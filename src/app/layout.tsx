@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Navbar from "@component/components/Navbar";
+import Navbar from "@/components/Navbar";
 
 export const metadata: Metadata = {
   title: "DriveFit",
@@ -14,10 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased">
-        <Navbar />
-        {children}
-      </body>
+      <body className="bg-[#0E1119] text-white">{children}</body>
     </html>
   );
 }

@@ -1,30 +1,21 @@
 import { Metadata } from "next";
-import HeroSection from "@component/components/StaticPages/HeroSection";
-import CardSection from "@component/components/StaticPages/CardSection";
-import { getPageData } from "@component/common/utils";
+import { homeData } from "@/data/home";
+import { StaticPageData } from "@/types/staticPages";
+import StaticPage from "@/components/StaticPages";
 
-export async function generateMetadata({ params }): Promise<Metadata> {
-  const slug = params.slug;
-  const data = getPageData("home");
+const pageData: StaticPageData = homeData;
+
+export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: data.seoTitle || data.title,
-    description: data.seoDescription,
+    title: pageData.seoTitle || pageData.title,
+    description: pageData.seoDescription,
   };
 }
 
-export default function Page() {
-  const data = getPageData("home");
-
+export default function Home() {
   return (
     <main>
-      <section><HeroSection data={data.hero} /></section>
-      {data.cardSection && (
-        <section>
-          {data.cardSection.map((card, idx) => (
-            <CardSection data={card} key={idx} />
-          ))}
-        </section>
-      )}
+      <StaticPage data={pageData} />
     </main>
   );
 }

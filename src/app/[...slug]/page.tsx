@@ -1,35 +1,42 @@
-import { readFileSync } from "fs";
-import { join } from "path";
 import { Metadata } from "next";
-import HeroSection from "@component/components/StaticPages/HeroSection";
-import CardSection from "@component/components/StaticPages/CardSection";
-import { getPageData } from "@component/common/utils";
+import { cricketData } from "@/data/cricket";
+import { fitnessData } from "@/data/fitness";
+import { recoveryData } from "@/data/recovery";
+import { runningData } from "@/data/running";
+import { StaticPageData } from "@/types/staticPages";
+import StaticPage from "@/components/StaticPages";
 
-export async function generateMetadata({ params }): Promise<Metadata> {
+type PageParams = {
+  params: {
+    slug: string;
+  };
+};
+
+const pageData: { [key: string]: StaticPageData } = {
+  cricket: cricketData,
+  fitness: fitnessData,
+  recovery: recoveryData,
+  running: runningData,
+};
+
+export async function generateMetadata({
+  params,
+}: PageParams): Promise<Metadata> {
   const slug = params.slug;
-  const data = getPageData(slug);
+  const data = pageData[slug] || pageData.home;
   return {
     title: data.seoTitle || data.title,
     description: data.seoDescription,
   };
 }
 
-
-
-export default function Page({ params }) {
+export default function Page({ params }: PageParams) {
   const slug = params.slug;
-  const data = getPageData(slug);
+  const data = pageData[slug];
 
   return (
     <main>
-      <section><HeroSection data={data.hero} /></section>
-      {data.cardSection && (
-        <section>
-          {data.cardSection.map((card, idx) => (
-            <CardSection data={card} key={idx} />
-          ))}
-        </section>
-      )}
+      <StaticPage data={data} />
     </main>
   );
 }
