@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function Home() {
   return (
     <main>
-      <StaticPage data={pageData} />
+      <StaticPage data={pageData} pageName="home" />
     </main>
   );
 }

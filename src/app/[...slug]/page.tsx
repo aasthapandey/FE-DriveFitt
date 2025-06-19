@@ -33,10 +33,11 @@ export async function generateMetadata({
 export default function Page({ params }: PageParams) {
   const slug = params.slug;
   const data = pageData[slug];
+  const pageName = Array.isArray(slug) ? slug[0] : slug;
 
   return (
     <main>
-      <StaticPage data={data} />
+      <StaticPage data={data} pageName={pageName} />
     </main>
   );
 }

@@ -7,7 +7,7 @@ export const cricketData: StaticPageData = {
   seoDescription:
     "Join the best cricket club in Gurugram. State-of-the-art facilities, coaching, and more.",
   hero: {
-    title: "DRIVE: Cricket for Every player. Every Day",
+    title: " Cricket for Every player. Every Day",
     description:
       "Experience Gurugram's premier sports club & fitness center – Cricket, Fitness, Recovery, Community…and more",
     desktopImage: "/images/hero/cricket.svg",

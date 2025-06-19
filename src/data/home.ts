@@ -7,7 +7,7 @@ export const homeData: StaticPageData = {
   seoDescription:
     "Join DriveFitt, Gurugram's top sports club for cricket, fitness, recovery, and more. Premium facilities and expert coaching.",
   hero: {
-    title: "Where Champions Come to STRIVE",
+    title: "Where Champions Come to ",
     description:
       "Experience Gurugram's premier sports club & fitness center – Cricket, Fitness, Recovery, Community…and more",
     desktopImage: "/images/hero/home.svg",

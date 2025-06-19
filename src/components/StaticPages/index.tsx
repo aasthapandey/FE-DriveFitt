@@ -1,8 +1,14 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/StaticPages/HeroSection";
 import CardSection from "@/components/StaticPages/CardSection";
+import { StaticPageData } from "@/types/staticPages";
 
-const StaticPage = ({ data }: { data: any }) => {
+interface StaticPageProps {
+  data: StaticPageData;
+  pageName: string;
+}
+
+const StaticPage = ({ data, pageName }: StaticPageProps) => {
   return (
     <div>
       <div
@@ -10,7 +16,7 @@ const StaticPage = ({ data }: { data: any }) => {
         style={{ backgroundImage: `url(${data.hero.desktopImage})` }}
       >
         <Navbar />
-        <HeroSection data={data.hero} />
+        <HeroSection data={data.hero} pageName={pageName} />
       </div>
       {data.cardSection && (
         <section className="px-20 py-16">
