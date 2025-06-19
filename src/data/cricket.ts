@@ -15,32 +15,41 @@ export const cricketData: StaticPageData = {
     btnPrimaryText: "Book a free trial",
     btnSecondaryText: "Join Online",
   },
-  cardSection: [
-    {
-      title: "Climate controlled nets",
-      description:
-        "State-of-the-art indoor cricket nets equipped with advanced bowling machines for all skill levels.",
-      backgroundImage: "/images/card-section/cricket/nets.svg",
-      link: "",
-    },
-    {
-      title: "Premium turf",
-      description:
-        "Professional-grade pitches with perfect, consistent bounce every time.",
-      backgroundImage: "/images/card-section/cricket/turf.svg",
-      link: "",
-    },
-    {
-      title: "Instant performance tracking",
-      description: "Auto clips, speed, swing, spin, DRS, pitch maps & more.",
-      backgroundImage: "/images/card-section/cricket/performance.svg",
-      link: "",
-    },
-    {
-      title: "Professional coaching",
-      description: "Led by certified and experienced trainers.",
-      backgroundImage: "/images/card-section/cricket/coaching.svg",
-      link: "",
-    },
-  ],
+  cardSection5: {
+    title: "The edge you need",
+    description: "",
+    cardSection: [
+      {
+        title: "Climate controlled nets",
+        description:
+          "State-of-the-art indoor cricket nets equipped with advanced bowling machines for all skill levels.",
+        backgroundImage: "/images/card-section/home/cricket.svg",
+        link: "/cricket",
+      },
+      {
+        title: "Instant performance tracking",
+        description: "Auto clips, speed, swing, spin, DRS, pitch maps & more.",
+        backgroundImage: "/images/card-section/home/cricket.svg",
+        link: "/cricket",
+      },
+      {
+        title: "Premium turf",
+        description: "Premium turf",
+        backgroundImage: "/images/card-section/home/cricket.svg",
+        link: "/cricket",
+      },
+      {
+        title: "Pick your time, book online",
+        description: "Quick, easy, and hassle-free.",
+        backgroundImage: "/images/card-section/home/cricket.svg",
+        link: "/cricket",
+      },
+      {
+        title: "Professional coaching",
+        description: "Led by certified and experienced trainers.",
+        backgroundImage: "/images/card-section/home/cricket.svg",
+        link: "/cricket",
+      },
+    ],
+  },
 };

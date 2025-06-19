@@ -13,11 +13,17 @@ export interface CarouselBanner {
   backgroundImage: string;
 }
 
-export interface Card {
-  title: string;
-  description: string;
-  backgroundImage: string;
-  link: string;
+export interface CardType {
+  title?: string;
+  description?: string;
+  backgroundImage?: string;
+  link?: string;
+}
+
+export interface CardSection {
+  title?: string;
+  description?: string;
+  cardSection: CardType[];
 }
 
 export interface StaticPageData {
@@ -27,5 +33,8 @@ export interface StaticPageData {
   seoDescription: string;
   hero: Hero;
   carouselBanner?: CarouselBanner[];
-  cardSection: Card[];
+  cardSection2?: CardSection;
+  cardSection3?: CardSection;
+  cardSection4?: CardSection;
+  cardSection5?: CardSection;
 }

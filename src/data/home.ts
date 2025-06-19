@@ -22,34 +22,84 @@ export const homeData: StaticPageData = {
       backgroundImage: "/images/carouselBanner/banner-1.svg",
     },
   ],
-  cardSection: [
-    {
-      title: "Cricket",
-      description:
-        "Fuel up with wholesome meals, recovery shakes, and smart hydration—designed for every fitness goal.",
-      backgroundImage: "/images/card-section/home/cricket.svg",
-      link: "/cricket",
-    },
-    {
-      title: "Fitness",
-      description:
-        "Expertly designed strength, conditioning, and performance training utilizing top-tier equipment, tailored for you.",
-      backgroundImage: "/images/card-section/home/fitness.svg",
-      link: "/fitness",
-    },
-    {
-      title: "Recovery",
-      description:
-        "Cold Plunge, infrared sauna, compression & percussion therapy along with physiotherapy to recharge, recover, and reduce injury risk.",
-      backgroundImage: "/images/card-section/home/recovery.svg",
-      link: "/recovery",
-    },
-    {
-      title: "Running",
-      description:
-        "Pace-enhancing run classes with functional drills to optimize speed, agility & endurance.",
-      backgroundImage: "/images/card-section/home/running.svg",
-      link: "/running",
-    },
-  ],
+  cardSection4: {
+    title: "A Complete Ecosystem for Peak Performance",
+    description:
+      "From cricket training to full-spectrum fitness and recovery—every element of your game is here.",
+    cardSection: [
+      {
+        title: "Cricket",
+        description:
+          "Fuel up with wholesome meals, recovery shakes, and smart hydration—designed for every fitness goal.",
+        backgroundImage: "/images/card-section/home/cricket.svg",
+        link: "/cricket",
+      },
+      {
+        title: "Fitness",
+        description:
+          "Expertly designed strength, conditioning, and performance training utilizing top-tier equipment, tailored for you.",
+        backgroundImage: "/images/card-section/home/fitness.svg",
+        link: "/fitness",
+      },
+      {
+        title: "Recovery",
+        description:
+          "Cold Plunge, infrared sauna, compression & percussion therapy along with physiotherapy to recharge, recover, and reduce injury risk.",
+        backgroundImage: "/images/card-section/home/recovery.svg",
+        link: "/recovery",
+      },
+      {
+        title: "Running",
+        description:
+          "Pace-enhancing run classes with functional drills to optimize speed, agility & endurance.",
+        backgroundImage: "/images/card-section/home/running.svg",
+        link: "/running",
+      },
+    ],
+  },
+  cardSection3: {
+    title: "Train your way",
+    description:
+      "Group energy. Focused strength. Smart recovery — your training, your terms.",
+    cardSection: [
+      {
+        title: "Group Classes",
+        description: "",
+        backgroundImage: "/images/card-section/home/cricket.svg",
+        link: "/cricket",
+      },
+      {
+        title: "Pilates",
+        description: "",
+        backgroundImage: "/images/card-section/home/cricket.svg",
+        link: "/cricket",
+      },
+      {
+        title: "Personal Training",
+        description: "",
+        backgroundImage: "/images/card-section/home/cricket.svg",
+        link: "/cricket",
+      },
+    ],
+  },
+  cardSection2: {
+    title: "Refueling & Gear-Up Zone",
+    description: "Refuel. Recharge. Reinvent.",
+    cardSection: [
+      {
+        title: "The Protein BAR",
+        description:
+          "Fuel up with wholesome meals, recovery shakes, and smart hydration—designed for every fitness goal.",
+        backgroundImage: "/images/card-section/home/cricket.svg",
+        link: "/cricket",
+      },
+      {
+        title: "The Pro Shop",
+        description:
+          "Access premium cricket gear, fitness accessories, and apparel—all curated for champions.",
+        backgroundImage: "/images/card-section/home/cricket.svg",
+        link: "/cricket",
+      },
+    ],
+  },
 };

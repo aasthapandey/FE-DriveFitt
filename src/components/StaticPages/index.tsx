@@ -1,7 +1,9 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/StaticPages/HeroSection";
-import CardSection from "@/components/StaticPages/CardSection";
 import { StaticPageData } from "@/types/staticPages";
+import CardSection4 from "@/components/StaticPages/CardSection4";
+import CardSection5 from "@/components/StaticPages/CardSection5";
+import CardSection3 from "@/components/StaticPages/CardSection3";
 
 interface StaticPageProps {
   data: StaticPageData;
@@ -9,8 +11,17 @@ interface StaticPageProps {
 }
 
 const StaticPage = ({ data, pageName }: StaticPageProps) => {
+  let CardSectionComponent = null;
+  if (data.cardSection4) {
+    CardSectionComponent = <CardSection4 data={data.cardSection4} />;
+  } else if (data.cardSection3) {
+    CardSectionComponent = <CardSection3 data={data.cardSection3} />;
+  } else if (data.cardSection5) {
+    CardSectionComponent = <CardSection5 data={data.cardSection5} />;
+  }
+
   return (
-    <div>
+    <div className="bg-[#0D0D0D]">
       <div
         className="bg-cover bg-center bg-no-repeat w-full"
         style={{ backgroundImage: `url(${data.hero.desktopImage})` }}
@@ -18,13 +29,8 @@ const StaticPage = ({ data, pageName }: StaticPageProps) => {
         <Navbar />
         <HeroSection data={data.hero} pageName={pageName} />
       </div>
-      {data.cardSection && (
-        <section className="px-20 py-16">
-          {data.cardSection.map((card, idx) => (
-            <CardSection data={card} key={idx} />
-          ))}
-        </section>
-      )}
+
+      <div>{CardSectionComponent}</div>
     </div>
   );
 };
