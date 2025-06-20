@@ -6,7 +6,7 @@ interface HeroSectionProps {
 }
 
 const HeroSection = ({ data, pageName }: HeroSectionProps) => {
-  const { title, description, btnPrimaryText, btnSecondaryText } = data;
+  const { title } = data;
   const renderTitle = () => {
     if (pageName === "home") {
       return (
