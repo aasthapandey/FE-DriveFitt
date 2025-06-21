@@ -12,21 +12,20 @@ interface StaticPageProps {
   pageName: string;
 }
 
-type ComponentMap = {
-  [key: string]: (data: any, pageName?: string) => JSX.Element;
-};
-
-const componentMap: ComponentMap = {
-  hero: (data: Hero, pageName?: string) => (
-    <HeroSection data={data} pageName={pageName!} />
+const componentMap: Record<
+  string,
+  (data: unknown, pageName?: string) => JSX.Element
+> = {
+  hero: (data: unknown, pageName?: string) => (
+    <HeroSection data={data as Hero} pageName={pageName!} />
   ),
   // carouselBanner: (data: CarouselBanner[]) => (
   //   <CarouselBannerSection data={data} />
   // ),
-  cardSection4: (data: CardSection) => <CardSection4 data={data} />,
-  cardSection3: (data: CardSection) => <CardSection3 data={data} />,
+  cardSection4: (data: unknown) => <CardSection4 data={data as CardSection} />,
+  cardSection3: (data: unknown) => <CardSection3 data={data as CardSection} />,
   // cardSection2: (data: CardSection) => <CardSection2 data={data} />,
-  cardSection5: (data: CardSection) => <CardSection5 data={data} />,
+  cardSection5: (data: unknown) => <CardSection5 data={data as CardSection} />,
 };
 
 const StaticPage = ({ data, pageName }: StaticPageProps) => {
