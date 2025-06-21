@@ -1,6 +1,6 @@
 import Navbar from "@/components/common/Navbar";
 import HeroSection from "@/components/StaticPages/HeroSection";
-import { StaticPageData, Hero, CardSection } from "@/types/staticPages";
+import { StaticPageData, Hero, CardSection, CarouselBanner } from "@/types/staticPages";
 import CardSection4 from "@/components/StaticPages/CardSection4";
 import CardSection5 from "@/components/StaticPages/CardSection5";
 import CardSection3 from "@/components/StaticPages/CardSection3";
@@ -12,40 +12,44 @@ interface StaticPageProps {
   pageName: string;
 }
 
-const componentMap: Record<
-  string,
-  (data: unknown, pageName?: string) => JSX.Element
-> = {
-  hero: (data: unknown, pageName?: string) => (
-    <HeroSection data={data as Hero} pageName={pageName!} />
-  ),
-  // carouselBanner: (data: CarouselBanner[]) => (
-  //   <CarouselBannerSection data={data} />
-  // ),
-  cardSection4: (data: unknown) => <CardSection4 data={data as CardSection} />,
-  cardSection3: (data: unknown) => <CardSection3 data={data as CardSection} />,
-  // cardSection2: (data: CardSection) => <CardSection2 data={data} />,
-  cardSection5: (data: unknown) => <CardSection5 data={data as CardSection} />,
-};
-
 const StaticPage = ({ data, pageName }: StaticPageProps) => {
+  const renderComponent = (key: string, value: Hero | CardSection | CarouselBanner[]) => {
+    switch (key) {
+      case "hero":
+        return <HeroSection data={value as Hero} pageName={pageName} />;
+      case "cardSection4":
+        return <CardSection4 data={value as CardSection} />;
+      case "cardSection3":
+        return <CardSection3 data={value as CardSection} />;
+      case "cardSection5":
+        return <CardSection5 data={value as CardSection} />;
+      // case "carouselBanner":
+      //   return <CarouselBannerSection data={value as CarouselBanner[]} />;
+      // case "cardSection2":
+      //   return <CardSection2 data={value as CardSection} />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className="bg-[#0D0D0D]">
       {Object.entries(data).map(([key, value]) => {
-        if (componentMap[key]) {
+        const component = renderComponent(key, value);
+        if (component) {
           if (key === "hero") {
             return (
               <div
                 key={key}
                 className="bg-cover bg-center bg-no-repeat w-full"
-                style={{ backgroundImage: `url(${value.desktopImage})` }}
+                style={{ backgroundImage: `url(${(value as Hero).desktopImage})` }}
               >
                 <Navbar />
-                {componentMap[key](value, pageName)}
+                {component}
               </div>
             );
           }
-          return <div key={key}>{componentMap[key](value)}</div>;
+          return <div key={key}>{component}</div>;
         }
         return null;
       })}
