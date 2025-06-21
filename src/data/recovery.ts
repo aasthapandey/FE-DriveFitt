@@ -15,36 +15,41 @@ export const recoveryData: StaticPageData = {
     btnPrimaryText: "Book a free trial",
     btnSecondaryText: "Join Online",
   },
-  cardSection: [
-    {
-      title: "Infrared Sauna",
-      description: "Deep detox. Better circulation. Less soreness.",
-      backgroundImage: "/images/card-section/recovery/sauna.svg",
-      link: "",
-    },
-    {
-      title: "Compression Therapy",
-      description: "Circulation boost. Faster leg recovery.",
-      backgroundImage: "/images/card-section/recovery/compression.svg",
-      link: "",
-    },
-    {
-      title: "Percussion Therapy",
-      description: "Massage that hits the right spot.",
-      backgroundImage: "/images/card-section/recovery/percussion.svg",
-      link: "",
-    },
-    {
-      title: "Cold Plunge",
-      description: "Ice-cold reset for muscles and mind.",
-      backgroundImage: "/images/card-section/recovery/cold-plunge.svg",
-      link: "",
-    },
-    {
-      title: "Sports Physiotherapy",
-      description: "Injury prevention. Rehab. Pro-level care.",
-      backgroundImage: "/images/card-section/recovery/physiotherapy.svg",
-      link: "",
-    },
-  ],
+  cardSection4: {
+    title: "Recovery & Wellness",
+    description:
+      "Recover smarter and perform your best with our recovery facilities.",
+    cardSection: [
+      {
+        title: "Infrared Sauna",
+        description: "Deep detox. Better circulation. Less soreness.",
+        backgroundImage: "/images/card-section/recovery/sauna.svg",
+        link: "",
+      },
+      {
+        title: "Compression Therapy",
+        description: "Circulation boost. Faster leg recovery.",
+        backgroundImage: "/images/card-section/recovery/compression.svg",
+        link: "",
+      },
+      {
+        title: "Percussion Therapy",
+        description: "Massage that hits the right spot.",
+        backgroundImage: "/images/card-section/recovery/percussion.svg",
+        link: "",
+      },
+      {
+        title: "Cold Plunge",
+        description: "Ice-cold reset for muscles and mind.",
+        backgroundImage: "/images/card-section/recovery/cold-plunge.svg",
+        link: "",
+      },
+      {
+        title: "Sports Physiotherapy",
+        description: "Injury prevention. Rehab. Pro-level care.",
+        backgroundImage: "/images/card-section/recovery/physiotherapy.svg",
+        link: "",
+      },
+    ],
+  },
 };

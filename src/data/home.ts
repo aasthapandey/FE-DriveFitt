@@ -65,19 +65,20 @@ export const homeData: StaticPageData = {
       {
         title: "Group Classes",
         description: "",
-        backgroundImage: "/images/card-section/home/cricket.svg",
+        backgroundImage: "/images/card-section/home/Group-Classes.svg",
         link: "/cricket",
+        className: "!h-full",
       },
       {
         title: "Pilates",
         description: "",
-        backgroundImage: "/images/card-section/home/cricket.svg",
+        backgroundImage: "/images/card-section/home/Pilates.svg",
         link: "/cricket",
       },
       {
         title: "Personal Training",
         description: "",
-        backgroundImage: "/images/card-section/home/cricket.svg",
+        backgroundImage: "/images/card-section/home/Personal-Training.svg",
         link: "/cricket",
       },
     ],
