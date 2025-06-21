@@ -52,6 +52,7 @@ const StaticPage = ({ data, pageName }: StaticPageProps) => {
           return <div key={key}>{component}</div>;
         }
         return null;
+        
       })}
     </div>
   );
