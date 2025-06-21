@@ -34,16 +34,16 @@ const HeroSection = ({ data, pageName }: HeroSectionProps) => {
         } `}
       >
         {renderTitle()}
-        <p className="text-white text-base mb-[60px]">{data.description}</p>
+        <p className="text-white text-base mb-[60px]">{description}</p>
         <div className="flex gap-4">
-          {data.btnPrimaryText && (
+          {btnPrimaryText && (
             <button className="bg-[#00DBDC] text-[#0D0D0D] px-10 py-3 rounded-lg font-medium">
-              {data.btnPrimaryText}
+              {btnPrimaryText}
             </button>
           )}
-          {data.btnSecondaryText && data.btnSecondaryText !== "" && (
+          {btnSecondaryText && btnSecondaryText !== "" && (
             <button className="border border-[#00DBDC] text-[#00DBDC] px-10 py-3 rounded-lg font-medium">
-              {data.btnSecondaryText}
+              {btnSecondaryText}
             </button>
           )}
         </div>
