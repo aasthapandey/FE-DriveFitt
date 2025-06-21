@@ -1,26 +1,32 @@
 import Navbar from "@/components/common/Navbar";
 import HeroSection from "@/components/StaticPages/HeroSection";
-import { StaticPageData } from "@/types/staticPages";
+import { StaticPageData, Hero, CardSection } from "@/types/staticPages";
 import CardSection4 from "@/components/StaticPages/CardSection4";
 import CardSection5 from "@/components/StaticPages/CardSection5";
 import CardSection3 from "@/components/StaticPages/CardSection3";
-import CarouselBannerSection from "@/components/StaticPages/CarouselBannerSection";
-import CardSection2 from "@/components/StaticPages/CardSection2";
+// import CarouselBannerSection from "@/components/StaticPages/CarouselBannerSection";
+// import CardSection2 from "@/components/StaticPages/CardSection2";
 
 interface StaticPageProps {
   data: StaticPageData;
   pageName: string;
 }
 
-const componentMap: Record<string, any> = {
-  hero: (data: any, pageName: string) => (
-    <HeroSection data={data} pageName={pageName} />
+type ComponentMap = {
+  [key: string]: (data: any, pageName?: string) => JSX.Element;
+};
+
+const componentMap: ComponentMap = {
+  hero: (data: Hero, pageName?: string) => (
+    <HeroSection data={data} pageName={pageName!} />
   ),
-  carouselBanner: () => <CarouselBannerSection />,
-  cardSection4: (data: any) => <CardSection4 data={data} />,
-  cardSection3: (data: any) => <CardSection3 data={data} />,
-  cardSection2: () => <CardSection2 />,
-  cardSection5: (data: any) => <CardSection5 data={data} />,
+  // carouselBanner: (data: CarouselBanner[]) => (
+  //   <CarouselBannerSection data={data} />
+  // ),
+  cardSection4: (data: CardSection) => <CardSection4 data={data} />,
+  cardSection3: (data: CardSection) => <CardSection3 data={data} />,
+  // cardSection2: (data: CardSection) => <CardSection2 data={data} />,
+  cardSection5: (data: CardSection) => <CardSection5 data={data} />,
 };
 
 const StaticPage = ({ data, pageName }: StaticPageProps) => {
