@@ -16,7 +16,7 @@ const componentMap: Record<string, any> = {
   hero: (data: any, pageName: string) => (
     <HeroSection data={data} pageName={pageName} />
   ),
-  carouselBanner: (data: any) => <CarouselBannerSection />,
+  carouselBanner: () => <CarouselBannerSection />,
   cardSection4: (data: any) => <CardSection4 data={data} />,
   cardSection3: (data: any) => <CardSection3 data={data} />,
   cardSection2: (data: any) => <CardSection2 data={data} />,
