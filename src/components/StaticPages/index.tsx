@@ -19,7 +19,7 @@ const componentMap: Record<string, any> = {
   carouselBanner: () => <CarouselBannerSection />,
   cardSection4: (data: any) => <CardSection4 data={data} />,
   cardSection3: (data: any) => <CardSection3 data={data} />,
-  cardSection2: (data: any) => <CardSection2 data={data} />,
+  cardSection2: () => <CardSection2 />,
   cardSection5: (data: any) => <CardSection5 data={data} />,
 };
 

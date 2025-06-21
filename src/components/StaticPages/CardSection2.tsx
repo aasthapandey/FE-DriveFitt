@@ -1,6 +1,4 @@
-import { CardSection } from "@/types/staticPages";
-
-const CardSection2 = ({ data }: { data: CardSection }) => {
+const CardSection2 = () => {
   return <div></div>;
 };
 
