@@ -3,10 +3,14 @@ import StaticCard from "@/components/StaticPages/StaticCard";
 
 const CardSection2 = ({ data }: { data: StaticCardProps }) => {
   return (
-    <section className="px-[120px]">
-      <h2 className="text-4xl font-bold mb-2">{data.title}</h2>
+    <section className="px-[120px] flex flex-col gap-5">
+      <h2 className="text-5xl font-semibold leading-[56px] tracking-[-2px] text-center">
+        {data.title}
+      </h2>
       {data.description && (
-        <p className="text-lg text-white/70 mb-8">{data.description}</p>
+        <p className="text-base font-light leading-5 tracking-[-1%] text-[#D4D4D4] text-center mb-[80px]">
+          {data.description}
+        </p>
       )}
       <div className="grid grid-cols-2 gap-10">
         <StaticCard data={data.cardSection[0]} />

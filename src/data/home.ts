@@ -88,7 +88,7 @@ export const homeData: StaticPageData = {
     description: "Refuel. Recharge. Reinvent.",
     cardSection: [
       {
-        title: "The Protein BAR",
+        title: "protein bar",
         description:
           "Fuel up with wholesome meals, recovery shakes, and smart hydration—designed for every fitness goal.",
         backgroundImage: "/images/card-section/home/card-section-2-bg.svg",
@@ -96,7 +96,7 @@ export const homeData: StaticPageData = {
         link: "/cricket",
       },
       {
-        title: "The Pro Shop",
+        title: "pro shop",
         description:
           "Access premium cricket gear, fitness accessories, and apparel—all curated for champions.",
         backgroundImage: "/images/card-section/home/card-section-2-bg.svg",
