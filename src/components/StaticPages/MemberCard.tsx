@@ -2,7 +2,7 @@ import { MemberItem } from "@/types/staticPages";
 import Image from "next/image";
 
 const MemberCard = ({ data }: { data: MemberItem }) => {
-  const { title, description, backgroundImage, link } = data;
+  const { title, description, backgroundImage } = data;
   return (
     <div
       className="relative rounded-[40px] h-[568px] w-full cursor-pointer"
