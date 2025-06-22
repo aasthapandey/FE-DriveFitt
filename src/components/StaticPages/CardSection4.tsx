@@ -9,8 +9,8 @@ const CardSection4 = ({ data }: { data: CardSection }) => {
       </h2>
       {data.description && (
         <p className="w-full max-w-[703px] h-auto min-h-[20px] text-base font-light leading-5 tracking-[-0.16px] text-center text-[#8A8A8A] mx-auto mb-[68px] justify-self-center">
-        {data.description}
-      </p>
+          {data.description}
+        </p>
       )}
       <div className="grid grid-cols-2 grid-rows-2 gap-[40px]">
         {data.cardSection.map((card, idx) => (

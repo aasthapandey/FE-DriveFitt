@@ -181,4 +181,29 @@ export const homeData: StaticPageData = {
     description: "The Drive FIIT Model: Engineered for Excellence",
     image: "/images/card-section/home/Personal-Training.svg",
   },
+  memberSection: {
+    title: "What our members are saying",
+    description:
+      "Join a like-minded community of athletes and fitness enthusiasts who call DriveFITT their second home.",
+    memberList: [
+      {
+        title: "Riya Bajaj",
+        description: "Yoga Class",
+        backgroundImage: "/images/member-section/member-1.svg",
+        link: "/cricket",
+      },
+      {
+        title: "Kunal Jain",
+        description: "Membership plan",
+        backgroundImage: "/images/member-section/member-2.svg",
+        link: "/cricket",
+      },
+      {
+        title: "Rahul Kapoor",
+        description: "Membership plan",
+        backgroundImage: "/images/member-section/member-3.svg",
+        link: "/cricket",
+      },
+    ],
+  },
 };

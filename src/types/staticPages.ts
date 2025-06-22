@@ -66,6 +66,19 @@ export interface SportsClubSectionProps {
   image: string;
 }
 
+export interface MemberItem {
+  title: string;
+  description: string;
+  backgroundImage: string;
+  link: string;
+}
+
+export interface MemberSectionProps {
+  title: string;
+  description: string;
+  memberList: MemberItem[];
+}
+
 export interface StaticPageData {
   title: string;
   description: string;
@@ -80,4 +93,5 @@ export interface StaticPageData {
   innovationCommunitySection?: InnovationCommunitySectionProps;
   gallerySection?: GallerySectionProps;
   sportsClubSection?: SportsClubSectionProps;
+  memberSection?: MemberSectionProps;
 }
