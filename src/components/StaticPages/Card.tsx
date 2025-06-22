@@ -26,7 +26,7 @@ const Card = ({ data }: { data: CardType }) => {
 
         <div className="absolute left-0 bottom-0 w-full p-6 z-10 flex flex-col transition-all duration-300 group-hover:bottom-20">
           <h3 className="text-white text-3xl font-semibold">{title}</h3>
-          <p className="text-white text-lg group-hover:mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <p className="ml-[3px] text-white text-lg font-light leading-tight tracking-tight group-hover:mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             {description}
           </p>
         </div>
