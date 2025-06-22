@@ -33,6 +33,7 @@ export const homeData: StaticPageData = {
         backgroundImage: "/images/card-section/home/cricket.svg",
         link: "/cricket",
       },
+      
       {
         title: "Fitness",
         description: //todo
