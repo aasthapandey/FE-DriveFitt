@@ -1,11 +1,17 @@
 import Navbar from "@/components/common/Navbar";
 import HeroSection from "@/components/StaticPages/HeroSection";
-import { StaticPageData, Hero, CardSection, CarouselBanner } from "@/types/staticPages";
+import {
+  StaticPageData,
+  Hero,
+  CardSection,
+  CarouselBanner,
+  StaticCardProps,
+} from "@/types/staticPages";
 import CardSection4 from "@/components/StaticPages/CardSection4";
 import CardSection5 from "@/components/StaticPages/CardSection5";
 import CardSection3 from "@/components/StaticPages/CardSection3";
 // import CarouselBannerSection from "@/components/StaticPages/CarouselBannerSection";
-// import CardSection2 from "@/components/StaticPages/CardSection2";
+import CardSection2 from "@/components/StaticPages/CardSection2";
 
 interface StaticPageProps {
   data: StaticPageData;
@@ -13,7 +19,10 @@ interface StaticPageProps {
 }
 
 const StaticPage = ({ data, pageName }: StaticPageProps) => {
-  const renderComponent = (key: string, value: Hero | CardSection | CarouselBanner[]) => {
+  const renderComponent = (
+    key: string,
+    value: Hero | CardSection | CarouselBanner[]
+  ) => {
     switch (key) {
       case "hero":
         return <HeroSection data={value as Hero} pageName={pageName} />;
@@ -25,15 +34,15 @@ const StaticPage = ({ data, pageName }: StaticPageProps) => {
         return <CardSection5 data={value as CardSection} />;
       // case "carouselBanner":
       //   return <CarouselBannerSection data={value as CarouselBanner[]} />;
-      // case "cardSection2":
-      //   return <CardSection2 data={value as CardSection} />;
+      case "cardSection2":
+        return <CardSection2 data={value as StaticCardProps} />;
       default:
         return null;
     }
   };
 
   return (
-    <div className="bg-[#0D0D0D]">
+    <div className="bg-[#0D0D0D] flex flex-col gap-[160px] pb-[120px]">
       {Object.entries(data).map(([key, value]) => {
         const component = renderComponent(key, value);
         if (component) {
@@ -42,7 +51,9 @@ const StaticPage = ({ data, pageName }: StaticPageProps) => {
               <div
                 key={key}
                 className="bg-cover bg-center bg-no-repeat w-full"
-                style={{ backgroundImage: `url(${(value as Hero).desktopImage})` }}
+                style={{
+                  backgroundImage: `url(${(value as Hero).desktopImage})`,
+                }}
               >
                 <Navbar />
                 {component}
@@ -52,7 +63,6 @@ const StaticPage = ({ data, pageName }: StaticPageProps) => {
           return <div key={key}>{component}</div>;
         }
         return null;
-        
       })}
     </div>
   );

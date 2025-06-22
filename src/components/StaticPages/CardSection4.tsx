@@ -3,7 +3,7 @@ import Card from "@/components/StaticPages/Card";
 
 const CardSection4 = ({ data }: { data: CardSection }) => {
   return (
-    <section className="px-[120px] py-[80px]">
+    <section className="px-[120px]">
       <h2 className="w-full max-w-[659px] h-auto min-h-[112px] text-3xl md:text-[48px] font-semibold leading-tight md:leading-[56px] tracking-[-1px] md:tracking-[-2px] text-center text-white flex items-center justify-center px-4 justify-self-center mb-4">
         {data.title}
       </h2>
