@@ -37,6 +37,22 @@ export interface StaticCardProps {
   cardSection: StaticCardType[];
 }
 
+export interface InfoItem {
+  image: string;
+  description: string;
+}
+
+export interface InfoSection {
+  title: string;
+  list: InfoItem[];
+}
+
+export interface InnovationCommunitySectionProps {
+  title: string;
+  description: string;
+  infoSection: InfoSection[];
+}
+
 export interface StaticPageData {
   title: string;
   description: string;
@@ -48,4 +64,5 @@ export interface StaticPageData {
   cardSection3?: CardSection;
   cardSection4?: CardSection;
   cardSection5?: CardSection;
+  innovationCommunitySection?: InnovationCommunitySectionProps;
 }

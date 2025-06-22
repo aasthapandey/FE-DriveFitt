@@ -105,4 +105,61 @@ export const homeData: StaticPageData = {
       },
     ],
   },
+  innovationCommunitySection: {
+    title: "Performance tech",
+    description: "Beyond Training: Your Tech-Integrated Fitness Lifestyle",
+    infoSection: [
+      {
+        title: "Performance tech",
+        list: [
+          {
+            image: "/images/info1-1.svg",
+            description: "3D body scans assessment",
+          },
+          {
+            image: "/images/info1-2.svg",
+            description: "A.I. ball tracking & analytics for cricket",
+          },
+          {
+            image: "/images/info1-3.svg",
+            description: "Integrated member app",
+          },
+        ],
+      },
+      {
+        title: "Premium workspaces",
+        list: [
+          {
+            image: "/images/info2-1.svg",
+            description: "Dedicated phone booths",
+          },
+          {
+            image: "/images/info2-2.svg",
+            description: "Ample sitting space",
+          },
+          {
+            image: "/images/info2-3.svg",
+            description: "Fast and reliable Wi-Fi",
+          },
+        ],
+      },
+      {
+        title: "Community & Challenges",
+        list: [
+          {
+            image: "/images/info3-1.svg",
+            description: "Squad based challenges",
+          },
+          {
+            image: "/images/info3-2.svg",
+            description: "Signature events & experiences",
+          },
+          {
+            image: "/images/info3-3.svg",
+            description: "Family Plan",
+          },
+        ],
+      },
+    ],
+  },
 };

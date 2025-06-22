@@ -6,12 +6,14 @@ import {
   CardSection,
   CarouselBanner,
   StaticCardProps,
+  InnovationCommunitySectionProps,
 } from "@/types/staticPages";
 import CardSection4 from "@/components/StaticPages/CardSection4";
 import CardSection5 from "@/components/StaticPages/CardSection5";
 import CardSection3 from "@/components/StaticPages/CardSection3";
 // import CarouselBannerSection from "@/components/StaticPages/CarouselBannerSection";
 import CardSection2 from "@/components/StaticPages/CardSection2";
+import InnovationCommunity from "@/components/StaticPages/InnovationCommunity";
 
 interface StaticPageProps {
   data: StaticPageData;
@@ -21,7 +23,12 @@ interface StaticPageProps {
 const StaticPage = ({ data, pageName }: StaticPageProps) => {
   const renderComponent = (
     key: string,
-    value: Hero | CardSection | CarouselBanner[]
+    value:
+      | Hero
+      | CardSection
+      | CarouselBanner[]
+      | StaticCardProps
+      | InnovationCommunitySectionProps
   ) => {
     switch (key) {
       case "hero":
@@ -36,6 +43,12 @@ const StaticPage = ({ data, pageName }: StaticPageProps) => {
       //   return <CarouselBannerSection data={value as CarouselBanner[]} />;
       case "cardSection2":
         return <CardSection2 data={value as StaticCardProps} />;
+      case "innovationCommunitySection":
+        return (
+          <InnovationCommunity
+            data={value as InnovationCommunitySectionProps}
+          />
+        );
       default:
         return null;
     }
