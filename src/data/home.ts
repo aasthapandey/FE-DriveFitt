@@ -7,9 +7,8 @@ export const homeData: StaticPageData = {
   seoDescription:
     "Join DriveFitt, Gurugram's top sports club for cricket, fitness, recovery, and more. Premium facilities and expert coaching.",
   hero: {
-    title: "Where Champions Come to ",
-    description:
-      "Experience Gurugram's premier sports club & fitness center – Cricket, Fitness, Recovery, Community…and more",
+    title: "India’s First Cricket and Fitness Club",
+    description: "",
     desktopImage: "/images/hero/home.svg",
     mobileImage: "/images/hero/home-mobile.svg",
     btnPrimaryText: "Join Online",
@@ -23,34 +22,35 @@ export const homeData: StaticPageData = {
     },
   ],
   cardSection4: {
-    title: "A Complete Ecosystem for Peak Performance",
+    title: "A complete ecosystem for peak performance",
     description:
       "From cricket training to full-spectrum fitness and recovery—every element of your game is here.",
     cardSection: [
       {
         title: "Cricket",
         description:
-          "Fuel up with wholesome meals, recovery shakes, and smart hydration—designed for every fitness goal.",
+          "Fuel up with wholesome meals, recovery shakes, and smart hydration - designed for every fitness goal.",
         backgroundImage: "/images/card-section/home/cricket.svg",
         link: "/cricket",
       },
+
       {
         title: "Fitness",
-        description:
+        description: //todo
           "Expertly designed strength, conditioning, and performance training utilizing top-tier equipment, tailored for you.",
         backgroundImage: "/images/card-section/home/fitness.svg",
         link: "/fitness",
       },
       {
         title: "Recovery",
-        description:
+        description: //todo
           "Cold Plunge, infrared sauna, compression & percussion therapy along with physiotherapy to recharge, recover, and reduce injury risk.",
         backgroundImage: "/images/card-section/home/recovery.svg",
         link: "/recovery",
       },
       {
         title: "Running",
-        description:
+        description: //todo
           "Pace-enhancing run classes with functional drills to optimize speed, agility & endurance.",
         backgroundImage: "/images/card-section/home/running.svg",
         link: "/running",
