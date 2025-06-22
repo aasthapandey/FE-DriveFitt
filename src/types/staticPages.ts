@@ -27,6 +27,16 @@ export interface CardSection {
   cardSection: CardType[];
 }
 
+export interface StaticCardType extends CardType {
+  modalImage: string;
+}
+
+export interface StaticCardProps {
+  title?: string;
+  description?: string;
+  cardSection: StaticCardType[];
+}
+
 export interface StaticPageData {
   title: string;
   description: string;
@@ -34,7 +44,7 @@ export interface StaticPageData {
   seoDescription: string;
   hero: Hero;
   carouselBanner?: CarouselBanner[];
-  cardSection2?: CardSection;
+  cardSection2?: StaticCardProps;
   cardSection3?: CardSection;
   cardSection4?: CardSection;
   cardSection5?: CardSection;

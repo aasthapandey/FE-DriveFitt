@@ -91,14 +91,16 @@ export const homeData: StaticPageData = {
         title: "The Protein BAR",
         description:
           "Fuel up with wholesome meals, recovery shakes, and smart hydration—designed for every fitness goal.",
-        backgroundImage: "/images/card-section/home/cricket.svg",
+        backgroundImage: "/images/card-section/home/card-section-2-bg.svg",
+        modalImage: "/images/card-section/home/man-modal.svg",
         link: "/cricket",
       },
       {
         title: "The Pro Shop",
         description:
           "Access premium cricket gear, fitness accessories, and apparel—all curated for champions.",
-        backgroundImage: "/images/card-section/home/cricket.svg",
+        backgroundImage: "/images/card-section/home/card-section-2-bg.svg",
+        modalImage: "/images/card-section/home/woman-modal.svg",
         link: "/cricket",
       },
     ],

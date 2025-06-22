@@ -6,14 +6,14 @@ const Card = ({ data }: { data: CardType }) => {
 
   return (
     <div
-      className={`rounded-[24px] p-[2px] ${className}`}
+      className={`rounded-[40px] p-[2px] ${className}`}
       style={{
         background: "linear-gradient(180deg, #333333 29.36%, #00DBDC 120.13%)",
       }}
     >
       <a
         href={link}
-        className={`group relative block rounded-[24px] overflow-hidden h-[407px] cursor-pointer w-full border-0 ${className}`}
+        className={`group relative block rounded-[40px] overflow-hidden h-[407px] cursor-pointer w-full border-0 ${className}`}
         style={{
           backgroundImage: `url(${backgroundImage})`,
           backgroundSize: "cover",
