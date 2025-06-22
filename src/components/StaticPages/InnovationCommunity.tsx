@@ -13,7 +13,7 @@ const InnovationCommunity = ({
         {title}
       </h2>
       {description && (
-        <p className="text-base font-light leading-5 tracking-[-1%] text-[#8A8A8A] text-center mb-[80px]">
+        <p className="text-base font-light leading-5 tracking-[-1%] text-[#8A8A8A] text-center mb-[52px]">
           {description}
         </p>
       )}

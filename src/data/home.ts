@@ -109,7 +109,7 @@ export const homeData: StaticPageData = {
     ],
   },
   innovationCommunitySection: {
-    title: "Performance tech",
+    title: "Innovation & Community",
     description: "Beyond Training: Your Tech-Integrated Fitness Lifestyle",
     infoSection: [
       {
@@ -175,5 +175,10 @@ export const homeData: StaticPageData = {
       "/images/gallery-section/gallery-home-2.svg",
       "/images/gallery-section/gallery-home-3.svg",
     ],
+  },
+  sportsClubSection: {
+    title: "The Drive FIIT sports club philosophy",
+    description: "The Drive FIIT Model: Engineered for Excellence",
+    image: "/images/card-section/home/Personal-Training.svg",
   },
 };

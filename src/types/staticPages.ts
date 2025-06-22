@@ -60,6 +60,12 @@ export interface GallerySectionProps {
   imageList: string[];
 }
 
+export interface SportsClubSectionProps {
+  title: string;
+  description: string;
+  image: string;
+}
+
 export interface StaticPageData {
   title: string;
   description: string;
@@ -73,4 +79,5 @@ export interface StaticPageData {
   cardSection5?: CardSection;
   innovationCommunitySection?: InnovationCommunitySectionProps;
   gallerySection?: GallerySectionProps;
+  sportsClubSection?: SportsClubSectionProps;
 }
