@@ -37,12 +37,12 @@ const HeroSection = ({ data, pageName }: HeroSectionProps) => {
         <p className="text-white text-base mb-[60px]">{description}</p>
         <div className="flex gap-4">
           {btnPrimaryText && (
-            <button className="bg-[#00DBDC] text-[#0D0D0D] px-10 py-3 rounded-lg font-medium">
+            <button className="bg-[#00DBDC] text-[#0D0D0D] px-10 py-3 rounded-lg font-medium leading-[100%] tracking-[-5%] text-xl">
               {btnPrimaryText}
             </button>
           )}
           {btnSecondaryText && btnSecondaryText !== "" && (
-            <button className="border border-[#00DBDC] text-[#00DBDC] px-10 py-3 rounded-lg font-medium">
+            <button className="border border-[#00DBDC] text-[#00DBDC] px-10 py-3 rounded-lg font-medium leading-[100%] tracking-[-5%] text-xl">
               {btnSecondaryText}
             </button>
           )}

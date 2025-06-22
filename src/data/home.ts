@@ -36,21 +36,24 @@ export const homeData: StaticPageData = {
 
       {
         title: "Fitness",
-        description: //todo
+        //todo
+        description:
           "Expertly designed strength, conditioning, and performance training utilizing top-tier equipment, tailored for you.",
         backgroundImage: "/images/card-section/home/fitness.svg",
         link: "/fitness",
       },
       {
         title: "Recovery",
-        description: //todo
+        //todo
+        description:
           "Cold Plunge, infrared sauna, compression & percussion therapy along with physiotherapy to recharge, recover, and reduce injury risk.",
         backgroundImage: "/images/card-section/home/recovery.svg",
         link: "/recovery",
       },
       {
         title: "Running",
-        description: //todo
+        //todo
+        description:
           "Pace-enhancing run classes with functional drills to optimize speed, agility & endurance.",
         backgroundImage: "/images/card-section/home/running.svg",
         link: "/running",
@@ -160,6 +163,17 @@ export const homeData: StaticPageData = {
           },
         ],
       },
+    ],
+  },
+  gallerySection: {
+    title: "Step inside the future of sports & fitness",
+    description:
+      "Tour our state-of-the-art club and discover how Drive FIIT redefines space, energy, and purpose.",
+    btnLabel: "View Gallery",
+    imageList: [
+      "/images/gallery-section/gallery-home-1.svg",
+      "/images/gallery-section/gallery-home-2.svg",
+      "/images/gallery-section/gallery-home-3.svg",
     ],
   },
 };

@@ -53,6 +53,13 @@ export interface InnovationCommunitySectionProps {
   infoSection: InfoSection[];
 }
 
+export interface GallerySectionProps {
+  title: string;
+  description: string;
+  btnLabel: string;
+  imageList: string[];
+}
+
 export interface StaticPageData {
   title: string;
   description: string;
@@ -65,4 +72,5 @@ export interface StaticPageData {
   cardSection4?: CardSection;
   cardSection5?: CardSection;
   innovationCommunitySection?: InnovationCommunitySectionProps;
+  gallerySection?: GallerySectionProps;
 }

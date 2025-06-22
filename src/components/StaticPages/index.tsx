@@ -7,6 +7,7 @@ import {
   CarouselBanner,
   StaticCardProps,
   InnovationCommunitySectionProps,
+  GallerySectionProps,
 } from "@/types/staticPages";
 import CardSection4 from "@/components/StaticPages/CardSection4";
 import CardSection5 from "@/components/StaticPages/CardSection5";
@@ -14,6 +15,7 @@ import CardSection3 from "@/components/StaticPages/CardSection3";
 // import CarouselBannerSection from "@/components/StaticPages/CarouselBannerSection";
 import CardSection2 from "@/components/StaticPages/CardSection2";
 import InnovationCommunity from "@/components/StaticPages/InnovationCommunity";
+import GallerySection from "./GallerySection";
 
 interface StaticPageProps {
   data: StaticPageData;
@@ -29,6 +31,7 @@ const StaticPage = ({ data, pageName }: StaticPageProps) => {
       | CarouselBanner[]
       | StaticCardProps
       | InnovationCommunitySectionProps
+      | GallerySectionProps
   ) => {
     switch (key) {
       case "hero":
@@ -49,6 +52,8 @@ const StaticPage = ({ data, pageName }: StaticPageProps) => {
             data={value as InnovationCommunitySectionProps}
           />
         );
+      case "gallerySection":
+        return <GallerySection data={value as GallerySectionProps} />;
       default:
         return null;
     }
