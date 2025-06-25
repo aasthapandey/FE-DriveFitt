@@ -11,6 +11,7 @@ import {
   SportsClubSectionProps,
   MemberSectionProps,
   AppDownloadProps,
+  FooterInfoProps,
 } from "@/types/staticPages";
 import CardSection4 from "@/components/StaticPages/CardSection4";
 import CardSection5 from "@/components/StaticPages/CardSection5";
@@ -22,6 +23,7 @@ import GallerySection from "./GallerySection";
 import SportsClub from "@/components/StaticPages/SportsClub";
 import MemberSection from "@/components/StaticPages/MemberSection";
 import AppDownload from "@/components/common/AppDownload";
+import FooterInfo from "@/components/common/FooterInfo";
 
 interface StaticPageProps {
   data: StaticPageData;
@@ -41,6 +43,7 @@ const StaticPage = ({ data, pageName }: StaticPageProps) => {
       | SportsClubSectionProps
       | MemberSectionProps
       | AppDownloadProps
+      | FooterInfoProps
   ) => {
     switch (key) {
       case "hero":
@@ -69,6 +72,8 @@ const StaticPage = ({ data, pageName }: StaticPageProps) => {
         return <MemberSection data={value as MemberSectionProps} />;
       case "appDownloadSection":
         return <AppDownload data={value as AppDownloadProps} />;
+      case "footerInfoSection":
+        return <FooterInfo data={value as FooterInfoProps} />;
       default:
         return null;
     }

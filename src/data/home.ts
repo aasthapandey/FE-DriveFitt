@@ -7,7 +7,7 @@ export const homeData: StaticPageData = {
   seoDescription:
     "Join DriveFitt, Gurugram's top sports club for cricket, fitness, recovery, and more. Premium facilities and expert coaching.",
   hero: {
-    title: "India’s First Cricket and Fitness Club",
+    title: "India's First Cricket and Fitness Club",
     description: "",
     desktopImage: "/images/hero/home.svg",
     mobileImage: "/images/hero/home-mobile.svg",
@@ -214,5 +214,43 @@ export const homeData: StaticPageData = {
     appStoreImg: "/images/app-download/app-store.svg",
     dfLogo: "/images/app-download/df-logo.svg",
     mobileImage: "/images/app-download/mobile.png",
+  },
+  footerInfoSection: {
+    footerInfoList: [
+      {
+        title: "Chat to us",
+        description: "Our friendly team is here to help",
+        email: "info@drivefitt.club",
+        image: "/images/mail.svg",
+      },
+      {
+        title: "Visit us",
+        description: "Welcome to Our Main Club Branch.",
+        email: "Sector-56, Golf Course RdGurugram, Haryana 122022",
+        image: "/images/location.svg",
+      },
+      {
+        title: "Call us",
+        description: "Mon - Sun from 10am to 10pm",
+        email: "+91-9999999990",
+        image: "/images/phone.svg",
+      },
+    ],
+    socialLinkList: [
+      {
+        image: "/images/facebook.svg",
+        link: "https://www.facebook.com/drivefitt",
+      },
+    ],
+    contactFormSection: {
+      title: "Get in touch",
+      description: "We'd love to hear from you. Please fill out this form.",
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      message: "",
+      submitButtonText: "Send Message",
+    },
   },
 };

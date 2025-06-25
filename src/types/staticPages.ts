@@ -88,6 +88,35 @@ export interface AppDownloadProps {
   mobileImage: string;
 }
 
+export interface SocialLinks {
+  image: string;
+  link: string;
+}
+
+export interface FooterInfoItem {
+  title: string;
+  description: string;
+  email: string;
+  image: string;
+}
+
+export interface ContactFormProps {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  message: string;
+  submitButtonText: string;
+  title: string;
+  description: string;
+}
+
+export interface FooterInfoProps {
+  footerInfoList: FooterInfoItem[];
+  socialLinkList: SocialLinks[];
+  contactFormSection: ContactFormProps;
+}
+
 export interface StaticPageData {
   title: string;
   description: string;
@@ -103,5 +132,6 @@ export interface StaticPageData {
   gallerySection?: GallerySectionProps;
   sportsClubSection?: SportsClubSectionProps;
   memberSection?: MemberSectionProps;
-  appDownloadSection: AppDownloadProps;
+  appDownloadSection?: AppDownloadProps;
+  footerInfoSection?: FooterInfoProps;
 }
