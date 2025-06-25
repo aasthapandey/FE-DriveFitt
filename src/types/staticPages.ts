@@ -117,7 +117,7 @@ export interface FooterInfoProps {
   contactFormSection: ContactFormProps;
 }
 
-export interface FooterProps{
+export interface FooterProps {
   title: string;
 }
 
@@ -138,5 +138,5 @@ export interface StaticPageData {
   memberSection?: MemberSectionProps;
   appDownloadSection?: AppDownloadProps;
   footerInfoSection?: FooterInfoProps;
-  footerSection: FooterProps;
+  footerSection?: FooterProps;
 }
