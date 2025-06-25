@@ -206,4 +206,13 @@ export const homeData: StaticPageData = {
       },
     ],
   },
+  appDownloadSection: {
+    title: "Your exclusive access, now on mobile",
+    description:
+      "Our app makes it easy to join classes, connect with coaches and track your journey.",
+    googlePlayImg: "/images/app-download/google-play.svg",
+    appStoreImg: "/images/app-download/app-store.svg",
+    dfLogo: "/images/app-download/df-logo.svg",
+    mobileImage: "/images/app-download/mobile.png",
+  },
 };

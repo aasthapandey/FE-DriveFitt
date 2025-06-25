@@ -79,6 +79,15 @@ export interface MemberSectionProps {
   memberList: MemberItem[];
 }
 
+export interface AppDownloadProps {
+  title: string;
+  description: string;
+  googlePlayImg: string;
+  appStoreImg: string;
+  dfLogo: string;
+  mobileImage: string;
+}
+
 export interface StaticPageData {
   title: string;
   description: string;
@@ -94,4 +103,5 @@ export interface StaticPageData {
   gallerySection?: GallerySectionProps;
   sportsClubSection?: SportsClubSectionProps;
   memberSection?: MemberSectionProps;
+  appDownloadSection: AppDownloadProps;
 }
