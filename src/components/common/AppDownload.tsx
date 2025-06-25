@@ -2,14 +2,7 @@ import { AppDownloadProps } from "@/types/staticPages";
 import Image from "next/image";
 
 const AppDownload = ({ data }: { data: AppDownloadProps }) => {
-  const {
-    title,
-    description,
-    googlePlayImg,
-    appStoreImg,
-    dfLogo,
-    mobileImage,
-  } = data;
+  const { title, description, googlePlayImg, appStoreImg, mobileImage } = data;
   return (
     <div className="relative px-[120px]">
       <Image
