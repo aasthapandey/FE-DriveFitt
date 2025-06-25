@@ -221,25 +221,37 @@ export const homeData: StaticPageData = {
         title: "Chat to us",
         description: "Our friendly team is here to help",
         email: "info@drivefitt.club",
-        image: "/images/mail.svg",
+        image: "/images/ChatToUs.svg",
       },
       {
         title: "Visit us",
         description: "Welcome to Our Main Club Branch.",
         email: "Sector-56, Golf Course RdGurugram, Haryana 122022",
-        image: "/images/location.svg",
+        image: "/images/VisitUs.svg",
       },
       {
         title: "Call us",
         description: "Mon - Sun from 10am to 10pm",
         email: "+91-9999999990",
-        image: "/images/phone.svg",
+        image: "/images/CallUs.svg",
       },
     ],
     socialLinkList: [
       {
-        image: "/images/facebook.svg",
-        link: "https://www.facebook.com/drivefitt",
+        image: "/images/x-social.svg",
+        link: "",
+      },
+      {
+        image: "/images/instagram-social.svg",
+        link: "",
+      },
+      {
+        image: "/images/linkedin-social.svg",
+        link: "",
+      },
+      {
+        image: "/images/facebook-social.svg",
+        link: "",
       },
     ],
     contactFormSection: {
@@ -252,5 +264,8 @@ export const homeData: StaticPageData = {
       message: "",
       submitButtonText: "Send Message",
     },
+  },
+  footerSection: {
+    title: "©2025 Drivefitt. All rights reserved.",
   },
 };

@@ -12,6 +12,7 @@ import {
   MemberSectionProps,
   AppDownloadProps,
   FooterInfoProps,
+  FooterProps,
 } from "@/types/staticPages";
 import CardSection4 from "@/components/StaticPages/CardSection4";
 import CardSection5 from "@/components/StaticPages/CardSection5";
@@ -24,6 +25,7 @@ import SportsClub from "@/components/StaticPages/SportsClub";
 import MemberSection from "@/components/StaticPages/MemberSection";
 import AppDownload from "@/components/common/AppDownload";
 import FooterInfo from "@/components/common/FooterInfo";
+import Footer from "@/components/common/Footer";
 
 interface StaticPageProps {
   data: StaticPageData;
@@ -44,6 +46,7 @@ const StaticPage = ({ data, pageName }: StaticPageProps) => {
       | MemberSectionProps
       | AppDownloadProps
       | FooterInfoProps
+      | FooterProps
   ) => {
     switch (key) {
       case "hero":
@@ -74,13 +77,15 @@ const StaticPage = ({ data, pageName }: StaticPageProps) => {
         return <AppDownload data={value as AppDownloadProps} />;
       case "footerInfoSection":
         return <FooterInfo data={value as FooterInfoProps} />;
+      case "footerSection":
+        return <Footer data={value as FooterProps} />;
       default:
         return null;
     }
   };
 
   return (
-    <div className="bg-[#0D0D0D] flex flex-col gap-[160px] pb-[120px]">
+    <div className="bg-[#0D0D0D] flex flex-col gap-[160px]">
       {Object.entries(data).map(([key, value]) => {
         const component = renderComponent(key, value);
         if (component) {
