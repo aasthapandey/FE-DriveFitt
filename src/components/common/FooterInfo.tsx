@@ -7,7 +7,7 @@ const FooterInfo = ({ data }: { data: FooterInfoProps }) => {
 
   return (
     <div
-      className="flex gap-6 px-[120px] pb-[120px] pt-[140px] h-fit w-full"
+      className="flex gap-6 px-[120px] pb-[40px] pt-[140px] h-fit w-full"
       style={{
         background: "linear-gradient(180deg, #1D1D1D 0%, #0D0D0D 100%)",
       }}
