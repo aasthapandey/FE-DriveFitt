@@ -11,7 +11,7 @@ export const homeData: StaticPageData = {
     description: "",
     desktopImage: "/images/hero/home.svg",
     mobileImage: "/images/hero/home-mobile.svg",
-    btnPrimaryText: "Join Online",
+    btnPrimaryText: "Join Now",
     btnSecondaryText: "",
   },
   carouselBanner: [

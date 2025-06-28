@@ -30,9 +30,10 @@ import Footer from "@/components/common/Footer";
 interface StaticPageProps {
   data: StaticPageData;
   pageName: string;
+  isMobile?: boolean;
 }
 
-const StaticPage = ({ data, pageName }: StaticPageProps) => {
+const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
   const renderComponent = (
     key: string,
     value:
@@ -50,7 +51,13 @@ const StaticPage = ({ data, pageName }: StaticPageProps) => {
   ) => {
     switch (key) {
       case "hero":
-        return <HeroSection data={value as Hero} pageName={pageName} />;
+        return (
+          <HeroSection
+            data={value as Hero}
+            pageName={pageName}
+            isMobile={isMobile}
+          />
+        );
       case "cardSection4":
         return <CardSection4 data={value as CardSection} />;
       case "cardSection3":
@@ -85,7 +92,7 @@ const StaticPage = ({ data, pageName }: StaticPageProps) => {
   };
 
   return (
-    <div className="bg-[#0D0D0D] flex flex-col gap-[160px]">
+    <div className="bg-[#0D0D0D] flex flex-col gap-[160px] w-full">
       {Object.entries(data).map(([key, value]) => {
         const component = renderComponent(key, value);
         if (component) {
@@ -93,12 +100,21 @@ const StaticPage = ({ data, pageName }: StaticPageProps) => {
             return (
               <div
                 key={key}
-                className="bg-cover bg-center bg-no-repeat w-full"
+                className={`w-full ${
+                  isMobile ? "bg-contain" : "bg-cover"
+                } bg-center bg-no-repeat h-auto`}
                 style={{
-                  backgroundImage: `url(${(value as Hero).desktopImage})`,
+                  background: `url(${
+                    isMobile
+                      ? (value as Hero).mobileImage
+                      : (value as Hero).desktopImage
+                  })`,
+                  backgroundPosition: isMobile ? "top center" : "center",
+                  backgroundSize: isMobile ? "contain" : "cover",
+                  backgroundRepeat: "no-repeat",
                 }}
               >
-                <Navbar />
+                <Navbar isMobile={isMobile} />
                 {component}
               </div>
             );
