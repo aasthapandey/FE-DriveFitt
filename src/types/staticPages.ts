@@ -117,8 +117,22 @@ export interface FooterInfoProps {
   contactFormSection: ContactFormProps;
 }
 
-export interface FooterProps {
+export interface FooterLink {
   title: string;
+  link: string;
+}
+
+export interface FooterSection {
+  title: string;
+  links: FooterLink[];
+}
+
+export interface FooterProps {
+  logo: string;
+  description: string;
+  sections: FooterSection[];
+  socialLinks: SocialLinks[];
+  copyright: string;
 }
 
 export interface StaticPageData {
