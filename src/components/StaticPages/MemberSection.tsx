@@ -3,8 +3,15 @@ import { useState } from "react";
 import { MemberSectionProps } from "@/types/staticPages";
 import MemberCard from "@/components/StaticPages/MemberCard";
 import Image from "next/image";
+import TitleDescription from "@/components/common/TitleDescription";
 
-const MemberSection = ({ data }: { data: MemberSectionProps }) => {
+const MemberSection = ({
+  data,
+  isMobile,
+}: {
+  data: MemberSectionProps;
+  isMobile?: boolean;
+}) => {
   const { title, description, memberList } = data;
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -32,16 +39,11 @@ const MemberSection = ({ data }: { data: MemberSectionProps }) => {
     setTimeout(() => setIsAnimating(false), 500); // Match this with CSS transition duration
   };
 
+  let widthOfCards = isMobile ? 66.6 : 33.3;
+
   return (
-    <section className="px-[120px] flex flex-col gap-4 relative !overflow-hidden">
-      <h2 className="text-5xl font-semibold leading-[56px] tracking-[-2px] text-center">
-        {title}
-      </h2>
-      {description && (
-        <p className="text-base font-light leading-5 tracking-[-1%] text-[#8A8A8A] text-center max-w-[600px] mx-auto mb-[52px]">
-          {description}
-        </p>
-      )}
+    <section className="md:px-[120px] px-6 flex flex-col gap-5 overflow-hidden">
+      <TitleDescription title={title || ""} description={description || ""} />
       <div className="relative">
         <div
           className="flex transition-transform duration-500 ease-in-out"
@@ -53,10 +55,10 @@ const MemberSection = ({ data }: { data: MemberSectionProps }) => {
           {memberList.map((member) => (
             <div
               key={member.title}
-              className="flex-shrink-0"
-              style={{ width: `${100 / memberList.length}%` }}
+              className="flex-shrink-0 "
+              style={{ width: `${widthOfCards}%` }}
             >
-              <div className="px-5">
+              <div className="px-[10px] md:px-5">
                 <MemberCard data={member} />
               </div>
             </div>

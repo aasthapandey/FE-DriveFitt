@@ -5,7 +5,7 @@ const MemberCard = ({ data }: { data: MemberItem }) => {
   const { title, description, backgroundImage } = data;
   return (
     <div
-      className="relative rounded-[40px] h-[568px] w-full cursor-pointer"
+      className="relative rounded-[40px] h-[304px] md:h-[568px] w-full cursor-pointer"
       style={{
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: "cover",

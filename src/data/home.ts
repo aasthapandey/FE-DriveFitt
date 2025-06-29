@@ -70,7 +70,6 @@ export const homeData: StaticPageData = {
         description: "",
         backgroundImage: "/images/card-section/home/Group-Classes.svg",
         link: "/cricket",
-        className: "!h-full",
       },
       {
         title: "Pilates",

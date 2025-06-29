@@ -51,20 +51,28 @@ const ContactForm = ({ data }: { data: ContactFormProps }) => {
         }}
       >
         <div
-          className="rounded-[40px] w-full h-full p-12 flex flex-col"
+          className="rounded-[40px] w-full h-full p-8 md:p-12 flex flex-col"
           style={{
             background: "linear-gradient(180deg, #1E1E1E 0%, #141414 100%)",
           }}
         >
-          <h2 className="text-[40px] font-semibold leading-[48px] tracking-[-0.02em] mb-2">
+          <h2 className="text-2xl leading-7 md:text-[40px] font-semibold md:leading-[48px] tracking-[-1px] md:tracking-[-2px] mb-2">
             {title}
           </h2>
-          <p className="text-base text-[#8A8A8A] mb-8">{description}</p>
+          <p className="text-xs leading-4 tracking-[-1%] md:text-base md:leading-5 text-[#8A8A8A] mb-7 md:mb-10">
+            {description}
+          </p>
 
-          <form onSubmit={handleSubmit} className="flex flex-col gap-6 flex-1">
-            <div className="grid grid-cols-2 gap-4">
-              <div className="flex flex-col gap-2">
-                <label htmlFor="firstName" className="text-sm text-[#8A8A8A]">
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col gap-4 md:gap-6 flex-1"
+          >
+            <div className="grid grid-row-2 gap-4 md:grid-cols-2 md:gap-6">
+              <div className="flex flex-col gap-1.5">
+                <label
+                  htmlFor="firstName"
+                  className="text-xs md:text-sm text-[#8A8A8A]"
+                >
                   First Name
                 </label>
                 <input
@@ -73,12 +81,15 @@ const ContactForm = ({ data }: { data: ContactFormProps }) => {
                   name="firstName"
                   value={formData.firstName}
                   onChange={handleChange}
-                  className="bg-[#E7E7E7] border border-[#333333] rounded-lg p-3 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[#00DBDC] outline-none transition-colors"
+                  className="bg-[#FFFFFF] border border-[#333333] rounded-lg py-1.5 md:py-2 px-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[#00DBDC] outline-none transition-colors"
                   required
                 />
               </div>
-              <div className="flex flex-col gap-2">
-                <label htmlFor="lastName" className="text-sm text-[#8A8A8A]">
+              <div className="flex flex-col gap-1.5">
+                <label
+                  htmlFor="lastName"
+                  className="text-xs md:text-sm  text-[#8A8A8A]"
+                >
                   Last Name
                 </label>
                 <input
@@ -87,15 +98,18 @@ const ContactForm = ({ data }: { data: ContactFormProps }) => {
                   name="lastName"
                   value={formData.lastName}
                   onChange={handleChange}
-                  className="bg-[#E7E7E7] border border-[#333333] rounded-lg p-3 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[#00DBDC] outline-none transition-colors"
+                  className="bg-[#FFFFFF] border border-[#333333] rounded-lg py-1.5 md:py-2 px-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[#00DBDC] outline-none transition-colors"
                   required
                 />
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
-              <div className="flex flex-col gap-2">
-                <label htmlFor="email" className="text-sm text-[#8A8A8A]">
+            <div className="grid grid-row-2 gap-4 md:grid-cols-2 md:gap-6">
+              <div className="flex flex-col gap-1.5">
+                <label
+                  htmlFor="email"
+                  className="text-xs md:text-sm text-[#8A8A8A]"
+                >
                   Email ID
                 </label>
                 <input
@@ -104,12 +118,15 @@ const ContactForm = ({ data }: { data: ContactFormProps }) => {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="bg-[#E7E7E7] border border-[#333333] rounded-lg p-3 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[#00DBDC] outline-none transition-colors"
+                  className="bg-[#FFFFFF] border border-[#333333] rounded-lg py-1.5 md:py-2 px-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[#00DBDC] outline-none transition-colors"
                   required
                 />
               </div>
-              <div className="flex flex-col gap-2">
-                <label htmlFor="phone" className="text-sm text-[#8A8A8A]">
+              <div className="flex flex-col gap-1.5">
+                <label
+                  htmlFor="phone"
+                  className="text-xs md:text-sm text-[#8A8A8A]"
+                >
                   Phone Number
                 </label>
                 <input
@@ -118,13 +135,13 @@ const ContactForm = ({ data }: { data: ContactFormProps }) => {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="bg-[#E7E7E7] border border-[#333333] rounded-lg p-3 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[#00DBDC] outline-none transition-colors"
+                  className="bg-[#FFFFFF] border border-[#333333] rounded-lg py-1.5 md:py-2 px-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[#00DBDC] outline-none transition-colors"
                   required
                 />
               </div>
             </div>
 
-            <div className="flex flex-col gap-2 flex-1">
+            <div className="flex flex-col gap-1.5 flex-1">
               <label htmlFor="message" className="text-sm text-[#8A8A8A]">
                 Message
               </label>
@@ -133,14 +150,14 @@ const ContactForm = ({ data }: { data: ContactFormProps }) => {
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
-                className="bg-[#E7E7E7] border border-[#333333] rounded-lg p-3 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[#00DBDC] outline-none transition-colors flex-1 min-h-[120px] resize-none"
+                className="bg-[#FFFFFF] border border-[#333333] rounded-lg py-1.5 md:py-2 px-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[#00DBDC] outline-none transition-colors flex-1 min-h-10 md:min-h-[120px] resize-none"
                 required
               />
             </div>
 
             <button
               type="submit"
-              className="w-full bg-[#00DBDC] text-black font-medium py-4 rounded-lg hover:bg-[#00c5c6] transition-colors"
+              className="w-full bg-[#00DBDC] text-black text-sm font-medium py-[10px] tracking-[-2%] md:tracking-[-6%] rounded-lg hover:bg-[#00c5c6] transition-colors"
             >
               {submitButtonText}
             </button>

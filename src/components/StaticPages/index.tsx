@@ -59,15 +59,17 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
           />
         );
       case "cardSection4":
-        return <CardSection4 data={value as CardSection} />;
+        return <CardSection4 data={value as CardSection} isMobile={isMobile} />;
       case "cardSection3":
-        return <CardSection3 data={value as CardSection} />;
+        return <CardSection3 data={value as CardSection} isMobile={isMobile} />;
       case "cardSection5":
-        return <CardSection5 data={value as CardSection} />;
+        return <CardSection5 data={value as CardSection} isMobile={isMobile} />;
       // case "carouselBanner":
       //   return <CarouselBannerSection data={value as CarouselBanner[]} />;
       case "cardSection2":
-        return <CardSection2 data={value as StaticCardProps} />;
+        return (
+          <CardSection2 data={value as StaticCardProps} isMobile={isMobile} />
+        );
       case "innovationCommunitySection":
         return (
           <InnovationCommunity
@@ -79,20 +81,27 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
       case "sportsClubSection":
         return <SportsClub data={value as SportsClubSectionProps} />;
       case "memberSection":
-        return <MemberSection data={value as MemberSectionProps} />;
+        return (
+          <MemberSection
+            data={value as MemberSectionProps}
+            isMobile={isMobile}
+          />
+        );
       case "appDownloadSection":
         return <AppDownload data={value as AppDownloadProps} />;
       case "footerInfoSection":
-        return <FooterInfo data={value as FooterInfoProps} />;
+        return (
+          <FooterInfo data={value as FooterInfoProps} isMobile={isMobile} />
+        );
       case "footerSection":
-        return <Footer data={value as FooterProps} />;
+        return <Footer data={value as FooterProps} isMobile={isMobile} />;
       default:
         return null;
     }
   };
 
   return (
-    <div className="bg-[#0D0D0D] flex flex-col gap-[160px] w-full">
+    <div className="bg-[#0D0D0D] flex flex-col gap-[60px] md:gap-[160px] w-full">
       {Object.entries(data).map(([key, value]) => {
         const component = renderComponent(key, value);
         if (component) {

@@ -24,6 +24,7 @@ export interface CardType {
 export interface CardSection {
   title?: string;
   description?: string;
+  isMobile?: boolean;
   cardSection: CardType[];
 }
 
