@@ -2,13 +2,7 @@ import { CardSection } from "@/types/staticPages";
 import Card from "@/components/StaticPages/Card";
 import TitleDescription from "@/components/common/TitleDescription";
 
-const CardSection5 = ({
-  data,
-  isMobile,
-}: {
-  data: CardSection;
-  isMobile?: boolean;
-}) => {
+const CardSection5 = ({ data }: { data: CardSection; isMobile?: boolean }) => {
   const { title, description, cardSection } = data;
   return (
     <section className="md:px-[120px] px-6 flex flex-col gap-5">
@@ -24,10 +18,7 @@ const CardSection5 = ({
       </div>
       <div className="grid grid-cols-2 gap-8">
         {cardSection.slice(3, 5).map((card, idx) => (
-          <Card
-            data={card}
-            key={idx + 3}
-          />
+          <Card data={card} key={idx + 3} />
         ))}
       </div>
     </section>

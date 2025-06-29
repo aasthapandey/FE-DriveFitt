@@ -6,7 +6,7 @@ interface StaticCardProps {
   isMobile?: boolean;
   className?: string;
 }
-const StaticCard = ({ data, isMobile, className }: StaticCardProps) => {
+const StaticCard = ({ data, className }: StaticCardProps) => {
   const { title, description, backgroundImage, link, modalImage } = data;
   return (
     <a href={link}>

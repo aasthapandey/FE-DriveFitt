@@ -39,7 +39,7 @@ const MemberSection = ({
     setTimeout(() => setIsAnimating(false), 500); // Match this with CSS transition duration
   };
 
-  let widthOfCards = isMobile ? 66.6 : 33.3;
+  const widthOfCards = isMobile ? 66.6 : 33.3;
 
   return (
     <section className="md:px-[120px] px-6 flex flex-col gap-5 overflow-hidden">

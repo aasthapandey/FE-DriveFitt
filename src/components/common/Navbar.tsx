@@ -46,10 +46,9 @@ export default function Navbar({ isMobile }: NavbarProps) {
         {isMenuOpen && (
           <div className="fixed inset-0 bg-[#1A1A1A] z-10">
             <div className="flex flex-col items-center justify-center pt-24">
-              {navLinks.map((link) => (
-                <div className="p-4 text-center w-full">
+              {navLinks.map((link, idx) => (
+                <div className="p-4 text-center w-full" key={idx}>
                   <Link
-                    key={link.href}
                     href={link.href}
                     className="text-white hover:text-[#00DBDC] transition-colors text-lg"
                     onClick={() => setIsMenuOpen(false)}
@@ -71,9 +70,9 @@ export default function Navbar({ isMobile }: NavbarProps) {
         <Image src="/images/logo.svg" alt="logo" width={212} height={36} />
       </Link>
       <div className="flex gap-10 px-2">
-        {navLinks.map((link) => (
+        {navLinks.map((link, idx) => (
           <Link
-            key={link.href}
+            key={idx}
             href={link.href}
             className="text-white hover:text-[#00DBDC] transition-colors"
           >
