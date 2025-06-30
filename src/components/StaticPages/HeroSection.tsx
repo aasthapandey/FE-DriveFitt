@@ -53,13 +53,13 @@ const HeroSection = ({ data, pageName, isMobile }: HeroSectionProps) => {
       >
         {renderTitle()}
         {pageName !== "home" ? (
-          <p className="text-white md:text-base md:leading-5 text-sm leading-[18px] tracking-[-2%] font-light mb-3 md:mb-[60px]">
+          <p className="text-white md:text-base md:leading-5 text-sm leading-[18px] tracking-[-2%] font-light mb-[28px] md:mb-[60px]">
             {description}
           </p>
         ) : null}
         <div className="flex gap-4 justify-center md:justify-start">
           {btnPrimaryText && (
-            <button className="bg-[#00DBDC] text-[#0D0D0D] px-10 py-3 md:px-14 md:py-4  rounded-lg font-medium leading-[100%] tracking-[-5%] text-base md:text-xl">
+            <button className="bg-[#00DBDC] text-[#0D0D0D] px-6 py-3 md:px-14 md:py-4  rounded-lg font-medium leading-[100%] tracking-[-5%] text-base md:text-xl">
               {btnPrimaryText}
             </button>
           )}
