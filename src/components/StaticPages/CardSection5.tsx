@@ -2,7 +2,6 @@ import { CardSection } from "@/types/staticPages";
 import Card from "@/components/StaticPages/Card";
 import TitleDescription from "@/components/common/TitleDescription";
 import CardInfo from "@/components/StaticPages/CardInfo";
-import Image from "next/image";
 import CardInfoItem from "@/components/StaticPages/CardInfoItem";
 
 const CardSection5 = ({

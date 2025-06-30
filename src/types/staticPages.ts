@@ -148,6 +148,18 @@ export interface EvolutionSectionProps {
   evolutionList: EvolutionItem[];
 }
 
+export type FaqItem = {
+  title: string;
+  description: string;
+  isOpen?: boolean;
+};
+
+export type FaqSectionProps = {
+  title: string;
+  description: string;
+  faqList: FaqItem[];
+};
+
 export interface StaticPageData {
   title: string;
   description: string;
@@ -167,4 +179,5 @@ export interface StaticPageData {
   appDownloadSection?: AppDownloadProps;
   footerInfoSection?: FooterInfoProps;
   footerSection?: FooterProps;
+  faqSection?: FaqSectionProps;
 }

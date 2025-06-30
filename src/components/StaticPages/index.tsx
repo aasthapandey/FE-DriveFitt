@@ -14,6 +14,7 @@ import {
   FooterInfoProps,
   FooterProps,
   EvolutionSectionProps,
+  FaqSectionProps,
 } from "@/types/staticPages";
 import CardSection4 from "@/components/StaticPages/CardSection4";
 import CardSection5 from "@/components/StaticPages/CardSection5";
@@ -28,6 +29,7 @@ import AppDownload from "@/components/common/AppDownload";
 import FooterInfo from "@/components/common/FooterInfo";
 import Footer from "@/components/common/Footer";
 import EvolutionSection from "@/components/StaticPages/EvolutionSection";
+import Faq from "@/components/common/Faq";
 
 interface StaticPageProps {
   data: StaticPageData;
@@ -51,6 +53,7 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
       | FooterInfoProps
       | FooterProps
       | EvolutionSectionProps
+      | FaqSectionProps
   ) => {
     switch (key) {
       case "hero":
@@ -83,6 +86,8 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
         return <EvolutionSection data={value as EvolutionSectionProps} />;
       case "gallerySection":
         return <GallerySection data={value as GallerySectionProps} />;
+      case "faqSection":
+        return isMobile ? null : <Faq data={value as FaqSectionProps} />;
       case "sportsClubSection":
         return <SportsClub data={value as SportsClubSectionProps} />;
       case "memberSection":

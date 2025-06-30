@@ -1,5 +1,4 @@
 import { CardType } from "@/types/staticPages";
-import Image from "next/image";
 import CardInfoItem from "@/components/StaticPages/CardInfoItem";
 
 type CardInfoProps = {
@@ -8,8 +7,7 @@ type CardInfoProps = {
   className?: string;
 };
 
-const CardInfo = ({ data, isMobile, className }: CardInfoProps) => {
-  const { title, description, iconImage, link } = data;
+const CardInfo = ({ data, className }: CardInfoProps) => {
   return (
     <div
       className={`rounded-[20px] md:rounded-[40px] p-[2px] ${className || ""}`}
