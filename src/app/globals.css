@@ -18,3 +18,12 @@
     background-color: white !important;
   }
 }
+
+.evolution-background {
+  background-size: contain !important;
+}
+@media (min-width: 768px) {
+  .evolution-background {
+    background-size: cover !important;
+  }
+}

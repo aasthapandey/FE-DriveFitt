@@ -32,12 +32,11 @@ const EvolutionSection = ({ data }: { data: EvolutionSectionProps }) => {
     <section className="flex flex-col gap-5">
       <TitleDescription title={title || ""} />
       <div
-        className="h-[265px] md:h-[730px] w-full flex flex-col justify-end"
+        className="h-[208px] md:h-[730px] w-full flex flex-col justify-end evolution-background"
         style={{
           background: `linear-gradient(179.2deg, rgba(0, 0, 0, 0) 0.87%, rgba(0, 0, 0, 0.2) 54.05%, #0D0D0D 99.5%), url(${activeBackground.backgroundImage})`,
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center center",
-          backgroundSize: "cover",
           backgroundAttachment: "local",
         }}
       >
