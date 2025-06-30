@@ -5,9 +5,10 @@ interface CardProps {
   data: CardType;
   isMobile?: boolean;
   className?: string;
+  imageClass?: string;
 }
 
-const Card = ({ data, isMobile, className }: CardProps) => {
+const Card = ({ data, isMobile, className, imageClass }: CardProps) => {
   const { title, description, backgroundImage, link } = data;
 
   return (
@@ -19,7 +20,7 @@ const Card = ({ data, isMobile, className }: CardProps) => {
     >
       <a
         href={link}
-        className={`group relative block rounded-[20px] md:rounded-[40px] overflow-hidden h-[256px] md:h-[407px] cursor-pointer w-full border-0 ${className}`}
+        className={`group relative block rounded-[20px] md:rounded-[40px] overflow-hidden h-[256px] md:h-[407px] cursor-pointer w-full border-0 ${imageClass}`}
         style={{
           backgroundImage: `url(${backgroundImage})`,
           backgroundSize: "cover",

@@ -19,18 +19,31 @@ const CardSection3 = ({
             <Card
               data={card}
               key={idx}
-              className={`${idx === 0 ? "h-[372px]" : "h-[176px]"}`}
+              className={`${idx === 0 ? "!h-[372px]" : "!h-[176px]"}`}
+              imageClass={`${idx === 0 ? "!h-[368px]" : "!h-[172px]"}`}
             />
           ))}
         </div>
       ) : (
-        <div className="grid grid-cols-2 gap-8">
+        <div className="grid grid-cols-2 gap-10">
           <div className="col-span-1 row-span-2 h-full">
-            <Card data={cardSection[0]} className="!h-full" />
+            <Card
+              data={cardSection[0]}
+              className="!h-[660px]"
+              imageClass="!h-[654px]"
+            />
           </div>
-          <div className="col-span-1 grid grid-rows-2 gap-8 h-full">
-            <Card data={cardSection[1]} />
-            <Card data={cardSection[2]} />
+          <div className="col-span-1 grid grid-rows-2 gap-10 h-full">
+            <Card
+              data={cardSection[1]}
+              className="!h-[310px]"
+              imageClass="!h-[306px]"
+            />
+            <Card
+              data={cardSection[2]}
+              className="!h-[310px]"
+              imageClass="!h-[306px]"
+            />
           </div>
         </div>
       )}

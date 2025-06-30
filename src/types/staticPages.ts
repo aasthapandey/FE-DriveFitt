@@ -19,6 +19,7 @@ export interface CardType {
   backgroundImage?: string;
   link?: string;
   className?: string;
+  iconImage?: string;
 }
 
 export interface CardSection {

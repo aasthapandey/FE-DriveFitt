@@ -5,6 +5,8 @@ import { recoveryData } from "@/data/recovery";
 import { runningData } from "@/data/running";
 import { StaticPageData } from "@/types/staticPages";
 import StaticPage from "@/components/StaticPages";
+import { headers } from "next/headers";
+import { isMobileDevice } from "@/utils/deviceDetection";
 
 type PageParams = {
   params: {
@@ -34,10 +36,13 @@ export default function Page({ params }: PageParams) {
   const slug = params.slug;
   const data = pageData[slug];
   const pageName = Array.isArray(slug) ? slug[0] : slug;
+  const headersList = headers();
+  const userAgent = headersList.get("user-agent") || "";
+  const isMobile = userAgent ? isMobileDevice(userAgent) : false;
 
   return (
     <main>
-      <StaticPage data={data} pageName={pageName} />
+      <StaticPage data={data} pageName={pageName} isMobile={isMobile} />
     </main>
   );
 }
