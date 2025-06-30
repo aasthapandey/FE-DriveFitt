@@ -14,13 +14,23 @@ const EvolutionSection = ({ data }: { data: EvolutionSectionProps }) => {
 
   const sliderSettings = {
     dots: true,
-    infinite: true,
+    infinite: false,
     speed: 500,
-    slidesToShow: 1,
+    slidesToShow: 1.1,
     slidesToScroll: 1,
     arrows: false,
     afterChange: (index: number) => {
-      setActiveBackground(evolutionList[index]);
+      const roundedIndex = Math.round(index);
+      const safeIndex = Math.max(
+        0,
+        Math.min(roundedIndex, evolutionList.length - 1)
+      );
+
+      if (evolutionList[safeIndex]) {
+        setActiveBackground(evolutionList[safeIndex]);
+      } else {
+        setActiveBackground(evolutionList[0]);
+      }
     },
     customPaging: () => (
       <div className="w-3 h-3 rounded-full bg-white/40 hover:bg-white transition-colors duration-300" />
@@ -28,20 +38,25 @@ const EvolutionSection = ({ data }: { data: EvolutionSectionProps }) => {
     dotsClass: "slick-dots custom-dots",
   };
 
+  const backgroundImageUrl =
+    activeBackground?.backgroundImage ||
+    evolutionList[0]?.backgroundImage ||
+    "";
+
   return (
     <section className="flex flex-col gap-5">
       <TitleDescription title={title || ""} />
       <div
         className="h-[208px] md:h-[730px] w-full flex flex-col justify-end evolution-background"
         style={{
-          background: `linear-gradient(179.2deg, rgba(0, 0, 0, 0) 0.87%, rgba(0, 0, 0, 0.2) 54.05%, #0D0D0D 99.5%), url(${activeBackground.backgroundImage})`,
+          background: `linear-gradient(179.2deg, rgba(0, 0, 0, 0) 0.87%, rgba(0, 0, 0, 0.2) 54.05%, #0D0D0D 99.5%), url(${backgroundImageUrl})`,
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center center",
           backgroundAttachment: "local",
         }}
       >
         {/* Desktop Hover View */}
-        <div className="hidden md:flex justify-between items-start w-full gap-10 md:px-[120px] px-6 py-4 md:py-[60px]">
+        <div className="hidden md:flex justify-between items-start w-full gap-10 md:px-[120px] pl-6 py-4 md:py-[60px]">
           {evolutionList.map((evo, idx) => {
             return (
               <div
@@ -65,11 +80,11 @@ const EvolutionSection = ({ data }: { data: EvolutionSectionProps }) => {
         </div>
       </div>
       {/* Mobile Carousel View */}
-      <div className="block md:hidden mt-[-70px] p-6 evolutionCarousel">
+      <div className="block md:hidden mt-[-70px] pl-4 evolutionCarousel">
         <Slider {...sliderSettings}>
           {evolutionList.map((evo, idx) => (
-            <div key={idx} className="!w-full h-[125px]">
-              <div className="bg-white text-[#1C1C1C] flex flex-col justify-center gap-3 px-8 w-full h-full">
+            <div key={idx} className="!w-full h-[125px] pl-4">
+              <div className="bg-white text-[#1C1C1C] flex flex-col justify-center gap-3 px-6 w-full h-full">
                 <h3 className="text-xl font-semibold leading-6 tracking-[-1%]">
                   {evo.title}
                 </h3>

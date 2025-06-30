@@ -48,7 +48,7 @@ const HeroSection = ({ data, pageName, isMobile }: HeroSectionProps) => {
             ? "max-w-full md:max-w-[739px]"
             : "max-w-full md:max-w-[600px]"
         } ${
-          pageName === "home" ? "mt-[267px] md:mt-0" : "mt-[145px] md:mt-0"
+          pageName === "home" ? "mt-[267px] md:mt-0" : "mt-[170px] md:mt-0"
         } `}
       >
         {renderTitle()}
