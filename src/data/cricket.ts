@@ -11,7 +11,7 @@ export const cricketData: StaticPageData = {
     description:
       "Experience Gurugram's premier sports club & fitness center – Cricket, Fitness, Recovery, Community…and more",
     desktopImage: "/images/hero/cricket.svg",
-    mobileImage: "/images/hero/cricket-mobile.svg",
+    mobileImage: "/images/card-section/home/cricket-mobile.svg",
     btnPrimaryText: "Book a free trial",
     btnSecondaryText: "Join Online",
   },
