@@ -137,6 +137,17 @@ export interface FooterProps {
   copyright: string;
 }
 
+export interface EvolutionItem {
+  title: string;
+  description: string;
+  backgroundImage: string;
+}
+
+export interface EvolutionSectionProps {
+  title: string;
+  evolutionList: EvolutionItem[];
+}
+
 export interface StaticPageData {
   title: string;
   description: string;
@@ -152,6 +163,7 @@ export interface StaticPageData {
   gallerySection?: GallerySectionProps;
   sportsClubSection?: SportsClubSectionProps;
   memberSection?: MemberSectionProps;
+  evolutionSection?: EvolutionSectionProps;
   appDownloadSection?: AppDownloadProps;
   footerInfoSection?: FooterInfoProps;
   footerSection?: FooterProps;

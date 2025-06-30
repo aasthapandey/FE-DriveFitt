@@ -49,15 +49,17 @@ const Card = ({ data, isMobile, className, imageClass }: CardProps) => {
             {description}
           </p>
         </div>
-        <div className="absolute flex items-center justify-center bottom-4 md:bottom-6 right-4 md:right-6 z-10">
-          <Image
-            src="/images/redirectionButton.svg"
-            alt="redirectionBtn"
-            width={isMobile ? 32 : 48}
-            height={isMobile ? 32 : 48}
-            className={`${isMobile ? "!size-8" : "!size-12"}`}
-          />
-        </div>
+        {link && (
+          <div className="absolute flex items-center justify-center bottom-4 md:bottom-6 right-4 md:right-6 z-10">
+            <Image
+              src="/images/redirectionButton.svg"
+              alt="redirectionBtn"
+              width={isMobile ? 32 : 48}
+              height={isMobile ? 32 : 48}
+              className={`${isMobile ? "!size-8" : "!size-12"}`}
+            />
+          </div>
+        )}
       </a>
     </div>
   );
