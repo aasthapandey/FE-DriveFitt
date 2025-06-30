@@ -7,7 +7,7 @@ const MemberCard = ({ data }: { data: MemberItem }) => {
     <div
       className="relative rounded-[40px] h-[304px] md:h-[568px] w-full cursor-pointer member-card-bg"
       style={{
-        backgroundImage: `url(${backgroundImage})`,
+        backgroundImage: `linear-gradient(0deg, #000000 0%, rgba(0, 0, 0, 0) 100%), url(${backgroundImage})`,
         backgroundSize: "cover",
       }}
     >

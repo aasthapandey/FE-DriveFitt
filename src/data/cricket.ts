@@ -79,6 +79,51 @@ export const cricketData: StaticPageData = {
       },
     ],
   },
+  gallerySection: {
+    title: "Cricket in Action",
+    description:
+      "Relive every swing, sprint and six—from net practice to match-day magic in action.",
+    btnLabel: "View Gallery",
+    imageList: [
+      "/images/gallery-section/gallery-cricket-1.svg",
+      "/images/gallery-section/gallery-cricket-2.svg",
+      "/images/gallery-section/gallery-cricket-3.svg",
+    ],
+  },
+  memberSection: {
+    title: "Member experiences",
+    description:
+      "Hear What Our Players Say — Real Stories of Growth, Grit, and Game-Changing Training.",
+    memberList: [
+      {
+        title: "Kunal Bajaj",
+        description: "Membership plan",
+        backgroundImage: "/images/member-section/cricket-member-1.svg",
+        link: "/cricket",
+      },
+      {
+        title: "Kunal Jain",
+        description: "Membership plan",
+        backgroundImage: "/images/member-section/cricket-member-2.svg",
+        link: "/cricket",
+      },
+      {
+        title: "Rahul Kapoor",
+        description: "Membership plan",
+        backgroundImage: "/images/member-section/cricket-member-3.svg",
+        link: "/cricket",
+      },
+    ],
+  },
+  appDownloadSection: {
+    title: "Your exclusive access, now on mobile",
+    description:
+      "Our app makes it easy to join classes, connect with coaches and track your journey.",
+    googlePlayImg: "/images/app-download/google-play.svg",
+    appStoreImg: "/images/app-download/app-store.svg",
+    dfLogo: "/images/app-download/df-logo.svg",
+    mobileImage: "/images/app-download/mobile.png",
+  },
   footerInfoSection: {
     footerInfoList: [
       {
