@@ -27,3 +27,26 @@
     background-size: cover !important;
   }
 }
+
+.member-carousel {
+  .slick-list {
+    overflow: visible;
+  }
+  .slick-track {
+    display: flex;
+    align-items: center;
+  }
+  .slick-slide {
+    height: auto;
+  }
+  .slick-slide > div {
+    height: 100%;
+  }
+}
+
+.member-card-bg {
+  background-position: top;
+  @media (min-width: 768px) {
+    background-position: center;
+  }
+}

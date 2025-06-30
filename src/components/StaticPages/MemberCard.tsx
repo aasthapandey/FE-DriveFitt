@@ -5,11 +5,10 @@ const MemberCard = ({ data }: { data: MemberItem }) => {
   const { title, description, backgroundImage } = data;
   return (
     <div
-      className="relative rounded-[40px] h-[304px] md:h-[568px] w-full cursor-pointer"
+      className="relative rounded-[40px] h-[304px] md:h-[568px] w-full cursor-pointer member-card-bg"
       style={{
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: "cover",
-        backgroundPosition: "center",
       }}
     >
       <div className="absolute bottom-6 left-6 flex flex-col gap-2">
