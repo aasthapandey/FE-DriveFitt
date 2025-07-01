@@ -79,6 +79,49 @@ export const runningData: StaticPageData = {
       },
     ],
   },
+  scrollingCardSection: {
+    title: "Engineered for progress",
+    description:
+      "Science-backed eating strategies that match your workout intensity, recovery needs, and cricket-specific demands—because elite results require elite fueling.",
+    iconImage: "/images/check-icon.svg",
+    cardSection: [
+      {
+        subTitle: "Precision run analysis",
+        list: [
+          "3D gait tracking + heart-rate zones to perfect your stride and pace simultaneously.",
+        ],
+        extraTagLabel: "",
+        backgroundImage: "/images/cricket/scroll-card-cricket-1.svg",
+      },
+      {
+        subTitle: "Smart interval training ",
+        list: [
+          "Capture every session and review it 10x faster with auto-clipped, ball-by-ball videos—no dead time, just pure action.",
+          "Create a team, stay in sync, and showcase your sessions on social media",
+          "Bat Sensor*- real-time insights on Bat Swing, Speed, Angles, Power & Efficiency ",
+        ],
+        extraTagLabel: "",
+        backgroundImage: "/images/fitness/scroll-card-fitness-1.svg",
+      },
+      {
+        subTitle: "Power-building routines ",
+        list: [
+          "Capture every session and review it 10x faster with auto-clipped, ball-by-ball videos—no dead time, just pure action.",
+          "Create a team, stay in sync, and showcase your sessions on social media",
+          "Bat Sensor*- real-time insights on Bat Swing, Speed, Angles, Power & Efficiency ",
+        ],
+        extraTagLabel: "*Purchase separately",
+        backgroundImage: "/images/recovery/scroll-card-recovery-1.svg",
+      },
+    ],
+  },
+  bannerSection: {
+    title: "Find your perfect program",
+    description:
+      "Whether you're taking your first swing or prepping for tournaments – we've got a proven path for you.",
+    btnLabel: "Explore Plan",
+    image: "/images/cricket/cricket-banner.svg",
+  },
   gallerySection: {
     title: "Fitness Unfiltered",
     description:

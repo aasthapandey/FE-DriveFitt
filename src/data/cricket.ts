@@ -79,24 +79,6 @@ export const cricketData: StaticPageData = {
       },
     ],
   },
-  gallerySection: {
-    title: "Cricket in Action",
-    description:
-      "Relive every swing, sprint and six—from net practice to match-day magic in action.",
-    btnLabel: "View Gallery",
-    imageList: [
-      "/images/gallery-section/gallery-cricket-1.svg",
-      "/images/gallery-section/gallery-cricket-2.svg",
-      "/images/gallery-section/gallery-cricket-3.svg",
-    ],
-  },
-  bannerSection: {
-    title: "Find your perfect program",
-    description:
-      "Whether you're taking your first swing or prepping for tournaments – we've got a proven path for you.",
-    btnLabel: "Explore Plan",
-    image: "/images/cricket/cricket-banner.svg",
-  },
   scrollingCardSection: {
     title: "Tech that transforms your game",
     description:
@@ -133,6 +115,24 @@ export const cricketData: StaticPageData = {
         extraTagLabel: "*Purchase separately",
         backgroundImage: "/images/recovery/scroll-card-recovery-1.svg",
       },
+    ],
+  },
+  bannerSection: {
+    title: "Find your perfect program",
+    description:
+      "Whether you're taking your first swing or prepping for tournaments – we've got a proven path for you.",
+    btnLabel: "Explore Plan",
+    image: "/images/cricket/cricket-banner.svg",
+  },
+  gallerySection: {
+    title: "Cricket in Action",
+    description:
+      "Relive every swing, sprint and six—from net practice to match-day magic in action.",
+    btnLabel: "View Gallery",
+    imageList: [
+      "/images/gallery-section/gallery-cricket-1.svg",
+      "/images/gallery-section/gallery-cricket-2.svg",
+      "/images/gallery-section/gallery-cricket-3.svg",
     ],
   },
   memberSection: {

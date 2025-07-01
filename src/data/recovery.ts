@@ -79,6 +79,49 @@ export const recoveryData: StaticPageData = {
       },
     ],
   },
+  scrollingCardSection: {
+    title: "Performance nutrition – Fuel like you train",
+    description:
+      "Science-backed eating strategies that match your workout intensity, recovery needs, and cricket-specific demands—because elite results require elite fueling.",
+    iconImage: "/images/check-icon.svg",
+    cardSection: [
+      {
+        subTitle: "Personalized sports nutrition plans",
+        list: [
+          "Tailored macros and meal timing to fuel your cricket, gym, and recovery needs—because a batsman and bowler don’t eat the same.",
+        ],
+        extraTagLabel: "",
+        backgroundImage: "/images/cricket/scroll-card-cricket-1.svg",
+      },
+      {
+        subTitle: "Performance meal prep ",
+        list: [
+          "Capture every session and review it 10x faster with auto-clipped, ball-by-ball videos—no dead time, just pure action.",
+          "Create a team, stay in sync, and showcase your sessions on social media",
+          "Bat Sensor*- real-time insights on Bat Swing, Speed, Angles, Power & Efficiency ",
+        ],
+        extraTagLabel: "*Purchase separately",
+        backgroundImage: "/images/fitness/scroll-card-fitness-1.svg",
+      },
+      {
+        subTitle: "Hydration & Supplement strategies ",
+        list: [
+          "Capture every session and review it 10x faster with auto-clipped, ball-by-ball videos—no dead time, just pure action.",
+          "Create a team, stay in sync, and showcase your sessions on social media",
+          "Bat Sensor*- real-time insights on Bat Swing, Speed, Angles, Power & Efficiency ",
+        ],
+        extraTagLabel: "*Purchase separately",
+        backgroundImage: "/images/recovery/scroll-card-recovery-1.svg",
+      },
+    ],
+  },
+  bannerSection: {
+    title: "Become a DriveFIIT member",
+    description:
+      "Whether you're taking your first swing or prepping for tournaments – we've got a proven path for you.",
+    btnLabel: "Explore Plan",
+    image: "/images/cricket/cricket-banner.svg",
+  },
   gallerySection: {
     title: "Fitness Unfiltered",
     description:

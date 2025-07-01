@@ -79,6 +79,49 @@ export const fitnessData: StaticPageData = {
       },
     ],
   },
+  scrollingCardSection: {
+    title: "Tech that transforms your game",
+    description:
+      "Smarter tools. Sharper results. Welcome to the future of performance",
+    iconImage: "/images/check-icon.svg",
+    cardSection: [
+      {
+        subTitle: "3D body scan",
+        list: [
+          "Our Advanced 3D Body Scan creates a full-body digital blueprint—capturing precise measurements, posture alignment, and asymmetries.",
+        ],
+        extraTagLabel: "",
+        backgroundImage: "/images/cricket/scroll-card-cricket-1.svg",
+      },
+      {
+        subTitle: "Sustainable & Eco-Friendly equipment ",
+        list: [
+          "Capture every session and review it 10x faster with auto-clipped, ball-by-ball videos—no dead time, just pure action.",
+          "Create a team, stay in sync, and showcase your sessions on social media",
+          "Bat Sensor*- real-time insights on Bat Swing, Speed, Angles, Power & Efficiency ",
+        ],
+        extraTagLabel: "*Purchase separately",
+        backgroundImage: "/images/fitness/scroll-card-fitness-1.svg",
+      },
+      {
+        subTitle: "ASmart Recovery Tools ",
+        list: [
+          "Capture every session and review it 10x faster with auto-clipped, ball-by-ball videos—no dead time, just pure action.",
+          "Create a team, stay in sync, and showcase your sessions on social media",
+          "Bat Sensor*- real-time insights on Bat Swing, Speed, Angles, Power & Efficiency ",
+        ],
+        extraTagLabel: "*Purchase separately",
+        backgroundImage: "/images/recovery/scroll-card-recovery-1.svg",
+      },
+    ],
+  },
+  bannerSection: {
+    title: "Become a DriveFIIT member",
+    description:
+      "Whether you're taking your first swing or prepping for tournaments – we've got a proven path for you.",
+    btnLabel: "Explore Plan",
+    image: "/images/cricket/cricket-banner.svg",
+  },
   gallerySection: {
     title: "Fitness unfiltered",
     description:
