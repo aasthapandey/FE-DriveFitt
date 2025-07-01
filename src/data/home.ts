@@ -12,7 +12,12 @@ export const homeData: StaticPageData = {
     desktopImage: "/images/hero/home.svg",
     mobileImage: "/images/hero/home-mobile.svg",
     btnPrimaryText: "Join Now",
-    btnSecondaryText: "",
+    btnSecondaryText: "Join Now",
+  },
+  countdownSection: {
+    title: "Experience Premium Club. Launching in ",
+    date: "2025-07-15",
+    bgImage: "/images/counter-bg.svg",
   },
   carouselBanner: [
     {

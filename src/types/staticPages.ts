@@ -175,12 +175,19 @@ export interface ScrollingCardSection {
   cardSection: ScrollingCardItem[];
 }
 
+export interface CountdownSection {
+  title: string;
+  date: string;
+  bgImage: string;
+}
+
 export interface StaticPageData {
   title: string;
   description: string;
   seoTitle: string;
   seoDescription: string;
   hero: Hero;
+  countdownSection?: CountdownSection;
   carouselBanner?: CarouselBanner[];
   cardSection2?: StaticCardProps;
   cardSection3?: CardSection;

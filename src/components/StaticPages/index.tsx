@@ -16,11 +16,11 @@ import {
   EvolutionSectionProps,
   FaqSectionProps,
   ScrollingCardSection as ScrollingCardSectionType,
+  CountdownSection,
 } from "@/types/staticPages";
 import CardSection4 from "@/components/StaticPages/CardSection4";
 import CardSection5 from "@/components/StaticPages/CardSection5";
 import CardSection3 from "@/components/StaticPages/CardSection3";
-// import CarouselBannerSection from "@/components/StaticPages/CarouselBannerSection";
 import CardSection2 from "@/components/StaticPages/CardSection2";
 import InnovationCommunity from "@/components/StaticPages/InnovationCommunity";
 import GallerySection from "./GallerySection";
@@ -58,6 +58,7 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
       | EvolutionSectionProps
       | FaqSectionProps
       | ScrollingCardSectionType
+      | CountdownSection
   ) => {
     switch (key) {
       case "hero":
@@ -68,14 +69,19 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
             isMobile={isMobile}
           />
         );
+      // case "countdownSection":
+      //   return (
+      //     <CountdownTimer
+      //       countdownData={value as CountdownSection}
+      //       isMobile={isMobile}
+      //     />
+      //   );
       case "cardSection4":
         return <CardSection4 data={value as CardSection} isMobile={isMobile} />;
       case "cardSection3":
         return <CardSection3 data={value as CardSection} isMobile={isMobile} />;
       case "cardSection5":
         return <CardSection5 data={value as CardSection} isMobile={isMobile} />;
-      // case "carouselBanner":
-      //   return <CarouselBannerSection data={value as CarouselBanner[]} />;
       case "cardSection2":
         return (
           <CardSection2 data={value as StaticCardProps} isMobile={isMobile} />
