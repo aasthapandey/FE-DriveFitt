@@ -15,6 +15,7 @@ import {
   FooterProps,
   EvolutionSectionProps,
   FaqSectionProps,
+  ScrollingCardSection as ScrollingCardSectionType,
 } from "@/types/staticPages";
 import CardSection4 from "@/components/StaticPages/CardSection4";
 import CardSection5 from "@/components/StaticPages/CardSection5";
@@ -31,6 +32,7 @@ import Footer from "@/components/common/Footer";
 import EvolutionSection from "@/components/StaticPages/EvolutionSection";
 import Faq from "@/components/common/Faq";
 import Banner from "@/components/common/Banner";
+import ScrollingCardSection from "@/components/StaticPages/ScrollingCardSection";
 
 interface StaticPageProps {
   data: StaticPageData;
@@ -55,6 +57,7 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
       | FooterProps
       | EvolutionSectionProps
       | FaqSectionProps
+      | ScrollingCardSectionType
   ) => {
     switch (key) {
       case "hero":
@@ -110,6 +113,13 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
         );
       case "footerSection":
         return <Footer data={value as FooterProps} isMobile={isMobile} />;
+      case "scrollingCardSection":
+        return (
+          <ScrollingCardSection
+            data={value as ScrollingCardSectionType}
+            isMobile={isMobile}
+          />
+        );
       default:
         return null;
     }

@@ -161,6 +161,20 @@ export type FaqSectionProps = {
   faqList: FaqItem[];
 };
 
+export interface ScrollingCardItem {
+  subTitle: string;
+  list: string[];
+  extraTagLabel?: string;
+  backgroundImage: string;
+}
+
+export interface ScrollingCardSection {
+  title: string;
+  description: string;
+  iconImage: string;
+  cardSection: ScrollingCardItem[];
+}
+
 export interface StaticPageData {
   title: string;
   description: string;
@@ -182,4 +196,5 @@ export interface StaticPageData {
   footerSection?: FooterProps;
   faqSection?: FaqSectionProps;
   bannerSection?: SportsClubSectionProps;
+  scrollingCardSection?: ScrollingCardSection;
 }

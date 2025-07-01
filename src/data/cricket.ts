@@ -97,6 +97,44 @@ export const cricketData: StaticPageData = {
     btnLabel: "Explore Plan",
     image: "/images/cricket/cricket-banner.svg",
   },
+  scrollingCardSection: {
+    title: "Tech that transforms your game",
+    description:
+      "Smart Tech. Sharper Skills. — Elevate every aspect of your game with cutting-edge cricket innovation.",
+    iconImage: "/images/check-icon.svg",
+    cardSection: [
+      {
+        subTitle: "Smart net system",
+        list: [
+          "Capture every session and review it 10x faster with auto-clipped, ball-by-ball videos—no dead time, just pure action.",
+          "Create a team, stay in sync, and showcase your sessions on social media",
+          "Bat Sensor*- real-time insights on Bat Swing, Speed, Angles, Power & Efficiency ",
+        ],
+        extraTagLabel: "*Purchase separately",
+        backgroundImage: "/images/cricket/scroll-card-cricket-1.svg",
+      },
+      {
+        subTitle: "Performance dashboard ",
+        list: [
+          "Capture every session and review it 10x faster with auto-clipped, ball-by-ball videos—no dead time, just pure action.",
+          "Create a team, stay in sync, and showcase your sessions on social media",
+          "Bat Sensor*- real-time insights on Bat Swing, Speed, Angles, Power & Efficiency ",
+        ],
+        extraTagLabel: "*Purchase separately",
+        backgroundImage: "/images/fitness/scroll-card-fitness-1.svg",
+      },
+      {
+        subTitle: "Adaptive bowling machine ",
+        list: [
+          "Capture every session and review it 10x faster with auto-clipped, ball-by-ball videos—no dead time, just pure action.",
+          "Create a team, stay in sync, and showcase your sessions on social media",
+          "Bat Sensor*- real-time insights on Bat Swing, Speed, Angles, Power & Efficiency ",
+        ],
+        extraTagLabel: "*Purchase separately",
+        backgroundImage: "/images/recovery/scroll-card-recovery-1.svg",
+      },
+    ],
+  },
   memberSection: {
     title: "Member experiences",
     description:
