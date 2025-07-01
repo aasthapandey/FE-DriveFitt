@@ -3,11 +3,10 @@ import TitleDescription from "@/components/common/TitleDescription";
 
 type BannerType = {
   data: SportsClubSectionProps;
-  pageName?: string;
   isMobile?: boolean;
 };
 
-const Banner = ({ data, pageName, isMobile }: BannerType) => {
+const Banner = ({ data, isMobile }: BannerType) => {
   const { title, description, image, btnLabel } = data;
   return (
     <section className="md:px-[120px] px-6 flex flex-col gap-5 md:gap-8">
