@@ -90,6 +90,13 @@ export const cricketData: StaticPageData = {
       "/images/gallery-section/gallery-cricket-3.svg",
     ],
   },
+  bannerSection: {
+    title: "Find your perfect program",
+    description:
+      "Whether you're taking your first swing or prepping for tournaments – we've got a proven path for you.",
+    btnLabel: "Explore Plan",
+    image: "/images/cricket/cricket-banner.svg",
+  },
   memberSection: {
     title: "Member experiences",
     description:

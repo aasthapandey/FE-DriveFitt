@@ -65,6 +65,7 @@ export interface GallerySectionProps {
 export interface SportsClubSectionProps {
   title: string;
   description: string;
+  btnLabel?: string;
   image: string;
 }
 
@@ -180,4 +181,5 @@ export interface StaticPageData {
   footerInfoSection?: FooterInfoProps;
   footerSection?: FooterProps;
   faqSection?: FaqSectionProps;
+  bannerSection?: SportsClubSectionProps;
 }

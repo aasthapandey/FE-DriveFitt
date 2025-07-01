@@ -30,6 +30,7 @@ import FooterInfo from "@/components/common/FooterInfo";
 import Footer from "@/components/common/Footer";
 import EvolutionSection from "@/components/StaticPages/EvolutionSection";
 import Faq from "@/components/common/Faq";
+import Banner from "@/components/common/Banner";
 
 interface StaticPageProps {
   data: StaticPageData;
@@ -90,6 +91,10 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
         return isMobile ? null : <Faq data={value as FaqSectionProps} />;
       case "sportsClubSection":
         return <SportsClub data={value as SportsClubSectionProps} />;
+      case "bannerSection":
+        return (
+          <Banner data={value as SportsClubSectionProps} pageName={pageName} />
+        );
       case "memberSection":
         return (
           <MemberSection
