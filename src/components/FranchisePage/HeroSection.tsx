@@ -7,7 +7,7 @@ interface HeroSectionProps {
   isMobile?: boolean;
 }
 
-const HeroSection = ({ data, isMobile }: HeroSectionProps) => {
+const HeroSection = ({ data }: HeroSectionProps) => {
   const { subTitle, title, description, roiTag, roiIcon, btnPrimaryText } =
     data;
   return (

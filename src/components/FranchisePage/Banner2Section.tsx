@@ -1,12 +1,11 @@
 import { Banner2SectionType } from "@/types/franchisePage";
-import TitleDescription from "@/components/common/TitleDescription";
 
 interface Banner2SectionProps {
   data: Banner2SectionType;
   isMobile?: boolean;
 }
 
-const Banner2Section = ({ data, isMobile }: Banner2SectionProps) => {
+const Banner2Section = ({ data }: Banner2SectionProps) => {
   const { title, description } = data;
   return (
     <div className="w-full px-6 md:px-[120px] mt-[39px] md:mt-0">

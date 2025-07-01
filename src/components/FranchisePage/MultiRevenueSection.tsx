@@ -7,7 +7,7 @@ interface MultiRevenueSectionProps {
   isMobile?: boolean;
 }
 
-const MultiRevenueSection = ({ data, isMobile }: MultiRevenueSectionProps) => {
+const MultiRevenueSection = ({ data }: MultiRevenueSectionProps) => {
   const { title, description, cardList } = data;
   return (
     <section className="md:px-[120px] px-6 flex flex-col gap-5">

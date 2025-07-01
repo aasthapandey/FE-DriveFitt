@@ -7,10 +7,7 @@ interface WhatYouReceiveSectionProps {
   isMobile?: boolean;
 }
 
-const WhatYouReceiveSection = ({
-  data,
-  isMobile,
-}: WhatYouReceiveSectionProps) => {
+const WhatYouReceiveSection = ({ data }: WhatYouReceiveSectionProps) => {
   const { title, description, cardList, image } = data;
   return (
     <section className="md:px-[120px] px-6 flex flex-col gap-5">
