@@ -69,13 +69,6 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
             isMobile={isMobile}
           />
         );
-      // case "countdownSection":
-      //   return (
-      //     <CountdownTimer
-      //       countdownData={value as CountdownSection}
-      //       isMobile={isMobile}
-      //     />
-      //   );
       case "cardSection4":
         return <CardSection4 data={value as CardSection} isMobile={isMobile} />;
       case "cardSection3":
