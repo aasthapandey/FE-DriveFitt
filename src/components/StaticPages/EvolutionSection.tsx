@@ -56,7 +56,7 @@ const EvolutionSection = ({ data }: { data: EvolutionSectionProps }) => {
         }}
       >
         {/* Desktop Hover View */}
-        <div className="hidden md:flex justify-between items-start w-full gap-10 md:px-[120px] pl-6 py-4 md:py-[60px]">
+        <div className="hidden md:flex justify-between h-fit items-start w-full gap-10 md:px-[120px] pl-6 py-4 md:py-[60px]">
           {evolutionList.map((evo, idx) => {
             return (
               <div
@@ -66,7 +66,7 @@ const EvolutionSection = ({ data }: { data: EvolutionSectionProps }) => {
                   activeBackground.title === evo.title
                     ? "bg-white text-[#1C1C1C]"
                     : "bg-transparent text-white"
-                } flex flex-col gap-4 p-8 cursor-pointer h-[125px] md:h-[220px] w-full md:w-[374px] border-t-[2px] border-white transition-colors duration-300`}
+                } flex flex-col gap-4 p-8 cursor-pointer h-full w-full md:w-[374px] border-t-[2px] border-white transition-colors duration-300`}
               >
                 <h3 className="text-xl md:text-[32px] font-semibold leading-6 md:leading-9 tracking-[-1%]">
                   {evo.title}

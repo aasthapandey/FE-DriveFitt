@@ -58,9 +58,12 @@ const ScrollingCardSection = ({
                 {card.subTitle}
               </h3>
               {activeIndex === idx && (
-                <div className="flex flex-col gap-3">
+                <div className="flex flex-col gap-4 md:gap-3">
                   {card.list.map((item, itemIdx) => (
-                    <div key={itemIdx} className="flex items-start gap-4">
+                    <div
+                      key={itemIdx}
+                      className="flex items-start gap-[14px] md:gap-[26px]"
+                    >
                       <Image
                         src={iconImage}
                         alt="check"

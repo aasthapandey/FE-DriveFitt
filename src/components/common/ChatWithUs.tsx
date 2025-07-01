@@ -15,20 +15,13 @@ const ChatWithUs = ({ footerInfoList, socialLinkList }: ChatWithUsProps) => {
       }}
     >
       <div
-        className="rounded-[40px] w-full h-full p-8 md:p-12 flex flex-col"
+        className="rounded-[40px] w-full h-full p-8 md:p-12 flex flex-col gap-6 md:gap-10"
         style={{
           background: "linear-gradient(180deg, #1E1E1E 0%, #141414 100%)",
         }}
       >
         {footerInfoList.map((item, index) => (
-          <div
-            key={item.title}
-            className={`flex items-start gap-[14px] md:gap-8 ${
-              index !== footerInfoList.length - 1
-                ? "mb-6 md:mb-10"
-                : "mb-6 md:mb-[60px]"
-            }`}
-          >
+          <div key={index} className="flex items-start gap-[14px] md:gap-8">
             <div>
               <div className="w-10 h-10 relative">
                 <div
@@ -63,7 +56,7 @@ const ChatWithUs = ({ footerInfoList, socialLinkList }: ChatWithUsProps) => {
           </div>
         ))}
 
-        <div className="flex gap-6 mt-auto pt-6 md:pt-8 border-t border-[#333333]">
+        <div className="flex gap-6 mt-auto pt-6 md:pt-10 border-t border-[#333333]">
           {socialLinkList.map((link) => (
             <a
               key={link.link}

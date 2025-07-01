@@ -145,12 +145,12 @@ const ContactForm = ({ data }: { data: ContactFormProps }) => {
               <label htmlFor="message" className="text-sm text-[#8A8A8A]">
                 Message
               </label>
-              <textarea
+              <input
                 id="message"
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
-                className="bg-[#FFFFFF] border border-[#333333] rounded-lg py-1.5 md:py-2 px-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[#00DBDC] outline-none transition-colors flex-1 min-h-10 md:min-h-[120px] resize-none"
+                className="bg-[#FFFFFF] border border-[#333333] rounded-lg py-1.5 md:py-2 px-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[#00DBDC] outline-none transition-colors"
                 required
               />
             </div>
