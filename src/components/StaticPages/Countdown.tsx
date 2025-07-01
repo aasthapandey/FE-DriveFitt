@@ -8,7 +8,7 @@ interface CountdownProps {
   isMobile?: boolean;
 }
 
-const Countdown = ({ countdownData, isMobile }: CountdownProps) => {
+const Countdown = ({ countdownData }: CountdownProps) => {
   const { title, date, bgImage } = countdownData;
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
