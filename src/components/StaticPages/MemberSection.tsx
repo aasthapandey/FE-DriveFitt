@@ -54,16 +54,38 @@ const MemberSection = ({
     sliderRef.current?.slickNext();
   };
 
-  // Calculate position and width for highlighting the active card
+  // Calculate position and width for highlighting based on visible members progress
   const getActiveCardHighlight = () => {
     if (isMobile) return { width: 0, left: 0 }; // No highlight on mobile
 
-    const cardWidth = 100 / 3; // Each card takes 33.33% width in desktop (3 cards view)
-    const activeCardIndex = currentSlide; // Currently focused card index
+    const totalWidth = 100; // Total width in percentage
+    const visibleSlides = isMobile ? 1 : 3; // Number of slides visible at once
+    const maxSlidePosition = Math.max(0, memberList.length - visibleSlides); // Maximum possible slide position
+
+    // If total members is less than or equal to visible slides, show full progress
+    if (memberList.length <= visibleSlides) {
+      return {
+        width: "100%",
+        left: "0%",
+      };
+    }
+
+    // Calculate base progress from visible slides
+    const baseProgress = (visibleSlides / memberList.length) * totalWidth;
+
+    // Calculate additional progress based on current position
+    const remainingWidth = totalWidth - baseProgress;
+    const additionalProgress =
+      maxSlidePosition === 0
+        ? 0
+        : (currentSlide / maxSlidePosition) * remainingWidth;
+
+    // Total progress is base progress plus any additional progress from sliding
+    const progress = baseProgress + additionalProgress;
 
     return {
-      width: `${cardWidth}%`,
-      left: `${activeCardIndex * cardWidth}%`,
+      width: `${progress}%`,
+      left: "0%",
     };
   };
 
@@ -83,42 +105,44 @@ const MemberSection = ({
         </Slider>
       </div>
 
-      <div className="flex items-center mt-8">
-        <div className="relative w-full max-w-[1200px] h-[1px] bg-[#1C1C1E] mb-2">
-          {/* White highlight below active card */}
-          <div
-            className="hidden md:block absolute top-0 h-[2px] bg-white transition-all duration-500 ease-in-out"
-            style={{
-              width: highlightStyle.width,
-              left: highlightStyle.left,
-            }}
-          />
-        </div>
-        <div className="h-16 p-2 rounded-[53.3px] bg-[#1B19444D] hidden md:flex gap-4">
-          <button
-            onClick={handlePrevious}
-            className="bg-[#1C1C1E] rounded-full p-4 hover:bg-[#2C2C2E] transition-colors"
-          >
-            <Image
-              src="/images/arrow-left.svg"
-              alt="Previous"
-              width={24}
-              height={24}
+      {isMobile ? null : (
+        <div className="flex items-center mt-8">
+          <div className="relative w-full max-w-[1200px] h-[1px] bg-[#1C1C1E] mb-2">
+            {/* White highlight below active card */}
+            <div
+              className="hidden md:block absolute top-0 h-[2px] bg-white transition-all duration-500 ease-in-out"
+              style={{
+                width: highlightStyle.width,
+                left: highlightStyle.left,
+              }}
             />
-          </button>
-          <button
-            onClick={handleNext}
-            className="bg-[#1C1C1E] rounded-full p-4 hover:bg-[#2C2C2E] transition-colors"
-          >
-            <Image
-              src="/images/arrow-right.svg"
-              alt="Next"
-              width={24}
-              height={24}
-            />
-          </button>
+          </div>
+          <div className="h-16 p-2 rounded-[53.3px] bg-[#1B19444D] hidden md:flex gap-4">
+            <button
+              onClick={handlePrevious}
+              className="bg-[#1C1C1E] rounded-full p-4 hover:bg-[#2C2C2E] transition-colors"
+            >
+              <Image
+                src="/images/arrow-left.svg"
+                alt="Previous"
+                width={24}
+                height={24}
+              />
+            </button>
+            <button
+              onClick={handleNext}
+              className="bg-[#1C1C1E] rounded-full p-4 hover:bg-[#2C2C2E] transition-colors"
+            >
+              <Image
+                src="/images/arrow-right.svg"
+                alt="Next"
+                width={24}
+                height={24}
+              />
+            </button>
+          </div>
         </div>
-      </div>
+      )}
     </section>
   );
 };

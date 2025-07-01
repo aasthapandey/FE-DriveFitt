@@ -65,6 +65,7 @@ export interface GallerySectionProps {
 export interface SportsClubSectionProps {
   title: string;
   description: string;
+  btnLabel?: string;
   image: string;
 }
 
@@ -160,6 +161,20 @@ export type FaqSectionProps = {
   faqList: FaqItem[];
 };
 
+export interface ScrollingCardItem {
+  subTitle: string;
+  list: string[];
+  extraTagLabel?: string;
+  backgroundImage: string;
+}
+
+export interface ScrollingCardSection {
+  title: string;
+  description: string;
+  iconImage: string;
+  cardSection: ScrollingCardItem[];
+}
+
 export interface StaticPageData {
   title: string;
   description: string;
@@ -180,4 +195,6 @@ export interface StaticPageData {
   footerInfoSection?: FooterInfoProps;
   footerSection?: FooterProps;
   faqSection?: FaqSectionProps;
+  bannerSection?: SportsClubSectionProps;
+  scrollingCardSection?: ScrollingCardSection;
 }
