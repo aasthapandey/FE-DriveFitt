@@ -13,7 +13,7 @@ const CardSection5 = ({
 }) => {
   const { title, description, cardSection } = data;
   return (
-    <section className="md:px-[120px] px-4 flex flex-col gap-8">
+    <section className="md:px-[120px] px-6 flex flex-col  gap-5 md:gap-8">
       <TitleDescription title={title || ""} description={description || ""} />
       {isMobile ? (
         <div

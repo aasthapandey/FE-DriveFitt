@@ -9,7 +9,10 @@ interface ScrollingCardSectionProps {
   isMobile?: boolean;
 }
 
-const ScrollingCardSection = ({ data }: ScrollingCardSectionProps) => {
+const ScrollingCardSection = ({
+  data,
+  isMobile,
+}: ScrollingCardSectionProps) => {
   const { title, description, iconImage, cardSection } = data;
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -34,21 +37,21 @@ const ScrollingCardSection = ({ data }: ScrollingCardSectionProps) => {
   );
 
   return (
-    <section className="md:px-[120px] px-4 flex flex-col gap-8">
+    <section className="md:px-[120px] px-6 flex flex-col gap-5 md:gap-8">
       <TitleDescription title={title} description={description} />
-      <div className="flex justify-between gap-[68px]">
-        <div className="flex flex-col w-[584px] h-full justify-center">
+      <div className="flex justify-between gap-[68px] ">
+        <div className="flex flex-col md:w-[584px] w-full h-auto md:h-full justify-center border-t border-[#FFFFFF29] md:border-t-0">
           {cardSection.map((card, idx) => (
             <div
               key={idx}
               style={{
                 background: `${
-                  activeIndex === idx
+                  activeIndex === idx && !isMobile
                     ? "linear-gradient(90deg, #1E1E1E 0%, #0D0D0D 100%)"
                     : ""
                 }`,
               }}
-              className="flex flex-col gap-6 cursor-pointer px-10 pt-8 pb-6 border-b border-[#FFFFFF29]"
+              className="flex flex-col gap-6 cursor-pointer py-6 md:px-10 md:pt-8 md:pb-6 border-b border-[#FFFFFF29]"
               onClick={() => setActiveIndex(idx)}
             >
               <h3 className="text-base md:text-[32px] font-semibold md:font-medium leading-6 md:leading-10 tracking-[-1px]">
@@ -70,17 +73,18 @@ const ScrollingCardSection = ({ data }: ScrollingCardSectionProps) => {
                       </span>
                     </div>
                   ))}
-                  {card.extraTagLabel && (
+                  {card.extraTagLabel && !isMobile && (
                     <span className="text-right text-sm text-[#808080] mt-2 italic">
                       {card.extraTagLabel}
                     </span>
                   )}
+                  {isMobile && renderCardImage}
                 </div>
               )}
             </div>
           ))}
         </div>
-        <div className="w-[549px]">{renderCardImage}</div>
+        {isMobile ? null : <div className="w-[549px]">{renderCardImage}</div>}
       </div>
     </section>
   );

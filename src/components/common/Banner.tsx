@@ -10,7 +10,7 @@ type BannerType = {
 const Banner = ({ data, pageName, isMobile }: BannerType) => {
   const { title, description, image, btnLabel } = data;
   return (
-    <section className="md:px-[120px] px-4 flex flex-col gap-8">
+    <section className="md:px-[120px] px-6 flex flex-col gap-5 md:gap-8">
       <div
         className="rounded-[20px] md:rounded-[40px] p-[2px] h-[224px] md:h-[534px]"
         style={{
