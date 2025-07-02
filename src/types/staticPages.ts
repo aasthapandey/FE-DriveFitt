@@ -181,13 +181,24 @@ export interface CountdownSection {
   bgImage: string;
 }
 
+export interface ComingSoonSection {
+  title: string;
+  description: string;
+  iconImage: string;
+  btnPrimaryText: string;
+  btnSecondaryText: string;
+  btnPrimaryLink?: string;
+  btnSecondaryLink?: string;
+}
+
 export interface StaticPageData {
   title: string;
   description: string;
   seoTitle: string;
   seoDescription: string;
-  hero: Hero;
+  hero?: Hero;
   countdownSection?: CountdownSection;
+  comingSoonSection?: ComingSoonSection;
   carouselBanner?: CarouselBanner[];
   cardSection2?: StaticCardProps;
   cardSection3?: CardSection;

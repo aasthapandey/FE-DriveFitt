@@ -17,6 +17,7 @@ import {
   FaqSectionProps,
   ScrollingCardSection as ScrollingCardSectionType,
   CountdownSection,
+  ComingSoonSection as ComingSoonSectionType,
 } from "@/types/staticPages";
 import CardSection4 from "@/components/StaticPages/CardSection4";
 import CardSection5 from "@/components/StaticPages/CardSection5";
@@ -33,6 +34,7 @@ import EvolutionSection from "@/components/StaticPages/EvolutionSection";
 import Faq from "@/components/common/Faq";
 import Banner from "@/components/common/Banner";
 import ScrollingCardSection from "@/components/StaticPages/ScrollingCardSection";
+import ComingSoonSection from "@/components/StaticPages/ComingSoonSection";
 
 interface StaticPageProps {
   data: StaticPageData;
@@ -59,6 +61,7 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
       | FaqSectionProps
       | ScrollingCardSectionType
       | CountdownSection
+      | ComingSoonSectionType
   ) => {
     switch (key) {
       case "hero":
@@ -66,6 +69,13 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
           <HeroSection
             data={value as Hero}
             pageName={pageName}
+            isMobile={isMobile}
+          />
+        );
+      case "comingSoonSection":
+        return (
+          <ComingSoonSection
+            data={value as ComingSoonSectionType}
             isMobile={isMobile}
           />
         );
@@ -144,6 +154,18 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
                   backgroundSize: isMobile ? "contain" : "cover",
                   backgroundRepeat: "no-repeat",
                 }}
+              >
+                <Navbar isMobile={isMobile} />
+                {component}
+              </div>
+            );
+          }
+          if (key === "comingSoonSection") {
+            return (
+              <div key={key}
+                className={`w-full ${
+                  isMobile ? "bg-contain" : "bg-cover"
+                } bg-center bg-no-repeat h-auto`}
               >
                 <Navbar isMobile={isMobile} />
                 {component}
