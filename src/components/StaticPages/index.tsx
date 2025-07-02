@@ -96,7 +96,6 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
         return (
           <PolicySection
             data={value as PolicySectionType}
-            isMobile={isMobile}
           />
         );
       case "cardSection4":

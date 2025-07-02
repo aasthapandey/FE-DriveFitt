@@ -2,10 +2,9 @@ interface PolicySectionProps {
   data: {
     htmlContent: string;
   };
-  isMobile?: boolean;
 }
 
-const PolicySection = ({ data, isMobile }: PolicySectionProps) => {
+const PolicySection = ({ data }: PolicySectionProps) => {
   return (
     <div className="bg-[#0D0D0D] min-h-screen">
       <div className="max-w-[1200px] mx-auto px-6 md:px-[120px] pt-12 md:pt-[160px] pb-16 md:pb-24">
