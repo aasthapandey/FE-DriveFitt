@@ -18,6 +18,7 @@ import {
   ScrollingCardSection as ScrollingCardSectionType,
   CountdownSection,
   ComingSoonSection as ComingSoonSectionType,
+  Error404Section as Error404SectionType,
 } from "@/types/staticPages";
 import CardSection4 from "@/components/StaticPages/CardSection4";
 import CardSection5 from "@/components/StaticPages/CardSection5";
@@ -35,6 +36,7 @@ import Faq from "@/components/common/Faq";
 import Banner from "@/components/common/Banner";
 import ScrollingCardSection from "@/components/StaticPages/ScrollingCardSection";
 import ComingSoonSection from "@/components/StaticPages/ComingSoonSection";
+import Error404Section from "@/components/StaticPages/Error404Section";
 
 interface StaticPageProps {
   data: StaticPageData;
@@ -62,6 +64,7 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
       | ScrollingCardSectionType
       | CountdownSection
       | ComingSoonSectionType
+      | Error404SectionType
   ) => {
     switch (key) {
       case "hero":
@@ -76,6 +79,13 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
         return (
           <ComingSoonSection
             data={value as ComingSoonSectionType}
+            isMobile={isMobile}
+          />
+        );
+      case "error404Section":
+        return (
+          <Error404Section
+            data={value as Error404SectionType}
             isMobile={isMobile}
           />
         );
@@ -167,6 +177,14 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
                   isMobile ? "bg-contain" : "bg-cover"
                 } bg-center bg-no-repeat h-auto`}
               >
+                <Navbar isMobile={isMobile} />
+                {component}
+              </div>
+            );
+          }
+          if (key === "error404Section") {
+            return (
+              <div key={key} className="w-full">
                 <Navbar isMobile={isMobile} />
                 {component}
               </div>
