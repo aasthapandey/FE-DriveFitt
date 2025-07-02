@@ -18,36 +18,33 @@ const ComingSoonSection = ({ data, isMobile }: ComingSoonSectionProps) => {
   } = data;
 
   return (
-    <div className="mt-[158px] flex items-center justify-center">
-      <div className="max-w-[1200px] mx-auto text-center">
+    <div className="flex items-center justify-center h-screen">
+      <div className="mx-auto text-center px-4">
         <div className="flex flex-col items-center justify-center">
-          <div className="mb-8 md:mb-[48px] md:w-[120px] md:h-[120px]">
+          <div className="mb-8 w-[80px] h-[80px] md:mb-[48px] md:w-[120px] md:h-[120px]">
             <img
               src={iconImage}
               alt="Coming Soon"
-              className="opacity-60"   
+              className="opacity-60 w-full h-full"   
             />
           </div>
-          {/* md:max-w-[256px] md:max-h-[56px] md:font-semibold md:text-[24px] md:leading-[28px] md:tracking-[-1px] md:mb-[8px] */}
-          <h1 className="text-white text-[48px] font-bold leading-[60px] tracking-[-2px] mb-[24px] w-[497px] h-[120px]">
+          <h1 className="text-white text-[32px] font-semibold leading-[40px] tracking-[-1px] mb-4 md:text-[48px] md:font-bold md:leading-[60px] md:tracking-[-2px] md:mb-[24px] md:w-[497px] md:h-[120px]">
             {title}
           </h1>
         
-          {/* md:mb-[32px] w-[791px] md:w-[364px] md:h-[32px] md:font-light md:text-[12px] md:leading-[16px] md:tracking-[-1px] md:text-[1.125rem]*/}
-          <p className="text-[#FFFFFF] text-[16px]  font-light leading-6 tracking-['-1px'] mb-[48px] ">
+          <p className="text-[#FFFFFF] text-[14px] font-light leading-5 tracking-[-0.5px] mb-8 max-w-[300px] md:text-[16px] md:leading-6 md:tracking-[-1px] md:mb-[48px] md:max-w-none">
             {description}
           </p>
 
-          <div className={`flex flex-row gap-4 md:gap-[9.5px] items-center justify-center`}>
-
-            <Link href={btnSecondaryLink}>
-              <button className="text-[#00DBDC] border border-[#00DBDC] rounded-[8px] cursor-pointer transition-all duration-200 ease-in-out hover:-translate-y-[1px] w-[224px] h-[56px] pt-4 pr-12 pb-4 pl-12 gap-[10px] font-inter font-medium text-[20px] leading-[100%] tracking-[-2%]">
+          <div className="flex flex-row gap-4 md:flex-row md:gap-4 md:w-auto">
+            <Link href={btnSecondaryLink} className="w-full md:w-auto">
+              <button className="w-[155px] text-[#00DBDC] border border-[#00DBDC] rounded-[8px] py-3 text-[16px] font-medium leading-[24px] md:w-[224px] md:h-[56px] md:text-[20px] md:leading-[100%] md:tracking-[-2%] md:py-4 md:px-12">
                 {btnSecondaryText}
               </button>
             </Link>
 
-            <Link href={btnPrimaryLink}>
-              <button className="bg-[#00DBDC] rounded-[8px] cursor-pointer transition-all duration-200 ease-in-out hover:-translate-y-[1px] w-[224px] h-[56px] py-4 gap-[10px] font-inter font-medium text-[20px] leading-[100%] tracking-[-2%] text-[#0D0D0D]">
+            <Link href={btnPrimaryLink} className="w-full md:w-auto">
+              <button className="w-[155px] bg-[#00DBDC] rounded-[8px] py-3 text-[16px] font-medium leading-[24px] text-[#0D0D0D] md:w-[224px] md:h-[56px] md:text-[20px] md:leading-[100%] md:tracking-[-2%] md:py-4">
                 {btnPrimaryText}
               </button>
             </Link>

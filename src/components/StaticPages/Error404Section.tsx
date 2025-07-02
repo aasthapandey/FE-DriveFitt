@@ -16,31 +16,26 @@ const Error404Section = ({ data, isMobile }: Error404SectionProps) => {
   } = data;
 
   return (
-    <div className="flex items-center justify-center mt-[154px]">
-      <div className="mx-auto text-center">
+    <div className="flex items-center justify-center h-screen">
+      <div className="mx-auto text-center px-4">
         <div className="flex flex-col items-center justify-center">
-          <div className="mb-[48px] ">
+          <div className="mb-8 w-[80px] h-[80px] md:mb-[48px] md:w-[120px] md:h-[120px]">
             <img
               src={illustration}
               alt="UFO 404 Illustration"
-              width={isMobile ? 120 : 160}
-              height={isMobile ? 120 : 160}
-              className="opacity-80"   
+              className="opacity-60 w-full h-full"   
             />
           </div>
-          {/*md:max-w-[240px] md:max-h-[28px] md:font-semibold md:text-[24px] md:leading-[28px] md:tracking-[-1px] */}
-          <h1 className="text-[#FFFFF7] max-w-[479px] max-h-[60px] font-semibold text-[48px] leading-[60px] tracking-[-2px] text-center mb-[24px]">
+          <h1 className="text-white text-[32px] font-semibold leading-[40px] tracking-[-1px] mb-4 max-w-[300px] md:text-[48px] md:font-bold md:leading-[60px] md:tracking-[-2px] md:mb-[24px] md:max-w-[479px]">
             {title}
           </h1>
         
-          {/* md:max-w-[364px] md:max-h-[16px] md:text-[12px] md:leading-[16px] */}
-          <p className="max-w-[262px] max-h-[24px] font-light text-[16px] leading-[24px] tracking-[-1px] text-center mb-[48px]">
+          <p className="text-[#FFFFFF] text-[14px] font-light leading-5 tracking-[-0.5px] mb-8 max-w-[300px] md:text-[16px] md:leading-6 md:tracking-[-1px] md:mb-[48px] md:max-w-[262px]">
             {description}
           </p>
           
-          {/* md:max-w-[108px] md:max-h-[20px] md:text-[14px] md:leading-[20px]  */}
-          <Link href={btnLink}>
-            <button className="bg-[#00DBDC] w-[187px] h-[56px] rounded-[8px] py-4 gap-[10px] font-medium text-[20px] leading-[100%] tracking-[-2%] text-black">
+          <Link href={btnLink} className="w-full md:w-auto">
+            <button className="w-[155px] bg-[#00DBDC] rounded-[8px] py-3 text-[16px] font-medium leading-[24px] text-black md:w-[187px] md:h-[56px] md:text-[20px] md:leading-[100%] md:tracking-[-2%] md:py-4">
               {btnText}
             </button>
           </Link>
