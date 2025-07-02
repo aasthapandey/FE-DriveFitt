@@ -17,7 +17,7 @@ import OpportunitySection from "@/components/FranchisePage/OpportunitySection";
 import WhatYouReceiveSection from "@/components/FranchisePage/WhatYouReceiveSection";
 import WhatLookingForSection from "@/components/FranchisePage/WhatLookingForSection";
 import Banner2Section from "@/components/FranchisePage/Banner2Section";
-// import NextStepSection from "@/components/FranchisePage/NextStepSection";
+import NextStepSection from "@/components/FranchisePage/NextStepSection";
 
 interface FranchisePageProps {
   data: FranchisePageData;
@@ -82,10 +82,10 @@ const FranchisePage = ({ data, pageName, isMobile }: FranchisePageProps) => {
             isMobile={isMobile}
           />
         );
-      // case "nextStepSection":
-      //   return (
-      //     <NextStepSection data={value as CardSection} isMobile={isMobile} />
-      //   );
+      case "nextStepSection":
+        return (
+          <NextStepSection data={value as CardSection} isMobile={isMobile} />
+        );
       case "footerInfoSection":
         return (
           <FooterInfo data={value as FooterInfoProps} isMobile={isMobile} />

@@ -25,7 +25,7 @@ const OpportunityCard = ({ card, className }: OpportunityCardProps) => {
       <h4 className="text-xl md:text-2xl font-semibold text-white mb-1 md:mb-3">
         {title}
       </h4>
-      <h3 className="text-lg md:text-3xl leading-10 font-normal text-white tracking-[-2px]">
+      <h3 className="text-xl md:text-3xl leading-10 font-normal text-white tracking-[-2px]">
         {subTitle}
       </h3>
       <p className="text-[#8A8A8A] font-light text-base leading-5">
