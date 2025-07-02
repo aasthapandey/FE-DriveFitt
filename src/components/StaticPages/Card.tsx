@@ -52,7 +52,7 @@ const Card = ({ data, isMobile, className, imageClass }: CardProps) => {
         {link && (
           <div className="absolute flex items-center justify-center bottom-4 md:bottom-6 right-4 md:right-6 z-10">
             <Image
-              src="/images/redirectionButton.svg"
+              src="https://da8nru77lsio9.cloudfront.net/raw-images/images/redirectionButton.svg"
               alt="redirectionBtn"
               width={isMobile ? 32 : 48}
               height={isMobile ? 32 : 48}

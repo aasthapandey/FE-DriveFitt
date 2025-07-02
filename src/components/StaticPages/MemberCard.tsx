@@ -20,7 +20,7 @@ const MemberCard = ({ data }: { data: MemberItem }) => {
         </p>
       </div>
       <div className="absolute bottom-1 right-1">
-        <Image src="/images/Play.svg" alt="play" width={98} height={98} />
+        <Image src="https://da8nru77lsio9.cloudfront.net/raw-images/images/Play.svg" alt="play" width={98} height={98} />
       </div>
     </div>
   );

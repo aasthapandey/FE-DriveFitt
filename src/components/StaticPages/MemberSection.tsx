@@ -123,7 +123,7 @@ const MemberSection = ({
               className="bg-[#1C1C1E] rounded-full p-4 hover:bg-[#2C2C2E] transition-colors"
             >
               <Image
-                src="/images/arrow-left.svg"
+                src="https://da8nru77lsio9.cloudfront.net/raw-images/images/arrow-left.svg"
                 alt="Previous"
                 width={24}
                 height={24}
@@ -134,7 +134,7 @@ const MemberSection = ({
               className="bg-[#1C1C1E] rounded-full p-4 hover:bg-[#2C2C2E] transition-colors"
             >
               <Image
-                src="/images/arrow-right.svg"
+                src="https://da8nru77lsio9.cloudfront.net/raw-images/images/arrow-right.svg"
                 alt="Next"
                 width={24}
                 height={24}

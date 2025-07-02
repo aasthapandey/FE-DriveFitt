@@ -20,7 +20,7 @@ const HeroSection = ({ data }: HeroSectionProps) => {
             style={{ boxShadow: "0px 4px 10px 0px #00DBDC1A" }}
           >
             <Image
-              src="/images/flash-on.svg"
+              src="https://da8nru77lsio9.cloudfront.net/raw-images/images/flash-on.svg"
               alt="ROI"
               width={24}
               height={24}

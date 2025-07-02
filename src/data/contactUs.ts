@@ -9,8 +9,8 @@ export const contactUsData: ContactUsPageData = {
     title: "Contact us",
     description:
       "Please Feel Free to contact us and we will get back to you as soon as we can.",
-    desktopImage: "/images/hero/contactUs.svg",
-    mobileImage: "/images/hero/contact-us-mobile.svg",
+    desktopImage: "https://da8nru77lsio9.cloudfront.net/raw-images/images/hero/contactUs.svg",
+    mobileImage: "https://da8nru77lsio9.cloudfront.net/raw-images/images/hero/contact-us-mobile.svg",
   },
   footerInfoSection: {
     footerInfoList: [
@@ -18,36 +18,36 @@ export const contactUsData: ContactUsPageData = {
         title: "Chat to us",
         description: "Our friendly team is here to help",
         email: "info@drivefitt.club",
-        image: "/images/ChatToUs.svg",
+        image: "https://da8nru77lsio9.cloudfront.net/raw-images/images/ChatToUs.svg",
       },
       {
         title: "Visit us",
         description: "Welcome to Our Main Club Branch.",
         email: "Sector-56, Golf Course RdGurugram, Haryana 122022",
-        image: "/images/VisitUs.svg",
+        image: "https://da8nru77lsio9.cloudfront.net/raw-images/images/VisitUs.svg",
       },
       {
         title: "Call us",
         description: "Mon - Sun from 10am to 10pm",
         email: "+91-9999999990",
-        image: "/images/CallUs.svg",
+        image: "https://da8nru77lsio9.cloudfront.net/raw-images/images/CallUs.svg",
       },
     ],
     socialLinkList: [
       {
-        image: "/images/x-social.svg",
+        image: "https://da8nru77lsio9.cloudfront.net/raw-images/images/x-social.svg",
         link: "https://x.com/Drive_Fitt",
       },
       {
-        image: "/images/instagram-social.svg",
+        image: "https://da8nru77lsio9.cloudfront.net/raw-images/images/instagram-social.svg",
         link: "https://www.instagram.com/drive_fitt/",
       },
       {
-        image: "/images/linkedin-social.svg",
+        image: "https://da8nru77lsio9.cloudfront.net/raw-images/images/linkedin-social.svg",
         link: "https://www.linkedin.com/company/drivefitt/",
       },
       {
-        image: "/images/facebook-social.svg",
+        image: "https://da8nru77lsio9.cloudfront.net/raw-images/images/facebook-social.svg",
         link: "https://www.facebook.com/profile.php?id=61561476262978",
       },
     ],
@@ -66,13 +66,13 @@ export const contactUsData: ContactUsPageData = {
     title: "Your exclusive access, now on mobile",
     description:
       "Our app makes it easy to join classes, connect with coaches and track your journey.",
-    googlePlayImg: "/images/app-download/google-play.svg",
-    appStoreImg: "/images/app-download/app-store.svg",
-    dfLogo: "/images/app-download/df-logo.svg",
-    mobileImage: "/images/app-download/mobile.png",
+    googlePlayImg: "https://da8nru77lsio9.cloudfront.net/raw-images/images/app-download/google-play.svg",
+    appStoreImg: "https://da8nru77lsio9.cloudfront.net/raw-images/images/app-download/app-store.svg",
+    dfLogo: "https://da8nru77lsio9.cloudfront.net/raw-images/images/app-download/df-logo.svg",
+    mobileImage: "https://da8nru77lsio9.cloudfront.net/raw-images/images/app-download/mobile.png",
   },
   footerSection: {
-    logo: "/images/logo.svg",
+    logo: "https://da8nru77lsio9.cloudfront.net/raw-images/images/logo.svg",
     description:
       "Experience Gurugram's premier fitness & sports club – Gym, cricket, recovery & more",
     sections: [
@@ -117,17 +117,17 @@ export const contactUsData: ContactUsPageData = {
       },
     ],
     socialLinks: [
-      { image: "/images/x-social.svg", link: "https://x.com/Drive_Fitt" },
+      { image: "https://da8nru77lsio9.cloudfront.net/raw-images/images/x-social.svg", link: "https://x.com/Drive_Fitt" },
       {
-        image: "/images/instagram-social.svg",
+        image: "https://da8nru77lsio9.cloudfront.net/raw-images/images/instagram-social.svg",
         link: "https://www.instagram.com/drive_fitt/",
       },
       {
-        image: "/images/linkedin-social.svg",
+        image: "https://da8nru77lsio9.cloudfront.net/raw-images/images/linkedin-social.svg",
         link: "https://www.linkedin.com/company/drivefitt/",
       },
       {
-        image: "/images/facebook-social.svg",
+        image: "https://da8nru77lsio9.cloudfront.net/raw-images/images/facebook-social.svg",
         link: "https://www.facebook.com/profile.php?id=61561476262978",
       },
     ],

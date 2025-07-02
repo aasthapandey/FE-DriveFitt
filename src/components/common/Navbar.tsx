@@ -27,14 +27,14 @@ export default function Navbar({ isMobile }: NavbarProps) {
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           <Image
-            src="/images/hamburger.svg"
+            src="https://da8nru77lsio9.cloudfront.net/raw-images/images/hamburger.svg"
             alt="menu"
             width={24}
             height={24}
           />
         </button>
         <Link href="/">
-          <Image src="/images/logo.svg" alt="logo" width={141} height={24} />
+          <Image src="https://da8nru77lsio9.cloudfront.net/raw-images/images/logo.svg" alt="logo" width={141} height={24} />
         </Link>
         <div className="flex items-center gap-4">
           <button className="bg-[#00DBDC] rounded-lg px-3 md:px-6 py-2 text-[#0D0D0D] font-medium text-xs md:text-sm">
@@ -67,7 +67,7 @@ export default function Navbar({ isMobile }: NavbarProps) {
   return (
     <nav className="flex justify-between items-center py-8 pr-[100px] pl-[120px] gap-4 bg-transparent">
       <Link href="/">
-        <Image src="/images/logo.svg" alt="logo" width={212} height={36} />
+        <Image src="https://da8nru77lsio9.cloudfront.net/raw-images/images/logo.svg" alt="logo" width={212} height={36} />
       </Link>
       <div className="flex gap-10 px-2">
         {navLinks.map((link, idx) => (

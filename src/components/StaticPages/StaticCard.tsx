@@ -59,7 +59,7 @@ const StaticCard = ({ data, className }: StaticCardProps) => {
             </div>
             <div>
               <Image
-                src="/images/redirectionButton.svg"
+                src="https://da8nru77lsio9.cloudfront.net/raw-images/images/redirectionButton.svg"
                 alt="redirectionBtn"
                 width={48}
                 height={48}
