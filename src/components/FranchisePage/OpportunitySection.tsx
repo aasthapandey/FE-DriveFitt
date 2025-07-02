@@ -17,7 +17,12 @@ const OpportunitySection = ({ data, isMobile }: OpportunitySectionProps) => {
           <div className="flex flex-col gap-4 w-full">
             {cardList.map((card, index) => {
               return (
-                <OpportunityCard key={index} card={card} className="w-full" />
+                <OpportunityCard 
+                  key={index} 
+                  card={card} 
+                  className="w-full"
+                  isHorizontal={index > 2} 
+                />
               );
             })}
           </div>
@@ -29,18 +34,10 @@ const OpportunitySection = ({ data, isMobile }: OpportunitySectionProps) => {
               <OpportunityCard card={cardList[1]} className="w-full" />
               <OpportunityCard card={cardList[2]} className="w-full" />
             </div>
-            {/* Second row - with last card fixed width */}
-            <div className="grid grid-cols-1 md:flex md:gap-8 w-full">
-              <div className="w-full md:flex-1">
-                <OpportunityCard card={cardList[3]} className="w-full" />
-              </div>
-              <div className="w-full md:flex-1">
-                <OpportunityCard card={cardList[4]} className="w-full" />
-              </div>
-              <OpportunityCard
-                card={cardList[5]}
-                className="w-full md:w-[520px]"
-              />
+            {/* Second row - two equal width cards with horizontal layout */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <OpportunityCard card={cardList[3]} className="w-full" isHorizontal={true} />
+              <OpportunityCard card={cardList[4]} className="w-full" isHorizontal={true} />
             </div>
           </div>
         )}

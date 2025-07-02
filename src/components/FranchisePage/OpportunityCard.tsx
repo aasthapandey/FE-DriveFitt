@@ -4,13 +4,14 @@ import Image from "next/image";
 interface OpportunityCardProps {
   card: Card;
   className?: string;
+  isHorizontal?: boolean;
 }
 
-const OpportunityCard = ({ card, className }: OpportunityCardProps) => {
+const OpportunityCard = ({ card, className, isHorizontal = false }: OpportunityCardProps) => {
   const { icon, title, description, subTitle } = card;
   return (
     <div
-      className={`rounded-[20px] md:rounded-[40px] h-auto md:h-[344px] p-4 md:p-10 flex flex-col items-center md:items-start border border-[#333333] gap-3 ${className}`}
+      className={`rounded-[20px] md:rounded-[40px] h-auto  p-4 md:p-10 flex ${isHorizontal ? 'md:flex-row md:items-start' : 'flex-col items-center md:items-start'} border border-[#333333] gap-3 ${className}`}
       style={{
         background: "linear-gradient(180deg, #1E1E1E 0%, #141414 100%)",
       }}
@@ -20,17 +21,19 @@ const OpportunityCard = ({ card, className }: OpportunityCardProps) => {
         alt={title}
         width={96}
         height={96}
-        className="mb-2 md:mb-7 size-[45px] md:size-[96px]"
+        className={`${isHorizontal ? 'mb-0 md:mr-8' : 'mb-2 md:mb-7'} size-[45px] md:size-[96px]`}
       />
-      <h4 className="text-xl md:text-2xl font-semibold text-white mb-1 md:mb-3">
-        {title}
-      </h4>
-      <h3 className="text-xl md:text-3xl leading-10 font-normal text-white tracking-[-2px]">
-        {subTitle}
-      </h3>
-      <p className="text-[#8A8A8A] font-light text-base leading-5">
-        {description}
-      </p>
+      <div className={`flex flex-col ${isHorizontal ? 'items-start text-left' : 'items-center md:items-start text-center md:text-left'}`}>
+        <h4 className="text-xl md:text-2xl font-semibold text-white mb-1 md:mb-3">
+          {title}
+        </h4>
+        <h3 className="text-xl md:text-3xl leading-10 font-normal text-white tracking-[-2px] mb-[12px]">
+          {subTitle}
+        </h3>
+        <p className="text-[#8A8A8A] font-light text-base leading-5">
+          {description}
+        </p>
+      </div>
     </div>
   );
 };

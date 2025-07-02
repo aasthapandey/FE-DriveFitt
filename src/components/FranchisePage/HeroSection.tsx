@@ -31,8 +31,8 @@ const HeroSection = ({ data }: HeroSectionProps) => {
 
           {/* Main Title */}
           <h1 className="text-[40px] md:text-[68px] font-light text-white flex tracking-[-2px] leading-[78px]">
-            <span className="italic font-bold ">DRIVE&nbsp;</span>
-            <span className="text-[#00DBDC] italic font-bold leading-[78px]">
+            <span className="text-[#00DBDC] italic font-bold ">DRIVE&nbsp;</span>
+            <span className=" italic font-bold leading-[78px]">
               FITT&nbsp;&nbsp;
             </span>
             <span className="text-white">{title}</span>

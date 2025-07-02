@@ -36,33 +36,33 @@ export const franchiseData: FranchisePageData = {
       },
       {
         icon: "/images/franchise/manual-icon-1.svg",
-        title: "Club Membership",
+        title: "Cricket Training & Coachingp",
         description:
-          "Premium memberships with exclusive access to all facilities",
+          "Professional cricket coaching with advanced analytics",
       },
       {
         icon: "/images/franchise/manual-icon-1.svg",
-        title: "Club Membership",
+        title: "Group Fitness & Personal Training",
         description:
-          "Premium memberships with exclusive access to all facilities",
+          "Diverse fitness classes and one-on-one training sessions",
       },
       {
         icon: "/images/franchise/manual-icon-1.svg",
-        title: "Club Membership",
+        title: "Recovery Services",
         description:
-          "Premium memberships with exclusive access to all facilities",
+          "Sauna, therapy, compression, and cold plunge services",
       },
       {
         icon: "/images/franchise/manual-icon-1.svg",
-        title: "Club Membership",
+        title: "Retail & Café",
         description:
-          "Premium memberships with exclusive access to all facilities",
+          "Sports equipment, supplements, and healthy food options",
       },
       {
         icon: "/images/franchise/manual-icon-1.svg",
-        title: "Club Membership",
+        title: "Events & Corporate Programmes",
         description:
-          "Premium memberships with exclusive access to all facilities",
+          "Corporate wellness programs and special events",
       },
     ],
   },
@@ -79,39 +79,27 @@ export const franchiseData: FranchisePageData = {
       },
       {
         icon: "/images/franchise/opportunity-1.svg",
-        title: "Initial Investment",
-        subTitle: "₹8–10 Cr",
-        description: "Club size, location-dependent",
+        title: "Ideal Location",
+        subTitle: "8,000–12,000 sq ft",
+        description: "Premium mixed-use developments",
       },
       {
         icon: "/images/franchise/opportunity-1.svg",
-        title: "Initial Investment",
-        subTitle: "₹8–10 Cr",
-        description: "Club size, location-dependent",
+        title: "Projected ROI",
+        subTitle: "30–40%",
+        description: "Strong return on investment",
       },
       {
         icon: "/images/franchise/opportunity-1.svg",
-        title: "Initial Investment",
-        subTitle: "₹8–10 Cr",
-        description: "Club size, location-dependent",
+        title: "Payback",
+        subTitle: "2.5 years",
+        description: "Quick capital recoveryt",
       },
       {
         icon: "/images/franchise/opportunity-1.svg",
-        title: "Initial Investment",
-        subTitle: "₹8–10 Cr",
-        description: "Club size, location-dependent",
-      },
-      {
-        icon: "/images/franchise/opportunity-1.svg",
-        title: "Complete support model",
-        subTitle: "₹8–10 Cr",
-        description: [
-          "Site selection",
-          "Design",
-          "Training",
-          "Launch campaigns",
-          "Operations",
-        ],
+        title: "Capex Recovery",
+        subTitle: "15%",
+        description: "Prior to launch",
       },
     ],
   },
@@ -129,27 +117,27 @@ export const franchiseData: FranchisePageData = {
       },
       {
         icon: "/images/franchise/receive-1.svg",
-        title: "Marketing that moves",
+        title: "Elite training & onboarding",
         description:
-          "Turnkey systems that fast-track launch—from club design to member retention.",
+          "In-depth induction at HQ + on-site launch support with flagship trainers and experts.",
+      },
+      {
+        icon: "/images/franchise/receive-1.svg",
+        title: "Cutting-edge tech & analytics",
+        description:
+          "3D body-scanning, cricket ball-tracking & analytics, mobile booking & CRM systems included.",
       },
       {
         icon: "/images/franchise/receive-1.svg",
         title: "Marketing that moves",
         description:
-          "Turnkey systems that fast-track launch—from club design to member retention.",
-      },
-      {
-        icon: "/images/franchise/receive-1.svg",
-        title: "Marketing that moves",
-        description:
-          "Turnkey systems that fast-track launch—from club design to member retention.",
+          "Pre-launch campaigns, influencer tie-ups, franchisee toolkits, and PR visibility.",
       },
       {
         icon: "/images/franchise/receive-1.svg",
         title: "Ongoing growth support",
         description:
-          "Turnkey systems that fast-track launch—from club design to member retention.",
+          "Monthly reviews, new product rollouts, and access to best-in-class supplier partnerships.",
       },
     ],
   },
@@ -168,19 +156,19 @@ export const franchiseData: FranchisePageData = {
         icon: "/images/franchise/looking-for-1.svg",
         title: "Investment Capacity",
         description:
-          "Genuine enthusiasm for sports, health, and community building",
+          "₹8–10 Cr+ investment capacity with financial stability",
       },
       {
         icon: "/images/franchise/looking-for-1.svg",
         title: "Operational Experience",
         description:
-          "Genuine enthusiasm for sports, health, and community building",
+          "Business operations experience and local market knowledge",
       },
       {
         icon: "/images/franchise/looking-for-1.svg",
         title: "Shared Values",
         description:
-          "Genuine enthusiasm for sports, health, and community building",
+          "Alignment with our values of performance, precision, and progress",
       },
     ],
   },
@@ -202,21 +190,21 @@ export const franchiseData: FranchisePageData = {
       },
       {
         icon: "/images/franchise/step-1.svg",
-        title: "Submit Interest",
+        title: "Discovery Call",
         description:
-          "Fill our quick enquiry form—name, investment range, proposed city.",
+          "Let’s align visions, walk through our business model and support ecosystem.",
       },
       {
         icon: "/images/franchise/step-1.svg",
-        title: "Submit Interest",
+        title: "Franchise Review",
         description:
-          "Fill our quick enquiry form—name, investment range, proposed city.",
+          "Review ROI projections, design agreements, and operational guidelines.",
       },
       {
         icon: "/images/franchise/step-1.svg",
-        title: "Submit Interest",
+        title: "Launch & Grow",
         description:
-          "Fill our quick enquiry form—name, investment range, proposed city.",
+          "Co-develop your high-performance centre, launch with impact, and scale purposefully.",
       },
     ],
   },
