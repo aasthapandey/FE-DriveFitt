@@ -10,8 +10,8 @@ export const recoveryData: StaticPageData = {
   hero: {
     title: "Recover at Drive FITT",
     description: "Train hard. Recover smarter. Perform your best.",
-    desktopImage: "/images/hero/recovery.svg",
-    mobileImage: "/images/hero/recovery-mobile.svg",
+    desktopImage: "https://da8nru77lsio9.cloudfront.net/images/hero/recovery.svg",
+    mobileImage: "https://da8nru77lsio9.cloudfront.net/images/hero/recovery-mobile.svg",
     btnPrimaryText: "Book a free trial",
     btnSecondaryText: "Join Online",
   },
@@ -22,36 +22,36 @@ export const recoveryData: StaticPageData = {
       {
         title: "Infrared Sauna",
         description: "Deep detox. Better circulation. Less soreness.",
-        backgroundImage: "/images/cricket/cricket-1.svg",
-        iconImage: "/images/cricket/cricket-icon-1.svg",
+        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-1.svg",
+        iconImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-icon-1.svg",
         link: "",
       },
       {
         title: "Cold plunge",
         description: "Ice-cold reset for muscles and mind.",
-        backgroundImage: "/images/cricket/cricket-5.svg",
-        iconImage: "/images/cricket/cricket-icon-2.svg",
+        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-5.svg",
+        iconImage: "https://da8nru77lsio9.cloudfront.net/images/recovery/cold-plunge-icon.svg",
         link: "",
       },
       {
         title: "Compression therapy",
         description: "Circulation boost. Faster leg recovery.",
-        backgroundImage: "/images/cricket/cricket-3.svg",
-        iconImage: "/images/cricket/cricket-icon-3.svg",
+        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-3.svg",
+        iconImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-icon-3.svg",
         link: "",
       },
       {
         title: "Percussion therapy",
         description: "Massage that hits the right spot.",
-        backgroundImage: "/images/cricket/cricket-1.svg",
-        iconImage: "/images/cricket/cricket-icon-4.svg",
+        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-1.svg",
+        iconImage: "https://da8nru77lsio9.cloudfront.net/images/recovery/percussion-therapy-icon.svg",
         link: "",
       },
       {
         title: "Sports physiotherapy",
         description: "Injury prevention. Rehab. Pro-level care.",
-        backgroundImage: "/images/cricket/cricket-5.svg",
-        iconImage: "/images/cricket/cricket-icon-5.svg",
+        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-5.svg",
+        iconImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-icon-5.svg",
         link: "",
       },
     ],
@@ -63,19 +63,19 @@ export const recoveryData: StaticPageData = {
         title: "For cricketers",
         description:
           "Bowling, batting, and fielding all stress joints and muscles. Recovery ensures season-long stamina, injury prevention, and match-day readiness.",
-        backgroundImage: "/images/cricket/evolution-1.svg",
+        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/evolution-1.svg",
       },
       {
         title: "For fitness enthusiasts",
         description:
           "Intense training demands muscular repair and nervous system reset. Recovery helps you train harder without breaking down.",
-        backgroundImage: "/images/fitness/evolution-1.svg",
+        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/fitness/evolution-1.svg",
       },
       {
         title: "For runners",
         description:
           "Recovery mitigates joint stress, prevents overuse injuries, and improves endurance through smarter mileage management.",
-        backgroundImage: "/images/recovery/evolution-1.svg",
+        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/recovery/evolution-1.svg",
       },
     ],
   },
@@ -83,7 +83,7 @@ export const recoveryData: StaticPageData = {
     title: "Performance nutrition – Fuel like you train",
     description:
       "Science-backed eating strategies that match your workout intensity, recovery needs, and cricket-specific demands—because elite results require elite fueling.",
-    iconImage: "/images/check-icon.svg",
+    iconImage: "https://da8nru77lsio9.cloudfront.net/images/check-icon.svg",
     cardSection: [
       {
         subTitle: "Personalized sports nutrition plans",
@@ -91,7 +91,7 @@ export const recoveryData: StaticPageData = {
           "Tailored macros and meal timing to fuel your cricket, gym, and recovery needs—because a batsman and bowler don’t eat the same.",
         ],
         extraTagLabel: "",
-        backgroundImage: "/images/cricket/scroll-card-cricket-1.svg",
+        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/scroll-card-cricket-1.svg",
       },
       {
         subTitle: "Performance meal prep ",
@@ -101,7 +101,7 @@ export const recoveryData: StaticPageData = {
           "Bat Sensor*- real-time insights on Bat Swing, Speed, Angles, Power & Efficiency ",
         ],
         extraTagLabel: "*Purchase separately",
-        backgroundImage: "/images/fitness/scroll-card-fitness-1.svg",
+        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/fitness/scroll-card-fitness-1.svg",
       },
       {
         subTitle: "Hydration & Supplement strategies ",
@@ -111,7 +111,7 @@ export const recoveryData: StaticPageData = {
           "Bat Sensor*- real-time insights on Bat Swing, Speed, Angles, Power & Efficiency ",
         ],
         extraTagLabel: "*Purchase separately",
-        backgroundImage: "/images/recovery/scroll-card-recovery-1.svg",
+        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/recovery/scroll-card-recovery-1.svg",
       },
     ],
   },
@@ -120,16 +120,16 @@ export const recoveryData: StaticPageData = {
     description:
       "Whether you're taking your first swing or prepping for tournaments – we've got a proven path for you.",
     btnLabel: "Explore Plan",
-    image: "/images/cricket/cricket-banner.svg",
+    image: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-banner.svg",
   },
   gallerySection: {
     title: "Fitness Unfiltered",
     description: "Where every drop of sweat writes your success story",
     btnLabel: "View Gallery",
     imageList: [
-      "/images/gallery-section/gallery-cricket-1.svg",
-      "/images/gallery-section/gallery-cricket-2.svg",
-      "/images/gallery-section/gallery-cricket-3.svg",
+      "https://da8nru77lsio9.cloudfront.net/images/gallery-section/gallery-cricket-1.svg",
+      "https://da8nru77lsio9.cloudfront.net/images/gallery-section/gallery-cricket-2.svg",
+      "https://da8nru77lsio9.cloudfront.net/images/gallery-section/gallery-cricket-3.svg",
     ],
   },
   memberSection: {
@@ -140,19 +140,19 @@ export const recoveryData: StaticPageData = {
       {
         title: "Kunal Bajaj",
         description: "Membership plan",
-        backgroundImage: "/images/member-section/cricket-member-1.svg",
+        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/member-section/cricket-member-1.svg",
         link: "/cricket",
       },
       {
         title: "Kunal Jain",
         description: "Membership plan",
-        backgroundImage: "/images/member-section/cricket-member-2.svg",
+        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/member-section/cricket-member-2.svg",
         link: "/cricket",
       },
       {
         title: "Rahul Kapoor",
         description: "Membership plan",
-        backgroundImage: "/images/member-section/cricket-member-3.svg",
+        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/member-section/cricket-member-3.svg",
         link: "/cricket",
       },
     ],
@@ -187,10 +187,10 @@ export const recoveryData: StaticPageData = {
     title: "Your exclusive access, now on mobile",
     description:
       "Our app makes it easy to join classes, connect with coaches and track your journey.",
-    googlePlayImg: "/images/app-download/google-play.svg",
-    appStoreImg: "/images/app-download/app-store.svg",
-    dfLogo: "/images/app-download/df-logo.svg",
-    mobileImage: "/images/app-download/mobile.png",
+    googlePlayImg: "https://da8nru77lsio9.cloudfront.net/images/app-download/google-play.svg",
+    appStoreImg: "https://da8nru77lsio9.cloudfront.net/images/app-download/app-store.svg",
+    dfLogo: "https://da8nru77lsio9.cloudfront.net/images/app-download/df-logo.svg",
+    mobileImage: "https://da8nru77lsio9.cloudfront.net/images/app-download/mobile.png",
   },
   footerInfoSection: {
     footerInfoList: [
@@ -198,36 +198,36 @@ export const recoveryData: StaticPageData = {
         title: "Chat to us",
         description: "Our friendly team is here to help",
         email: "info@drivefitt.club",
-        image: "/images/ChatToUs.svg",
+        image: "https://da8nru77lsio9.cloudfront.net/images/ChatToUs.svg",
       },
       {
         title: "Visit us",
         description: "Welcome to Our Main Club Branch.",
         email: "Sector-56, Golf Course RdGurugram, Haryana 122022",
-        image: "/images/VisitUs.svg",
+        image: "https://da8nru77lsio9.cloudfront.net/images/VisitUs.svg",
       },
       {
         title: "Call us",
         description: "Mon - Sun from 10am to 10pm",
         email: "+91-9999999990",
-        image: "/images/CallUs.svg",
+        image: "https://da8nru77lsio9.cloudfront.net/images/CallUs.svg",
       },
     ],
     socialLinkList: [
       {
-        image: "/images/x-social.svg",
+        image: "https://da8nru77lsio9.cloudfront.net/images/x-social.svg",
         link: "https://x.com/Drive_Fitt",
       },
       {
-        image: "/images/instagram-social.svg",
+        image: "https://da8nru77lsio9.cloudfront.net/images/instagram-social.svg",
         link: "https://www.instagram.com/drive_fitt/",
       },
       {
-        image: "/images/linkedin-social.svg",
+        image: "https://da8nru77lsio9.cloudfront.net/images/linkedin-social.svg",
         link: "https://www.linkedin.com/company/drivefitt/",
       },
       {
-        image: "/images/facebook-social.svg",
+        image: "https://da8nru77lsio9.cloudfront.net/images/facebook-social.svg",
         link: "https://www.facebook.com/profile.php?id=61561476262978",
       },
     ],
@@ -243,7 +243,7 @@ export const recoveryData: StaticPageData = {
     },
   },
   footerSection: {
-    logo: "/images/logo.svg",
+    logo: "https://da8nru77lsio9.cloudfront.net/images/logo.svg",
     description:
       "Experience Gurugram's premier fitness & sports club – Gym, cricket, recovery & more",
     sections: [
@@ -286,17 +286,17 @@ export const recoveryData: StaticPageData = {
       },
     ],
     socialLinks: [
-      { image: "/images/x-social.svg", link: "https://x.com/Drive_Fitt" },
+      { image: "https://da8nru77lsio9.cloudfront.net/images/x-social.svg", link: "https://x.com/Drive_Fitt" },
       {
-        image: "/images/instagram-social.svg",
+        image: "https://da8nru77lsio9.cloudfront.net/images/instagram-social.svg",
         link: "https://www.instagram.com/drive_fitt/",
       },
       {
-        image: "/images/linkedin-social.svg",
+        image: "https://da8nru77lsio9.cloudfront.net/images/linkedin-social.svg",
         link: "https://www.linkedin.com/company/drivefitt/",
       },
       {
-        image: "/images/facebook-social.svg",
+        image: "https://da8nru77lsio9.cloudfront.net/images/facebook-social.svg",
         link: "https://www.facebook.com/profile.php?id=61561476262978",
       },
     ],
