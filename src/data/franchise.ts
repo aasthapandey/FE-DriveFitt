@@ -192,7 +192,7 @@ export const franchiseData: FranchisePageData = {
           "Let's align visions, walk through our business model and support ecosystem.",
       },
       {
-        icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/franchise-icon.svg",
+        icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/franchise-icon.png",
         title: "Franchise Review",
         description:
           "Review ROI projections, design agreements, and operational guidelines.",
