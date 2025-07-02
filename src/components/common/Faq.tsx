@@ -42,7 +42,7 @@ const Faq = ({ data }: { data: FaqSectionProps }) => {
                   {faq.title}
                 </h3>
                 <Image
-                  src={`https://da8nru77lsio9.cloudfront.net/raw-images/images/${openFaqIndex === idx ? "minus" : "plus"}.svg`}
+                  src={`https://da8nru77lsio9.cloudfront.net/images/${openFaqIndex === idx ? "minus" : "plus"}.svg`}
                   alt={openFaqIndex === idx ? "minus" : "plus"}
                   width={24}
                   height={26}

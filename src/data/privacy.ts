@@ -190,7 +190,7 @@ export const privacyData: StaticPageData = {
     `,
   },
   footerSection: {
-    logo: "https://da8nru77lsio9.cloudfront.net/raw-images/images/logo.svg",
+    logo: "https://da8nru77lsio9.cloudfront.net/images/logo.svg",
     description:
       "Experience Gurugram's premier fitness & sports club – Gym, cricket, recovery & more",
     sections: [
@@ -233,17 +233,17 @@ export const privacyData: StaticPageData = {
       },
     ],
     socialLinks: [
-      { image: "https://da8nru77lsio9.cloudfront.net/raw-images/images/x-social.svg", link: "https://x.com/Drive_Fitt" },
+      { image: "https://da8nru77lsio9.cloudfront.net/images/x-social.svg", link: "https://x.com/Drive_Fitt" },
       {
-        image: "https://da8nru77lsio9.cloudfront.net/raw-images/images/instagram-social.svg",
+        image: "https://da8nru77lsio9.cloudfront.net/images/instagram-social.svg",
         link: "https://www.instagram.com/drive_fitt/",
       },
       {
-        image: "https://da8nru77lsio9.cloudfront.net/raw-images/images/linkedin-social.svg",
+        image: "https://da8nru77lsio9.cloudfront.net/images/linkedin-social.svg",
         link: "https://www.linkedin.com/company/drivefitt/",
       },
       {
-        image: "https://da8nru77lsio9.cloudfront.net/raw-images/images/facebook-social.svg",
+        image: "https://da8nru77lsio9.cloudfront.net/images/facebook-social.svg",
         link: "https://www.facebook.com/profile.php?id=61561476262978",
       },
     ],

@@ -10,8 +10,8 @@ export const runningData: StaticPageData = {
     title: "Running Redefined. Only at DRIVE FITT.",
     description:
       "India's First Professional Indoor Running Studio — Where Running Becomes a Lifestyle",
-    desktopImage: "https://da8nru77lsio9.cloudfront.net/raw-images/images/hero/running.svg",
-    mobileImage: "https://da8nru77lsio9.cloudfront.net/raw-images/images/hero/running-mobile.svg",
+    desktopImage: "https://da8nru77lsio9.cloudfront.net/images/hero/running.svg",
+    mobileImage: "https://da8nru77lsio9.cloudfront.net/images/hero/running-mobile.svg",
     btnPrimaryText: "Book a free trial",
     btnSecondaryText: "Join Online",
   },
@@ -23,39 +23,39 @@ export const runningData: StaticPageData = {
         title: "Race day prep",
         description:
           "Exclusive group race training programs so you feel confident on race days",
-        backgroundImage: "https://da8nru77lsio9.cloudfront.net/raw-images/images/cricket/cricket-1.svg",
-        iconImage: "https://da8nru77lsio9.cloudfront.net/raw-images/images/cricket/cricket-icon-1.svg",
+        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-1.svg",
+        iconImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-icon-1.svg",
         link: "",
       },
       {
         title: "Electric studio vibe",
         description:
           "Pulsing lights, energizing playlists, and community camaraderie",
-        backgroundImage: "https://da8nru77lsio9.cloudfront.net/raw-images/images/cricket/cricket-5.svg",
-        iconImage: "https://da8nru77lsio9.cloudfront.net/raw-images/images/cricket/cricket-icon-2.svg",
+        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-5.svg",
+        iconImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-icon-2.svg",
         link: "",
       },
       {
         title: "Precision indoor track",
         description:
           "Climate-controlled 200m track with shock-absorbing surface for joint-friendly, year-round training.",
-        backgroundImage: "https://da8nru77lsio9.cloudfront.net/raw-images/images/cricket/cricket-3.svg",
-        iconImage: "https://da8nru77lsio9.cloudfront.net/raw-images/images/cricket/cricket-icon-3.svg",
+        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-3.svg",
+        iconImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-icon-3.svg",
         link: "",
       },
       {
         title: "HIIT + Intervals + Recovery ",
         description: "Massage that hits the right spot.",
-        backgroundImage: "https://da8nru77lsio9.cloudfront.net/raw-images/images/cricket/cricket-1.svg",
-        iconImage: "https://da8nru77lsio9.cloudfront.net/raw-images/images/cricket/cricket-icon-4.svg",
+        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-1.svg",
+        iconImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-icon-4.svg",
         link: "",
       },
       {
         title: "Coach-powered motivation",
         description:
           "Expert runners who inspire, instruct, and hold you accountable",
-        backgroundImage: "https://da8nru77lsio9.cloudfront.net/raw-images/images/cricket/cricket-5.svg",
-        iconImage: "https://da8nru77lsio9.cloudfront.net/raw-images/images/cricket/cricket-icon-5.svg",
+        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-5.svg",
+        iconImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-icon-5.svg",
         link: "",
       },
     ],
@@ -67,19 +67,19 @@ export const runningData: StaticPageData = {
         title: "Community energy",
         description:
           "Feed off the group's drive—our runners consistently report 30% higher motivation than solo training.",
-        backgroundImage: "https://da8nru77lsio9.cloudfront.net/raw-images/images/cricket/evolution-1.svg",
+        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/evolution-1.svg",
       },
       {
         title: "Expert coaching ",
         description:
           "From cadence to kick-finishes, our certified coaches refine your form, race strategy, and the resilience needed to break through plateaus.",
-        backgroundImage: "https://da8nru77lsio9.cloudfront.net/raw-images/images/fitness/evolution-1.svg",
+        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/fitness/evolution-1.svg",
       },
       {
         title: "Progress tracking ",
         description:
           "Watch your pace, endurance, and technique evolve with real-time data on every run.",
-        backgroundImage: "https://da8nru77lsio9.cloudfront.net/raw-images/images/recovery/evolution-1.svg",
+        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/recovery/evolution-1.svg",
       },
     ],
   },
@@ -87,7 +87,7 @@ export const runningData: StaticPageData = {
     title: "Engineered for progress",
     description:
       "Science-backed eating strategies that match your workout intensity, recovery needs, and cricket-specific demands—because elite results require elite fueling.",
-    iconImage: "https://da8nru77lsio9.cloudfront.net/raw-images/images/check-icon.svg",
+    iconImage: "https://da8nru77lsio9.cloudfront.net/images/check-icon.svg",
     cardSection: [
       {
         subTitle: "Precision run analysis",
@@ -95,7 +95,7 @@ export const runningData: StaticPageData = {
           "3D gait tracking + heart-rate zones to perfect your stride and pace simultaneously.",
         ],
         extraTagLabel: "",
-        backgroundImage: "https://da8nru77lsio9.cloudfront.net/raw-images/images/cricket/scroll-card-cricket-1.svg",
+        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/scroll-card-cricket-1.svg",
       },
       {
         subTitle: "Smart interval training ",
@@ -105,7 +105,7 @@ export const runningData: StaticPageData = {
           "Bat Sensor*- real-time insights on Bat Swing, Speed, Angles, Power & Efficiency ",
         ],
         extraTagLabel: "",
-        backgroundImage: "https://da8nru77lsio9.cloudfront.net/raw-images/images/fitness/scroll-card-fitness-1.svg",
+        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/fitness/scroll-card-fitness-1.svg",
       },
       {
         subTitle: "Power-building routines ",
@@ -115,7 +115,7 @@ export const runningData: StaticPageData = {
           "Bat Sensor*- real-time insights on Bat Swing, Speed, Angles, Power & Efficiency ",
         ],
         extraTagLabel: "*Purchase separately",
-        backgroundImage: "https://da8nru77lsio9.cloudfront.net/raw-images/images/recovery/scroll-card-recovery-1.svg",
+        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/recovery/scroll-card-recovery-1.svg",
       },
     ],
   },
@@ -124,16 +124,16 @@ export const runningData: StaticPageData = {
     description:
       "Whether you're taking your first swing or prepping for tournaments – we've got a proven path for you.",
     btnLabel: "Explore Plan",
-    image: "https://da8nru77lsio9.cloudfront.net/raw-images/images/cricket/cricket-banner.svg",
+    image: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-banner.svg",
   },
   gallerySection: {
     title: "Fitness Unfiltered",
     description: "Where every drop of sweat writes your success story",
     btnLabel: "View Gallery",
     imageList: [
-      "https://da8nru77lsio9.cloudfront.net/raw-images/images/gallery-section/gallery-cricket-1.svg",
-      "https://da8nru77lsio9.cloudfront.net/raw-images/images/gallery-section/gallery-cricket-2.svg",
-      "https://da8nru77lsio9.cloudfront.net/raw-images/images/gallery-section/gallery-cricket-3.svg",
+      "https://da8nru77lsio9.cloudfront.net/images/gallery-section/gallery-cricket-1.svg",
+      "https://da8nru77lsio9.cloudfront.net/images/gallery-section/gallery-cricket-2.svg",
+      "https://da8nru77lsio9.cloudfront.net/images/gallery-section/gallery-cricket-3.svg",
     ],
   },
   memberSection: {
@@ -144,19 +144,19 @@ export const runningData: StaticPageData = {
       {
         title: "Kunal Bajaj",
         description: "Membership plan",
-        backgroundImage: "https://da8nru77lsio9.cloudfront.net/raw-images/images/member-section/cricket-member-1.svg",
+        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/member-section/cricket-member-1.svg",
         link: "/cricket",
       },
       {
         title: "Kunal Jain",
         description: "Membership plan",
-        backgroundImage: "https://da8nru77lsio9.cloudfront.net/raw-images/images/member-section/cricket-member-2.svg",
+        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/member-section/cricket-member-2.svg",
         link: "/cricket",
       },
       {
         title: "Rahul Kapoor",
         description: "Membership plan",
-        backgroundImage: "https://da8nru77lsio9.cloudfront.net/raw-images/images/member-section/cricket-member-3.svg",
+        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/member-section/cricket-member-3.svg",
         link: "/cricket",
       },
     ],
@@ -191,10 +191,10 @@ export const runningData: StaticPageData = {
     title: "Your exclusive access, now on mobile",
     description:
       "Our app makes it easy to join classes, connect with coaches and track your journey.",
-    googlePlayImg: "https://da8nru77lsio9.cloudfront.net/raw-images/images/app-download/google-play.svg",
-    appStoreImg: "https://da8nru77lsio9.cloudfront.net/raw-images/images/app-download/app-store.svg",
-    dfLogo: "https://da8nru77lsio9.cloudfront.net/raw-images/images/app-download/df-logo.svg",
-    mobileImage: "https://da8nru77lsio9.cloudfront.net/raw-images/images/app-download/mobile.png",
+    googlePlayImg: "https://da8nru77lsio9.cloudfront.net/images/app-download/google-play.svg",
+    appStoreImg: "https://da8nru77lsio9.cloudfront.net/images/app-download/app-store.svg",
+    dfLogo: "https://da8nru77lsio9.cloudfront.net/images/app-download/df-logo.svg",
+    mobileImage: "https://da8nru77lsio9.cloudfront.net/images/app-download/mobile.png",
   },
   footerInfoSection: {
     footerInfoList: [
@@ -202,36 +202,36 @@ export const runningData: StaticPageData = {
         title: "Chat to us",
         description: "Our friendly team is here to help",
         email: "info@drivefitt.club",
-        image: "https://da8nru77lsio9.cloudfront.net/raw-images/images/ChatToUs.svg",
+        image: "https://da8nru77lsio9.cloudfront.net/images/ChatToUs.svg",
       },
       {
         title: "Visit us",
         description: "Welcome to Our Main Club Branch.",
         email: "Sector-56, Golf Course RdGurugram, Haryana 122022",
-        image: "https://da8nru77lsio9.cloudfront.net/raw-images/images/VisitUs.svg",
+        image: "https://da8nru77lsio9.cloudfront.net/images/VisitUs.svg",
       },
       {
         title: "Call us",
         description: "Mon - Sun from 10am to 10pm",
         email: "+91-9999999990",
-        image: "https://da8nru77lsio9.cloudfront.net/raw-images/images/CallUs.svg",
+        image: "https://da8nru77lsio9.cloudfront.net/images/CallUs.svg",
       },
     ],
     socialLinkList: [
       {
-        image: "https://da8nru77lsio9.cloudfront.net/raw-images/images/x-social.svg",
+        image: "https://da8nru77lsio9.cloudfront.net/images/x-social.svg",
         link: "https://x.com/Drive_Fitt",
       },
       {
-        image: "https://da8nru77lsio9.cloudfront.net/raw-images/images/instagram-social.svg",
+        image: "https://da8nru77lsio9.cloudfront.net/images/instagram-social.svg",
         link: "https://www.instagram.com/drive_fitt/",
       },
       {
-        image: "https://da8nru77lsio9.cloudfront.net/raw-images/images/linkedin-social.svg",
+        image: "https://da8nru77lsio9.cloudfront.net/images/linkedin-social.svg",
         link: "https://www.linkedin.com/company/drivefitt/",
       },
       {
-        image: "https://da8nru77lsio9.cloudfront.net/raw-images/images/facebook-social.svg",
+        image: "https://da8nru77lsio9.cloudfront.net/images/facebook-social.svg",
         link: "https://www.facebook.com/profile.php?id=61561476262978",
       },
     ],
@@ -247,7 +247,7 @@ export const runningData: StaticPageData = {
     },
   },
   footerSection: {
-    logo: "https://da8nru77lsio9.cloudfront.net/raw-images/images/logo.svg",
+    logo: "https://da8nru77lsio9.cloudfront.net/images/logo.svg",
     description:
       "Experience Gurugram's premier fitness & sports club – Gym, cricket, recovery & more",
     sections: [
@@ -290,17 +290,17 @@ export const runningData: StaticPageData = {
       },
     ],
     socialLinks: [
-      { image: "https://da8nru77lsio9.cloudfront.net/raw-images/images/x-social.svg", link: "https://x.com/Drive_Fitt" },
+      { image: "https://da8nru77lsio9.cloudfront.net/images/x-social.svg", link: "https://x.com/Drive_Fitt" },
       {
-        image: "https://da8nru77lsio9.cloudfront.net/raw-images/images/instagram-social.svg",
+        image: "https://da8nru77lsio9.cloudfront.net/images/instagram-social.svg",
         link: "https://www.instagram.com/drive_fitt/",
       },
       {
-        image: "https://da8nru77lsio9.cloudfront.net/raw-images/images/linkedin-social.svg",
+        image: "https://da8nru77lsio9.cloudfront.net/images/linkedin-social.svg",
         link: "https://www.linkedin.com/company/drivefitt/",
       },
       {
-        image: "https://da8nru77lsio9.cloudfront.net/raw-images/images/facebook-social.svg",
+        image: "https://da8nru77lsio9.cloudfront.net/images/facebook-social.svg",
         link: "https://www.facebook.com/profile.php?id=61561476262978",
       },
     ],
