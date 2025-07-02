@@ -35,31 +35,31 @@ export const franchiseData: FranchisePageData = {
           "Premium memberships with exclusive access to all facilities",
       },
       {
-        icon: "https://da8nru77lsio9.cloudfront.net/raw-images/images/franchise/manual-icon-1.svg",
+        icon: "/images/franchise/cricketTrainingIcon.svg",
         title: "Cricket Training & Coachingp",
         description:
           "Professional cricket coaching with advanced analytics",
       },
       {
-        icon: "https://da8nru77lsio9.cloudfront.net/raw-images/images/franchise/manual-icon-1.svg",
+        icon: "/images/franchise/groupFitnessIcon.png",
         title: "Group Fitness & Personal Training",
         description:
           "Diverse fitness classes and one-on-one training sessions",
       },
       {
-        icon: "https://da8nru77lsio9.cloudfront.net/raw-images/images/franchise/manual-icon-1.svg",
+        icon: "https://da8nru77lsio9.cloudfront.net/raw-images/images/franchise/recovery-icon.svg",
         title: "Recovery Services",
         description:
           "Sauna, therapy, compression, and cold plunge services",
       },
       {
-        icon: "https://da8nru77lsio9.cloudfront.net/raw-images/images/franchise/manual-icon-1.svg",
+        icon: "https://da8nru77lsio9.cloudfront.net/raw-images/images/franchise/cafe-icon.svg",
         title: "Retail & Café",
         description:
           "Sports equipment, supplements, and healthy food options",
       },
       {
-        icon: "https://da8nru77lsio9.cloudfront.net/raw-images/images/franchise/manual-icon-1.svg",
+        icon: "https://da8nru77lsio9.cloudfront.net/raw-images/images/franchise/event-icon.svg",
         title: "Events & Corporate Programmes",
         description:
           "Corporate wellness programs and special events",
@@ -78,25 +78,25 @@ export const franchiseData: FranchisePageData = {
         description: "Club size, location-dependent",
       },
       {
-        icon: "https://da8nru77lsio9.cloudfront.net/raw-images/images/franchise/opportunity-1.svg",
+        icon: "https://da8nru77lsio9.cloudfront.net/raw-images/images/franchise/ideal-location-icon.svg",
         title: "Ideal Location",
         subTitle: "8,000–12,000 sq ft",
         description: "Premium mixed-use developments",
       },
       {
-        icon: "https://da8nru77lsio9.cloudfront.net/raw-images/images/franchise/opportunity-1.svg",
+        icon: "https://da8nru77lsio9.cloudfront.net/raw-images/images/franchise/roi-icon.svg",
         title: "Projected ROI",
         subTitle: "30–40%",
         description: "Strong return on investment",
       },
       {
-        icon: "https://da8nru77lsio9.cloudfront.net/raw-images/images/franchise/opportunity-1.svg",
+        icon: "https://da8nru77lsio9.cloudfront.net/raw-images/images/franchise/payback-icon.svg",
         title: "Payback",
         subTitle: "2.5 years",
         description: "Quick capital recoveryt",
       },
       {
-        icon: "https://da8nru77lsio9.cloudfront.net/raw-images/images/franchise/opportunity-1.svg",
+        icon: "https://da8nru77lsio9.cloudfront.net/raw-images/images/franchise/capex-icon.svg",
         title: "Capex Recovery",
         subTitle: "15%",
         description: "Prior to launch",
@@ -116,25 +116,25 @@ export const franchiseData: FranchisePageData = {
           "Turnkey systems that fast-track launch—from club design to member retention.",
       },
       {
-        icon: "https://da8nru77lsio9.cloudfront.net/raw-images/images/franchise/receive-1.svg",
+        icon: "https://da8nru77lsio9.cloudfront.net/raw-images/images/franchise/elite-training-icon.svg",
         title: "Elite training & onboarding",
         description:
           "In-depth induction at HQ + on-site launch support with flagship trainers and experts.",
       },
       {
-        icon: "https://da8nru77lsio9.cloudfront.net/raw-images/images/franchise/receive-1.svg",
+        icon: "https://da8nru77lsio9.cloudfront.net/raw-images/images/franchise/cutting-edge-icon.svg",
         title: "Cutting-edge tech & analytics",
         description:
           "3D body-scanning, cricket ball-tracking & analytics, mobile booking & CRM systems included.",
       },
       {
-        icon: "https://da8nru77lsio9.cloudfront.net/raw-images/images/franchise/receive-1.svg",
+        icon: "https://da8nru77lsio9.cloudfront.net/raw-images/images/franchise/marketing-icon.svg",
         title: "Marketing that moves",
         description:
           "Pre-launch campaigns, influencer tie-ups, franchisee toolkits, and PR visibility.",
       },
       {
-        icon: "https://da8nru77lsio9.cloudfront.net/raw-images/images/franchise/receive-1.svg",
+        icon: "https://da8nru77lsio9.cloudfront.net/raw-images/images/franchise/ongoing-growth-icon.svg",
         title: "Ongoing growth support",
         description:
           "Monthly reviews, new product rollouts, and access to best-in-class supplier partnerships.",
@@ -153,19 +153,19 @@ export const franchiseData: FranchisePageData = {
           "Genuine enthusiasm for sports, health, and community building",
       },
       {
-        icon: "https://da8nru77lsio9.cloudfront.net/raw-images/images/franchise/looking-for-1.svg",
+        icon: "https://da8nru77lsio9.cloudfront.net/raw-images/images/franchise/investment-capacity-icon.svg",
         title: "Investment Capacity",
         description:
           "₹8–10 Cr+ investment capacity with financial stability",
       },
       {
-        icon: "https://da8nru77lsio9.cloudfront.net/raw-images/images/franchise/looking-for-1.svg",
+        icon: "https://da8nru77lsio9.cloudfront.net/raw-images/images/franchise/operational-icon.svg",
         title: "Operational Experience",
         description:
           "Business operations experience and local market knowledge",
       },
       {
-        icon: "https://da8nru77lsio9.cloudfront.net/raw-images/images/franchise/looking-for-1.svg",
+        icon: "https://da8nru77lsio9.cloudfront.net/raw-images/images/franchise/values.svg",
         title: "Shared Values",
         description:
           "Alignment with our values of performance, precision, and progress",
@@ -189,19 +189,19 @@ export const franchiseData: FranchisePageData = {
           "Fill our quick enquiry form—name, investment range, proposed city.",
       },
       {
-        icon: "https://da8nru77lsio9.cloudfront.net/raw-images/images/franchise/step-1.svg",
+        icon: "https://da8nru77lsio9.cloudfront.net/raw-images/images/franchise/discovery-icon.svg",
         title: "Discovery Call",
         description:
           "Let's align visions, walk through our business model and support ecosystem.",
       },
       {
-        icon: "https://da8nru77lsio9.cloudfront.net/raw-images/images/franchise/step-1.svg",
+        icon: "https://da8nru77lsio9.cloudfront.net/raw-images/images/franchise/franchise-icon.svg",
         title: "Franchise Review",
         description:
           "Review ROI projections, design agreements, and operational guidelines.",
       },
       {
-        icon: "https://da8nru77lsio9.cloudfront.net/raw-images/images/franchise/step-1.svg",
+        icon: "https://da8nru77lsio9.cloudfront.net/raw-images/images/franchise/launch-icon.svg",
         title: "Launch & Grow",
         description:
           "Co-develop your high-performance centre, launch with impact, and scale purposefully.",
