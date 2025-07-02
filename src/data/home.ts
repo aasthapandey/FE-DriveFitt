@@ -243,19 +243,19 @@ export const homeData: StaticPageData = {
     socialLinkList: [
       {
         image: "/images/x-social.svg",
-        link: "",
+        link: "https://x.com/Drive_Fitt",
       },
       {
         image: "/images/instagram-social.svg",
-        link: "",
+        link: "https://www.instagram.com/drive_fitt/",
       },
       {
         image: "/images/linkedin-social.svg",
-        link: "",
+        link: "https://www.linkedin.com/company/drivefitt/",
       },
       {
         image: "/images/facebook-social.svg",
-        link: "",
+        link: "https://www.facebook.com/profile.php?id=61561476262978",
       },
     ],
     contactFormSection: {

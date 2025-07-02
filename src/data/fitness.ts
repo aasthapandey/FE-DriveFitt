@@ -29,28 +29,32 @@ export const fitnessData: StaticPageData = {
       },
       {
         title: "Group classes",
-        description: "Our expert-led group sessions fuel your energy and connect you with a community that shares your drive.",
+        description:
+          "Our expert-led group sessions fuel your energy and connect you with a community that shares your drive.",
         backgroundImage: "/images/cricket/cricket-5.svg",
         iconImage: "/images/cricket/cricket-icon-2.svg",
         link: "",
       },
       {
         title: "Hyrox-Inspired Zone",
-        description: "Experience the energy, structure, and challenge of the global fitness race at your club",
+        description:
+          "Experience the energy, structure, and challenge of the global fitness race at your club",
         backgroundImage: "/images/cricket/cricket-3.svg",
         iconImage: "/images/cricket/cricket-icon-3.svg",
         link: "",
       },
       {
         title: "Personal training",
-        description: "Customized 1-on-1 coaching tailored to your body, goals, sport-specific performance—and complete recovery needs.",
+        description:
+          "Customized 1-on-1 coaching tailored to your body, goals, sport-specific performance—and complete recovery needs.",
         backgroundImage: "/images/cricket/cricket-1.svg",
         iconImage: "/images/cricket/cricket-icon-4.svg",
         link: "",
       },
       {
         title: "High and Low Intensity workout zones ",
-        description: "From sweat-drenched HIIT sessions to mindful low-impact training, our zones allow you to train full spectrum",
+        description:
+          "From sweat-drenched HIIT sessions to mindful low-impact training, our zones allow you to train full spectrum",
         backgroundImage: "/images/cricket/cricket-5.svg",
         iconImage: "/images/cricket/cricket-icon-5.svg",
         link: "",
@@ -74,7 +78,8 @@ export const fitnessData: StaticPageData = {
       },
       {
         title: "Indoor running studio",
-        description: "Join the pack. Run with purpose at Drive FIIT. Our program helps you build proper technique to help you excel across all race formats.",
+        description:
+          "Join the pack. Run with purpose at Drive FIIT. Our program helps you build proper technique to help you excel across all race formats.",
         backgroundImage: "/images/recovery/evolution-1.svg",
       },
     ],
@@ -124,8 +129,7 @@ export const fitnessData: StaticPageData = {
   },
   gallerySection: {
     title: "Fitness unfiltered",
-    description:
-      "Where every drop of sweat writes your success story",
+    description: "Where every drop of sweat writes your success story",
     btnLabel: "View Gallery",
     imageList: [
       "/images/gallery-section/gallery-cricket-1.svg",
@@ -217,19 +221,19 @@ export const fitnessData: StaticPageData = {
     socialLinkList: [
       {
         image: "/images/x-social.svg",
-        link: "",
+        link: "https://x.com/Drive_Fitt",
       },
       {
         image: "/images/instagram-social.svg",
-        link: "",
+        link: "https://www.instagram.com/drive_fitt/",
       },
       {
         image: "/images/linkedin-social.svg",
-        link: "",
+        link: "https://www.linkedin.com/company/drivefitt/",
       },
       {
         image: "/images/facebook-social.svg",
-        link: "",
+        link: "https://www.facebook.com/profile.php?id=61561476262978",
       },
     ],
     contactFormSection: {

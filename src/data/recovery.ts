@@ -21,8 +21,7 @@ export const recoveryData: StaticPageData = {
     cardSection: [
       {
         title: "Infrared Sauna",
-        description:
-          "Deep detox. Better circulation. Less soreness.",
+        description: "Deep detox. Better circulation. Less soreness.",
         backgroundImage: "/images/cricket/cricket-1.svg",
         iconImage: "/images/cricket/cricket-icon-1.svg",
         link: "",
@@ -74,7 +73,8 @@ export const recoveryData: StaticPageData = {
       },
       {
         title: "For runners",
-        description: "Recovery mitigates joint stress, prevents overuse injuries, and improves endurance through smarter mileage management.",
+        description:
+          "Recovery mitigates joint stress, prevents overuse injuries, and improves endurance through smarter mileage management.",
         backgroundImage: "/images/recovery/evolution-1.svg",
       },
     ],
@@ -124,8 +124,7 @@ export const recoveryData: StaticPageData = {
   },
   gallerySection: {
     title: "Fitness Unfiltered",
-    description:
-      "Where every drop of sweat writes your success story",
+    description: "Where every drop of sweat writes your success story",
     btnLabel: "View Gallery",
     imageList: [
       "/images/gallery-section/gallery-cricket-1.svg",
@@ -217,19 +216,19 @@ export const recoveryData: StaticPageData = {
     socialLinkList: [
       {
         image: "/images/x-social.svg",
-        link: "",
+        link: "https://x.com/Drive_Fitt",
       },
       {
         image: "/images/instagram-social.svg",
-        link: "",
+        link: "https://www.instagram.com/drive_fitt/",
       },
       {
         image: "/images/linkedin-social.svg",
-        link: "",
+        link: "https://www.linkedin.com/company/drivefitt/",
       },
       {
         image: "/images/facebook-social.svg",
-        link: "",
+        link: "https://www.facebook.com/profile.php?id=61561476262978",
       },
     ],
     contactFormSection: {
