@@ -21,12 +21,12 @@ export const franchiseData: FranchisePageData = {
     description1: "As category creators in ",
     description2: "cricket + fitness + recovery",
     description3:
-      "we’ve built India’s only 360° sports and fitness performance ecosystem under one roof. Now, we’re expanding — and looking for passionate partners to lead the way.",
+      "we've built India's only 360° sports and fitness performance ecosystem under one roof. Now, we're expanding — and looking for passionate partners to lead the way.",
   },
   multiRevenueSection: {
     title: "Multi-Revenue, All-in-One Model",
     description:
-      "Unlike standalone gyms, monetize every square foot with Drive FITT’s diverse revenue stream",
+      "Unlike standalone gyms, monetize every square foot with Drive FITT's diverse revenue stream",
     cardList: [
       {
         icon: "/images/franchise/manual-icon-1.svg",
@@ -104,7 +104,7 @@ export const franchiseData: FranchisePageData = {
     ],
   },
   whatYouReceiveSection: {
-    title: "What You’ll Receive",
+    title: "What You'll Receive",
     description:
       "Comprehensive support to ensure your success from day one and beyond",
     image: "/images/franchise/ShubhmanPreity.svg",
@@ -144,7 +144,7 @@ export const franchiseData: FranchisePageData = {
   whatLookingForSection: {
     title: "Who We're Looking For",
     description:
-      "Drive FITT thrives on entrepreneurship. Ideal franchisees are those who:",
+      "Drive FITT thrives on entrepreneurship. Ideal franchisees are those who:",
     cardList: [
       {
         icon: "/images/franchise/looking-for-1.svg",
@@ -175,7 +175,7 @@ export const franchiseData: FranchisePageData = {
   banner2Section: {
     title: "Our Footprint & Growth Vision",
     description:
-      "Starting in Gurugram, we’re fast-moving across India. Franchise candidates with the right infrastructure and ambition can spearhead their regional markets.",
+      "Starting in Gurugram, we're fast-moving across India. Franchise candidates with the right infrastructure and ambition can spearhead their regional markets.",
   },
   nextStepSection: {
     title: "Your Next Steps",
@@ -192,7 +192,7 @@ export const franchiseData: FranchisePageData = {
         icon: "/images/franchise/step-1.svg",
         title: "Discovery Call",
         description:
-          "Let’s align visions, walk through our business model and support ecosystem.",
+          "Let's align visions, walk through our business model and support ecosystem.",
       },
       {
         icon: "/images/franchise/step-1.svg",
@@ -267,6 +267,7 @@ export const franchiseData: FranchisePageData = {
         title: "Quick links",
         links: [
           { title: "About us", link: "/coming-soon" },
+          { title: "Our services", link: "/coming-soon" },
           { title: "Blogs", link: "/coming-soon" },
           { title: "Career", link: "/coming-soon" },
           { title: "Partner with us", link: "/franchise" },
