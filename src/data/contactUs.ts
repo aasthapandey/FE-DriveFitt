@@ -10,7 +10,7 @@ export const contactUsData: ContactUsPageData = {
     description:
       "Please Feel Free to contact us and we will get back to you as soon as we can.",
     desktopImage: "/images/hero/contactUs.svg",
-    mobileImage: "/images/hero/contactUs.svg",
+    mobileImage: "/images/hero/contact-us-mobile.svg",
   },
   footerInfoSection: {
     footerInfoList: [
