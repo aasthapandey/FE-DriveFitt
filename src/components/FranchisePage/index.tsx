@@ -15,9 +15,9 @@ import Banner1Section from "@/components/FranchisePage/Banner1Section";
 import MultiRevenueSection from "@/components/FranchisePage/MultiRevenueSection";
 import OpportunitySection from "@/components/FranchisePage/OpportunitySection";
 import WhatYouReceiveSection from "@/components/FranchisePage/WhatYouReceiveSection";
-import WhatLookingForSection from "@/components/FranchisePage/WhatLookingForSection";
+import WhoLookingForSection from "@/components/FranchisePage/WhoLookingForSection";
 import Banner2Section from "@/components/FranchisePage/Banner2Section";
-// import NextStepSection from "@/components/FranchisePage/NextStepSection";
+import NextStepSection from "@/components/FranchisePage/NextStepSection";
 
 interface FranchisePageProps {
   data: FranchisePageData;
@@ -70,7 +70,7 @@ const FranchisePage = ({ data, pageName, isMobile }: FranchisePageProps) => {
         );
       case "whatLookingForSection":
         return (
-          <WhatLookingForSection
+          <WhoLookingForSection
             data={value as CardSection}
             isMobile={isMobile}
           />
@@ -82,10 +82,10 @@ const FranchisePage = ({ data, pageName, isMobile }: FranchisePageProps) => {
             isMobile={isMobile}
           />
         );
-      // case "nextStepSection":
-      //   return (
-      //     <NextStepSection data={value as CardSection} isMobile={isMobile} />
-      //   );
+      case "nextStepSection":
+        return (
+          <NextStepSection data={value as CardSection} isMobile={isMobile} />
+        );
       case "footerInfoSection":
         return (
           <FooterInfo data={value as FooterInfoProps} isMobile={isMobile} />

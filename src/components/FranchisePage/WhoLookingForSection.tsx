@@ -7,7 +7,10 @@ interface WhatLookingForSectionProps {
   isMobile?: boolean;
 }
 
-const WhatLookingForSection = ({ data }: WhatLookingForSectionProps) => {
+const WhoLookingForSection = ({
+  data,
+  isMobile,
+}: WhatLookingForSectionProps) => {
   const { title, description, cardList } = data;
   return (
     <section className="md:px-[120px] px-6 flex flex-col gap-5">
@@ -17,18 +20,20 @@ const WhatLookingForSection = ({ data }: WhatLookingForSectionProps) => {
           <div
             key={index}
             className={`${
-              card.title === "Passion for Sport & Health" ||
-              card.title === "Investment Capacity"
+              (card.title === "Passion for Sport & Health" ||
+                card.title === "Investment Capacity") &&
+              !isMobile
                 ? "border-b border-[#333333]"
                 : ""
             } ${
-              card.title === "Passion for Sport & Health" ||
-              card.title === "Operational Experience"
+              (card.title === "Passion for Sport & Health" ||
+                card.title === "Operational Experience") &&
+              !isMobile
                 ? "border-r border-[#333333]"
                 : ""
-            } px-12 py-[60px] flex flex-col items-center gap-3`}
+            } p-4 md:px-12 md:py-[60px] flex flex-col items-center gap-3`}
           >
-            <div className="w-12 h-12 relative mb-7">
+            <div className="w-12 h-12 relative mb-2 md:mb-7">
               <div
                 className="absolute inset-0 rounded-full w-10 h-10"
                 style={{
@@ -47,7 +52,7 @@ const WhatLookingForSection = ({ data }: WhatLookingForSectionProps) => {
               </div>
             </div>
             <h3 className="text-xl font-semibold text-white">{card.title}</h3>
-            <p className="text-gray-300">{card.description}</p>
+            <p className="text-gray-300 text-center">{card.description}</p>
           </div>
         ))}
       </div>
@@ -55,4 +60,4 @@ const WhatLookingForSection = ({ data }: WhatLookingForSectionProps) => {
   );
 };
 
-export default WhatLookingForSection;
+export default WhoLookingForSection;
