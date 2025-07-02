@@ -8,7 +8,7 @@ export const error404Data: StaticPageData = {
   error404Section: {
     title: "Oops! Page Not Found",
     description: "We can't find the page you're looking for",
-    iconImage: "https://da8nru77lsio9.cloudfront.net/images/1751427188771_ec99e463bf9859fa_Group_1597880512.webp",
+    iconImage: "/images/404.svg",
     btnText: "Go to home",
     btnLink: "/",
   },

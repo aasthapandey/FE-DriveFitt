@@ -9,7 +9,7 @@ export const comingSoonData: StaticPageData = {
   comingSoonSection: {
     title: "Coming Soon – Early access now open",
     description: "Get privileged access to our game-changing facility before launch - plus enjoy a free session to experience the difference.",
-    iconImage: "https://da8nru77lsio9.cloudfront.net/original-images/1751421552237_1b521eaf51e30bbd_hourglass.jpg",
+    iconImage: "/images/comingsoon.svg",
     btnPrimaryText: "Book a Free Trial",
     btnSecondaryText: "Go to Home",
     btnPrimaryLink: "#trial-booking",

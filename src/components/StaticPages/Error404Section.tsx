@@ -19,7 +19,7 @@ const Error404Section = ({ data, isMobile }: Error404SectionProps) => {
     <div className="flex items-center justify-center mt-[154px]">
       <div className="mx-auto text-center">
         <div className="flex flex-col items-center justify-center">
-          <div className="mb-[48px] bg-black">
+          <div className="mb-[48px] ">
             <img
               src={illustration}
               alt="UFO 404 Illustration"

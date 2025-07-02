@@ -21,12 +21,10 @@ const ComingSoonSection = ({ data, isMobile }: ComingSoonSectionProps) => {
     <div className="mt-[158px] flex items-center justify-center">
       <div className="max-w-[1200px] mx-auto text-center">
         <div className="flex flex-col items-center justify-center">
-          <div className="mb-8 md:mb-[24px]">
+          <div className="mb-8 md:mb-[48px] md:w-[120px] md:h-[120px]">
             <img
               src={iconImage}
               alt="Coming Soon"
-              width={isMobile ? 80 : 120}
-              height={isMobile ? 80 : 120}
               className="opacity-60"   
             />
           </div>
