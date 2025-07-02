@@ -20,7 +20,6 @@ const PolicySection = ({ data, isMobile }: PolicySectionProps) => {
           .policy-content h1 {
             font-size: 68px;
             font-weight: 700;
-            font-size: 68px;
             line-height: 72px;
             letter-spacing: -2px;
             color: white;
@@ -42,8 +41,8 @@ const PolicySection = ({ data, isMobile }: PolicySectionProps) => {
           }
           
           .policy-content p {
-            font-size: 14px;
-            line-height: 20px;
+            font-size: 16px;
+            line-height: 24px;
             color: #FFFFFF;
             margin-bottom: 24px;
           }
@@ -87,6 +86,7 @@ const PolicySection = ({ data, isMobile }: PolicySectionProps) => {
           .policy-content a {
             color: #00DBDC;
             text-decoration: underline;
+            word-break: break-word;
           }
           
           .policy-content a:hover {
@@ -119,19 +119,121 @@ const PolicySection = ({ data, isMobile }: PolicySectionProps) => {
           @media (max-width: 768px) {
             .policy-content h1 {
               font-size: 32px;
+              line-height: 38px;
+              letter-spacing: -1px;
+              margin-bottom: 24px;
             }
             
             .policy-content h2 {
               font-size: 20px;
+              line-height: 26px;
+              margin: 32px 0 12px 0;
             }
             
             .policy-content h3 {
               font-size: 18px;
+              line-height: 24px;
+              margin: 28px 0 12px 0;
+            }
+            
+            .policy-content p {
+              font-size: 14px;
+              line-height: 22px;
+              margin-bottom: 20px;
+            }
+            
+            .policy-content ol {
+              padding-left: 16px;
+              margin-bottom: 24px;
+            }
+            
+            .policy-content ul {
+              padding-left: 16px;
+              margin-bottom: 20px;
+            }
+            
+            .policy-content li {
+              font-size: 14px;
+              line-height: 1.5;
+              margin-bottom: 6px;
+            }
+            
+            .policy-content ul li {
+              margin-bottom: 8px;
             }
             
             .policy-content blockquote {
               padding: 16px;
               margin: 16px 0;
+              border-radius: 6px;
+            }
+            
+            .policy-content blockquote p {
+              font-size: 13px;
+              line-height: 20px;
+              margin-bottom: 12px;
+            }
+            
+            .policy-content a {
+              word-break: break-all;
+              overflow-wrap: anywhere;
+            }
+            
+            .policy-content strong {
+              font-size: 14px;
+              line-height: 22px;
+            }
+          }
+          
+          @media (max-width: 480px) {
+            .policy-content h1 {
+              font-size: 28px;
+              line-height: 34px;
+              margin-bottom: 20px;
+            }
+            
+            .policy-content h2 {
+              font-size: 18px;
+              line-height: 24px;
+              margin: 28px 0 10px 0;
+            }
+            
+            .policy-content h3 {
+              font-size: 16px;
+              line-height: 22px;
+              margin: 24px 0 10px 0;
+            }
+            
+            .policy-content p {
+              font-size: 13px;
+              line-height: 20px;
+              margin-bottom: 18px;
+            }
+            
+            .policy-content li {
+              font-size: 13px;
+              line-height: 1.4;
+            }
+            
+            .policy-content ol {
+              padding-left: 14px;
+              margin-bottom: 20px;
+            }
+            
+            .policy-content ul {
+              padding-left: 14px;
+              margin-bottom: 18px;
+            }
+            
+            .policy-content blockquote {
+              padding: 12px;
+              margin: 12px 0;
+            }
+            
+            .policy-content blockquote p {
+              font-size: 12px;
+              line-height: 18px;
+              margin-bottom: 10px;
             }
           }
         `
