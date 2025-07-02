@@ -32,7 +32,7 @@ export const fitnessData: StaticPageData = {
         description:
           "Our expert-led group sessions fuel your energy and connect you with a community that shares your drive.",
         backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-5.svg",
-        iconImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-icon-2.svg",
+        iconImage: "https://da8nru77lsio9.cloudfront.net/images/fitness/group-classes-icon.svg",
         link: "",
       },
       {
@@ -48,7 +48,7 @@ export const fitnessData: StaticPageData = {
         description:
           "Customized 1-on-1 coaching tailored to your body, goals, sport-specific performance—and complete recovery needs.",
         backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-1.svg",
-        iconImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-icon-4.svg",
+        iconImage: "https://da8nru77lsio9.cloudfront.net/images/fitness/personal-training-icon.svg",
         link: "",
       },
       {

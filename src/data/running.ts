@@ -32,7 +32,7 @@ export const runningData: StaticPageData = {
         description:
           "Pulsing lights, energizing playlists, and community camaraderie",
         backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-5.svg",
-        iconImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-icon-2.svg",
+        iconImage: "https://da8nru77lsio9.cloudfront.net/images/running/foot-massage.svg",
         link: "",
       },
       {
@@ -47,7 +47,7 @@ export const runningData: StaticPageData = {
         title: "HIIT + Intervals + Recovery ",
         description: "Massage that hits the right spot.",
         backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-1.svg",
-        iconImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-icon-4.svg",
+        iconImage: "https://da8nru77lsio9.cloudfront.net/images/running/foot-massage.svg",
         link: "",
       },
       {

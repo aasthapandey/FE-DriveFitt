@@ -30,7 +30,7 @@ export const recoveryData: StaticPageData = {
         title: "Cold plunge",
         description: "Ice-cold reset for muscles and mind.",
         backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-5.svg",
-        iconImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-icon-2.svg",
+        iconImage: "https://da8nru77lsio9.cloudfront.net/images/recovery/cold-plunge-icon.svg",
         link: "",
       },
       {
@@ -44,7 +44,7 @@ export const recoveryData: StaticPageData = {
         title: "Percussion therapy",
         description: "Massage that hits the right spot.",
         backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-1.svg",
-        iconImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-icon-4.svg",
+        iconImage: "https://da8nru77lsio9.cloudfront.net/images/recovery/percussion-therapy-icon.svg",
         link: "",
       },
       {
