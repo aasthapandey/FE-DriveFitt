@@ -33,9 +33,9 @@ const WhoLookingForSection = ({
                 : ""
             } p-4 md:px-12 md:py-[60px] flex flex-col items-center gap-3`}
           >
-            <div className="w-12 h-12 relative mb-2 md:mb-7">
+            <div className="md:w-[100px] md:h-[100px] w-[48px] h-[48px] relative mb-2 md:mb-7">
               <div
-                className="absolute inset-0 rounded-full w-10 h-10"
+                className="absolute inset-0 rounded-full md:w-[100px] md:h-[100px] w-[48px] h-[48px]"
                 style={{
                   boxShadow: "0px 7.2px 14.4px 0px #00DBDC33",
                 }}
@@ -44,15 +44,19 @@ const WhoLookingForSection = ({
                   <Image
                     src={card.icon}
                     alt={card.title}
-                    width={24}
-                    height={24}
-                    className="max-w-6 max-h-6 w-auto h-auto"
+                    width={60}
+                    height={60}
+                    className="md:max-w-[60px] md:max-h-[60px] w-auto max-w-6 max-h-6 h-auto"
                   />
                 </div>
               </div>
             </div>
-            <h3 className="text-xl font-semibold text-white">{card.title}</h3>
-            <p className="text-gray-300 text-center">{card.description}</p>
+            <h3 className="text-xl md:text-[32px] leading-10 font-semibold text-white">
+              {card.title}
+            </h3>
+            <p className="text-[#8A8A8A] text-base leading-5 text-center">
+              {card.description}
+            </p>
           </div>
         ))}
       </div>

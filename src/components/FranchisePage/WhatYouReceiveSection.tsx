@@ -42,9 +42,9 @@ const WhatYouReceiveSection = ({ data }: WhatYouReceiveSectionProps) => {
             return (
               <div key={index} className="flex gap-5 md:gap-10 min-h-full">
                 <div className="min-h-full flex items-center justify-center">
-                  <div className="w-12 h-12 relative">
+                  <div className="w-12 h-12 relative mb-[20px] md:mb-10">
                     <div
-                      className="absolute inset-0 rounded-full w-10 h-10"
+                      className="absolute inset-0 rounded-full w-12 h-12"
                       style={{
                         boxShadow: "0px 7.2px 14.4px 0px #00DBDC33",
                       }}
@@ -66,7 +66,7 @@ const WhatYouReceiveSection = ({ data }: WhatYouReceiveSectionProps) => {
                     card.title === "Ongoing growth support" ? "border-b-0" : ""
                   } flex flex-col gap-3 py-5 md:py-10 items-start justify-center border-b border-[#333333]`}
                 >
-                  <div className="font-semibold text-[32px] leading-10 tracking-[-1px]">
+                  <div className="font-semibold text-xl md:text-[32px] leading-10 tracking-[-1px]">
                     {card.title}
                   </div>
                   <div className="font-light text-sm leading-5">

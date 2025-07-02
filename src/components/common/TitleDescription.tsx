@@ -12,7 +12,7 @@ const TitleDescription = ({
       <h2
         className={`${
           !description ? "mb-2 md:mb-[48px]" : ""
-        } text-2xl md:text-5xl font-semibold leading-7 md:leading-[56px] tracking-[-1px] md:tracking-[-2px] text-center`}
+        } text-2xl md:text-5xl font-semibold leading-7 md:leading-[56px] px-0 md:px-[120px] tracking-[-1px] md:tracking-[-2px] text-center`}
       >
         {title}
       </h2>

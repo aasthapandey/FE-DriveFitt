@@ -6,7 +6,7 @@ interface StaticCardProps {
   isMobile?: boolean;
   className?: string;
 }
-const StaticCard = ({ data, className }: StaticCardProps) => {
+const StaticCard = ({ data, className, isMobile }: StaticCardProps) => {
   const { title, description, backgroundImage, link, modalImage } = data;
   return (
     <a href={link}>
@@ -61,8 +61,9 @@ const StaticCard = ({ data, className }: StaticCardProps) => {
               <Image
                 src="/images/redirectionButton.svg"
                 alt="redirectionBtn"
-                width={48}
-                height={48}
+                width={60}
+                height={60}
+                className={`${isMobile ? "!size-8" : "!size-[60px]"}`}
               />
             </div>
           </div>

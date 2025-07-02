@@ -22,7 +22,7 @@ const MultiRevenueCard = ({ card }: { card: Card }) => {
             alt={title}
             width={100}
             height={100}
-            className="mb-3"
+            className="mb-3 md:size[100px] size-[60px]"
           />
           <h3 className="text-2xl leading-7 tracking-[-1px] font-semibold">
             {title}

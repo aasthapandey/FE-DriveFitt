@@ -20,7 +20,7 @@ const OpportunityCard = ({ card, className }: OpportunityCardProps) => {
         alt={title}
         width={96}
         height={96}
-        className="mb-2 md:mb-7 size-[45px] md:size-[96px]"
+        className="mb-2 md:mb-7 size-[60px] md:size-[96px]"
       />
       <h4 className="text-xl md:text-2xl font-semibold text-white mb-1 md:mb-3">
         {title}

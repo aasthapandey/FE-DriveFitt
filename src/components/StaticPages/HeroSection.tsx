@@ -14,8 +14,11 @@ const HeroSection = ({ data, pageName, isMobile }: HeroSectionProps) => {
     if (pageName === "home") {
       return (
         <h1 className="text-white text-[42px] leading-[50px] tracking-[-2px] md:leading-[72px] md:text-6xl font-bold md:mb-7 mb-[22px]">
-          {title}
-          {!isMobile && <span className="text-[#00DBDC] italic">STRIVE</span>}
+          <span className="text-white">India's First </span>
+          <span className="text-[#00DBDC]">Cricket </span>
+          <span className="text-white">and </span>
+          <span className="text-[#00DBDC]">Fitness </span>
+          <span className="text-white">Club</span>
         </h1>
       );
     } else if (pageName === "cricket") {
@@ -63,16 +66,17 @@ const HeroSection = ({ data, pageName, isMobile }: HeroSectionProps) => {
           <div className="flex gap-4 justify-center md:justify-start">
             {btnPrimaryText && (
               <button className="bg-[#00DBDC] text-[#0D0D0D] px-6 py-3 md:px-14 md:py-4  rounded-lg font-medium leading-[100%] tracking-[-5%] text-base md:text-xl">
-                {isMobile
-                  ? btnSecondaryText
-                  : btnPrimaryText}
+                {isMobile ? btnSecondaryText : btnPrimaryText}
               </button>
             )}
-            {btnSecondaryText && btnSecondaryText !== "" && !isMobile && pageName !== "home" && (
-              <button className="border border-[#00DBDC] text-[#00DBDC] px-10 py-3 md:px-14 md:py-4 rounded-lg font-medium leading-[100%] tracking-[-5%] text-base md:text-xl">
-                {btnSecondaryText}
-              </button>
-            )}
+            {btnSecondaryText &&
+              btnSecondaryText !== "" &&
+              !isMobile &&
+              pageName !== "home" && (
+                <button className="border border-[#00DBDC] text-[#00DBDC] px-10 py-3 md:px-14 md:py-4 rounded-lg font-medium leading-[100%] tracking-[-5%] text-base md:text-xl">
+                  {btnSecondaryText}
+                </button>
+              )}
           </div>
         </div>
       </div>
