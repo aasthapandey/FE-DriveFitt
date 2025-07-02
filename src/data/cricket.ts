@@ -253,11 +253,11 @@ export const cricketData: StaticPageData = {
       {
         title: "Quick links",
         links: [
-          { title: "About us", link: "/about" },
-          { title: "Our services", link: "/services" },
-          { title: "Blogs", link: "/blogs" },
-          { title: "Career", link: "/career" },
-          { title: "Partner with us", link: "/partner" },
+          { title: "About us", link: "/coming-soon" },
+          { title: "Our services", link: "/coming-soon" },
+          { title: "Blogs", link: "/coming-soon" },
+          { title: "Career", link: "/coming-soon" },
+          { title: "Partner with us", link: "/franchise" },
         ],
       },
       {
@@ -267,18 +267,18 @@ export const cricketData: StaticPageData = {
           { title: "Fitness", link: "/fitness" },
           { title: "Recovery", link: "/recovery" },
           { title: "Running", link: "/running" },
-          { title: "Group Classes", link: "/group-classes" },
-          { title: "Pilates", link: "/pilates" },
-          { title: "Personal Training", link: "/personal-training" },
+          { title: "Group Classes", link: "/coming-soon" },
+          { title: "Pilates", link: "/coming-soon" },
+          { title: "Personal Training", link: "/coming-soon" },
         ],
       },
       {
         title: "Support",
         links: [
-          { title: "Account", link: "/account" },
-          { title: "Help", link: "/help" },
-          { title: "Contact Us", link: "/contact" },
-          { title: "Customer Support", link: "/support" },
+          { title: "Account", link: "/coming-soon" },
+          { title: "Help", link: "/coming-soon" },
+          { title: "Contact Us", link: "/coming-soon" },
+          { title: "Customer Support", link: "/coming-soon" },
         ],
       },
       {
@@ -291,10 +291,19 @@ export const cricketData: StaticPageData = {
       },
     ],
     socialLinks: [
-      { image: "/images/x-social.svg", link: "" },
-      { image: "/images/instagram-social.svg", link: "" },
-      { image: "/images/linkedin-social.svg", link: "" },
-      { image: "/images/facebook-social.svg", link: "" },
+      { image: "/images/x-social.svg", link: "https://x.com/Drive_Fitt" },
+      {
+        image: "/images/instagram-social.svg",
+        link: "https://www.instagram.com/drive_fitt/",
+      },
+      {
+        image: "/images/linkedin-social.svg",
+        link: "https://www.linkedin.com/company/drivefitt/",
+      },
+      {
+        image: "/images/facebook-social.svg",
+        link: "https://www.facebook.com/profile.php?id=61561476262978",
+      },
     ],
     copyright: "©2025 Drivefitt. All rights reserved.",
   },
