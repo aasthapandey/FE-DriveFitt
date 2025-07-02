@@ -8,7 +8,7 @@ interface PolicySectionProps {
 const PolicySection = ({ data, isMobile }: PolicySectionProps) => {
   return (
     <div className="bg-[#0D0D0D] min-h-screen">
-      <div className="max-w-[1200px] mx-auto px-6 md:px-12 pt-12 md:pt-16 pb-16 md:pb-24">
+      <div className="max-w-[1200px] mx-auto px-6 md:px-[120px] pt-12 md:pt-[160px] pb-16 md:pb-24">
         <div 
           className="text-white policy-content prose prose-invert max-w-none"
           dangerouslySetInnerHTML={{ __html: data.htmlContent }}
@@ -18,9 +18,11 @@ const PolicySection = ({ data, isMobile }: PolicySectionProps) => {
       <style dangerouslySetInnerHTML={{
         __html: `
           .policy-content h1 {
-            font-size: 48px;
+            font-size: 68px;
             font-weight: 700;
-            line-height: 1.1;
+            font-size: 68px;
+            line-height: 72px;
+            letter-spacing: -2px;
             color: white;
             margin-bottom: 40px;
           }
@@ -40,41 +42,55 @@ const PolicySection = ({ data, isMobile }: PolicySectionProps) => {
           }
           
           .policy-content p {
-            font-size: 16px;
-            line-height: 1.6;
-            color: #A3A3A3;
+            font-size: 14px;
+            line-height: 20px;
+            color: #FFFFFF;
             margin-bottom: 24px;
           }
           
           .policy-content ol {
             padding-left: 20px;
             margin-bottom: 32px;
-            color: #A3A3A3;
+            color: #FFFFFF;
+            list-style-type: decimal;
+            list-style-position: outside;
           }
           
           .policy-content ul {
             padding-left: 20px;
             margin-bottom: 24px;
-            color: #A3A3A3;
+            color: #FFFFFF;
+            list-style-type: disc;
+            list-style-position: outside;
           }
           
           .policy-content li {
             font-size: 16px;
             line-height: 1.6;
             margin-bottom: 8px;
+            color: #FFFFFF;
           }
           
           .policy-content ul li {
             margin-bottom: 12px;
           }
           
+          .policy-content ol li::marker {
+            color: white;
+            font-weight: 600;
+          }
+          
+          .policy-content ul li::marker {
+            color: white;
+          }
+          
           .policy-content a {
-            color: #00d4aa;
+            color: #00DBDC;
             text-decoration: underline;
           }
           
           .policy-content a:hover {
-            color: #00b896;
+            color: #00DBDC;
           }
           
           .policy-content strong {
@@ -84,7 +100,7 @@ const PolicySection = ({ data, isMobile }: PolicySectionProps) => {
           .policy-content blockquote {
             background: #2a2a2a;
             padding: 20px;
-            border-left: 4px solid #00d4aa;
+            border-left: 4px solid #00DBDC;
             margin: 20px 0;
             font-family: monospace;
             color: #e5e5e5;
