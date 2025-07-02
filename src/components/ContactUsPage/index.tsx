@@ -17,7 +17,7 @@ interface StaticPageProps {
   isMobile?: boolean;
 }
 
-const ContactUsPage = ({ data, pageName, isMobile }: StaticPageProps) => {
+const ContactUsPage = ({ data, isMobile }: StaticPageProps) => {
   const { hero, appDownloadSection, footerInfoSection, footerSection } = data;
   const { title, description, mobileImage, desktopImage } = hero as Hero;
   const { footerInfoList, socialLinkList, contactFormSection } =

@@ -6,7 +6,7 @@ interface ComingSoonSectionProps {
   isMobile?: boolean;
 }
 
-const ComingSoonSection = ({ data, isMobile }: ComingSoonSectionProps) => {
+const ComingSoonSection = ({ data }: ComingSoonSectionProps) => {
   const {
     title,
     description,
@@ -25,13 +25,13 @@ const ComingSoonSection = ({ data, isMobile }: ComingSoonSectionProps) => {
             <img
               src={iconImage}
               alt="Coming Soon"
-              className="opacity-60 w-full h-full"   
+              className="opacity-60 w-full h-full"
             />
           </div>
           <h1 className="text-white text-[32px] font-semibold leading-[40px] tracking-[-1px] mb-4 md:text-[48px] md:font-bold md:leading-[60px] md:tracking-[-2px] md:mb-[24px] md:w-[497px] md:h-[120px]">
             {title}
           </h1>
-        
+
           <p className="text-[#FFFFFF] text-[14px] font-light leading-5 tracking-[-0.5px] mb-8 max-w-[300px] md:text-[16px] md:leading-6 md:tracking-[-1px] md:mb-[48px] md:max-w-none">
             {description}
           </p>
@@ -55,4 +55,4 @@ const ComingSoonSection = ({ data, isMobile }: ComingSoonSectionProps) => {
   );
 };
 
-export default ComingSoonSection; 
+export default ComingSoonSection;
