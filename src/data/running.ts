@@ -32,7 +32,7 @@ export const runningData: StaticPageData = {
         description:
           "Pulsing lights, energizing playlists, and community camaraderie",
         backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-5.svg",
-        iconImage: "https://da8nru77lsio9.cloudfront.net/images/running/foot-massage.svg",
+        iconImage: "https://da8nru77lsio9.cloudfront.net/images/running/music-icon.svg",
         link: "",
       },
       {
