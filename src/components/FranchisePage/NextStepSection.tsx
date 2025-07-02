@@ -19,7 +19,7 @@ const NextStepSection = ({ data }: NextStepSectionProps) => {
             return (
               <div
                 key={card.title}
-                className="relative bg-[#333333] size-[50px] md:size-[100px] rounded-full flex justify-center items-center text-xl md:text-5xl leading-[56px] font-light z-10"
+                className="relative bg-[#333333] size-[50px] md:size-[100px] rounded-full flex justify-center items-center text-xl md:text-5xl leading-[56px] font-light"
               >
                 {index + 1}
               </div>

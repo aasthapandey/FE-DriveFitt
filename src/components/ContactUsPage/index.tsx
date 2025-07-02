@@ -26,7 +26,7 @@ const ContactUsPage = ({ data, isMobile }: StaticPageProps) => {
   return (
     <div className="bg-[#0D0D0D] flex flex-col w-full">
       <div
-        className={`w-full bg-center bg-no-repeat h-auto`}
+        className="w-full bg-center bg-no-repeat h-auto"
         style={{
           background: `url(${isMobile ? mobileImage : desktopImage})`,
           backgroundPosition: "top center",

@@ -13,7 +13,7 @@ const FooterInfo = ({
 
   return (
     <div
-      className="flex flex-col md:flex-row gap-6 md:gap-10 px-6 md:px-[120px] md:pb-[40px] md:pt-[140px] h-fit w-full"
+      className="flex flex-col md:flex-row gap-6 md:gap-10 px-6 md:px-[120px] md:mb-[-40px] md:pt-[140px] h-fit w-full"
       style={{
         background: `${
           isMobile

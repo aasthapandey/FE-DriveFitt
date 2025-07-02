@@ -13,7 +13,7 @@ export const cricketData: StaticPageData = {
     desktopImage:
       "https://da8nru77lsio9.cloudfront.net/images/hero/cricket.svg",
     mobileImage:
-      "https://da8nru77lsio9.cloudfront.net/images/card-section/home/cricket-mobile.svg",
+      "https://da8nru77lsio9.cloudfront.net/images/hero/cricket-mobile.svg",
     btnPrimaryText: "Book a free trial",
     btnSecondaryText: "Join Online",
   },

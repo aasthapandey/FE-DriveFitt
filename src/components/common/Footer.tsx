@@ -38,7 +38,7 @@ const Footer = ({
                     <li key={linkIndex}>
                       <Link
                         href={link.link}
-                        className="text-white hover:text-[#EAECF0] text-base leading-6 md:leading-10 font-medium tracking-[0%] md:tracking-[-2%] transition-colors"
+                        className="text-white hover:text-[#00DBDC] cursor-pointer text-base leading-6 md:leading-10 font-medium tracking-[0%] md:tracking-[-2%] transition-colors"
                       >
                         {link.title}
                       </Link>

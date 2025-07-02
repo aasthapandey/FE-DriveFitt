@@ -44,18 +44,13 @@ const ContactForm = ({ data }: { data: ContactFormProps }) => {
   return (
     <div className="flex-1">
       <div
-        className="rounded-[40px] p-[2px] h-full"
+        className="rounded-[20px] md:rounded-[40px] p-[2px] h-full"
         style={{
           background:
             "linear-gradient(180deg, #333333 29.36%, #00DBDC 120.13%)",
         }}
       >
-        <div
-          className="rounded-[40px] w-full h-full p-8 md:p-12 flex flex-col"
-          style={{
-            background: "linear-gradient(180deg, #1E1E1E 0%, #141414 100%)",
-          }}
-        >
+        <div className="rounded-[20px] md:rounded-[40px] w-full h-full p-8 md:p-12 flex flex-col bg-[#0D0D0D]">
           <h2 className="text-2xl leading-7 md:text-[40px] font-semibold md:leading-[48px] tracking-[-1px] md:tracking-[-2px] mb-2">
             {title}
           </h2>

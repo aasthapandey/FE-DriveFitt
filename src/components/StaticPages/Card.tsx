@@ -31,7 +31,7 @@ const Card = ({ data, isMobile, className, imageClass }: CardProps) => {
 
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
 
-        <div className="absolute left-0 bottom-0 w-full p-6 md:px-10 md:py-[46px] z-10 flex flex-col transition-all duration-500 group-hover:bottom-2">
+        <div className="absolute left-0 bottom-0 w-full p-6 md:px-10 md:py-[46px] flex flex-col transition-all duration-500 group-hover:bottom-2">
           <h3 className="text-white text-xl leading-6 md:leading-9 md:text-3xl font-semibold ">
             {title}
           </h3>
@@ -40,7 +40,7 @@ const Card = ({ data, isMobile, className, imageClass }: CardProps) => {
           </p>
         </div>
         {link && (
-          <div className="absolute flex items-center justify-center bottom-4 md:bottom-6 right-4 md:right-6 z-10">
+          <div className="absolute flex items-center justify-center bottom-4 md:bottom-6 right-4 md:right-6">
             <Image
               src="https://da8nru77lsio9.cloudfront.net/images/redirectionButton.svg"
               alt="redirectionBtn"

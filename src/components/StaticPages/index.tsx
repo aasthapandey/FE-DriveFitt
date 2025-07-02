@@ -93,11 +93,7 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
           />
         );
       case "policySection":
-        return (
-          <PolicySection
-            data={value as PolicySectionType}
-          />
-        );
+        return <PolicySection data={value as PolicySectionType} />;
       case "cardSection4":
         return <CardSection4 data={value as CardSection} isMobile={isMobile} />;
       case "cardSection3":
@@ -160,17 +156,15 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
             return (
               <div
                 key={key}
-                className={`w-full ${
-                  isMobile ? "bg-contain" : "bg-cover"
-                } bg-center bg-no-repeat h-auto`}
+                className="w-full bg-center bg-no-repeat h-auto md:mb-[-60px]"
                 style={{
                   background: `url(${
                     isMobile
                       ? (value as Hero).mobileImage
                       : (value as Hero).desktopImage
                   })`,
-                  backgroundPosition: isMobile ? "top center" : "center",
-                  backgroundSize: isMobile ? "contain" : "cover",
+                  backgroundPosition: "top center",
+                  backgroundSize: "cover",
                   backgroundRepeat: "no-repeat",
                 }}
               >
@@ -181,7 +175,8 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
           }
           if (key === "comingSoonSection") {
             return (
-              <div key={key}
+              <div
+                key={key}
                 className={`w-full ${
                   isMobile ? "bg-contain" : "bg-cover"
                 } bg-center bg-no-repeat h-auto`}

@@ -11,14 +11,14 @@ const StaticCard = ({ data, className, isMobile }: StaticCardProps) => {
   return (
     <a href={link}>
       <div
-        className={`rounded-[40px] p-[2px] ${className}`}
+        className={`rounded-[20px] md:rounded-[40px] p-[2px] ${className}`}
         style={{
           background:
             "linear-gradient(180deg, #333333 29.36%, #00DBDC 120.13%)",
         }}
       >
         <div
-          className="rounded-[40px] bg-[#0D0D0D] w-full h-full cursor-pointer flex flex-col justify-end relative"
+          className="rounded-[20px] md:rounded-[40px] bg-[#0D0D0D] w-full h-full cursor-pointer flex flex-col justify-end relative"
           style={{
             backgroundImage: `url(${backgroundImage})`,
             backgroundSize: "cover",
@@ -47,7 +47,7 @@ const StaticCard = ({ data, className, isMobile }: StaticCardProps) => {
               }}
             />
           </div>
-          <div className="flex justify-between items-end p-6 md:p-10 relative z-10">
+          <div className="flex justify-between items-end p-6 md:p-10 relative">
             <div className="flex flex-col justify-start w-3/5 gap-2 md:gap-4">
               <h3 className="text-white text-5  md:text-[32px] tracking-[-1px] leading-6 md:leading-9 font-semibold">
                 <div>The</div>

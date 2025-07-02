@@ -12,7 +12,7 @@ const HeroSection = ({ data }: HeroSectionProps) => {
     data;
   return (
     <div className="min-h-[500px] md:min-h-screen flex items-center justify-center">
-      <div className="container mx-auto px-4 z-10">
+      <div className="container mx-auto px-4">
         <div className="flex flex-col items-center text-center gap-6">
           {/* Ecosystem Tag */}
           <div
@@ -31,7 +31,9 @@ const HeroSection = ({ data }: HeroSectionProps) => {
 
           {/* Main Title */}
           <h1 className="text-[40px] md:text-[68px] font-light text-white flex tracking-[-2px] leading-[78px]">
-            <span className="text-[#00DBDC] italic font-bold ">DRIVE&nbsp;</span>
+            <span className="text-[#00DBDC] italic font-bold ">
+              DRIVE&nbsp;
+            </span>
             <span className=" italic font-bold leading-[78px]">
               FITT&nbsp;&nbsp;
             </span>

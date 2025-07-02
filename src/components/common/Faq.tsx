@@ -7,7 +7,7 @@ import Image from "next/image";
 
 const Faq = ({ data }: { data: FaqSectionProps }) => {
   const { title, description, faqList } = data;
-  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
 
   const toggleFaq = (index: number) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
@@ -42,7 +42,9 @@ const Faq = ({ data }: { data: FaqSectionProps }) => {
                   {faq.title}
                 </h3>
                 <Image
-                  src={`https://da8nru77lsio9.cloudfront.net/images/${openFaqIndex === idx ? "minus" : "plus"}.svg`}
+                  src={`https://da8nru77lsio9.cloudfront.net/images/${
+                    openFaqIndex === idx ? "minus" : "plus"
+                  }.svg`}
                   alt={openFaqIndex === idx ? "minus" : "plus"}
                   width={24}
                   height={26}

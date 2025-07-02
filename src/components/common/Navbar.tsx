@@ -34,7 +34,12 @@ export default function Navbar({ isMobile }: NavbarProps) {
           />
         </button>
         <Link href="/">
-          <Image src="https://da8nru77lsio9.cloudfront.net/images/logo.svg" alt="logo" width={141} height={24} />
+          <Image
+            src="https://da8nru77lsio9.cloudfront.net/images/logo.svg"
+            alt="logo"
+            width={141}
+            height={24}
+          />
         </Link>
         <div className="flex items-center gap-4">
           <button className="bg-[#00DBDC] rounded-lg px-3 md:px-6 py-2 text-[#0D0D0D] font-medium text-xs md:text-sm">
@@ -44,7 +49,7 @@ export default function Navbar({ isMobile }: NavbarProps) {
 
         {/* Mobile Menu Overlay */}
         {isMenuOpen && (
-          <div className="fixed inset-0 bg-[#1A1A1A] z-10">
+          <div className="fixed inset-0 bg-[#1A1A1A] z-10000">
             <div className="flex flex-col items-center justify-center pt-24">
               {navLinks.map((link, idx) => (
                 <div className="p-4 text-center w-full" key={idx}>
@@ -67,7 +72,12 @@ export default function Navbar({ isMobile }: NavbarProps) {
   return (
     <nav className="flex justify-between items-center py-8 pr-[100px] pl-[120px] gap-4 bg-transparent">
       <Link href="/">
-        <Image src="https://da8nru77lsio9.cloudfront.net/images/logo.svg" alt="logo" width={212} height={36} />
+        <Image
+          src="https://da8nru77lsio9.cloudfront.net/images/logo.svg"
+          alt="logo"
+          width={212}
+          height={36}
+        />
       </Link>
       <div className="flex gap-10 px-2">
         {navLinks.map((link, idx) => (

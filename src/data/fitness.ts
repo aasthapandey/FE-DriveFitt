@@ -10,8 +10,10 @@ export const fitnessData: StaticPageData = {
     title: "Step into a whole new world of training",
     description:
       "Never Boring. Always Moving. High & Low Intensity Workouts That Keep You Going.",
-    desktopImage: "https://da8nru77lsio9.cloudfront.net/images/hero/fitness.svg",
-    mobileImage: "https://da8nru77lsio9.cloudfront.net/images/hero/fitness-mobile.svg",
+    desktopImage:
+      "https://da8nru77lsio9.cloudfront.net/images/hero/fitness.svg",
+    mobileImage:
+      "https://da8nru77lsio9.cloudfront.net/images/hero/fitness-mobile.svg",
     btnPrimaryText: "Book a free trial",
     btnSecondaryText: "Join Online",
   },
@@ -23,40 +25,50 @@ export const fitnessData: StaticPageData = {
         title: "Advanced 3D Body Scan",
         description:
           "Launch your fitness journey with actionable insights for best performance.",
-        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-1.svg",
-        iconImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-icon-1.svg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-1.svg",
+        iconImage:
+          "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-icon-1.svg",
         link: "",
       },
       {
         title: "Group classes",
         description:
           "Our expert-led group sessions fuel your energy and connect you with a community that shares your drive.",
-        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-5.svg",
-        iconImage: "https://da8nru77lsio9.cloudfront.net/images/fitness/group-classes-icon.svg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-5.svg",
+        iconImage:
+          "https://da8nru77lsio9.cloudfront.net/images/fitness/group-classes-icon.svg",
         link: "",
       },
       {
         title: "Hyrox-Inspired Zone",
         description:
           "Experience the energy, structure, and challenge of the global fitness race at your club",
-        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-3.svg",
-        iconImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-icon-3.svg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-3.svg",
+        iconImage:
+          "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-icon-3.svg",
         link: "",
       },
       {
         title: "Personal training",
         description:
           "Customized 1-on-1 coaching tailored to your body, goals, sport-specific performance—and complete recovery needs.",
-        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-1.svg",
-        iconImage: "https://da8nru77lsio9.cloudfront.net/images/fitness/personal-training-icon.svg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-1.svg",
+        iconImage:
+          "https://da8nru77lsio9.cloudfront.net/images/fitness/personal-training-icon.svg",
         link: "",
       },
       {
         title: "High and Low Intensity workout zones ",
         description:
           "From sweat-drenched HIIT sessions to mindful low-impact training, our zones allow you to train full spectrum",
-        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-5.svg",
-        iconImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-icon-5.svg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-5.svg",
+        iconImage:
+          "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-icon-5.svg",
         link: "",
       },
     ],
@@ -68,19 +80,22 @@ export const fitnessData: StaticPageData = {
         title: "Best fitness socials",
         description:
           "Part fitness class, part fitness party. Experience heart-pumping music, and a group atmosphere that makes sweating feel like celebrating.",
-        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/evolution-1.svg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/cricket/evolution-1.svg",
       },
       {
         title: "Mind body integration",
         description:
           "Experience programs that combine physical movement with mental well-being, such as yoga, and guided breathwork",
-        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/fitness/evolution-1.svg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/fitness/evolution-1.svg",
       },
       {
         title: "Indoor running studio",
         description:
           "Join the pack. Run with purpose at Drive FIIT. Our program helps you build proper technique to help you excel across all race formats.",
-        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/recovery/evolution-1.svg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/recovery/evolution-1.svg",
       },
     ],
   },
@@ -96,7 +111,8 @@ export const fitnessData: StaticPageData = {
           "Our Advanced 3D Body Scan creates a full-body digital blueprint—capturing precise measurements, posture alignment, and asymmetries.",
         ],
         extraTagLabel: "",
-        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/scroll-card-cricket-1.svg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/cricket/scroll-card-cricket-1.svg",
       },
       {
         subTitle: "Sustainable & Eco-Friendly equipment ",
@@ -106,7 +122,8 @@ export const fitnessData: StaticPageData = {
           "Bat Sensor*- real-time insights on Bat Swing, Speed, Angles, Power & Efficiency ",
         ],
         extraTagLabel: "*Purchase separately",
-        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/fitness/scroll-card-fitness-1.svg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/fitness/scroll-card-fitness-1.svg",
       },
       {
         subTitle: "ASmart Recovery Tools ",
@@ -116,7 +133,8 @@ export const fitnessData: StaticPageData = {
           "Bat Sensor*- real-time insights on Bat Swing, Speed, Angles, Power & Efficiency ",
         ],
         extraTagLabel: "*Purchase separately",
-        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/recovery/scroll-card-recovery-1.svg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/recovery/scroll-card-recovery-1.svg",
       },
     ],
   },
@@ -125,7 +143,8 @@ export const fitnessData: StaticPageData = {
     description:
       "Whether you're taking your first swing or prepping for tournaments – we've got a proven path for you.",
     btnLabel: "Explore Plan",
-    image: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-banner.svg",
+    image:
+      "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-banner.svg",
   },
   gallerySection: {
     title: "Fitness unfiltered",
@@ -145,19 +164,22 @@ export const fitnessData: StaticPageData = {
       {
         title: "Kunal Bajaj",
         description: "Membership plan",
-        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/member-section/cricket-member-1.svg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/member-section/cricket-member-1.svg",
         link: "/cricket",
       },
       {
         title: "Kunal Jain",
         description: "Membership plan",
-        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/member-section/cricket-member-2.svg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/member-section/cricket-member-2.svg",
         link: "/cricket",
       },
       {
         title: "Rahul Kapoor",
         description: "Membership plan",
-        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/member-section/cricket-member-3.svg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/member-section/cricket-member-3.svg",
         link: "/cricket",
       },
     ],
@@ -192,10 +214,14 @@ export const fitnessData: StaticPageData = {
     title: "Your exclusive access, now on mobile",
     description:
       "Our app makes it easy to join classes, connect with coaches and track your journey.",
-    googlePlayImg: "https://da8nru77lsio9.cloudfront.net/images/app-download/google-play.svg",
-    appStoreImg: "https://da8nru77lsio9.cloudfront.net/images/app-download/app-store.svg",
-    dfLogo: "https://da8nru77lsio9.cloudfront.net/images/app-download/df-logo.svg",
-    mobileImage: "https://da8nru77lsio9.cloudfront.net/images/app-download/mobile.png",
+    googlePlayImg:
+      "https://da8nru77lsio9.cloudfront.net/images/app-download/google-play.svg",
+    appStoreImg:
+      "https://da8nru77lsio9.cloudfront.net/images/app-download/app-store.svg",
+    dfLogo:
+      "https://da8nru77lsio9.cloudfront.net/images/app-download/df-logo.svg",
+    mobileImage:
+      "https://da8nru77lsio9.cloudfront.net/images/app-download/mobile.png",
   },
   footerInfoSection: {
     footerInfoList: [
@@ -224,15 +250,18 @@ export const fitnessData: StaticPageData = {
         link: "https://x.com/Drive_Fitt",
       },
       {
-        image: "https://da8nru77lsio9.cloudfront.net/images/instagram-social.svg",
+        image:
+          "https://da8nru77lsio9.cloudfront.net/images/instagram-social.svg",
         link: "https://www.instagram.com/drive_fitt/",
       },
       {
-        image: "https://da8nru77lsio9.cloudfront.net/images/linkedin-social.svg",
+        image:
+          "https://da8nru77lsio9.cloudfront.net/images/linkedin-social.svg",
         link: "https://www.linkedin.com/company/drivefitt/",
       },
       {
-        image: "https://da8nru77lsio9.cloudfront.net/images/facebook-social.svg",
+        image:
+          "https://da8nru77lsio9.cloudfront.net/images/facebook-social.svg",
         link: "https://www.facebook.com/profile.php?id=61561476262978",
       },
     ],
@@ -291,17 +320,23 @@ export const fitnessData: StaticPageData = {
       },
     ],
     socialLinks: [
-      { image: "https://da8nru77lsio9.cloudfront.net/images/x-social.svg", link: "https://x.com/Drive_Fitt" },
       {
-        image: "https://da8nru77lsio9.cloudfront.net/images/instagram-social.svg",
+        image: "https://da8nru77lsio9.cloudfront.net/images/x-social.svg",
+        link: "https://x.com/Drive_Fitt",
+      },
+      {
+        image:
+          "https://da8nru77lsio9.cloudfront.net/images/instagram-social.svg",
         link: "https://www.instagram.com/drive_fitt/",
       },
       {
-        image: "https://da8nru77lsio9.cloudfront.net/images/linkedin-social.svg",
+        image:
+          "https://da8nru77lsio9.cloudfront.net/images/linkedin-social.svg",
         link: "https://www.linkedin.com/company/drivefitt/",
       },
       {
-        image: "https://da8nru77lsio9.cloudfront.net/images/facebook-social.svg",
+        image:
+          "https://da8nru77lsio9.cloudfront.net/images/facebook-social.svg",
         link: "https://www.facebook.com/profile.php?id=61561476262978",
       },
     ],

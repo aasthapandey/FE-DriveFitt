@@ -26,7 +26,7 @@ const AppDownload = ({ data }: { data: AppDownloadProps }) => {
           }}
         >
           <div className="flex flex-start px-5 pt-8 md:py-[124px] md:pl-[92px]">
-            <div className="flex flex-col text-center md:text-start gap-3 md:gap-4 z-10 md:w-[573px] md:h-[292px]">
+            <div className="flex flex-col text-center md:text-start gap-3 md:gap-4 md:w-[573px] md:h-[292px]">
               <h2 className="text-2xl md:text-5xl font-semibold leading-7 md:leading-[56px] tracking-[-1px] md:tracking-[-2px]">
                 {title}
               </h2>

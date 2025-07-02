@@ -16,7 +16,7 @@ const InfoCard = ({ data }: { data: InfoSection }) => {
           background: "linear-gradient(180deg, #1E1E1E 0%, #141414 100%)",
         }}
       >
-        <div className="flex p-5 md:p-10 flex-col gap-6 z-10">
+        <div className="flex p-5 md:p-10 flex-col gap-6">
           <h2 className="w-full md:w-[200px] font-semibold md:font-medium text-xl md:text-[28px] leading-6 md:leading-[100%] tracking-[-1px]">
             {title}
           </h2>

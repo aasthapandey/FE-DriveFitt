@@ -8,7 +8,11 @@ const TitleDescription = ({
   isBanner?: boolean;
 }) => {
   return (
-    <div className={`flex flex-col gap-3 md:gap-4 ${isBanner ? "!gap-2" : ""}`}>
+    <div
+      className={`flex flex-col items-center gap-3 md:gap-4 ${
+        isBanner ? "!gap-2" : ""
+      }`}
+    >
       <h2
         className={`${
           !description ? "mb-2 md:mb-[48px]" : ""
@@ -19,7 +23,9 @@ const TitleDescription = ({
       {description && (
         <p
           className={`${
-            isBanner ? "text-white" : ""
+            isBanner
+              ? "text-white max-w-full md:!max-w-[685px] md:!text-xl !leading-full !tracking-[-2%] !font-normal !mb-0"
+              : ""
           } text-xs md:text-base font-light leading-4 md:leading-5 tracking-[-1%] text-[#8A8A8A] text-center mb-2 md:mb-[48px]`}
         >
           {description}

@@ -52,7 +52,7 @@ const ScrollingCardSection = ({
                 }`,
               }}
               className="flex flex-col gap-6 cursor-pointer py-6 md:px-10 md:pt-8 md:pb-6 border-b border-[#FFFFFF29]"
-              onClick={() => setActiveIndex(idx)}
+              onMouseEnter={() => setActiveIndex(idx)}
             >
               <h3 className="text-base md:text-[32px] font-semibold md:font-medium leading-6 md:leading-10 tracking-[-1px]">
                 {card.subTitle}

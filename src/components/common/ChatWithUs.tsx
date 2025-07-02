@@ -9,17 +9,12 @@ interface ChatWithUsProps {
 const ChatWithUs = ({ footerInfoList, socialLinkList }: ChatWithUsProps) => {
   return (
     <div
-      className="rounded-[40px] p-[2px] h-full"
+      className="rounded-[20px] md:rounded-[40px] p-[2px] h-full"
       style={{
         background: "linear-gradient(180deg, #333333 29.36%, #00DBDC 120.13%)",
       }}
     >
-      <div
-        className="rounded-[40px] w-full h-full p-8 md:p-12 flex flex-col gap-6 md:gap-10"
-        style={{
-          background: "linear-gradient(180deg, #1E1E1E 0%, #141414 100%)",
-        }}
-      >
+      <div className="rounded-[20px] md:rounded-[40px] w-full h-full p-8 md:p-12 flex flex-col gap-6 md:gap-10 bg-[#0D0D0D]">
         {footerInfoList.map((item, index) => (
           <div key={index} className="flex items-start gap-[14px] md:gap-8">
             <div>
