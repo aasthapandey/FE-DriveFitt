@@ -14,7 +14,7 @@ const HeroSection = ({ data, pageName, isMobile }: HeroSectionProps) => {
     if (pageName === "home") {
       return (
         <h1 className="text-white text-[42px] leading-[50px] tracking-[-2px] md:leading-[72px] md:text-6xl font-bold md:mb-7 mb-[22px]">
-          <span className="text-white">India's First </span>
+          <span className="text-white">India&apos;s First </span>
           <span className="text-[#00DBDC]">Cricket </span>
           <span className="text-white">and </span>
           <span className="text-[#00DBDC]">Fitness </span>
