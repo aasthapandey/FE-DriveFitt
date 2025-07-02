@@ -58,7 +58,8 @@ const Footer = ({
             {socialLinks.map((social, index) => (
               <Link
                 key={index}
-                href={social.link || "#"}
+                href={social.link}
+                target="_blank"
                 className="hover:opacity-80 transition-opacity"
               >
                 <Image

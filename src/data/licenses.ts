@@ -2,9 +2,11 @@ import { StaticPageData } from "@/types/staticPages";
 
 export const licensesData: StaticPageData = {
   title: "Licenses | DriveFitt Premium Club",
-  description: "Software licenses and legal attributions for DriveFitt Premium Club.",
+  description:
+    "Software licenses and legal attributions for DriveFitt Premium Club.",
   seoTitle: "Licenses | DriveFitt Premium Club",
-  seoDescription: "View software licenses and legal attributions for DriveFitt.",
+  seoDescription:
+    "View software licenses and legal attributions for DriveFitt.",
   policySection: {
     htmlContent: `
       <h1>Licenses</h1>
@@ -133,7 +135,7 @@ export const licensesData: StaticPageData = {
       <p>This license information is updated regularly to reflect changes in our technology stack and third-party services. The "Last Updated" date at the top of this page indicates when this information was last modified.</p>
       
       <p>We are committed to maintaining compliance with all applicable licenses and will promptly address any licensing concerns brought to our attention.</p>
-    `
+    `,
   },
   footerSection: {
     logo: "/images/logo.svg",
@@ -144,7 +146,6 @@ export const licensesData: StaticPageData = {
         title: "Quick links",
         links: [
           { title: "About us", link: "/coming-soon" },
-          { title: "Our services", link: "/coming-soon" },
           { title: "Blogs", link: "/coming-soon" },
           { title: "Career", link: "/coming-soon" },
           { title: "Partner with us", link: "/franchise" },
@@ -167,8 +168,7 @@ export const licensesData: StaticPageData = {
         links: [
           { title: "Account", link: "/coming-soon" },
           { title: "Help", link: "/coming-soon" },
-          { title: "Contact Us", link: "/coming-soon" },
-          { title: "Customer Support", link: "/coming-soon" },
+          { title: "Contact Us", link: "/contact-us" },
         ],
       },
       {
@@ -181,11 +181,20 @@ export const licensesData: StaticPageData = {
       },
     ],
     socialLinks: [
-      { image: "/images/x-social.svg", link: "" },
-      { image: "/images/instagram-social.svg", link: "" },
-      { image: "/images/linkedin-social.svg", link: "" },
-      { image: "/images/facebook-social.svg", link: "" },
+      { image: "/images/x-social.svg", link: "https://x.com/Drive_Fitt" },
+      {
+        image: "/images/instagram-social.svg",
+        link: "https://www.instagram.com/drive_fitt/",
+      },
+      {
+        image: "/images/linkedin-social.svg",
+        link: "https://www.linkedin.com/company/drivefitt/",
+      },
+      {
+        image: "/images/facebook-social.svg",
+        link: "https://www.facebook.com/profile.php?id=61561476262978",
+      },
     ],
     copyright: "©2025 Drivefitt. All rights reserved.",
   },
-}; 
+};

@@ -29,14 +29,16 @@ export const runningData: StaticPageData = {
       },
       {
         title: "Electric studio vibe",
-        description: "Pulsing lights, energizing playlists, and community camaraderie",
+        description:
+          "Pulsing lights, energizing playlists, and community camaraderie",
         backgroundImage: "/images/cricket/cricket-5.svg",
         iconImage: "/images/cricket/cricket-icon-2.svg",
         link: "",
       },
       {
         title: "Precision indoor track",
-        description: "Climate-controlled 200m track with shock-absorbing surface for joint-friendly, year-round training.",
+        description:
+          "Climate-controlled 200m track with shock-absorbing surface for joint-friendly, year-round training.",
         backgroundImage: "/images/cricket/cricket-3.svg",
         iconImage: "/images/cricket/cricket-icon-3.svg",
         link: "",
@@ -50,7 +52,8 @@ export const runningData: StaticPageData = {
       },
       {
         title: "Coach-powered motivation",
-        description: "Expert runners who inspire, instruct, and hold you accountable",
+        description:
+          "Expert runners who inspire, instruct, and hold you accountable",
         backgroundImage: "/images/cricket/cricket-5.svg",
         iconImage: "/images/cricket/cricket-icon-5.svg",
         link: "",
@@ -74,7 +77,8 @@ export const runningData: StaticPageData = {
       },
       {
         title: "Progress tracking ",
-        description: "Watch your pace, endurance, and technique evolve with real-time data on every run.",
+        description:
+          "Watch your pace, endurance, and technique evolve with real-time data on every run.",
         backgroundImage: "/images/recovery/evolution-1.svg",
       },
     ],
@@ -124,8 +128,7 @@ export const runningData: StaticPageData = {
   },
   gallerySection: {
     title: "Fitness Unfiltered",
-    description:
-      "Where every drop of sweat writes your success story",
+    description: "Where every drop of sweat writes your success story",
     btnLabel: "View Gallery",
     imageList: [
       "/images/gallery-section/gallery-cricket-1.svg",
@@ -217,19 +220,19 @@ export const runningData: StaticPageData = {
     socialLinkList: [
       {
         image: "/images/x-social.svg",
-        link: "",
+        link: "https://x.com/Drive_Fitt",
       },
       {
         image: "/images/instagram-social.svg",
-        link: "",
+        link: "https://www.instagram.com/drive_fitt/",
       },
       {
         image: "/images/linkedin-social.svg",
-        link: "",
+        link: "https://www.linkedin.com/company/drivefitt/",
       },
       {
         image: "/images/facebook-social.svg",
-        link: "",
+        link: "https://www.facebook.com/profile.php?id=61561476262978",
       },
     ],
     contactFormSection: {
@@ -252,7 +255,6 @@ export const runningData: StaticPageData = {
         title: "Quick links",
         links: [
           { title: "About us", link: "/coming-soon" },
-          { title: "Our services", link: "/coming-soon" },
           { title: "Blogs", link: "/coming-soon" },
           { title: "Career", link: "/coming-soon" },
           { title: "Partner with us", link: "/franchise" },
@@ -275,8 +277,7 @@ export const runningData: StaticPageData = {
         links: [
           { title: "Account", link: "/coming-soon" },
           { title: "Help", link: "/coming-soon" },
-          { title: "Contact Us", link: "/coming-soon" },
-          { title: "Customer Support", link: "/coming-soon" },
+          { title: "Contact Us", link: "/contact-us" },
         ],
       },
       {
@@ -289,10 +290,19 @@ export const runningData: StaticPageData = {
       },
     ],
     socialLinks: [
-      { image: "/images/x-social.svg", link: "" },
-      { image: "/images/instagram-social.svg", link: "" },
-      { image: "/images/linkedin-social.svg", link: "" },
-      { image: "/images/facebook-social.svg", link: "" },
+      { image: "/images/x-social.svg", link: "https://x.com/Drive_Fitt" },
+      {
+        image: "/images/instagram-social.svg",
+        link: "https://www.instagram.com/drive_fitt/",
+      },
+      {
+        image: "/images/linkedin-social.svg",
+        link: "https://www.linkedin.com/company/drivefitt/",
+      },
+      {
+        image: "/images/facebook-social.svg",
+        link: "https://www.facebook.com/profile.php?id=61561476262978",
+      },
     ],
     copyright: "©2025 Drivefitt. All rights reserved.",
   },

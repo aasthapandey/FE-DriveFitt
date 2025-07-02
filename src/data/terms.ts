@@ -2,9 +2,11 @@ import { StaticPageData } from "@/types/staticPages";
 
 export const termsData: StaticPageData = {
   title: "Terms & Conditions | DriveFitt Premium Club",
-  description: "Read our terms and conditions for membership and services at DriveFitt Premium Club.",
+  description:
+    "Read our terms and conditions for membership and services at DriveFitt Premium Club.",
   seoTitle: "Terms & Conditions | DriveFitt Premium Club",
-  seoDescription: "Review the terms and conditions for DriveFitt membership and services.",
+  seoDescription:
+    "Review the terms and conditions for DriveFitt membership and services.",
   policySection: {
     htmlContent: `
       <h1>DRIVE FITT Terms & Conditions</h1>
@@ -141,7 +143,7 @@ export const termsData: StaticPageData = {
       
       <h3>IX. INTEGRATION – ENTIRE AGREEMENT</h3>
       <p>This agreement constitutes the entire exclusive agreement between the parties and cancels and supersedes prior promises, representations, understandings, and/or agreements between the parties. The agreement may be modified only by an instrument in writing signed by all parties; however, the Club or any assignee of this agreement are authorized to correct patent errors in the agreement (and other related documents.)</p>
-    `
+    `,
   },
   footerSection: {
     logo: "/images/logo.svg",
@@ -152,7 +154,6 @@ export const termsData: StaticPageData = {
         title: "Quick links",
         links: [
           { title: "About us", link: "/coming-soon" },
-          { title: "Our services", link: "/coming-soon" },
           { title: "Blogs", link: "/coming-soon" },
           { title: "Career", link: "/coming-soon" },
           { title: "Partner with us", link: "/franchise" },
@@ -175,8 +176,7 @@ export const termsData: StaticPageData = {
         links: [
           { title: "Account", link: "/coming-soon" },
           { title: "Help", link: "/coming-soon" },
-          { title: "Contact Us", link: "/coming-soon" },
-          { title: "Customer Support", link: "/coming-soon" },
+          { title: "Contact Us", link: "/contact-us" },
         ],
       },
       {
@@ -189,11 +189,20 @@ export const termsData: StaticPageData = {
       },
     ],
     socialLinks: [
-      { image: "/images/x-social.svg", link: "" },
-      { image: "/images/instagram-social.svg", link: "" },
-      { image: "/images/linkedin-social.svg", link: "" },
-      { image: "/images/facebook-social.svg", link: "" },
+      { image: "/images/x-social.svg", link: "https://x.com/Drive_Fitt" },
+      {
+        image: "/images/instagram-social.svg",
+        link: "https://www.instagram.com/drive_fitt/",
+      },
+      {
+        image: "/images/linkedin-social.svg",
+        link: "https://www.linkedin.com/company/drivefitt/",
+      },
+      {
+        image: "/images/facebook-social.svg",
+        link: "https://www.facebook.com/profile.php?id=61561476262978",
+      },
     ],
     copyright: "©2025 Drivefitt. All rights reserved.",
   },
-}; 
+};

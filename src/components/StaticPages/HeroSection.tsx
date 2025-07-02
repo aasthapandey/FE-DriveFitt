@@ -63,10 +63,12 @@ const HeroSection = ({ data, pageName, isMobile }: HeroSectionProps) => {
           <div className="flex gap-4 justify-center md:justify-start">
             {btnPrimaryText && (
               <button className="bg-[#00DBDC] text-[#0D0D0D] px-6 py-3 md:px-14 md:py-4  rounded-lg font-medium leading-[100%] tracking-[-5%] text-base md:text-xl">
-                {isMobile ? btnSecondaryText : btnPrimaryText}
+                {isMobile
+                  ? btnSecondaryText
+                  : btnPrimaryText}
               </button>
             )}
-            {btnSecondaryText && btnSecondaryText !== "" && !isMobile && (
+            {btnSecondaryText && btnSecondaryText !== "" && !isMobile && pageName !== "home" && (
               <button className="border border-[#00DBDC] text-[#00DBDC] px-10 py-3 md:px-14 md:py-4 rounded-lg font-medium leading-[100%] tracking-[-5%] text-base md:text-xl">
                 {btnSecondaryText}
               </button>

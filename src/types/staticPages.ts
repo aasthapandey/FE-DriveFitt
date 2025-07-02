@@ -3,7 +3,7 @@ export interface Hero {
   description: string;
   desktopImage: string;
   mobileImage: string;
-  btnPrimaryText: string;
+  btnPrimaryText?: string;
   btnSecondaryText?: string;
 }
 
@@ -229,4 +229,15 @@ export interface StaticPageData {
   faqSection?: FaqSectionProps;
   bannerSection?: SportsClubSectionProps;
   scrollingCardSection?: ScrollingCardSection;
+}
+
+export interface ContactUsPageData {
+  title: string;
+  description: string;
+  seoTitle: string;
+  seoDescription: string;
+  hero: Hero;
+  footerInfoSection?: FooterInfoProps;
+  footerSection?: FooterProps;
+  appDownloadSection?: AppDownloadProps;
 }

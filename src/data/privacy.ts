@@ -2,7 +2,8 @@ import { StaticPageData } from "@/types/staticPages";
 
 export const privacyData: StaticPageData = {
   title: "Privacy Policy | DriveFitt Premium Club",
-  description: "Learn how DriveFitt collects, uses, and protects your personal information.",
+  description:
+    "Learn how DriveFitt collects, uses, and protects your personal information.",
   seoTitle: "Privacy Policy | DriveFitt Premium Club",
   seoDescription: "Understand how DriveFitt handles your personal data.",
   policySection: {
@@ -186,7 +187,7 @@ export const privacyData: StaticPageData = {
       </blockquote>
       
       <p>We will attempt to respond to and resolve those complaints to your satisfaction.</p>
-    `
+    `,
   },
   footerSection: {
     logo: "/images/logo.svg",
@@ -197,7 +198,6 @@ export const privacyData: StaticPageData = {
         title: "Quick links",
         links: [
           { title: "About us", link: "/coming-soon" },
-          { title: "Our services", link: "/coming-soon" },
           { title: "Blogs", link: "/coming-soon" },
           { title: "Career", link: "/coming-soon" },
           { title: "Partner with us", link: "/franchise" },
@@ -220,8 +220,7 @@ export const privacyData: StaticPageData = {
         links: [
           { title: "Account", link: "/coming-soon" },
           { title: "Help", link: "/coming-soon" },
-          { title: "Contact Us", link: "/coming-soon" },
-          { title: "Customer Support", link: "/coming-soon" },
+          { title: "Contact Us", link: "/contact-us" },
         ],
       },
       {
@@ -234,11 +233,20 @@ export const privacyData: StaticPageData = {
       },
     ],
     socialLinks: [
-      { image: "/images/x-social.svg", link: "" },
-      { image: "/images/instagram-social.svg", link: "" },
-      { image: "/images/linkedin-social.svg", link: "" },
-      { image: "/images/facebook-social.svg", link: "" },
+      { image: "/images/x-social.svg", link: "https://x.com/Drive_Fitt" },
+      {
+        image: "/images/instagram-social.svg",
+        link: "https://www.instagram.com/drive_fitt/",
+      },
+      {
+        image: "/images/linkedin-social.svg",
+        link: "https://www.linkedin.com/company/drivefitt/",
+      },
+      {
+        image: "/images/facebook-social.svg",
+        link: "https://www.facebook.com/profile.php?id=61561476262978",
+      },
     ],
     copyright: "©2025 Drivefitt. All rights reserved.",
   },
-}; 
+};
