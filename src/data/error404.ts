@@ -6,10 +6,9 @@ export const error404Data: StaticPageData = {
   seoTitle: "404 - Page Not Found | DriveFitt Premium Club",
   seoDescription: "Oops! The page you're looking for doesn't exist. Return to DriveFitt's homepage to explore our premium cricket and fitness facilities.",
   error404Section: {
-    errorCode: "404",
     title: "Oops! Page Not Found",
     description: "We can't find the page you're looking for",
-    illustration: "https://da8nru77lsio9.cloudfront.net/images/1751427188771_ec99e463bf9859fa_Group_1597880512.webp",
+    iconImage: "https://da8nru77lsio9.cloudfront.net/images/1751427188771_ec99e463bf9859fa_Group_1597880512.webp",
     btnText: "Go to home",
     btnLink: "/",
   },

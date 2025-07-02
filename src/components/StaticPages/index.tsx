@@ -19,6 +19,7 @@ import {
   CountdownSection,
   ComingSoonSection as ComingSoonSectionType,
   Error404Section as Error404SectionType,
+  PolicySection as PolicySectionType,
 } from "@/types/staticPages";
 import CardSection4 from "@/components/StaticPages/CardSection4";
 import CardSection5 from "@/components/StaticPages/CardSection5";
@@ -37,6 +38,7 @@ import Banner from "@/components/common/Banner";
 import ScrollingCardSection from "@/components/StaticPages/ScrollingCardSection";
 import ComingSoonSection from "@/components/StaticPages/ComingSoonSection";
 import Error404Section from "@/components/StaticPages/Error404Section";
+import PolicySection from "@/components/StaticPages/PolicySection";
 
 interface StaticPageProps {
   data: StaticPageData;
@@ -65,6 +67,7 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
       | CountdownSection
       | ComingSoonSectionType
       | Error404SectionType
+      | PolicySectionType
   ) => {
     switch (key) {
       case "hero":
@@ -86,6 +89,13 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
         return (
           <Error404Section
             data={value as Error404SectionType}
+            isMobile={isMobile}
+          />
+        );
+      case "policySection":
+        return (
+          <PolicySection
+            data={value as PolicySectionType}
             isMobile={isMobile}
           />
         );
@@ -183,6 +193,14 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
             );
           }
           if (key === "error404Section") {
+            return (
+              <div key={key} className="w-full">
+                <Navbar isMobile={isMobile} />
+                {component}
+              </div>
+            );
+          }
+          if (key === "policySection") {
             return (
               <div key={key} className="w-full">
                 <Navbar isMobile={isMobile} />

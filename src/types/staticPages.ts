@@ -192,12 +192,15 @@ export interface ComingSoonSection {
 }
 
 export interface Error404Section {
-  errorCode: string;
   title: string;
   description: string;
-  illustration: string;
+  iconImage: string;
   btnText: string;
   btnLink?: string;
+}
+
+export interface PolicySection {
+  htmlContent: string;
 }
 
 export interface StaticPageData {
@@ -209,6 +212,7 @@ export interface StaticPageData {
   countdownSection?: CountdownSection;
   comingSoonSection?: ComingSoonSection;
   error404Section?: Error404Section;
+  policySection?: PolicySection;
   carouselBanner?: CarouselBanner[];
   cardSection2?: StaticCardProps;
   cardSection3?: CardSection;

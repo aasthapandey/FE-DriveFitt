@@ -8,10 +8,9 @@ interface Error404SectionProps {
 
 const Error404Section = ({ data, isMobile }: Error404SectionProps) => {
   const {
-    errorCode,
     title,
     description,
-    illustration,
+    iconImage: illustration,
     btnText,
     btnLink = "/",
   } = data;
