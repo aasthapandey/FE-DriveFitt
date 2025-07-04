@@ -36,7 +36,7 @@ const Faq = ({ data }: { data: FaqSectionProps }) => {
             >
               <div
                 className="flex justify-between items-center py-8 cursor-pointer"
-                onClick={() => toggleFaq(idx)}
+                onMouseDown={() => toggleFaq(idx)}
               >
                 <h3 className="text-white text-base md:text-xl font-medium">
                   {faq.title}

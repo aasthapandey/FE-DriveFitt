@@ -1,17 +1,30 @@
 import { AppDownloadProps } from "@/types/staticPages";
 import Image from "next/image";
 
-const AppDownload = ({ data }: { data: AppDownloadProps }) => {
-  const { title, description, googlePlayImg, appStoreImg, mobileImage } = data;
+const AppDownload = ({
+  data,
+  isMobile,
+}: {
+  data: AppDownloadProps;
+  isMobile?: boolean;
+}) => {
+  const {
+    title,
+    description,
+    googlePlayImg,
+    appStoreImg,
+    mobileImage,
+    desktopImage,
+  } = data;
   return (
     <div className="relative md:px-[120px] px-6">
-      <Image
+      {/* <Image
         src={mobileImage}
         alt="mobile"
         width={400}
         height={400}
         className="w-[240px] h-[200px] md:w-[400px] md:h-[400px] absolute bottom-[2px] right-[20vw] md:right-[190px] z-20"
-      />
+      /> */}
       <div
         className="rounded-[20px] md:rounded-[40px] p-[2px] h-[420px] md:h-[540px]"
         style={{
@@ -22,7 +35,10 @@ const AppDownload = ({ data }: { data: AppDownloadProps }) => {
         <div
           className="rounded-[20px] md:rounded-[40px] w-full h-full cursor-pointer flex flex-col justify-start md:justify-center relative overflow-hidden"
           style={{
-            background: "linear-gradient(180deg, #1E1E1E 0%, #141414 100%)",
+            background: `url(${isMobile ? mobileImage : desktopImage})`,
+            backgroundPosition: "top center",
+            backgroundSize: "contain",
+            backgroundRepeat: "no-repeat",
           }}
         >
           <div className="flex flex-start px-5 pt-8 md:py-[124px] md:pl-[92px]">

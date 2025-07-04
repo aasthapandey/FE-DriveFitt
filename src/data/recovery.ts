@@ -10,8 +10,10 @@ export const recoveryData: StaticPageData = {
   hero: {
     title: "Recover at Drive FITT",
     description: "Train hard. Recover smarter. Perform your best.",
-    desktopImage: "https://da8nru77lsio9.cloudfront.net/images/hero/recovery.svg",
-    mobileImage: "https://da8nru77lsio9.cloudfront.net/images/hero/recovery-mobile.svg",
+    desktopImage:
+      "https://da8nru77lsio9.cloudfront.net/images/hero/recovery.svg",
+    mobileImage:
+      "https://da8nru77lsio9.cloudfront.net/images/hero/recovery-mobile.svg",
     btnPrimaryText: "Book a free trial",
     btnSecondaryText: "Join Online",
   },
@@ -22,36 +24,46 @@ export const recoveryData: StaticPageData = {
       {
         title: "Infrared Sauna",
         description: "Deep detox. Better circulation. Less soreness.",
-        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-1.svg",
-        iconImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-icon-1.svg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-1.svg",
+        iconImage:
+          "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-icon-1.svg",
         link: "",
       },
       {
         title: "Cold plunge",
         description: "Ice-cold reset for muscles and mind.",
-        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-5.svg",
-        iconImage: "https://da8nru77lsio9.cloudfront.net/images/recovery/cold-plunge-icon.svg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-5.svg",
+        iconImage:
+          "https://da8nru77lsio9.cloudfront.net/images/recovery/cold-plunge-icon.svg",
         link: "",
       },
       {
         title: "Compression therapy",
         description: "Circulation boost. Faster leg recovery.",
-        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-3.svg",
-        iconImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-icon-3.svg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-3.svg",
+        iconImage:
+          "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-icon-3.svg",
         link: "",
       },
       {
         title: "Percussion therapy",
         description: "Massage that hits the right spot.",
-        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-1.svg",
-        iconImage: "https://da8nru77lsio9.cloudfront.net/images/recovery/percussion-therapy-icon.svg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-1.svg",
+        iconImage:
+          "https://da8nru77lsio9.cloudfront.net/images/recovery/percussion-therapy-icon.svg",
         link: "",
       },
       {
         title: "Sports physiotherapy",
         description: "Injury prevention. Rehab. Pro-level care.",
-        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-5.svg",
-        iconImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-icon-5.svg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-5.svg",
+        iconImage:
+          "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-icon-5.svg",
         link: "",
       },
     ],
@@ -63,19 +75,22 @@ export const recoveryData: StaticPageData = {
         title: "For cricketers",
         description:
           "Bowling, batting, and fielding all stress joints and muscles. Recovery ensures season-long stamina, injury prevention, and match-day readiness.",
-        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/evolution-1.svg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/cricket/evolution-1.svg",
       },
       {
         title: "For fitness enthusiasts",
         description:
           "Intense training demands muscular repair and nervous system reset. Recovery helps you train harder without breaking down.",
-        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/fitness/evolution-1.svg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/fitness/evolution-1.svg",
       },
       {
         title: "For runners",
         description:
           "Recovery mitigates joint stress, prevents overuse injuries, and improves endurance through smarter mileage management.",
-        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/recovery/evolution-1.svg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/recovery/evolution-1.svg",
       },
     ],
   },
@@ -91,7 +106,8 @@ export const recoveryData: StaticPageData = {
           "Tailored macros and meal timing to fuel your cricket, gym, and recovery needs—because a batsman and bowler don’t eat the same.",
         ],
         extraTagLabel: "",
-        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/cricket/scroll-card-cricket-1.svg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/cricket/scroll-card-cricket-1.svg",
       },
       {
         subTitle: "Performance meal prep ",
@@ -101,7 +117,8 @@ export const recoveryData: StaticPageData = {
           "Bat Sensor*- real-time insights on Bat Swing, Speed, Angles, Power & Efficiency ",
         ],
         extraTagLabel: "*Purchase separately",
-        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/fitness/scroll-card-fitness-1.svg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/fitness/scroll-card-fitness-1.svg",
       },
       {
         subTitle: "Hydration & Supplement strategies ",
@@ -111,7 +128,8 @@ export const recoveryData: StaticPageData = {
           "Bat Sensor*- real-time insights on Bat Swing, Speed, Angles, Power & Efficiency ",
         ],
         extraTagLabel: "*Purchase separately",
-        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/recovery/scroll-card-recovery-1.svg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/recovery/scroll-card-recovery-1.svg",
       },
     ],
   },
@@ -120,7 +138,8 @@ export const recoveryData: StaticPageData = {
     description:
       "Whether you're taking your first swing or prepping for tournaments – we've got a proven path for you.",
     btnLabel: "Explore Plan",
-    image: "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-banner.svg",
+    image:
+      "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-banner.svg",
   },
   gallerySection: {
     title: "Fitness Unfiltered",
@@ -140,19 +159,22 @@ export const recoveryData: StaticPageData = {
       {
         title: "Kunal Bajaj",
         description: "Membership plan",
-        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/member-section/cricket-member-1.svg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/member-section/cricket-member-1.svg",
         link: "/cricket",
       },
       {
         title: "Kunal Jain",
         description: "Membership plan",
-        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/member-section/cricket-member-2.svg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/member-section/cricket-member-2.svg",
         link: "/cricket",
       },
       {
         title: "Rahul Kapoor",
         description: "Membership plan",
-        backgroundImage: "https://da8nru77lsio9.cloudfront.net/images/member-section/cricket-member-3.svg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/member-section/cricket-member-3.svg",
         link: "/cricket",
       },
     ],
@@ -187,10 +209,14 @@ export const recoveryData: StaticPageData = {
     title: "Your exclusive access, now on mobile",
     description:
       "Our app makes it easy to join classes, connect with coaches and track your journey.",
-    googlePlayImg: "https://da8nru77lsio9.cloudfront.net/images/app-download/google-play.svg",
-    appStoreImg: "https://da8nru77lsio9.cloudfront.net/images/app-download/app-store.svg",
-    dfLogo: "https://da8nru77lsio9.cloudfront.net/images/app-download/df-logo.svg",
-    mobileImage: "https://da8nru77lsio9.cloudfront.net/images/app-download/mobile.png",
+    googlePlayImg:
+      "https://da8nru77lsio9.cloudfront.net/images/app-download/google-play.svg",
+    appStoreImg:
+      "https://da8nru77lsio9.cloudfront.net/images/app-download/app-store.svg",
+    desktopImage:
+      "https://da8nru77lsio9.cloudfront.net/app-download/desktop-bg.svg",
+    mobileImage:
+      "https://da8nru77lsio9.cloudfront.net/app-download/mobile-bg.svg",
   },
   footerInfoSection: {
     footerInfoList: [
@@ -219,15 +245,18 @@ export const recoveryData: StaticPageData = {
         link: "https://x.com/Drive_Fitt",
       },
       {
-        image: "https://da8nru77lsio9.cloudfront.net/images/instagram-social.svg",
+        image:
+          "https://da8nru77lsio9.cloudfront.net/images/instagram-social.svg",
         link: "https://www.instagram.com/drive_fitt/",
       },
       {
-        image: "https://da8nru77lsio9.cloudfront.net/images/linkedin-social.svg",
+        image:
+          "https://da8nru77lsio9.cloudfront.net/images/linkedin-social.svg",
         link: "https://www.linkedin.com/company/drivefitt/",
       },
       {
-        image: "https://da8nru77lsio9.cloudfront.net/images/facebook-social.svg",
+        image:
+          "https://da8nru77lsio9.cloudfront.net/images/facebook-social.svg",
         link: "https://www.facebook.com/profile.php?id=61561476262978",
       },
     ],
@@ -286,17 +315,23 @@ export const recoveryData: StaticPageData = {
       },
     ],
     socialLinks: [
-      { image: "https://da8nru77lsio9.cloudfront.net/images/x-social.svg", link: "https://x.com/Drive_Fitt" },
       {
-        image: "https://da8nru77lsio9.cloudfront.net/images/instagram-social.svg",
+        image: "https://da8nru77lsio9.cloudfront.net/images/x-social.svg",
+        link: "https://x.com/Drive_Fitt",
+      },
+      {
+        image:
+          "https://da8nru77lsio9.cloudfront.net/images/instagram-social.svg",
         link: "https://www.instagram.com/drive_fitt/",
       },
       {
-        image: "https://da8nru77lsio9.cloudfront.net/images/linkedin-social.svg",
+        image:
+          "https://da8nru77lsio9.cloudfront.net/images/linkedin-social.svg",
         link: "https://www.linkedin.com/company/drivefitt/",
       },
       {
-        image: "https://da8nru77lsio9.cloudfront.net/images/facebook-social.svg",
+        image:
+          "https://da8nru77lsio9.cloudfront.net/images/facebook-social.svg",
         link: "https://www.facebook.com/profile.php?id=61561476262978",
       },
     ],

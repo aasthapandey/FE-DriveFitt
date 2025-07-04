@@ -11,22 +11,24 @@ const HeroSection = ({ data }: HeroSectionProps) => {
   const { subTitle, title, description, roiTag, roiIcon, btnPrimaryText } =
     data;
   return (
-    <div className="min-h-[500px] md:min-h-screen flex items-center justify-center">
-      <div className="container mx-auto px-4">
+    <div className="flex items-center justify-center mb-[-60px]">
+      <div className="container mx-auto pt-[85px] md:pt-[133px] px-4">
         <div className="flex flex-col items-center text-center gap-6">
           {/* Ecosystem Tag */}
           <div
-            className="bg-[#0D2223] border items-center border-[#003434] rounded-full px-4 py-2 mb-2 flex gap-1"
+            className="bg-[#0D2223] border items-center border-[#003434] rounded-full py-2 px-3 md:px-4 md:py-2 mb-2 flex gap-1"
             style={{ boxShadow: "0px 4px 10px 0px #00DBDC1A" }}
           >
             <Image
               src="https://da8nru77lsio9.cloudfront.net/images/flash-on.svg"
               alt="ROI"
-              width={24}
-              height={24}
-              className="mt-2"
+              width={16}
+              height={16}
+              className="mt-1"
             />
-            <p className="text-primary text-sm md:text-base">{subTitle}</p>
+            <p className="text-[10px] tracking-[0%] font-light leading-3 md:text-base">
+              {subTitle}
+            </p>
           </div>
 
           {/* Main Title */}

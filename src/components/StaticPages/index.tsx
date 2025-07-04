@@ -128,7 +128,9 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
           />
         );
       case "appDownloadSection":
-        return <AppDownload data={value as AppDownloadProps} />;
+        return (
+          <AppDownload data={value as AppDownloadProps} isMobile={isMobile} />
+        );
       case "footerInfoSection":
         return (
           <FooterInfo data={value as FooterInfoProps} isMobile={isMobile} />

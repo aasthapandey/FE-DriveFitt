@@ -27,15 +27,15 @@ const Card = ({ data, isMobile, className, imageClass }: CardProps) => {
           backgroundPosition: "center",
         }}
       >
-        <div className="absolute inset-0 transition duration-500 group-hover:backdrop-blur-sm" />
+        <div className="absolute inset-0 transition-all duration-300 ease-in-out group-hover:backdrop-blur-sm" />
 
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
 
-        <div className="absolute left-0 bottom-0 w-full p-6 md:px-10 md:py-[46px] flex flex-col transition-all duration-500 group-hover:bottom-2">
-          <h3 className="text-white text-xl leading-6 md:leading-9 md:text-3xl font-semibold ">
+        <div className="absolute left-0 bottom-0 w-full p-6 md:px-10 md:py-[46px] flex flex-col transition-all duration-300 ease-in-out transform group-hover:translate-y-[-8px]">
+          <h3 className="text-white text-xl leading-6 md:leading-9 md:text-3xl font-semibold">
             {title}
           </h3>
-          <p className="text-white text-base md:text-lg font-light leading-tight tracking-tight hidden group-hover:block mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <p className="text-white text-base md:text-lg font-light leading-tight tracking-tight hidden group-hover:block mt-2 opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out">
             {description}
           </p>
         </div>

@@ -9,8 +9,10 @@ export const contactUsData: ContactUsPageData = {
     title: "Contact us",
     description:
       "Please Feel Free to contact us and we will get back to you as soon as we can.",
-    desktopImage: "https://da8nru77lsio9.cloudfront.net/images/hero/contactUs.svg",
-    mobileImage: "https://da8nru77lsio9.cloudfront.net/images/hero/contact-us-mobile.svg",
+    desktopImage:
+      "https://da8nru77lsio9.cloudfront.net/images/hero/contactUs.svg",
+    mobileImage:
+      "https://da8nru77lsio9.cloudfront.net/images/hero/contact-us-mobile.svg",
   },
   footerInfoSection: {
     footerInfoList: [
@@ -39,15 +41,18 @@ export const contactUsData: ContactUsPageData = {
         link: "https://x.com/Drive_Fitt",
       },
       {
-        image: "https://da8nru77lsio9.cloudfront.net/images/instagram-social.svg",
+        image:
+          "https://da8nru77lsio9.cloudfront.net/images/instagram-social.svg",
         link: "https://www.instagram.com/drive_fitt/",
       },
       {
-        image: "https://da8nru77lsio9.cloudfront.net/images/linkedin-social.svg",
+        image:
+          "https://da8nru77lsio9.cloudfront.net/images/linkedin-social.svg",
         link: "https://www.linkedin.com/company/drivefitt/",
       },
       {
-        image: "https://da8nru77lsio9.cloudfront.net/images/facebook-social.svg",
+        image:
+          "https://da8nru77lsio9.cloudfront.net/images/facebook-social.svg",
         link: "https://www.facebook.com/profile.php?id=61561476262978",
       },
     ],
@@ -66,10 +71,14 @@ export const contactUsData: ContactUsPageData = {
     title: "Your exclusive access, now on mobile",
     description:
       "Our app makes it easy to join classes, connect with coaches and track your journey.",
-    googlePlayImg: "https://da8nru77lsio9.cloudfront.net/images/app-download/google-play.svg",
-    appStoreImg: "https://da8nru77lsio9.cloudfront.net/images/app-download/app-store.svg",
-    dfLogo: "https://da8nru77lsio9.cloudfront.net/images/app-download/df-logo.svg",
-    mobileImage: "https://da8nru77lsio9.cloudfront.net/images/app-download/mobile.png",
+    googlePlayImg:
+      "https://da8nru77lsio9.cloudfront.net/images/app-download/google-play.svg",
+    appStoreImg:
+      "https://da8nru77lsio9.cloudfront.net/images/app-download/app-store.svg",
+    desktopImage:
+      "https://da8nru77lsio9.cloudfront.net/app-download/desktop-bg.svg",
+    mobileImage:
+      "https://da8nru77lsio9.cloudfront.net/app-download/mobile-bg.svg",
   },
   footerSection: {
     logo: "https://da8nru77lsio9.cloudfront.net/images/logo.svg",
@@ -117,17 +126,23 @@ export const contactUsData: ContactUsPageData = {
       },
     ],
     socialLinks: [
-      { image: "https://da8nru77lsio9.cloudfront.net/images/x-social.svg", link: "https://x.com/Drive_Fitt" },
       {
-        image: "https://da8nru77lsio9.cloudfront.net/images/instagram-social.svg",
+        image: "https://da8nru77lsio9.cloudfront.net/images/x-social.svg",
+        link: "https://x.com/Drive_Fitt",
+      },
+      {
+        image:
+          "https://da8nru77lsio9.cloudfront.net/images/instagram-social.svg",
         link: "https://www.instagram.com/drive_fitt/",
       },
       {
-        image: "https://da8nru77lsio9.cloudfront.net/images/linkedin-social.svg",
+        image:
+          "https://da8nru77lsio9.cloudfront.net/images/linkedin-social.svg",
         link: "https://www.linkedin.com/company/drivefitt/",
       },
       {
-        image: "https://da8nru77lsio9.cloudfront.net/images/facebook-social.svg",
+        image:
+          "https://da8nru77lsio9.cloudfront.net/images/facebook-social.svg",
         link: "https://www.facebook.com/profile.php?id=61561476262978",
       },
     ],

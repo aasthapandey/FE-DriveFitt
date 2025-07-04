@@ -17,7 +17,7 @@ const CardSection5 = ({
       <TitleDescription title={title || ""} description={description || ""} />
       {isMobile ? (
         <div
-          className="rounded-[20px] md:rounded-[40px] p-[2px] h-[548px]"
+          className="rounded-[20px] md:rounded-[40px] p-[2px]"
           style={{
             background:
               "linear-gradient(180deg, #333333 29.36%, #00DBDC 120.13%)",

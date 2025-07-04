@@ -217,10 +217,10 @@ export const runningData: StaticPageData = {
       "https://da8nru77lsio9.cloudfront.net/images/app-download/google-play.svg",
     appStoreImg:
       "https://da8nru77lsio9.cloudfront.net/images/app-download/app-store.svg",
-    dfLogo:
-      "https://da8nru77lsio9.cloudfront.net/images/app-download/df-logo.svg",
+    desktopImage:
+      "https://da8nru77lsio9.cloudfront.net/app-download/desktop-bg.svg",
     mobileImage:
-      "https://da8nru77lsio9.cloudfront.net/images/app-download/mobile.png",
+      "https://da8nru77lsio9.cloudfront.net/app-download/mobile-bg.svg",
   },
   footerInfoSection: {
     footerInfoList: [

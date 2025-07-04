@@ -87,7 +87,7 @@ export interface AppDownloadProps {
   description: string;
   googlePlayImg: string;
   appStoreImg: string;
-  dfLogo: string;
+  desktopImage: string;
   mobileImage: string;
 }
 

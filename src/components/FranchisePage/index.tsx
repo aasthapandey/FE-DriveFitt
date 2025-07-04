@@ -106,16 +106,14 @@ const FranchisePage = ({ data, pageName, isMobile }: FranchisePageProps) => {
             return (
               <div
                 key={key}
-                className={`w-full ${
-                  isMobile ? "bg-contain" : "bg-cover"
-                } bg-center bg-no-repeat h-auto`}
+                className={`w-full bg-center bg-no-repeat h-auto`}
                 style={{
                   background: `url(${
                     isMobile
                       ? (value as FranchiseHero).mobileImage
                       : (value as FranchiseHero).desktopImage
                   })`,
-                  backgroundPosition: isMobile ? "top center" : "center",
+                  backgroundPosition: isMobile ? "center center" : "top center",
                   backgroundSize: isMobile ? "contain" : "cover",
                   backgroundRepeat: "no-repeat",
                 }}
