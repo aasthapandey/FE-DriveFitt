@@ -48,7 +48,7 @@ const HeroSection = ({ data }: HeroSectionProps) => {
           </p>
 
           {/* ROI Tag */}
-          <div className="flex items-center gap-2 text-[#00DBDC] mb-4">
+          <div className="flex items-center gap-2 text-[#00DBDC] mb-4 ">
             <Image
               src={roiIcon}
               alt="ROI"
