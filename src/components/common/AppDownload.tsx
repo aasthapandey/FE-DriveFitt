@@ -35,10 +35,9 @@ const AppDownload = ({
         <div
           className="rounded-[20px] md:rounded-[40px] w-full h-full cursor-pointer flex flex-col justify-start md:justify-center relative overflow-hidden"
           style={{
-            background: `url(${isMobile ? mobileImage : desktopImage})`,
-            backgroundPosition: "top center",
-            backgroundSize: "contain",
-            backgroundRepeat: "no-repeat",
+            backgroundImage: `url(${isMobile ? mobileImage : desktopImage})`,
+            backgroundPosition: "center center",
+            backgroundSize: "cover",
           }}
         >
           <div className="flex flex-start px-5 pt-8 md:py-[124px] md:pl-[92px]">

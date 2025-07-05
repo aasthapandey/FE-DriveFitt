@@ -24,7 +24,7 @@ const Card = ({ data, isMobile, className, imageClass }: CardProps) => {
         style={{
           backgroundImage: `url(${backgroundImage})`,
           backgroundSize: "cover",
-          backgroundPosition: "center",
+          backgroundPosition: "top center",
         }}
       >
         <div className="absolute inset-0 transition-all duration-300 ease-in-out group-hover:backdrop-blur-sm" />

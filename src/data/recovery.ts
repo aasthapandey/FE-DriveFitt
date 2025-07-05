@@ -214,9 +214,9 @@ export const recoveryData: StaticPageData = {
     appStoreImg:
       "https://da8nru77lsio9.cloudfront.net/images/app-download/app-store.svg",
     desktopImage:
-      "https://da8nru77lsio9.cloudfront.net/app-download/desktop-bg.svg",
+      "https://da8nru77lsio9.cloudfront.net/images/app-download/desktop-bg.svg",
     mobileImage:
-      "https://da8nru77lsio9.cloudfront.net/app-download/mobile-bg.svg",
+      "https://da8nru77lsio9.cloudfront.net/images/app-download/mobile-bg.svg",
   },
   footerInfoSection: {
     footerInfoList: [
