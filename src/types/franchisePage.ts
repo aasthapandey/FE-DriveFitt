@@ -33,7 +33,8 @@ export interface CardSection {
 }
 
 export interface ImageCardSection extends CardSection {
-  image: string;
+  imageMobile: string;
+  imageDesktop: string;
 }
 
 export interface Banner2SectionType {

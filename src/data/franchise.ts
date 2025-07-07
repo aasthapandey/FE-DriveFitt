@@ -12,9 +12,9 @@ export const franchiseData: FranchisePageData = {
     roiTag: "30-40% Projected ROI",
     roiIcon: "https://da8nru77lsio9.cloudfront.net/images/roi-icon.svg",
     desktopImage:
-      "https://da8nru77lsio9.cloudfront.net/hero/franchise-hero-bg.svg",
+      "https://da8nru77lsio9.cloudfront.net/images/hero/franchise-hero-bg.svg",
     mobileImage:
-      "https://da8nru77lsio9.cloudfront.net/hero/franchise-hero-bg-mobile.svg",
+      "https://da8nru77lsio9.cloudfront.net/images/hero/franchise-hero-bg-mobile.svg",
     btnPrimaryText: "Start Your Journey Now",
   },
   banner1Section: {
@@ -37,12 +37,12 @@ export const franchiseData: FranchisePageData = {
           "Premium memberships with exclusive access to all facilities",
       },
       {
-        icon: "https://da8nru77lsio9.cloudfront.net/franchise/cricketTrainingIcon.svg",
+        icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/cricketTrainingIcon.svg",
         title: "Cricket Training & Coachingp",
         description: "Professional cricket coaching with advanced analytics",
       },
       {
-        icon: "https://da8nru77lsio9.cloudfront.net/franchise/groupFitnessIcon.png",
+        icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/groupFitnessIcon.png",
         title: "Group Fitness & Personal Training",
         description: "Diverse fitness classes and one-on-one training sessions",
       },
@@ -104,8 +104,10 @@ export const franchiseData: FranchisePageData = {
     title: "What You'll Receive",
     description:
       "Comprehensive support to ensure your success from day one and beyond",
-    image:
-      "https://da8nru77lsio9.cloudfront.net/images/franchise/ShubhmanPreity.svg",
+    imageMobile:
+      "https://da8nru77lsio9.cloudfront.net/images/franchise/ShubhmanPreityMobile.svg",
+    imageDesktop:
+      "https://da8nru77lsio9.cloudfront.net/images/franchise/ShubhmanPreityDesktop.svg",
     cardList: [
       {
         icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/receive-1.svg",

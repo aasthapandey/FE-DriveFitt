@@ -7,16 +7,31 @@ interface HeroSectionProps {
   isMobile?: boolean;
 }
 
-const HeroSection = ({ data }: HeroSectionProps) => {
-  const { subTitle, title, description, roiTag, roiIcon, btnPrimaryText } =
-    data;
+const HeroSection = ({ data, isMobile }: HeroSectionProps) => {
+  const {
+    subTitle,
+    title,
+    description,
+    roiTag,
+    roiIcon,
+    btnPrimaryText,
+    mobileImage,
+  } = data;
   return (
-    <div className="flex items-center justify-center mb-[-60px]">
-      <div className="container mx-auto pt-[85px] md:pt-[133px] px-4">
-        <div className="flex flex-col items-center text-center gap-6">
+    <div
+      className="flex items-center justify-center mb-[-60px]"
+      style={{
+        background: `url(${isMobile ? mobileImage : ""})`,
+        backgroundPosition: "top center",
+        backgroundSize: "contain",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      <div className="container mx-auto px-4">
+        <div className="flex flex-col items-center text-center gap-3 md:gap-6 mt-[85px] md:mt-[133px]">
           {/* Ecosystem Tag */}
           <div
-            className="bg-[#0D2223] border items-center border-[#003434] rounded-full py-2 px-3 md:px-4 md:py-2 mb-2 flex gap-1"
+            className="bg-[#0D2223] border items-center border-[#003434] rounded-full py-2 px-3 md:px-4 md:py-2 mb-0 md:mb-2 flex gap-1"
             style={{ boxShadow: "0px 4px 10px 0px #00DBDC1A" }}
           >
             <Image
@@ -32,23 +47,23 @@ const HeroSection = ({ data }: HeroSectionProps) => {
           </div>
 
           {/* Main Title */}
-          <h1 className="text-[40px] md:text-[68px] font-light text-white flex tracking-[-2px] leading-[78px]">
+          <div className="text-[40px] w-[70%] md:w-full h-auto flex-wrap justify-center md:text-[68px] font-light text-white flex tracking-[-2px] leading-[44px] md:leading-[78px] text-center">
             <span className="text-[#00DBDC] italic font-bold ">
               DRIVE&nbsp;
             </span>
-            <span className=" italic font-bold leading-[78px]">
-              FITT&nbsp;&nbsp;
+            <span className=" italic font-bold">FITT&nbsp;&nbsp;</span>
+            <span className="text-white">
+              {isMobile ? title.toUpperCase() : title}
             </span>
-            <span className="text-white">{title}</span>
-          </h1>
+          </div>
 
           {/* Description */}
-          <p className="text-xl md:text-2xl tracking-[2%] text-white max-w-2xl font-light mb-4">
+          <p className="text-base md:text-2xl tracking-[0%] leading-[100%] md:tracking-[-2%] text-white max-w-[252px] md:max-w-2xl font-light mb-3 md:mb-4">
             {description}
           </p>
 
           {/* ROI Tag */}
-          <div className="flex items-center gap-2 text-[#00DBDC] mb-4 ">
+          <div className="flex items-center gap-2 text-[#00DBDC] mb-1 md:mb-4 ">
             <Image
               src={roiIcon}
               alt="ROI"
@@ -60,7 +75,7 @@ const HeroSection = ({ data }: HeroSectionProps) => {
           </div>
 
           {/* CTA Button */}
-          <button className="bg-[#00DBDC] text-[#0D0D0D] px-6 py-3 md:px-14 md:py-4  rounded-lg font-medium leading-[100%] tracking-[-5%] text-base md:text-xl">
+          <button className="bg-[#00DBDC] text-[#0D0D0D] px-6 py-2.5 md:px-14 md:py-4 rounded-[4px] md:rounded-lg font-medium leading-[100%] tracking-[-2%] md:tracking-[-5%] text-sm md:text-xl">
             {btnPrimaryText}
           </button>
         </div>
