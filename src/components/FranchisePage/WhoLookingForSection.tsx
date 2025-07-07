@@ -7,10 +7,7 @@ interface WhatLookingForSectionProps {
   isMobile?: boolean;
 }
 
-const WhoLookingForSection = ({
-  data,
-  isMobile,
-}: WhatLookingForSectionProps) => {
+const WhoLookingForSection = ({ data }: WhatLookingForSectionProps) => {
   const { title, description, cardList } = data;
   return (
     <section className="md:px-[120px] px-6 flex flex-col gap-5">
