@@ -23,7 +23,7 @@ const MemberSection = ({
     dots: false,
     infinite: false,
     speed: 500,
-    slidesToShow: isMobile ? 1 : 3,
+    slidesToShow: isMobile ? 1.8 : 3,
     slidesToScroll: 1,
     arrows: false,
     swipe: isMobile,
@@ -36,10 +36,10 @@ const MemberSection = ({
       {
         breakpoint: 768,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 1.8,
           slidesToScroll: 1,
           swipe: true,
-          draggable: true,
+          draggable: false,
           touchMove: true,
         },
       },
@@ -59,7 +59,7 @@ const MemberSection = ({
     if (isMobile) return { width: 0, left: 0 }; // No highlight on mobile
 
     const totalWidth = 100; // Total width in percentage
-    const visibleSlides = isMobile ? 1 : 3; // Number of slides visible at once
+    const visibleSlides = isMobile ? 1.8 : 3; // Number of slides visible at once
     const maxSlidePosition = Math.max(0, memberList.length - visibleSlides); // Maximum possible slide position
 
     // If total members is less than or equal to visible slides, show full progress

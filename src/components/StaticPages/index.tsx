@@ -166,7 +166,7 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
                       : (value as Hero).desktopImage
                   })`,
                   backgroundPosition: "top center",
-                  backgroundSize: "cover",
+                  backgroundSize: "contain",
                   backgroundRepeat: "no-repeat",
                 }}
               >
