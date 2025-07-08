@@ -65,7 +65,7 @@ const MemberSection = ({
     // If total members is less than or equal to visible slides, show full progress
     if (memberList.length <= visibleSlides) {
       return {
-        width: "100%",
+        width: "97%",
         left: "0%",
       };
     }
