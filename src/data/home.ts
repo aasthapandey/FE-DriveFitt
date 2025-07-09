@@ -8,7 +8,7 @@ export const homeData: StaticPageData = {
   "hero": {
     "titleWords": [
       {
-        "text": "India's Firsttt ",
+        "text": "India's First ",
         "color": "#FFFFFF"
       },
       {
