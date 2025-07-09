@@ -26,7 +26,7 @@ export const initializeGit = async (): Promise<SimpleGit> => {
     try {
       await git.removeRemote("origin");
     } catch (e) {
-      console.log("Remote doesn't exist");
+      console.log("Remote doesn't exist", e);
       // Ignore error if remote doesn't exist
     }
 
@@ -36,7 +36,7 @@ export const initializeGit = async (): Promise<SimpleGit> => {
     try {
       await git.checkout("main");
     } catch (e) {
-      console.log("Main branch doesn't exist");
+      console.log("Main branch doesn't exist", e);
       // If main branch doesn't exist, create it
       await git.checkoutLocalBranch("main");
     }
