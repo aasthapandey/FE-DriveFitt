@@ -19,7 +19,7 @@ interface StaticPageProps {
 
 const ContactUsPage = ({ data, isMobile }: StaticPageProps) => {
   const { hero, appDownloadSection, footerInfoSection, footerSection } = data;
-  const { title, description, mobileImage, desktopImage } = hero as Hero;
+  const { titleWords, description, mobileImage, desktopImage } = hero as Hero;
   const { footerInfoList, socialLinkList, contactFormSection } =
     footerInfoSection as FooterInfoProps;
 
@@ -39,7 +39,15 @@ const ContactUsPage = ({ data, isMobile }: StaticPageProps) => {
         <div className="mt-[209px] md:mt-[108px]">
           <div className="flex flex-col gap-3 md:gap-[18px] ">
             <h1 className="md:px-[120px] px-6 text-[40px] md:text-[68px] text-center md:text-left font-bold text-white tracking-[-2px] leading-[44px] md:leading-[72px]">
-              {title}
+              {titleWords.map((word, index) => (
+                <span
+                  key={index}
+                  style={{ color: word.color }}
+                  className={word.isItalic ? "italic" : ""}
+                >
+                  {word.text}
+                </span>
+              ))}
             </h1>
             <p className="md:px-[120px] px-6 text-sm leading-5 md:text-xl text-center md:text-left tracking-[2%] text-white font-light mb-5 md:mb-[45px]">
               {description}

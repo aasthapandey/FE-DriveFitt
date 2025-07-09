@@ -6,7 +6,7 @@ export const contactUsData: ContactUsPageData = {
   seoTitle: "",
   seoDescription: "",
   hero: {
-    title: "Contact us",
+    titleWords: [{ text: "Contact us", color: "#FFFFFF" }],
     description:
       "Please Feel Free to contact us and we will get back to you as soon as we can.",
     desktopImage:
