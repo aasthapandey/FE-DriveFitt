@@ -263,12 +263,29 @@ export const recoveryData: StaticPageData = {
     contactFormSection: {
       title: "Get in touch",
       description: "We'd love to hear from you. Please fill out this form.",
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-      message: "",
       submitButtonText: "Send Message",
+      fields: {
+        firstName: {
+          label: "First Name",
+          placeholder: "",
+        },
+        lastName: {
+          label: "Last Name",
+          placeholder: "",
+        },
+        email: {
+          label: "Email ID",
+          placeholder: "",
+        },
+        phone: {
+          label: "Phone Number",
+          placeholder: "",
+        },
+        message: {
+          label: "Message",
+          placeholder: "",
+        },
+      },
     },
   },
   footerSection: {

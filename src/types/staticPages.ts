@@ -110,14 +110,31 @@ export interface FooterInfoItem {
 }
 
 export interface ContactFormProps {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  message: string;
-  submitButtonText: string;
   title: string;
   description: string;
+  submitButtonText: string;
+  fields: {
+    firstName: {
+      label: string;
+      placeholder?: string;
+    };
+    lastName: {
+      label: string;
+      placeholder?: string;
+    };
+    email: {
+      label: string;
+      placeholder?: string;
+    };
+    phone: {
+      label: string;
+      placeholder?: string;
+    };
+    message: {
+      label: string;
+      placeholder?: string;
+    };
+  };
 }
 
 export interface FooterInfoProps {
@@ -185,6 +202,14 @@ export interface CountdownSection {
   title: string;
   date: string;
   bgImage: string;
+  location: string;
+  openingText: string;
+  labels: {
+    days: string;
+    hours: string;
+    minutes: string;
+    seconds: string;
+  };
 }
 
 export interface ComingSoonSection {
@@ -246,4 +271,17 @@ export interface ContactUsPageData {
   footerInfoSection?: FooterInfoProps;
   footerSection?: FooterProps;
   appDownloadSection?: AppDownloadProps;
+}
+
+export interface NavLink {
+  title: string;
+  href: string;
+}
+
+export interface NavbarProps {
+  logo: string;
+  navLinks: NavLink[];
+  signInButton: {
+    text: string;
+  };
 }

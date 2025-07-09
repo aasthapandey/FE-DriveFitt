@@ -9,7 +9,7 @@ interface CountdownProps {
 }
 
 const Countdown = ({ countdownData }: CountdownProps) => {
-  const { title, date, bgImage } = countdownData;
+  const { title, date, bgImage, location, openingText, labels } = countdownData;
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -70,10 +70,10 @@ const Countdown = ({ countdownData }: CountdownProps) => {
       <div className="flex flex-col md:flex-row pt-6 pb-[38px] md:pb-[72px] md:pt-[40px] gap-4 md:gap-0 justify-between md:px-[46px] text-center md:text-left">
         <h2 className="px-8 md:px-0 w-full text-xl md:w-[402px] md:ml-[59px] leading-7 md:mt-8 text-white md:text-[32px] md:leading-[46px] font-semibold tracking-[-1px]">
           {title}
-          <span className="text-[#00DBDC] italic">GURUGRAM</span>
+          <span className="text-[#00DBDC] italic">{location}</span>
         </h2>
         <div className="text-[#8A8A8A] text-[10px] md:text-sm md:leading-5 leading-3 text-center items-center flex flex-col gap-3">
-          <div className="text-xs md:text-sm">Opening in</div>
+          <div className="text-xs md:text-sm">{openingText}</div>
           <div className="flex gap-3 md:gap-4">
             <div className="flex gap-2 flex-col">
               <div className="flex gap-1">
@@ -84,7 +84,7 @@ const Countdown = ({ countdownData }: CountdownProps) => {
                   {daysSecond}
                 </div>
               </div>
-              <div className="tracking-[4px]">DAYS</div>
+              <div className="tracking-[4px]">{labels.days}</div>
             </div>
             <div className="flex gap-2 flex-col">
               <div className="flex gap-1">
@@ -95,7 +95,7 @@ const Countdown = ({ countdownData }: CountdownProps) => {
                   {hoursSecond}
                 </div>
               </div>
-              <div className="tracking-[4px]">HOURS</div>
+              <div className="tracking-[4px]">{labels.hours}</div>
             </div>
             <div className="flex gap-2 flex-col">
               <div className="flex gap-1">
@@ -106,7 +106,7 @@ const Countdown = ({ countdownData }: CountdownProps) => {
                   {minutesSecond}
                 </div>
               </div>
-              <div className="tracking-[4px]">MINUTE</div>
+              <div className="tracking-[4px]">{labels.minutes}</div>
             </div>
             <div className="flex gap-2 flex-col">
               <div className="flex gap-1">
@@ -117,7 +117,7 @@ const Countdown = ({ countdownData }: CountdownProps) => {
                   {secondsSecond}
                 </div>
               </div>
-              <div className="tracking-[4px]">SECOND</div>
+              <div className="tracking-[4px]">{labels.seconds}</div>
             </div>
           </div>
         </div>

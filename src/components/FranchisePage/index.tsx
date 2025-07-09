@@ -1,4 +1,5 @@
 import Navbar from "@/components/common/Navbar";
+import { navbarData } from "@/data/navbar";
 import {
   FranchisePageData,
   FranchiseHero,
@@ -116,7 +117,7 @@ const FranchisePage = ({ data, pageName, isMobile }: FranchisePageProps) => {
                   backgroundRepeat: "no-repeat",
                 }}
               >
-                <Navbar isMobile={isMobile} />
+                <Navbar data={navbarData} isMobile={isMobile} />
                 {component}
               </div>
             );

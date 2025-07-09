@@ -1,4 +1,5 @@
 import Navbar from "@/components/common/Navbar";
+import { navbarData } from "@/data/navbar";
 import HeroSection from "@/components/StaticPages/HeroSection";
 import {
   StaticPageData,
@@ -170,7 +171,7 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
                   backgroundRepeat: "no-repeat",
                 }}
               >
-                <Navbar isMobile={isMobile} />
+                <Navbar data={navbarData} isMobile={isMobile} />
                 {component}
               </div>
             );
@@ -183,7 +184,7 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
                   isMobile ? "bg-contain" : "bg-cover"
                 } bg-center bg-no-repeat h-auto`}
               >
-                <Navbar isMobile={isMobile} />
+                <Navbar data={navbarData} isMobile={isMobile} />
                 {component}
               </div>
             );
@@ -191,7 +192,7 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
           if (key === "error404Section") {
             return (
               <div key={key} className="w-full">
-                <Navbar isMobile={isMobile} />
+                <Navbar data={navbarData} isMobile={isMobile} />
                 {component}
               </div>
             );
@@ -199,7 +200,7 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
           if (key === "policySection") {
             return (
               <div key={key} className="w-full">
-                <Navbar isMobile={isMobile} />
+                <Navbar data={navbarData} isMobile={isMobile} />
                 {component}
               </div>
             );

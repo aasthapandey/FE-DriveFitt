@@ -3,7 +3,7 @@ import { ContactFormProps } from "@/types/staticPages";
 import { useState } from "react";
 
 const ContactForm = ({ data }: { data: ContactFormProps }) => {
-  const { title, description, submitButtonText } = data;
+  const { title, description, submitButtonText, fields } = data;
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -68,7 +68,7 @@ const ContactForm = ({ data }: { data: ContactFormProps }) => {
                   htmlFor="firstName"
                   className="text-xs md:text-sm text-[#8A8A8A]"
                 >
-                  First Name
+                  {fields.firstName.label}
                 </label>
                 <input
                   id="firstName"
@@ -76,6 +76,7 @@ const ContactForm = ({ data }: { data: ContactFormProps }) => {
                   name="firstName"
                   value={formData.firstName}
                   onChange={handleChange}
+                  placeholder={fields.firstName.placeholder}
                   className="bg-[#FFFFFF] border border-[#333333] rounded-lg py-1.5 md:py-2 px-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[#00DBDC] outline-none transition-colors"
                   required
                 />
@@ -83,9 +84,9 @@ const ContactForm = ({ data }: { data: ContactFormProps }) => {
               <div className="flex flex-col gap-1.5">
                 <label
                   htmlFor="lastName"
-                  className="text-xs md:text-sm  text-[#8A8A8A]"
+                  className="text-xs md:text-sm text-[#8A8A8A]"
                 >
-                  Last Name
+                  {fields.lastName.label}
                 </label>
                 <input
                   id="lastName"
@@ -93,6 +94,7 @@ const ContactForm = ({ data }: { data: ContactFormProps }) => {
                   name="lastName"
                   value={formData.lastName}
                   onChange={handleChange}
+                  placeholder={fields.lastName.placeholder}
                   className="bg-[#FFFFFF] border border-[#333333] rounded-lg py-1.5 md:py-2 px-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[#00DBDC] outline-none transition-colors"
                   required
                 />
@@ -105,7 +107,7 @@ const ContactForm = ({ data }: { data: ContactFormProps }) => {
                   htmlFor="email"
                   className="text-xs md:text-sm text-[#8A8A8A]"
                 >
-                  Email ID
+                  {fields.email.label}
                 </label>
                 <input
                   id="email"
@@ -113,6 +115,7 @@ const ContactForm = ({ data }: { data: ContactFormProps }) => {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
+                  placeholder={fields.email.placeholder}
                   className="bg-[#FFFFFF] border border-[#333333] rounded-lg py-1.5 md:py-2 px-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[#00DBDC] outline-none transition-colors"
                   required
                 />
@@ -122,7 +125,7 @@ const ContactForm = ({ data }: { data: ContactFormProps }) => {
                   htmlFor="phone"
                   className="text-xs md:text-sm text-[#8A8A8A]"
                 >
-                  Phone Number
+                  {fields.phone.label}
                 </label>
                 <input
                   id="phone"
@@ -130,6 +133,7 @@ const ContactForm = ({ data }: { data: ContactFormProps }) => {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
+                  placeholder={fields.phone.placeholder}
                   className="bg-[#FFFFFF] border border-[#333333] rounded-lg py-1.5 md:py-2 px-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[#00DBDC] outline-none transition-colors"
                   required
                 />
@@ -138,13 +142,14 @@ const ContactForm = ({ data }: { data: ContactFormProps }) => {
 
             <div className="flex flex-col gap-1.5 flex-1">
               <label htmlFor="message" className="text-sm text-[#8A8A8A]">
-                Message
+                {fields.message.label}
               </label>
               <input
                 id="message"
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
+                placeholder={fields.message.placeholder}
                 className="bg-[#FFFFFF] border border-[#333333] rounded-lg py-1.5 md:py-2 px-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[#00DBDC] outline-none transition-colors"
                 required
               />

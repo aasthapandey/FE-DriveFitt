@@ -1,4 +1,5 @@
 import Navbar from "@/components/common/Navbar";
+import { navbarData } from "@/data/navbar";
 import {
   StaticPageData,
   Hero,
@@ -34,7 +35,7 @@ const ContactUsPage = ({ data, isMobile }: StaticPageProps) => {
           backgroundRepeat: "no-repeat",
         }}
       >
-        <Navbar isMobile={isMobile} />
+        <Navbar data={navbarData} isMobile={isMobile} />
 
         <div className="mt-[209px] md:mt-[108px]">
           <div className="flex flex-col gap-3 md:gap-[18px] ">

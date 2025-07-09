@@ -2,22 +2,16 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
+import { NavbarProps } from "@/types/staticPages";
 
-interface NavbarProps {
+interface Props {
+  data: NavbarProps;
   isMobile?: boolean;
 }
 
-const navLinks = [
-  { title: "Cricket", href: "/cricket" },
-  { title: "Fitness", href: "/fitness" },
-  { title: "Recovery", href: "/recovery" },
-  { title: "Running", href: "/running" },
-  { title: "Personal Training", href: "/personal-training" },
-  { title: "Membership", href: "/membership" },
-];
-
-export default function Navbar({ isMobile }: NavbarProps) {
+export default function Navbar({ data, isMobile }: Props) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { logo, navLinks, signInButton } = data;
 
   if (isMobile) {
     return (
@@ -34,16 +28,11 @@ export default function Navbar({ isMobile }: NavbarProps) {
           />
         </button>
         <Link href="/">
-          <Image
-            src="https://da8nru77lsio9.cloudfront.net/images/logo.svg"
-            alt="logo"
-            width={141}
-            height={24}
-          />
+          <Image src={logo} alt="logo" width={141} height={24} />
         </Link>
         <div className="flex items-center gap-4">
           <button className="bg-[#00DBDC] rounded-lg px-3 md:px-6 py-2 text-[#0D0D0D] font-medium text-xs md:text-sm">
-            Sign In
+            {signInButton.text}
           </button>
         </div>
 
@@ -72,12 +61,7 @@ export default function Navbar({ isMobile }: NavbarProps) {
   return (
     <nav className="flex justify-between items-center py-8 pr-[100px] pl-[120px] gap-4 bg-transparent">
       <Link href="/">
-        <Image
-          src="https://da8nru77lsio9.cloudfront.net/images/logo.svg"
-          alt="logo"
-          width={212}
-          height={36}
-        />
+        <Image src={logo} alt="logo" width={212} height={36} />
       </Link>
       <div className="flex gap-10 px-2">
         {navLinks.map((link, idx) => (
@@ -91,7 +75,7 @@ export default function Navbar({ isMobile }: NavbarProps) {
         ))}
       </div>
       <button className="bg-[#00DBDC] rounded-lg px-10 py-3 text-[#0D0D0D] font-medium text-base">
-        Sign In
+        {signInButton.text}
       </button>
     </nav>
   );
