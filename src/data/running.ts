@@ -7,7 +7,10 @@ export const runningData: StaticPageData = {
   seoDescription:
     "Experience the best indoor running track and training at DriveFitt.",
   hero: {
-    title: "Running Redefined. Only at ",
+    titleWords: [
+      { text: "Running Redefined. Only at ", color: "#FFFFFF" },
+      { text: "DRIVE FITT", color: "#FFFFFF", isItalic: true },
+    ],
     description:
       "India's First Professional Indoor Running Studio — Where Running Becomes a Lifestyle",
     desktopImage:

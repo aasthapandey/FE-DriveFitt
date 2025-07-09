@@ -8,7 +8,7 @@ export const recoveryData: StaticPageData = {
   seoDescription:
     "Boost your recovery at DriveFitt with advanced therapies and expert care.",
   hero: {
-    title: "Recover at Drive FITT",
+    titleWords: [{ text: "Recover at Drive FITT", color: "#FFFFFF" }],
     description: "Train hard. Recover smarter. Perform your best.",
     desktopImage:
       "https://da8nru77lsio9.cloudfront.net/images/hero/recovery.svg",

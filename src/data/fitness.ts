@@ -7,7 +7,9 @@ export const fitnessData: StaticPageData = {
   seoDescription:
     "Achieve your fitness goals at DriveFitt. Modern equipment, expert trainers, and a motivating environment.",
   hero: {
-    title: "Step into a whole new world of training",
+    titleWords: [
+      { text: "Step into a whole new world of training", color: "#FFFFFF" },
+    ],
     description:
       "Never Boring. Always Moving. High & Low Intensity Workouts That Keep You Going.",
     desktopImage:

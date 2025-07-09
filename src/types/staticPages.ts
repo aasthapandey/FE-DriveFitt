@@ -1,5 +1,11 @@
+export interface TitleWord {
+  text: string;
+  color?: string;
+  isItalic?: boolean;
+}
+
 export interface Hero {
-  title: string;
+  titleWords: TitleWord[];
   description: string;
   desktopImage: string;
   mobileImage: string;

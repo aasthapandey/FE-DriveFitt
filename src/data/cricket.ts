@@ -7,7 +7,10 @@ export const cricketData: StaticPageData = {
   seoDescription:
     "Join the best cricket club in Gurugram. State-of-the-art facilities, coaching, and more.",
   hero: {
-    title: " Cricket for Every player. Every Day",
+    titleWords: [
+      { text: "DRIVE:", color: "#00DBDC", isItalic: true },
+      { text: " Cricket for Every player. Every Day", color: "#FFFFFF" },
+    ],
     description:
       "Experience Gurugram's premier sports club & fitness center – Cricket, Fitness, Recovery, Community…and more",
     desktopImage:

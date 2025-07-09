@@ -1,4 +1,4 @@
-import { Hero } from "@/types/staticPages";
+import { Hero, TitleWord } from "@/types/staticPages";
 import CountdownTimer from "@/components/StaticPages/CountdownTimer";
 import { homeData } from "@/data/home";
 
@@ -9,39 +9,22 @@ interface HeroSectionProps {
 }
 
 const HeroSection = ({ data, pageName, isMobile }: HeroSectionProps) => {
-  const { title, description, btnPrimaryText, btnSecondaryText } = data;
-  const renderTitle = () => {
-    if (pageName === "home") {
-      return (
-        <h1 className="text-white text-[42px] leading-[50px] tracking-[-2px] md:leading-[72px] md:text-6xl font-bold md:mb-7 mb-[22px]">
-          <span className="text-white">India&apos;s First </span>
-          <span className="text-[#00DBDC]">Cricket </span>
-          <span className="text-white">and </span>
-          <span className="text-[#00DBDC]">Fitness </span>
-          <span className="text-white">Club</span>
-        </h1>
-      );
-    } else if (pageName === "cricket") {
-      return (
-        <h1 className="text-white text-[42px] leading-[50px] tracking-[-2px] md:leading-[72px] md:text-6xl font-bold md:mb-7 mb-[22px]">
-          <span className="text-[#00DBDC] italic">DRIVE:</span>
-          {title}
-        </h1>
-      );
-    } else if (pageName === "running") {
-      return (
-        <h1 className="text-white text-[42px] leading-[50px] tracking-[-2px] md:leading-[72px] md:text-6xl font-bold md:mb-7 mb-[22px]">
-          {title}
-          <span className="italic">DRIVE FITT.</span>
-        </h1>
-      );
-    } else {
-      return (
-        <h1 className="text-white text-[42px] leading-[50px] tracking-[-2px] md:leading-[72px] md:text-6xl font-bold md:mb-7 mb-[22px]">
-          {title}
-        </h1>
-      );
-    }
+  const { titleWords, description, btnPrimaryText, btnSecondaryText } = data;
+  const renderTitle = (titleWords: TitleWord[]) => {
+    return (
+      <h1 className="text-white text-[42px] leading-[50px] tracking-[-2px] md:leading-[72px] md:text-6xl font-bold md:mb-7 mb-[22px]">
+        {titleWords.map((word, index) => (
+          <span
+            key={index}
+            className={`${word.color ? `text-[${word.color}]` : "text-white"} ${
+              word.isItalic ? "italic" : ""
+            }`}
+          >
+            {word.text}
+          </span>
+        ))}
+      </h1>
+    );
   };
   return (
     <>
@@ -61,7 +44,7 @@ const HeroSection = ({ data, pageName, isMobile }: HeroSectionProps) => {
                 }`
           }`}
         >
-          {renderTitle()}
+          {renderTitle(titleWords)}
           {pageName !== "home" ? (
             <p className="text-white md:text-base md:leading-5 text-sm leading-[18px] tracking-[-2%] font-light mb-[28px] md:mb-[60px]">
               {description}
