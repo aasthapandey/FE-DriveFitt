@@ -1,11 +1,13 @@
 import { StaticPageData } from "@/types/staticPages";
+import { navbarData } from "./navbar";
 
 export const homeData: StaticPageData = {
-  title: "Welcome to DriveFitt Premium Club",
-  description: "Experience Gurugram's premier sports club and fitness center.",
-  seoTitle: "DriveFitt Premium Club | Home",
+  title: "DriveFitt",
+  description: "Experience the best fitness and sports facilities.",
+  seoTitle: "DriveFitt - Premium Fitness & Sports Club",
   seoDescription:
-    "Join DriveFitt, Gurugram's top sports club for cricket, fitness, recovery, and more. Premium facilities and expert coaching.",
+    "Join DriveFitt, Gurugram's premier fitness & sports club. Experience state-of-the-art facilities for cricket, fitness, recovery, and more.",
+  navbar: navbarData,
   hero: {
     titleWords: [
       {

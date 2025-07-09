@@ -1,4 +1,4 @@
-import { FooterInfoProps, FooterProps } from "./staticPages";
+import { FooterInfoProps, FooterProps, NavbarProps } from "./staticPages";
 
 export interface FranchiseHero {
   title: string;
@@ -47,6 +47,7 @@ export interface FranchisePageData {
   description: string;
   seoTitle: string;
   seoDescription: string;
+  navbar: NavbarProps;
   hero: FranchiseHero;
   banner1Section: BannerSection;
   multiRevenueSection: CardSection;

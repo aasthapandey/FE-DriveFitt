@@ -239,6 +239,7 @@ export interface StaticPageData {
   description: string;
   seoTitle: string;
   seoDescription: string;
+  navbar?: NavbarProps;
   hero?: Hero;
   countdownSection?: CountdownSection;
   comingSoonSection?: ComingSoonSection;
@@ -267,6 +268,7 @@ export interface ContactUsPageData {
   description: string;
   seoTitle: string;
   seoDescription: string;
+  navbar: NavbarProps;
   hero: Hero;
   footerInfoSection?: FooterInfoProps;
   footerSection?: FooterProps;

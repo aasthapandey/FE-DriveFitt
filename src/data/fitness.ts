@@ -1,4 +1,5 @@
 import { StaticPageData } from "@/types/staticPages";
+import { navbarData } from "./navbar";
 
 export const fitnessData: StaticPageData = {
   title: "Fitness at DriveFitt",
@@ -6,6 +7,7 @@ export const fitnessData: StaticPageData = {
   seoTitle: "Premium Fitness Center | DriveFitt",
   seoDescription:
     "Achieve your fitness goals at DriveFitt. Modern equipment, expert trainers, and a motivating environment.",
+  navbar: navbarData,
   hero: {
     titleWords: [
       { text: "Step into a whole new world of training", color: "#FFFFFF" },

@@ -1,10 +1,13 @@
 import { ContactUsPageData } from "@/types/staticPages";
+import { navbarData } from "./navbar";
 
 export const contactUsData: ContactUsPageData = {
-  title: "",
-  description: "",
-  seoTitle: "",
-  seoDescription: "",
+  title: "Contact Us",
+  description: "Get in touch with us.",
+  seoTitle: "Contact Us | DriveFitt",
+  seoDescription:
+    "Contact DriveFitt for any queries about our fitness and sports facilities.",
+  navbar: navbarData,
   hero: {
     titleWords: [{ text: "Contact us", color: "#FFFFFF" }],
     description:

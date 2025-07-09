@@ -1,4 +1,5 @@
 import { StaticPageData } from "@/types/staticPages";
+import { navbarData } from "./navbar";
 
 export const cricketData: StaticPageData = {
   title: "Cricket at DriveFitt",
@@ -6,6 +7,7 @@ export const cricketData: StaticPageData = {
   seoTitle: "Premium Cricket Club | DriveFitt",
   seoDescription:
     "Join the best cricket club in Gurugram. State-of-the-art facilities, coaching, and more.",
+  navbar: navbarData,
   hero: {
     titleWords: [
       { text: "DRIVE:", color: "#00DBDC", isItalic: true },
