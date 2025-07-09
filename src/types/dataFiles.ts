@@ -11,6 +11,7 @@ export enum DataFileType {
   LICENSES = 10,
   PRIVACY = 11,
   TERMS = 12,
+  NAVBAR = 13,
 }
 
 export const DataFileMap: Record<DataFileType, string> = {
@@ -26,4 +27,5 @@ export const DataFileMap: Record<DataFileType, string> = {
   [DataFileType.LICENSES]: "licenses",
   [DataFileType.PRIVACY]: "privacy",
   [DataFileType.TERMS]: "terms",
+  [DataFileType.NAVBAR]: "navbar",
 };
