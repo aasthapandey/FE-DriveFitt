@@ -25,11 +25,11 @@ const PhoneNumberModal = ({
   return (
     <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4">
       {/* Modal Content */}
-      <div className="relative">
-        {/* Close button */}
+      <div className="relative items-center justify-center flex flex-col">
+        {/* Close button - positioned relative to the gradient border */}
         <button
           onClick={onClose}
-          className="absolute -top-4 -right-4 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-gray-600 bg-opacity-50 flex items-center justify-center hover:bg-opacity-70 transition-all duration-200"
+          className=" z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-gray-600 bg-opacity-50 flex items-center justify-center hover:bg-opacity-70 transition-all duration-200 md:mb-[22px]"
         >
           <svg
             width="16"
@@ -48,15 +48,14 @@ const PhoneNumberModal = ({
             />
           </svg>
         </button>
-
         <div
-          className={`rounded-[20px] md:rounded-[40px] p-[2px] w-full max-w-[340px] md:max-w-[420px] md:max-h-[432px]`}
+          className={`rounded-[20px] md:rounded-[40px] p-[2px] w-full max-w-[340px] md:max-w-[420px]`}
           style={{
             background:
               "linear-gradient(180deg, #333333 29.36%, #00DBDC 120.13%)",
           }}
         >
-          <div className="bg-[#0D0D0D] rounded-[20px] md:rounded-[40px] flex flex-col items-center md:px-[40px] md:py-[68px]">
+          <div className="bg-[#0D0D0D] rounded-[20px] md:rounded-[40px] flex flex-col items-center px-6 py-8 md:px-[40px] md:py-[48px]">
             {/* Logo */}
             <div className="mb-8 md:mb-[48px] md:px-[64px]">
               <Image
