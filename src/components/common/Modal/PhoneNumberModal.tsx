@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import Image from "next/image";
 
 type ModalState = "phone" | "otp";
@@ -112,10 +112,29 @@ const OTPStep = ({
   onResendOTP,
   isMobile,
 }: OTPStepProps) => {
+  const firstInputRef = useRef<HTMLInputElement>(null);
+  const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
+
+  // Auto-focus first input when component mounts
+  useEffect(() => {
+    if (firstInputRef.current) {
+      firstInputRef.current.focus();
+      setFocusedIndex(0);
+    }
+  }, []);
+
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${mins}:${secs.toString().padStart(2, "0")}`;
+  };
+
+  const handleInputFocus = (index: number) => {
+    setFocusedIndex(index);
+  };
+
+  const handleInputBlur = () => {
+    setFocusedIndex(null);
   };
 
   return (
@@ -153,14 +172,17 @@ const OTPStep = ({
         {otpValues.map((value, index) => (
           <input
             key={index}
+            ref={index === 0 ? firstInputRef : null}
             type="text"
             value={value}
             onChange={(e) => onOTPChange(index, e.target.value)}
+            onFocus={() => handleInputFocus(index)}
+            onBlur={handleInputBlur}
             data-index={index}
             maxLength={1}
             className={`w-12 h-12 md:w-16 md:h-16 bg-transparent border-2 rounded-lg text-center text-white text-lg md:text-xl font-medium focus:outline-none transition-colors duration-200 ${
-              index === 0
-                ? "border-[#00DBDC] bg-[#00DBDC]/10"
+              value || focusedIndex === index
+                ? "border-[#00DBDC]"
                 : "border-[#333333]"
             }`}
             style={{
@@ -270,9 +292,15 @@ const PhoneNumberModal = ({
 
   const handleVerify = useCallback(() => {
     const otp = otpValues.join("");
-    console.log("Verifying OTP:", otp, "for phone:", phoneNumber);
-    // Handle OTP verification logic here
-  }, [otpValues, phoneNumber]);
+
+    // Validate that all 4 digits are entered
+    if (otp.length === 4 && otpValues.every((val) => val !== "")) {
+      console.log("Verifying OTP:", otp, "for phone:", phoneNumber);
+      // Handle OTP verification logic here
+      // Close the modal after successful validation
+      onClose();
+    }
+  }, [otpValues, phoneNumber, onClose]);
 
   const handleChangePhone = useCallback(() => {
     setModalState("phone");
@@ -295,26 +323,17 @@ const PhoneNumberModal = ({
           onClick={onClose}
           className="z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-gray-600 bg-opacity-50 flex items-center justify-center hover:bg-opacity-70 transition-all duration-200 md:mb-[22px]"
         >
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 16 16"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-4 h-4 md:w-5 md:h-5"
-          >
-            <path
-              d="M12 4L4 12M4 4L12 12"
-              stroke="white"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          <Image
+            src="/images/otp-modal-close-icon.svg"
+            alt="Close"
+            width={16}
+            height={16}
+            className="w-[48px] h-[48px]"
+          />
         </button>
 
         <div
-          className={`rounded-[20px] md:rounded-[40px] p-[2px] w-full max-w-[340px] md:max-w-[420px]`}
+          className={`rounded-[20px] md:rounded-[40px] p-[2px] w-full w-[340px] md:w-[420px]`}
           style={{
             background:
               "linear-gradient(180deg, #333333 29.36%, #00DBDC 120.13%)",
