@@ -2,8 +2,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import { NavbarProps } from "@/types/staticPages";
-import { PhoneNumberModal } from "./Modal";
+import { NavbarProps, LoginModalType } from "@/types/staticPages";
+import { PhoneNumberModal, EmailModal } from "./Modal";
 
 interface Props {
   data: NavbarProps;
@@ -12,8 +12,8 @@ interface Props {
 
 export default function Navbar({ data, isMobile }: Props) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isPhoneModalOpen, setIsPhoneModalOpen] = useState(false);
-  const { logo, navLinks, signInButton } = data;
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const { logo, navLinks, signInButton, loginModalType } = data;
 
   if (isMobile) {
     return (
@@ -34,19 +34,27 @@ export default function Navbar({ data, isMobile }: Props) {
         </Link>
         <div className="flex items-center gap-4">
           <button
-            onClick={() => setIsPhoneModalOpen(true)}
+            onClick={() => setIsLoginModalOpen(true)}
             className="bg-[#00DBDC] rounded-lg px-3 md:px-6 py-2 text-[#0D0D0D] font-medium text-xs md:text-sm"
           >
             {signInButton.text}
           </button>
         </div>
 
-        {/* Phone Number Modal */}
-        <PhoneNumberModal
-          isOpen={isPhoneModalOpen}
-          onClose={() => setIsPhoneModalOpen(false)}
-          isMobile={isMobile}
-        />
+        {/* Login Modals */}
+        {loginModalType === LoginModalType.PHONE ? (
+          <PhoneNumberModal
+            isOpen={isLoginModalOpen}
+            onClose={() => setIsLoginModalOpen(false)}
+            isMobile={isMobile}
+          />
+        ) : (
+          <EmailModal
+            isOpen={isLoginModalOpen}
+            onClose={() => setIsLoginModalOpen(false)}
+            isMobile={isMobile}
+          />
+        )}
 
         {/* Mobile Menu Overlay */}
         {isMenuOpen && (
@@ -87,18 +95,26 @@ export default function Navbar({ data, isMobile }: Props) {
         ))}
       </div>
       <button
-        onClick={() => setIsPhoneModalOpen(true)}
+        onClick={() => setIsLoginModalOpen(true)}
         className="bg-[#00DBDC] rounded-lg px-10 py-3 text-[#0D0D0D] font-medium text-base"
       >
         {signInButton.text}
       </button>
 
-      {/* Phone Number Modal */}
-      <PhoneNumberModal
-        isOpen={isPhoneModalOpen}
-        onClose={() => setIsPhoneModalOpen(false)}
-        isMobile={isMobile}
-      />
+      {/* Login Modals */}
+      {loginModalType === LoginModalType.PHONE ? (
+        <PhoneNumberModal
+          isOpen={isLoginModalOpen}
+          onClose={() => setIsLoginModalOpen(false)}
+          isMobile={isMobile}
+        />
+      ) : (
+        <EmailModal
+          isOpen={isLoginModalOpen}
+          onClose={() => setIsLoginModalOpen(false)}
+          isMobile={isMobile}
+        />
+      )}
     </nav>
   );
 }

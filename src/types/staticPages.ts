@@ -4,6 +4,11 @@ export interface TitleWord {
   isItalic?: boolean;
 }
 
+export enum LoginModalType {
+  PHONE = "phone",
+  EMAIL = "email",
+}
+
 export interface Hero {
   titleWords: TitleWord[];
   description: string;
@@ -288,4 +293,5 @@ export interface NavbarProps {
   signInButton: {
     text: string;
   };
+  loginModalType: LoginModalType;
 }
