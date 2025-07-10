@@ -17,7 +17,6 @@ interface PhoneStepProps {
   onFocus: () => void;
   onBlur: () => void;
   onContinue: () => void;
-  isMobile?: boolean;
 }
 
 interface OTPStepProps {
@@ -28,7 +27,6 @@ interface OTPStepProps {
   onChangePhone: () => void;
   timeLeft: number;
   onResendOTP: () => void;
-  isMobile?: boolean;
 }
 
 // Phone Number Step Component
@@ -39,7 +37,6 @@ const PhoneStep = ({
   onFocus,
   onBlur,
   onContinue,
-  isMobile,
 }: PhoneStepProps) => (
   <>
     {/* Logo */}
@@ -47,8 +44,8 @@ const PhoneStep = ({
       <Image
         src="https://da8nru77lsio9.cloudfront.net/images/logo.svg"
         alt="DRIVEFITT"
-        width={isMobile ? 180 : 212}
-        height={isMobile ? 30 : 36}
+        width={212}
+        height={36}
         className="w-auto h-auto"
       />
     </div>
@@ -110,7 +107,6 @@ const OTPStep = ({
   onChangePhone,
   timeLeft,
   onResendOTP,
-  isMobile,
 }: OTPStepProps) => {
   const firstInputRef = useRef<HTMLInputElement>(null);
   const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
@@ -149,7 +145,7 @@ const OTPStep = ({
       {/* Description */}
       <div className="mb-8 md:mb-10 text-center">
         <p className="text-[#8A8A8A] font-light text-[20px] leading-[28px] tracking-[0%]">
-          We've sent an SMS with an
+          We&apos;ve sent an SMS with an
         </p>
         <p className="text-[#8A8A8A] font-light text-[20px] leading-[28px] tracking-[0%]">
           activation code to your phone
@@ -204,7 +200,7 @@ const OTPStep = ({
       {/* Resend OTP */}
       <div className="text-center">
         <span className="text-[#8A8A8A] font-medium text-base leading-[20px] tracking-[-0.02em]">
-          Didn't receive OTP?{" "}
+          Didn&apos;t receive OTP?{" "}
         </span>
         {timeLeft > 0 ? (
           <span className="text-[#00DBDC] font-medium text-base leading-[20px] tracking-[-0.02em]">
@@ -223,11 +219,7 @@ const OTPStep = ({
   );
 };
 
-const PhoneNumberModal = ({
-  isOpen,
-  onClose,
-  isMobile,
-}: PhoneNumberModalProps) => {
+const PhoneNumberModal = ({ isOpen, onClose }: PhoneNumberModalProps) => {
   const [modalState, setModalState] = useState<ModalState>("phone");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [isFocused, setIsFocused] = useState(false);
@@ -348,7 +340,6 @@ const PhoneNumberModal = ({
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}
                 onContinue={handleContinue}
-                isMobile={isMobile}
               />
             ) : (
               <OTPStep
@@ -359,7 +350,6 @@ const PhoneNumberModal = ({
                 onChangePhone={handleChangePhone}
                 timeLeft={timeLeft}
                 onResendOTP={handleResendOTP}
-                isMobile={isMobile}
               />
             )}
           </div>
