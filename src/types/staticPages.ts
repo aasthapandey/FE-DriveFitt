@@ -8,7 +8,9 @@ export interface Hero {
   titleWords: TitleWord[];
   description: string;
   desktopImage: string;
+  originalDesktopImage?: string;
   mobileImage: string;
+  originalMobileImage?: string;
   btnPrimaryText?: string;
   btnSecondaryText?: string;
 }

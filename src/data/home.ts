@@ -32,9 +32,13 @@ export const homeData: StaticPageData = {
       },
     ],
     description: "",
-    desktopImage: "https://da8nru77lsio9.cloudfront.net/images/hero/home.svg",
+    desktopImage: "https://da8nru77lsio9.cloudfront.net/images/hero/home.webp",
+    originalDesktopImage:
+      "https://da8nru77lsio9.cloudfront.net/images/hero/home-original.svg",
     mobileImage:
-      "https://da8nru77lsio9.cloudfront.net/images/hero/home-mobile.svg",
+      "https://da8nru77lsio9.cloudfront.net/images/hero/home-mobile.webp",
+    originalMobileImage:
+      "https://da8nru77lsio9.cloudfront.net/images/hero/home-mobile-original.svg",
     btnPrimaryText: "Join Now",
     btnSecondaryText: "Join Now",
   },
