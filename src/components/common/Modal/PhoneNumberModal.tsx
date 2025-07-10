@@ -14,8 +14,16 @@ const PhoneNumberModal = ({
   isMobile,
 }: PhoneNumberModalProps) => {
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [isFocused, setIsFocused] = useState(false);
 
   if (!isOpen) return null;
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.replace(/\D/g, ""); // Remove non-digits
+    if (value.length <= 10) {
+      setPhoneNumber(value);
+    }
+  };
 
   const handleContinue = () => {
     // Handle continue logic here
@@ -71,10 +79,13 @@ const PhoneNumberModal = ({
             <div className="w-full mb-6 md:mb-[24px]">
               <input
                 type="tel"
-                placeholder="Enter your phone number"
+                placeholder={isFocused ? "" : "Enter your phone number"}
                 value={phoneNumber}
-                onChange={(e) => setPhoneNumber(e.target.value)}
-                className="w-full bg-transparent border-b-2 border-[#333333] pl-4 pr-4 py-3 md:py-4 text-[#00DBDC] placeholder-[#8A8A8A] focus:outline-none transition-colors duration-200 font-light text-base md:text-2xl md:leading-7 caret-[#00DBDC]"
+                onChange={handlePhoneChange}
+                onFocus={() => setIsFocused(true)}
+                onBlur={() => setIsFocused(false)}
+                maxLength={10}
+                className="w-full bg-transparent border-b-2 border-[#333333] pl-4 pr-4 py-3 md:py-4 text-[#00DBDC] placeholder-[#8A8A8A] focus:outline-none transition-colors duration-200 font-light text-base md:text-2xl md:leading-7 caret-[#00DBDC] text-center"
                 style={{
                   fontFamily: "Inter, sans-serif",
                 }}
