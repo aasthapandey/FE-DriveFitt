@@ -69,7 +69,7 @@ const PhoneNumberModal = ({
             </div>
 
             {/* Phone Input */}
-            <div className="w-full mb-6 md:mb-8">
+            <div className="w-full mb-6 md:mb-[24px]">
               <input
                 type="tel"
                 placeholder="Enter your phone number"
@@ -85,14 +85,17 @@ const PhoneNumberModal = ({
             {/* Continue Button */}
             <button
               onClick={handleContinue}
-              className="w-full bg-[#00DBDC] rounded-lg py-3 md:py-4 text-[#0D0D0D] font-medium text-base md:text-lg mb-6 md:mb-8 hover:bg-[#00c5c6] transition-colors duration-200"
+              className="w-full bg-[#00DBDC] rounded-lg py-3 md:py-3 text-[#0D0D0D] font-medium text-base md:text-lg mb-6 md:mb-[48px] hover:bg-[#00c5c6] transition-colors duration-200"
             >
               Continue
             </button>
 
             {/* Terms and Privacy */}
-            <div className="text-center text-xs md:text-sm text-gray-400">
-              <span>* By Continuing you agree to the </span>
+            <div className="font-light md:text-base leading-5 tracking-[-0.02em] text-center text-[#6A6A6A] md:max-w-[291px]">
+              <span className="md:mx-3">
+                {" "}
+                * By Continuing you agree to the{" "}
+              </span>
               <br className="md:hidden" />
               <a
                 href="/terms"
