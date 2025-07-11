@@ -15,9 +15,9 @@ export const fitnessData: StaticPageData = {
     description:
       "Never Boring. Always Moving. High & Low Intensity Workouts That Keep You Going.",
     desktopImage:
-      "https://da8nru77lsio9.cloudfront.net/images/hero/fitness.svg",
+      "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/hero.webp",
     mobileImage:
-      "https://da8nru77lsio9.cloudfront.net/images/hero/fitness-mobile.svg",
+      "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/mobile-hero.webp",
     btnPrimaryText: "Book a free trial",
     btnSecondaryText: "Join Online",
   },
@@ -50,7 +50,7 @@ export const fitnessData: StaticPageData = {
         description:
           "Experience the energy, structure, and challenge of the global fitness race at your club",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-3.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/card5-2.webp",
         iconImage:
           "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-icon-3.svg",
         link: "",
@@ -70,7 +70,7 @@ export const fitnessData: StaticPageData = {
         description:
           "From sweat-drenched HIIT sessions to mindful low-impact training, our zones allow you to train full spectrum",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-5.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/card5-3.webp",
         iconImage:
           "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-icon-5.svg",
         link: "",
@@ -85,21 +85,21 @@ export const fitnessData: StaticPageData = {
         description:
           "Part fitness class, part fitness party. Experience heart-pumping music, and a group atmosphere that makes sweating feel like celebrating.",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/cricket/evolution-1.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/evolution-1.webp",
       },
       {
         title: "Mind body integration",
         description:
           "Experience programs that combine physical movement with mental well-being, such as yoga, and guided breathwork",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/fitness/evolution-1.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/evolution-2.webp",
       },
       {
         title: "Indoor running studio",
         description:
           "Join the pack. Run with purpose at Drive FIIT. Our program helps you build proper technique to help you excel across all race formats.",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/recovery/evolution-1.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/evolution-3.webp",
       },
     ],
   },
@@ -116,7 +116,7 @@ export const fitnessData: StaticPageData = {
         ],
         extraTagLabel: "",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/cricket/scroll-card-cricket-1.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/scroll-card-1.webp",
       },
       {
         subTitle: "Sustainable & Eco-Friendly equipment ",
@@ -127,7 +127,7 @@ export const fitnessData: StaticPageData = {
         ],
         extraTagLabel: "*Purchase separately",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/fitness/scroll-card-fitness-1.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/scroll-card-2.webp",
       },
       {
         subTitle: "ASmart Recovery Tools ",
@@ -138,7 +138,7 @@ export const fitnessData: StaticPageData = {
         ],
         extraTagLabel: "*Purchase separately",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/recovery/scroll-card-recovery-1.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/scroll-card-3.webp",
       },
     ],
   },
@@ -148,16 +148,16 @@ export const fitnessData: StaticPageData = {
       "Whether you're taking your first swing or prepping for tournaments – we've got a proven path for you.",
     btnLabel: "Explore Plan",
     image:
-      "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-banner.svg",
+      "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/banner.webp",
   },
   gallerySection: {
     title: "Fitness unfiltered",
     description: "Where every drop of sweat writes your success story",
     btnLabel: "View Gallery",
     imageList: [
-      "https://da8nru77lsio9.cloudfront.net/images/gallery-section/gallery-cricket-1.svg",
-      "https://da8nru77lsio9.cloudfront.net/images/gallery-section/gallery-cricket-2.svg",
-      "https://da8nru77lsio9.cloudfront.net/images/gallery-section/gallery-cricket-3.svg",
+      "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/gallery-1.webp",
+      "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/gallery-2.webp",
+      "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/gallery-3.webp",
     ],
   },
   memberSection: {
