@@ -81,7 +81,7 @@ export const homeData: StaticPageData = {
         description:
           "Expertly designed strength, conditioning, and performance training utilizing top-tier equipment, tailored for you.",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/card-section/home/fitness.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/homec/card4-2.webp",
         link: "/fitness",
       },
       {
@@ -89,7 +89,7 @@ export const homeData: StaticPageData = {
         description:
           "Cold Plunge, infrared sauna, compression & percussion therapy along with physiotherapy to recharge, recover, and reduce injury risk.",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/card-section/home/recovery.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/homec/card4-3.webp",
         link: "/recovery",
       },
       {
@@ -97,7 +97,7 @@ export const homeData: StaticPageData = {
         description:
           "Pace-enhancing run classes with functional drills to optimize speed, agility & endurance.",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/card-section/home/running.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/homec/card4-4.webp",
         link: "/running",
       },
     ],
@@ -111,21 +111,21 @@ export const homeData: StaticPageData = {
         title: "Group Classes",
         description: "",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/card-section/home/Group-Classes.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/homec/card3-1.webp",
         link: "/cricket",
       },
       {
         title: "Pilates",
         description: "",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/card-section/home/Pilates.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/homec/card3-2.webp",
         link: "/cricket",
       },
       {
         title: "Personal Training",
         description: "",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/card-section/home/Personal-Training.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/homec/card3-3.webp",
         link: "/cricket",
       },
     ],
@@ -151,7 +151,7 @@ export const homeData: StaticPageData = {
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/card-section/home/card-section-2-bg.svg",
         modalImage:
-          "https://da8nru77lsio9.cloudfront.net/images/card-section/home/woman-modal.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/homec/card2-2.webp",
         link: "/cricket",
       },
     ],
@@ -219,16 +219,15 @@ export const homeData: StaticPageData = {
       "Tour our state-of-the-art club and discover how Drive FIIT redefines space, energy, and purpose.",
     btnLabel: "Join online",
     imageList: [
-      "https://da8nru77lsio9.cloudfront.net/images/gallery-section/gallery-home-1.svg",
-      "https://da8nru77lsio9.cloudfront.net/images/gallery-section/gallery-home-2.svg",
-      "https://da8nru77lsio9.cloudfront.net/images/gallery-section/gallery-home-3.svg",
+      "https://da8nru77lsio9.cloudfront.net/images/homec/gallery-1.webp",
+      "https://da8nru77lsio9.cloudfront.net/images/homec/gallery-2.webp",
+      "https://da8nru77lsio9.cloudfront.net/images/homec/gallery-3.webp",
     ],
   },
   sportsClubSection: {
     title: "The Drive FIIT sports club philosophy",
     description: "The Drive FIIT Model: Engineered for Excellence",
-    image:
-      "https://da8nru77lsio9.cloudfront.net/images/card-section/home/Personal-Training.svg",
+    image: "https://da8nru77lsio9.cloudfront.net/images/homec/card1.webp",
   },
   memberSection: {
     title: "What our members are saying",
@@ -239,21 +238,21 @@ export const homeData: StaticPageData = {
         title: "Riya Bajaj",
         description: "Yoga Class",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/member-section/member-1.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/homec/member-1.webp",
         link: "/cricket",
       },
       {
         title: "Kunal Jain",
         description: "Membership plan",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/member-section/member-2.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/homec/member-2.webp",
         link: "/cricket",
       },
       {
         title: "Rahul Kapoor",
         description: "Membership plan",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/member-section/member-3.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/homec/member-3.webp",
         link: "/cricket",
       },
     ],
