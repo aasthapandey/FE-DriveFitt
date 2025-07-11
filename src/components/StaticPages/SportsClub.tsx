@@ -5,15 +5,16 @@ import Image from "next/image";
 const SportsClub = ({ data }: { data: SportsClubSectionProps }) => {
   const { title, description, image } = data;
   return (
-    <section className="md:px-[120px] px-6 flex flex-col gap-5">
+    <section className="-mb-[94px]">
       <TitleDescription title={title || ""} description={description || ""} />
-      <div
-        className="border-[2px] border-[#262626] rounded-[20px] md:rounded-[40px] w-full h-[313px] md:h-[422px]"
-        style={{
-          background: "linear-gradient(180deg, #1D1D1D 0%, #0D0D0D 133.18%)",
-        }}
-      >
-        <Image src={image} alt={title || ""} width={100} height={100} />
+      <div className="w-full flex justify-center">
+        <Image
+          src={image}
+          alt={title || ""}
+          width={1440}
+          height={775}
+          className="mt-[1px] max-w-full h-auto"
+        />
       </div>
     </section>
   );

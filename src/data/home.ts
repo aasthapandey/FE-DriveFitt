@@ -73,7 +73,7 @@ export const homeData: StaticPageData = {
         description:
           "Fuel up with wholesome meals, recovery shakes, and smart hydration - designed for every fitness goal.",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/card-section/home/cricket.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/homec/mobile-card4-1.webp",
         link: "/cricket",
       },
       {
@@ -227,7 +227,7 @@ export const homeData: StaticPageData = {
   sportsClubSection: {
     title: "The Drive FIIT sports club philosophy",
     description: "The Drive FIIT Model: Engineered for Excellence",
-    image: "https://da8nru77lsio9.cloudfront.net/images/homec/card1.svg",
+    image: "https://da8nru77lsio9.cloudfront.net/images/homec/ecosystem.svg",
   },
   memberSection: {
     title: "What our members are saying",
