@@ -151,7 +151,7 @@ export const homeData: StaticPageData = {
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/card-section/home/card-section-2-bg.svg",
         modalImage:
-          "https://da8nru77lsio9.cloudfront.net/images/homec/card2-2.webp",
+          "https://da8nru77lsio9.cloudfront.net/images/homec/card2-2.svg",
         link: "/cricket",
       },
     ],
@@ -227,7 +227,7 @@ export const homeData: StaticPageData = {
   sportsClubSection: {
     title: "The Drive FIIT sports club philosophy",
     description: "The Drive FIIT Model: Engineered for Excellence",
-    image: "https://da8nru77lsio9.cloudfront.net/images/homec/card1.webp",
+    image: "https://da8nru77lsio9.cloudfront.net/images/homec/card1.svg",
   },
   memberSection: {
     title: "What our members are saying",

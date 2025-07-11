@@ -1,8 +1,9 @@
 import { SportsClubSectionProps } from "@/types/staticPages";
 import TitleDescription from "@/components/common/TitleDescription";
+import Image from "next/image";
 
 const SportsClub = ({ data }: { data: SportsClubSectionProps }) => {
-  const { title, description } = data;
+  const { title, description, image } = data;
   return (
     <section className="md:px-[120px] px-6 flex flex-col gap-5">
       <TitleDescription title={title || ""} description={description || ""} />
@@ -11,7 +12,9 @@ const SportsClub = ({ data }: { data: SportsClubSectionProps }) => {
         style={{
           background: "linear-gradient(180deg, #1D1D1D 0%, #0D0D0D 133.18%)",
         }}
-      ></div>
+      >
+        <Image src={image} alt={title || ""} width={100} height={100} />
+      </div>
     </section>
   );
 };
