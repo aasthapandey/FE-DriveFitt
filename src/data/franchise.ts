@@ -108,9 +108,9 @@ export const franchiseData: FranchisePageData = {
     description:
       "Comprehensive support to ensure your success from day one and beyond",
     imageMobile:
-      "https://da8nru77lsio9.cloudfront.net/images/franchise/ShubhmanPreityMobile.svg",
+      "https://da8nru77lsio9.cloudfront.net/images/franchise/shubman-gill-pretty-zinta-mobile.webp",
     imageDesktop:
-      "https://da8nru77lsio9.cloudfront.net/images/franchise/ShubhmanPreityDesktop.svg",
+      "https://da8nru77lsio9.cloudfront.net/images/franchise/shubman-gill-pretty-zinta.webp",
     cardList: [
       {
         icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/receive-1.svg",

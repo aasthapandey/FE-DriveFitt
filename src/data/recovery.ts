@@ -12,9 +12,9 @@ export const recoveryData: StaticPageData = {
     titleWords: [{ text: "Recover at Drive FITT", color: "#FFFFFF" }],
     description: "Train hard. Recover smarter. Perform your best.",
     desktopImage:
-      "https://da8nru77lsio9.cloudfront.net/images/hero/recovery.svg",
+      "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/hero.webp",
     mobileImage:
-      "https://da8nru77lsio9.cloudfront.net/images/hero/recovery-mobile.svg",
+      "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/mobile-hero.webp",
     btnPrimaryText: "Book a free trial",
     btnSecondaryText: "Join Online",
   },
@@ -26,7 +26,7 @@ export const recoveryData: StaticPageData = {
         title: "Infrared Sauna",
         description: "Deep detox. Better circulation. Less soreness.",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-1.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/card5-1.webp",
         iconImage:
           "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-icon-1.svg",
         link: "",
@@ -44,7 +44,7 @@ export const recoveryData: StaticPageData = {
         title: "Compression therapy",
         description: "Circulation boost. Faster leg recovery.",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-3.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/card5-2.webp",
         iconImage:
           "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-icon-3.svg",
         link: "",
@@ -62,7 +62,7 @@ export const recoveryData: StaticPageData = {
         title: "Sports physiotherapy",
         description: "Injury prevention. Rehab. Pro-level care.",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-5.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/card5-3.webp",
         iconImage:
           "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-icon-5.svg",
         link: "",
@@ -77,21 +77,21 @@ export const recoveryData: StaticPageData = {
         description:
           "Bowling, batting, and fielding all stress joints and muscles. Recovery ensures season-long stamina, injury prevention, and match-day readiness.",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/cricket/evolution-1.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/evolution-1.webp",
       },
       {
         title: "For fitness enthusiasts",
         description:
           "Intense training demands muscular repair and nervous system reset. Recovery helps you train harder without breaking down.",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/fitness/evolution-1.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/evolution-2.webp",
       },
       {
         title: "For runners",
         description:
           "Recovery mitigates joint stress, prevents overuse injuries, and improves endurance through smarter mileage management.",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/recovery/evolution-1.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/evolution-3.webp",
       },
     ],
   },
@@ -108,7 +108,7 @@ export const recoveryData: StaticPageData = {
         ],
         extraTagLabel: "",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/cricket/scroll-card-cricket-1.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/scroll-card-1.webp",
       },
       {
         subTitle: "Performance meal prep ",
@@ -119,7 +119,7 @@ export const recoveryData: StaticPageData = {
         ],
         extraTagLabel: "*Purchase separately",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/fitness/scroll-card-fitness-1.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/scroll-card-2.webp",
       },
       {
         subTitle: "Hydration & Supplement strategies ",
@@ -130,7 +130,7 @@ export const recoveryData: StaticPageData = {
         ],
         extraTagLabel: "*Purchase separately",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/recovery/scroll-card-recovery-1.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/scroll-card-3.webp",
       },
     ],
   },
@@ -140,16 +140,16 @@ export const recoveryData: StaticPageData = {
       "Whether you're taking your first swing or prepping for tournaments – we've got a proven path for you.",
     btnLabel: "Explore Plan",
     image:
-      "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-banner.svg",
+      "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/banner.webp",
   },
   gallerySection: {
     title: "Fitness Unfiltered",
     description: "Where every drop of sweat writes your success story",
     btnLabel: "View Gallery",
     imageList: [
-      "https://da8nru77lsio9.cloudfront.net/images/gallery-section/gallery-cricket-1.svg",
-      "https://da8nru77lsio9.cloudfront.net/images/gallery-section/gallery-cricket-2.svg",
-      "https://da8nru77lsio9.cloudfront.net/images/gallery-section/gallery-cricket-3.svg",
+      "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/gallery-1.webp",
+      "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/gallery-2.webp",
+      "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/gallery-3.webp",
     ],
   },
   memberSection: {

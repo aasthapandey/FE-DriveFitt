@@ -148,7 +148,7 @@ export const fitnessData: StaticPageData = {
       "Whether you're taking your first swing or prepping for tournaments – we've got a proven path for you.",
     btnLabel: "Explore Plan",
     image:
-      "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/banner.webp",
+      "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/banner.webp",
   },
   gallerySection: {
     title: "Fitness unfiltered",

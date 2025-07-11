@@ -16,9 +16,9 @@ export const runningData: StaticPageData = {
     description:
       "India's First Professional Indoor Running Studio — Where Running Becomes a Lifestyle",
     desktopImage:
-      "https://da8nru77lsio9.cloudfront.net/images/hero/running.svg",
+      "https://da8nru77lsio9.cloudfront.net/images/running-compressed/hero.webp",
     mobileImage:
-      "https://da8nru77lsio9.cloudfront.net/images/hero/running-mobile.svg",
+      "https://da8nru77lsio9.cloudfront.net/images/running-compressed/mobile-hero.webp",
     btnPrimaryText: "Book a free trial",
     btnSecondaryText: "Join Online",
   },
@@ -31,7 +31,7 @@ export const runningData: StaticPageData = {
         description:
           "Exclusive group race training programs so you feel confident on race days",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-1.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/running-compressed/card5-1.webp",
         iconImage:
           "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-icon-1.svg",
         link: "",
@@ -51,7 +51,7 @@ export const runningData: StaticPageData = {
         description:
           "Climate-controlled 200m track with shock-absorbing surface for joint-friendly, year-round training.",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-3.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/running-compressed/card5-2.webp",
         iconImage:
           "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-icon-3.svg",
         link: "",
@@ -70,7 +70,7 @@ export const runningData: StaticPageData = {
         description:
           "Expert runners who inspire, instruct, and hold you accountable",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-5.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/running-compressed/card5-3.webp",
         iconImage:
           "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-icon-5.svg",
         link: "",
@@ -85,21 +85,21 @@ export const runningData: StaticPageData = {
         description:
           "Feed off the group's drive—our runners consistently report 30% higher motivation than solo training.",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/cricket/evolution-1.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/running-compressed/evolution-1.webp",
       },
       {
         title: "Expert coaching ",
         description:
           "From cadence to kick-finishes, our certified coaches refine your form, race strategy, and the resilience needed to break through plateaus.",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/fitness/evolution-1.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/running-compressed/evolution-2.webp",
       },
       {
         title: "Progress tracking ",
         description:
           "Watch your pace, endurance, and technique evolve with real-time data on every run.",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/recovery/evolution-1.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/running-compressed/evolution-3.webp",
       },
     ],
   },
@@ -116,7 +116,7 @@ export const runningData: StaticPageData = {
         ],
         extraTagLabel: "",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/cricket/scroll-card-cricket-1.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/running-compressed/scroll-card-1.webp",
       },
       {
         subTitle: "Smart interval training ",
@@ -127,7 +127,7 @@ export const runningData: StaticPageData = {
         ],
         extraTagLabel: "",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/fitness/scroll-card-fitness-1.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/running-compressed/scroll-card-2.webp",
       },
       {
         subTitle: "Power-building routines ",
@@ -138,7 +138,7 @@ export const runningData: StaticPageData = {
         ],
         extraTagLabel: "*Purchase separately",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/recovery/scroll-card-recovery-1.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/running-compressed/scroll-card-3.webp",
       },
     ],
   },
@@ -148,16 +148,16 @@ export const runningData: StaticPageData = {
       "Whether you're taking your first swing or prepping for tournaments – we've got a proven path for you.",
     btnLabel: "Explore Plan",
     image:
-      "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-banner.svg",
+      "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/banner.webp",
   },
   gallerySection: {
     title: "Fitness Unfiltered",
     description: "Where every drop of sweat writes your success story",
     btnLabel: "View Gallery",
     imageList: [
-      "https://da8nru77lsio9.cloudfront.net/images/gallery-section/gallery-cricket-1.svg",
-      "https://da8nru77lsio9.cloudfront.net/images/gallery-section/gallery-cricket-2.svg",
-      "https://da8nru77lsio9.cloudfront.net/images/gallery-section/gallery-cricket-3.svg",
+      "https://da8nru77lsio9.cloudfront.net/images/running-compressed/gallery-1.webp",
+      "https://da8nru77lsio9.cloudfront.net/images/running-compressed/gallery-2.webp",
+      "https://da8nru77lsio9.cloudfront.net/images/running-compressed/gallery-3.webp",
     ],
   },
   memberSection: {
