@@ -69,6 +69,7 @@ const ScrollingCardSection = ({
 
   const renderCardImage = (
     <div
+      key={activeIndex}
       className={`rounded-[20px] md:rounded-[40px] p-[2px] h-[396px] md:h-[598px] ${
         isMobile && isInView ? "sticky top-4" : ""
       }`}
@@ -77,13 +78,13 @@ const ScrollingCardSection = ({
       }}
     >
       <div
+        key={`card-image-${activeIndex}`}
         className="rounded-[20px] md:rounded-[40px] w-full h-full cursor-pointer flex flex-col justify-center p-6 md:p-10 transition-all duration-500 ease-in-out"
         style={{
           background: `linear-gradient(180.09deg, rgba(13, 13, 13, 0) 50%, #0D0D0D 99.92%), url(${cardSection[activeIndex].backgroundImage})`,
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center center",
-          backgroundAttachment: "local",
-          backgroundSize: "cover",
+          backgroundSize: "contain",
         }}
       />
     </div>
