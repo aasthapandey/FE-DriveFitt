@@ -16,9 +16,9 @@ export const cricketData: StaticPageData = {
     description:
       "Experience Gurugram's premier sports club & fitness center – Cricket, Fitness, Recovery, Community…and more",
     desktopImage:
-      "https://da8nru77lsio9.cloudfront.net/images/hero/cricket.svg",
+      "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/hero.webp",
     mobileImage:
-      "https://da8nru77lsio9.cloudfront.net/images/hero/cricket-mobile.svg",
+      "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/hero-mobile.webp",
     btnPrimaryText: "Book a free trial",
     btnSecondaryText: "Join Online",
   },
@@ -31,7 +31,7 @@ export const cricketData: StaticPageData = {
         description:
           "State-of-the-art indoor cricket nets equipped with advanced bowling machines for all skill levels.",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-1.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/card5-1.webp",
         iconImage:
           "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-icon-1.svg",
         link: "",
@@ -50,7 +50,7 @@ export const cricketData: StaticPageData = {
         description:
           "Professional-grade pitches with perfect, consistent bounce every time.",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-3.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/card5-2.webp",
         iconImage:
           "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-icon-3.svg",
         link: "",
@@ -68,7 +68,7 @@ export const cricketData: StaticPageData = {
         title: "Professional coaching",
         description: "Led by certified and experienced trainers.",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-5.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/card5-3.webp",
         iconImage:
           "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-icon-5.svg",
         link: "",
@@ -83,20 +83,20 @@ export const cricketData: StaticPageData = {
         description:
           "See measurable improvements in weeks, not years, with integrated performance analytics.",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/cricket/evolution-1.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/evolution-1.webp",
       },
       {
         title: "Train Smarter, Not Harder",
         description:
           "Tailored one-on-one sessions focused on skill development, strength, agility, and injury prevention",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/fitness/evolution-1.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/evolution-2.webp",
       },
       {
         title: "Gear Up Like A Pro",
         description: "Finest Cricket Equipment & Accessories",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/recovery/evolution-1.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/evolution-3.webp",
       },
     ],
   },
@@ -115,7 +115,7 @@ export const cricketData: StaticPageData = {
         ],
         extraTagLabel: "*Purchase separately",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/cricket/scroll-card-cricket-1.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/scroll-card-1.webp",
       },
       {
         subTitle: "Performance dashboard ",
@@ -126,7 +126,7 @@ export const cricketData: StaticPageData = {
         ],
         extraTagLabel: "*Purchase separately",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/fitness/scroll-card-fitness-1.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/scroll-card-2.webp",
       },
       {
         subTitle: "Adaptive bowling machine ",
@@ -137,7 +137,7 @@ export const cricketData: StaticPageData = {
         ],
         extraTagLabel: "*Purchase separately",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/recovery/scroll-card-recovery-1.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/scroll-card-3.webp",
       },
     ],
   },
@@ -147,7 +147,7 @@ export const cricketData: StaticPageData = {
       "Whether you're taking your first swing or prepping for tournaments – we've got a proven path for you.",
     btnLabel: "Explore Plan",
     image:
-      "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-banner.svg",
+      "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/banner.webp",
   },
   gallerySection: {
     title: "Cricket in Action",
@@ -155,9 +155,9 @@ export const cricketData: StaticPageData = {
       "Relive every swing, sprint and six—from net practice to match-day magic in action.",
     btnLabel: "View Gallery",
     imageList: [
-      "https://da8nru77lsio9.cloudfront.net/images/gallery-section/gallery-cricket-1.svg",
-      "https://da8nru77lsio9.cloudfront.net/images/gallery-section/gallery-cricket-2.svg",
-      "https://da8nru77lsio9.cloudfront.net/images/gallery-section/gallery-cricket-3.svg",
+      "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/gallery-1.webp",
+      "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/gallery-2.webp",
+      "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/gallery-3.webp",
     ],
   },
   memberSection: {
@@ -169,21 +169,21 @@ export const cricketData: StaticPageData = {
         title: "Kunal Bajaj",
         description: "Membership plan",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/member-section/cricket-member-1.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/member-1.webp",
         link: "/cricket",
       },
       {
         title: "Kunal Jain",
         description: "Membership plan",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/member-section/cricket-member-2.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/member-2.webp",
         link: "/cricket",
       },
       {
         title: "Rahul Kapoor",
         description: "Membership plan",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/member-section/cricket-member-3.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/member-3.webp",
         link: "/cricket",
       },
     ],
