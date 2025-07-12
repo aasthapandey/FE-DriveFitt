@@ -71,7 +71,7 @@ export const homeData: StaticPageData = {
       {
         title: "Cricket",
         description:
-          "Fuel up with wholesome meals, recovery shakes, and smart hydration - designed for every fitness goal.",
+          "World-class indoor nets, ball tracking & analytics for cricket & pro coaching for all skill levels",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/homec/mobile-card4-1.webp",
         link: "/cricket",
@@ -140,7 +140,7 @@ export const homeData: StaticPageData = {
       {
         title: "Protein BAR",
         description:
-          "Fuel up with wholesome meals, recovery shakes, and smart hydration—designed for every fitness goal.",
+          "World-class indoor nets, ball tracking & analytics for cricket & pro coaching for all skill levels.",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/card-section/home/card-section-2-bg.svg",
         modalImage:
