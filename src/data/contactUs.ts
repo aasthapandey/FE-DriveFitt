@@ -20,7 +20,7 @@ export const contactUsData: ContactUsPageData = {
   footerInfoSection: {
     footerInfoList: [
       {
-        title: "Chat to us",
+        title: "Chat To Us",
         description: "Our friendly team is here to help",
         email: "info@drivefitt.club",
         image: "https://da8nru77lsio9.cloudfront.net/images/ChatToUs.svg",
@@ -28,7 +28,7 @@ export const contactUsData: ContactUsPageData = {
       {
         title: "Visit us",
         description: "Welcome to Our Main Club Branch.",
-        email: "Sector-56, Golf Course RdGurugram, Haryana 122022",
+        email: "Sector-56, Golf Course Rd Gurugram, Haryana 122022",
         image: "https://da8nru77lsio9.cloudfront.net/images/VisitUs.svg",
       },
       {
@@ -60,8 +60,8 @@ export const contactUsData: ContactUsPageData = {
       },
     ],
     contactFormSection: {
-      title: "Get in touch",
-      description: "We'd love to hear from you. Please fill out this form.",
+      title: "Get In Touch",
+      description: "We'd Love To Hear From You. Please Fill Out This Form.",
       submitButtonText: "Send Message",
       fields: {
         firstName: {
