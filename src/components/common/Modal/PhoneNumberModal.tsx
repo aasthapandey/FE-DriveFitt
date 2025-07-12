@@ -226,6 +226,20 @@ const PhoneNumberModal = ({ isOpen, onClose }: PhoneNumberModalProps) => {
   const [otpValues, setOtpValues] = useState<string[]>(["", "", "", ""]);
   const [timeLeft, setTimeLeft] = useState(59);
 
+  // Disable/enable body scroll when modal opens/closes
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+
+    // Cleanup function to ensure scroll is re-enabled when component unmounts
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen]);
+
   // Reset modal state when closed
   useEffect(() => {
     if (!isOpen) {
