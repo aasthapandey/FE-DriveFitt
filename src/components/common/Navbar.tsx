@@ -2,6 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { NavbarProps, LoginModalType } from "@/types/staticPages";
 import { PhoneNumberModal, EmailModal } from "./Modal";
 
@@ -14,6 +15,7 @@ export default function Navbar({ data, isMobile }: Props) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
   const { logo, navLinks, signInButton, loginModalType } = data;
 
   useEffect(() => {
@@ -25,6 +27,13 @@ export default function Navbar({ data, isMobile }: Props) {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const isActiveLink = (href: string) => {
+    if (href === "/") {
+      return pathname === "/";
+    }
+    return pathname === href;
+  };
 
   if (isMobile) {
     return (
@@ -79,7 +88,11 @@ export default function Navbar({ data, isMobile }: Props) {
                 <div className="p-4 text-center w-full" key={idx}>
                   <Link
                     href={link.href}
-                    className="text-white hover:text-[#00DBDC] transition-colors text-lg"
+                    className={`text-lg transition-colors ${
+                      isActiveLink(link.href)
+                        ? "text-[#00DBDC]"
+                        : "text-white hover:text-[#00DBDC]"
+                    }`}
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {link.title}
@@ -107,7 +120,11 @@ export default function Navbar({ data, isMobile }: Props) {
           <Link
             key={idx}
             href={link.href}
-            className="text-white hover:text-[#00DBDC] transition-colors"
+            className={`transition-colors ${
+              isActiveLink(link.href)
+                ? "text-[#00DBDC]"
+                : "text-white hover:text-[#00DBDC]"
+            }`}
           >
             {link.title}
           </Link>
