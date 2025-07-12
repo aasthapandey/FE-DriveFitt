@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NavbarProps, LoginModalType } from "@/types/staticPages";
 import { PhoneNumberModal, EmailModal } from "./Modal";
 
@@ -13,11 +13,26 @@ interface Props {
 export default function Navbar({ data, isMobile }: Props) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const { logo, navLinks, signInButton, loginModalType } = data;
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      setIsScrolled(scrollTop > 0);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   if (isMobile) {
     return (
-      <nav className="flex justify-between items-center py-5 px-6 md:py-6 md:px-4 bg-transparent w-full">
+      <nav
+        className={`sticky top-0 z-50 flex justify-between items-center py-5 px-6 md:py-6 md:px-4 w-full transition-all duration-300 ${
+          isScrolled ? "bg-[#0D0D0D]/95 backdrop-blur-sm" : "bg-transparent"
+        }`}
+      >
         <button
           className="relative z-20"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -58,7 +73,7 @@ export default function Navbar({ data, isMobile }: Props) {
 
         {/* Mobile Menu Overlay */}
         {isMenuOpen && (
-          <div className="fixed inset-0 bg-[#1A1A1A] z-10000">
+          <div className="fixed inset-0 bg-[#1A1A1A] z-[9999]">
             <div className="flex flex-col items-center justify-center pt-24">
               {navLinks.map((link, idx) => (
                 <div className="p-4 text-center w-full" key={idx}>
@@ -79,7 +94,11 @@ export default function Navbar({ data, isMobile }: Props) {
   }
 
   return (
-    <nav className="flex justify-between items-center py-8 pr-[100px] pl-[120px] gap-4 bg-transparent">
+    <nav
+      className={`sticky top-0 z-50 flex justify-between items-center py-8 pr-[100px] pl-[120px] gap-4 transition-all duration-300 ${
+        isScrolled ? "bg-[#0D0D0D]/95 backdrop-blur-sm" : "bg-transparent"
+      }`}
+    >
       <Link href="/">
         <Image src={logo} alt="logo" width={212} height={36} />
       </Link>

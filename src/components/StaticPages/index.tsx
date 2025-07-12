@@ -151,64 +151,63 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
   };
 
   return (
-    <div className="bg-[#0D0D0D] flex flex-col gap-[60px] md:gap-[160px] w-full">
-      {Object.entries(data).map(([key, value]) => {
-        const component = renderComponent(key, value);
-        if (component) {
-          if (key === "hero") {
-            return (
-              <div
-                key={key}
-                className="w-full bg-center bg-no-repeat h-auto md:mb-[-60px]"
-                style={{
-                  background: `url(${
-                    isMobile
-                      ? (value as Hero).mobileImage
-                      : (value as Hero).desktopImage
-                  })`,
-                  backgroundPosition: "top center",
-                  backgroundSize: "contain",
-                  backgroundRepeat: "no-repeat",
-                }}
-              >
-                <Navbar data={navbarData} isMobile={isMobile} />
-                {component}
-              </div>
-            );
+    <div className="bg-[#0D0D0D] w-full">
+      <Navbar data={navbarData} isMobile={isMobile} />
+      <div className="flex flex-col gap-[60px] md:gap-[160px] w-full">
+        {Object.entries(data).map(([key, value]) => {
+          const component = renderComponent(key, value);
+          if (component) {
+            if (key === "hero") {
+              return (
+                <div
+                  key={key}
+                  className="w-full bg-center bg-no-repeat h-auto md:mb-[-60px]"
+                  style={{
+                    background: `url(${
+                      isMobile
+                        ? (value as Hero).mobileImage
+                        : (value as Hero).desktopImage
+                    })`,
+                    backgroundPosition: "top center",
+                    backgroundSize: "contain",
+                    backgroundRepeat: "no-repeat",
+                  }}
+                >
+                  {component}
+                </div>
+              );
+            }
+            if (key === "comingSoonSection") {
+              return (
+                <div
+                  key={key}
+                  className={`w-full ${
+                    isMobile ? "bg-contain" : "bg-cover"
+                  } bg-center bg-no-repeat h-auto`}
+                >
+                  {component}
+                </div>
+              );
+            }
+            if (key === "error404Section") {
+              return (
+                <div key={key} className="w-full">
+                  {component}
+                </div>
+              );
+            }
+            if (key === "policySection") {
+              return (
+                <div key={key} className="w-full">
+                  {component}
+                </div>
+              );
+            }
+            return <div key={key}>{component}</div>;
           }
-          if (key === "comingSoonSection") {
-            return (
-              <div
-                key={key}
-                className={`w-full ${
-                  isMobile ? "bg-contain" : "bg-cover"
-                } bg-center bg-no-repeat h-auto`}
-              >
-                <Navbar data={navbarData} isMobile={isMobile} />
-                {component}
-              </div>
-            );
-          }
-          if (key === "error404Section") {
-            return (
-              <div key={key} className="w-full">
-                <Navbar data={navbarData} isMobile={isMobile} />
-                {component}
-              </div>
-            );
-          }
-          if (key === "policySection") {
-            return (
-              <div key={key} className="w-full">
-                <Navbar data={navbarData} isMobile={isMobile} />
-                {component}
-              </div>
-            );
-          }
-          return <div key={key}>{component}</div>;
-        }
-        return null;
-      })}
+          return null;
+        })}
+      </div>
     </div>
   );
 };

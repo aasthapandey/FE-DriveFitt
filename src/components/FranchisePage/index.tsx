@@ -99,33 +99,35 @@ const FranchisePage = ({ data, pageName, isMobile }: FranchisePageProps) => {
   };
 
   return (
-    <div className="bg-[#0D0D0D] flex flex-col gap-[60px] md:gap-[160px] w-full">
-      {Object.entries(data).map(([key, value]) => {
-        const component = renderComponent(key, value);
-        if (component) {
-          if (key === "hero") {
-            return (
-              <div
-                key={key}
-                className={`w-full bg-center bg-no-repeat h-auto`}
-                style={{
-                  background: `url(${
-                    isMobile ? "" : (value as FranchiseHero).desktopImage
-                  })`,
-                  backgroundPosition: "top center",
-                  backgroundSize: "cover",
-                  backgroundRepeat: "no-repeat",
-                }}
-              >
-                <Navbar data={navbarData} isMobile={isMobile} />
-                {component}
-              </div>
-            );
+    <div className="bg-[#0D0D0D] w-full">
+      <Navbar data={navbarData} isMobile={isMobile} />
+      <div className="flex flex-col gap-[60px] md:gap-[160px] w-full">
+        {Object.entries(data).map(([key, value]) => {
+          const component = renderComponent(key, value);
+          if (component) {
+            if (key === "hero") {
+              return (
+                <div
+                  key={key}
+                  className={`w-full bg-center bg-no-repeat h-auto`}
+                  style={{
+                    background: `url(${
+                      isMobile ? "" : (value as FranchiseHero).desktopImage
+                    })`,
+                    backgroundPosition: "top center",
+                    backgroundSize: "cover",
+                    backgroundRepeat: "no-repeat",
+                  }}
+                >
+                  {component}
+                </div>
+              );
+            }
+            return <div key={key}>{component}</div>;
           }
-          return <div key={key}>{component}</div>;
-        }
-        return null;
-      })}
+          return null;
+        })}
+      </div>
     </div>
   );
 };

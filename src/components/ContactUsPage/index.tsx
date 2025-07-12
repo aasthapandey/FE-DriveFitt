@@ -26,6 +26,7 @@ const ContactUsPage = ({ data, isMobile }: StaticPageProps) => {
 
   return (
     <div className="bg-[#0D0D0D] flex flex-col w-full">
+      <Navbar data={navbarData} isMobile={isMobile} />
       <div
         className="w-full bg-center bg-no-repeat h-auto"
         style={{
@@ -35,9 +36,7 @@ const ContactUsPage = ({ data, isMobile }: StaticPageProps) => {
           backgroundRepeat: "no-repeat",
         }}
       >
-        <Navbar data={navbarData} isMobile={isMobile} />
-
-        <div className="mt-[209px] md:mt-[108px]">
+        <div className="mt-[109px] md:mt-[108px]">
           <div className="flex flex-col gap-3 md:gap-[18px] ">
             <h1 className="md:px-[120px] px-6 text-[40px] md:text-[68px] text-center md:text-left font-bold text-white tracking-[-2px] leading-[44px] md:leading-[72px]">
               {titleWords.map((word, index) => (
