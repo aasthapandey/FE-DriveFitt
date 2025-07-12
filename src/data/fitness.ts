@@ -126,7 +126,8 @@ export const fitnessData: StaticPageData = {
           "Bat Sensor*- real-time insights on Bat Swing, Speed, Angles, Power & Efficiency ",
         ],
         extraTagLabel: "*Purchase separately",
-        backgroundImage: "/images/fitness-compressed/scroll-card-2.webp",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/scroll-card-2.webp",
       },
       {
         subTitle: "Smart Recovery Tools ",

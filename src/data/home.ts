@@ -261,8 +261,10 @@ export const homeData: StaticPageData = {
     title: "Your exclusive access, now on mobile",
     description:
       "Our app makes it easy to join classes, connect with coaches and track your journey.",
-    googlePlayImg: "/images/google-app-store.svg",
-    appStoreImg: "/images/apple-app-store.svg",
+    googlePlayImg:
+      "https://da8nru77lsio9.cloudfront.net/images/google-app-store.svg",
+    appStoreImg:
+      "https://da8nru77lsio9.cloudfront.net/images/apple-app-store.svg",
     desktopImage:
       "https://da8nru77lsio9.cloudfront.net/images/app-download/desktop-bg.svg",
     mobileImage:

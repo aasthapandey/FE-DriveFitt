@@ -316,7 +316,7 @@ const PhoneNumberModal = ({ isOpen, onClose }: PhoneNumberModalProps) => {
           className="z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-gray-600 bg-opacity-50 flex items-center justify-center hover:bg-opacity-70 transition-all duration-200 md:mb-[22px]"
         >
           <Image
-            src="/images/otp-modal-close-icon.svg"
+            src="https://da8nru77lsio9.cloudfront.net/images/otp-modal-close-icon.svg"
             alt="Close"
             width={16}
             height={16}
