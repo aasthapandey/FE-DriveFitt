@@ -40,6 +40,7 @@ import ScrollingCardSection from "@/components/StaticPages/ScrollingCardSection"
 import ComingSoonSection from "@/components/StaticPages/ComingSoonSection";
 import Error404Section from "@/components/StaticPages/Error404Section";
 import PolicySection from "@/components/StaticPages/PolicySection";
+import JoinNow from "@/components/common/JoinNow";
 
 interface StaticPageProps {
   data: StaticPageData;
@@ -69,6 +70,7 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
       | ComingSoonSectionType
       | Error404SectionType
       | PolicySectionType
+      | {}
   ) => {
     switch (key) {
       case "hero":
@@ -152,6 +154,8 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
             isMobile={isMobile}
           />
         );
+      case "joinNowSection":
+        return <JoinNow isMobile={isMobile} />;
       default:
         return null;
     }

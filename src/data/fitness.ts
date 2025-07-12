@@ -183,6 +183,7 @@ export const fitnessData: StaticPageData = {
       },
     ],
   },
+  joinNowSection: {},
   faqSection: {
     title: "Frequently Asked Questions",
     description: "Everything you need to know about the Drivefitt and billing.",

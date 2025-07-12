@@ -262,6 +262,7 @@ export interface StaticPageData {
   gallerySection?: GallerySectionProps;
   sportsClubSection?: SportsClubSectionProps;
   memberSection?: MemberSectionProps;
+  joinNowSection?: {};
   evolutionSection?: EvolutionSectionProps;
   appDownloadSection?: AppDownloadProps;
   footerInfoSection?: FooterInfoProps;
