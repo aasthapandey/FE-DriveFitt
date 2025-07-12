@@ -432,10 +432,6 @@ export const homeData: StaticPageData = {
             title: "Privacy & Policy",
             link: "/privacy",
           },
-          {
-            title: "Licenses",
-            link: "/licenses",
-          },
         ],
       },
     ],

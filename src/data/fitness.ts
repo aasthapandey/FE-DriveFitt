@@ -143,8 +143,7 @@ export const fitnessData: StaticPageData = {
     description:
       "Whether you're taking your first swing or prepping for tournaments – we've got a proven path for you.",
     btnLabel: "Explore Plan",
-    image:
-      "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/banner.webp",
+    image: "https://da8nru77lsio9.cloudfront.net/images/banner1.webp",
   },
   gallerySection: {
     title: "Fitness unfiltered",
@@ -332,7 +331,6 @@ export const fitnessData: StaticPageData = {
         links: [
           { title: "Terms & Conditions", link: "/terms" },
           { title: "Privacy & Policy", link: "/privacy" },
-          { title: "Licenses", link: "/licenses" },
         ],
       },
     ],

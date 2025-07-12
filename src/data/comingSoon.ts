@@ -56,7 +56,6 @@ export const comingSoonData: StaticPageData = {
         links: [
           { title: "Terms & Conditions", link: "/terms" },
           { title: "Privacy & Policy", link: "/privacy" },
-          { title: "Licenses", link: "/licenses" },
         ],
       },
     ],
