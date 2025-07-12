@@ -109,21 +109,24 @@ export const homeData: StaticPageData = {
     cardSection: [
       {
         title: "Group Classes",
-        description: "",
+        description:
+          "Our expert-led group sessions fuel your energy and connect you with a community that shares your drive.",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/homec/card3-1.webp",
         link: "/cricket",
       },
       {
         title: "Pilates",
-        description: "",
+        description:
+          "Low-impact, high-control pilates workouts designed to improve flexibility, posture, and core strength in a group setting.",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/homec/card3-2.webp",
         link: "/cricket",
       },
       {
         title: "Personal Training",
-        description: "",
+        description:
+          "Customized 1-on-1 coaching tailored to your body, goals, sport-specific performance—and complete recovery needs.",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/homec/card3-3.webp",
         link: "/cricket",
@@ -214,9 +217,9 @@ export const homeData: StaticPageData = {
     ],
   },
   gallerySection: {
-    title: "Step inside the future of sports & fitness",
+    title: "Step Inside the Future of Sports & Fitness",
     description:
-      "Tour our state-of-the-art club and discover how Drive FIIT redefines space, energy, and purpose.",
+      "Tour our state-of-the-art club and discover how Drive FITT redefines space, energy, and purpose.",
     btnLabel: "Join online",
     imageList: [
       "https://da8nru77lsio9.cloudfront.net/images/homec/gallery-1.webp",
@@ -225,8 +228,8 @@ export const homeData: StaticPageData = {
     ],
   },
   sportsClubSection: {
-    title: "The Drive FIIT sports club philosophy",
-    description: "The Drive FIIT Model: Engineered for Excellence",
+    title: "The Drive FITT sports club philosophy",
+    description: "The Drive FITT Model: Engineered for Excellence",
     image: "https://da8nru77lsio9.cloudfront.net/images/homec/ecosystem.svg",
   },
   memberSection: {

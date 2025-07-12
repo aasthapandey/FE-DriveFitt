@@ -135,7 +135,7 @@ export const recoveryData: StaticPageData = {
     ],
   },
   bannerSection: {
-    title: "Become a DriveFIIT member",
+    title: "Become a DriveFITT member",
     description:
       "Whether you're taking your first swing or prepping for tournaments – we've got a proven path for you.",
     btnLabel: "Explore Plan",

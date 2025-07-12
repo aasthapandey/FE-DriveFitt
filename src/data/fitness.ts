@@ -97,7 +97,7 @@ export const fitnessData: StaticPageData = {
       {
         title: "Indoor running studio",
         description:
-          "Join the pack. Run with purpose at Drive FIIT. Our program helps you build proper technique to help you excel across all race formats.",
+          "Join the pack. Run with purpose at Drive FITT. Our program helps you build proper technique to help you excel across all race formats.",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/evolution-3.webp",
       },
@@ -143,7 +143,7 @@ export const fitnessData: StaticPageData = {
     ],
   },
   bannerSection: {
-    title: "Become a DriveFIIT member",
+    title: "Become a DriveFITT member",
     description:
       "Whether you're taking your first swing or prepping for tournaments – we've got a proven path for you.",
     btnLabel: "Explore Plan",
