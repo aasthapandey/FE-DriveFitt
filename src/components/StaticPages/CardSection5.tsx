@@ -43,23 +43,29 @@ const CardSection5 = ({
           <div className="flex flex-col gap-10">
             <Card
               data={cardSection[0]}
-              className="!h-[406px]"
+              className="!h-[406px] !cursor-default"
               imageClass="!h-[402px]"
             />
-            <CardInfo data={cardSection[1]} className="!h-[276px]" />
+            <CardInfo
+              data={cardSection[1]}
+              className="!h-[276px] !cursor-default"
+            />
           </div>
           <div className="flex flex-col">
             <Card
               data={cardSection[2]}
-              className="!h-[722px]"
+              className="!h-[722px] !cursor-default"
               imageClass="!h-[718px]"
             />
           </div>
           <div className="flex flex-col gap-10">
-            <CardInfo data={cardSection[3]} className="!h-[276px]" />
+            <CardInfo
+              data={cardSection[3]}
+              className="!h-[276px] !cursor-default"
+            />
             <Card
               data={cardSection[4]}
-              className="!h-[406px]"
+              className="!h-[406px] !cursor-default"
               imageClass="!h-[402px]"
             />
           </div>

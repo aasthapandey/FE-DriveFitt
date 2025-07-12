@@ -20,7 +20,11 @@ const Card = ({ data, isMobile, className, imageClass }: CardProps) => {
     >
       <a
         href={link}
-        className={`group relative block rounded-[20px] md:rounded-[40px] overflow-hidden h-[256px] md:h-[407px] !cursor-pointer w-full border-0 ${imageClass}`}
+        className={`group relative block rounded-[20px] md:rounded-[40px] overflow-hidden h-[256px] md:h-[407px] ${
+          className?.includes("!cursor-default")
+            ? "!cursor-default"
+            : "!cursor-pointer"
+        } w-full border-0 ${imageClass}`}
         style={{
           backgroundImage: `url(${backgroundImage})`,
           backgroundSize: "cover",

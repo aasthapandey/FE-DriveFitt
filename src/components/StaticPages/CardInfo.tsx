@@ -16,7 +16,11 @@ const CardInfo = ({ data, className }: CardInfoProps) => {
       }}
     >
       <div
-        className="rounded-[20px] md:rounded-[40px] w-full h-full cursor-pointer flex flex-col justify-center"
+        className={`rounded-[20px] md:rounded-[40px] w-full h-full ${
+          className?.includes("!cursor-default")
+            ? "!cursor-default"
+            : "!cursor-pointer"
+        } flex flex-col justify-center`}
         style={{
           background: "linear-gradient(180deg, #1E1E1E 0%, #141414 100%)",
         }}
