@@ -298,7 +298,7 @@ const EmailModal = ({ isOpen, onClose }: EmailModalProps) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4">
+    <div className="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
       {/* Modal Content */}
       <div className="relative items-center justify-center flex flex-col">
         {/* Close button */}
