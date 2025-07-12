@@ -13,7 +13,7 @@ export const comingSoonData: StaticPageData = {
       "Get privileged access to our game-changing facility before launch - plus enjoy a free session to experience the difference.",
     iconImage: "https://da8nru77lsio9.cloudfront.net/images/comingsoon.svg",
     btnPrimaryText: "Go to Home",
-    btnSecondaryText: "",
+    btnSecondaryText: "/",
     btnPrimaryLink: "#trial-booking",
     btnSecondaryLink: "/",
   },
