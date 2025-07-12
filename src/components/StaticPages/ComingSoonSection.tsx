@@ -18,7 +18,7 @@ const ComingSoonSection = ({ data }: ComingSoonSectionProps) => {
   } = data;
 
   return (
-    <div className="flex items-center justify-center h-screen">
+    <div className="flex items-center justify-center h-[calc(100vh-170px)]">
       <div className="mx-auto text-center px-4">
         <div className="flex flex-col items-center justify-center">
           <div className="mb-8 w-[80px] h-[80px] md:mb-[48px] md:w-[120px] md:h-[120px]">
@@ -37,11 +37,13 @@ const ComingSoonSection = ({ data }: ComingSoonSectionProps) => {
           </p>
 
           <div className="flex flex-row gap-4 md:flex-row md:gap-4 md:w-auto">
-            <Link href={btnSecondaryLink} className="w-full md:w-auto">
-              <button className="w-[155px] text-[#00DBDC] border border-[#00DBDC] rounded-[8px] py-3 text-[16px] font-medium leading-[24px] md:w-[224px] md:h-[56px] md:text-[20px] md:leading-[100%] md:tracking-[-2%] md:py-4 md:px-12">
-                {btnSecondaryText}
-              </button>
-            </Link>
+            {btnSecondaryText && (
+              <Link href={btnSecondaryLink} className="w-full md:w-auto">
+                <button className="w-[155px] text-[#00DBDC] border border-[#00DBDC] rounded-[8px] py-3 text-[16px] font-medium leading-[24px] md:w-[224px] md:h-[56px] md:text-[20px] md:leading-[100%] md:tracking-[-2%] md:py-4 md:px-12">
+                  {btnSecondaryText}
+                </button>
+              </Link>
+            )}
 
             <Link href={btnPrimaryLink} className="w-full md:w-auto">
               <button className="w-[155px] bg-[#00DBDC] rounded-[8px] py-3 text-[16px] font-medium leading-[24px] text-[#0D0D0D] md:w-[224px] md:h-[56px] md:text-[20px] md:leading-[100%] md:tracking-[-2%] md:py-4">
