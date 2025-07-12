@@ -146,12 +146,12 @@ const OTPStep = ({
           activation code to your email
         </p>
         <div className="flex items-center justify-center gap-2 flex-wrap">
-          <span className="text-white font-light text-[20px] leading-[28px] tracking-[0%]">
+          <span className="text-white font-light text-[20px] leading-[28px] tracking-[0%] break-all max-w-[280px] md:max-w-[320px]">
             {email}
           </span>
           <button
             onClick={onChangeEmail}
-            className="text-[#00DBDC] font-light text-[20px] leading-[28px] tracking-[0%]"
+            className="text-[#00DBDC] font-light text-[20px] leading-[28px] tracking-[0%] whitespace-nowrap"
           >
             Change
           </button>
@@ -308,6 +308,7 @@ const EmailModal = ({ isOpen, onClose }: EmailModalProps) => {
 
   const handleChangeEmail = useCallback(() => {
     setModalState("email");
+    setTimeLeft(59); // Reset timer when going back to email input
   }, []);
 
   const handleResendOTP = useCallback(() => {

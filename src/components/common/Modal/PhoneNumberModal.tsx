@@ -151,13 +151,13 @@ const OTPStep = ({
         <p className="text-[#8A8A8A] font-light text-[20px] leading-[28px] tracking-[0%]">
           activation code to your phone
         </p>
-        <div className="flex items-center justify-center gap-2">
-          <span className="text-white font-light text-[20px] leading-[28px] tracking-[0%]">
+        <div className="flex items-center justify-center gap-2 flex-wrap">
+          <span className="text-white font-light text-[20px] leading-[28px] tracking-[0%] break-all">
             +91 {phoneNumber}
           </span>
           <button
             onClick={onChangePhone}
-            className="text-[#00DBDC] font-light text-[20px] leading-[28px] tracking-[0%]"
+            className="text-[#00DBDC] font-light text-[20px] leading-[28px] tracking-[0%] whitespace-nowrap"
           >
             Change
           </button>
@@ -317,6 +317,7 @@ const PhoneNumberModal = ({ isOpen, onClose }: PhoneNumberModalProps) => {
 
   const handleChangePhone = useCallback(() => {
     setModalState("phone");
+    setTimeLeft(59); // Reset timer when going back to phone input
   }, []);
 
   const handleResendOTP = useCallback(() => {
