@@ -275,23 +275,23 @@ export const fitnessData: StaticPageData = {
       fields: {
         firstName: {
           label: "First Name",
-          placeholder: "",
+          placeholder: "Enter your first name",
         },
         lastName: {
           label: "Last Name",
-          placeholder: "",
+          placeholder: "Enter your last name",
         },
         email: {
           label: "Email ID",
-          placeholder: "",
+          placeholder: "Enter your email address",
         },
         phone: {
           label: "Phone Number",
-          placeholder: "",
+          placeholder: "Enter your phone number",
         },
         message: {
           label: "Message",
-          placeholder: "",
+          placeholder: "Write your message here...",
         },
       },
     },

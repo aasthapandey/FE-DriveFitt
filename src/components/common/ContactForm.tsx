@@ -77,7 +77,7 @@ const ContactForm = ({ data }: { data: ContactFormProps }) => {
                   value={formData.firstName}
                   onChange={handleChange}
                   placeholder={fields.firstName.placeholder}
-                  className="bg-[#FFFFFF] border border-[#333333] rounded-lg py-1.5 md:py-2 px-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[#00DBDC] outline-none transition-colors"
+                  className="bg-[#FFFFFF] border border-[#333333] rounded-lg py-1.5 md:py-2 px-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[2px] focus:border-[#00DBDC] outline-none transition-colors"
                   required
                 />
               </div>
