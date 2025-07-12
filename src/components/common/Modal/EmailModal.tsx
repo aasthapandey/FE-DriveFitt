@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect, useCallback, useRef } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 
 type ModalState = "email" | "otp";
@@ -219,6 +220,12 @@ const EmailModal = ({ isOpen, onClose }: EmailModalProps) => {
   const [isFocused, setIsFocused] = useState(false);
   const [otpValues, setOtpValues] = useState<string[]>(["", "", "", ""]);
   const [timeLeft, setTimeLeft] = useState(59);
+  const [isMounted, setIsMounted] = useState(false);
+
+  // Check if component is mounted (client-side)
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // Disable/enable body scroll when modal opens/closes
   useEffect(() => {
@@ -309,12 +316,33 @@ const EmailModal = ({ isOpen, onClose }: EmailModalProps) => {
     console.log("Resending OTP to:", email);
   }, [email]);
 
-  if (!isOpen) return null;
+  if (!isOpen || !isMounted) return null;
 
-  return (
-    <div className="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+  const modalContent = (
+    <div
+      className="z-[10000] p-4"
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        backgroundColor: "rgba(0, 0, 0, 0.8)",
+        backdropFilter: "blur(4px)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       {/* Modal Content */}
-      <div className="relative items-center justify-center flex flex-col">
+      <div
+        className="relative flex flex-col items-center justify-center"
+        style={{
+          position: "relative",
+          maxWidth: "90vw",
+          maxHeight: "90vh",
+        }}
+      >
         {/* Close button */}
         <button
           onClick={onClose}
@@ -362,6 +390,8 @@ const EmailModal = ({ isOpen, onClose }: EmailModalProps) => {
       </div>
     </div>
   );
+
+  return createPortal(modalContent, document.body);
 };
 
 export default EmailModal;

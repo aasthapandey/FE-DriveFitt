@@ -1,10 +1,7 @@
 import { CardSection } from "@/types/staticPages";
-import Card from "@/components/StaticPages/Card";
 import TitleDescription from "@/components/common/TitleDescription";
-import CardInfo from "@/components/StaticPages/CardInfo";
 import CardInfoItem from "@/components/StaticPages/CardInfoItem";
 import { CardType } from "@/types/staticPages";
-import Image from "next/image";
 
 // Custom Card component without hover effects
 const StaticCard = ({
