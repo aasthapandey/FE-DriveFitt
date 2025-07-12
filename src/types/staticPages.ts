@@ -243,7 +243,8 @@ export interface PolicySection {
 }
 
 export interface JoinNowSectionProps {
-  // Empty interface for now, can be extended later if needed
+  title?: string;
+  description?: string;
 }
 
 export interface StaticPageData {

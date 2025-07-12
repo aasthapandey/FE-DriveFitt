@@ -1,5 +1,6 @@
 import type { ComingSoonSection } from "@/types/staticPages";
 import Link from "next/link";
+import Image from "next/image";
 
 interface ComingSoonSectionProps {
   data: ComingSoonSection;
@@ -22,10 +23,12 @@ const ComingSoonSection = ({ data }: ComingSoonSectionProps) => {
       <div className="mx-auto text-center px-4">
         <div className="flex flex-col items-center justify-center">
           <div className="mb-8 w-[80px] h-[80px] md:mb-[48px] md:w-[120px] md:h-[120px]">
-            <img
+            <Image
               src={iconImage}
               alt="Coming Soon"
               className="opacity-60 w-full h-full"
+              width={120}
+              height={120}
             />
           </div>
           <h1 className="text-white text-[32px] font-semibold leading-[40px] tracking-[-1px] mb-4 md:text-[48px] md:font-bold md:leading-[60px] md:tracking-[-2px] md:mb-[24px] md:w-[497px] md:h-[120px]">
@@ -37,7 +40,7 @@ const ComingSoonSection = ({ data }: ComingSoonSectionProps) => {
           </p>
 
           <div className="flex flex-row gap-4 md:flex-row md:gap-4 md:w-auto">
-            {btnSecondaryText && (
+            {btnSecondaryText && btnSecondaryLink && (
               <Link href={btnSecondaryLink} className="w-full md:w-auto">
                 <button className="w-[155px] text-[#00DBDC] border border-[#00DBDC] rounded-[8px] py-3 text-[16px] font-medium leading-[24px] md:w-[224px] md:h-[56px] md:text-[20px] md:leading-[100%] md:tracking-[-2%] md:py-4 md:px-12">
                   {btnSecondaryText}

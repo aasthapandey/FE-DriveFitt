@@ -1,5 +1,6 @@
 import type { Error404Section } from "@/types/staticPages";
 import Link from "next/link";
+import Image from "next/image";
 
 interface Error404SectionProps {
   data: Error404Section;
@@ -20,10 +21,12 @@ const Error404Section = ({ data }: Error404SectionProps) => {
       <div className="mx-auto text-center px-4">
         <div className="flex flex-col items-center justify-center">
           <div className="mb-8 w-[80px] h-[80px] md:mb-[48px] md:w-[120px] md:h-[120px]">
-            <img
+            <Image
               src={illustration}
               alt="UFO 404 Illustration"
               className="opacity-60 w-full h-full"
+              width={120}
+              height={120}
             />
           </div>
           <h1 className="text-white text-[32px] font-semibold leading-[40px] tracking-[-1px] mb-4 max-w-[300px] md:text-[48px] md:font-bold md:leading-[60px] md:tracking-[-2px] md:mb-[24px] md:max-w-[479px]">
