@@ -4,9 +4,9 @@ import { navbarData } from "./navbar";
 export const contactUsData: ContactUsPageData = {
   title: "Contact Us",
   description: "Get in touch with us.",
-  seoTitle: "Contact Us | DriveFitt",
+  seoTitle: "Contact Us | DriveFIIT",
   seoDescription:
-    "Contact DriveFitt for any queries about our fitness and sports facilities.",
+    "Contact DriveFIIT for any queries about our fitness and sports facilities.",
   navbar: navbarData,
   hero: {
     titleWords: [{ text: "Contact us", color: "#FFFFFF" }],

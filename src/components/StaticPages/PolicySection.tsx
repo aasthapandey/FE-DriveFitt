@@ -7,15 +7,16 @@ interface PolicySectionProps {
 const PolicySection = ({ data }: PolicySectionProps) => {
   return (
     <div className="bg-[#0D0D0D] min-h-screen">
-      <div className="max-w-[1200px] mx-auto px-6 md:px-[120px] pt-12 md:pt-[160px] pb-16 md:pb-24">
-        <div 
+      <div className="max-w-[1200px] mx-auto px-6 md:px-[120px] pt-12 md:pt-[60px] pb-16 md:mb-[-130px]">
+        <div
           className="text-white policy-content prose prose-invert max-w-none"
           dangerouslySetInnerHTML={{ __html: data.htmlContent }}
         />
       </div>
-      
-      <style dangerouslySetInnerHTML={{
-        __html: `
+
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
           .policy-content h1 {
             font-size: 68px;
             font-weight: 700;
@@ -235,10 +236,11 @@ const PolicySection = ({ data }: PolicySectionProps) => {
               margin-bottom: 10px;
             }
           }
-        `
-      }} />
+        `,
+        }}
+      />
     </div>
   );
 };
 
-export default PolicySection; 
+export default PolicySection;

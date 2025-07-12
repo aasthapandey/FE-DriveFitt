@@ -2,11 +2,11 @@ import { StaticPageData } from "@/types/staticPages";
 import { navbarData } from "./navbar";
 
 export const runningData: StaticPageData = {
-  title: "Running at DriveFitt",
+  title: "Running at DriveFIIT",
   description: "Experience advanced running facilities and training.",
-  seoTitle: "Premium Running Club | DriveFitt",
+  seoTitle: "Premium Running Club | DriveFIIT",
   seoDescription:
-    "Join DriveFitt's running club. Indoor running studio, expert coaching, and performance tracking.",
+    "Join DriveFIIT's running club. Indoor running studio, expert coaching, and performance tracking.",
   navbar: navbarData,
   hero: {
     titleWords: [
@@ -78,26 +78,25 @@ export const runningData: StaticPageData = {
     ],
   },
   evolutionSection: {
-    title: "Join India's one of the first indoor run movement",
+    title:
+      "Forget traffic, pollution, or weather. Choose DRIVE FITT's indoor studio for:",
     evolutionList: [
       {
         title: "Community energy",
         description:
-          "Feed off the group's drive—our runners consistently report 30% higher motivation than solo training.",
+          "Community energy that sparks motivation—plants consistency and grit",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/running-compressed/evolution-1.webp",
       },
       {
         title: "Expert coaching ",
-        description:
-          "From cadence to kick-finishes, our certified coaches refine your form, race strategy, and the resilience needed to break through plateaus.",
+        description: "Expert coaching to guide form, strategy, and resilience",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/running-compressed/evolution-2.webp",
       },
       {
         title: "Progress tracking ",
-        description:
-          "Watch your pace, endurance, and technique evolve with real-time data on every run.",
+        description: "Progress tracking for every step of your running journey",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/running-compressed/evolution-3.webp",
       },

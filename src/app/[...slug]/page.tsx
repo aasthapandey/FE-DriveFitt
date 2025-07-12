@@ -27,14 +27,14 @@ export async function generateMetadata({
 }: PageParams): Promise<Metadata> {
   const slug = params.slug;
   const data = pageData[slug];
-  
+
   if (!data) {
     return {
-      title: "Page Not Found | DriveFitt Premium Club",
+      title: "Page Not Found | DriveFIIT Premium Club",
       description: "The page you're looking for doesn't exist.",
     };
   }
-  
+
   return {
     title: data.seoTitle || data.title,
     description: data.seoDescription,
@@ -44,11 +44,11 @@ export async function generateMetadata({
 export default function Page({ params }: PageParams) {
   const slug = params.slug;
   const data = pageData[slug];
-  
+
   if (!data) {
     notFound();
   }
-  
+
   const pageName = Array.isArray(slug) ? slug[0] : slug;
   const headersList = headers();
   const userAgent = headersList.get("user-agent") || "";

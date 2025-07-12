@@ -2,11 +2,11 @@ import { FranchisePageData } from "@/types/franchisePage";
 import { navbarData } from "./navbar";
 
 export const franchiseData: FranchisePageData = {
-  title: "Franchise with DriveFitt",
+  title: "Franchise with DriveFIIT",
   description: "Partner with India's premium fitness and sports club.",
-  seoTitle: "Franchise Opportunities | DriveFitt",
+  seoTitle: "Franchise Opportunities | DriveFIIT",
   seoDescription:
-    "Start your own DriveFitt franchise. Premium fitness and sports club with proven business model.",
+    "Start your own DriveFIIT franchise. Premium fitness and sports club with proven business model.",
   navbar: navbarData,
   hero: {
     title: "Franchise",

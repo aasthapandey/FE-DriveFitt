@@ -2,11 +2,11 @@ import { StaticPageData } from "@/types/staticPages";
 import { navbarData } from "./navbar";
 
 export const recoveryData: StaticPageData = {
-  title: "Recovery at DriveFitt",
+  title: "Recovery at DriveFIIT",
   description: "Experience advanced recovery and wellness facilities.",
-  seoTitle: "Premium Recovery & Wellness | DriveFitt",
+  seoTitle: "Premium Recovery & Wellness | DriveFIIT",
   seoDescription:
-    "Experience state-of-the-art recovery and wellness facilities at DriveFitt. Cold plunge, percussion therapy, and more.",
+    "Experience state-of-the-art recovery and wellness facilities at DriveFIIT. Cold plunge, percussion therapy, and more.",
   navbar: navbarData,
   hero: {
     titleWords: [{ text: "Recover at Drive FITT", color: "#FFFFFF" }],

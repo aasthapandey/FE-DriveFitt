@@ -2,11 +2,11 @@ import { StaticPageData } from "@/types/staticPages";
 import { navbarData } from "./navbar";
 
 export const fitnessData: StaticPageData = {
-  title: "Fitness at DriveFitt",
+  title: "Fitness at DriveFIIT",
   description: "Step into a world of advanced fitness and training.",
-  seoTitle: "Premium Fitness Center | DriveFitt",
+  seoTitle: "Premium Fitness Center | DriveFIIT",
   seoDescription:
-    "Achieve your fitness goals at DriveFitt. Modern equipment, expert trainers, and a motivating environment.",
+    "Achieve your fitness goals at DriveFIIT. Modern equipment, expert trainers, and a motivating environment.",
   navbar: navbarData,
   hero: {
     titleWords: [
@@ -104,7 +104,7 @@ export const fitnessData: StaticPageData = {
     ],
   },
   scrollingCardSection: {
-    title: "Tech that transforms your game",
+    title: "Train hard. Tech harder",
     description:
       "Smarter tools. Sharper results. Welcome to the future of performance",
     iconImage: "https://da8nru77lsio9.cloudfront.net/images/check-icon.svg",
@@ -121,22 +121,18 @@ export const fitnessData: StaticPageData = {
       {
         subTitle: "Sustainable & Eco-Friendly equipment ",
         list: [
-          "Capture every session and review it 10x faster with auto-clipped, ball-by-ball videos—no dead time, just pure action.",
-          "Create a team, stay in sync, and showcase your sessions on social media",
-          "Bat Sensor*- real-time insights on Bat Swing, Speed, Angles, Power & Efficiency ",
+          "Eco-friendly equipment that’s as good for the planet as it is for your workout. Our Yoga mats, towels, coffee cups make minimal environmental impact ",
         ],
-        extraTagLabel: "*Purchase separately",
+        extraTagLabel: "",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/scroll-card-2.webp",
       },
       {
         subTitle: "Smart Recovery Tools ",
         list: [
-          "Capture every session and review it 10x faster with auto-clipped, ball-by-ball videos—no dead time, just pure action.",
-          "Create a team, stay in sync, and showcase your sessions on social media",
-          "Bat Sensor*- real-time insights on Bat Swing, Speed, Angles, Power & Efficiency ",
+          "Our high tech massage guns and compression platforms help in quicker muscle recovery ",
         ],
-        extraTagLabel: "*Purchase separately",
+        extraTagLabel: "",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/scroll-card-3.webp",
       },

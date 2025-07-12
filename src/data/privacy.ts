@@ -1,11 +1,11 @@
 import { StaticPageData } from "@/types/staticPages";
 
 export const privacyData: StaticPageData = {
-  title: "Privacy Policy | DriveFitt Premium Club",
+  title: "Privacy Policy | DriveFIIT Premium Club",
   description:
-    "Learn how DriveFitt collects, uses, and protects your personal information.",
-  seoTitle: "Privacy Policy | DriveFitt Premium Club",
-  seoDescription: "Understand how DriveFitt handles your personal data.",
+    "Learn how DriveFIIT collects, uses, and protects your personal information.",
+  seoTitle: "Privacy Policy | DriveFIIT Premium Club",
+  seoDescription: "Understand how DriveFIIT handles your personal data.",
   policySection: {
     htmlContent: `
       <h1>Privacy Policy</h1>

@@ -1,12 +1,12 @@
 import { StaticPageData } from "@/types/staticPages";
 
 export const comingSoonData: StaticPageData = {
-  title: "Coming Soon - DriveFitt Premium Club",
+  title: "Coming Soon - DriveFIIT Premium Club",
   description:
     "Get early access to India's first cricket and fitness club before we launch.",
-  seoTitle: "Coming Soon | DriveFitt Premium Club",
+  seoTitle: "Coming Soon | DriveFIIT Premium Club",
   seoDescription:
-    "Be the first to experience DriveFitt - India's premier cricket and fitness club. Book your free trial and get exclusive early access.",
+    "Be the first to experience DriveFIIT - India's premier cricket and fitness club. Book your free trial and get exclusive early access.",
   comingSoonSection: {
     title: "Coming Soon – Early access now open",
     description:

@@ -2,11 +2,11 @@ import { StaticPageData } from "@/types/staticPages";
 import { navbarData } from "./navbar";
 
 export const homeData: StaticPageData = {
-  title: "DriveFitt",
+  title: "DriveFIIT",
   description: "Experience the best fitness and sports facilities.",
-  seoTitle: "DriveFitt - Premium Fitness & Sports Club",
+  seoTitle: "DriveFIIT - Premium Fitness & Sports Club",
   seoDescription:
-    "Join DriveFitt, Gurugram's premier fitness & sports club. Experience state-of-the-art facilities for cricket, fitness, recovery, and more.",
+    "Join DriveFIIT, Gurugram's premier fitness & sports club. Experience state-of-the-art facilities for cricket, fitness, recovery, and more.",
   navbar: navbarData,
   hero: {
     titleWords: [
@@ -230,7 +230,7 @@ export const homeData: StaticPageData = {
   sportsClubSection: {
     title: "The Drive FITT sports club philosophy",
     description: "The Drive FITT Model: Engineered for Excellence",
-    image: "https://da8nru77lsio9.cloudfront.net/images/homec/ecosystem.svg",
+    image: "https://da8nru77lsio9.cloudfront.net/images/homec/card1.svg",
   },
   memberSection: {
     title: "What our members are saying",
