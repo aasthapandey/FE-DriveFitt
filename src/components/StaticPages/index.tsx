@@ -21,6 +21,7 @@ import {
   ComingSoonSection as ComingSoonSectionType,
   Error404Section as Error404SectionType,
   PolicySection as PolicySectionType,
+  LoginModalType,
 } from "@/types/staticPages";
 import CardSection4 from "@/components/StaticPages/CardSection4";
 import CardSection5 from "@/components/StaticPages/CardSection5";
@@ -157,9 +158,12 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
     }
   };
 
+  const hasHeroSection = data.hero;
+
   return (
     <div className="bg-[#0D0D0D] w-full">
       <Navbar data={navbarData} isMobile={isMobile} />
+
       <div className="flex flex-col gap-[60px] md:gap-[160px] w-full">
         {Object.entries(data).map(([key, value]) => {
           const component = renderComponent(key, value);
@@ -168,7 +172,7 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
               return (
                 <div
                   key={key}
-                  className="w-full bg-center bg-no-repeat h-auto md:mb-[-60px]"
+                  className="w-full bg-center bg-no-repeat h-auto md:mb-[-60px] -mt-[84px] md:-mt-[140px]"
                   style={{
                     background: `url(${
                       isMobile
@@ -180,7 +184,7 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
                     backgroundRepeat: "no-repeat",
                   }}
                 >
-                  {component}
+                  <div className="pt-[84px] md:pt-[140px]">{component}</div>
                 </div>
               );
             }
