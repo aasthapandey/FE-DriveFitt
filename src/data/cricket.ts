@@ -18,7 +18,7 @@ export const cricketData: StaticPageData = {
     desktopImage:
       "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/hero.webp",
     mobileImage:
-      "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/hero-mobile.webp",
+      "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/mobile-hero.webp",
     btnPrimaryText: "Book a free trial",
     btnSecondaryText: "Join Online",
   },
