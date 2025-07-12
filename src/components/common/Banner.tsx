@@ -7,7 +7,9 @@ type BannerType = {
 };
 
 const Banner = ({ data, isMobile }: BannerType) => {
-  const { title, description, image, btnLabel } = data;
+  const { title, description, image, mobileImage, btnLabel } = data;
+  const imageToUse = isMobile && mobileImage ? mobileImage : image;
+
   return (
     <section className="md:px-[120px] px-6 flex flex-col gap-5 md:gap-8">
       <div
@@ -20,7 +22,7 @@ const Banner = ({ data, isMobile }: BannerType) => {
         <div
           className="rounded-[20px] md:rounded-[40px] w-full h-full cursor-pointer flex flex-col justify-center p-6 md:p-10"
           style={{
-            background: `linear-gradient(180deg, rgba(13, 13, 13, 0) 0%, #0D0D0D 100%), url(${image})`,
+            background: `linear-gradient(180deg, rgba(13, 13, 13, 0) 0%, #0D0D0D 100%), url(${imageToUse})`,
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center center",
             backgroundAttachment: "local",

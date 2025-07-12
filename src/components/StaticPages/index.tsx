@@ -118,9 +118,16 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
       case "faqSection":
         return isMobile ? null : <Faq data={value as FaqSectionProps} />;
       case "sportsClubSection":
-        return <SportsClub data={value as SportsClubSectionProps} />;
+        return (
+          <SportsClub
+            data={value as SportsClubSectionProps}
+            isMobile={isMobile}
+          />
+        );
       case "bannerSection":
-        return <Banner data={value as SportsClubSectionProps} />;
+        return (
+          <Banner data={value as SportsClubSectionProps} isMobile={isMobile} />
+        );
       case "memberSection":
         return (
           <MemberSection

@@ -231,6 +231,7 @@ export const homeData: StaticPageData = {
     title: "The Drive FITT sports club philosophy",
     description: "The Drive FITT Model: Engineered for Excellence",
     image: "https://da8nru77lsio9.cloudfront.net/images/homec/card1.svg",
+    mobileImage: "/images/homec/card1-mobile.svg",
   },
   memberSection: {
     title: "What our members are saying",

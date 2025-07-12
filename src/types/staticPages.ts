@@ -80,6 +80,7 @@ export interface SportsClubSectionProps {
   description: string;
   btnLabel?: string;
   image: string;
+  mobileImage?: string;
 }
 
 export interface MemberItem {
