@@ -189,20 +189,27 @@ export const termsData: StaticPageData = {
       },
     ],
     socialLinks: [
-      { image: "https://da8nru77lsio9.cloudfront.net/images/x-social.svg", link: "https://x.com/Drive_Fitt" },
       {
-        image: "https://da8nru77lsio9.cloudfront.net/images/instagram-social.svg",
+        image: "https://da8nru77lsio9.cloudfront.net/images/x-social.svg",
+        link: "https://x.com/Drive_Fitt",
+      },
+      {
+        image:
+          "https://da8nru77lsio9.cloudfront.net/images/instagram-social.svg",
         link: "https://www.instagram.com/drive_fitt/",
       },
       {
-        image: "https://da8nru77lsio9.cloudfront.net/images/linkedin-social.svg",
+        image:
+          "https://da8nru77lsio9.cloudfront.net/images/linkedin-social.svg",
         link: "https://www.linkedin.com/company/drivefitt/",
       },
       {
-        image: "https://da8nru77lsio9.cloudfront.net/images/facebook-social.svg",
+        image:
+          "https://da8nru77lsio9.cloudfront.net/images/facebook-social.svg",
         link: "https://www.facebook.com/profile.php?id=61561476262978",
       },
     ],
-    copyright: "©2025 Drivefitt. All rights reserved.",
+    copyright:
+      "DriveFITT. All Right Reserved. Designed and Developed by TechKatalyst",
   },
 };

@@ -11,6 +11,27 @@ const Footer = ({
 }) => {
   const { logo, description, sections, socialLinks, copyright } = data;
 
+  const renderCopyright = (text: string, className: string) => {
+    if (text.includes("TechKatalyst")) {
+      const parts = text.split("TechKatalyst");
+      return (
+        <p className={className}>
+          {parts[0]}
+          <Link
+            href="http://techkatalyst.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#00DBDC] hover:text-[#00c5c6] transition-colors underline"
+          >
+            TechKatalyst
+          </Link>
+          {parts[1]}
+        </p>
+      );
+    }
+    return <p className={className}>{text}</p>;
+  };
+
   return (
     <footer className="bg-[#1A1A1A] text-white w-full">
       <div className="container mx-auto px-4 md:px-0 md:pt-[60px] md:pb-[47px] pb-6 pt-12">
@@ -51,9 +72,9 @@ const Footer = ({
         </div>
 
         <div className="flex flex-col md:flex-row justify-between items-center md:pt-[41px] pt-6 border-t border-[#333333]">
-          {isMobile ? null : (
-            <p className="text-[#8A8A8A] mb-0 md:text-base">{copyright}</p>
-          )}
+          {isMobile
+            ? null
+            : renderCopyright(copyright, "text-[#8A8A8A] mb-0 md:text-base")}
           <div className="flex space-x-6 md:space-x-8 mb-4 md:mb-0">
             {socialLinks.map((social, index) => (
               <Link
@@ -72,9 +93,9 @@ const Footer = ({
               </Link>
             ))}
           </div>
-          {isMobile ? (
-            <p className="text-[#8A8A8A] mb-4 text-xs">{copyright}</p>
-          ) : null}
+          {isMobile
+            ? renderCopyright(copyright, "text-[#8A8A8A] mb-4 text-xs")
+            : null}
         </div>
       </div>
     </footer>

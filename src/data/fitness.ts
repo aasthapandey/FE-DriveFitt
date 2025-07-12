@@ -361,6 +361,7 @@ export const fitnessData: StaticPageData = {
         link: "https://www.facebook.com/profile.php?id=61561476262978",
       },
     ],
-    copyright: "©2025 Drivefitt. All rights reserved.",
+    copyright:
+      "DriveFITT. All Right Reserved. Designed and Developed by TechKatalyst",
   },
 };
