@@ -26,10 +26,10 @@ const Banner = ({ data, isMobile }: BannerType) => {
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center center",
             backgroundAttachment: "local",
-            backgroundSize: isMobile ? "contain" : "cover",
+            backgroundSize: "100% 100%",
           }}
         >
-          <div className="flex flex-col justify-end md:justify-center h-full items-center gap-4 md:gap-10">
+          <div className="flex flex-col justify-end md:justify-center h-full items-center gap-4 md:gap-10 md:pt-[115px]">
             <TitleDescription
               title={title || ""}
               description={description || ""}
