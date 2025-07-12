@@ -64,7 +64,7 @@ export const homeData: StaticPageData = {
     },
   ],
   cardSection4: {
-    title: "A complete ecosystem for peak performance",
+    title: "A Complete Ecosystem for Peak Performance",
     description:
       "From cricket training to full-spectrum fitness and recovery—every element of your game is here.",
     cardSection: [
