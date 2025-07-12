@@ -12,7 +12,7 @@ const GallerySection = ({ data }: { data: GallerySectionProps }) => {
         <p className="text-xs md:text-base font-light leading-4 md:leading-5 tracking-[-1%] text-[#8A8A8A]">
           {description}
         </p>
-        <button className="bg-[#00DBDC] w-fit leading-[100%] tracking-[-5%] text-base text-[#0D0D0D] px-10 py-3 rounded-lg font-medium mt-2 md:mt-11">
+        <button className="bg-[#00DBDC] border border-transparent w-fit leading-[100%] tracking-[-5%] text-base text-[#0D0D0D] px-10 py-3 rounded-lg font-medium mt-2 md:mt-11 hover:bg-transparent hover:border-[#00DBDC] hover:text-[#00DBDC] transition-all duration-200">
           {btnLabel}
         </button>
       </div>

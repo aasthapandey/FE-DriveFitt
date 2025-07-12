@@ -38,7 +38,7 @@ const Error404Section = ({ data }: Error404SectionProps) => {
           </p>
 
           <Link href={btnLink} className="w-full md:w-auto">
-            <button className="w-[155px] bg-[#00DBDC] rounded-[8px] py-3 text-[16px] font-medium leading-[24px] text-black md:w-[187px] md:h-[56px] md:text-[20px] md:leading-[100%] md:tracking-[-2%] md:py-4">
+            <button className="w-[155px] bg-[#00DBDC] border border-transparent rounded-[8px] py-3 text-[16px] font-medium leading-[24px] text-black md:w-[187px] md:h-[56px] md:text-[20px] md:leading-[100%] md:tracking-[-2%] md:py-4 hover:bg-transparent hover:border-[#00DBDC] hover:text-[#00DBDC] transition-all duration-200">
               {btnText}
             </button>
           </Link>

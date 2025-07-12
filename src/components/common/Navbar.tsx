@@ -59,7 +59,7 @@ export default function Navbar({ data, isMobile }: Props) {
         <div className="flex items-center gap-4">
           <button
             onClick={() => setIsLoginModalOpen(true)}
-            className="bg-[#00DBDC] rounded-lg px-3 md:px-6 py-2 text-[#0D0D0D] font-medium text-xs md:text-sm"
+            className="bg-[#00DBDC] border border-transparent rounded-lg px-3 md:px-6 py-2 text-[#0D0D0D] font-medium text-xs md:text-sm hover:bg-transparent hover:border-[#00DBDC] hover:text-[#00DBDC] transition-all duration-200"
           >
             {signInButton.text}
           </button>
@@ -132,7 +132,7 @@ export default function Navbar({ data, isMobile }: Props) {
       </div>
       <button
         onClick={() => setIsLoginModalOpen(true)}
-        className="bg-[#00DBDC] rounded-lg px-10 py-3 text-[#0D0D0D] font-medium text-base"
+        className="bg-[#00DBDC] border border-transparent rounded-lg px-10 py-3 text-[#0D0D0D] font-medium text-base hover:bg-transparent hover:border-[#00DBDC] hover:text-[#00DBDC] transition-all duration-200"
       >
         {signInButton.text}
       </button>

@@ -157,7 +157,7 @@ const ContactForm = ({ data }: { data: ContactFormProps }) => {
 
             <button
               type="submit"
-              className="w-full bg-[#00DBDC] text-black text-sm font-medium py-[10px] tracking-[-2%] md:tracking-[-6%] rounded-lg hover:bg-[#00c5c6] transition-colors"
+              className="w-full bg-[#00DBDC] border border-transparent text-black text-sm font-medium py-[10px] tracking-[-2%] md:tracking-[-6%] rounded-lg hover:bg-transparent hover:border-[#00DBDC] hover:text-[#00DBDC] transition-all duration-200"
             >
               {submitButtonText}
             </button>

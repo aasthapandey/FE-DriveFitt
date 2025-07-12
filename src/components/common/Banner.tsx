@@ -35,7 +35,7 @@ const Banner = ({ data, isMobile }: BannerType) => {
               description={description || ""}
               isBanner={true}
             />
-            <button className="bg-[#00DBDC] w-fit leading-[100%] tracking-[-5%] text-base text-[#0D0D0D] md:px-12 md:py-4 py-[10px] px-9 rounded-lg font-medium ">
+            <button className="bg-[#00DBDC] border border-transparent w-fit leading-[100%] tracking-[-5%] text-base text-[#0D0D0D] md:px-12 md:py-4 py-[10px] px-9 rounded-lg font-medium hover:bg-transparent hover:border-[#00DBDC] hover:text-[#00DBDC] transition-all duration-200">
               {btnLabel}
             </button>
           </div>

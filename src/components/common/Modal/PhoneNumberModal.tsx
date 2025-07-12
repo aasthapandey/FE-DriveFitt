@@ -72,7 +72,7 @@ const PhoneStep = ({
     <button
       onClick={onContinue}
       disabled={phoneNumber.length !== 10}
-      className="w-full bg-[#00DBDC] rounded-lg py-3 md:py-3 text-[#0D0D0D] font-medium text-base md:text-lg mb-6 md:mb-[48px] hover:bg-[#00c5c6] transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+      className="w-full bg-[#00DBDC] border border-transparent rounded-lg py-3 md:py-3 text-[#0D0D0D] font-medium text-base md:text-lg mb-6 md:mb-[48px] hover:bg-transparent hover:border-[#00DBDC] hover:text-[#00DBDC] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-[#00DBDC] disabled:hover:text-[#0D0D0D] disabled:hover:border-transparent"
     >
       Continue
     </button>
@@ -193,7 +193,7 @@ const OTPStep = ({
       <button
         onClick={onVerify}
         disabled={otpValues.some((val) => val === "")}
-        className="w-full bg-[#00DBDC] rounded-lg py-3 md:py-3 text-[#0D0D0D] font-medium text-base md:text-lg mb-6 md:mb-8 hover:bg-[#00c5c6] transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full bg-[#00DBDC] border border-transparent rounded-lg py-3 md:py-3 text-[#0D0D0D] font-medium text-base md:text-lg mb-6 md:mb-8 hover:bg-transparent hover:border-[#00DBDC] hover:text-[#00DBDC] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-[#00DBDC] disabled:hover:text-[#0D0D0D] disabled:hover:border-transparent"
       >
         Verify
       </button>

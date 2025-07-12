@@ -75,7 +75,7 @@ const HeroSection = ({ data, isMobile }: HeroSectionProps) => {
           </div>
 
           {/* CTA Button */}
-          <button className="bg-[#00DBDC] text-[#0D0D0D] px-6 py-2.5 md:px-14 md:py-4 rounded-[4px] md:rounded-lg font-medium leading-[100%] tracking-[-2%] md:tracking-[-5%] text-sm md:text-xl">
+          <button className="bg-[#00DBDC] border border-transparent text-[#0D0D0D] px-6 py-2.5 md:px-14 md:py-4 rounded-[4px] md:rounded-lg font-medium leading-[100%] tracking-[-2%] md:tracking-[-5%] text-sm md:text-xl hover:bg-transparent hover:border-[#00DBDC] hover:text-[#00DBDC] transition-all duration-200">
             {btnPrimaryText}
           </button>
         </div>
