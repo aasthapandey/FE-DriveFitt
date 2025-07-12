@@ -242,6 +242,10 @@ export interface PolicySection {
   htmlContent: string;
 }
 
+export interface JoinNowSectionProps {
+  // Empty interface for now, can be extended later if needed
+}
+
 export interface StaticPageData {
   title: string;
   description: string;
@@ -262,7 +266,7 @@ export interface StaticPageData {
   gallerySection?: GallerySectionProps;
   sportsClubSection?: SportsClubSectionProps;
   memberSection?: MemberSectionProps;
-  joinNowSection?: {};
+  joinNowSection?: JoinNowSectionProps;
   evolutionSection?: EvolutionSectionProps;
   appDownloadSection?: AppDownloadProps;
   footerInfoSection?: FooterInfoProps;

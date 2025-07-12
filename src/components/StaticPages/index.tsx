@@ -21,6 +21,7 @@ import {
   ComingSoonSection as ComingSoonSectionType,
   Error404Section as Error404SectionType,
   PolicySection as PolicySectionType,
+  JoinNowSectionProps,
 } from "@/types/staticPages";
 import CardSection4 from "@/components/StaticPages/CardSection4";
 import CardSection5 from "@/components/StaticPages/CardSection5";
@@ -70,7 +71,7 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
       | ComingSoonSectionType
       | Error404SectionType
       | PolicySectionType
-      | {}
+      | JoinNowSectionProps
   ) => {
     switch (key) {
       case "hero":

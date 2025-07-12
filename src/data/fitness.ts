@@ -183,7 +183,9 @@ export const fitnessData: StaticPageData = {
       },
     ],
   },
-  joinNowSection: {},
+  joinNowSection: {
+    // Empty object following JoinNowSectionProps interface
+  },
   faqSection: {
     title: "Frequently Asked Questions",
     description: "Everything you need to know about the Drivefitt and billing.",
