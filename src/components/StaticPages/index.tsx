@@ -172,7 +172,7 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
               return (
                 <div
                   key={key}
-                  className="w-full bg-center bg-no-repeat h-auto md:mb-[-60px] -mt-[84px] md:-mt-[140px]"
+                  className="w-full bg-center bg-no-repeat h-auto md:mb-[-60px] -mt-[70px] md:-mt-[140px]"
                   style={{
                     background: `url(${
                       isMobile
@@ -180,7 +180,7 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
                         : (value as Hero).desktopImage
                     })`,
                     backgroundPosition: "top center",
-                    backgroundSize: "contain",
+                    backgroundSize: "100% auto",
                     backgroundRepeat: "no-repeat",
                   }}
                 >
