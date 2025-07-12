@@ -12,7 +12,7 @@ const HeroSection = ({ data, pageName, isMobile }: HeroSectionProps) => {
   const { titleWords, description, btnPrimaryText, btnSecondaryText } = data;
   const renderTitle = (titleWords: TitleWord[]) => {
     return (
-      <h1 className="text-white text-[42px] leading-[50px] tracking-[-2px] md:leading-[72px] md:text-6xl font-bold md:mb-7 mb-[22px]">
+      <h1 className="text-white text-[42px] leading-[50px] tracking-[-2px] md:leading-[72px] md:text-6xl font-bold md:mb-[60px] mb-[22px]">
         {titleWords.map((word, index) => (
           <span
             key={index}
@@ -28,7 +28,7 @@ const HeroSection = ({ data, pageName, isMobile }: HeroSectionProps) => {
   };
   return (
     <>
-      <div className="h-fit md:h-[745px] flex flex-col justify-center md:justify-start items-center md:items-start text-center md:text-start px-6 md:px-20">
+      <div className="h-fit md:h-[745px] flex flex-col justify-center md:justify-start items-center md:items-start text-center md:text-start px-6 md:px-[120px]">
         <div
           className={`${
             pageName === "cricket"
