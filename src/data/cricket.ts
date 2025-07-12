@@ -49,8 +49,7 @@ export const cricketData: StaticPageData = {
         title: "Premium turf",
         description:
           "Professional-grade pitches with perfect, consistent bounce every time.",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/card5-2.webp",
+        backgroundImage: "/images/cricket-compressed/premium_turf.svg",
         iconImage:
           "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-icon-3.svg",
         link: "",
