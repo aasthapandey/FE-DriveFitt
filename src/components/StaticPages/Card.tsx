@@ -28,28 +28,36 @@ const Card = ({ data, isMobile, className, imageClass }: CardProps) => {
         }}
       >
         <div className="absolute inset-0 transition-all duration-300 ease-in-out group-hover:backdrop-blur-sm" />
-
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
 
-        <div className="absolute left-0 bottom-0 w-full p-6 md:px-10 md:py-[46px] flex flex-col transition-all duration-300 ease-in-out transform group-hover:translate-y-[-8px]">
-          <h3 className="text-white text-xl leading-6 md:leading-9 md:text-3xl font-semibold">
-            {title}
-          </h3>
-          <p className="text-white text-base md:text-lg font-light leading-tight tracking-tight hidden group-hover:block mt-2 opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out">
-            {description}
-          </p>
-        </div>
-        {link && (
-          <div className="absolute flex items-center justify-center bottom-4 md:bottom-6 right-4 md:right-6">
-            <Image
-              src="https://da8nru77lsio9.cloudfront.net/images/redirectionButton.svg"
-              alt="redirectionBtn"
-              width={isMobile ? 32 : 60}
-              height={isMobile ? 32 : 60}
-              className={`${isMobile ? "!size-8" : "!size-[60px]"}`}
-            />
+        <div className="absolute left-0 bottom-0 w-full p-6 md:px-10 md:py-[46px] flex justify-between items-start">
+          <div className="flex flex-col transition-all duration-300 ease-in-out transform group-hover:translate-y-[-8px]">
+            <h3 className="text-white text-xl leading-6 md:leading-9 md:text-3xl font-semibold">
+              {title}
+            </h3>
+            <p className="text-white text-base md:text-lg font-light leading-tight tracking-tight hidden group-hover:block mt-2 opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out md:max-w-[392px]">
+              {description}
+            </p>
           </div>
-        )}
+
+          {link && (
+            <div
+              className={`flex items-center justify-center ${
+                description && description.length > 0
+                  ? "md:group-hover:mt-[30px]"
+                  : ""
+              }`}
+            >
+              <Image
+                src="https://da8nru77lsio9.cloudfront.net/images/redirectionButton.svg"
+                alt="redirectionBtn"
+                width={isMobile ? 32 : 70}
+                height={isMobile ? 32 : 70}
+                className={`${isMobile ? "!size-8" : "!size-[70px]"}`}
+              />
+            </div>
+          )}
+        </div>
       </a>
     </div>
   );
