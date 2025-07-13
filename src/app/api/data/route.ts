@@ -4,6 +4,38 @@ import path from "path";
 import { DataFileType, DataFileMap } from "@/types/dataFiles";
 import { initializeGit } from "@/utils/gitConfig";
 
+// Import all data files statically
+import { homeData } from "@/data/home";
+import { runningData } from "@/data/running";
+import { contactUsData } from "@/data/contactUs";
+import { cricketData } from "@/data/cricket";
+import { fitnessData } from "@/data/fitness";
+import { franchiseData } from "@/data/franchise";
+import { recoveryData } from "@/data/recovery";
+import { comingSoonData } from "@/data/comingSoon";
+import { error404Data } from "@/data/error404";
+import { licensesData } from "@/data/licenses";
+import { privacyData } from "@/data/privacy";
+import { termsData } from "@/data/terms";
+import { navbarData } from "@/data/navbar";
+
+// Create a data map for easy access
+const dataMap = {
+  [DataFileType.HOME]: homeData,
+  [DataFileType.RUNNING]: runningData,
+  [DataFileType.CONTACT_US]: contactUsData,
+  [DataFileType.CRICKET]: cricketData,
+  [DataFileType.FITNESS]: fitnessData,
+  [DataFileType.FRANCHISE]: franchiseData,
+  [DataFileType.RECOVERY]: recoveryData,
+  [DataFileType.COMING_SOON]: comingSoonData,
+  [DataFileType.ERROR_404]: error404Data,
+  [DataFileType.LICENSES]: licensesData,
+  [DataFileType.PRIVACY]: privacyData,
+  [DataFileType.TERMS]: termsData,
+  [DataFileType.NAVBAR]: navbarData,
+};
+
 // Helper function to get the data directory path
 const getDataDirPath = () => {
   return path.join(process.cwd(), "src", "data");
@@ -22,29 +54,18 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const fileName = DataFileMap[fileType as DataFileType];
-    const filePath = path.join(getDataDirPath(), `${fileName}.ts`);
+    // Get data from the static import map
+    const data = dataMap[fileType as DataFileType];
 
-    // Read the file content
-    const fileContent = await fs.readFile(filePath, "utf-8");
-
-    // Extract the JSON data from the TypeScript file
-    const match = fileContent.match(/export const [^=]+=\s*({[\s\S]*});?\s*$/);
-    if (!match) {
-      return NextResponse.json(
-        { error: "Invalid file format" },
-        { status: 400 }
-      );
+    if (!data) {
+      return NextResponse.json({ error: "Data not found" }, { status: 404 });
     }
 
-    // Parse the extracted JSON
-    const jsonData = eval("(" + match[1] + ")");
-
-    return NextResponse.json(jsonData);
+    return NextResponse.json(data);
   } catch (error) {
-    console.error("Error reading file:", error);
+    console.error("Error reading data:", error);
     return NextResponse.json(
-      { error: error instanceof Error ? error.message : "Error reading file" },
+      { error: error instanceof Error ? error.message : "Error reading data" },
       { status: 500 }
     );
   }
@@ -89,7 +110,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Convert the data to a TypeScript export
-    const fileContent = `import { StaticPageData } from "@/types/staticPages";\n\nexport const ${fileName}Data: StaticPageData = ${JSON.stringify(
+    const fileContent = `import { StaticPageData } from "@/types/staticPages";\nimport { navbarData } from "./navbar";\n\nexport const ${fileName}Data: StaticPageData = ${JSON.stringify(
       data,
       null,
       2
