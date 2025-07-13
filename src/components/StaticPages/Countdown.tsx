@@ -61,6 +61,9 @@ const Countdown = ({ countdownData }: CountdownProps) => {
       className="w-full h-fit md:h-[236px] rounded-[30px]  border-[#343434]"
       style={{
         background: `url(${bgImage})`,
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
       }}
     >
       <div className="flex flex-col md:flex-row pt-6 pb-[38px] md:pb-[72px] md:pt-[40px] gap-4 md:gap-0 justify-between md:px-[46px] text-center md:text-left">
