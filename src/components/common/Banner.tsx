@@ -20,7 +20,7 @@ const Banner = ({ data, isMobile }: BannerType) => {
         }}
       >
         <div
-          className="rounded-[20px] md:rounded-[40px] w-full h-full cursor-pointer flex flex-col justify-center p-6 md:p-10"
+          className="rounded-[20px] md:rounded-[40px] w-full h-full  flex flex-col justify-center p-6 md:p-10"
           style={{
             background: `linear-gradient(180deg, rgba(13, 13, 13, 0) 0%, #0D0D0D 100%), url(${imageToUse})`,
             backgroundRepeat: "no-repeat",
@@ -35,7 +35,7 @@ const Banner = ({ data, isMobile }: BannerType) => {
               description={description || ""}
               isBanner={true}
             />
-            <button className="bg-[#00DBDC] border border-transparent w-fit leading-[100%] tracking-[-5%] text-base text-[#0D0D0D] md:px-12 md:py-4 py-[10px] px-9 rounded-lg font-medium hover:bg-transparent hover:border-[#00DBDC] hover:text-[#00DBDC] transition-all duration-200">
+            <button className="bg-[#00DBDC] border border-transparent w-fit leading-[100%] tracking-[-5%] text-base text-[#0D0D0D] md:px-12 py-[10px] px-9 rounded-lg font-medium hover:bg-transparent hover:border-[#00DBDC] hover:text-[#00DBDC] transition-all duration-200 md:h-[50px] cursor-pointer">
               {btnLabel}
             </button>
           </div>
