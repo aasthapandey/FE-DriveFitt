@@ -22,6 +22,7 @@ import {
   Error404Section as Error404SectionType,
   PolicySection as PolicySectionType,
   JoinNowSectionProps,
+  RecoveryBannerProps,
 } from "@/types/staticPages";
 import CardSection4 from "@/components/StaticPages/CardSection4";
 import CardSection5 from "@/components/StaticPages/CardSection5";
@@ -42,6 +43,7 @@ import ComingSoonSection from "@/components/StaticPages/ComingSoonSection";
 import Error404Section from "@/components/StaticPages/Error404Section";
 import PolicySection from "@/components/StaticPages/PolicySection";
 import JoinNow from "@/components/common/JoinNow";
+import RecoveryBanner from "@/components/StaticPages/RecoveryBanner";
 
 interface StaticPageProps {
   data: StaticPageData;
@@ -72,6 +74,7 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
       | Error404SectionType
       | PolicySectionType
       | JoinNowSectionProps
+      | RecoveryBannerProps
   ) => {
     switch (key) {
       case "hero":
@@ -157,6 +160,13 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
         );
       case "joinNowSection":
         return <JoinNow isMobile={isMobile} />;
+      case "recoveryBannerSection":
+        return (
+          <RecoveryBanner
+            data={value as RecoveryBannerProps}
+            isMobile={isMobile}
+          />
+        );
       default:
         return null;
     }

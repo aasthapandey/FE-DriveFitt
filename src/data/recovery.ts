@@ -95,44 +95,12 @@ export const recoveryData: StaticPageData = {
       },
     ],
   },
-  scrollingCardSection: {
-    title: "Performance Nutrition – Fuel Like You Train",
+  recoveryBannerSection: {
+    title: "Recovery That Sets Us Apart",
     description:
-      "Science-backed eating strategies that match your workout intensity, recovery needs, and cricket-specific demands—because elite results require elite fueling.",
-    iconImage: "https://da8nru77lsio9.cloudfront.net/images/check-icon.svg",
-    cardSection: [
-      {
-        subTitle: "Personalized Sports Nutrition Plans",
-        list: [
-          "Tailored macros and meal timing to fuel your cricket, gym, and recovery needs—because a batsman and bowler don’t eat the same.",
-        ],
-        extraTagLabel: "",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/scroll-card-1.webp",
-      },
-      {
-        subTitle: "Performance Meal Prep",
-        list: [
-          "Capture every session and review it 10x faster with auto-clipped, ball-by-ball videos—no dead time, just pure action.",
-          "Create a team, stay in sync, and showcase your sessions on social media",
-          "Bat Sensor*- real-time insights on Bat Swing, Speed, Angles, Power & Efficiency ",
-        ],
-        extraTagLabel: "*Purchase separately",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/scroll-card-2.webp",
-      },
-      {
-        subTitle: "Hydration & Supplement Strategies",
-        list: [
-          "Capture every session and review it 10x faster with auto-clipped, ball-by-ball videos—no dead time, just pure action.",
-          "Create a team, stay in sync, and showcase your sessions on social media",
-          "Bat Sensor*- real-time insights on Bat Swing, Speed, Angles, Power & Efficiency ",
-        ],
-        extraTagLabel: "*Purchase separately",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/scroll-card-3.webp",
-      },
-    ],
+      "Most fitness centers treat recovery as optional—we make it integral. Our multi-modal recovery zones, science-backed methods, and professional support help you train longer, recover faster, and perform at your peak. This isn't luxury—it's a performance essential.",
+    image: "/images/recovery-compressed/banner3.webp",
+    mobileImage: "/images/recovery-compressed/mobile-banner3.webp",
   },
   bannerSection: {
     title: "Become a DriveFITT member",

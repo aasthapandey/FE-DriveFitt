@@ -248,6 +248,13 @@ export interface JoinNowSectionProps {
   description?: string;
 }
 
+export interface RecoveryBannerProps {
+  title: string;
+  description: string;
+  image: string;
+  mobileImage?: string;
+}
+
 export interface StaticPageData {
   title: string;
   description: string;
@@ -271,6 +278,7 @@ export interface StaticPageData {
   joinNowSection?: JoinNowSectionProps;
   evolutionSection?: EvolutionSectionProps;
   appDownloadSection?: AppDownloadProps;
+  recoveryBannerSection?: RecoveryBannerProps;
   footerInfoSection?: FooterInfoProps;
   footerSection?: FooterProps;
   faqSection?: FaqSectionProps;
