@@ -278,21 +278,21 @@ export const homeData: StaticPageData = {
   footerInfoSection: {
     footerInfoList: [
       {
-        title: "Chat To Us",
-        description: "Our friendly team is here to help",
+        title: "Write To Us",
+        description: "Our Friendly Team Is Here To Help",
         email: "info@drivefitt.club",
         image: "https://da8nru77lsio9.cloudfront.net/images/ChatToUs.svg",
       },
       {
         title: "Visit Us",
-        description: "Welcome to Our Main Club Branch.",
-        email: "Sector-56, Golf Course Rd Gurugram, Haryana 122022",
+        description: "Discover The Best Of What We Offer At Our Flagship Club",
+        email: "M3M 65th Avenue, Sector 65, Gurugram, Haryana 122022",
         image: "https://da8nru77lsio9.cloudfront.net/images/VisitUs.svg",
       },
       {
         title: "Call Us",
-        description: "Mon - Sun from 10am to 10pm",
-        email: "+91-9999999990",
+        description: "Mon - Sun From 10am To 10pm",
+        email: "+91-9871836565",
         image: "https://da8nru77lsio9.cloudfront.net/images/CallUs.svg",
       },
     ],
