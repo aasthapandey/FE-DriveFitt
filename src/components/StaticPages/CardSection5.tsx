@@ -34,10 +34,10 @@ const StaticCard = ({
 
         <div className="absolute left-0 bottom-0 w-full p-6 md:px-10 md:py-[46px] flex justify-between items-start">
           <div className="flex flex-col">
-            <h3 className="text-white text-xl leading-6 md:leading-9 md:text-3xl font-semibold">
+            <h3 className="text-white text-xl leading-6 md:leading-9 md:text-[32px] font-semibold">
               {title}
             </h3>
-            <p className="text-white text-base md:text-lg font-light leading-tight tracking-tight mt-4 md:max-w-[392px]">
+            <p className="text-white text-base md:text-[14px] font-light leading-tight tracking-tight mt-4 md:max-w-[392px]">
               {description}
             </p>
           </div>

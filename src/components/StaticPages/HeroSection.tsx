@@ -46,7 +46,7 @@ const HeroSection = ({ data, pageName, isMobile }: HeroSectionProps) => {
         >
           {renderTitle(titleWords)}
           {pageName !== "home" ? (
-            <p className="text-white md:text-base md:leading-5 text-sm leading-[18px] tracking-[-2%] font-light mb-[28px] md:mb-[60px]">
+            <p className="text-white md:text-base md:leading-5 text-sm leading-[18px] tracking-[-2%] font-light mb-[28px] md:mb-[60px] md:max-w-[486px]">
               {description}
             </p>
           ) : null}

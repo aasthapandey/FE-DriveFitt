@@ -24,7 +24,7 @@ const WhatYouReceiveSection = ({
                 "linear-gradient(180deg, #333333 29.36%, #00DBDC 120.13%)",
             }}
           >
-            <div className="rounded-[20px] md:rounded-[40px] w-full h-full cursor-pointer flex flex-col justify-end overflow-hidden">
+            <div className="rounded-[20px] md:rounded-[40px] w-full h-full flex flex-col justify-end overflow-hidden">
               <Image
                 src={isMobile ? imageMobile : imageDesktop}
                 alt={title || ""}
