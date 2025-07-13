@@ -49,11 +49,11 @@ const StaticCard = ({ data, className, isMobile }: StaticCardProps) => {
           </div>
           <div className="flex justify-between items-end p-6 md:p-10 relative">
             <div className="flex flex-col justify-start w-3/5 gap-2 md:gap-4">
-              <h3 className="text-white text-5  md:text-[32px] tracking-[-1px] leading-6 md:leading-9 font-semibold">
+              <h3 className="text-white text-[20px]  md:text-[32px] tracking-[-1px] leading-6 md:leading-9 font-semibold">
                 <div>The</div>
                 <div>{title}</div>
               </h3>
-              <p className="text-white text-xs leading-4 md:text-base tracking-[-2%] md:leading-[100%] font-light">
+              <p className="text-white text-xs leading-4 md:text-base tracking-[-2%] md:leading-[24px] font-light">
                 {description}
               </p>
             </div>

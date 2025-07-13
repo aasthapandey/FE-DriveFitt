@@ -17,7 +17,7 @@ const InfoCard = ({ data }: { data: InfoSection }) => {
         }}
       >
         <div className="flex p-5 md:p-10 flex-col gap-6">
-          <h2 className="w-full md:w-[200px] font-semibold md:font-medium text-xl md:text-[28px] leading-6 md:leading-[100%] tracking-[-1px]">
+          <h2 className="w-full md:w-[200px] font-semibold md:font-medium text-[20px] md:text-[32px] leading-6 md:leading-[38px] tracking-[-1px]">
             {title}
           </h2>
           {list.map((item) => (
