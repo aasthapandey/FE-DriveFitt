@@ -18,7 +18,7 @@ const StaticCard = ({ data, className, isMobile }: StaticCardProps) => {
         }}
       >
         <div
-          className="rounded-[20px] md:rounded-[40px] bg-[#0D0D0D] w-full h-full cursor-pointer flex flex-col justify-end relative"
+          className="rounded-[20px] md:rounded-[40px] bg-[#0D0D0D] w-full h-full flex flex-col justify-end relative"
           style={{
             backgroundImage: `url(${backgroundImage})`,
             backgroundSize: "cover",
@@ -56,15 +56,6 @@ const StaticCard = ({ data, className, isMobile }: StaticCardProps) => {
               <p className="text-white text-xs leading-4 md:text-base tracking-[-2%] md:leading-[24px] font-light">
                 {description}
               </p>
-            </div>
-            <div>
-              <Image
-                src="https://da8nru77lsio9.cloudfront.net/images/redirectionButton.svg"
-                alt="redirectionBtn"
-                width={60}
-                height={60}
-                className={`${isMobile ? "!size-8" : "!size-[60px]"}`}
-              />
             </div>
           </div>
         </div>
