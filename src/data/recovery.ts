@@ -121,34 +121,6 @@ export const recoveryData: StaticPageData = {
       "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/gallery-3.webp",
     ],
   },
-  memberSection: {
-    title: "Member Experiences",
-    description:
-      "Hear What Our Players Say — Real Stories of Growth, Grit, and Game-Changing Training.",
-    memberList: [
-      {
-        title: "Kunal Bajaj",
-        description: "Membership plan",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/member-section/cricket-member-1.svg",
-        link: "/cricket",
-      },
-      {
-        title: "Kunal Jain",
-        description: "Membership plan",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/member-section/cricket-member-2.svg",
-        link: "/cricket",
-      },
-      {
-        title: "Rahul Kapoor",
-        description: "Membership plan",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/member-section/cricket-member-3.svg",
-        link: "/cricket",
-      },
-    ],
-  },
   joinNowSection: {
     // Empty object following JoinNowSectionProps interface
   },

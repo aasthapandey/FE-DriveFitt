@@ -234,34 +234,6 @@ export const homeData: StaticPageData = {
     mobileImage:
       "https://da8nru77lsio9.cloudfront.net/images/homec/card1-mobile.svg",
   },
-  memberSection: {
-    title: "What Our Members Are Saying",
-    description:
-      "Join a like-minded community of athletes and fitness enthusiasts who call DriveFITT their second home.",
-    memberList: [
-      {
-        title: "Riya Bajaj",
-        description: "Yoga Class",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/homec/member-1.webp",
-        link: "/cricket",
-      },
-      {
-        title: "Kunal Jain",
-        description: "Membership plan",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/homec/member-2.webp",
-        link: "/cricket",
-      },
-      {
-        title: "Rahul Kapoor",
-        description: "Membership plan",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/homec/member-3.webp",
-        link: "/cricket",
-      },
-    ],
-  },
   appDownloadSection: {
     title: "Your Exclusive Access, Now On Mobile",
     description:
