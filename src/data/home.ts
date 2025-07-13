@@ -2,461 +2,443 @@ import { StaticPageData } from "@/types/staticPages";
 import { navbarData } from "./navbar";
 
 export const homeData: StaticPageData = {
-  title: "DriveFIIT",
-  description: "Experience the best fitness and sports facilities.",
-  seoTitle: "DriveFIIT - Premium Fitness & Sports Club",
-  seoDescription:
-    "Join DriveFIIT, Gurugram's premier fitness & sports club. Experience state-of-the-art facilities for cricket, fitness, recovery, and more.",
-  navbar: navbarData,
-  hero: {
-    titleWords: [
+  "title": "DriveFIIT",
+  "description": "Experience the best fitness and sports facilities.",
+  "seoTitle": "DriveFIIT - Premium Fitness & Sports Club",
+  "seoDescription": "Join DriveFIIT, Gurugram's premier fitness & sports club. Experience state-of-the-art facilities for cricket, fitness, recovery, and more.",
+  "navbar": {
+    "logo": "https://da8nru77lsio9.cloudfront.net/images/logo.svg",
+    "navLinks": [
       {
-        text: "India's First ",
-        color: "#FFFFFF",
+        "title": "Cricket",
+        "href": "/cricket"
       },
       {
-        text: "Cricket ",
-        color: "#00DBDC",
+        "title": "Fitness",
+        "href": "/fitness"
       },
       {
-        text: "and ",
-        color: "#FFFFFF",
+        "title": "Recovery",
+        "href": "/recovery"
       },
       {
-        text: "Fitness ",
-        color: "#00DBDC",
+        "title": "Running",
+        "href": "/running"
       },
       {
-        text: "Club",
-        color: "#FFFFFF",
-      },
+        "title": "Franchise",
+        "href": "/franchise"
+      }
     ],
-    description: "",
-    desktopImage: "https://da8nru77lsio9.cloudfront.net/images/hero/home.webp",
-    originalDesktopImage:
-      "https://da8nru77lsio9.cloudfront.net/images/hero/home-original.svg",
-    mobileImage:
-      "https://da8nru77lsio9.cloudfront.net/images/hero/home-mobile.webp",
-    originalMobileImage:
-      "https://da8nru77lsio9.cloudfront.net/images/hero/home-mobile-original.svg",
-    btnPrimaryText: "Join Now",
-    btnSecondaryText: "Join Now",
-  },
-  countdownSection: {
-    title: "Experience Premium Club. Launching in ",
-    date: "2025-07-15",
-    bgImage: "https://da8nru77lsio9.cloudfront.net/images/counter-bg.svg",
-    location: "GURUGRAM",
-    openingText: "Opening in",
-    labels: {
-      days: "DAYS",
-      hours: "HOURS",
-      minutes: "MINUTE",
-      seconds: "SECOND",
+    "signInButton": {
+      "text": "Sign In"
     },
+    "loginModalType": "email"
   },
-  carouselBanner: [
+  "hero": {
+    "titleWords": [
+      {
+        "text": "India's Firsttt ",
+        "color": "#FFFFFF"
+      },
+      {
+        "text": "Cricket ",
+        "color": "#00DBDC"
+      },
+      {
+        "text": "and ",
+        "color": "#FFFFFF"
+      },
+      {
+        "text": "Fitness ",
+        "color": "#00DBDC"
+      },
+      {
+        "text": "Club",
+        "color": "#FFFFFF"
+      }
+    ],
+    "description": "",
+    "desktopImage": "https://da8nru77lsio9.cloudfront.net/images/hero/home.webp",
+    "originalDesktopImage": "https://da8nru77lsio9.cloudfront.net/images/hero/home-original.svg",
+    "mobileImage": "https://da8nru77lsio9.cloudfront.net/images/hero/home-mobile.webp",
+    "originalMobileImage": "https://da8nru77lsio9.cloudfront.net/images/hero/home-mobile-original.svg",
+    "btnPrimaryText": "Join Now",
+    "btnSecondaryText": "Join Now"
+  },
+  "countdownSection": {
+    "title": "Experience Premium Club. Launching in ",
+    "date": "2025-07-15",
+    "bgImage": "https://da8nru77lsio9.cloudfront.net/images/counter-bg.svg",
+    "location": "GURUGRAM",
+    "openingText": "Opening in",
+    "labels": {
+      "days": "DAYS",
+      "hours": "HOURS",
+      "minutes": "MINUTE",
+      "seconds": "SECOND"
+    }
+  },
+  "carouselBanner": [
     {
-      title: "Experience Premium Club. Launching in GURUGRAM",
-      countdownEnd: "2025-09-19",
-      backgroundImage:
-        "https://da8nru77lsio9.cloudfront.net/images/carouselBanner/banner-1.svg",
-    },
+      "title": "Experience Premium Club. Launching in GURUGRAM",
+      "countdownEnd": "2025-09-19",
+      "backgroundImage": "https://da8nru77lsio9.cloudfront.net/images/carouselBanner/banner-1.svg"
+    }
   ],
-  cardSection4: {
-    title: "A Complete Ecosystem for Peak Performance",
-    description:
-      "From cricket training to full-spectrum fitness and recovery—every element of your game is here.",
-    cardSection: [
+  "cardSection4": {
+    "title": "A Complete Ecosystem for Peak Performance",
+    "description": "From cricket training to full-spectrum fitness and recovery—every element of your game is here.",
+    "cardSection": [
       {
-        title: "Cricket",
-        description:
-          "World-class indoor nets, ball tracking & analytics for cricket & pro coaching for all skill levels",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/homec/mobile-card4-1.webp",
-        link: "/cricket",
+        "title": "Cricket",
+        "description": "World-class indoor nets, ball tracking & analytics for cricket & pro coaching for all skill levels",
+        "backgroundImage": "https://da8nru77lsio9.cloudfront.net/images/homec/mobile-card4-1.webp",
+        "link": "/cricket"
       },
       {
-        title: "Fitness",
-        description:
-          "Expertly designed strength, conditioning, and performance training utilizing top-tier equipment, tailored for you.",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/homec/card4-2.webp",
-        link: "/fitness",
+        "title": "Fitness",
+        "description": "Expertly designed strength, conditioning, and performance training utilizing top-tier equipment, tailored for you.",
+        "backgroundImage": "https://da8nru77lsio9.cloudfront.net/images/homec/card4-2.webp",
+        "link": "/fitness"
       },
       {
-        title: "Recovery",
-        description:
-          "Cold Plunge, infrared sauna, compression & percussion therapy along with physiotherapy to recharge, recover, and reduce injury risk.",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/homec/card4-3.webp",
-        link: "/recovery",
+        "title": "Recovery",
+        "description": "Cold Plunge, infrared sauna, compression & percussion therapy along with physiotherapy to recharge, recover, and reduce injury risk.",
+        "backgroundImage": "https://da8nru77lsio9.cloudfront.net/images/homec/card4-3.webp",
+        "link": "/recovery"
       },
       {
-        title: "Running",
-        description:
-          "Pace-enhancing run classes with functional drills to optimize speed, agility & endurance.",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/homec/card4-4.webp",
-        link: "/running",
-      },
-    ],
+        "title": "Running",
+        "description": "Pace-enhancing run classes with functional drills to optimize speed, agility & endurance.",
+        "backgroundImage": "https://da8nru77lsio9.cloudfront.net/images/homec/card4-4.webp",
+        "link": "/running"
+      }
+    ]
   },
-  cardSection3: {
-    title: "Train your way",
-    description:
-      "Group energy. Focused strength. Smart recovery — your training, your terms.",
-    cardSection: [
+  "cardSection3": {
+    "title": "Train your way",
+    "description": "Group energy. Focused strength. Smart recovery — your training, your terms.",
+    "cardSection": [
       {
-        title: "Group Classes",
-        description:
-          "Our expert-led group sessions fuel your energy and connect you with a community that shares your drive.",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/homec/card3-1.webp",
-        link: "/cricket",
+        "title": "Group Classes",
+        "description": "Our expert-led group sessions fuel your energy and connect you with a community that shares your drive.",
+        "backgroundImage": "https://da8nru77lsio9.cloudfront.net/images/homec/card3-1.webp",
+        "link": "/cricket"
       },
       {
-        title: "Pilates",
-        description:
-          "Low-impact, high-control pilates workouts designed to improve flexibility, posture, and core strength in a group setting.",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/homec/card3-2.webp",
-        link: "/cricket",
+        "title": "Pilates",
+        "description": "Low-impact, high-control pilates workouts designed to improve flexibility, posture, and core strength in a group setting.",
+        "backgroundImage": "https://da8nru77lsio9.cloudfront.net/images/homec/card3-2.webp",
+        "link": "/cricket"
       },
       {
-        title: "Personal Training",
-        description:
-          "Customized 1-on-1 coaching tailored to your body, goals, sport-specific performance—and complete recovery needs.",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/homec/card3-3.webp",
-        link: "/cricket",
-      },
-    ],
+        "title": "Personal Training",
+        "description": "Customized 1-on-1 coaching tailored to your body, goals, sport-specific performance—and complete recovery needs.",
+        "backgroundImage": "https://da8nru77lsio9.cloudfront.net/images/homec/card3-3.webp",
+        "link": "/cricket"
+      }
+    ]
   },
-  cardSection2: {
-    title: "Refueling & Gear-Up Zone",
-    description: "Refuel. Recharge. Reinvent.",
-    cardSection: [
+  "cardSection2": {
+    "title": "Refueling & Gear-Up Zone",
+    "description": "Refuel. Recharge. Reinvent.",
+    "cardSection": [
       {
-        title: "Protein BAR",
-        description:
-          "World-class indoor nets, ball tracking & analytics for cricket & pro coaching for all skill levels.",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/card-section/home/card-section-2-bg.svg",
-        modalImage:
-          "https://da8nru77lsio9.cloudfront.net/images/card-section/home/man-modal.svg",
-        link: "/cricket",
+        "title": "Protein BAR",
+        "description": "World-class indoor nets, ball tracking & analytics for cricket & pro coaching for all skill levels.",
+        "backgroundImage": "https://da8nru77lsio9.cloudfront.net/images/card-section/home/card-section-2-bg.svg",
+        "modalImage": "https://da8nru77lsio9.cloudfront.net/images/card-section/home/man-modal.svg",
+        "link": "/cricket"
       },
       {
-        title: "Pro Shop",
-        description:
-          "Access premium cricket gear, fitness accessories, and apparel—all curated for champions.",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/card-section/home/card-section-2-bg.svg",
-        modalImage:
-          "https://da8nru77lsio9.cloudfront.net/images/homec/card2-2.svg",
-        link: "/cricket",
-      },
-    ],
+        "title": "Pro Shop",
+        "description": "Access premium cricket gear, fitness accessories, and apparel—all curated for champions.",
+        "backgroundImage": "https://da8nru77lsio9.cloudfront.net/images/card-section/home/card-section-2-bg.svg",
+        "modalImage": "https://da8nru77lsio9.cloudfront.net/images/homec/card2-2.svg",
+        "link": "/cricket"
+      }
+    ]
   },
-  innovationCommunitySection: {
-    title: "Innovation & Community",
-    description: "Beyond Training: Your Tech-Integrated Fitness Lifestyle",
-    infoSection: [
+  "innovationCommunitySection": {
+    "title": "Innovation & Community",
+    "description": "Beyond Training: Your Tech-Integrated Fitness Lifestyle",
+    "infoSection": [
       {
-        title: "Performance tech",
-        list: [
+        "title": "Performance tech",
+        "list": [
           {
-            image: "https://da8nru77lsio9.cloudfront.net/images/info1-1.svg",
-            description: "3D body scans assessment",
+            "image": "https://da8nru77lsio9.cloudfront.net/images/info1-1.svg",
+            "description": "3D body scans assessment"
           },
           {
-            image: "https://da8nru77lsio9.cloudfront.net/images/info1-2.svg",
-            description: "A.I. ball tracking & analytics for cricket",
+            "image": "https://da8nru77lsio9.cloudfront.net/images/info1-2.svg",
+            "description": "A.I. ball tracking & analytics for cricket"
           },
           {
-            image: "https://da8nru77lsio9.cloudfront.net/images/info1-3.svg",
-            description: "Integrated member app",
-          },
-        ],
+            "image": "https://da8nru77lsio9.cloudfront.net/images/info1-3.svg",
+            "description": "Integrated member app"
+          }
+        ]
       },
       {
-        title: "Premium workspaces",
-        list: [
+        "title": "Premium workspaces",
+        "list": [
           {
-            image: "https://da8nru77lsio9.cloudfront.net/images/info2-1.svg",
-            description: "Dedicated phone booths",
+            "image": "https://da8nru77lsio9.cloudfront.net/images/info2-1.svg",
+            "description": "Dedicated phone booths"
           },
           {
-            image: "https://da8nru77lsio9.cloudfront.net/images/info2-2.svg",
-            description: "Ample sitting space",
+            "image": "https://da8nru77lsio9.cloudfront.net/images/info2-2.svg",
+            "description": "Ample sitting space"
           },
           {
-            image: "https://da8nru77lsio9.cloudfront.net/images/info2-3.svg",
-            description: "Fast and reliable Wi-Fi",
-          },
-        ],
+            "image": "https://da8nru77lsio9.cloudfront.net/images/info2-3.svg",
+            "description": "Fast and reliable Wi-Fi"
+          }
+        ]
       },
       {
-        title: "Community & Challenges",
-        list: [
+        "title": "Community & Challenges",
+        "list": [
           {
-            image: "https://da8nru77lsio9.cloudfront.net/images/info3-1.svg",
-            description: "Squad based challenges",
+            "image": "https://da8nru77lsio9.cloudfront.net/images/info3-1.svg",
+            "description": "Squad based challenges"
           },
           {
-            image: "https://da8nru77lsio9.cloudfront.net/images/info3-2.svg",
-            description: "Signature events & experiences",
+            "image": "https://da8nru77lsio9.cloudfront.net/images/info3-2.svg",
+            "description": "Signature events & experiences"
           },
           {
-            image: "https://da8nru77lsio9.cloudfront.net/images/info3-3.svg",
-            description: "Family Plan",
-          },
-        ],
-      },
-    ],
+            "image": "https://da8nru77lsio9.cloudfront.net/images/info3-3.svg",
+            "description": "Family Plan"
+          }
+        ]
+      }
+    ]
   },
-  gallerySection: {
-    title: "Step Inside the Future of Sports & Fitness",
-    description:
-      "Tour our state-of-the-art club and discover how Drive FITT redefines space, energy, and purpose.",
-    btnLabel: "Join online",
-    imageList: [
+  "gallerySection": {
+    "title": "Step Inside the Future of Sports & Fitness",
+    "description": "Tour our state-of-the-art club and discover how Drive FITT redefines space, energy, and purpose.",
+    "btnLabel": "Join online",
+    "imageList": [
       "https://da8nru77lsio9.cloudfront.net/images/homec/gallery-1.webp",
       "https://da8nru77lsio9.cloudfront.net/images/homec/gallery-2.webp",
-      "https://da8nru77lsio9.cloudfront.net/images/homec/gallery-3.webp",
-    ],
+      "https://da8nru77lsio9.cloudfront.net/images/homec/gallery-3.webp"
+    ]
   },
-  sportsClubSection: {
-    title: "The Drive FITT sports club philosophy",
-    description: "The Drive FITT Model: Engineered for Excellence",
-    image: "https://da8nru77lsio9.cloudfront.net/images/homec/card1.svg",
-    mobileImage:
-      "https://da8nru77lsio9.cloudfront.net/images/homec/card1-mobile.svg",
+  "sportsClubSection": {
+    "title": "The Drive FITT sports club philosophy",
+    "description": "The Drive FITT Model: Engineered for Excellence",
+    "image": "https://da8nru77lsio9.cloudfront.net/images/homec/card1.svg",
+    "mobileImage": "https://da8nru77lsio9.cloudfront.net/images/homec/card1-mobile.svg"
   },
-  memberSection: {
-    title: "What our members are saying",
-    description:
-      "Join a like-minded community of athletes and fitness enthusiasts who call DriveFITT their second home.",
-    memberList: [
+  "memberSection": {
+    "title": "What our members are saying",
+    "description": "Join a like-minded community of athletes and fitness enthusiasts who call DriveFITT their second home.",
+    "memberList": [
       {
-        title: "Riya Bajaj",
-        description: "Yoga Class",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/homec/member-1.webp",
-        link: "/cricket",
+        "title": "Riya Bajaj",
+        "description": "Yoga Class",
+        "backgroundImage": "https://da8nru77lsio9.cloudfront.net/images/homec/member-1.webp",
+        "link": "/cricket"
       },
       {
-        title: "Kunal Jain",
-        description: "Membership plan",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/homec/member-2.webp",
-        link: "/cricket",
+        "title": "Kunal Jain",
+        "description": "Membership plan",
+        "backgroundImage": "https://da8nru77lsio9.cloudfront.net/images/homec/member-2.webp",
+        "link": "/cricket"
       },
       {
-        title: "Rahul Kapoor",
-        description: "Membership plan",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/homec/member-3.webp",
-        link: "/cricket",
-      },
-    ],
+        "title": "Rahul Kapoor",
+        "description": "Membership plan",
+        "backgroundImage": "https://da8nru77lsio9.cloudfront.net/images/homec/member-3.webp",
+        "link": "/cricket"
+      }
+    ]
   },
-  appDownloadSection: {
-    title: "Your exclusive access, now on mobile",
-    description:
-      "Our app makes it easy to join classes, connect with coaches and track your journey.",
-    googlePlayImg:
-      "https://da8nru77lsio9.cloudfront.net/images/google-app-store.svg",
-    appStoreImg:
-      "https://da8nru77lsio9.cloudfront.net/images/apple-app-store.svg",
-    desktopImage:
-      "https://da8nru77lsio9.cloudfront.net/images/app-download/desktop-bg.svg",
-    mobileImage:
-      "https://da8nru77lsio9.cloudfront.net/images/app-download/mobile-bg.svg",
+  "appDownloadSection": {
+    "title": "Your exclusive access, now on mobile",
+    "description": "Our app makes it easy to join classes, connect with coaches and track your journey.",
+    "googlePlayImg": "https://da8nru77lsio9.cloudfront.net/images/google-app-store.svg",
+    "appStoreImg": "https://da8nru77lsio9.cloudfront.net/images/apple-app-store.svg",
+    "desktopImage": "https://da8nru77lsio9.cloudfront.net/images/app-download/desktop-bg.svg",
+    "mobileImage": "https://da8nru77lsio9.cloudfront.net/images/app-download/mobile-bg.svg"
   },
-  footerInfoSection: {
-    footerInfoList: [
+  "footerInfoSection": {
+    "footerInfoList": [
       {
-        title: "Chat To Us",
-        description: "Our friendly team is here to help",
-        email: "info@drivefitt.club",
-        image: "https://da8nru77lsio9.cloudfront.net/images/ChatToUs.svg",
+        "title": "Chat To Us",
+        "description": "Our friendly team is here to help",
+        "email": "info@drivefitt.club",
+        "image": "https://da8nru77lsio9.cloudfront.net/images/ChatToUs.svg"
       },
       {
-        title: "Visit us",
-        description: "Welcome to Our Main Club Branch.",
-        email: "Sector-56, Golf Course Rd Gurugram, Haryana 122022",
-        image: "https://da8nru77lsio9.cloudfront.net/images/VisitUs.svg",
+        "title": "Visit us",
+        "description": "Welcome to Our Main Club Branch.",
+        "email": "Sector-56, Golf Course Rd Gurugram, Haryana 122022",
+        "image": "https://da8nru77lsio9.cloudfront.net/images/VisitUs.svg"
       },
       {
-        title: "Call us",
-        description: "Mon - Sun from 10am to 10pm",
-        email: "+91-9999999990",
-        image: "https://da8nru77lsio9.cloudfront.net/images/CallUs.svg",
-      },
+        "title": "Call us",
+        "description": "Mon - Sun from 10am to 10pm",
+        "email": "+91-9999999990",
+        "image": "https://da8nru77lsio9.cloudfront.net/images/CallUs.svg"
+      }
     ],
-    socialLinkList: [
+    "socialLinkList": [
       {
-        image: "https://da8nru77lsio9.cloudfront.net/images/x-social.svg",
-        link: "https://x.com/Drive_Fitt",
+        "image": "https://da8nru77lsio9.cloudfront.net/images/x-social.svg",
+        "link": "https://x.com/Drive_Fitt"
       },
       {
-        image:
-          "https://da8nru77lsio9.cloudfront.net/images/instagram-social.svg",
-        link: "https://www.instagram.com/drive_fitt/",
+        "image": "https://da8nru77lsio9.cloudfront.net/images/instagram-social.svg",
+        "link": "https://www.instagram.com/drive_fitt/"
       },
       {
-        image:
-          "https://da8nru77lsio9.cloudfront.net/images/linkedin-social.svg",
-        link: "https://www.linkedin.com/company/drivefitt/",
+        "image": "https://da8nru77lsio9.cloudfront.net/images/linkedin-social.svg",
+        "link": "https://www.linkedin.com/company/drivefitt/"
       },
       {
-        image:
-          "https://da8nru77lsio9.cloudfront.net/images/facebook-social.svg",
-        link: "https://www.facebook.com/profile.php?id=61561476262978",
-      },
+        "image": "https://da8nru77lsio9.cloudfront.net/images/facebook-social.svg",
+        "link": "https://www.facebook.com/profile.php?id=61561476262978"
+      }
     ],
-    contactFormSection: {
-      title: "Get In Touch",
-      description: "We'd Love To Hear From You. Please Fill Out This Form.",
-      submitButtonText: "Send Message",
-      fields: {
-        firstName: {
-          label: "First Name",
-          placeholder: "Enter your first name",
+    "contactFormSection": {
+      "title": "Get In Touch",
+      "description": "We'd Love To Hear From You. Please Fill Out This Form.",
+      "submitButtonText": "Send Message",
+      "fields": {
+        "firstName": {
+          "label": "First Name",
+          "placeholder": "Enter your first name"
         },
-        lastName: {
-          label: "Last Name",
-          placeholder: "Enter your last name",
+        "lastName": {
+          "label": "Last Name",
+          "placeholder": "Enter your last name"
         },
-        email: {
-          label: "Email ID",
-          placeholder: "Enter your email address",
+        "email": {
+          "label": "Email ID",
+          "placeholder": "Enter your email address"
         },
-        phone: {
-          label: "Phone Number",
-          placeholder: "Enter your phone number",
+        "phone": {
+          "label": "Phone Number",
+          "placeholder": "Enter your phone number"
         },
-        message: {
-          label: "Message",
-          placeholder: "Write your message here...",
-        },
-      },
-    },
+        "message": {
+          "label": "Message",
+          "placeholder": "Write your message here..."
+        }
+      }
+    }
   },
-  footerSection: {
-    logo: "https://da8nru77lsio9.cloudfront.net/images/logo.svg",
-    description:
-      "Experience Gurugram's premier fitness & sports club – Gym, cricket, recovery & more",
-    sections: [
+  "footerSection": {
+    "logo": "https://da8nru77lsio9.cloudfront.net/images/logo.svg",
+    "description": "Experience Gurugram's premier fitness & sports club – Gym, cricket, recovery & more",
+    "sections": [
       {
-        title: "Quick links",
-        links: [
+        "title": "Quick links",
+        "links": [
           {
-            title: "About us",
-            link: "/coming-soon",
+            "title": "About us",
+            "link": "/coming-soon"
           },
           {
-            title: "Blogs",
-            link: "/coming-soon",
+            "title": "Blogs",
+            "link": "/coming-soon"
           },
           {
-            title: "Career",
-            link: "/coming-soon",
+            "title": "Career",
+            "link": "/coming-soon"
           },
           {
-            title: "Partner with us",
-            link: "/franchise",
-          },
-        ],
+            "title": "Partner with us",
+            "link": "/franchise"
+          }
+        ]
       },
       {
-        title: "Services",
-        links: [
+        "title": "Services",
+        "links": [
           {
-            title: "Cricket",
-            link: "/cricket",
+            "title": "Cricket",
+            "link": "/cricket"
           },
           {
-            title: "Fitness",
-            link: "/fitness",
+            "title": "Fitness",
+            "link": "/fitness"
           },
           {
-            title: "Recovery",
-            link: "/recovery",
+            "title": "Recovery",
+            "link": "/recovery"
           },
           {
-            title: "Running",
-            link: "/running",
+            "title": "Running",
+            "link": "/running"
           },
           {
-            title: "Group Classes",
-            link: "/coming-soon",
+            "title": "Group Classes",
+            "link": "/coming-soon"
           },
           {
-            title: "Pilates",
-            link: "/coming-soon",
+            "title": "Pilates",
+            "link": "/coming-soon"
           },
           {
-            title: "Personal Training",
-            link: "/coming-soon",
-          },
-        ],
+            "title": "Personal Training",
+            "link": "/coming-soon"
+          }
+        ]
       },
       {
-        title: "Support",
-        links: [
+        "title": "Support",
+        "links": [
           {
-            title: "Account",
-            link: "/coming-soon",
+            "title": "Account",
+            "link": "/coming-soon"
           },
           {
-            title: "Help",
-            link: "/coming-soon",
+            "title": "Help",
+            "link": "/coming-soon"
           },
           {
-            title: "Contact Us",
-            link: "/contact-us",
-          },
-        ],
+            "title": "Contact Us",
+            "link": "/contact-us"
+          }
+        ]
       },
       {
-        title: "Legals",
-        links: [
+        "title": "Legals",
+        "links": [
           {
-            title: "Terms & Conditions",
-            link: "/terms",
+            "title": "Terms & Conditions",
+            "link": "/terms"
           },
           {
-            title: "Privacy & Policy",
-            link: "/privacy",
-          },
-        ],
-      },
+            "title": "Privacy & Policy",
+            "link": "/privacy"
+          }
+        ]
+      }
     ],
-    socialLinks: [
+    "socialLinks": [
       {
-        image: "https://da8nru77lsio9.cloudfront.net/images/x-social.svg",
-        link: "https://x.com/Drive_Fitt",
+        "image": "https://da8nru77lsio9.cloudfront.net/images/x-social.svg",
+        "link": "https://x.com/Drive_Fitt"
       },
       {
-        image:
-          "https://da8nru77lsio9.cloudfront.net/images/instagram-social.svg",
-        link: "https://www.instagram.com/drive_fitt/",
+        "image": "https://da8nru77lsio9.cloudfront.net/images/instagram-social.svg",
+        "link": "https://www.instagram.com/drive_fitt/"
       },
       {
-        image:
-          "https://da8nru77lsio9.cloudfront.net/images/linkedin-social.svg",
-        link: "https://www.linkedin.com/company/drivefitt/",
+        "image": "https://da8nru77lsio9.cloudfront.net/images/linkedin-social.svg",
+        "link": "https://www.linkedin.com/company/drivefitt/"
       },
       {
-        image:
-          "https://da8nru77lsio9.cloudfront.net/images/facebook-social.svg",
-        link: "https://www.facebook.com/profile.php?id=61561476262978",
-      },
+        "image": "https://da8nru77lsio9.cloudfront.net/images/facebook-social.svg",
+        "link": "https://www.facebook.com/profile.php?id=61561476262978"
+      }
     ],
-    copyright:
-      "DriveFITT. All Right Reserved. Designed and Developed by TechKatalyst",
-  },
+    "copyright": "DriveFITT. All Right Reserved. Designed and Developed by TechKatalyst"
+  }
 };
