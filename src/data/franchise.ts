@@ -21,7 +21,7 @@ export const franchiseData: FranchisePageData = {
     btnPrimaryText: "Start Your Journey Now",
   },
   banner1Section: {
-    title: "Drive FITT?",
+    title: "DriveFITT?",
     subTitle: "Be The First To Disrupt",
     description1: "As category creators in ",
     description2: "cricket + fitness + recovery",
