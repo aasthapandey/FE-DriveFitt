@@ -195,12 +195,12 @@ export const privacyData: StaticPageData = {
       "Experience Gurugram's premier fitness & sports club – Gym, cricket, recovery & more",
     sections: [
       {
-        title: "Quick links",
+        title: "Quick Links",
         links: [
-          { title: "About us", link: "/coming-soon" },
+          { title: "About Us", link: "/coming-soon" },
           { title: "Blogs", link: "/coming-soon" },
           { title: "Career", link: "/coming-soon" },
-          { title: "Partner with us", link: "/franchise" },
+          { title: "Partner With Us", link: "/franchise" },
         ],
       },
       {

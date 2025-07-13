@@ -2,7 +2,7 @@ import { StaticPageData } from "@/types/staticPages";
 import { navbarData } from "./navbar";
 
 export const cricketData: StaticPageData = {
-  title: "Cricket at DriveFIIT",
+  title: "Cricket At DriveFIIT",
   description: "Experience the best cricket training facilities.",
   seoTitle: "Premium Cricket Club | DriveFIIT",
   seoDescription:
@@ -23,11 +23,11 @@ export const cricketData: StaticPageData = {
     btnSecondaryText: "Join Online",
   },
   cardSection5: {
-    title: "The edge you need",
+    title: "The Edge You Need",
     description: "",
     cardSection: [
       {
-        title: "Climate controlled nets",
+        title: "Climate Controlled Nets",
         description:
           "State-of-the-art indoor cricket nets equipped with advanced bowling machines for all skill levels.",
         backgroundImage:
@@ -37,7 +37,7 @@ export const cricketData: StaticPageData = {
         link: "",
       },
       {
-        title: "Instant performance tracking",
+        title: "Instant Performance Tracking",
         description: "Auto clips, speed, swing, spin, DRS, pitch maps & more.",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-5.svg",
@@ -46,7 +46,7 @@ export const cricketData: StaticPageData = {
         link: "",
       },
       {
-        title: "Premium turf",
+        title: "Premium Turf",
         description:
           "Professional-grade pitches with perfect, consistent bounce every time.",
         backgroundImage:
@@ -56,7 +56,7 @@ export const cricketData: StaticPageData = {
         link: "",
       },
       {
-        title: "Pick your time, book online",
+        title: "Pick Your Time, Book Online",
         description: "Quick, easy, and hassle-free.",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-1.svg",
@@ -65,7 +65,7 @@ export const cricketData: StaticPageData = {
         link: "",
       },
       {
-        title: "Professional coaching",
+        title: "Professional Coaching",
         description: "Led by certified and experienced trainers.",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/card5-3.webp",
@@ -76,7 +76,7 @@ export const cricketData: StaticPageData = {
     ],
   },
   evolutionSection: {
-    title: "Your cricket evolution starts here",
+    title: "Your Cricket Evolution Starts Here",
     evolutionList: [
       {
         title: "Faster Skill Development",
@@ -101,13 +101,13 @@ export const cricketData: StaticPageData = {
     ],
   },
   scrollingCardSection: {
-    title: "Tech that transforms your game",
+    title: "Tech That Transforms Your Game",
     description:
       "Smart Tech. Sharper Skills. — Elevate every aspect of your game with cutting-edge cricket innovation.",
     iconImage: "https://da8nru77lsio9.cloudfront.net/images/check-icon.svg",
     cardSection: [
       {
-        subTitle: "Smart net system",
+        subTitle: "Smart Net System",
         list: [
           "Capture every session and review it 10x faster with auto-clipped, ball-by-ball videos—no dead time, just pure action.",
           "Create a team, stay in sync, and showcase your sessions on social media",
@@ -118,22 +118,22 @@ export const cricketData: StaticPageData = {
           "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/scroll-card-1.webp",
       },
       {
-        subTitle: "Performance dashboard ",
+        subTitle: "Performance Dashboard",
         list: [
           "Capture every session and review it 10x faster with auto-clipped, ball-by-ball videos—no dead time, just pure action.",
           "Create a team, stay in sync, and showcase your sessions on social media",
-          "Bat Sensor*- real-time insights on Bat Swing, Speed, Angles, Power & Efficiency ",
+          "Bat Sensor*- real-time insights on Bat Swing, Speed, Angles, Power & Efficiency ",
         ],
         extraTagLabel: "*Purchase separately",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/scroll-card-2.webp",
       },
       {
-        subTitle: "Adaptive bowling machine ",
+        subTitle: "Adaptive Bowling Machine",
         list: [
           "Capture every session and review it 10x faster with auto-clipped, ball-by-ball videos—no dead time, just pure action.",
           "Create a team, stay in sync, and showcase your sessions on social media",
-          "Bat Sensor*- real-time insights on Bat Swing, Speed, Angles, Power & Efficiency ",
+          "Bat Sensor*- real-time insights on Bat Swing, Speed, Angles, Power & Efficiency ",
         ],
         extraTagLabel: "*Purchase separately",
         backgroundImage:
@@ -142,7 +142,7 @@ export const cricketData: StaticPageData = {
     ],
   },
   bannerSection: {
-    title: "Find your perfect program",
+    title: "Find Your Perfect Program",
     description:
       "Whether you're taking your first swing or prepping for tournaments – we've got a proven path for you.",
     btnLabel: "Explore Plan",
@@ -151,7 +151,7 @@ export const cricketData: StaticPageData = {
       "https://da8nru77lsio9.cloudfront.net/images/become-a-member-mobile.webp",
   },
   gallerySection: {
-    title: "Cricket in Action",
+    title: "Cricket In Action",
     description:
       "Relive every swing, sprint and six—from net practice to match-day magic in action.",
     btnLabel: "View Gallery",
@@ -162,7 +162,7 @@ export const cricketData: StaticPageData = {
     ],
   },
   memberSection: {
-    title: "Member experiences",
+    title: "Member Experiences",
     description:
       "Hear What Our Players Say — Real Stories of Growth, Grit, and Game-Changing Training.",
     memberList: [

@@ -2,7 +2,7 @@ import { StaticPageData } from "@/types/staticPages";
 import { navbarData } from "./navbar";
 
 export const recoveryData: StaticPageData = {
-  title: "Recovery at DriveFIIT",
+  title: "Recovery At DriveFIIT",
   description: "Experience advanced recovery and wellness facilities.",
   seoTitle: "Premium Recovery & Wellness | DriveFIIT",
   seoDescription:
@@ -19,7 +19,7 @@ export const recoveryData: StaticPageData = {
     btnSecondaryText: "Join Online",
   },
   cardSection5: {
-    title: "The ultimate fitness experience",
+    title: "The Ultimate Fitness Experience",
     description: "",
     cardSection: [
       {
@@ -32,7 +32,7 @@ export const recoveryData: StaticPageData = {
         link: "",
       },
       {
-        title: "Cold plunge",
+        title: "Cold Plunge",
         description: "Ice-cold reset for muscles and mind.",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-5.svg",
@@ -41,7 +41,7 @@ export const recoveryData: StaticPageData = {
         link: "",
       },
       {
-        title: "Compression therapy",
+        title: "Compression Therapy",
         description: "Circulation boost. Faster leg recovery.",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/card5-2.webp",
@@ -50,7 +50,7 @@ export const recoveryData: StaticPageData = {
         link: "",
       },
       {
-        title: "Percussion therapy",
+        title: "Percussion Therapy",
         description: "Massage that hits the right spot.",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-1.svg",
@@ -59,7 +59,7 @@ export const recoveryData: StaticPageData = {
         link: "",
       },
       {
-        title: "Sports physiotherapy",
+        title: "Sports Physiotherapy",
         description: "Injury prevention. Rehab. Pro-level care.",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/card5-3.webp",
@@ -73,21 +73,21 @@ export const recoveryData: StaticPageData = {
     title: "Why Recovery Matters",
     evolutionList: [
       {
-        title: "For cricketers",
+        title: "For Cricketers",
         description:
           "Bowling, batting, and fielding all stress joints and muscles. Recovery ensures season-long stamina, injury prevention, and match-day readiness.",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/evolution-1.webp",
       },
       {
-        title: "For fitness enthusiasts",
+        title: "For Fitness Enthusiasts",
         description:
           "Intense training demands muscular repair and nervous system reset. Recovery helps you train harder without breaking down.",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/evolution-2.webp",
       },
       {
-        title: "For runners",
+        title: "For Runners",
         description:
           "Recovery mitigates joint stress, prevents overuse injuries, and improves endurance through smarter mileage management.",
         backgroundImage:
@@ -96,13 +96,13 @@ export const recoveryData: StaticPageData = {
     ],
   },
   scrollingCardSection: {
-    title: "Performance nutrition – Fuel like you train",
+    title: "Performance Nutrition – Fuel Like You Train",
     description:
       "Science-backed eating strategies that match your workout intensity, recovery needs, and cricket-specific demands—because elite results require elite fueling.",
     iconImage: "https://da8nru77lsio9.cloudfront.net/images/check-icon.svg",
     cardSection: [
       {
-        subTitle: "Personalized sports nutrition plans",
+        subTitle: "Personalized Sports Nutrition Plans",
         list: [
           "Tailored macros and meal timing to fuel your cricket, gym, and recovery needs—because a batsman and bowler don’t eat the same.",
         ],
@@ -111,22 +111,22 @@ export const recoveryData: StaticPageData = {
           "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/scroll-card-1.webp",
       },
       {
-        subTitle: "Performance meal prep ",
+        subTitle: "Performance Meal Prep",
         list: [
           "Capture every session and review it 10x faster with auto-clipped, ball-by-ball videos—no dead time, just pure action.",
           "Create a team, stay in sync, and showcase your sessions on social media",
-          "Bat Sensor*- real-time insights on Bat Swing, Speed, Angles, Power & Efficiency ",
+          "Bat Sensor*- real-time insights on Bat Swing, Speed, Angles, Power & Efficiency ",
         ],
         extraTagLabel: "*Purchase separately",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/scroll-card-2.webp",
       },
       {
-        subTitle: "Hydration & Supplement strategies ",
+        subTitle: "Hydration & Supplement Strategies",
         list: [
           "Capture every session and review it 10x faster with auto-clipped, ball-by-ball videos—no dead time, just pure action.",
           "Create a team, stay in sync, and showcase your sessions on social media",
-          "Bat Sensor*- real-time insights on Bat Swing, Speed, Angles, Power & Efficiency ",
+          "Bat Sensor*- real-time insights on Bat Swing, Speed, Angles, Power & Efficiency ",
         ],
         extraTagLabel: "*Purchase separately",
         backgroundImage:
@@ -154,7 +154,7 @@ export const recoveryData: StaticPageData = {
     ],
   },
   memberSection: {
-    title: "Member experiences",
+    title: "Member Experiences",
     description:
       "Hear What Our Players Say — Real Stories of Growth, Grit, and Game-Changing Training.",
     memberList: [

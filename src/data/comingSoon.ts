@@ -8,7 +8,7 @@ export const comingSoonData: StaticPageData = {
   seoDescription:
     "Be the first to experience DriveFIIT - India's premier cricket and fitness club. Book your free trial and get exclusive early access.",
   comingSoonSection: {
-    title: "Coming Soon – Early access now open",
+    title: "Coming Soon – Early Access Now Open",
     description:
       "Get privileged access to our game-changing facility before launch - plus enjoy a free session to experience the difference.",
     iconImage: "https://da8nru77lsio9.cloudfront.net/images/comingsoon.svg",
@@ -23,12 +23,12 @@ export const comingSoonData: StaticPageData = {
       "Experience Gurugram's premier fitness & sports club – Gym, cricket, recovery & more",
     sections: [
       {
-        title: "Quick links",
+        title: "Quick Links",
         links: [
-          { title: "About us", link: "/coming-soon" },
+          { title: "About Us", link: "/coming-soon" },
           { title: "Blogs", link: "/coming-soon" },
           { title: "Career", link: "/coming-soon" },
-          { title: "Partner with us", link: "/franchise" },
+          { title: "Partner With Us", link: "/franchise" },
         ],
       },
       {

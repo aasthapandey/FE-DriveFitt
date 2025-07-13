@@ -103,7 +103,7 @@ export const homeData: StaticPageData = {
     ],
   },
   cardSection3: {
-    title: "Train your way",
+    title: "Train Your Way",
     description:
       "Group energy. Focused strength. Smart recovery — your training, your terms.",
     cardSection: [
@@ -164,7 +164,7 @@ export const homeData: StaticPageData = {
     description: "Beyond Training: Your Tech-Integrated Fitness Lifestyle",
     infoSection: [
       {
-        title: "Performance tech",
+        title: "Performance Tech",
         list: [
           {
             image: "https://da8nru77lsio9.cloudfront.net/images/info1-1.svg",
@@ -181,7 +181,7 @@ export const homeData: StaticPageData = {
         ],
       },
       {
-        title: "Premium workspaces",
+        title: "Premium Workspaces",
         list: [
           {
             image: "https://da8nru77lsio9.cloudfront.net/images/info2-1.svg",
@@ -228,14 +228,14 @@ export const homeData: StaticPageData = {
     ],
   },
   sportsClubSection: {
-    title: "The Drive FITT sports club philosophy",
+    title: "The Drive FITT Sports Club Philosophy",
     description: "The Drive FITT Model: Engineered for Excellence",
     image: "https://da8nru77lsio9.cloudfront.net/images/homec/card1.svg",
     mobileImage:
       "https://da8nru77lsio9.cloudfront.net/images/homec/card1-mobile.svg",
   },
   memberSection: {
-    title: "What our members are saying",
+    title: "What Our Members Are Saying",
     description:
       "Join a like-minded community of athletes and fitness enthusiasts who call DriveFITT their second home.",
     memberList: [
@@ -263,7 +263,7 @@ export const homeData: StaticPageData = {
     ],
   },
   appDownloadSection: {
-    title: "Your exclusive access, now on mobile",
+    title: "Your Exclusive Access, Now On Mobile",
     description:
       "Our app makes it easy to join classes, connect with coaches and track your journey.",
     googlePlayImg:
@@ -284,13 +284,13 @@ export const homeData: StaticPageData = {
         image: "https://da8nru77lsio9.cloudfront.net/images/ChatToUs.svg",
       },
       {
-        title: "Visit us",
+        title: "Visit Us",
         description: "Welcome to Our Main Club Branch.",
         email: "Sector-56, Golf Course Rd Gurugram, Haryana 122022",
         image: "https://da8nru77lsio9.cloudfront.net/images/VisitUs.svg",
       },
       {
-        title: "Call us",
+        title: "Call Us",
         description: "Mon - Sun from 10am to 10pm",
         email: "+91-9999999990",
         image: "https://da8nru77lsio9.cloudfront.net/images/CallUs.svg",
@@ -351,10 +351,10 @@ export const homeData: StaticPageData = {
       "Experience Gurugram's premier fitness & sports club – Gym, cricket, recovery & more",
     sections: [
       {
-        title: "Quick links",
+        title: "Quick Links",
         links: [
           {
-            title: "About us",
+            title: "About Us",
             link: "/coming-soon",
           },
           {
@@ -366,7 +366,7 @@ export const homeData: StaticPageData = {
             link: "/coming-soon",
           },
           {
-            title: "Partner with us",
+            title: "Partner With Us",
             link: "/franchise",
           },
         ],

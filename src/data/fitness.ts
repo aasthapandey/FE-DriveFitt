@@ -2,7 +2,7 @@ import { StaticPageData } from "@/types/staticPages";
 import { navbarData } from "./navbar";
 
 export const fitnessData: StaticPageData = {
-  title: "Fitness at DriveFIIT",
+  title: "Fitness At DriveFIIT",
   description: "Step into a world of advanced fitness and training.",
   seoTitle: "Premium Fitness Center | DriveFIIT",
   seoDescription:
@@ -22,7 +22,7 @@ export const fitnessData: StaticPageData = {
     btnSecondaryText: "Join Online",
   },
   cardSection5: {
-    title: "The ultimate fitness experience",
+    title: "The Ultimate Fitness Experience",
     description: "",
     cardSection: [
       {
@@ -36,7 +36,7 @@ export const fitnessData: StaticPageData = {
         link: "",
       },
       {
-        title: "Group classes",
+        title: "Group Classes",
         description:
           "Our expert-led group sessions fuel your energy and connect you with a community that shares your drive.",
         backgroundImage:
@@ -56,7 +56,7 @@ export const fitnessData: StaticPageData = {
         link: "",
       },
       {
-        title: "Personal training",
+        title: "Personal Training",
         description:
           "Customized 1-on-1 coaching tailored to your body, goals, sport-specific performance—and complete recovery needs.",
         backgroundImage:
@@ -66,7 +66,7 @@ export const fitnessData: StaticPageData = {
         link: "",
       },
       {
-        title: "High and Low Intensity workout zones ",
+        title: "High And Low Intensity Workout Zones",
         description:
           "From sweat-drenched HIIT sessions to mindful low-impact training, our zones allow you to train full spectrum",
         backgroundImage:
@@ -78,24 +78,24 @@ export const fitnessData: StaticPageData = {
     ],
   },
   evolutionSection: {
-    title: "Discover a new era of fitness",
+    title: "Discover A New Era Of Fitness",
     evolutionList: [
       {
-        title: "Best fitness socials",
+        title: "Best Fitness Socials",
         description:
           "Part fitness class, part fitness party. Experience heart-pumping music, and a group atmosphere that makes sweating feel like celebrating.",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/evolution-1.webp",
       },
       {
-        title: "Mind body integration",
+        title: "Mind Body Integration",
         description:
           "Experience programs that combine physical movement with mental well-being, such as yoga, and guided breathwork",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/evolution-2.webp",
       },
       {
-        title: "Indoor running studio",
+        title: "Indoor Running Studio",
         description:
           "Join the pack. Run with purpose at Drive FITT. Our program helps you build proper technique to help you excel across all race formats.",
         backgroundImage:
@@ -104,13 +104,13 @@ export const fitnessData: StaticPageData = {
     ],
   },
   scrollingCardSection: {
-    title: "Train hard. Tech harder",
+    title: "Train Hard. Tech Harder",
     description:
       "Smarter tools. Sharper results. Welcome to the future of performance",
     iconImage: "https://da8nru77lsio9.cloudfront.net/images/check-icon.svg",
     cardSection: [
       {
-        subTitle: "3D body scan",
+        subTitle: "3D Body Scan",
         list: [
           "Our Advanced 3D Body Scan creates a full-body digital blueprint—capturing precise measurements, posture alignment, and asymmetries.",
         ],
@@ -119,18 +119,18 @@ export const fitnessData: StaticPageData = {
           "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/scroll-card-1.webp",
       },
       {
-        subTitle: "Sustainable & Eco-Friendly equipment ",
+        subTitle: "Sustainable & Eco-Friendly Equipment",
         list: [
-          "Eco-friendly equipment that’s as good for the planet as it is for your workout. Our Yoga mats, towels, coffee cups make minimal environmental impact ",
+          "Eco-friendly equipment that's as good for the planet as it is for your workout. Our Yoga mats, towels, coffee cups make minimal environmental impact ",
         ],
         extraTagLabel: "",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/scroll-card-2.webp",
       },
       {
-        subTitle: "Smart Recovery Tools ",
+        subTitle: "Smart Recovery Tools",
         list: [
-          "Our high tech massage guns and compression platforms help in quicker muscle recovery ",
+          "Our high tech massage guns and compression platforms help in quicker muscle recovery ",
         ],
         extraTagLabel: "",
         backgroundImage:
@@ -148,7 +148,7 @@ export const fitnessData: StaticPageData = {
       "https://da8nru77lsio9.cloudfront.net/images/become-a-member-mobile.webp",
   },
   gallerySection: {
-    title: "Fitness unfiltered",
+    title: "Fitness Unfiltered",
     description: "Where every drop of sweat writes your success story",
     btnLabel: "View Gallery",
     imageList: [
@@ -158,7 +158,7 @@ export const fitnessData: StaticPageData = {
     ],
   },
   memberSection: {
-    title: "Member experiences",
+    title: "Member Experiences",
     description:
       "Hear What Our Players Say — Real Stories of Growth, Grit, and Game-Changing Training.",
     memberList: [

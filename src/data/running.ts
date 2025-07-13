@@ -2,7 +2,7 @@ import { StaticPageData } from "@/types/staticPages";
 import { navbarData } from "./navbar";
 
 export const runningData: StaticPageData = {
-  title: "Running at DriveFIIT",
+  title: "Running At DriveFIIT",
   description: "Experience advanced running facilities and training.",
   seoTitle: "Premium Running Club | DriveFIIT",
   seoDescription:
@@ -23,11 +23,11 @@ export const runningData: StaticPageData = {
     btnSecondaryText: "Join Online",
   },
   cardSection5: {
-    title: "Why You'll Love It here",
+    title: "Why You'll Love It Here",
     description: "",
     cardSection: [
       {
-        title: "Race day prep",
+        title: "Race Day Prep",
         description:
           "Exclusive group race training programs so you feel confident on race days",
         backgroundImage:
@@ -37,7 +37,7 @@ export const runningData: StaticPageData = {
         link: "",
       },
       {
-        title: "Electric studio vibe",
+        title: "Electric Studio Vibe",
         description:
           "Pulsing lights, energizing playlists, and community camaraderie",
         backgroundImage:
@@ -47,7 +47,7 @@ export const runningData: StaticPageData = {
         link: "",
       },
       {
-        title: "Precision indoor track",
+        title: "Precision Indoor Track",
         description:
           "Climate-controlled 200m track with shock-absorbing surface for joint-friendly, year-round training.",
         backgroundImage:
@@ -66,7 +66,7 @@ export const runningData: StaticPageData = {
         link: "",
       },
       {
-        title: "Coach-powered motivation",
+        title: "Coach-Powered Motivation",
         description:
           "Expert runners who inspire, instruct, and hold you accountable",
         backgroundImage:
@@ -82,20 +82,20 @@ export const runningData: StaticPageData = {
       "Forget traffic, pollution, or weather. Choose DRIVE FITT's indoor studio for:",
     evolutionList: [
       {
-        title: "Community energy",
+        title: "Community Energy",
         description:
           "Community energy that sparks motivation—plants consistency and grit",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/running-compressed/evolution-1.webp",
       },
       {
-        title: "Expert coaching ",
+        title: "Expert Coaching",
         description: "Expert coaching to guide form, strategy, and resilience",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/running-compressed/evolution-2.webp",
       },
       {
-        title: "Progress tracking ",
+        title: "Progress Tracking",
         description: "Progress tracking for every step of your running journey",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/running-compressed/evolution-3.webp",
@@ -103,13 +103,13 @@ export const runningData: StaticPageData = {
     ],
   },
   scrollingCardSection: {
-    title: "Engineered for progress",
+    title: "Engineered For Progress",
     description:
       "Science-backed eating strategies that match your workout intensity, recovery needs, and cricket-specific demands—because elite results require elite fueling.",
     iconImage: "https://da8nru77lsio9.cloudfront.net/images/check-icon.svg",
     cardSection: [
       {
-        subTitle: "Precision run analysis",
+        subTitle: "Precision Run Analysis",
         list: [
           "3D gait tracking + heart-rate zones to perfect your stride and pace simultaneously.",
         ],
@@ -120,11 +120,11 @@ export const runningData: StaticPageData = {
           "https://da8nru77lsio9.cloudfront.net/images/running-compressed/mobile-scroll-card-1.webp",
       },
       {
-        subTitle: "Smart interval training ",
+        subTitle: "Smart Interval Training",
         list: [
           "Capture every session and review it 10x faster with auto-clipped, ball-by-ball videos—no dead time, just pure action.",
           "Create a team, stay in sync, and showcase your sessions on social media",
-          "Bat Sensor*- real-time insights on Bat Swing, Speed, Angles, Power & Efficiency ",
+          "Bat Sensor*- real-time insights on Bat Swing, Speed, Angles, Power & Efficiency ",
         ],
         extraTagLabel: "",
         backgroundImage:
@@ -133,11 +133,11 @@ export const runningData: StaticPageData = {
           "https://da8nru77lsio9.cloudfront.net/images/running-compressed/mobile-scroll-card-2.webp",
       },
       {
-        subTitle: "Power-building routines ",
+        subTitle: "Power-Building Routines",
         list: [
           "Capture every session and review it 10x faster with auto-clipped, ball-by-ball videos—no dead time, just pure action.",
           "Create a team, stay in sync, and showcase your sessions on social media",
-          "Bat Sensor*- real-time insights on Bat Swing, Speed, Angles, Power & Efficiency ",
+          "Bat Sensor*- real-time insights on Bat Swing, Speed, Angles, Power & Efficiency ",
         ],
         extraTagLabel: "*Purchase separately",
         backgroundImage:
@@ -148,7 +148,7 @@ export const runningData: StaticPageData = {
     ],
   },
   bannerSection: {
-    title: "Find your perfect program",
+    title: "Find Your Perfect Program",
     description:
       "Whether you're taking your first swing or prepping for tournaments – we've got a proven path for you.",
     btnLabel: "Explore Plan",
@@ -167,7 +167,7 @@ export const runningData: StaticPageData = {
     ],
   },
   memberSection: {
-    title: "Member experiences",
+    title: "Member Experiences",
     description:
       "Hear What Our Athletes Say — Real Stories of Strength, Sweat, and Transformational Results",
     memberList: [

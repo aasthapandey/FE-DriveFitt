@@ -9,7 +9,7 @@ export const contactUsData: ContactUsPageData = {
     "Contact DriveFIIT for any queries about our fitness and sports facilities.",
   navbar: navbarData,
   hero: {
-    titleWords: [{ text: "Contact us", color: "#FFFFFF" }],
+    titleWords: [{ text: "Contact Us", color: "#FFFFFF" }],
     description:
       "Please Feel Free to contact us and we will get back to you as soon as we can.",
     desktopImage:
@@ -26,13 +26,13 @@ export const contactUsData: ContactUsPageData = {
         image: "https://da8nru77lsio9.cloudfront.net/images/ChatToUs.svg",
       },
       {
-        title: "Visit us",
+        title: "Visit Us",
         description: "Welcome to Our Main Club Branch.",
         email: "Sector-56, Golf Course Rd Gurugram, Haryana 122022",
         image: "https://da8nru77lsio9.cloudfront.net/images/VisitUs.svg",
       },
       {
-        title: "Call us",
+        title: "Call Us",
         description: "Mon - Sun from 10am to 10pm",
         email: "+91-9999999990",
         image: "https://da8nru77lsio9.cloudfront.net/images/CallUs.svg",

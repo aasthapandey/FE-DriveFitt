@@ -2,7 +2,7 @@ import { FranchisePageData } from "@/types/franchisePage";
 import { navbarData } from "./navbar";
 
 export const franchiseData: FranchisePageData = {
-  title: "Franchise with DriveFIIT",
+  title: "Franchise With DriveFIIT",
   description: "Partner with India's premium fitness and sports club.",
   seoTitle: "Franchise Opportunities | DriveFIIT",
   seoDescription:
@@ -22,14 +22,14 @@ export const franchiseData: FranchisePageData = {
   },
   banner1Section: {
     title: "Drive FITT?",
-    subTitle: "Be the first to disrupt",
+    subTitle: "Be The First To Disrupt",
     description1: "As category creators in ",
     description2: "cricket + fitness + recovery",
     description3:
       "we've built India's only 360° sports and fitness performance ecosystem under one roof. Now, we're expanding — and looking for passionate partners to lead the way.",
   },
   multiRevenueSection: {
-    title: "Multi-Revenue, All-in-One Model",
+    title: "Multi-Revenue, All-In-One Model",
     description:
       "Unlike standalone gyms, monetize every square foot with Drive FITT's diverse revenue stream",
     cardList: [
@@ -41,7 +41,7 @@ export const franchiseData: FranchisePageData = {
       },
       {
         icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/cricketTrainingIcon.svg",
-        title: "Cricket Training & Coachingp",
+        title: "Cricket Training & Coaching",
         description: "Professional cricket coaching with advanced analytics",
       },
       {
@@ -61,13 +61,13 @@ export const franchiseData: FranchisePageData = {
       },
       {
         icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/event-icon.svg",
-        title: "Events & Corporate Programmes",
+        title: "Events & Corporate Programs",
         description: "Corporate wellness programs and special events",
       },
     ],
   },
   opportunitySection: {
-    title: "Your opportunity at a glance",
+    title: "Your Opportunity At A Glance",
     description:
       "A comprehensive look at what it takes to join the Drive FITT revolution",
     cardList: [
@@ -114,31 +114,31 @@ export const franchiseData: FranchisePageData = {
     cardList: [
       {
         icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/receive-1.svg",
-        title: "Proven operations playbook",
+        title: "Proven Operations Playbook",
         description:
           "Turnkey systems that fast-track launch—from club design to member retention.",
       },
       {
         icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/elite-training-icon.svg",
-        title: "Elite training & onboarding",
+        title: "Elite Training & Onboarding",
         description:
           "In-depth induction at HQ + on-site launch support with flagship trainers and experts.",
       },
       {
         icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/cutting-edge-icon.svg",
-        title: "Cutting-edge tech & analytics",
+        title: "Cutting-Edge Tech & Analytics",
         description:
           "3D body-scanning, cricket ball-tracking & analytics, mobile booking & CRM systems included.",
       },
       {
         icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/marketing-icon.svg",
-        title: "Marketing that moves",
+        title: "Marketing That Moves",
         description:
           "Pre-launch campaigns, influencer tie-ups, franchisee toolkits, and PR visibility.",
       },
       {
         icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/ongoing-growth-icon.svg",
-        title: "Ongoing growth support",
+        title: "Ongoing Growth Support",
         description:
           "Monthly reviews, new product rollouts, and access to best-in-class supplier partnerships.",
       },
@@ -151,7 +151,7 @@ export const franchiseData: FranchisePageData = {
     cardList: [
       {
         icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/looking-for-1.svg",
-        title: "Passion for Sport & Health",
+        title: "Passion For Sport & Health",
         description:
           "Genuine enthusiasm for sports, health, and community building",
       },
