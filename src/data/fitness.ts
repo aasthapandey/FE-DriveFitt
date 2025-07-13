@@ -30,7 +30,7 @@ export const fitnessData: StaticPageData = {
         description:
           "Launch your fitness journey with actionable insights for best performance.",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-1.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/card5-2.webp",
         iconImage:
           "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-icon-1.svg",
         link: "",
