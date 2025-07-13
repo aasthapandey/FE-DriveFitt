@@ -124,7 +124,8 @@ export const fitnessData: StaticPageData = {
           "Eco-friendly equipment that’s as good for the planet as it is for your workout. Our Yoga mats, towels, coffee cups make minimal environmental impact ",
         ],
         extraTagLabel: "",
-        backgroundImage: "/images/fitness-compressed/scroll-card-2.webp",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/scroll-card-2.webp",
       },
       {
         subTitle: "Smart Recovery Tools ",

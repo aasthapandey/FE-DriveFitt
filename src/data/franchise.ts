@@ -14,8 +14,10 @@ export const franchiseData: FranchisePageData = {
     description: "Own a Game-Changing Sports & Fitness Revolution",
     roiTag: "30-40% Projected ROI",
     roiIcon: "https://da8nru77lsio9.cloudfront.net/images/roi-icon.svg",
-    desktopImage: "/images/franchise/hero.svg",
-    mobileImage: "/images/franchise/mobile-hero.svg",
+    desktopImage:
+      "https://da8nru77lsio9.cloudfront.net/images/franchise/hero.svg",
+    mobileImage:
+      "https://da8nru77lsio9.cloudfront.net/images/franchise/mobile-hero.svg",
     btnPrimaryText: "Start Your Journey Now",
   },
   banner1Section: {
@@ -105,7 +107,8 @@ export const franchiseData: FranchisePageData = {
     title: "What You'll Receive",
     description:
       "Comprehensive support to ensure your success from day one and beyond",
-    imageMobile: "/images/franchise/shubman-gill-pretty-zinta-mobile.webp",
+    imageMobile:
+      "https://da8nru77lsio9.cloudfront.net/images/franchise/shubman-gill-pretty-zinta-mobile.webp",
     imageDesktop:
       "https://da8nru77lsio9.cloudfront.net/images/franchise/shubman-gill-pretty-zinta.webp",
     cardList: [
