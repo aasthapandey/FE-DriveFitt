@@ -50,7 +50,7 @@ export const cricketData: StaticPageData = {
         description:
           "Professional-grade pitches with perfect, consistent bounce every time.",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/test.webp",
+          "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/card5-2.webp",
         iconImage:
           "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-icon-3.svg",
         link: "",
