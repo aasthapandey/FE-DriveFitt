@@ -58,10 +58,11 @@ const ContactUsPage = ({ data, isMobile }: StaticPageProps) => {
                   <ChatWithUs
                     footerInfoList={footerInfoList}
                     socialLinkList={socialLinkList}
+                    isMobile={isMobile}
                   />
                 </div>
                 <div className="w-full md:w-3/5 h-full">
-                  <ContactForm data={contactFormSection} />
+                  <ContactForm data={contactFormSection} isMobile={isMobile} />
                 </div>
               </div>
               <AppDownload data={appDownloadSection as AppDownloadProps} />

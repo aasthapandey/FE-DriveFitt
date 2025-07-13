@@ -1,7 +1,13 @@
 import { GallerySectionProps } from "@/types/staticPages";
 import Image from "next/image";
 
-const GallerySection = ({ data }: { data: GallerySectionProps }) => {
+const GallerySection = ({
+  data,
+  isMobile,
+}: {
+  data: GallerySectionProps;
+  isMobile?: boolean;
+}) => {
   const { title, description, btnLabel, imageList } = data;
   return (
     <div className="md:px-[120px] px-6 flex flex-col md:flex-row gap-[25px] md:gap-[104px] justify-between items-center">
@@ -9,10 +15,16 @@ const GallerySection = ({ data }: { data: GallerySectionProps }) => {
         <h2 className="text-2xl md:text-5xl font-semibold leading-7 md:leading-[56px] tracking-[-1px] md:tracking-[-2.4px]">
           {title}
         </h2>
-        <p className="text-xs md:text-base font-light leading-4 md:leading-5 tracking-[-1%] text-[#8A8A8A]">
+        <p className="text-base md:text-lg font-light leading-6 md:leading-7 tracking-[-0.5px] md:tracking-[-0.9px]">
           {description}
         </p>
-        <button className="bg-[#00DBDC] border border-transparent w-fit leading-[100%] tracking-[-5%] text-base text-[#0D0D0D] px-10 py-3 rounded-lg font-medium mt-2 md:mt-[60px] hover:bg-transparent hover:border-[#00DBDC] hover:text-[#00DBDC] transition-all duration-200 md:px-[48px] md:h-[50px]">
+        <button
+          className={`bg-[#00DBDC] border border-transparent w-fit leading-[100%] tracking-[-5%] text-base text-[#0D0D0D] px-10 py-3 rounded-lg font-medium mt-2 md:mt-[60px] ${
+            isMobile
+              ? ""
+              : "hover:bg-transparent hover:border-[#00DBDC] hover:text-[#00DBDC]"
+          } transition-all duration-200 md:px-[48px] md:h-[50px]`}
+        >
           {btnLabel}
         </button>
       </div>

@@ -59,7 +59,11 @@ export default function Navbar({ data, isMobile }: Props) {
         <div className="flex items-center gap-4">
           <button
             onClick={() => setIsLoginModalOpen(true)}
-            className="bg-[#00DBDC] border border-transparent rounded-lg px-3 md:px-6 py-2 text-[#0D0D0D] font-medium text-xs md:text-sm hover:bg-transparent hover:border-[#00DBDC] hover:text-[#00DBDC] transition-all duration-200"
+            className={`bg-[#00DBDC] border border-transparent rounded-lg px-3 md:px-6 py-2 text-[#0D0D0D] font-medium text-xs md:text-sm ${
+              isMobile
+                ? ""
+                : "hover:bg-transparent hover:border-[#00DBDC] hover:text-[#00DBDC]"
+            } transition-all duration-200`}
           >
             {signInButton.text}
           </button>
@@ -91,7 +95,7 @@ export default function Navbar({ data, isMobile }: Props) {
                     className={`text-lg transition-colors ${
                       isActiveLink(link.href)
                         ? "text-[#00DBDC]"
-                        : "text-white hover:text-[#00DBDC]"
+                        : `text-white ${isMobile ? "" : "hover:text-[#00DBDC]"}`
                     }`}
                     onClick={() => setIsMenuOpen(false)}
                   >
@@ -123,7 +127,7 @@ export default function Navbar({ data, isMobile }: Props) {
             className={`transition-colors ${
               isActiveLink(link.href)
                 ? "text-[#00DBDC]"
-                : "text-white hover:text-[#00DBDC]"
+                : `text-white ${isMobile ? "" : "hover:text-[#00DBDC]"}`
             }`}
           >
             {link.title}
@@ -132,7 +136,11 @@ export default function Navbar({ data, isMobile }: Props) {
       </div>
       <button
         onClick={() => setIsLoginModalOpen(true)}
-        className="bg-[#00DBDC] border border-transparent rounded-lg px-10 md:px-[48px] md:h-[50px] text-[#0D0D0D] font-medium text-base hover:bg-transparent hover:border-[#00DBDC] hover:text-[#00DBDC] transition-all duration-200"
+        className={`bg-[#00DBDC] border border-transparent rounded-lg px-10 md:px-[48px] md:h-[50px] text-[#0D0D0D] font-medium text-base ${
+          isMobile
+            ? ""
+            : "hover:bg-transparent hover:border-[#00DBDC] hover:text-[#00DBDC]"
+        } transition-all duration-200`}
       >
         {signInButton.text}
       </button>

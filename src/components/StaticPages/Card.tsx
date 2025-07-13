@@ -20,7 +20,9 @@ const Card = ({ data, isMobile, className, imageClass }: CardProps) => {
     >
       <a
         href={link}
-        className={`group relative block rounded-[20px] md:rounded-[40px] overflow-hidden h-[256px] md:h-[407px] ${
+        className={`${
+          isMobile ? "" : "group"
+        } relative block rounded-[20px] md:rounded-[40px] overflow-hidden h-[256px] md:h-[407px] ${
           className?.includes("!cursor-default")
             ? "!cursor-default"
             : "!cursor-pointer"
@@ -31,15 +33,33 @@ const Card = ({ data, isMobile, className, imageClass }: CardProps) => {
           backgroundPosition: "top center",
         }}
       >
-        <div className="absolute inset-0 transition-all duration-300 ease-in-out group-hover:backdrop-blur-sm" />
+        <div
+          className={`absolute inset-0 transition-all duration-300 ease-in-out ${
+            isMobile ? "" : "group-hover:backdrop-blur-sm"
+          }`}
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
 
-        <div className="absolute left-0 bottom-0 w-full p-6 md:px-10 md:pt-[46px] md:pb-[3px] group-hover:md:py-[28px] flex justify-between items-start">
-          <div className="flex flex-col transition-all duration-300 ease-in-out transform group-hover:translate-y-[-8px]">
+        <div
+          className={`absolute left-0 bottom-0 w-full p-6 md:px-10 md:pt-[46px] md:pb-[3px] ${
+            isMobile ? "" : "group-hover:md:py-[28px]"
+          } flex justify-between items-start`}
+        >
+          <div
+            className={`flex flex-col transition-all duration-300 ease-in-out ${
+              isMobile ? "" : "transform group-hover:translate-y-[-8px]"
+            }`}
+          >
             <h3 className="text-white text-xl leading-6 md:leading-9 md:text-[32px] font-semibold">
               {title}
             </h3>
-            <p className="text-white text-base md:text-lg font-light leading-tight tracking-tight hidden group-hover:block mt-4 opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out md:max-w-[392px]">
+            <p
+              className={`text-white text-base md:text-lg font-light leading-tight tracking-tight ${
+                isMobile
+                  ? "block mt-4"
+                  : "hidden group-hover:block mt-4 opacity-0 group-hover:opacity-100"
+              } transition-all duration-300 ease-in-out md:max-w-[392px]`}
+            >
               {description}
             </p>
           </div>
@@ -47,7 +67,7 @@ const Card = ({ data, isMobile, className, imageClass }: CardProps) => {
           {link && (
             <div
               className={`flex items-center justify-center ${
-                description && description.length > 0
+                description && description.length > 0 && !isMobile
                   ? "md:group-hover:mt-[30px]"
                   : ""
               }`}

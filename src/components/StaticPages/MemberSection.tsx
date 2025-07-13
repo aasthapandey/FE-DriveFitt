@@ -120,7 +120,9 @@ const MemberSection = ({
           <div className="h-16 p-2 rounded-[53.3px] bg-[#222226] hidden md:flex gap-4">
             <button
               onClick={handlePrevious}
-              className="bg-[#373737] rounded-full p-4 hover:bg-[#2C2C2E] transition-colors"
+              className={`bg-[#373737] rounded-full p-4 ${
+                isMobile ? "" : "hover:bg-[#2C2C2E]"
+              } transition-colors`}
             >
               <Image
                 src="https://da8nru77lsio9.cloudfront.net/images/arrow-left.svg"
@@ -131,7 +133,9 @@ const MemberSection = ({
             </button>
             <button
               onClick={handleNext}
-              className="bg-[#373737] rounded-full p-4 hover:bg-[#2C2C2E] transition-colors"
+              className={`bg-[#373737] rounded-full p-4 ${
+                isMobile ? "" : "hover:bg-[#2C2C2E]"
+              } transition-colors`}
             >
               <Image
                 src="https://da8nru77lsio9.cloudfront.net/images/arrow-right.svg"

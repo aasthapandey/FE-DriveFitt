@@ -18,6 +18,7 @@ interface EmailStepProps {
   onFocus: () => void;
   onBlur: () => void;
   onContinue: () => void;
+  isMobile?: boolean;
 }
 
 interface OTPStepProps {
@@ -28,6 +29,7 @@ interface OTPStepProps {
   onChangeEmail: () => void;
   timeLeft: number;
   onResendOTP: () => void;
+  isMobile?: boolean;
 }
 
 // Email Step Component
@@ -38,6 +40,7 @@ const EmailStep = ({
   onFocus,
   onBlur,
   onContinue,
+  isMobile,
 }: EmailStepProps) => (
   <>
     {/* Logo */}
@@ -71,7 +74,11 @@ const EmailStep = ({
     <button
       onClick={onContinue}
       disabled={!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)}
-      className="w-full bg-[#00DBDC] border border-transparent rounded-lg py-3 md:py-3 text-[#0D0D0D] font-medium text-base md:text-lg mb-6 md:mb-[48px] hover:bg-transparent hover:border-[#00DBDC] hover:text-[#00DBDC] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-[#00DBDC] disabled:hover:text-[#0D0D0D] disabled:hover:border-transparent"
+      className={`w-full bg-[#00DBDC] border border-transparent rounded-lg py-3 md:py-3 text-[#0D0D0D] font-medium text-base md:text-lg mb-6 md:mb-[48px] ${
+        isMobile
+          ? ""
+          : "hover:bg-transparent hover:border-[#00DBDC] hover:text-[#00DBDC]"
+      } transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-[#00DBDC] disabled:hover:text-[#0D0D0D] disabled:hover:border-transparent`}
     >
       Continue
     </button>
@@ -80,11 +87,17 @@ const EmailStep = ({
     <div className="text-center text-[#8A8A8A] text-xs md:text-sm">
       <p>
         By continuing, you agree to our{" "}
-        <a href="/terms" className="text-[#00DBDC] hover:underline">
+        <a
+          href="/terms"
+          className={`text-[#00DBDC] ${isMobile ? "" : "hover:underline"}`}
+        >
           Terms of Service
         </a>{" "}
         and{" "}
-        <a href="/privacy" className="text-[#00DBDC] hover:underline">
+        <a
+          href="/privacy"
+          className={`text-[#00DBDC] ${isMobile ? "" : "hover:underline"}`}
+        >
           Privacy Policy
         </a>
         .
@@ -102,6 +115,7 @@ const OTPStep = ({
   onChangeEmail,
   timeLeft,
   onResendOTP,
+  isMobile,
 }: OTPStepProps) => {
   const firstInputRef = useRef<HTMLInputElement>(null);
   const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
@@ -187,7 +201,11 @@ const OTPStep = ({
       <button
         onClick={onVerify}
         disabled={otpValues.some((val) => val === "")}
-        className="w-full bg-[#00DBDC] border border-transparent rounded-lg py-3 md:py-3 text-[#0D0D0D] font-medium text-base md:text-lg mb-6 md:mb-8 hover:bg-transparent hover:border-[#00DBDC] hover:text-[#00DBDC] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-[#00DBDC] disabled:hover:text-[#0D0D0D] disabled:hover:border-transparent"
+        className={`w-full bg-[#00DBDC] border border-transparent rounded-lg py-3 md:py-3 text-[#0D0D0D] font-medium text-base md:text-lg mb-6 md:mb-8 ${
+          isMobile
+            ? ""
+            : "hover:bg-transparent hover:border-[#00DBDC] hover:text-[#00DBDC]"
+        } transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-[#00DBDC] disabled:hover:text-[#0D0D0D] disabled:hover:border-transparent`}
       >
         Verify
       </button>
@@ -214,7 +232,7 @@ const OTPStep = ({
   );
 };
 
-const EmailModal = ({ isOpen, onClose }: EmailModalProps) => {
+const EmailModal = ({ isOpen, onClose, isMobile }: EmailModalProps) => {
   const [modalState, setModalState] = useState<ModalState>("email");
   const [email, setEmail] = useState("");
   const [isFocused, setIsFocused] = useState(false);
@@ -347,7 +365,9 @@ const EmailModal = ({ isOpen, onClose }: EmailModalProps) => {
         {/* Close button */}
         <button
           onClick={onClose}
-          className="z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-gray-600 bg-opacity-50 flex items-center justify-center hover:bg-opacity-70 transition-all duration-200 md:mb-[22px]"
+          className={`z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-gray-600 bg-opacity-50 flex items-center justify-center ${
+            isMobile ? "" : "hover:bg-opacity-70"
+          } transition-all duration-200 md:mb-[22px]`}
         >
           <Image
             src="https://da8nru77lsio9.cloudfront.net/images/otp-modal-close-icon.svg"
@@ -374,6 +394,7 @@ const EmailModal = ({ isOpen, onClose }: EmailModalProps) => {
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}
                 onContinue={handleContinue}
+                isMobile={isMobile}
               />
             ) : (
               <OTPStep
@@ -384,6 +405,7 @@ const EmailModal = ({ isOpen, onClose }: EmailModalProps) => {
                 onChangeEmail={handleChangeEmail}
                 timeLeft={timeLeft}
                 onResendOTP={handleResendOTP}
+                isMobile={isMobile}
               />
             )}
           </div>

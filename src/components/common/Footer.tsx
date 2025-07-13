@@ -21,7 +21,9 @@ const Footer = ({
             href="http://techkatalyst.com/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[#00DBDC] hover:text-[#00c5c6] transition-colors underline"
+            className={`text-[#00DBDC] ${
+              isMobile ? "" : "hover:text-[#00c5c6]"
+            } transition-colors underline`}
           >
             TechKatalyst
           </Link>
@@ -59,7 +61,9 @@ const Footer = ({
                     <li key={linkIndex}>
                       <Link
                         href={link.link}
-                        className="text-white hover:text-[#00DBDC] cursor-pointer text-base leading-6 md:leading-10 font-medium tracking-[0%] md:tracking-[-2%] transition-colors"
+                        className={`text-white ${
+                          isMobile ? "" : "hover:text-[#00DBDC]"
+                        } cursor-pointer text-base leading-6 md:leading-10 font-medium tracking-[0%] md:tracking-[-2%] transition-colors`}
                       >
                         {link.title}
                       </Link>
@@ -81,7 +85,9 @@ const Footer = ({
                 key={index}
                 href={social.link}
                 target="_blank"
-                className="hover:opacity-80 transition-opacity"
+                className={`${
+                  isMobile ? "" : "hover:opacity-80"
+                } transition-opacity`}
               >
                 <Image
                   src={social.image}

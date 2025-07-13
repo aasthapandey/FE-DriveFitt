@@ -1,6 +1,7 @@
 import { CardSection } from "@/types/staticPages";
 import Card from "@/components/StaticPages/Card";
 import TitleDescription from "@/components/common/TitleDescription";
+import Image from "next/image";
 
 const CardSection4 = ({
   data,
@@ -10,13 +11,80 @@ const CardSection4 = ({
   isMobile?: boolean;
 }) => {
   const { title, description, cardSection } = data;
+
+  const CustomMobileCard = ({ card }: { card: any }) => (
+    <div
+      className="rounded-[20px] p-[2px]"
+      style={{
+        background: "linear-gradient(180deg, #333333 29.36%, #00DBDC 120.13%)",
+      }}
+    >
+      <a
+        href={card.link}
+        className="relative block rounded-[20px] overflow-hidden h-[256px] w-full"
+        style={{
+          backgroundImage: `url(${card.backgroundImage})`,
+          backgroundSize: "cover",
+          backgroundPosition: "top center",
+        }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+
+        <div className="absolute left-0 bottom-0 w-full p-6 flex justify-between items-end gap-[20px]">
+          <div className="flex flex-col">
+            <h3
+              className="text-white font-semibold mb-4"
+              style={{
+                fontFamily: "Inter",
+                fontWeight: 600,
+                fontSize: "20px",
+                lineHeight: "24px",
+                letterSpacing: "-1px",
+              }}
+            >
+              {card.title}
+            </h3>
+            <p
+              className="text-white font-light"
+              style={{
+                fontFamily: "Inter",
+                fontWeight: 300,
+                fontSize: "12px",
+                lineHeight: "16px",
+                letterSpacing: "-2%",
+              }}
+            >
+              {card.description}
+            </p>
+          </div>
+
+          {card.link && (
+            <div className="flex items-end justify-end flex-shrink-0 -mb-[13px] -mr-[15px]">
+              <Image
+                src="https://da8nru77lsio9.cloudfront.net/images/redirectionButton.svg"
+                alt="redirectionBtn"
+                width={50}
+                height={50}
+                style={{
+                  width: "50px",
+                  height: "50px",
+                  opacity: 1,
+                }}
+              />
+            </div>
+          )}
+        </div>
+      </a>
+    </div>
+  );
+
   return (
     <section className="md:px-[120px] px-6 flex flex-col gap-5">
       <TitleDescription title={title || ""} description={description || ""} />
       {isMobile ? (
         <div className="flex flex-col w-full gap-4">
           {cardSection.map((card, idx) => (
-            <Card data={card} key={idx} />
+            <CustomMobileCard card={card} key={idx} />
           ))}
         </div>
       ) : (

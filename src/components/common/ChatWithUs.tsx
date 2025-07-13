@@ -4,9 +4,14 @@ import Image from "next/image";
 interface ChatWithUsProps {
   footerInfoList: FooterInfoItem[];
   socialLinkList: SocialLinks[];
+  isMobile?: boolean;
 }
 
-const ChatWithUs = ({ footerInfoList, socialLinkList }: ChatWithUsProps) => {
+const ChatWithUs = ({
+  footerInfoList,
+  socialLinkList,
+  isMobile,
+}: ChatWithUsProps) => {
   return (
     <div
       className="rounded-[20px] md:rounded-[40px] p-[2px] h-full"
@@ -58,7 +63,9 @@ const ChatWithUs = ({ footerInfoList, socialLinkList }: ChatWithUsProps) => {
               href={link.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:opacity-80 transition-opacity"
+              className={`${
+                isMobile ? "" : "hover:opacity-80"
+              } transition-opacity`}
             >
               <Image src={link.image} alt="social" width={24} height={24} />
             </a>

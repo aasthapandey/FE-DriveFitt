@@ -18,6 +18,7 @@ interface PhoneStepProps {
   onFocus: () => void;
   onBlur: () => void;
   onContinue: () => void;
+  isMobile?: boolean;
 }
 
 interface OTPStepProps {
@@ -28,6 +29,7 @@ interface OTPStepProps {
   onChangePhone: () => void;
   timeLeft: number;
   onResendOTP: () => void;
+  isMobile?: boolean;
 }
 
 // Phone Number Step Component
@@ -38,6 +40,7 @@ const PhoneStep = ({
   onFocus,
   onBlur,
   onContinue,
+  isMobile,
 }: PhoneStepProps) => (
   <>
     {/* Logo */}
@@ -72,7 +75,11 @@ const PhoneStep = ({
     <button
       onClick={onContinue}
       disabled={phoneNumber.length !== 10}
-      className="w-full bg-[#00DBDC] border border-transparent rounded-lg py-3 md:py-3 text-[#0D0D0D] font-medium text-base md:text-lg mb-6 md:mb-[48px] hover:bg-transparent hover:border-[#00DBDC] hover:text-[#00DBDC] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-[#00DBDC] disabled:hover:text-[#0D0D0D] disabled:hover:border-transparent"
+      className={`w-full bg-[#00DBDC] border border-transparent rounded-lg py-3 md:py-3 text-[#0D0D0D] font-medium text-base md:text-lg mb-6 md:mb-[48px] ${
+        isMobile
+          ? ""
+          : "hover:bg-transparent hover:border-[#00DBDC] hover:text-[#00DBDC]"
+      } transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-[#00DBDC] disabled:hover:text-[#0D0D0D] disabled:hover:border-transparent`}
     >
       Continue
     </button>
@@ -83,14 +90,18 @@ const PhoneStep = ({
       <br className="md:hidden" />
       <a
         href="/terms"
-        className="text-white hover:text-[#00DBDC] transition-colors underline"
+        className={`text-white ${
+          isMobile ? "" : "hover:text-[#00DBDC]"
+        } transition-colors underline`}
       >
         Terms & Conditions
       </a>
       <span> and </span>
       <a
         href="/privacy"
-        className="text-white hover:text-[#00DBDC] transition-colors underline"
+        className={`text-white ${
+          isMobile ? "" : "hover:text-[#00DBDC]"
+        } transition-colors underline`}
       >
         Privacy Policy
       </a>
@@ -108,6 +119,7 @@ const OTPStep = ({
   onChangePhone,
   timeLeft,
   onResendOTP,
+  isMobile,
 }: OTPStepProps) => {
   const firstInputRef = useRef<HTMLInputElement>(null);
   const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
@@ -193,7 +205,11 @@ const OTPStep = ({
       <button
         onClick={onVerify}
         disabled={otpValues.some((val) => val === "")}
-        className="w-full bg-[#00DBDC] border border-transparent rounded-lg py-3 md:py-3 text-[#0D0D0D] font-medium text-base md:text-lg mb-6 md:mb-8 hover:bg-transparent hover:border-[#00DBDC] hover:text-[#00DBDC] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-[#00DBDC] disabled:hover:text-[#0D0D0D] disabled:hover:border-transparent"
+        className={`w-full bg-[#00DBDC] border border-transparent rounded-lg py-3 md:py-3 text-[#0D0D0D] font-medium text-base md:text-lg mb-6 md:mb-8 ${
+          isMobile
+            ? ""
+            : "hover:bg-transparent hover:border-[#00DBDC] hover:text-[#00DBDC]"
+        } transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-[#00DBDC] disabled:hover:text-[#0D0D0D] disabled:hover:border-transparent`}
       >
         Verify
       </button>
@@ -220,7 +236,11 @@ const OTPStep = ({
   );
 };
 
-const PhoneNumberModal = ({ isOpen, onClose }: PhoneNumberModalProps) => {
+const PhoneNumberModal = ({
+  isOpen,
+  onClose,
+  isMobile,
+}: PhoneNumberModalProps) => {
   const [modalState, setModalState] = useState<ModalState>("phone");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [isFocused, setIsFocused] = useState(false);
@@ -356,7 +376,9 @@ const PhoneNumberModal = ({ isOpen, onClose }: PhoneNumberModalProps) => {
         {/* Close button */}
         <button
           onClick={onClose}
-          className="z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-gray-600 bg-opacity-50 flex items-center justify-center hover:bg-opacity-70 transition-all duration-200 md:mb-[22px]"
+          className={`z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-gray-600 bg-opacity-50 flex items-center justify-center ${
+            isMobile ? "" : "hover:bg-opacity-70"
+          } transition-all duration-200 md:mb-[22px]`}
         >
           <Image
             src="https://da8nru77lsio9.cloudfront.net/images/otp-modal-close-icon.svg"
@@ -383,6 +405,7 @@ const PhoneNumberModal = ({ isOpen, onClose }: PhoneNumberModalProps) => {
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}
                 onContinue={handleContinue}
+                isMobile={isMobile}
               />
             ) : (
               <OTPStep
@@ -393,6 +416,7 @@ const PhoneNumberModal = ({ isOpen, onClose }: PhoneNumberModalProps) => {
                 onChangePhone={handleChangePhone}
                 timeLeft={timeLeft}
                 onResendOTP={handleResendOTP}
+                isMobile={isMobile}
               />
             )}
           </div>

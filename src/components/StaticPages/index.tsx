@@ -118,9 +118,19 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
           />
         );
       case "evolutionSection":
-        return <EvolutionSection data={value as EvolutionSectionProps} />;
+        return (
+          <EvolutionSection
+            data={value as EvolutionSectionProps}
+            isMobile={isMobile}
+          />
+        );
       case "gallerySection":
-        return <GallerySection data={value as GallerySectionProps} />;
+        return (
+          <GallerySection
+            data={value as GallerySectionProps}
+            isMobile={isMobile}
+          />
+        );
       case "faqSection":
         return isMobile ? null : <Faq data={value as FaqSectionProps} />;
       case "sportsClubSection":

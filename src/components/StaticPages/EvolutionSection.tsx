@@ -6,7 +6,13 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-const EvolutionSection = ({ data }: { data: EvolutionSectionProps }) => {
+const EvolutionSection = ({
+  data,
+  isMobile,
+}: {
+  data: EvolutionSectionProps;
+  isMobile?: boolean;
+}) => {
   const { title, evolutionList } = data;
   const [activeBackground, setActiveBackground] = useState<EvolutionItem>(
     evolutionList[0]
@@ -61,12 +67,16 @@ const EvolutionSection = ({ data }: { data: EvolutionSectionProps }) => {
             return (
               <div
                 key={idx}
-                onMouseEnter={() => setActiveBackground(evo)}
+                {...(!isMobile && {
+                  onMouseEnter: () => setActiveBackground(evo),
+                })}
                 className={`${
                   activeBackground.title === evo.title
                     ? "bg-white text-[#1C1C1C]"
                     : "bg-transparent text-white"
-                } flex flex-col gap-4 p-8 cursor-pointer h-full w-full md:w-[374px] border-t-[2px] border-white transition-colors duration-300`}
+                } flex flex-col gap-4 p-8 ${
+                  isMobile ? "" : "cursor-pointer"
+                } h-full w-full md:w-[374px] border-t-[2px] border-white transition-colors duration-300`}
               >
                 <h3 className="text-xl md:text-[32px] font-semibold leading-6 md:leading-9 tracking-[-1%]">
                   {evo.title}
