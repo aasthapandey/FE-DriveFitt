@@ -26,7 +26,7 @@ const TitleDescription = ({
             isBanner
               ? "text-white max-w-full md:!max-w-[685px] md:!text-xl !leading-full !tracking-[-2%] !font-normal !mb-0"
               : ""
-          } text-xs md:text-base font-light leading-4 md:leading-5 tracking-[-1%] text-[#8A8A8A] text-center mb-2 md:mb-[48px]`}
+          } text-xs md:text-base font-light leading-4 md:leading-5 tracking-[-1%] text-[#8A8A8A] text-center mb-2 md:mb-[48px] md:max-w-[843px]`}
         >
           {description}
         </p>

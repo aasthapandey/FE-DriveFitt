@@ -116,6 +116,8 @@ export const runningData: StaticPageData = {
         extraTagLabel: "",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/running-compressed/scroll-card-1.webp",
+        mobileImage:
+          "https://da8nru77lsio9.cloudfront.net/images/running-compressed/mobile-scroll-card-1.webp",
       },
       {
         subTitle: "Smart interval training ",
@@ -127,6 +129,8 @@ export const runningData: StaticPageData = {
         extraTagLabel: "",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/running-compressed/scroll-card-2.webp",
+        mobileImage:
+          "https://da8nru77lsio9.cloudfront.net/images/running-compressed/mobile-scroll-card-2.webp",
       },
       {
         subTitle: "Power-building routines ",
@@ -138,6 +142,8 @@ export const runningData: StaticPageData = {
         extraTagLabel: "*Purchase separately",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/running-compressed/scroll-card-3.webp",
+        mobileImage:
+          "https://da8nru77lsio9.cloudfront.net/images/running-compressed/mobile-scroll-card-3.webp",
       },
     ],
   },
@@ -146,7 +152,9 @@ export const runningData: StaticPageData = {
     description:
       "Whether you're taking your first swing or prepping for tournaments – we've got a proven path for you.",
     btnLabel: "Explore Plan",
-    image: "https://da8nru77lsio9.cloudfront.net/images/banner1.webp",
+    image: "https://da8nru77lsio9.cloudfront.net/images/become-a-member.webp",
+    mobileImage:
+      "https://da8nru77lsio9.cloudfront.net/images/become-a-member-mobile.webp",
   },
   gallerySection: {
     title: "Fitness Unfiltered",

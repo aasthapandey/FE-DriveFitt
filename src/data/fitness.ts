@@ -124,8 +124,7 @@ export const fitnessData: StaticPageData = {
           "Eco-friendly equipment that’s as good for the planet as it is for your workout. Our Yoga mats, towels, coffee cups make minimal environmental impact ",
         ],
         extraTagLabel: "",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/scroll-card-2.webp",
+        backgroundImage: "/images/fitness-compressed/scroll-card-2.webp",
       },
       {
         subTitle: "Smart Recovery Tools ",
@@ -143,7 +142,9 @@ export const fitnessData: StaticPageData = {
     description:
       "Whether you're taking your first swing or prepping for tournaments – we've got a proven path for you.",
     btnLabel: "Explore Plan",
-    image: "https://da8nru77lsio9.cloudfront.net/images/banner1.webp",
+    image: "https://da8nru77lsio9.cloudfront.net/images/become-a-member.webp",
+    mobileImage:
+      "https://da8nru77lsio9.cloudfront.net/images/become-a-member-mobile.webp",
   },
   gallerySection: {
     title: "Fitness unfiltered",

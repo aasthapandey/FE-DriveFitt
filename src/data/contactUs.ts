@@ -13,9 +13,9 @@ export const contactUsData: ContactUsPageData = {
     description:
       "Please Feel Free to contact us and we will get back to you as soon as we can.",
     desktopImage:
-      "https://da8nru77lsio9.cloudfront.net/images/contact-us-hero.webp",
+      "https://da8nru77lsio9.cloudfront.net/images/contact-us-compressed/hero.webp",
     mobileImage:
-      "https://da8nru77lsio9.cloudfront.net/images/mobile-contact-us-hero.webp",
+      "https://da8nru77lsio9.cloudfront.net/images/contact-us-compressed/mobile-hero.webp",
   },
   footerInfoSection: {
     footerInfoList: [

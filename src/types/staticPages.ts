@@ -197,6 +197,7 @@ export interface ScrollingCardItem {
   list: string[];
   extraTagLabel?: string;
   backgroundImage: string;
+  mobileImage?: string;
 }
 
 export interface ScrollingCardSection {
