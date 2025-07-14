@@ -38,35 +38,6 @@ const ScrollingCardSection = ({
     return () => sectionObserver.disconnect();
   }, [isMobile]);
 
-  useEffect(() => {
-    if (isMobile) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const index = cardRefs.current.findIndex(
-              (ref) => ref === entry.target
-            );
-            if (index !== -1) {
-              setActiveIndex(index);
-            }
-          }
-        });
-      },
-      {
-        threshold: 0.8,
-        rootMargin: "-30% 0px -30% 0px",
-      }
-    );
-
-    cardRefs.current.forEach((ref) => {
-      if (ref) observer.observe(ref);
-    });
-
-    return () => observer.disconnect();
-  }, [isMobile]);
-
   const handleAccordionToggle = (index: number) => {
     if (isMobile) {
       setActiveIndex(activeIndex === index ? -1 : index);
@@ -87,7 +58,7 @@ const ScrollingCardSection = ({
     >
       <div
         key={`card-image-${activeIndex}`}
-        className="rounded-[20px] md:rounded-[40px] w-full h-full cursor-pointer flex flex-col justify-center p-6 md:p-10 transition-all duration-500 ease-in-out"
+        className="rounded-[20px] md:rounded-[40px] w-full h-full cursor-pointer flex flex-col justify-center transition-all duration-500 ease-in-out"
         style={{
           background: `linear-gradient(180.09deg, rgba(13, 13, 13, 0) 50%, #0D0D0D 99.92%), url(${
             isMobile && cardSection[activeIndex]?.mobileImage
@@ -96,7 +67,7 @@ const ScrollingCardSection = ({
           })`,
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center center",
-          backgroundSize: "contain",
+          backgroundSize: "100% 100%",
         }}
       />
     </div>

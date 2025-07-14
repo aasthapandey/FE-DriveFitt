@@ -94,7 +94,7 @@ const EvolutionSection = ({
         <Slider {...sliderSettings}>
           {evolutionList.map((evo, idx) => (
             <div key={idx} className="!w-full  pl-4">
-              <div className="bg-white text-[#1C1C1C] flex flex-col justify-center gap-3 p-6 w-full h-full">
+              <div className="bg-white text-[#1C1C1C] flex flex-col justify-start gap-3 p-6 w-full h-[144px]">
                 <h3 className="text-xl font-semibold leading-6 tracking-[-1%]">
                   {evo.title}
                 </h3>
