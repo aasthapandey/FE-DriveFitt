@@ -8,9 +8,9 @@ interface StaticCardProps {
 const StaticCard = ({ data, className }: StaticCardProps) => {
   const { title, description, backgroundImage, link, modalImage } = data;
   return (
-    <a href={link}>
+    <a href={link} className="cursor-default">
       <div
-        className={`rounded-[20px] md:rounded-[40px] p-[2px] ${className}`}
+        className={` rounded-[20px] md:rounded-[40px] p-[2px] ${className}`}
         style={{
           background:
             "linear-gradient(180deg, #333333 29.36%, #00DBDC 120.13%)",
