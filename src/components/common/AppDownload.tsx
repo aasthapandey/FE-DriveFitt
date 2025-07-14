@@ -8,6 +8,11 @@ const AppDownload = ({
   data: AppDownloadProps;
   isMobile?: boolean;
 }) => {
+  // Add defensive check for undefined data
+  if (!data) {
+    return null;
+  }
+
   const {
     title,
     description,

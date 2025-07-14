@@ -9,8 +9,27 @@ interface CountdownProps {
 }
 
 const Countdown = ({ countdownData, isMobile }: CountdownProps) => {
+  // Add defensive check for undefined data
+  if (!countdownData) {
+    return null;
+  }
+
   const { title, date, bgImage, mobileBgImage, location, openingText, labels } =
     countdownData;
+
+  // Add defensive checks for required properties
+  if (!title || !date || !bgImage) {
+    return null;
+  }
+
+  // Provide default values for labels to prevent undefined errors
+  const safeLabels = labels || {
+    days: "DAYS",
+    hours: "HOURS",
+    minutes: "MINUTES",
+    seconds: "SECONDS",
+  };
+
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -86,7 +105,7 @@ const Countdown = ({ countdownData, isMobile }: CountdownProps) => {
                   {daysSecond}
                 </div>
               </div>
-              <div className="tracking-[4px]">{labels.days}</div>
+              <div className="tracking-[4px]">{safeLabels.days}</div>
             </div>
             <div className="flex gap-2 flex-col">
               <div className="flex gap-1">
@@ -97,7 +116,7 @@ const Countdown = ({ countdownData, isMobile }: CountdownProps) => {
                   {hoursSecond}
                 </div>
               </div>
-              <div className="tracking-[4px]">{labels.hours}</div>
+              <div className="tracking-[4px]">{safeLabels.hours}</div>
             </div>
             <div className="flex gap-2 flex-col">
               <div className="flex gap-1">
@@ -108,7 +127,7 @@ const Countdown = ({ countdownData, isMobile }: CountdownProps) => {
                   {minutesSecond}
                 </div>
               </div>
-              <div className="tracking-[4px]">{labels.minutes}</div>
+              <div className="tracking-[4px]">{safeLabels.minutes}</div>
             </div>
             <div className="flex gap-2 flex-col">
               <div className="flex gap-1">
@@ -119,7 +138,7 @@ const Countdown = ({ countdownData, isMobile }: CountdownProps) => {
                   {secondsSecond}
                 </div>
               </div>
-              <div className="tracking-[4px]">{labels.seconds}</div>
+              <div className="tracking-[4px]">{safeLabels.seconds}</div>
             </div>
           </div>
         </div>
