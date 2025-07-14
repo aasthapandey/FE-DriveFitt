@@ -34,33 +34,33 @@ export const franchiseData: FranchisePageData = {
       "Unlike standalone gyms, monetize every square foot with Drive FITT's diverse revenue stream",
     cardList: [
       {
-        icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/manual-icon-1.svg",
+        icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/multi-revenue-icon-1.svg",
         title: "Club Membership",
         description:
           "Premium memberships with exclusive access to all facilities",
       },
       {
-        icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/cricketTrainingIcon.svg",
+        icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/multi-revenue-icon-2.svg",
         title: "Cricket Training & Coaching",
         description: "Professional cricket coaching with advanced analytics",
       },
       {
-        icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/groupFitnessIcon.png",
+        icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/multi-revenue-icon-3.svg",
         title: "Group Fitness & Personal Training",
         description: "Diverse fitness classes and one-on-one training sessions",
       },
       {
-        icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/recovery-icon.svg",
+        icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/multi-revenue-icon-4.svg",
         title: "Recovery Services",
         description: "Sauna, therapy, compression, and cold plunge services",
       },
       {
-        icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/cafe-icon.svg",
+        icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/multi-revenue-icon-5.svg",
         title: "Retail & Café",
         description: "Sports equipment, supplements, and healthy food options",
       },
       {
-        icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/event-icon.svg",
+        icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/multi-revenue-icon-6.svg",
         title: "Events & Corporate Programs",
         description: "Corporate wellness programs and special events",
       },
