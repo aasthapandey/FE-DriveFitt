@@ -92,7 +92,7 @@ const Card = ({
                 width={isMobile ? 32 : 70}
                 height={isMobile ? 32 : 70}
                 className={`${
-                  isMobile ? "!size-8" : "!size-[70px]"
+                  isMobile ? "!size-8" : iconClass || "!size-[70px]"
                 } ${iconClass}`}
               />
             </div>
