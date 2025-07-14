@@ -365,7 +365,7 @@ const EmailModal = ({ isOpen, onClose, isMobile }: EmailModalProps) => {
         {/* Close button */}
         <button
           onClick={onClose}
-          className={`z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-gray-600 bg-opacity-50 flex items-center justify-center ${
+          className={`z-10 w-8 h-8 mb-[24px] md:w-10 md:h-10 rounded-full bg-gray-600 bg-opacity-50 flex items-center justify-center ${
             isMobile ? "" : "hover:bg-opacity-70"
           } transition-all duration-200 md:mb-[22px]`}
         >
