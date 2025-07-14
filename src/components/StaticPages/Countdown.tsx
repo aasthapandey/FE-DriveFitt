@@ -16,6 +16,37 @@ const Countdown = ({ countdownData, isMobile }: CountdownProps) => {
     seconds: 0,
   });
 
+  useEffect(() => {
+    if (!countdownData?.date) return;
+
+    const calculateTimeLeft = () => {
+      const difference = +new Date(countdownData.date) - +new Date();
+      let timeLeft = {
+        days: 0,
+        hours: 0,
+        minutes: 0,
+        seconds: 0,
+      };
+
+      if (difference > 0) {
+        timeLeft = {
+          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+          minutes: Math.floor((difference / 1000 / 60) % 60),
+          seconds: Math.floor((difference / 1000) % 60),
+        };
+      }
+
+      return timeLeft;
+    };
+
+    const timer = setInterval(() => {
+      setTimeLeft(calculateTimeLeft());
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [countdownData?.date]);
+
   // Add defensive check for undefined data
   if (!countdownData) {
     return null;
@@ -41,37 +72,6 @@ const Countdown = ({ countdownData, isMobile }: CountdownProps) => {
     const paddedNumber = number.toString().padStart(2, "0");
     return [parseInt(paddedNumber[0]), parseInt(paddedNumber[1])];
   };
-
-  useEffect(() => {
-    if (!date) return;
-
-    const calculateTimeLeft = () => {
-      const difference = +new Date(date) - +new Date();
-      let timeLeft = {
-        days: 0,
-        hours: 0,
-        minutes: 0,
-        seconds: 0,
-      };
-
-      if (difference > 0) {
-        timeLeft = {
-          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-          hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-          minutes: Math.floor((difference / 1000 / 60) % 60),
-          seconds: Math.floor((difference / 1000) % 60),
-        };
-      }
-
-      return timeLeft;
-    };
-
-    const timer = setInterval(() => {
-      setTimeLeft(calculateTimeLeft());
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, [date]);
 
   const [daysFirst, daysSecond] = getDigits(timeLeft.days);
   const [hoursFirst, hoursSecond] = getDigits(timeLeft.hours);
