@@ -2,11 +2,11 @@ import { FranchisePageData } from "@/types/franchisePage";
 import { navbarData } from "./navbar";
 
 export const franchiseData: FranchisePageData = {
-  title: "Franchise With DriveFIIT",
+  title: "Franchise With DriveFITT",
   description: "Partner with India's premium fitness and sports club.",
-  seoTitle: "Franchise Opportunities | DriveFIIT",
+  seoTitle: "Franchise Opportunities | DriveFITT",
   seoDescription:
-    "Start your own DriveFIIT franchise. Premium fitness and sports club with proven business model.",
+    "Start your own DriveFITT franchise. Premium fitness and sports club with proven business model.",
   navbar: navbarData,
   hero: {
     title: "Franchise",
@@ -23,8 +23,8 @@ export const franchiseData: FranchisePageData = {
   banner1Section: {
     title: "DriveFITT?",
     subTitle: "Be The First To Disrupt",
-    description1: "As category creators in ",
-    description2: "cricket + fitness + recovery",
+    description1: "As category creators in",
+    description2: "Cricket + Fitness + Recovery",
     description3:
       "we've built India's only 360° sports and fitness performance ecosystem under one roof. Now, we're expanding — and looking for passionate partners to lead the way.",
   },
@@ -74,19 +74,19 @@ export const franchiseData: FranchisePageData = {
       {
         icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/opportunity-1.svg",
         title: "Initial Investment",
-        subTitle: "₹8–10 Cr",
+        subTitle: "₹8 - 10 Cr",
         description: "Club size, location-dependent",
       },
       {
         icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/ideal-location-icon.svg",
         title: "Ideal Location",
-        subTitle: "8,000–12,000 sq ft",
+        subTitle: "8,000 - 12,000 sq ft",
         description: "Premium mixed-use developments",
       },
       {
         icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/roi-icon.svg",
         title: "Projected ROI",
-        subTitle: "30–40%",
+        subTitle: "30 - 40%",
         description: "Strong return on investment",
       },
       {
@@ -114,7 +114,7 @@ export const franchiseData: FranchisePageData = {
         icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/receive-1.svg",
         title: "Proven Operations Playbook",
         description:
-          "Turnkey systems that fast-track launch—from club design to member retention.",
+          "Turnkey systems that fast-track launch - from Site Selection And club design to member retention.",
       },
       {
         icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/elite-training-icon.svg",

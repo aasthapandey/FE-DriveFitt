@@ -109,33 +109,30 @@ export const cricketData: StaticPageData = {
       {
         subTitle: "Smart Net System",
         list: [
-          "Capture every session and review it 10x faster with auto-clipped, ball-by-ball videos—no dead time, just pure action.",
+          "Capture every session and review it 10x faster with auto-clipped, ball-by-ball videos - no dead time, just pure action",
           "Create a team, stay in sync, and showcase your sessions on social media",
-          "Bat Sensor*- real-time insights on Bat Swing, Speed, Angles, Power & Efficiency ",
         ],
-        extraTagLabel: "*Purchase separately",
+        extraTagLabel: "",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/scroll-card-1.webp",
       },
       {
-        subTitle: "Performance Dashboard",
+        subTitle: "Adaptive Bowling Machine",
         list: [
-          "Capture every session and review it 10x faster with auto-clipped, ball-by-ball videos—no dead time, just pure action.",
-          "Create a team, stay in sync, and showcase your sessions on social media",
-          "Bat Sensor*- real-time insights on Bat Swing, Speed, Angles, Power & Efficiency ",
+          "Delivers endless variations in speed, swing, and spin Intelligent simulation like - Random, Match Practice or Match Situation",
         ],
-        extraTagLabel: "*Purchase separately",
+        extraTagLabel: "",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/scroll-card-2.webp",
       },
       {
-        subTitle: "Adaptive Bowling Machine",
+        subTitle: "Advanced 3D Body Scan",
         list: [
-          "Capture every session and review it 10x faster with auto-clipped, ball-by-ball videos—no dead time, just pure action.",
-          "Create a team, stay in sync, and showcase your sessions on social media",
-          "Bat Sensor*- real-time insights on Bat Swing, Speed, Angles, Power & Efficiency ",
+          "Prevent overuse and biomechanical injuries before they happen",
+          "Real-time motion capture reveals movement flaws, helping refine technique",
+          "Evidence-Based Recovery for a smarter, safer Return-to-Play",
         ],
-        extraTagLabel: "*Purchase separately",
+        extraTagLabel: "",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/scroll-card-3.webp",
       },
