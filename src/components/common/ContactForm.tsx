@@ -248,11 +248,11 @@ const ContactForm = ({
                   {fields.phone.label}
                 </label>
                 <div
-                  className={`bg-[#FFFFFF] border rounded-lg flex items-center transition-colors ${
+                  className={`bg-[#FFFFFF] border rounded-lg flex items-center transition-colors overflow-hidden ${
                     errors.phone ? "border-red-500" : "border-[#333333]"
                   } focus-within:border-[2px] focus-within:border-[#00DBDC]`}
                 >
-                  <span className="text-[#0D0D0D] px-4 py-1.5 md:py-2 font-medium">
+                  <span className="text-[#0D0D0D] px-4 py-1.5 md:py-2 font-medium flex-shrink-0">
                     +91
                   </span>
                   <input
@@ -262,7 +262,7 @@ const ContactForm = ({
                     value={formData.phone}
                     onChange={handleChange}
                     placeholder={fields.phone.placeholder}
-                    className="bg-transparent flex-1 py-1.5 md:py-2 pr-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] outline-none"
+                    className="bg-transparent flex-1 py-1.5 md:py-2 pr-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] outline-none min-w-0"
                   />
                 </div>
               </div>
