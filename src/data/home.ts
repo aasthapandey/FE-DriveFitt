@@ -44,7 +44,7 @@ export const homeData: StaticPageData = {
   },
   countdownSection: {
     title: "Your premium sports club. just days away. Launching in ",
-    date: "2025-07-15",
+    date: "2025-09-13",
     bgImage: "https://da8nru77lsio9.cloudfront.net/images/countdown-bgg.svg",
     mobileBgImage:
       "https://da8nru77lsio9.cloudfront.net/images/countdown-bg-mobile.svg",
@@ -60,7 +60,7 @@ export const homeData: StaticPageData = {
   carouselBanner: [
     {
       title: "Experience Premium Club. Launching in GURUGRAM",
-      countdownEnd: "2025-09-19",
+      countdownEnd: "2025-09-13",
       backgroundImage:
         "https://da8nru77lsio9.cloudfront.net/images/carouselBanner/banner-1.svg",
     },
