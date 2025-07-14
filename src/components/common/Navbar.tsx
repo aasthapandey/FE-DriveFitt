@@ -76,7 +76,13 @@ export default function Navbar({ data, isMobile }: Props) {
             />
           </button>
           <Link href="/">
-            <Image src={logo} alt="logo" width={141} height={24} />
+            <Image
+              src={logo}
+              alt="logo"
+              width={141}
+              height={24}
+              className="ml-[25px]"
+            />
           </Link>
           <div className="flex items-center gap-4">
             <button

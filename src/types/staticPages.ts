@@ -212,6 +212,7 @@ export interface CountdownSection {
   title: string;
   date: string;
   bgImage: string;
+  mobileBgImage: string;
   location: string;
   openingText: string;
   labels: {

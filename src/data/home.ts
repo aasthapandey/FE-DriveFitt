@@ -43,9 +43,11 @@ export const homeData: StaticPageData = {
     btnSecondaryText: "Join Now",
   },
   countdownSection: {
-    title: "Experience Premium Club. Launching in ",
+    title: "Your premium sports club. just days away. Launching in ",
     date: "2025-07-15",
-    bgImage: "https://da8nru77lsio9.cloudfront.net/images/counter-bg.svg",
+    bgImage: "https://da8nru77lsio9.cloudfront.net/images/countdown-bgg.svg",
+    mobileBgImage:
+      "https://da8nru77lsio9.cloudfront.net/images/countdown-bg-mobile.svg",
     location: "GURUGRAM",
     openingText: "Opening in",
     labels: {

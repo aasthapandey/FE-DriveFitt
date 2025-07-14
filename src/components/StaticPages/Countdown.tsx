@@ -8,8 +8,9 @@ interface CountdownProps {
   isMobile?: boolean;
 }
 
-const Countdown = ({ countdownData }: CountdownProps) => {
-  const { title, date, bgImage, location, openingText, labels } = countdownData;
+const Countdown = ({ countdownData, isMobile }: CountdownProps) => {
+  const { title, date, bgImage, mobileBgImage, location, openingText, labels } =
+    countdownData;
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -56,18 +57,20 @@ const Countdown = ({ countdownData }: CountdownProps) => {
   const [minutesFirst, minutesSecond] = getDigits(timeLeft.minutes);
   const [secondsFirst, secondsSecond] = getDigits(timeLeft.seconds);
 
+  const backgroundImage = isMobile && mobileBgImage ? mobileBgImage : bgImage;
+
   return (
     <div
-      className="w-full h-fit md:h-[236px] rounded-[30px]  border-[#343434]"
+      className="w-full max-w-[1200px] mx-auto h-fit md:h-[236px] rounded-[30px] "
       style={{
-        background: `url(${bgImage})`,
+        background: `url(${backgroundImage})`,
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
       }}
     >
       <div className="flex flex-col md:flex-row pt-6 pb-[38px] md:pb-[72px] md:pt-[40px] gap-4 md:gap-0 justify-between md:px-[46px] text-center md:text-left">
-        <h2 className="px-8 md:px-0 w-full text-xl md:w-[402px] md:ml-[59px] leading-7 md:mt-8 text-white md:text-[32px] md:leading-[46px] font-semibold tracking-[-1px]">
+        <h2 className="px-8 md:px-0 w-full text-xl md:w-[402px] md:ml-[59px] leading-7 text-white md:text-[32px] md:leading-[46px] font-semibold tracking-[-1px]">
           {title}
           <span className="text-[#00DBDC] italic">{location}</span>
         </h2>
