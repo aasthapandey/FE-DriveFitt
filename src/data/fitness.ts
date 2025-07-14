@@ -32,7 +32,7 @@ export const fitnessData: StaticPageData = {
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/card5-1.webp",
         iconImage:
-          "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-icon-1.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/icon-1.svg",
         link: "",
       },
       {
@@ -42,7 +42,7 @@ export const fitnessData: StaticPageData = {
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-5.svg",
         iconImage:
-          "https://da8nru77lsio9.cloudfront.net/images/fitness/group-classes-icon.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/icon-2.svg",
         link: "",
       },
       {
@@ -52,7 +52,7 @@ export const fitnessData: StaticPageData = {
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/card5-2.webp",
         iconImage:
-          "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-icon-3.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/icon-3.svg",
         link: "",
       },
       {
@@ -62,7 +62,7 @@ export const fitnessData: StaticPageData = {
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-1.svg",
         iconImage:
-          "https://da8nru77lsio9.cloudfront.net/images/fitness/personal-training-icon.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/icon-4.svg",
         link: "",
       },
       {
@@ -72,7 +72,7 @@ export const fitnessData: StaticPageData = {
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/card5-3.webp",
         iconImage:
-          "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-icon-5.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/icon-5.svg",
         link: "",
       },
     ],

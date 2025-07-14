@@ -33,7 +33,7 @@ export const runningData: StaticPageData = {
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/running-compressed/card5-1.webp",
         iconImage:
-          "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-icon-1.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/running-compressed/icon-1.svg",
         link: "",
       },
       {
@@ -53,7 +53,7 @@ export const runningData: StaticPageData = {
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/running-compressed/card5-2.webp",
         iconImage:
-          "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-icon-3.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/running-compressed/icon-3.svg",
         link: "",
       },
       {
