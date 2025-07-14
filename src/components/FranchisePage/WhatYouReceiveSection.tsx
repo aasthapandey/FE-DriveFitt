@@ -38,7 +38,10 @@ const WhatYouReceiveSection = ({
         <div className="w-full md:w-1/2 flex flex-col">
           {cardList.map((card, index) => {
             return (
-              <div key={index} className="flex gap-4 md:gap-10 min-h-full">
+              <div
+                key={index}
+                className="flex gap-4 md:gap-10 min-h-full border-b border-[#333333]"
+              >
                 <div className="min-h-full flex items-start justify-center py-6 md:py-10">
                   <div className="md:w-12 md:h-12 w-10 h-10 relative">
                     <div
@@ -62,7 +65,7 @@ const WhatYouReceiveSection = ({
                 <div
                   className={`${
                     card.title === "Ongoing growth support" ? "border-b-0" : ""
-                  } flex flex-col gap-2 md:gap-3 py-6 md:py-10 items-start justify-center border-b border-[#333333]`}
+                  } flex flex-col gap-2 md:gap-3 py-6 md:py-10 items-start justify-center `}
                 >
                   <div className="font-semibold text-xl md:text-[32px] leading-6 md:leading-10 tracking-[-1px]">
                     {card.title}
