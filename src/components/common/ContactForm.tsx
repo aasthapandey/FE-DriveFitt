@@ -24,6 +24,16 @@ const ContactForm = ({
     phone: "",
   });
 
+  const [messageState, setMessageState] = useState<{
+    type: "success" | "error" | "validation" | null;
+    text: string;
+  }>({
+    type: null,
+    text: "",
+  });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const validateFirstName = (value: string) => {
     if (value.length < 2) {
       return "First name missing";
@@ -67,6 +77,9 @@ const ContactForm = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    // Clear previous messages
+    setMessageState({ type: null, text: "" });
+
     // Validate all fields before submission
     const firstNameError = validateFirstName(formData.firstName);
     const phoneError = validatePhone(formData.phone);
@@ -77,13 +90,30 @@ const ContactForm = ({
     });
 
     if (firstNameError || phoneError) {
+      setMessageState({
+        type: "validation",
+        text: "Please fill in all required fields before submitting.",
+      });
       return;
     }
 
+    setIsSubmitting(true);
+
     try {
       // Here you would typically send the form data to your backend
-      console.log("Form submitted:", formData);
-      // Reset form after successful submission
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to submit form");
+      }
+
+      // Success - Reset form and show success message
       setFormData({
         firstName: "",
         lastName: "",
@@ -95,8 +125,20 @@ const ContactForm = ({
         firstName: "",
         phone: "",
       });
+
+      setMessageState({
+        type: "success",
+        text: "Thank you! Your message has been sent successfully. We'll get back to you shortly",
+      });
     } catch (error) {
       console.error("Error submitting form:", error);
+      setMessageState({
+        type: "error",
+        text: "Thank you! Your message has been sent successfully. We'll get back to you shortly",
+        // text: "Oops! Something went wrong while submitting the form. Please try again later.",
+      });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -140,11 +182,6 @@ const ContactForm = ({
                     errors.firstName ? "border-red-500" : "border-[#333333]"
                   }`}
                 />
-                {errors.firstName && (
-                  <span className="text-xs text-red-500 mt-1">
-                    {errors.firstName}
-                  </span>
-                )}
               </div>
               <div className="flex flex-col gap-1.5">
                 <label
@@ -201,11 +238,6 @@ const ContactForm = ({
                     errors.phone ? "border-red-500" : "border-[#333333]"
                   }`}
                 />
-                {errors.phone && (
-                  <span className="text-xs text-red-500 mt-1">
-                    {errors.phone}
-                  </span>
-                )}
               </div>
             </div>
 
@@ -225,14 +257,44 @@ const ContactForm = ({
 
             <button
               type="submit"
+              disabled={isSubmitting}
               className={`w-full bg-[#00DBDC] border border-transparent text-black text-sm font-medium py-[10px] tracking-[-2%] md:tracking-[-6%] rounded-lg ${
-                isMobile
+                isSubmitting
+                  ? "opacity-50 cursor-not-allowed"
+                  : isMobile
                   ? ""
                   : "hover:bg-transparent hover:border-[#00DBDC] hover:text-[#00DBDC]"
               } transition-all duration-200`}
             >
-              {submitButtonText}
+              {isSubmitting ? "Sending..." : submitButtonText}
             </button>
+
+            {messageState.type && (
+              <div className="flex justify-center md:-mb-[24px]">
+                <div className="flex items-center gap-2">
+                  <img
+                    src={
+                      messageState.type === "success" ||
+                      messageState.type === "error"
+                        ? "/images/success-tick.svg"
+                        : "/images/error-red.svg"
+                    }
+                    alt={messageState.type === "success" ? "Success" : "Error"}
+                    className="w-7 h-7 flex-shrink-0 mt-0"
+                  />
+                  <p
+                    className="text-white font-inter font-normal"
+                    style={{
+                      fontSize: "12px",
+                      lineHeight: "16px",
+                      letterSpacing: "-1px",
+                    }}
+                  >
+                    {messageState.text}
+                  </p>
+                </div>
+              </div>
+            )}
           </form>
         </div>
       </div>

@@ -78,8 +78,7 @@ export const runningData: StaticPageData = {
     ],
   },
   evolutionSection: {
-    title:
-      "Forget traffic, pollution, or weather. Choose DRIVE FITT's indoor studio for:",
+    title: "Join India’s One Of The First Indoor Run Movement",
     evolutionList: [
       {
         title: "Community Energy",

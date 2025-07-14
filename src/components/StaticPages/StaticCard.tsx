@@ -6,9 +6,9 @@ interface StaticCardProps {
   className?: string;
 }
 const StaticCard = ({ data, className }: StaticCardProps) => {
-  const { title, description, backgroundImage, link, modalImage } = data;
+  const { title, description, backgroundImage, modalImage } = data;
   return (
-    <a href={link} className="cursor-default">
+    <a className="cursor-default">
       <div
         className={` rounded-[20px] md:rounded-[40px] p-[2px] ${className}`}
         style={{
