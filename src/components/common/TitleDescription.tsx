@@ -2,16 +2,18 @@ const TitleDescription = ({
   title,
   description,
   isBanner,
+  className,
 }: {
   title: string;
   description?: string;
   isBanner?: boolean;
+  className?: string;
 }) => {
   return (
     <div
       className={`flex flex-col items-center gap-3 md:gap-4 ${
         isBanner ? "!gap-2" : ""
-      }`}
+      } ${className}`}
     >
       <h2
         className={`${

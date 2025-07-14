@@ -12,8 +12,12 @@ const SportsClub = ({ data, isMobile }: SportsClubProps) => {
   const imageToUse = isMobile && mobileImage ? mobileImage : image;
 
   return (
-    <section className="md:-mb-[94px]">
-      <TitleDescription title={title || ""} description={description || ""} />
+    <section className="md:-mb-[94px] ">
+      <TitleDescription
+        title={title || ""}
+        description={description || ""}
+        className="px-[24px]"
+      />
       <div className="w-full flex justify-center">
         <Image
           src={imageToUse}
