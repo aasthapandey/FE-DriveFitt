@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import TitleDescription from "@/components/common/TitleDescription";
 import { EvolutionSectionProps, EvolutionItem } from "@/types/staticPages";
 import Slider from "react-slick";
@@ -17,6 +17,33 @@ const EvolutionSection = ({
   const [activeBackground, setActiveBackground] = useState<EvolutionItem>(
     evolutionList[0]
   );
+  const [maxCardHeight, setMaxCardHeight] = useState<number>(144);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    cardRefs.current = new Array(evolutionList.length).fill(null);
+  }, [evolutionList.length]);
+
+  useEffect(() => {
+    if (!isMobile) return;
+
+    const measureHeights = () => {
+      const validRefs = cardRefs.current.filter((ref) => ref !== null);
+      if (validRefs.length === 0) return;
+
+      setTimeout(() => {
+        const heights = validRefs.map((ref) => ref?.offsetHeight || 0);
+        const maxHeight = Math.max(...heights, 144);
+        setMaxCardHeight(maxHeight);
+      }, 150);
+    };
+
+    const timeoutId = setTimeout(measureHeights, 200);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [isMobile, evolutionList]);
 
   const sliderSettings = {
     dots: true,
@@ -94,7 +121,16 @@ const EvolutionSection = ({
         <Slider {...sliderSettings}>
           {evolutionList.map((evo, idx) => (
             <div key={idx} className="!w-full  pl-4">
-              <div className="bg-white text-[#1C1C1C] flex flex-col justify-start gap-3 p-6 w-full min-h-[144px]">
+              <div
+                ref={(el) => {
+                  cardRefs.current[idx] = el;
+                }}
+                className="bg-white text-[#1C1C1C] flex flex-col justify-start gap-3 p-6 w-full"
+                style={{
+                  height: isMobile ? `${maxCardHeight + 24}px` : "auto",
+                  minHeight: "144px",
+                }}
+              >
                 <h3 className="text-xl font-semibold leading-6 tracking-[-1%]">
                   {evo.title}
                 </h3>
