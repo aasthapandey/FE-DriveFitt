@@ -33,6 +33,7 @@ export interface CardType {
   link?: string;
   className?: string;
   iconImage?: string;
+  redirectionIcon?: string;
 }
 
 export interface CardSection {

@@ -6,10 +6,19 @@ interface CardProps {
   isMobile?: boolean;
   className?: string;
   imageClass?: string;
+  iconClass?: string;
+  textPlusImageClass?: string;
 }
 
-const Card = ({ data, isMobile, className, imageClass }: CardProps) => {
-  const { title, description, backgroundImage, link } = data;
+const Card = ({
+  data,
+  isMobile,
+  className,
+  imageClass,
+  iconClass,
+  textPlusImageClass,
+}: CardProps) => {
+  const { title, description, backgroundImage, link, redirectionIcon } = data;
 
   return (
     <div
@@ -43,7 +52,7 @@ const Card = ({ data, isMobile, className, imageClass }: CardProps) => {
         <div
           className={`absolute left-0 bottom-0 w-full p-6 md:px-10 md:pt-[46px] md:pb-[3px] ${
             isMobile ? "" : "group-hover:md:py-[28px]"
-          } flex justify-between items-start`}
+          } flex justify-between items-start ${textPlusImageClass}`}
         >
           <div
             className={`flex flex-col transition-all duration-300 ease-in-out ${
@@ -68,16 +77,23 @@ const Card = ({ data, isMobile, className, imageClass }: CardProps) => {
             <div
               className={`flex items-center justify-center ${
                 description && description.length > 0 && !isMobile
-                  ? "md:group-hover:mt-[30px]"
+                  ? description.length < 100
+                    ? "md:group-hover:mt-[50px]"
+                    : "md:group-hover:mt-[60px]"
                   : ""
               }`}
             >
               <Image
-                src="https://da8nru77lsio9.cloudfront.net/images/redirectionButton.svg"
+                src={
+                  redirectionIcon ||
+                  "https://da8nru77lsio9.cloudfront.net/images/redirectionButton.svg"
+                }
                 alt="redirectionBtn"
                 width={isMobile ? 32 : 70}
                 height={isMobile ? 32 : 70}
-                className={`${isMobile ? "!size-8" : "!size-[70px]"}`}
+                className={`${
+                  isMobile ? "!size-8" : "!size-[70px]"
+                } ${iconClass}`}
               />
             </div>
           )}

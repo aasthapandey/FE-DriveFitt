@@ -59,9 +59,17 @@ const CardSection4 = ({
           </div>
 
           {card.link && (
-            <div className="flex items-end justify-end flex-shrink-0 -mb-[13px] -mr-[15px]">
+            <div
+              className={`flex items-end justify-end flex-shrink-0  -mr-[15px] ${
+                card.description?.length && card.description?.length < 100
+                  ? "-mb-[13px]"
+                  : "-mb-[7px]"
+              }`}
+            >
               <Image
-                src="https://da8nru77lsio9.cloudfront.net/images/redirectionButton.svg"
+                src={
+                  "https://da8nru77lsio9.cloudfront.net/images/redirectionButton.svg"
+                }
                 alt="redirectionBtn"
                 width={50}
                 height={50}
@@ -90,7 +98,12 @@ const CardSection4 = ({
       ) : (
         <div className="grid grid-cols-2 grid-rows-2 gap-[40px]">
           {cardSection.map((card, idx) => (
-            <Card data={card} key={idx} />
+            <Card
+              data={card}
+              key={idx}
+              iconClass="!size-10"
+              textPlusImageClass="md:pb-[40px]"
+            />
           ))}
         </div>
       )}

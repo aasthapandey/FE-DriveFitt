@@ -75,30 +75,31 @@ export const homeData: StaticPageData = {
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/homec/mobile-card4-1.webp",
         link: "/cricket",
+        redirectionIcon: "/images/redirection.svg",
       },
       {
         title: "Fitness",
         description:
           "Expertly designed strength, conditioning, and performance training utilizing top-tier equipment, tailored for you.",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/homec/card4-2.webp",
+        backgroundImage: "/images/homec/card4-2.webp",
         link: "/fitness",
+        redirectionIcon: "/images/redirection.svg",
       },
       {
         title: "Recovery",
         description:
           "Cold Plunge, infrared sauna, compression & percussion therapy along with physiotherapy to recharge, recover, and reduce injury risk.",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/homec/card4-3.webp",
+        backgroundImage: "/images/homec/card4-3.webp",
         link: "/recovery",
+        redirectionIcon: "/images/redirection.svg",
       },
       {
         title: "Running",
         description:
           "Pace-enhancing run classes with functional drills to optimize speed, agility & endurance.",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/homec/card4-4.webp",
+        backgroundImage: "/images/homec/card4-4.webp",
         link: "/running",
+        redirectionIcon: "/images/redirection.svg",
       },
     ],
   },
@@ -146,6 +147,8 @@ export const homeData: StaticPageData = {
         modalImage:
           "https://da8nru77lsio9.cloudfront.net/images/card-section/home/man-modal.svg",
         link: "/cricket",
+        redirectionIcon:
+          "https://da8nru77lsio9.cloudfront.net/images/redirection.svg",
       },
       {
         title: "Pro Shop",
@@ -156,6 +159,8 @@ export const homeData: StaticPageData = {
         modalImage:
           "https://da8nru77lsio9.cloudfront.net/images/homec/card2-2.svg",
         link: "/cricket",
+        redirectionIcon:
+          "https://da8nru77lsio9.cloudfront.net/images/redirection.svg",
       },
     ],
   },
