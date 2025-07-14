@@ -19,7 +19,7 @@ export const cricketData: StaticPageData = {
       "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/hero.webp",
     mobileImage:
       "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/mobile-hero.webp",
-    btnPrimaryText: "Book a free trial",
+    btnPrimaryText: "Book a Free Trial",
     btnSecondaryText: "Join Online",
   },
   cardSection5: {

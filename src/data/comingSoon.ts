@@ -14,7 +14,7 @@ export const comingSoonData: StaticPageData = {
     iconImage: "https://da8nru77lsio9.cloudfront.net/images/comingsoon.svg",
     btnPrimaryText: "Go to Home",
     btnSecondaryText: "/",
-    btnPrimaryLink: "",
+    btnPrimaryLink: "/",
     btnSecondaryLink: "",
   },
   footerSection: {

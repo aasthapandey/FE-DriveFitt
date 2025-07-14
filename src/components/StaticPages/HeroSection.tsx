@@ -1,6 +1,9 @@
+"use client";
 import { Hero, TitleWord } from "@/types/staticPages";
-import CountdownTimer from "@/components/StaticPages/CountdownTimer";
 import { homeData } from "@/data/home";
+import CountdownTimer from "./CountdownTimer";
+import { useState } from "react";
+import EmailModal from "@/components/common/Modal/EmailModal";
 
 interface HeroSectionProps {
   data: Hero;
@@ -10,6 +13,24 @@ interface HeroSectionProps {
 
 const HeroSection = ({ data, pageName, isMobile }: HeroSectionProps) => {
   const { titleWords, description, btnPrimaryText, btnSecondaryText } = data;
+  const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
+
+  const handlePrimaryButtonClick = () => {
+    if (btnPrimaryText === "Book a Free Trial") {
+      window.location.href = "/coming-soon";
+    } else if (btnPrimaryText === "Join Now") {
+      setIsEmailModalOpen(true);
+    }
+  };
+
+  const handleSecondaryButtonClick = () => {
+    if (btnSecondaryText === "Join Online") {
+      setIsEmailModalOpen(true);
+    } else if (btnSecondaryText === "Join Now") {
+      setIsEmailModalOpen(true);
+    }
+  };
+
   const renderTitle = (titleWords: TitleWord[]) => {
     return (
       <h1
@@ -30,6 +51,7 @@ const HeroSection = ({ data, pageName, isMobile }: HeroSectionProps) => {
       </h1>
     );
   };
+
   return (
     <>
       <div className="h-fit md:h-[745px] flex flex-col justify-center md:justify-start items-center md:items-start text-center md:text-start px-6 md:px-[120px]">
@@ -57,6 +79,11 @@ const HeroSection = ({ data, pageName, isMobile }: HeroSectionProps) => {
           <div className="flex gap-4 justify-center md:justify-start">
             {btnPrimaryText && (
               <button
+                onClick={
+                  isMobile && btnSecondaryText === "Join Online"
+                    ? handleSecondaryButtonClick
+                    : handlePrimaryButtonClick
+                }
                 className={`bg-[#00DBDC] border border-transparent text-[#0D0D0D] px-6 py-3 md:px-14 md:py-4 rounded-[4px] md:rounded-lg font-medium leading-[100%] tracking-[-5%] text-base md:text-xl ${
                   isMobile
                     ? ""
@@ -71,6 +98,7 @@ const HeroSection = ({ data, pageName, isMobile }: HeroSectionProps) => {
               !isMobile &&
               pageName !== "home" && (
                 <button
+                  onClick={handleSecondaryButtonClick}
                   className={`bg-transparent border border-[#00DBDC] text-[#00DBDC] px-10 py-3 md:px-14 md:py-4 rounded-lg font-medium leading-[100%] tracking-[-5%] text-base md:text-xl ${
                     isMobile ? "" : "hover:bg-[#00DBDC] hover:text-[#0D0D0D]"
                   } transition-all duration-200`}
@@ -87,6 +115,13 @@ const HeroSection = ({ data, pageName, isMobile }: HeroSectionProps) => {
           isMobile={isMobile}
         />
       )}
+
+      {/* Email Modal */}
+      <EmailModal
+        isOpen={isEmailModalOpen}
+        onClose={() => setIsEmailModalOpen(false)}
+        isMobile={isMobile}
+      />
     </>
   );
 };

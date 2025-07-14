@@ -1,3 +1,4 @@
+"use client";
 import { SportsClubSectionProps } from "@/types/staticPages";
 import TitleDescription from "@/components/common/TitleDescription";
 
@@ -9,6 +10,10 @@ type BannerType = {
 const Banner = ({ data, isMobile }: BannerType) => {
   const { title, description, image, mobileImage, btnLabel } = data;
   const imageToUse = isMobile && mobileImage ? mobileImage : image;
+
+  const handleButtonClick = () => {
+    window.location.href = "/coming-soon";
+  };
 
   return (
     <section className="md:px-[120px] px-6 flex flex-col gap-5 md:gap-8">
@@ -36,6 +41,7 @@ const Banner = ({ data, isMobile }: BannerType) => {
               isBanner={true}
             />
             <button
+              onClick={handleButtonClick}
               className={`bg-[#00DBDC] border border-transparent w-fit leading-[100%] tracking-[-5%] text-base text-[#0D0D0D] md:px-12 py-[10px] px-9 rounded-[4px] md:rounded-lg font-medium ${
                 isMobile
                   ? "font-medium text-sm leading-none tracking-tighter"

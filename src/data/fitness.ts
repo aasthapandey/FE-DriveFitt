@@ -18,7 +18,7 @@ export const fitnessData: StaticPageData = {
       "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/hero.webp",
     mobileImage:
       "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/mobile-hero.webp",
-    btnPrimaryText: "Book a free trial",
+    btnPrimaryText: "Book a Free Trial",
     btnSecondaryText: "Join Online",
   },
   cardSection5: {
@@ -46,7 +46,7 @@ export const fitnessData: StaticPageData = {
         link: "",
       },
       {
-        title: "Hyrox-Inspired Zone",
+        title: "Hybrid-Inspired Zone",
         description:
           "Experience the energy, structure, and challenge of the global fitness race at your club",
         backgroundImage:

@@ -10,7 +10,7 @@ interface JoinNowProps {
 
 export default function JoinNow({
   isMobile,
-  loginModalType = LoginModalType.PHONE,
+  loginModalType = LoginModalType.EMAIL,
 }: JoinNowProps) {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 

@@ -234,19 +234,6 @@ export const homeData: StaticPageData = {
     mobileImage:
       "https://da8nru77lsio9.cloudfront.net/images/homec/card1-mobile.svg",
   },
-  appDownloadSection: {
-    title: "Your Exclusive Access, Now On Mobile",
-    description:
-      "Our app makes it easy to join classes, connect with coaches and track your journey.",
-    googlePlayImg:
-      "https://da8nru77lsio9.cloudfront.net/images/google-app-store.svg",
-    appStoreImg:
-      "https://da8nru77lsio9.cloudfront.net/images/apple-app-store.svg",
-    desktopImage:
-      "https://da8nru77lsio9.cloudfront.net/images/app-download/desktop-bg.svg",
-    mobileImage:
-      "https://da8nru77lsio9.cloudfront.net/images/app-download/mobile-bg.svg",
-  },
   footerInfoSection: {
     footerInfoList: [
       {
