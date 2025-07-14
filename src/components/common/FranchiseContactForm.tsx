@@ -237,7 +237,7 @@ const FranchiseContactForm = ({ isMobile }: FranchiseContactFormProps) => {
                     htmlFor="proposedCity"
                     className="text-xs md:text-sm text-[#8A8A8A]"
                   >
-                    Proposed City *
+                    City *
                   </label>
                   <input
                     id="proposedCity"
