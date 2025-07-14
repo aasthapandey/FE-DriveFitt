@@ -65,9 +65,6 @@ const PhoneStep = ({
         onBlur={onBlur}
         maxLength={10}
         className="w-full bg-transparent border-b-2 border-[#333333] pl-4 pr-4 py-3 md:py-4 text-[#00DBDC] placeholder-[#8A8A8A] focus:outline-none transition-colors duration-200 font-light text-base md:text-2xl md:leading-7 caret-[#00DBDC] text-center"
-        style={{
-          fontFamily: "Inter, sans-serif",
-        }}
       />
     </div>
 
@@ -194,9 +191,6 @@ const OTPStep = ({
                 ? "border-[#00DBDC]"
                 : "border-[#333333]"
             }`}
-            style={{
-              fontFamily: "Inter, sans-serif",
-            }}
           />
         ))}
       </div>

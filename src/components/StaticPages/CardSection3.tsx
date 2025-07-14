@@ -45,7 +45,6 @@ const CardSection3 = ({
             <h3
               className="text-white font-semibold"
               style={{
-                fontFamily: "Inter",
                 fontWeight: 600,
                 fontSize: "20px",
                 lineHeight: "24px",
