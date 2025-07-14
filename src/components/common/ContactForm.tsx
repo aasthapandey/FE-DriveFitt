@@ -314,7 +314,6 @@ const ContactForm = ({
                     style={{
                       fontSize: "12px",
                       lineHeight: "16px",
-                      letterSpacing: "-1px",
                     }}
                   >
                     {messageState.text}
