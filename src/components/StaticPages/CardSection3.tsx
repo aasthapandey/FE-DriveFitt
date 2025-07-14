@@ -40,10 +40,10 @@ const CardSection3 = ({
       >
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
 
-        <div className="absolute left-0 bottom-0 w-full pb-6 px-6 flex justify-between items-end">
+        <div className="absolute left-0 bottom-0 w-full pb-6 px-6 flex justify-between items-end gap-[20px]">
           <div className="flex flex-col">
             <h3
-              className="text-white font-semibold"
+              className="text-white font-semibold mb-4"
               style={{
                 fontWeight: 600,
                 fontSize: "20px",
@@ -53,10 +53,27 @@ const CardSection3 = ({
             >
               {card.title}
             </h3>
+            <p
+              className="text-white font-light"
+              style={{
+                fontWeight: 300,
+                fontSize: "12px",
+                lineHeight: "16px",
+                letterSpacing: "-2%",
+              }}
+            >
+              {card.description}
+            </p>
           </div>
 
           {card.link && (
-            <div className="flex items-end justify-end flex-shrink-0 -mb-[18px] -mr-[12px]">
+            <div
+              className={`flex items-end justify-end flex-shrink-0 -mr-[15px] ${
+                card.description?.length && card.description?.length < 100
+                  ? "-mb-[13px]"
+                  : "-mb-[7px]"
+              }`}
+            >
               <Image
                 src="https://da8nru77lsio9.cloudfront.net/images/redirectionButton.svg"
                 alt="redirectionBtn"
