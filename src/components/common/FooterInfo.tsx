@@ -13,7 +13,7 @@ const FooterInfo = ({
 
   return (
     <div
-      className="flex flex-col md:flex-row gap-6 md:gap-10 px-6 md:px-[120px] md:mb-[-40px] md:pt-[140px] h-fit w-full"
+      className="flex flex-col md:flex-row gap-6 md:gap-10 px-6 md:px-[120px] md:mb-[-40px] md:pt-[140px] w-full"
       style={{
         background: `${
           isMobile
@@ -22,13 +22,13 @@ const FooterInfo = ({
         }`,
       }}
     >
-      <div className="w-full md:w-2/5 max-h-full">
+      <div className="w-full md:w-2/5 flex">
         <ChatWithUs
           footerInfoList={footerInfoList}
           socialLinkList={socialLinkList}
         />
       </div>
-      <div className="w-full md:w-3/5 h-full">
+      <div className="w-full md:w-3/5 flex">
         <ContactForm data={contactFormSection} />
       </div>
     </div>
