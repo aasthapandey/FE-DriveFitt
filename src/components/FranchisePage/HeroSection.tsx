@@ -49,7 +49,7 @@ const HeroSection = ({ data, isMobile }: HeroSectionProps) => {
           {/* Main Title */}
           <div className="text-[40px] w-[70%] md:w-full h-auto flex-wrap justify-center md:text-[68px] font-light text-white flex tracking-[-2px] leading-[44px] md:leading-[78px] text-center">
             <span className="text-[#00DBDC] italic font-bold ">
-              DRIVE&nbsp;
+              Drive&nbsp;
             </span>
             <span className=" italic font-bold">FITT&nbsp;&nbsp;</span>
             <span className="text-white">
