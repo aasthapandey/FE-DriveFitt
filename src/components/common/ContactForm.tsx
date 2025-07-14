@@ -55,22 +55,31 @@ const ContactForm = ({
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
 
-    // Validate on change
-    if (name === "firstName") {
+    if (name === "phone") {
+      // Only allow digits and limit to 10 characters
+      const numericValue = value.replace(/\D/g, "").slice(0, 10);
+      setFormData((prev) => ({
+        ...prev,
+        [name]: numericValue,
+      }));
       setErrors((prev) => ({
         ...prev,
-        firstName: validateFirstName(value),
+        phone: validatePhone(numericValue),
       }));
-    } else if (name === "phone") {
-      setErrors((prev) => ({
+    } else {
+      setFormData((prev) => ({
         ...prev,
-        phone: validatePhone(value),
+        [name]: value,
       }));
+
+      // Validate on change
+      if (name === "firstName") {
+        setErrors((prev) => ({
+          ...prev,
+          firstName: validateFirstName(value),
+        }));
+      }
     }
   };
 
@@ -136,6 +145,17 @@ const ContactForm = ({
         type: "error",
         text: "Thank you! Your message has been sent successfully. We'll get back to you shortly",
         // text: "Oops! Something went wrong while submitting the form. Please try again later.",
+      });
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        message: "",
+      });
+      setErrors({
+        firstName: "",
+        phone: "",
       });
     } finally {
       setIsSubmitting(false);
@@ -227,17 +247,24 @@ const ContactForm = ({
                 >
                   {fields.phone.label}
                 </label>
-                <input
-                  id="phone"
-                  type="tel"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  placeholder={fields.phone.placeholder}
-                  className={`bg-[#FFFFFF] border rounded-lg py-1.5 md:py-2 px-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[#00DBDC] outline-none transition-colors ${
+                <div
+                  className={`bg-[#FFFFFF] border rounded-lg flex items-center transition-colors ${
                     errors.phone ? "border-red-500" : "border-[#333333]"
-                  }`}
-                />
+                  } focus-within:border-[2px] focus-within:border-[#00DBDC]`}
+                >
+                  <span className="text-[#0D0D0D] px-4 py-1.5 md:py-2 font-medium">
+                    +91
+                  </span>
+                  <input
+                    id="phone"
+                    type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    placeholder="Enter phone number"
+                    className="bg-transparent flex-1 py-1.5 md:py-2 pr-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] outline-none"
+                  />
+                </div>
               </div>
             </div>
 

@@ -13,8 +13,7 @@ export const cricketData: StaticPageData = {
       { text: "DRIVE:", color: "#00DBDC", isItalic: true },
       { text: " Cricket for Every player. Every Day", color: "#FFFFFF" },
     ],
-    description:
-      "Experience Gurugram's premier sports club & fitness center – Cricket, Fitness, Recovery, Community…and more",
+    description: "Play Better, Longer, and Safer - No Matter your Age or Skill",
     desktopImage:
       "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/hero.webp",
     mobileImage:
@@ -37,7 +36,7 @@ export const cricketData: StaticPageData = {
         link: "",
       },
       {
-        title: "Instant Performance Tracking",
+        title: "Performance Tracking",
         description: "Auto clips, speed, swing, spin, DRS, pitch maps & more.",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-5.svg",
@@ -120,6 +119,7 @@ export const cricketData: StaticPageData = {
         subTitle: "Adaptive Bowling Machine",
         list: [
           "Delivers endless variations in speed, swing, and spin Intelligent simulation like - Random, Match Practice or Match Situation",
+          "Intelligent simulation like Random, Match Practice or Match Situation",
         ],
         extraTagLabel: "",
         backgroundImage:
@@ -206,7 +206,7 @@ export const cricketData: StaticPageData = {
       submitButtonText: "Send Message",
       fields: {
         firstName: {
-          label: "First Name",
+          label: "First Name*",
           placeholder: "Enter your first name",
         },
         lastName: {
@@ -218,7 +218,7 @@ export const cricketData: StaticPageData = {
           placeholder: "Enter your email address",
         },
         phone: {
-          label: "Phone Number",
+          label: "Phone Number*",
           placeholder: "Enter your phone number",
         },
         message: {

@@ -65,7 +65,7 @@ export const contactUsData: ContactUsPageData = {
       submitButtonText: "Send Message",
       fields: {
         firstName: {
-          label: "First Name",
+          label: "First Name*",
           placeholder: "Enter your first name",
         },
         lastName: {
@@ -77,7 +77,7 @@ export const contactUsData: ContactUsPageData = {
           placeholder: "Enter your email address",
         },
         phone: {
-          label: "Phone Number",
+          label: "Phone Number*",
           placeholder: "Enter your phone number",
         },
         message: {
