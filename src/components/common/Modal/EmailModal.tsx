@@ -239,11 +239,32 @@ const EmailModal = ({ isOpen, onClose, isMobile }: EmailModalProps) => {
   const [otpValues, setOtpValues] = useState<string[]>(["", "", "", ""]);
   const [timeLeft, setTimeLeft] = useState(59);
   const [isMounted, setIsMounted] = useState(false);
+  const modalRef = useRef<HTMLDivElement>(null);
 
   // Check if component is mounted (client-side)
   useEffect(() => {
     setIsMounted(true);
   }, []);
+
+  // Handle click outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        modalRef.current &&
+        !modalRef.current.contains(event.target as Node)
+      ) {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen, onClose]);
 
   // Disable/enable body scroll when modal opens/closes
   useEffect(() => {
@@ -355,6 +376,7 @@ const EmailModal = ({ isOpen, onClose, isMobile }: EmailModalProps) => {
     >
       {/* Modal Content */}
       <div
+        ref={modalRef}
         className="relative flex flex-col items-center justify-center"
         style={{
           position: "relative",
