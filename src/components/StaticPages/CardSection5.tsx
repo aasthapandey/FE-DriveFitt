@@ -103,6 +103,9 @@ const CardSection5 = ({
               return (
                 <div key={idx} className="flex flex-col">
                   <CardInfoItem data={card} />
+                  {idx < cardSection.length - 1 && (
+                    <div className="border-b border-[#333333] mx-6" />
+                  )}
                 </div>
               );
             })}
