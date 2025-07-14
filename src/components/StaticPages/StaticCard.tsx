@@ -3,10 +3,9 @@ import Image from "next/image";
 
 interface StaticCardProps {
   data: StaticCardType;
-  isMobile?: boolean;
   className?: string;
 }
-const StaticCard = ({ data, className, isMobile }: StaticCardProps) => {
+const StaticCard = ({ data, className }: StaticCardProps) => {
   const { title, description, backgroundImage, link, modalImage } = data;
   return (
     <a href={link}>

@@ -1,4 +1,4 @@
-import { CardSection } from "@/types/staticPages";
+import { CardSection, CardType } from "@/types/staticPages";
 import Card from "@/components/StaticPages/Card";
 import TitleDescription from "@/components/common/TitleDescription";
 import Image from "next/image";
@@ -12,7 +12,7 @@ const CardSection4 = ({
 }) => {
   const { title, description, cardSection } = data;
 
-  const CustomMobileCard = ({ card }: { card: any }) => (
+  const CustomMobileCard = ({ card }: { card: CardType }) => (
     <div
       className="rounded-[20px] p-[2px]"
       style={{
