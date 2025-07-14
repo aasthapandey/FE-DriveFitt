@@ -121,9 +121,7 @@ export const recoveryData: StaticPageData = {
       "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/gallery-3.webp",
     ],
   },
-  joinNowSection: {
-    // Empty object following JoinNowSectionProps interface
-  },
+
   faqSection: {
     title: "Frequently Asked Questions",
     description: "Everything you need to know about the Drivefitt and billing.",
