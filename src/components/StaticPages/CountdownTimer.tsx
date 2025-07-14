@@ -8,7 +8,7 @@ interface CountdownProps {
 
 const CountdownTimer = ({ countdownData, isMobile }: CountdownProps) => {
   return (
-    <div className="w-full px-6 md:px-[120px] mt-[39px] md:mt-0">
+    <div className="w-full px-6 md:px-[120px] mt-[39px] md:-mt-[107px]">
       <Countdown countdownData={countdownData} isMobile={isMobile} />
     </div>
   );
