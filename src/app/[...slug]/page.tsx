@@ -30,7 +30,7 @@ export async function generateMetadata({
 
   if (!data) {
     return {
-      title: "Page Not Found | DriveFIIT Premium Club",
+      title: "Page Not Found | DriveFITT Premium Club",
       description: "The page you're looking for doesn't exist.",
     };
   }

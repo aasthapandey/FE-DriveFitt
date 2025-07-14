@@ -1,12 +1,12 @@
 import { StaticPageData } from "@/types/staticPages";
 
 export const licensesData: StaticPageData = {
-  title: "Licenses | DriveFIIT Premium Club",
+  title: "Licenses | DriveFITT Premium Club",
   description:
-    "Software licenses and legal attributions for DriveFIIT Premium Club.",
-  seoTitle: "Licenses | DriveFIIT Premium Club",
+    "Software licenses and legal attributions for DriveFITT Premium Club.",
+  seoTitle: "Licenses | DriveFITT Premium Club",
   seoDescription:
-    "View software licenses and legal attributions for DriveFIIT.",
+    "View software licenses and legal attributions for DriveFITT.",
   policySection: {
     htmlContent: `
       <h1>Licenses</h1>

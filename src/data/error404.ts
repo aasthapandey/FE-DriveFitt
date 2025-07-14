@@ -1,12 +1,12 @@
 import { StaticPageData } from "@/types/staticPages";
 
 export const error404Data: StaticPageData = {
-  title: "404 - Page Not Found | DriveFIIT Premium Club",
+  title: "404 - Page Not Found | DriveFITT Premium Club",
   description:
-    "The page you're looking for doesn't exist. Return to DriveFIIT's homepage.",
-  seoTitle: "404 - Page Not Found | DriveFIIT Premium Club",
+    "The page you're looking for doesn't exist. Return to DriveFITT's homepage.",
+  seoTitle: "404 - Page Not Found | DriveFITT Premium Club",
   seoDescription:
-    "Oops! The page you're looking for doesn't exist. Return to DriveFIIT's homepage to explore our premium cricket and fitness facilities.",
+    "Oops! The page you're looking for doesn't exist. Return to DriveFITT's homepage to explore our premium cricket and fitness facilities.",
   error404Section: {
     title: "Oops! Page Not Found",
     description: "We can't find the page you're looking for",

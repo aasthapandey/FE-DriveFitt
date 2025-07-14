@@ -1,12 +1,12 @@
 import { StaticPageData } from "@/types/staticPages";
 
 export const termsData: StaticPageData = {
-  title: "Terms & Conditions | DriveFIIT Premium Club",
+  title: "Terms & Conditions | DriveFITT Premium Club",
   description:
-    "Read our terms and conditions for membership and services at DriveFIIT Premium Club.",
-  seoTitle: "Terms & Conditions | DriveFIIT Premium Club",
+    "Read our terms and conditions for membership and services at DriveFITT Premium Club.",
+  seoTitle: "Terms & Conditions | DriveFITT Premium Club",
   seoDescription:
-    "Review the terms and conditions for DriveFIIT membership and services.",
+    "Review the terms and conditions for DriveFITT membership and services.",
   policySection: {
     htmlContent: `
       <h1>DRIVE FITT Terms & Conditions</h1>

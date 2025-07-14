@@ -2,11 +2,11 @@ import { StaticPageData } from "@/types/staticPages";
 import { navbarData } from "./navbar";
 
 export const runningData: StaticPageData = {
-  title: "Running At DriveFIIT",
+  title: "Running At DriveFITT",
   description: "Experience advanced running facilities and training.",
-  seoTitle: "Premium Running Club | DriveFIIT",
+  seoTitle: "Premium Running Club | DriveFITT",
   seoDescription:
-    "Join DriveFIIT's running club. Indoor running studio, expert coaching, and performance tracking.",
+    "Join DriveFITT's running club. Indoor running studio, expert coaching, and performance tracking.",
   navbar: navbarData,
   hero: {
     titleWords: [

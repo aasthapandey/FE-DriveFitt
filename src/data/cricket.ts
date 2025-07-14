@@ -2,9 +2,9 @@ import { StaticPageData } from "@/types/staticPages";
 import { navbarData } from "./navbar";
 
 export const cricketData: StaticPageData = {
-  title: "Cricket At DriveFIIT",
+  title: "Cricket At DriveFITT",
   description: "Experience the best cricket training facilities.",
-  seoTitle: "Premium Cricket Club | DriveFIIT",
+  seoTitle: "Premium Cricket Club | DriveFITT",
   seoDescription:
     "Join the best cricket club in Gurugram. State-of-the-art facilities, coaching, and more.",
   navbar: navbarData,
