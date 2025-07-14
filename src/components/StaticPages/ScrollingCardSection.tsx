@@ -39,7 +39,7 @@ const ScrollingCardSection = ({
   }, [isMobile]);
 
   useEffect(() => {
-    if (!isMobile) return;
+    if (isMobile) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -67,6 +67,14 @@ const ScrollingCardSection = ({
     return () => observer.disconnect();
   }, [isMobile]);
 
+  const handleAccordionToggle = (index: number) => {
+    if (isMobile) {
+      setActiveIndex(activeIndex === index ? -1 : index);
+    } else {
+      setActiveIndex(index);
+    }
+  };
+
   const renderCardImage = (
     <div
       key={activeIndex}
@@ -82,9 +90,9 @@ const ScrollingCardSection = ({
         className="rounded-[20px] md:rounded-[40px] w-full h-full cursor-pointer flex flex-col justify-center p-6 md:p-10 transition-all duration-500 ease-in-out"
         style={{
           background: `linear-gradient(180.09deg, rgba(13, 13, 13, 0) 50%, #0D0D0D 99.92%), url(${
-            isMobile && cardSection[activeIndex].mobileImage
+            isMobile && cardSection[activeIndex]?.mobileImage
               ? cardSection[activeIndex].mobileImage
-              : cardSection[activeIndex].backgroundImage
+              : cardSection[activeIndex]?.backgroundImage
           })`,
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center center",
@@ -115,14 +123,37 @@ const ScrollingCardSection = ({
                     : ""
                 }`,
               }}
-              className="flex flex-col gap-6 cursor-pointer py-6 md:px-10 md:pt-8 md:pb-6 border-b border-[#FFFFFF29]"
+              className="flex flex-col cursor-pointer border-b border-[#FFFFFF29]"
               onMouseEnter={() => !isMobile && setActiveIndex(idx)}
+              onClick={() => isMobile && handleAccordionToggle(idx)}
             >
-              <h3 className="text-base md:text-[32px] font-semibold md:font-medium leading-6 md:leading-10 tracking-[-1px]">
-                {card.subTitle}
-              </h3>
-              {activeIndex === idx && (
-                <div className="flex flex-col gap-4 md:gap-3">
+              <div className="flex items-center justify-between py-6 md:px-10 md:pt-8 md:pb-6">
+                <h3 className="text-base md:text-[32px] font-semibold md:font-medium leading-6 md:leading-10 tracking-[-1px]">
+                  {card.subTitle}
+                </h3>
+                {isMobile && (
+                  <Image
+                    src={
+                      activeIndex === idx
+                        ? "/images/accordian-up-arrow.svg"
+                        : "/images/accordian-down-arrow.svg"
+                    }
+                    alt={activeIndex === idx ? "collapse" : "expand"}
+                    width={24}
+                    height={24}
+                    className="transition-transform duration-200"
+                  />
+                )}
+              </div>
+
+              <div
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                  activeIndex === idx
+                    ? "max-h-[1000px] opacity-100"
+                    : "max-h-0 opacity-0"
+                }`}
+              >
+                <div className="flex flex-col gap-4 md:gap-3 pb-6 md:px-10">
                   {card.list.map((item, itemIdx) => (
                     <div
                       key={itemIdx}
@@ -145,9 +176,9 @@ const ScrollingCardSection = ({
                       {card.extraTagLabel}
                     </span>
                   )}
-                  {isMobile && renderCardImage}
+                  {isMobile && activeIndex === idx && renderCardImage}
                 </div>
-              )}
+              </div>
             </div>
           ))}
         </div>
