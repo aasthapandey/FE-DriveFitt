@@ -75,31 +75,38 @@ export const homeData: StaticPageData = {
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/homec/mobile-card4-1.webp",
         link: "/cricket",
-        redirectionIcon: "/images/redirection.svg",
+        redirectionIcon:
+          "https://da8nru77lsio9.cloudfront.net/images/redirection.svg",
       },
       {
         title: "Fitness",
         description:
           "Expertly designed strength, conditioning, and performance training utilizing top-tier equipment, tailored for you.",
-        backgroundImage: "/images/homec/card4-2.webp",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/homec/card4-2.webp",
         link: "/fitness",
-        redirectionIcon: "/images/redirection.svg",
+        redirectionIcon:
+          "https://da8nru77lsio9.cloudfront.net/images/redirection.svg",
       },
       {
         title: "Recovery",
         description:
           "Cold Plunge, infrared sauna, compression & percussion therapy along with physiotherapy to recharge, recover, and reduce injury risk.",
-        backgroundImage: "/images/homec/card4-3.webp",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/homec/card4-3.webp",
         link: "/recovery",
-        redirectionIcon: "/images/redirection.svg",
+        redirectionIcon:
+          "https://da8nru77lsio9.cloudfront.net/images/redirection.svg",
       },
       {
         title: "Running",
         description:
           "Pace-enhancing run classes with functional drills to optimize speed, agility & endurance.",
-        backgroundImage: "/images/homec/card4-4.webp",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/homec/card4-4.webp",
         link: "/running",
-        redirectionIcon: "/images/redirection.svg",
+        redirectionIcon:
+          "https://da8nru77lsio9.cloudfront.net/images/redirection.svg",
       },
     ],
   },

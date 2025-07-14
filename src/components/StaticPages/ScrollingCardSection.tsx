@@ -106,8 +106,8 @@ const ScrollingCardSection = ({
                   <Image
                     src={
                       activeIndex === idx
-                        ? "/images/accordian-up-arrow.svg"
-                        : "/images/accordian-down-arrow.svg"
+                        ? "https://da8nru77lsio9.cloudfront.net/images/accordian-up-arrow.svg"
+                        : "https://da8nru77lsio9.cloudfront.net/images/accordian-down-arrow.svg"
                     }
                     alt={activeIndex === idx ? "collapse" : "expand"}
                     width={24}
