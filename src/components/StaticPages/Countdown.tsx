@@ -9,6 +9,13 @@ interface CountdownProps {
 }
 
 const Countdown = ({ countdownData, isMobile }: CountdownProps) => {
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
+
   // Add defensive check for undefined data
   if (!countdownData) {
     return null;
@@ -30,19 +37,14 @@ const Countdown = ({ countdownData, isMobile }: CountdownProps) => {
     seconds: "SECONDS",
   };
 
-  const [timeLeft, setTimeLeft] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-  });
-
   const getDigits = (number: number): [number, number] => {
     const paddedNumber = number.toString().padStart(2, "0");
     return [parseInt(paddedNumber[0]), parseInt(paddedNumber[1])];
   };
 
   useEffect(() => {
+    if (!date) return;
+
     const calculateTimeLeft = () => {
       const difference = +new Date(date) - +new Date();
       let timeLeft = {
