@@ -55,7 +55,7 @@ const FranchiseModal = ({ isOpen, onClose, isMobile }: FranchiseModalProps) => {
             className="w-[48px] h-[48px]"
           />
         </button>
-        <FranchiseContactForm isMobile={isMobile} isModal={true} />
+        <FranchiseContactForm isMobile={isMobile} />
       </div>
     </div>
   );
