@@ -9,7 +9,7 @@ import {
   Banner2SectionType,
 } from "@/types/franchisePage";
 import { FooterInfoProps, FooterProps } from "@/types/staticPages";
-import FooterInfo from "@/components/common/FooterInfo";
+import FranchiseFooterInfo from "@/components/common/FranchiseFooterInfo";
 import Footer from "@/components/common/Footer";
 import HeroSection from "@/components/FranchisePage/HeroSection";
 import Banner1Section from "@/components/FranchisePage/Banner1Section";
@@ -89,7 +89,10 @@ const FranchisePage = ({ data, pageName, isMobile }: FranchisePageProps) => {
         );
       case "footerInfoSection":
         return (
-          <FooterInfo data={value as FooterInfoProps} isMobile={isMobile} />
+          <FranchiseFooterInfo
+            data={value as FooterInfoProps}
+            isMobile={isMobile}
+          />
         );
       case "footerSection":
         return <Footer data={value as FooterProps} isMobile={isMobile} />;
