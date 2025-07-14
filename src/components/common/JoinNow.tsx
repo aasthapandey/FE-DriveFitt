@@ -18,9 +18,9 @@ export default function JoinNow({
     <section className="md:px-[120px] px-6 flex justify-center md:-my-[120px]">
       <button
         onClick={() => setIsLoginModalOpen(true)}
-        className={`bg-[#00DBDC] border border-transparent rounded-lg px-10 py-3 text-[#0D0D0D] font-medium text-base ${
+        className={`bg-[#00DBDC] border border-transparent rounded-[4px] md:rounded-lg px-10 py-3 text-[#0D0D0D] font-medium text-base ${
           isMobile
-            ? ""
+            ? "h-[37px] font-medium text-sm leading-none tracking-tighter"
             : "hover:bg-transparent hover:border-[#00DBDC] hover:text-[#00DBDC]"
         } transition-all duration-200 md:px-[48px] md:h-[50px]`}
       >

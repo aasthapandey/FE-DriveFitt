@@ -31,9 +31,9 @@ const GallerySection = ({
           {description}
         </p>
         <button
-          className={`bg-[#00DBDC] border border-transparent w-fit leading-[100%] tracking-[-5%] text-base text-[#0D0D0D] px-10 py-3 rounded-lg font-medium mt-2 md:mt-[60px] ${
+          className={`bg-[#00DBDC] border border-transparent w-fit leading-[100%] tracking-[-5%] text-base text-[#0D0D0D] px-10 py-3 rounded-[4px] md:rounded-lg font-medium mt-2 md:mt-[60px] ${
             isMobile
-              ? ""
+              ? "h-[37px] font-medium text-sm leading-none tracking-tighter"
               : "hover:bg-transparent hover:border-[#00DBDC] hover:text-[#00DBDC]"
           } transition-all duration-200 md:px-[48px] md:h-[50px]`}
         >

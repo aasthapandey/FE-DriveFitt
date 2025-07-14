@@ -57,7 +57,7 @@ const HeroSection = ({ data, pageName, isMobile }: HeroSectionProps) => {
           <div className="flex gap-4 justify-center md:justify-start">
             {btnPrimaryText && (
               <button
-                className={`bg-[#00DBDC] border border-transparent text-[#0D0D0D] px-6 py-3 md:px-14 md:py-4 rounded-lg font-medium leading-[100%] tracking-[-5%] text-base md:text-xl ${
+                className={`bg-[#00DBDC] border border-transparent text-[#0D0D0D] px-6 py-3 md:px-14 md:py-4 rounded-[4px] md:rounded-lg font-medium leading-[100%] tracking-[-5%] text-base md:text-xl ${
                   isMobile
                     ? ""
                     : "hover:bg-transparent hover:border-[#00DBDC] hover:text-[#00DBDC]"

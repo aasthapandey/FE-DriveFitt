@@ -81,7 +81,7 @@ export default function Navbar({ data, isMobile }: Props) {
           <div className="flex items-center gap-4">
             <button
               onClick={() => setIsLoginModalOpen(true)}
-              className="bg-[#00DBDC] border border-transparent rounded-lg px-3 md:px-6 py-2 text-[#0D0D0D] font-medium text-xs md:text-sm transition-all duration-200"
+              className="bg-[#00DBDC] border border-transparent rounded-[4px] md:rounded-lg px-3 md:px-6 py-2 text-[#0D0D0D] font-medium text-xs md:text-sm transition-all duration-200"
             >
               {signInButton.text}
             </button>
