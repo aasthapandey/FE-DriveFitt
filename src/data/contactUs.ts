@@ -87,19 +87,6 @@ export const contactUsData: ContactUsPageData = {
       },
     },
   },
-  appDownloadSection: {
-    title: "Your exclusive access, now on mobile",
-    description:
-      "Our app makes it easy to join classes, connect with coaches and track your journey.",
-    googlePlayImg:
-      "https://da8nru77lsio9.cloudfront.net/images/app-download/google-play.svg",
-    appStoreImg:
-      "https://da8nru77lsio9.cloudfront.net/images/app-download/app-store.svg",
-    desktopImage:
-      "https://da8nru77lsio9.cloudfront.net/images/app-download/desktop-bg.svg",
-    mobileImage:
-      "https://da8nru77lsio9.cloudfront.net/images/app-download/mobile-bg.svg",
-  },
   footerSection: {
     logo: "https://da8nru77lsio9.cloudfront.net/images/logo.svg",
     description:

@@ -161,46 +161,6 @@ export const cricketData: StaticPageData = {
       "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/gallery-3.webp",
     ],
   },
-
-  faqSection: {
-    title: "Frequently Asked Questions",
-    description: "Everything you need to know about the Drivefitt and billing.",
-    faqList: [
-      {
-        title: "How is DRIVE different from regular cricket academies?",
-        description:
-          "Yes, you can try us for free for 30 days. If you want, we'll provide you with a free, personalized 30-minute onboarding call to get you up and running as soon as possible.",
-      },
-      {
-        title: "Do I Need Prior Experience To Join?",
-        description:
-          "No prior cricket experience is required. Our program is designed to accommodate players of all skill levels, from beginners to advanced cricketers. Our personalized approach ensures that you'll receive training tailored to your current ability and goals.",
-      },
-      {
-        title: "What's Included In The Membership?",
-        description:
-          "Our membership includes comprehensive cricket training, personalized coaching, access to state-of-the-art facilities, performance tracking, video analysis, and regular progress assessments. You'll also get access to our online resources and community of players.",
-      },
-      {
-        title: "Can My Fitness Trainer Access My Cricket Data?",
-        description:
-          "Yes, we provide integration options that allow your fitness trainer to access your cricket performance data. This helps create a more holistic training approach by combining cricket-specific skills with overall fitness development.",
-      },
-    ],
-  },
-  appDownloadSection: {
-    title: "Your exclusive access, now on mobile",
-    description:
-      "Our app makes it easy to join classes, connect with coaches and track your journey.",
-    googlePlayImg:
-      "https://da8nru77lsio9.cloudfront.net/images/app-download/google-play.svg",
-    appStoreImg:
-      "https://da8nru77lsio9.cloudfront.net/images/app-download/app-store.svg",
-    desktopImage:
-      "https://da8nru77lsio9.cloudfront.net/images/app-download/desktop-bg.svg",
-    mobileImage:
-      "https://da8nru77lsio9.cloudfront.net/images/app-download/mobile-bg.svg",
-  },
   footerInfoSection: {
     footerInfoList: [
       {
