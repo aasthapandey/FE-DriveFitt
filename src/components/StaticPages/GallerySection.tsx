@@ -12,10 +12,22 @@ const GallerySection = ({
   return (
     <div className="md:px-[120px] px-6 flex flex-col md:flex-row gap-[25px] md:gap-[104px] justify-between items-center">
       <div className="w-full md:w-2/5 flex flex-col text-center justify-center items-center md:text-start md:justify-start md:items-start gap-3 md:gap-4">
-        <h2 className="text-2xl md:text-5xl font-semibold leading-7 md:leading-[56px] tracking-[-1px] md:tracking-[-2.4px]">
+        <h2
+          className={`${
+            isMobile
+              ? "text-2xl font-semibold leading-7 tracking-[-1px]"
+              : "text-5xl font-semibold leading-[56px] tracking-[-2.4px]"
+          } md:text-5xl md:font-semibold md:leading-[56px] md:tracking-[-2.4px]`}
+        >
           {title}
         </h2>
-        <p className="text-base md:text-lg font-light leading-6 md:leading-7 tracking-[-0.5px] md:tracking-[-0.9px]">
+        <p
+          className={`${
+            isMobile
+              ? "text-xs font-light leading-4 tracking-[-1%] text-[#8A8A8A]"
+              : "text-lg font-light leading-7 tracking-[-0.9px]"
+          } md:text-lg md:font-light md:leading-7 md:tracking-[-0.9px]`}
+        >
           {description}
         </p>
         <button
