@@ -10,7 +10,7 @@ export const fitnessData: StaticPageData = {
   navbar: navbarData,
   hero: {
     titleWords: [
-      { text: "Step into a whole new world of training", color: "#FFFFFF" },
+      { text: "Step Into a Whole New World of Training", color: "#FFFFFF" },
     ],
     description:
       "Never Boring. Always Moving. High & Low Intensity Workouts That Keep You Going.",

@@ -47,9 +47,9 @@ export const runningData: StaticPageData = {
         link: "",
       },
       {
-        title: "Precision Indoor Track",
+        title: "Indoor Running Revolution",
         description:
-          "Climate-controlled 200m track with shock-absorbing surface for joint-friendly, year-round training.",
+          "Bringing running indoors as a science, skill, and powerful shared experience",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/running-compressed/card5-2.webp",
         iconImage:
@@ -110,9 +110,7 @@ export const runningData: StaticPageData = {
     cardSection: [
       {
         subTitle: "Precision Run Analysis",
-        list: [
-          "3D gait tracking + heart-rate zones to perfect your stride and pace simultaneously.",
-        ],
+        list: ["3D gait and form assessment to perfect posture and stride."],
         extraTagLabel: "",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/running-compressed/scroll-card-1.webp",
@@ -120,11 +118,9 @@ export const runningData: StaticPageData = {
           "https://da8nru77lsio9.cloudfront.net/images/running-compressed/mobile-scroll-card-1.webp",
       },
       {
-        subTitle: "Smart Interval Training",
+        subTitle: "Strength & Power Integration",
         list: [
-          "Capture every session and review it 10x faster with auto-clipped, ball-by-ball videos—no dead time, just pure action.",
-          "Create a team, stay in sync, and showcase your sessions on social media",
-          "Bat Sensor*- real-time insights on Bat Swing, Speed, Angles, Power & Efficiency ",
+          "Interval treadmills and lower-body routines to build explosive strength.",
         ],
         extraTagLabel: "",
         backgroundImage:
@@ -133,13 +129,11 @@ export const runningData: StaticPageData = {
           "https://da8nru77lsio9.cloudfront.net/images/running-compressed/mobile-scroll-card-2.webp",
       },
       {
-        subTitle: "Power-Building Routines",
+        subTitle: "Smart Performance Tracking",
         list: [
-          "Capture every session and review it 10x faster with auto-clipped, ball-by-ball videos—no dead time, just pure action.",
-          "Create a team, stay in sync, and showcase your sessions on social media",
-          "Bat Sensor*- real-time insights on Bat Swing, Speed, Angles, Power & Efficiency ",
+          "Heart-rate zones and pace tracking for targeted, efficient effort.",
         ],
-        extraTagLabel: "*Purchase separately",
+        extraTagLabel: "",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/running-compressed/scroll-card-3.webp",
         mobileImage:
