@@ -93,8 +93,8 @@ const EvolutionSection = ({
       <div className="block md:hidden mt-[-70px] pl-4 evolutionCarousel">
         <Slider {...sliderSettings}>
           {evolutionList.map((evo, idx) => (
-            <div key={idx} className="!w-full h-[125px] pl-4">
-              <div className="bg-white text-[#1C1C1C] flex flex-col justify-center gap-3 px-6 w-full h-full">
+            <div key={idx} className="!w-full  pl-4">
+              <div className="bg-white text-[#1C1C1C] flex flex-col justify-center gap-3 p-6 w-full h-full">
                 <h3 className="text-xl font-semibold leading-6 tracking-[-1%]">
                   {evo.title}
                 </h3>

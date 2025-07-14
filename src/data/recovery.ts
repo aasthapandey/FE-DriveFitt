@@ -9,7 +9,7 @@ export const recoveryData: StaticPageData = {
     "Experience state-of-the-art recovery and wellness facilities at DriveFIIT. Cold plunge, percussion therapy, and more.",
   navbar: navbarData,
   hero: {
-    titleWords: [{ text: "Recover at Drive FITT", color: "#FFFFFF" }],
+    titleWords: [{ text: "Recover at DriveFITT", color: "#FFFFFF" }],
     description: "Train hard. Recover smarter. Perform your best.",
     desktopImage:
       "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/hero.webp",
