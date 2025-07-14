@@ -157,8 +157,9 @@ export const runningData: StaticPageData = {
       "https://da8nru77lsio9.cloudfront.net/images/become-a-member-mobile.webp",
   },
   gallerySection: {
-    title: "Fitness Unfiltered",
-    description: "Where every drop of sweat writes your success story",
+    title: "Step Inside the Future of Sports & Fitness",
+    description:
+      "Tour our state-of-the-art club and discover how Drive FITT redefines space, energy, and purpose.",
     btnLabel: "View Gallery",
     imageList: [
       "https://da8nru77lsio9.cloudfront.net/images/running-compressed/gallery-1.webp",

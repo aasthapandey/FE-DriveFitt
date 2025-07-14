@@ -220,7 +220,7 @@ export const homeData: StaticPageData = {
     title: "Step Inside the Future of Sports & Fitness",
     description:
       "Tour our state-of-the-art club and discover how Drive FITT redefines space, energy, and purpose.",
-    btnLabel: "Join online",
+    btnLabel: "View Gallery",
     imageList: [
       "https://da8nru77lsio9.cloudfront.net/images/homec/gallery-1.webp",
       "https://da8nru77lsio9.cloudfront.net/images/homec/gallery-2.webp",
