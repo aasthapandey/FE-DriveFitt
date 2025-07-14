@@ -221,7 +221,7 @@ const FranchiseContactForm = ({ isMobile }: FranchiseContactFormProps) => {
                     name="phoneNumber"
                     value={formData.phoneNumber}
                     onChange={handleChange}
-                    placeholder="Enter Your Phone Number"
+                    placeholder="Enter phone Number"
                     className={`bg-[#FFFFFF] border rounded-lg py-1.5 md:py-2 px-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[2px] focus:border-[#00DBDC] outline-none transition-colors ${
                       errors.phoneNumber ? "border-red-500" : "border-[#333333]"
                     }`}

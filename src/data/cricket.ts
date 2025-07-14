@@ -219,7 +219,7 @@ export const cricketData: StaticPageData = {
         },
         phone: {
           label: "Phone Number*",
-          placeholder: "Enter your phone number",
+          placeholder: "Enter phone number",
         },
         message: {
           label: "Message",

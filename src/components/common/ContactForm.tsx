@@ -261,7 +261,7 @@ const ContactForm = ({
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    placeholder="Enter phone number"
+                    placeholder={fields.phone.placeholder}
                     className="bg-transparent flex-1 py-1.5 md:py-2 pr-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] outline-none"
                   />
                 </div>

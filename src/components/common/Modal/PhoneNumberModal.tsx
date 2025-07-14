@@ -58,7 +58,7 @@ const PhoneStep = ({
     <div className="w-full mb-6 md:mb-[24px]">
       <input
         type="tel"
-        placeholder={isFocused ? "" : "Enter your phone number"}
+        placeholder={isFocused ? "" : "Enter phone number"}
         value={phoneNumber}
         onChange={onPhoneChange}
         onFocus={onFocus}
