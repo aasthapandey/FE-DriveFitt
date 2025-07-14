@@ -28,6 +28,18 @@ export default function Navbar({ data, isMobile }: Props) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isMenuOpen]);
+
   const isActiveLink = (href: string) => {
     if (href === "/") {
       return pathname === "/";
@@ -35,80 +47,130 @@ export default function Navbar({ data, isMobile }: Props) {
     return pathname === href;
   };
 
+  const handleMenuToggle = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleLinkClick = () => {
+    setIsMenuOpen(false);
+  };
+
   if (isMobile) {
     return (
-      <nav
-        className={`sticky top-0 z-50 flex justify-between items-center py-5 px-6 md:py-6 md:px-4 w-full transition-all duration-300 ${
-          isScrolled ? "bg-[#0D0D0D]/95 backdrop-blur-sm" : "bg-transparent"
-        }`}
-      >
-        <button
-          className="relative z-20"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
+      <>
+        <nav
+          className={`sticky top-0 z-50 flex justify-between items-center py-5 px-6 md:py-6 md:px-4 w-full transition-all duration-300 ${
+            isScrolled ? "bg-[#0D0D0D]/95 backdrop-blur-sm" : "bg-transparent"
+          }`}
         >
-          <Image
-            src="https://da8nru77lsio9.cloudfront.net/images/hamburger.svg"
-            alt="menu"
-            width={24}
-            height={24}
-          />
-        </button>
-        <Link href="/">
-          <Image src={logo} alt="logo" width={141} height={24} />
-        </Link>
-        <div className="flex items-center gap-4">
           <button
-            onClick={() => setIsLoginModalOpen(true)}
-            className={`bg-[#00DBDC] border border-transparent rounded-lg px-3 md:px-6 py-2 text-[#0D0D0D] font-medium text-xs md:text-sm ${
-              isMobile
-                ? ""
-                : "hover:bg-transparent hover:border-[#00DBDC] hover:text-[#00DBDC]"
-            } transition-all duration-200`}
+            className="relative z-20"
+            onClick={handleMenuToggle}
+            aria-label="Toggle menu"
           >
-            {signInButton.text}
+            <Image
+              src="https://da8nru77lsio9.cloudfront.net/images/hamburger.svg"
+              alt="menu"
+              width={24}
+              height={24}
+            />
           </button>
-        </div>
+          <Link href="/">
+            <Image src={logo} alt="logo" width={141} height={24} />
+          </Link>
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => setIsLoginModalOpen(true)}
+              className="bg-[#00DBDC] border border-transparent rounded-lg px-3 md:px-6 py-2 text-[#0D0D0D] font-medium text-xs md:text-sm transition-all duration-200"
+            >
+              {signInButton.text}
+            </button>
+          </div>
 
-        {/* Login Modals */}
-        {loginModalType === LoginModalType.PHONE ? (
-          <PhoneNumberModal
-            isOpen={isLoginModalOpen}
-            onClose={() => setIsLoginModalOpen(false)}
-            isMobile={isMobile}
-          />
-        ) : (
-          <EmailModal
-            isOpen={isLoginModalOpen}
-            onClose={() => setIsLoginModalOpen(false)}
-            isMobile={isMobile}
-          />
-        )}
+          {/* Login Modals */}
+          {loginModalType === LoginModalType.PHONE ? (
+            <PhoneNumberModal
+              isOpen={isLoginModalOpen}
+              onClose={() => setIsLoginModalOpen(false)}
+              isMobile={isMobile}
+            />
+          ) : (
+            <EmailModal
+              isOpen={isLoginModalOpen}
+              onClose={() => setIsLoginModalOpen(false)}
+              isMobile={isMobile}
+            />
+          )}
+        </nav>
 
         {/* Mobile Menu Overlay */}
-        {isMenuOpen && (
-          <div className="fixed inset-0 bg-[#1A1A1A] z-[9999]">
-            <div className="flex flex-col items-center justify-center pt-24">
+        <div
+          className={`fixed inset-0 bg-[#0D0D0D]/95 backdrop-blur-sm z-[9999] transition-all duration-300 ${
+            isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
+          }`}
+        >
+          <div
+            className={`fixed inset-0 bg-[#1A1A1A] transform transition-transform duration-300 ease-in-out ${
+              isMenuOpen ? "translate-x-0" : "-translate-x-full"
+            }`}
+          >
+            {/* Header with Close Button */}
+            <div className="flex justify-between items-center py-5 px-6 border-b border-[#333333]">
+              <Link href="/" onClick={handleLinkClick}>
+                <Image src={logo} alt="logo" width={141} height={24} />
+              </Link>
+              <button
+                onClick={handleMenuToggle}
+                className="p-2 hover:bg-[#333333] rounded-lg transition-colors duration-200"
+                aria-label="Close menu"
+              >
+                <Image
+                  src="https://da8nru77lsio9.cloudfront.net/images/otp-modal-close-icon.svg"
+                  alt="close"
+                  width={20}
+                  height={20}
+                />
+              </button>
+            </div>
+
+            {/* Navigation Links */}
+            <div className="flex flex-col py-8 px-6 space-y-2">
               {navLinks.map((link, idx) => (
-                <div className="p-4 text-center w-full" key={idx}>
-                  <Link
-                    href={link.href}
-                    className={`text-lg transition-colors ${
-                      isActiveLink(link.href)
-                        ? "text-[#00DBDC]"
-                        : `text-white ${isMobile ? "" : "hover:text-[#00DBDC]"}`
-                    }`}
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {link.title}
-                  </Link>
-                </div>
+                <Link
+                  key={idx}
+                  href={link.href}
+                  className={`py-4 px-4 rounded-lg text-lg font-medium transition-all duration-200 ${
+                    isActiveLink(link.href)
+                      ? "text-[#00DBDC] bg-[#00DBDC]/10 border-l-4 border-[#00DBDC]"
+                      : "text-white hover:text-[#00DBDC] hover:bg-[#333333]/50"
+                  }`}
+                  onClick={handleLinkClick}
+                >
+                  {link.title}
+                </Link>
               ))}
             </div>
+
+            {/* Sign In Button in Menu */}
+            <div className="px-6 mt-8">
+              <button
+                onClick={() => {
+                  setIsLoginModalOpen(true);
+                  setIsMenuOpen(false);
+                }}
+                className="w-full bg-[#00DBDC] border border-transparent rounded-lg py-4 text-[#0D0D0D] font-medium text-lg transition-all duration-200"
+              >
+                {signInButton.text}
+              </button>
+            </div>
           </div>
-        )}
-      </nav>
+        </div>
+      </>
     );
   }
+
+  // Desktop view - filter out Home link
+  const desktopNavLinks = navLinks.filter((link) => link.title !== "Home");
 
   return (
     <nav
@@ -120,14 +182,14 @@ export default function Navbar({ data, isMobile }: Props) {
         <Image src={logo} alt="logo" width={212} height={36} />
       </Link>
       <div className="flex gap-10 px-2">
-        {navLinks.map((link, idx) => (
+        {desktopNavLinks.map((link, idx) => (
           <Link
             key={idx}
             href={link.href}
             className={`transition-colors ${
               isActiveLink(link.href)
                 ? "text-[#00DBDC]"
-                : `text-white ${isMobile ? "" : "hover:text-[#00DBDC]"}`
+                : "text-white hover:text-[#00DBDC]"
             }`}
           >
             {link.title}
@@ -136,11 +198,7 @@ export default function Navbar({ data, isMobile }: Props) {
       </div>
       <button
         onClick={() => setIsLoginModalOpen(true)}
-        className={`bg-[#00DBDC] border border-transparent rounded-lg px-10 md:px-[48px] md:h-[50px] text-[#0D0D0D] font-medium text-base ${
-          isMobile
-            ? ""
-            : "hover:bg-transparent hover:border-[#00DBDC] hover:text-[#00DBDC]"
-        } transition-all duration-200`}
+        className="bg-[#00DBDC] border border-transparent rounded-lg px-10 md:px-[48px] md:h-[50px] text-[#0D0D0D] font-medium text-base hover:bg-transparent hover:border-[#00DBDC] hover:text-[#00DBDC] transition-all duration-200"
       >
         {signInButton.text}
       </button>
