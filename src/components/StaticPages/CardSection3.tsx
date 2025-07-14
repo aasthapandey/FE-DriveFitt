@@ -56,7 +56,7 @@ const CardSection3 = ({
           </div>
 
           {card.link && (
-            <div className="flex items-end justify-end flex-shrink-0 -mb-[13px] -mr-[12px]">
+            <div className="flex items-end justify-end flex-shrink-0 -mb-[18px] -mr-[12px]">
               <Image
                 src="https://da8nru77lsio9.cloudfront.net/images/redirectionButton.svg"
                 alt="redirectionBtn"
@@ -91,6 +91,8 @@ const CardSection3 = ({
               data={cardSection[0]}
               className="!h-[660px]"
               imageClass="!h-[654px]"
+              iconClass="!size-10"
+              textPlusImageClass="md:pb-[40px]"
             />
           </div>
           <div className="col-span-1 grid grid-rows-2 gap-10 h-full">
@@ -98,11 +100,15 @@ const CardSection3 = ({
               data={cardSection[1]}
               className="!h-[310px]"
               imageClass="!h-[306px]"
+              iconClass="!size-10"
+              textPlusImageClass="md:pb-[40px]"
             />
             <Card
               data={cardSection[2]}
               className="!h-[310px]"
               imageClass="!h-[306px]"
+              iconClass="!size-10"
+              textPlusImageClass="md:pb-[40px]"
             />
           </div>
         </div>

@@ -124,6 +124,7 @@ export const homeData: StaticPageData = {
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/homec/card3-1.webp",
         link: "/coming-soon",
+        redirectionIcon: "/images/redirection.svg",
       },
       {
         title: "Pilates",
@@ -132,6 +133,7 @@ export const homeData: StaticPageData = {
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/homec/card3-2.webp",
         link: "/coming-soon",
+        redirectionIcon: "/images/redirection.svg",
       },
       {
         title: "Personal Training",
@@ -140,6 +142,7 @@ export const homeData: StaticPageData = {
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/homec/card3-3.webp",
         link: "/coming-soon",
+        redirectionIcon: "/images/redirection.svg",
       },
     ],
   },

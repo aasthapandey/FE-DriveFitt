@@ -75,7 +75,7 @@ const Card = ({
 
           {link && (
             <div
-              className={`flex items-center justify-center ${
+              className={`flex items-center justify-center md:pl-[25px]  ${
                 description && description.length > 0 && !isMobile
                   ? description.length < 100
                     ? "md:group-hover:mt-[50px]"
