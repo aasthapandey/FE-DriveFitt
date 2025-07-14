@@ -28,7 +28,7 @@ const StaticCard = ({ data, className }: StaticCardProps) => {
             className={`absolute top-0 ${
               title === "Protein BAR"
                 ? "right-[3%] top-[-10%] md:right-[3%] md:top-[-10%] h-[276px] md:h-[440px] w-[153px]  md:w-[244px]"
-                : "right-[-5%] top-[-9%] md:right-[-5%] md:top-[-9%] h-[271px] md:h-[430px]  w-[260px]  md:w-[412px]"
+                : "right-[-5%] top-[-9%] md:right-[-5%] md:top-[-30px] h-[271px] md:h-[430px]  w-[260px]  md:w-[412px]"
             }`}
           >
             <Image
