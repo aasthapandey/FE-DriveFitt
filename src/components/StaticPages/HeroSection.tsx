@@ -12,7 +12,11 @@ const HeroSection = ({ data, pageName, isMobile }: HeroSectionProps) => {
   const { titleWords, description, btnPrimaryText, btnSecondaryText } = data;
   const renderTitle = (titleWords: TitleWord[]) => {
     return (
-      <h1 className="text-white text-[42px] leading-[50px] tracking-[-2px] md:leading-[72px] md:text-6xl font-bold md:mb-[24px] mb-[22px]">
+      <h1
+        className={`text-white text-[42px] leading-[50px] tracking-[-2px] md:leading-[72px] md:text-6xl font-bold md:mb-[24px] mb-[22px] ${
+          pageName === "home" ? "md:mb-[60px]" : ""
+        }`}
+      >
         {titleWords.map((word, index) => (
           <span
             key={index}
