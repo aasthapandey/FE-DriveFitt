@@ -20,7 +20,6 @@ const CardSection2 = ({
               data={card}
               key={idx}
               className="h-[256px] md:h-[407px]"
-              isMobile={isMobile}
             />
           ))}
         </div>
@@ -29,12 +28,10 @@ const CardSection2 = ({
           <StaticCard
             data={cardSection[0]}
             className="h-[256px] md:h-[407px]"
-            isMobile={isMobile}
           />
           <StaticCard
             data={cardSection[1]}
             className="h-[256px] md:h-[407px]"
-            isMobile={isMobile}
           />
         </div>
       )}

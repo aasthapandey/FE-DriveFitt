@@ -58,7 +58,7 @@ const HeroSection = ({ data, isMobile }: HeroSectionProps) => {
           </div>
 
           {/* Description */}
-          <p className="text-base md:text-2xl tracking-[0%] leading-[100%] md:tracking-[-2%] text-white max-w-[252px] md:max-w-2xl font-light mb-3 md:mb-4">
+          <p className="text-base md:text-2xl tracking-[0%] leading-[20px] md:tracking-[-2%] text-white max-w-[252px] md:max-w-2xl font-light mb-3 md:mb-4">
             {description}
           </p>
 
