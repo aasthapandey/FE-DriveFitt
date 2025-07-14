@@ -127,8 +127,8 @@ export default function Navbar({ data, isMobile }: Props) {
                 <Image
                   src="https://da8nru77lsio9.cloudfront.net/images/otp-modal-close-icon.svg"
                   alt="close"
-                  width={20}
-                  height={20}
+                  width={32}
+                  height={32}
                 />
               </button>
             </div>
