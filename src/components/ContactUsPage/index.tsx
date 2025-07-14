@@ -25,10 +25,10 @@ const ContactUsPage = ({ data, isMobile }: StaticPageProps) => {
     footerInfoSection as FooterInfoProps;
 
   return (
-    <div className="bg-[#0D0D0D] flex flex-col w-full">
+    <div className="bg-[#0D0D0D] flex flex-col w-full relative">
       <Navbar data={navbarData} isMobile={isMobile} />
       <div
-        className="w-full bg-center bg-no-repeat h-auto"
+        className="w-full bg-center bg-no-repeat h-auto -mt-[109px] md:-mt-[108px]"
         style={{
           background: `url(${isMobile ? mobileImage : desktopImage})`,
           backgroundPosition: "top center",
@@ -36,7 +36,7 @@ const ContactUsPage = ({ data, isMobile }: StaticPageProps) => {
           backgroundRepeat: "no-repeat",
         }}
       >
-        <div className="mt-[109px] md:mt-[108px]">
+        <div className="pt-[109px] md:pt-[108px]">
           <div className="flex flex-col gap-3 md:gap-[18px] ">
             <h1 className="md:px-[120px] px-6 text-[40px] md:text-[68px] text-center md:text-left font-bold text-white tracking-[-2px] leading-[44px] md:leading-[72px]">
               {titleWords.map((word, index) => (

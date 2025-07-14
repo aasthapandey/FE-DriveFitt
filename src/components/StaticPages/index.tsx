@@ -194,7 +194,7 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
               return (
                 <div
                   key={key}
-                  className="w-full bg-center bg-no-repeat h-auto md:mb-[-60px] -mt-[70px] md:-mt-[90px]"
+                  className="w-full bg-center bg-no-repeat h-auto md:mb-[-60px] -mt-[80px] md:-mt-[105px]"
                   style={{
                     background: `url(${
                       isMobile
