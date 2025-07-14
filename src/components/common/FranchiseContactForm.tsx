@@ -3,13 +3,9 @@ import { useState } from "react";
 
 interface FranchiseContactFormProps {
   isMobile?: boolean;
-  isModal?: boolean;
 }
 
-const FranchiseContactForm = ({
-  isMobile,
-  isModal = false,
-}: FranchiseContactFormProps) => {
+const FranchiseContactForm = ({ isMobile }: FranchiseContactFormProps) => {
   const [formData, setFormData] = useState({
     fullName: "",
     emailAddress: "",
@@ -20,8 +16,8 @@ const FranchiseContactForm = ({
 
   const [errors, setErrors] = useState({
     fullName: "",
-    phoneNumber: "",
     emailAddress: "",
+    phoneNumber: "",
     proposedCity: "",
   });
 
@@ -150,136 +146,142 @@ const FranchiseContactForm = ({
             Ready to Get Started?
           </h2>
           <p className="text-xs leading-4 tracking-[-1%] md:text-base md:leading-5 text-[#8A8A8A] mb-7 md:mb-10">
-            Fill Out The Form Below And We'll Contact You Within 24 Hours
+            Fill Out The Form Below And We&apos;ll Contact You Within 24 Hours
           </p>
 
           <form
             onSubmit={handleSubmit}
             className="flex flex-col gap-4 md:gap-6 flex-1"
           >
-            <div className="grid grid-row-2 gap-4 md:grid-cols-2 md:gap-6">
-              <div className="flex flex-col gap-1.5">
-                <label
-                  htmlFor="fullName"
-                  className="text-xs md:text-sm text-[#8A8A8A]"
-                >
-                  Full Name *
-                </label>
-                <input
-                  id="fullName"
-                  type="text"
-                  name="fullName"
-                  value={formData.fullName}
-                  onChange={handleChange}
-                  placeholder="Enter Your Name"
-                  className={`bg-[#FFFFFF] border rounded-lg py-1.5 md:py-2 px-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[2px] focus:border-[#00DBDC] outline-none transition-colors ${
-                    errors.fullName ? "border-red-500" : "border-[#333333]"
-                  }`}
-                />
-                {errors.fullName && (
-                  <span className="text-xs text-red-500 mt-1">
-                    {errors.fullName}
-                  </span>
-                )}
+            <div className="flex flex-col gap-4 md:gap-6">
+              <div className="grid grid-row-2 gap-4 md:grid-cols-2 md:gap-6">
+                <div className="flex flex-col gap-1.5">
+                  <label
+                    htmlFor="fullName"
+                    className="text-xs md:text-sm text-[#8A8A8A]"
+                  >
+                    Full Name *
+                  </label>
+                  <input
+                    id="fullName"
+                    type="text"
+                    name="fullName"
+                    value={formData.fullName}
+                    onChange={handleChange}
+                    placeholder="Enter Your Name"
+                    className={`bg-[#FFFFFF] border rounded-lg py-1.5 md:py-2 px-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[2px] focus:border-[#00DBDC] outline-none transition-colors ${
+                      errors.fullName ? "border-red-500" : "border-[#333333]"
+                    }`}
+                  />
+                  {errors.fullName && (
+                    <span className="text-xs text-red-500 mt-1">
+                      {errors.fullName}
+                    </span>
+                  )}
+                </div>
+                <div className="flex flex-col gap-1.5">
+                  <label
+                    htmlFor="emailAddress"
+                    className="text-xs md:text-sm text-[#8A8A8A]"
+                  >
+                    Email Address *
+                  </label>
+                  <input
+                    id="emailAddress"
+                    type="email"
+                    name="emailAddress"
+                    value={formData.emailAddress}
+                    onChange={handleChange}
+                    placeholder="Enter Your Email Address"
+                    className={`bg-[#FFFFFF] border rounded-lg py-1.5 md:py-2 px-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[2px] focus:border-[#00DBDC] outline-none transition-colors ${
+                      errors.emailAddress
+                        ? "border-red-500"
+                        : "border-[#333333]"
+                    }`}
+                  />
+                  {errors.emailAddress && (
+                    <span className="text-xs text-red-500 mt-1">
+                      {errors.emailAddress}
+                    </span>
+                  )}
+                </div>
               </div>
-              <div className="flex flex-col gap-1.5">
-                <label
-                  htmlFor="emailAddress"
-                  className="text-xs md:text-sm text-[#8A8A8A]"
-                >
-                  Email Address *
-                </label>
-                <input
-                  id="emailAddress"
-                  type="email"
-                  name="emailAddress"
-                  value={formData.emailAddress}
-                  onChange={handleChange}
-                  placeholder="Enter Your Email Address"
-                  className={`bg-[#FFFFFF] border rounded-lg py-1.5 md:py-2 px-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[2px] focus:border-[#00DBDC] outline-none transition-colors ${
-                    errors.emailAddress ? "border-red-500" : "border-[#333333]"
-                  }`}
-                />
-                {errors.emailAddress && (
-                  <span className="text-xs text-red-500 mt-1">
-                    {errors.emailAddress}
-                  </span>
-                )}
-              </div>
-            </div>
 
-            <div className="grid grid-row-2 gap-4 md:grid-cols-2 md:gap-6">
-              <div className="flex flex-col gap-1.5">
-                <label
-                  htmlFor="phoneNumber"
-                  className="text-xs md:text-sm text-[#8A8A8A]"
-                >
-                  Phone Number *
-                </label>
-                <input
-                  id="phoneNumber"
-                  type="tel"
-                  name="phoneNumber"
-                  value={formData.phoneNumber}
-                  onChange={handleChange}
-                  placeholder="Enter Your Phone Number"
-                  className={`bg-[#FFFFFF] border rounded-lg py-1.5 md:py-2 px-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[2px] focus:border-[#00DBDC] outline-none transition-colors ${
-                    errors.phoneNumber ? "border-red-500" : "border-[#333333]"
-                  }`}
-                />
-                {errors.phoneNumber && (
-                  <span className="text-xs text-red-500 mt-1">
-                    {errors.phoneNumber}
-                  </span>
-                )}
+              <div className="grid grid-row-2 gap-4 md:grid-cols-2 md:gap-6">
+                <div className="flex flex-col gap-1.5">
+                  <label
+                    htmlFor="phoneNumber"
+                    className="text-xs md:text-sm text-[#8A8A8A]"
+                  >
+                    Phone Number *
+                  </label>
+                  <input
+                    id="phoneNumber"
+                    type="tel"
+                    name="phoneNumber"
+                    value={formData.phoneNumber}
+                    onChange={handleChange}
+                    placeholder="Enter Your Phone Number"
+                    className={`bg-[#FFFFFF] border rounded-lg py-1.5 md:py-2 px-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[2px] focus:border-[#00DBDC] outline-none transition-colors ${
+                      errors.phoneNumber ? "border-red-500" : "border-[#333333]"
+                    }`}
+                  />
+                  {errors.phoneNumber && (
+                    <span className="text-xs text-red-500 mt-1">
+                      {errors.phoneNumber}
+                    </span>
+                  )}
+                </div>
+                <div className="flex flex-col gap-1.5">
+                  <label
+                    htmlFor="proposedCity"
+                    className="text-xs md:text-sm text-[#8A8A8A]"
+                  >
+                    Proposed City *
+                  </label>
+                  <input
+                    id="proposedCity"
+                    type="text"
+                    name="proposedCity"
+                    value={formData.proposedCity}
+                    onChange={handleChange}
+                    placeholder="Enter Your City"
+                    className={`bg-[#FFFFFF] border rounded-lg py-1.5 md:py-2 px-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[2px] focus:border-[#00DBDC] outline-none transition-colors ${
+                      errors.proposedCity
+                        ? "border-red-500"
+                        : "border-[#333333]"
+                    }`}
+                  />
+                  {errors.proposedCity && (
+                    <span className="text-xs text-red-500 mt-1">
+                      {errors.proposedCity}
+                    </span>
+                  )}
+                </div>
               </div>
-              <div className="flex flex-col gap-1.5">
-                <label
-                  htmlFor="proposedCity"
-                  className="text-xs md:text-sm text-[#8A8A8A]"
-                >
-                  Proposed City *
-                </label>
-                <input
-                  id="proposedCity"
-                  type="text"
-                  name="proposedCity"
-                  value={formData.proposedCity}
-                  onChange={handleChange}
-                  placeholder="Enter Your City"
-                  className={`bg-[#FFFFFF] border rounded-lg py-1.5 md:py-2 px-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[2px] focus:border-[#00DBDC] outline-none transition-colors ${
-                    errors.proposedCity ? "border-red-500" : "border-[#333333]"
-                  }`}
-                />
-                {errors.proposedCity && (
-                  <span className="text-xs text-red-500 mt-1">
-                    {errors.proposedCity}
-                  </span>
-                )}
-              </div>
-            </div>
 
-            <div className="flex flex-col gap-1.5 flex-1">
-              <label
-                htmlFor="additionalMessage"
-                className="text-sm text-[#8A8A8A]"
-              >
-                Additional Message (Optional)
-              </label>
-              <textarea
-                id="additionalMessage"
-                name="additionalMessage"
-                value={formData.additionalMessage}
-                onChange={handleChange}
-                placeholder="Tell Us About Your Background, Experience, Or Any Questions You Have"
-                rows={4}
-                className="bg-[#FFFFFF] border border-[#333333] rounded-lg py-1.5 md:py-2 px-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[#00DBDC] outline-none transition-colors resize-none"
-              />
+              <div className="flex flex-col gap-1.5">
+                <label
+                  htmlFor="additionalMessage"
+                  className="text-sm text-[#8A8A8A]"
+                >
+                  Additional Message (Optional)
+                </label>
+                <textarea
+                  id="additionalMessage"
+                  name="additionalMessage"
+                  value={formData.additionalMessage}
+                  onChange={handleChange}
+                  placeholder="Tell Us About Your Background, Experience, Or Any Questions You Have"
+                  rows={4}
+                  className="bg-[#FFFFFF] border border-[#333333] rounded-lg py-1.5 md:py-2 px-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[#00DBDC] outline-none transition-colors resize-none"
+                />
+              </div>
             </div>
 
             <button
               type="submit"
-              className={`w-full bg-[#00DBDC] border border-transparent text-black text-sm font-medium py-[10px] tracking-[-2%] md:tracking-[-6%] rounded-lg ${
+              className={`w-full bg-[#00DBDC] border border-transparent text-black text-sm font-medium py-[10px] tracking-[-2%] md:tracking-[-6%] rounded-lg mt-auto ${
                 isMobile
                   ? ""
                   : "hover:bg-transparent hover:border-[#00DBDC] hover:text-[#00DBDC]"
