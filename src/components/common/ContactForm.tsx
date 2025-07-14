@@ -19,6 +19,28 @@ const ContactForm = ({
     message: "",
   });
 
+  const [errors, setErrors] = useState({
+    firstName: "",
+    phone: "",
+  });
+
+  const validateFirstName = (value: string) => {
+    if (value.length < 2) {
+      return "First name missing";
+    }
+    if (!/^[A-Za-z\s]+$/.test(value)) {
+      return "First name can only contain letters and spaces";
+    }
+    return "";
+  };
+
+  const validatePhone = (value: string) => {
+    if (!/^\d{10}$/.test(value)) {
+      return "Phone number must be exactly 10 digits";
+    }
+    return "";
+  };
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -27,10 +49,37 @@ const ContactForm = ({
       ...prev,
       [name]: value,
     }));
+
+    // Validate on change
+    if (name === "firstName") {
+      setErrors((prev) => ({
+        ...prev,
+        firstName: validateFirstName(value),
+      }));
+    } else if (name === "phone") {
+      setErrors((prev) => ({
+        ...prev,
+        phone: validatePhone(value),
+      }));
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Validate all fields before submission
+    const firstNameError = validateFirstName(formData.firstName);
+    const phoneError = validatePhone(formData.phone);
+
+    setErrors({
+      firstName: firstNameError,
+      phone: phoneError,
+    });
+
+    if (firstNameError || phoneError) {
+      return;
+    }
+
     try {
       // Here you would typically send the form data to your backend
       console.log("Form submitted:", formData);
@@ -41,6 +90,10 @@ const ContactForm = ({
         email: "",
         phone: "",
         message: "",
+      });
+      setErrors({
+        firstName: "",
+        phone: "",
       });
     } catch (error) {
       console.error("Error submitting form:", error);
@@ -83,9 +136,15 @@ const ContactForm = ({
                   value={formData.firstName}
                   onChange={handleChange}
                   placeholder={fields.firstName.placeholder}
-                  className="bg-[#FFFFFF] border border-[#333333] rounded-lg py-1.5 md:py-2 px-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[2px] focus:border-[#00DBDC] outline-none transition-colors"
-                  required
+                  className={`bg-[#FFFFFF] border rounded-lg py-1.5 md:py-2 px-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[2px] focus:border-[#00DBDC] outline-none transition-colors ${
+                    errors.firstName ? "border-red-500" : "border-[#333333]"
+                  }`}
                 />
+                {errors.firstName && (
+                  <span className="text-xs text-red-500 mt-1">
+                    {errors.firstName}
+                  </span>
+                )}
               </div>
               <div className="flex flex-col gap-1.5">
                 <label
@@ -102,7 +161,6 @@ const ContactForm = ({
                   onChange={handleChange}
                   placeholder={fields.lastName.placeholder}
                   className="bg-[#FFFFFF] border border-[#333333] rounded-lg py-1.5 md:py-2 px-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[#00DBDC] outline-none transition-colors"
-                  required
                 />
               </div>
             </div>
@@ -123,7 +181,6 @@ const ContactForm = ({
                   onChange={handleChange}
                   placeholder={fields.email.placeholder}
                   className="bg-[#FFFFFF] border border-[#333333] rounded-lg py-1.5 md:py-2 px-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[#00DBDC] outline-none transition-colors"
-                  required
                 />
               </div>
               <div className="flex flex-col gap-1.5">
@@ -140,9 +197,15 @@ const ContactForm = ({
                   value={formData.phone}
                   onChange={handleChange}
                   placeholder={fields.phone.placeholder}
-                  className="bg-[#FFFFFF] border border-[#333333] rounded-lg py-1.5 md:py-2 px-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[#00DBDC] outline-none transition-colors"
-                  required
+                  className={`bg-[#FFFFFF] border rounded-lg py-1.5 md:py-2 px-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[#00DBDC] outline-none transition-colors ${
+                    errors.phone ? "border-red-500" : "border-[#333333]"
+                  }`}
                 />
+                {errors.phone && (
+                  <span className="text-xs text-red-500 mt-1">
+                    {errors.phone}
+                  </span>
+                )}
               </div>
             </div>
 
@@ -157,7 +220,6 @@ const ContactForm = ({
                 onChange={handleChange}
                 placeholder={fields.message.placeholder}
                 className="bg-[#FFFFFF] border border-[#333333] rounded-lg py-1.5 md:py-2 px-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[#00DBDC] outline-none transition-colors"
-                required
               />
             </div>
 
