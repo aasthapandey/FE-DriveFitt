@@ -27,9 +27,9 @@ export const closeConnection = async (): Promise<void> => {
   }
 };
 
-export const executeQuery = async <T = any>(
+export const executeQuery = async <T = unknown>(
   query: string,
-  params?: any[]
+  params?: unknown[]
 ): Promise<T> => {
   const connection = await getConnection();
   try {
