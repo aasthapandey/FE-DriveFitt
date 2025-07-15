@@ -109,13 +109,18 @@ const ContactForm = ({
     setIsSubmitting(true);
 
     try {
-      // Here you would typically send the form data to your backend
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          first_name: formData.firstName,
+          last_name: formData.lastName,
+          email: formData.email,
+          phone: formData.phone,
+          message: formData.message,
+        }),
       });
 
       if (!response.ok) {

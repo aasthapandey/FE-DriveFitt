@@ -53,15 +53,15 @@ const ContactUsPage = ({ data, isMobile }: StaticPageProps) => {
               {description}
             </p>
             <div className="flex flex-col md:gap-[120px] gap-[40px]">
-              <div className="md:px-[120px] mb-5 md:mb-0 px-6 flex flex-col md:flex-row gap-4 md:gap-10 justify-start md:justify-between w-full">
-                <div className="w-full md:w-2/5 flex">
+              <div className="md:px-[120px] mb-5 md:mb-0 px-6 flex flex-col md:flex-row gap-4 md:gap-10 justify-start md:justify-between h-fit w-full">
+                <div className="w-full md:w-2/5 max-h-full">
                   <ChatWithUs
                     footerInfoList={footerInfoList}
                     socialLinkList={socialLinkList}
                     isMobile={isMobile}
                   />
                 </div>
-                <div className="w-full md:w-3/5 flex">
+                <div className="w-full md:w-3/5 h-full">
                   <ContactForm data={contactFormSection} isMobile={isMobile} />
                 </div>
               </div>

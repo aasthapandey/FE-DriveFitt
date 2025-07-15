@@ -29,6 +29,66 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
+## Database Setup
+
+This application requires a MySQL database. Make sure to set up the following environment variables in your `.env.local` file:
+
+```bash
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=your_password
+DB_NAME=drivefitt
+DB_PORT=3306
+```
+
+The application expects the following database tables to be created:
+
+### Contact Us Table
+
+```sql
+CREATE TABLE contact_us (
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    phone VARCHAR(20) NULL,
+    message TEXT NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+```
+
+### Franchise Inquiries Table
+
+```sql
+CREATE TABLE franchise_inquiries (
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    business_name VARCHAR(150) NULL,
+    contact_person VARCHAR(100) NULL,
+    email VARCHAR(100) NULL,
+    phone VARCHAR(20) NULL,
+    location VARCHAR(150) NULL,
+    city VARCHAR(100) NULL,
+    state VARCHAR(100) NULL,
+    investment_capacity DECIMAL(15,2) NULL,
+    experience_years INT NULL,
+    business_background TEXT NULL,
+    why_franchise TEXT NULL,
+    status TINYINT DEFAULT 1 COMMENT '1=New, 2=Contacted, 3=In Discussion, 4=Approved, 5=Rejected',
+    notes TEXT NULL,
+    assigned_to INT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+```
+
+## API Endpoints
+
+The application provides the following API endpoints for form submissions:
+
+- `POST /api/contact` - Submit contact us form
+- `POST /api/franchise` - Submit franchise inquiry form
+
 ## Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.

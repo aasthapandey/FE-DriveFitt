@@ -134,13 +134,18 @@ const FranchiseContactForm = ({ isMobile }: FranchiseContactFormProps) => {
     setIsSubmitting(true);
 
     try {
-      // Here you would typically send the form data to your backend
       const response = await fetch("/api/franchise", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          contact_person: formData.fullName,
+          email: formData.emailAddress,
+          phone: formData.phoneNumber,
+          city: formData.proposedCity,
+          business_background: formData.additionalMessage,
+        }),
       });
 
       if (!response.ok) {
