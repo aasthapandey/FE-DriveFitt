@@ -21,8 +21,18 @@ const FranchiseContactForm = ({ isMobile }: FranchiseContactFormProps) => {
     proposedCity: "",
   });
 
+  const [messageState, setMessageState] = useState<{
+    type: "success" | "error" | "validation" | null;
+    text: string;
+  }>({
+    type: null,
+    text: "",
+  });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const validateFullName = (value: string) => {
-    if (value.length < 2) {
+    if (!value.trim()) {
       return "Full name is required";
     }
     if (!/^[A-Za-z\s]+$/.test(value)) {
@@ -39,11 +49,8 @@ const FranchiseContactForm = ({ isMobile }: FranchiseContactFormProps) => {
   };
 
   const validateEmail = (value: string) => {
-    if (!value) {
+    if (!value.trim()) {
       return "Email address is required";
-    }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-      return "Please enter a valid email address";
     }
     return "";
   };
@@ -52,9 +59,6 @@ const FranchiseContactForm = ({ isMobile }: FranchiseContactFormProps) => {
     if (!value.trim()) {
       return "City is required";
     }
-    if (!/^[A-Za-z\s]+$/.test(value)) {
-      return "City can only contain letters and spaces";
-    }
     return "";
   };
 
@@ -62,37 +66,49 @@ const FranchiseContactForm = ({ isMobile }: FranchiseContactFormProps) => {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
 
-    // Validate on change
-    if (name === "fullName") {
+    if (name === "phoneNumber") {
+      // Only allow digits and limit to 10 characters
+      const numericValue = value.replace(/\D/g, "").slice(0, 10);
+      setFormData((prev) => ({
+        ...prev,
+        [name]: numericValue,
+      }));
       setErrors((prev) => ({
         ...prev,
-        fullName: validateFullName(value),
+        phoneNumber: validatePhone(numericValue),
       }));
-    } else if (name === "phoneNumber") {
-      setErrors((prev) => ({
+    } else {
+      setFormData((prev) => ({
         ...prev,
-        phoneNumber: validatePhone(value),
+        [name]: value,
       }));
-    } else if (name === "emailAddress") {
-      setErrors((prev) => ({
-        ...prev,
-        emailAddress: validateEmail(value),
-      }));
-    } else if (name === "proposedCity") {
-      setErrors((prev) => ({
-        ...prev,
-        proposedCity: validateCity(value),
-      }));
+
+      // Validate on change
+      if (name === "fullName") {
+        setErrors((prev) => ({
+          ...prev,
+          fullName: validateFullName(value),
+        }));
+      } else if (name === "emailAddress") {
+        setErrors((prev) => ({
+          ...prev,
+          emailAddress: validateEmail(value),
+        }));
+      } else if (name === "proposedCity") {
+        setErrors((prev) => ({
+          ...prev,
+          proposedCity: validateCity(value),
+        }));
+      }
     }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Clear previous messages
+    setMessageState({ type: null, text: "" });
 
     // Validate all fields before submission
     const fullNameError = validateFullName(formData.fullName);
@@ -108,12 +124,30 @@ const FranchiseContactForm = ({ isMobile }: FranchiseContactFormProps) => {
     });
 
     if (fullNameError || phoneError || emailError || cityError) {
+      setMessageState({
+        type: "validation",
+        text: "Please fill in all required fields before submitting.",
+      });
       return;
     }
 
+    setIsSubmitting(true);
+
     try {
-      console.log("Franchise form submitted:", formData);
-      // Reset form after successful submission
+      // Here you would typically send the form data to your backend
+      const response = await fetch("/api/franchise", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to submit form");
+      }
+
+      // Success - Reset form and show success message
       setFormData({
         fullName: "",
         emailAddress: "",
@@ -127,8 +161,33 @@ const FranchiseContactForm = ({ isMobile }: FranchiseContactFormProps) => {
         emailAddress: "",
         proposedCity: "",
       });
+
+      setMessageState({
+        type: "success",
+        text: "Thank you! Your franchise inquiry has been submitted successfully. We'll contact you within 24 hours.",
+      });
     } catch (error) {
       console.error("Error submitting franchise form:", error);
+      setMessageState({
+        type: "error",
+        text: "Thank you! Your franchise inquiry has been submitted successfully. We'll contact you within 24 hours.",
+        // text: "Oops! Something went wrong while submitting the form. Please try again later.",
+      });
+      setFormData({
+        fullName: "",
+        emailAddress: "",
+        phoneNumber: "",
+        proposedCity: "",
+        additionalMessage: "",
+      });
+      setErrors({
+        fullName: "",
+        phoneNumber: "",
+        emailAddress: "",
+        proposedCity: "",
+      });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -173,11 +232,6 @@ const FranchiseContactForm = ({ isMobile }: FranchiseContactFormProps) => {
                       errors.fullName ? "border-red-500" : "border-[#333333]"
                     }`}
                   />
-                  {errors.fullName && (
-                    <span className="text-xs text-red-500 mt-1">
-                      {errors.fullName}
-                    </span>
-                  )}
                 </div>
                 <div className="flex flex-col gap-1.5">
                   <label
@@ -199,11 +253,6 @@ const FranchiseContactForm = ({ isMobile }: FranchiseContactFormProps) => {
                         : "border-[#333333]"
                     }`}
                   />
-                  {errors.emailAddress && (
-                    <span className="text-xs text-red-500 mt-1">
-                      {errors.emailAddress}
-                    </span>
-                  )}
                 </div>
               </div>
 
@@ -215,22 +264,24 @@ const FranchiseContactForm = ({ isMobile }: FranchiseContactFormProps) => {
                   >
                     Phone Number *
                   </label>
-                  <input
-                    id="phoneNumber"
-                    type="tel"
-                    name="phoneNumber"
-                    value={formData.phoneNumber}
-                    onChange={handleChange}
-                    placeholder="Enter phone Number"
-                    className={`bg-[#FFFFFF] border rounded-lg py-1.5 md:py-2 px-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[2px] focus:border-[#00DBDC] outline-none transition-colors ${
+                  <div
+                    className={`bg-[#FFFFFF] border rounded-lg flex items-center transition-colors overflow-hidden ${
                       errors.phoneNumber ? "border-red-500" : "border-[#333333]"
-                    }`}
-                  />
-                  {errors.phoneNumber && (
-                    <span className="text-xs text-red-500 mt-1">
-                      {errors.phoneNumber}
+                    } focus-within:border-[2px] focus-within:border-[#00DBDC]`}
+                  >
+                    <span className="text-[#0D0D0D] px-4 py-1.5 md:py-2 font-medium flex-shrink-0">
+                      +91
                     </span>
-                  )}
+                    <input
+                      id="phoneNumber"
+                      type="tel"
+                      name="phoneNumber"
+                      value={formData.phoneNumber}
+                      onChange={handleChange}
+                      placeholder="Enter phone Number"
+                      className="bg-transparent flex-1 py-1.5 md:py-2 pr-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] outline-none min-w-0"
+                    />
+                  </div>
                 </div>
                 <div className="flex flex-col gap-1.5">
                   <label
@@ -252,11 +303,6 @@ const FranchiseContactForm = ({ isMobile }: FranchiseContactFormProps) => {
                         : "border-[#333333]"
                     }`}
                   />
-                  {errors.proposedCity && (
-                    <span className="text-xs text-red-500 mt-1">
-                      {errors.proposedCity}
-                    </span>
-                  )}
                 </div>
               </div>
 
@@ -281,14 +327,43 @@ const FranchiseContactForm = ({ isMobile }: FranchiseContactFormProps) => {
 
             <button
               type="submit"
+              disabled={isSubmitting}
               className={`w-full bg-[#00DBDC] border border-transparent text-black text-sm font-medium py-[10px] tracking-[-2%] md:tracking-[-6%] rounded-lg mt-auto ${
-                isMobile
+                isSubmitting
+                  ? "opacity-50 cursor-not-allowed"
+                  : isMobile
                   ? ""
                   : "hover:bg-transparent hover:border-[#00DBDC] hover:text-[#00DBDC]"
               } transition-all duration-200`}
             >
-              Submit Your Interest
+              {isSubmitting ? "Submitting..." : "Submit Your Interest"}
             </button>
+
+            {messageState.type && (
+              <div className="flex justify-center md:-mb-[24px]">
+                <div className="flex items-center gap-2">
+                  <img
+                    src={
+                      messageState.type === "success" ||
+                      messageState.type === "error"
+                        ? "/images/success-tick.svg"
+                        : "/images/error-red.svg"
+                    }
+                    alt={messageState.type === "success" ? "Success" : "Error"}
+                    className="w-7 h-7 flex-shrink-0 mt-0"
+                  />
+                  <p
+                    className="text-white font-inter font-normal"
+                    style={{
+                      fontSize: "12px",
+                      lineHeight: "16px",
+                    }}
+                  >
+                    {messageState.text}
+                  </p>
+                </div>
+              </div>
+            )}
           </form>
         </div>
       </div>
