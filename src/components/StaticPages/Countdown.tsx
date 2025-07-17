@@ -8,6 +8,52 @@ interface CountdownProps {
   isMobile?: boolean;
 }
 
+interface FlipDigitProps {
+  digit: number;
+  isMobile?: boolean;
+}
+
+const FlipDigit = ({ digit, isMobile }: FlipDigitProps) => {
+  const [currentDigit, setCurrentDigit] = useState(digit);
+  const [isFlipping, setIsFlipping] = useState(false);
+
+  useEffect(() => {
+    if (digit !== currentDigit) {
+      setIsFlipping(true);
+      const timer = setTimeout(() => {
+        setCurrentDigit(digit);
+        setIsFlipping(false);
+      }, 150);
+      return () => clearTimeout(timer);
+    }
+  }, [digit, currentDigit]);
+
+  const digitSize = isMobile
+    ? "w-[30px] h-[49px] text-xl"
+    : "w-[42px] h-16 text-[32px]";
+
+  return (
+    <div
+      className={`${digitSize} bg-[#0D0D0D] rounded-lg overflow-hidden relative`}
+    >
+      <div
+        className={`absolute inset-0 flex items-center justify-center text-white font-semibold tracking-[-2px] transition-transform duration-150 ${
+          isFlipping ? "transform -translate-y-full" : "transform translate-y-0"
+        }`}
+      >
+        {currentDigit}
+      </div>
+      <div
+        className={`absolute inset-0 flex items-center justify-center text-white font-semibold tracking-[-2px] transition-transform duration-150 ${
+          isFlipping ? "transform translate-y-0" : "transform translate-y-full"
+        }`}
+      >
+        {digit}
+      </div>
+    </div>
+  );
+};
+
 const Countdown = ({ countdownData, isMobile }: CountdownProps) => {
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
@@ -47,7 +93,6 @@ const Countdown = ({ countdownData, isMobile }: CountdownProps) => {
     return () => clearInterval(timer);
   }, [countdownData?.date]);
 
-  // Add defensive check for undefined data
   if (!countdownData) {
     return null;
   }
@@ -55,12 +100,10 @@ const Countdown = ({ countdownData, isMobile }: CountdownProps) => {
   const { title, date, bgImage, mobileBgImage, location, openingText, labels } =
     countdownData;
 
-  // Add defensive checks for required properties
   if (!title || !date || !bgImage) {
     return null;
   }
 
-  // Provide default values for labels to prevent undefined errors
   const safeLabels = labels || {
     days: "DAYS",
     hours: "HOURS",
@@ -100,45 +143,29 @@ const Countdown = ({ countdownData, isMobile }: CountdownProps) => {
           <div className="flex gap-3 md:gap-4">
             <div className="flex gap-2 flex-col">
               <div className="flex gap-1">
-                <div className="w-[30px] h-[49px] md:w-[42px] md:h-16 bg-[#0D0D0D] flex items-center justify-center rounded-lg text-white text-xl md:text-[32px] font-semibold tracking-[-2px]">
-                  {daysFirst}
-                </div>
-                <div className="w-[30px] h-[49px] md:w-[42px] md:h-16 bg-[#0D0D0D] flex items-center justify-center rounded-lg text-white  text-xl md:text-[32px] font-semibold tracking-[-2px]">
-                  {daysSecond}
-                </div>
+                <FlipDigit digit={daysFirst} isMobile={isMobile} />
+                <FlipDigit digit={daysSecond} isMobile={isMobile} />
               </div>
               <div className="tracking-[4px]">{safeLabels.days}</div>
             </div>
             <div className="flex gap-2 flex-col">
               <div className="flex gap-1">
-                <div className="w-[30px] h-[49px] md:w-[42px] md:h-16 bg-[#0D0D0D] flex items-center justify-center rounded-lg text-white  text-xl md:text-[32px] font-semibold tracking-[-2px]">
-                  {hoursFirst}
-                </div>
-                <div className="w-[30px] h-[49px] md:w-[42px] md:h-16 bg-[#0D0D0D] flex items-center justify-center rounded-lg text-white  text-xl md:text-[32px] font-semibold tracking-[-2px]">
-                  {hoursSecond}
-                </div>
+                <FlipDigit digit={hoursFirst} isMobile={isMobile} />
+                <FlipDigit digit={hoursSecond} isMobile={isMobile} />
               </div>
               <div className="tracking-[4px]">{safeLabels.hours}</div>
             </div>
             <div className="flex gap-2 flex-col">
               <div className="flex gap-1">
-                <div className="w-[30px] h-[49px] md:w-[42px] md:h-16 bg-[#0D0D0D] flex items-center justify-center rounded-lg text-white  text-xl md:text-[32px] font-semibold tracking-[-2px]">
-                  {minutesFirst}
-                </div>
-                <div className="w-[30px] h-[49px] md:w-[42px] md:h-16 bg-[#0D0D0D] flex items-center justify-center rounded-lg text-white  text-xl md:text-[32px] font-semibold tracking-[-2px]">
-                  {minutesSecond}
-                </div>
+                <FlipDigit digit={minutesFirst} isMobile={isMobile} />
+                <FlipDigit digit={minutesSecond} isMobile={isMobile} />
               </div>
               <div className="tracking-[4px]">{safeLabels.minutes}</div>
             </div>
             <div className="flex gap-2 flex-col">
               <div className="flex gap-1">
-                <div className="w-[30px] h-[49px] md:w-[42px] md:h-16 bg-[#0D0D0D] flex items-center justify-center rounded-lg text-white  text-xl md:text-[32px] font-semibold tracking-[-2px]">
-                  {secondsFirst}
-                </div>
-                <div className="w-[30px] h-[49px] md:w-[42px] md:h-16 bg-[#0D0D0D] flex items-center justify-center rounded-lg text-white  text-xl md:text-[32px] font-semibold tracking-[-2px]">
-                  {secondsSecond}
-                </div>
+                <FlipDigit digit={secondsFirst} isMobile={isMobile} />
+                <FlipDigit digit={secondsSecond} isMobile={isMobile} />
               </div>
               <div className="tracking-[4px]">{safeLabels.seconds}</div>
             </div>
