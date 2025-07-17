@@ -1,12 +1,73 @@
 "use client";
 
 import { CountdownSection } from "@/types/staticPages";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 interface CountdownProps {
   countdownData: CountdownSection;
   isMobile?: boolean;
 }
+
+interface FlipCardProps {
+  value: number;
+  label: string;
+  isMobile?: boolean;
+}
+
+const FlipCard = ({ value, label, isMobile }: FlipCardProps) => {
+  const [currentValue, setCurrentValue] = useState(value);
+  const [isFlipping, setIsFlipping] = useState(false);
+  const [nextValue, setNextValue] = useState(value);
+  const prevValueRef = useRef(value);
+
+  useEffect(() => {
+    if (value !== prevValueRef.current) {
+      setNextValue(value);
+      setIsFlipping(true);
+      const timer = setTimeout(() => {
+        setCurrentValue(value);
+        setIsFlipping(false);
+      }, 300);
+      prevValueRef.current = value;
+      return () => clearTimeout(timer);
+    }
+  }, [value]);
+
+  const paddedCurrentValue = currentValue.toString().padStart(2, "0");
+  const paddedNextValue = nextValue.toString().padStart(2, "0");
+
+  return (
+    <div className="flex flex-col gap-2">
+      <div className={`flip-number ${isFlipping ? "flipping" : ""}`}>
+        <div
+          className={`${
+            isMobile ? "w-[60px] h-[49px]" : "w-[84px] h-16"
+          } bg-[#0D0D0D] rounded-lg overflow-hidden relative`}
+        >
+          <div className="flip-number-front">
+            <div
+              className={`text-white ${
+                isMobile ? "text-xl" : "text-[32px]"
+              } font-semibold tracking-[-2px]`}
+            >
+              {paddedCurrentValue}
+            </div>
+          </div>
+          <div className="flip-number-back">
+            <div
+              className={`text-white ${
+                isMobile ? "text-xl" : "text-[32px]"
+              } font-semibold tracking-[-2px]`}
+            >
+              {paddedNextValue}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="tracking-[4px] text-center">{label}</div>
+    </div>
+  );
+};
 
 const Countdown = ({ countdownData, isMobile }: CountdownProps) => {
   const [timeLeft, setTimeLeft] = useState({
@@ -47,7 +108,6 @@ const Countdown = ({ countdownData, isMobile }: CountdownProps) => {
     return () => clearInterval(timer);
   }, [countdownData?.date]);
 
-  // Add defensive check for undefined data
   if (!countdownData) {
     return null;
   }
@@ -55,12 +115,10 @@ const Countdown = ({ countdownData, isMobile }: CountdownProps) => {
   const { title, date, bgImage, mobileBgImage, location, openingText, labels } =
     countdownData;
 
-  // Add defensive checks for required properties
   if (!title || !date || !bgImage) {
     return null;
   }
 
-  // Provide default values for labels to prevent undefined errors
   const safeLabels = labels || {
     days: "DAYS",
     hours: "HOURS",
@@ -68,21 +126,11 @@ const Countdown = ({ countdownData, isMobile }: CountdownProps) => {
     seconds: "SECONDS",
   };
 
-  const getDigits = (number: number): [number, number] => {
-    const paddedNumber = number.toString().padStart(2, "0");
-    return [parseInt(paddedNumber[0]), parseInt(paddedNumber[1])];
-  };
-
-  const [daysFirst, daysSecond] = getDigits(timeLeft.days);
-  const [hoursFirst, hoursSecond] = getDigits(timeLeft.hours);
-  const [minutesFirst, minutesSecond] = getDigits(timeLeft.minutes);
-  const [secondsFirst, secondsSecond] = getDigits(timeLeft.seconds);
-
   const backgroundImage = isMobile && mobileBgImage ? mobileBgImage : bgImage;
 
   return (
     <div
-      className="w-full max-w-[1200px] mx-auto h-fit md:h-[236px] rounded-[30px] "
+      className="w-full max-w-[1200px] mx-auto h-fit md:h-[236px] rounded-[30px]"
       style={{
         background: `url(${backgroundImage})`,
         backgroundSize: "cover",
@@ -98,50 +146,26 @@ const Countdown = ({ countdownData, isMobile }: CountdownProps) => {
         <div className="text-[#8A8A8A] text-[10px] md:text-sm md:leading-5 leading-3 text-center items-center flex flex-col gap-3">
           <div className="text-xs md:text-sm">{openingText}</div>
           <div className="flex gap-3 md:gap-4">
-            <div className="flex gap-2 flex-col">
-              <div className="flex gap-1">
-                <div className="w-[30px] h-[49px] md:w-[42px] md:h-16 bg-[#0D0D0D] flex items-center justify-center rounded-lg text-white text-xl md:text-[32px] font-semibold tracking-[-2px]">
-                  {daysFirst}
-                </div>
-                <div className="w-[30px] h-[49px] md:w-[42px] md:h-16 bg-[#0D0D0D] flex items-center justify-center rounded-lg text-white  text-xl md:text-[32px] font-semibold tracking-[-2px]">
-                  {daysSecond}
-                </div>
-              </div>
-              <div className="tracking-[4px]">{safeLabels.days}</div>
-            </div>
-            <div className="flex gap-2 flex-col">
-              <div className="flex gap-1">
-                <div className="w-[30px] h-[49px] md:w-[42px] md:h-16 bg-[#0D0D0D] flex items-center justify-center rounded-lg text-white  text-xl md:text-[32px] font-semibold tracking-[-2px]">
-                  {hoursFirst}
-                </div>
-                <div className="w-[30px] h-[49px] md:w-[42px] md:h-16 bg-[#0D0D0D] flex items-center justify-center rounded-lg text-white  text-xl md:text-[32px] font-semibold tracking-[-2px]">
-                  {hoursSecond}
-                </div>
-              </div>
-              <div className="tracking-[4px]">{safeLabels.hours}</div>
-            </div>
-            <div className="flex gap-2 flex-col">
-              <div className="flex gap-1">
-                <div className="w-[30px] h-[49px] md:w-[42px] md:h-16 bg-[#0D0D0D] flex items-center justify-center rounded-lg text-white  text-xl md:text-[32px] font-semibold tracking-[-2px]">
-                  {minutesFirst}
-                </div>
-                <div className="w-[30px] h-[49px] md:w-[42px] md:h-16 bg-[#0D0D0D] flex items-center justify-center rounded-lg text-white  text-xl md:text-[32px] font-semibold tracking-[-2px]">
-                  {minutesSecond}
-                </div>
-              </div>
-              <div className="tracking-[4px]">{safeLabels.minutes}</div>
-            </div>
-            <div className="flex gap-2 flex-col">
-              <div className="flex gap-1">
-                <div className="w-[30px] h-[49px] md:w-[42px] md:h-16 bg-[#0D0D0D] flex items-center justify-center rounded-lg text-white  text-xl md:text-[32px] font-semibold tracking-[-2px]">
-                  {secondsFirst}
-                </div>
-                <div className="w-[30px] h-[49px] md:w-[42px] md:h-16 bg-[#0D0D0D] flex items-center justify-center rounded-lg text-white  text-xl md:text-[32px] font-semibold tracking-[-2px]">
-                  {secondsSecond}
-                </div>
-              </div>
-              <div className="tracking-[4px]">{safeLabels.seconds}</div>
-            </div>
+            <FlipCard
+              value={timeLeft.days}
+              label={safeLabels.days}
+              isMobile={isMobile}
+            />
+            <FlipCard
+              value={timeLeft.hours}
+              label={safeLabels.hours}
+              isMobile={isMobile}
+            />
+            <FlipCard
+              value={timeLeft.minutes}
+              label={safeLabels.minutes}
+              isMobile={isMobile}
+            />
+            <FlipCard
+              value={timeLeft.seconds}
+              label={safeLabels.seconds}
+              isMobile={isMobile}
+            />
           </div>
         </div>
       </div>
