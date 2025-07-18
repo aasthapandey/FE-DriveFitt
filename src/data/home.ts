@@ -153,7 +153,7 @@ export const homeData: StaticPageData = {
       {
         title: "Protein BAR",
         description:
-          "World-class indoor nets, ball tracking & analytics for cricket & pro coaching for all skill levels.",
+          "Fuel up with wholesome meals, recovery shakes, and smart hydration—designed for every fitness goal.",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/card-section/home/card-section-2-bg.svg",
         modalImage:
