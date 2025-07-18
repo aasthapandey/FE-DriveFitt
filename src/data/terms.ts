@@ -79,7 +79,7 @@ export const termsData: StaticPageData = {
         <li>The Club is not responsible for Lost and Found items. Items found are immediately placed in public lost-and- found location.</li>
         <li>Any notice required or permitted to be given to you shall be considered duly given when personally delivered to you or mailed to your address as it appears on your membership agreement or as subsequently changed by written notice to the Club. No solicitation allowed in Club or parking lot.</li>
         <li>The Club holds a right to reserve "RIGHTS OF ADMISSION"- reserves the right to "TERMINATE A MEMBERSHIP" as and when the management deems necessary.</li>
-        <li>We are committed to providing a safe environment and strict action in accordance with law will be taken against anyone found guilty under sexual harassment behaviour. For any complaint under sexual harassment behaviour in the gym, you can reach out to us on the contact details specified on the poster at the concerned outlet.</li>
+        <li>We are committed to providing a safe environment and strict action in accordance with law will be taken against anyone found guilty under sexual harassment behaviour. For any complaint under sexual harassment behaviour in the you can reach out to us on the contact details specified on the poster at the concerned outlet.</li>
         <li>The Club will keep the premises shut temporarily if there is a need arising out of an emergency situation taken place in the premises or in the neighbourhood as it deems necessary.</li>
         <li>Any damages to Drive FITT facilities or property or the property of any members caused by another member or his/her guest, is the sole responsibility of the offending member. All costs of damages and repairs will have to be borne by the offending member. In case the member does not compensate the Club for the same within 15 days from the date of written notice the membership will be terminated and fees paid for membership or other services or facilities will be forfeited. Additional amount over the amount forfeited will have to be borne by the member.</li>
         <li>The Club will provide one towel for use for shower per workout day complimentary. Additional towels if required will be available at a cost as posted in the gym.</li>
@@ -148,7 +148,7 @@ export const termsData: StaticPageData = {
   footerSection: {
     logo: "https://da8nru77lsio9.cloudfront.net/images/logo.svg",
     description:
-      "Experience Gurugram's premier fitness & sports club – Gym, cricket, recovery & more",
+      "Experience Gurugram's premier fitness & sports club – cricket, recovery & more",
     sections: [
       {
         title: "Quick Links",

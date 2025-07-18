@@ -19,7 +19,7 @@ export const recoveryData: StaticPageData = {
     btnSecondaryText: "Join Online",
   },
   cardSection5: {
-    title: "The Ultimate Fitness Experience",
+    title: "Not Just Rest. Recovery Tech",
     description: "",
     cardSection: [
       {
@@ -59,7 +59,7 @@ export const recoveryData: StaticPageData = {
         link: "",
       },
       {
-        title: "Sports Physiotherapy",
+        title: "Physiotherapy",
         description: "Injury prevention. Rehab. Pro-level care.",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/card5-3.webp",
@@ -195,7 +195,7 @@ export const recoveryData: StaticPageData = {
   footerSection: {
     logo: "https://da8nru77lsio9.cloudfront.net/images/logo.svg",
     description:
-      "Experience Gurugram's premier fitness & sports club – Gym, cricket, recovery & more",
+      "Experience Gurugram's premier fitness & sports club – cricket, recovery & more",
     sections: [
       {
         title: "Quick links",

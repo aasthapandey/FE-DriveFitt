@@ -46,7 +46,7 @@ export const fitnessData: StaticPageData = {
         link: "",
       },
       {
-        title: "Hybrid-Inspired Zone",
+        title: "International Fitness Formats",
         description:
           "Experience the energy, structure, and challenge of the global fitness race at your club",
         backgroundImage:
@@ -230,7 +230,7 @@ export const fitnessData: StaticPageData = {
   footerSection: {
     logo: "https://da8nru77lsio9.cloudfront.net/images/logo.svg",
     description:
-      "Experience Gurugram's premier fitness & sports club – Gym, cricket, recovery & more",
+      "Experience Gurugram's premier fitness & sports club – cricket, recovery & more",
     sections: [
       {
         title: "Quick links",

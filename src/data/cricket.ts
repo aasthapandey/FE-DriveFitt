@@ -118,12 +118,12 @@ export const cricketData: StaticPageData = {
       {
         subTitle: "Adaptive Bowling Machine",
         list: [
-          "Delivers endless variations in speed, swing, and spin Intelligent simulation like - Random, Match Practice or Match Situation",
+          "Delivers endless variations in speed, swing, and spin",
           "Intelligent simulation like Random, Match Practice or Match Situation",
         ],
         extraTagLabel: "",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/scroll-card-2.webp",
+          "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/scroll-card-3.webp",
       },
       {
         subTitle: "Advanced 3D Body Scan",
@@ -134,7 +134,7 @@ export const cricketData: StaticPageData = {
         ],
         extraTagLabel: "",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/scroll-card-3.webp",
+          "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/scroll-card-2.webp",
       },
     ],
   },
@@ -231,7 +231,7 @@ export const cricketData: StaticPageData = {
   footerSection: {
     logo: "https://da8nru77lsio9.cloudfront.net/images/logo.svg",
     description:
-      "Experience Gurugram's premier fitness & sports club – Gym, cricket, recovery & more",
+      "Experience Gurugram's premier fitness & sports club – cricket, recovery & more",
     sections: [
       {
         title: "Quick links",

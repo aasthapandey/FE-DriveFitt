@@ -11,7 +11,7 @@ export const runningData: StaticPageData = {
   hero: {
     titleWords: [
       { text: "Running Redefined. Only at ", color: "#FFFFFF" },
-      { text: "DRIVE FITT", color: "#FFFFFF", isItalic: true },
+      { text: "DRIVE FITT", color: "#FFFFFF" },
     ],
     description:
       "India's First Professional Indoor Running Studio — Where Running Becomes a Lifestyle",
@@ -58,7 +58,7 @@ export const runningData: StaticPageData = {
       },
       {
         title: "HIIT + Intervals + Recovery ",
-        description: "Massage that hits the right spot.",
+        description: "Structured classes combine speed, hills, and active rest",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-1.svg",
         iconImage:
@@ -78,7 +78,9 @@ export const runningData: StaticPageData = {
     ],
   },
   evolutionSection: {
-    title: "Join India’s One Of The First Indoor Run Movement",
+    // title: "Join India’s One Of The First Indoor Run Movement",
+    title:
+      "Forget traffic, pollution, or weather. Choose DRIVE FITT’s indoor studio for:",
     evolutionList: [
       {
         title: "Community Energy",
@@ -103,8 +105,7 @@ export const runningData: StaticPageData = {
   },
   scrollingCardSection: {
     title: "Engineered For Progress",
-    description:
-      "Science-backed eating strategies that match your workout intensity, recovery needs, and cricket-specific demands—because elite results require elite fueling.",
+    description: "Our sessions are scientifically designed:",
     iconImage: "https://da8nru77lsio9.cloudfront.net/images/check-icon.svg",
     cardSection: [
       {
@@ -233,7 +234,7 @@ export const runningData: StaticPageData = {
   footerSection: {
     logo: "https://da8nru77lsio9.cloudfront.net/images/logo.svg",
     description:
-      "Experience Gurugram's premier fitness & sports club – Gym, cricket, recovery & more",
+      "Experience Gurugram's premier fitness & sports club – cricket, recovery & more",
     sections: [
       {
         title: "Quick links",

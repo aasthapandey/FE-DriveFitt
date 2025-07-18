@@ -52,12 +52,13 @@ export const franchiseData: FranchisePageData = {
       {
         icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/multi-revenue-icon-4.svg",
         title: "Recovery Services",
-        description: "Sauna, therapy, compression, and cold plunge services",
+        description: "IR Sauna, compression, and cold plunge services",
       },
       {
         icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/multi-revenue-icon-5.svg",
         title: "Retail & Café",
-        description: "Sports equipment, supplements, and healthy food options",
+        description:
+          "Sports equipment, supplements, apparel, and healthy food options",
       },
       {
         icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/multi-revenue-icon-6.svg",
@@ -80,7 +81,7 @@ export const franchiseData: FranchisePageData = {
       {
         icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/ideal-location-icon.svg",
         title: "Ideal Location",
-        subTitle: "8,000 - 12,000 sq ft",
+        subTitle: "10,000 sq ft or above",
         description: "Premium mixed-use developments",
       },
       {
@@ -114,7 +115,7 @@ export const franchiseData: FranchisePageData = {
         icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/receive-1.svg",
         title: "Proven Operations Playbook",
         description:
-          "Turnkey systems that fast-track launch - from Site Selection And club design to member retention.",
+          "Turnkey systems that fast-track launch - from item selection and club design to member retention.",
       },
       {
         icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/elite-training-icon.svg",
@@ -160,7 +161,7 @@ export const franchiseData: FranchisePageData = {
       },
       {
         icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/operational-icon.svg",
-        title: "Operational Experience",
+        title: "Entrepreneurial Experience",
         description:
           "Business operations experience and local market knowledge",
       },
@@ -281,7 +282,7 @@ export const franchiseData: FranchisePageData = {
   footerSection: {
     logo: "https://da8nru77lsio9.cloudfront.net/images/logo.svg",
     description:
-      "Experience Gurugram's premier fitness & sports club – Gym, cricket, recovery & more",
+      "Experience Gurugram's premier fitness & sports club – cricket, recovery & more",
     sections: [
       {
         title: "Quick links",

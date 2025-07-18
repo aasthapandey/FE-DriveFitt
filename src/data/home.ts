@@ -44,11 +44,11 @@ export const homeData: StaticPageData = {
   },
   countdownSection: {
     title: "Your premium sports club. just days away. Launching in ",
-    date: "2025-09-13",
+    date: "2025-11-25",
     bgImage: "https://da8nru77lsio9.cloudfront.net/images/countdown-bgg.svg",
     mobileBgImage:
       "https://da8nru77lsio9.cloudfront.net/images/countdown-bg-mobile.svg",
-    location: "GURUGRAM",
+    location: "65th Ave. Golf Course Extn Road OR just Sec 65",
     openingText: "Opening in",
     labels: {
       days: "DAYS",
@@ -324,7 +324,7 @@ export const homeData: StaticPageData = {
   footerSection: {
     logo: "https://da8nru77lsio9.cloudfront.net/images/logo.svg",
     description:
-      "Experience Gurugram's premier fitness & sports club – Gym, cricket, recovery & more",
+      "Experience Gurugram's premier fitness & sports club – cricket, recovery & more",
     sections: [
       {
         title: "Quick Links",
