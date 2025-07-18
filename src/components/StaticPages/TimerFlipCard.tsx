@@ -133,7 +133,9 @@ const FlipClock = ({ countdown, labels, onComplete }: FlipClockProps) => {
           cancelAnimationFrame(animationRef.current);
         }
         setTime({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-        onComplete && onComplete();
+        if (onComplete) {
+          onComplete();
+        }
         return;
       }
 
@@ -360,7 +362,7 @@ const TimeFlipCard = ({ countdownDate, labels }: TimeFlipCardProps) => {
 
       {countdownComplete && (
         <div style={{ color: "red", fontSize: "2em", margin: "20px" }}>
-          Time's Up!
+          Time&apos;s Up!
         </div>
       )}
       {/* 

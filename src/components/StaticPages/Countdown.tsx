@@ -1,9 +1,5 @@
-"use client";
-
-import { CountdownSection } from "@/types/staticPages";
-import { useEffect, useState, useRef } from "react";
 import TimeFlipCard from "@/components/StaticPages/TimerFlipCard";
-import { CountdownProps, FlipCardProps } from "@/types/staticPages";
+import { CountdownProps } from "@/types/staticPages";
 
 const Countdown = ({ countdownData, isMobile }: CountdownProps) => {
   const { title, date, bgImage, mobileBgImage, location, openingText, labels } =
