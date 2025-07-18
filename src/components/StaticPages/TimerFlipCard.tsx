@@ -275,7 +275,7 @@ const TimeFlipCard = ({ countdownDate, labels }: TimeFlipCardProps) => {
           top: 50%;
           left: 0;
           border-top: solid 1px #000;
-          background: #0D0D0D;
+          background: #393939;
           border-radius: 0 0 0.15em 0.15em;
           pointer-events: none;
           overflow: hidden;
