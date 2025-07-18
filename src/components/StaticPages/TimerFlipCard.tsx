@@ -81,10 +81,16 @@ interface TimeState {
 
 interface FlipClockProps {
   countdown?: Date;
+  labels?: {
+    days: string;
+    hours: string;
+    minutes: string;
+    seconds: string;
+  };
   onComplete?: () => void;
 }
 
-const FlipClock = ({ countdown, onComplete }: FlipClockProps) => {
+const FlipClock = ({ countdown, labels, onComplete }: FlipClockProps) => {
   const [time, setTime] = useState<TimeState>({});
   const animationRef = useRef<number>();
 
@@ -145,15 +151,39 @@ const FlipClock = ({ countdown, onComplete }: FlipClockProps) => {
 
   const timeUnits = countdown
     ? [
-        { key: "days", label: "Days", value: time.days || 0 },
-        { key: "hours", label: "Hours", value: time.hours || 0 },
-        { key: "minutes", label: "Minutes", value: time.minutes || 0 },
-        { key: "seconds", label: "Seconds", value: time.seconds || 0 },
+        { key: "days", label: labels?.days || "Days", value: time.days || 0 },
+        {
+          key: "hours",
+          label: labels?.hours || "Hours",
+          value: time.hours || 0,
+        },
+        {
+          key: "minutes",
+          label: labels?.minutes || "Minutes",
+          value: time.minutes || 0,
+        },
+        {
+          key: "seconds",
+          label: labels?.seconds || "Seconds",
+          value: time.seconds || 0,
+        },
       ]
     : [
-        { key: "hours", label: "Hours", value: time.hours || 0 },
-        { key: "minutes", label: "Minutes", value: time.minutes || 0 },
-        { key: "seconds", label: "Seconds", value: time.seconds || 0 },
+        {
+          key: "hours",
+          label: labels?.hours || "Hours",
+          value: time.hours || 0,
+        },
+        {
+          key: "minutes",
+          label: labels?.minutes || "Minutes",
+          value: time.minutes || 0,
+        },
+        {
+          key: "seconds",
+          label: labels?.seconds || "Seconds",
+          value: time.seconds || 0,
+        },
       ];
 
   return (
@@ -165,28 +195,30 @@ const FlipClock = ({ countdown, onComplete }: FlipClockProps) => {
   );
 };
 
-const TimeFlipCard = () => {
+interface TimeFlipCardProps {
+  countdownDate?: string;
+  labels?: {
+    days: string;
+    hours: string;
+    minutes: string;
+    seconds: string;
+  };
+}
+
+const TimeFlipCard = ({ countdownDate, labels }: TimeFlipCardProps) => {
   const [countdownComplete, setCountdownComplete] = useState(false);
 
-  const deadline = new Date(Date.now() + 12 * 24 * 60 * 60 * 1000);
+  const deadline = countdownDate
+    ? new Date(countdownDate)
+    : new Date(Date.now() + 12 * 24 * 60 * 60 * 1000);
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        background: "#EEE",
-        fontFamily: "Arial, sans-serif",
-      }}
-    >
+    <div>
       <style>{`
         .flip-clock {
           text-align: center;
           perspective: 400px;
-          margin: 20px auto;
+          margin: 0;
         }
 
         .flip-clock *,
@@ -197,22 +229,26 @@ const TimeFlipCard = () => {
 
         .flip-clock__piece {
           display: inline-block;
-          margin: 0 5px;
+          margin: 0 8px;
         }
 
         .flip-clock__slot {
-          font-size: 2vw;
-          color: #333;
-          margin-top: 10px;
+          font-size: 10px;
+          color: #8A8A8A;
+          margin-top: 5px;
           display: block;
+          font-weight: 500;
+          letter-spacing: 1px;
         }
 
         .card {
           display: block;
           position: relative;
           padding-bottom: 0.72em;
-          font-size: 9vw;
-          line-height: 0.95;
+          font-size: 32px;
+          line-height: 100%;
+          letter-spacing: -2px;
+          font-weight: 600;
         }
 
         .card__top,
@@ -221,8 +257,8 @@ const TimeFlipCard = () => {
         .card__back::after {
           display: block;
           height: 0.72em;
-          color: #ccc;
-          background: #222;
+          color: #FFF;
+          background: #0D0D0D;
           padding: 0.25em 0.25em;
           border-radius: 0.15em 0.15em 0 0;
           backface-visibility: hidden;
@@ -239,7 +275,7 @@ const TimeFlipCard = () => {
           top: 50%;
           left: 0;
           border-top: solid 1px #000;
-          background: #393939;
+          background: #0D0D0D;
           border-radius: 0 0 0.15em 0.15em;
           pointer-events: none;
           overflow: hidden;
@@ -315,6 +351,7 @@ const TimeFlipCard = () => {
       {/* <h2>Countdown Timer</h2> */}
       <FlipClock
         countdown={deadline}
+        labels={labels}
         onComplete={() => {
           setCountdownComplete(true);
           alert("Countdown complete!");

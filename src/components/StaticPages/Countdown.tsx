@@ -37,7 +37,10 @@ const Countdown = ({ countdownData, isMobile }: CountdownProps) => {
           {title}
           <span className="text-[#00DBDC] italic">{location}</span>
         </h2>
-        <TimeFlipCard />
+        <div className="text-[#8A8A8A] text-[10px] md:text-sm md:leading-5 leading-3 text-center items-center flex flex-col gap-3">
+          <div className="text-xs md:text-sm">{openingText}</div>
+          <TimeFlipCard countdownDate={date} labels={safeLabels} />
+        </div>
       </div>
     </div>
   );
