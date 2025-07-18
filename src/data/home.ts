@@ -48,7 +48,7 @@ export const homeData: StaticPageData = {
     bgImage: "https://da8nru77lsio9.cloudfront.net/images/countdown-bgg.svg",
     mobileBgImage:
       "https://da8nru77lsio9.cloudfront.net/images/countdown-bg-mobile.svg",
-    location: "65th Ave. Golf Course Extn Road OR just Sec 65",
+    location: "65th Ave. Golf Course Extn Road",
     openingText: "Opening in",
     labels: {
       days: "DAYS",
