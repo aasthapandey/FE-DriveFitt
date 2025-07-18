@@ -93,7 +93,7 @@ export const homeData: StaticPageData = {
       {
         title: "Recovery",
         description:
-          "Cold Plunge, infrared sauna, compression & percussion therapy along with physiotherapy to recharge, recover, and reduce injury risk.",
+          "Cold plunge, infrared sauna, compression & percussion therapy along with physiotherapy to recharge, recover, and reduce injury risk.",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/homec/card4-3.webp",
         link: "/recovery",
