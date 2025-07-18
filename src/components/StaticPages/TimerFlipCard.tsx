@@ -350,7 +350,6 @@ const TimeFlipCard = ({ countdownDate, labels }: TimeFlipCardProps) => {
         }
       `}</style>
 
-      {/* <h2>Countdown Timer</h2> */}
       <FlipClock
         countdown={deadline}
         labels={labels}
@@ -365,9 +364,6 @@ const TimeFlipCard = ({ countdownDate, labels }: TimeFlipCardProps) => {
           Time&apos;s Up!
         </div>
       )}
-      {/* 
-      <h2>Current Time</h2>
-      <FlipClock /> */}
     </div>
   );
 };

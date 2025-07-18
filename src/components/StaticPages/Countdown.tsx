@@ -28,8 +28,8 @@ const Countdown = ({ countdownData, isMobile }: CountdownProps) => {
         backgroundPosition: "center",
       }}
     >
-      <div className="flex flex-col md:flex-row pt-6 pb-[38px] md:pb-[72px] md:pt-[40px] gap-4 md:gap-0 justify-between md:px-[46px] text-center md:text-left">
-        <h2 className="px-8 md:px-0 w-full text-xl md:w-[402px] md:ml-[59px] leading-7 text-white md:text-[32px] md:leading-[46px] font-semibold tracking-[-1px]">
+      <div className="flex flex-col md:flex-row pt-6 pb-[38px] md:py-[72px] md:pt-[40px] gap-4 md:gap-20 justify-between md:px-[46px] text-center md:text-left">
+        <h2 className="px-8 md:px-0 md:pt-8 w-full text-xl md:w-[402px] md:ml-[59px] md:flex-1 leading-7 text-white md:text-[32px] md:leading-[46px] font-semibold tracking-[-1px]">
           {title}
           <span className="text-[#00DBDC] italic">{location}</span>
         </h2>
