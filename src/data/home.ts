@@ -73,7 +73,7 @@ export const homeData: StaticPageData = {
       {
         title: "Cricket",
         description:
-          "World-class indoor nets, ball tracking & analytics for cricket & pro coaching for all skill levels",
+          "World-class indoor nets, ball tracking & analytics & pro coaching for all skill levels",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/homec/mobile-card4-1.webp",
         link: "/cricket",
@@ -148,7 +148,7 @@ export const homeData: StaticPageData = {
   },
   cardSection2: {
     title: "Refueling & Gear-Up Zone",
-    description: "Refuel. Recharge. Reinvent.",
+    description: "Refuel. Recharge. Recover.",
     cardSection: [
       {
         title: "Protein BAR",
@@ -185,7 +185,7 @@ export const homeData: StaticPageData = {
         list: [
           {
             image: "https://da8nru77lsio9.cloudfront.net/images/info1-1.svg",
-            description: "3D body scans assessment",
+            description: "3D body scan assessment",
           },
           {
             image: "https://da8nru77lsio9.cloudfront.net/images/info1-2.svg",
