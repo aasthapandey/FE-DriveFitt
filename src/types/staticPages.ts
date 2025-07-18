@@ -313,3 +313,14 @@ export interface NavbarProps {
   };
   loginModalType: LoginModalType;
 }
+
+export interface CountdownProps {
+  countdownData: CountdownSection;
+  isMobile?: boolean;
+}
+
+export interface FlipCardProps {
+  value: number;
+  label: string;
+  isMobile?: boolean;
+}

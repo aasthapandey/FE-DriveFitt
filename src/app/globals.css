@@ -92,7 +92,6 @@
   transform: rotateX(180deg);
 }
 
-/* Enhanced 3D Flip Animation */
 .flip-number {
   perspective: 400px;
   transform-style: preserve-3d;
