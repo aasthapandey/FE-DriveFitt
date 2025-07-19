@@ -44,6 +44,7 @@ import Error404Section from "@/components/StaticPages/Error404Section";
 import PolicySection from "@/components/StaticPages/PolicySection";
 import JoinNow from "@/components/common/JoinNow";
 import RecoveryBanner from "@/components/StaticPages/RecoveryBanner";
+import AnimatedSection from "@/components/common/AnimatedSection";
 
 interface StaticPageProps {
   data: StaticPageData;
@@ -187,7 +188,7 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
       <Navbar data={navbarData} isMobile={isMobile} />
 
       <div className="flex flex-col gap-[60px] md:gap-[160px] w-full">
-        {Object.entries(data).map(([key, value]) => {
+        {Object.entries(data).map(([key, value], index) => {
           const component = renderComponent(key, value);
           if (component) {
             if (key === "hero") {
@@ -222,21 +223,21 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
                 </div>
               );
             }
-            if (key === "error404Section") {
+            if (key === "error404Section" || key === "policySection") {
               return (
                 <div key={key} className="w-full">
                   {component}
                 </div>
               );
             }
-            if (key === "policySection") {
-              return (
-                <div key={key} className="w-full">
-                  {component}
-                </div>
-              );
-            }
-            return <div key={key}>{component}</div>;
+
+            // Add animations to other sections
+            const direction = index % 2 === 0 ? "left" : "right";
+            return (
+              <AnimatedSection key={key} direction={direction} delay={0.2}>
+                {component}
+              </AnimatedSection>
+            );
           }
           return null;
         })}
