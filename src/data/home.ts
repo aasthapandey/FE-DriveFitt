@@ -45,9 +45,8 @@ export const homeData: StaticPageData = {
   countdownSection: {
     title: "Your premium sports club. just days away. Launching in ",
     date: "2025-11-25",
-    bgImage: "https://da8nru77lsio9.cloudfront.net/images/countdown-bgg.svg",
-    mobileBgImage:
-      "https://da8nru77lsio9.cloudfront.net/images/countdown-bg-mobile.svg",
+    bgImage: "/images/counterbg.svg",
+    mobileBgImage: "/images/counterbg-mobile.svg",
     location: "65th Ave. Golf Course Extn Road",
     openingText: "Opening in",
     labels: {
