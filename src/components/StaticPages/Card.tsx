@@ -31,11 +31,11 @@ const Card = ({
         href={link}
         className={`${
           isMobile ? "" : "group"
-        } relative block rounded-[20px] md:rounded-[40px] overflow-hidden h-[256px] md:h-[407px] ${
+        } relative block rounded-[20px] md:rounded-[40px] overflow-hidden h-[256px]  ${
           className?.includes("!cursor-default")
             ? "!cursor-default"
             : "!cursor-pointer"
-        } w-full border-0 ${imageClass}`}
+        } w-full border-0 ${imageClass} md:h-[407px]`}
         style={{
           backgroundImage: `url(${backgroundImage})`,
           backgroundSize: "cover",
