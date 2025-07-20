@@ -101,6 +101,7 @@ const CardSection4 = ({
               key={idx}
               iconClass="!size-10"
               textPlusImageClass="md:pb-[40px]"
+              imageClass="md:h-[360px]"
             />
           ))}
         </div>
