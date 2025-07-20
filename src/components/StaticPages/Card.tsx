@@ -38,7 +38,7 @@ const Card = ({
             ? "!cursor-default"
             : "!cursor-pointer"
         } w-full border-0 ${imageClass} ${
-          type === 1 ? "md:h-[407px]" : "md:h-[360px]"
+          type === 1 ? "md:h-[360px]" : "md:h-[407px]"
         }`}
         style={{
           backgroundImage: `url(${backgroundImage})`,
