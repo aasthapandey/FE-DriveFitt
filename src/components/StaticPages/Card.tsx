@@ -8,6 +8,7 @@ interface CardProps {
   imageClass?: string;
   iconClass?: string;
   textPlusImageClass?: string;
+  type?: number;
 }
 
 const Card = ({
@@ -17,6 +18,7 @@ const Card = ({
   imageClass,
   iconClass,
   textPlusImageClass,
+  type,
 }: CardProps) => {
   const { title, description, backgroundImage, link, redirectionIcon } = data;
 
@@ -35,7 +37,9 @@ const Card = ({
           className?.includes("!cursor-default")
             ? "!cursor-default"
             : "!cursor-pointer"
-        } w-full border-0 ${imageClass} md:h-[407px]`}
+        } w-full border-0 ${imageClass} ${
+          type === 1 ? "md:h-[407px]" : "md:h-[360px]"
+        }`}
         style={{
           backgroundImage: `url(${backgroundImage})`,
           backgroundSize: "cover",

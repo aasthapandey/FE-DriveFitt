@@ -102,6 +102,7 @@ const CardSection4 = ({
               iconClass="!size-10"
               textPlusImageClass="md:pb-[40px]"
               imageClass="md:h-[360px]"
+              type={1}
             />
           ))}
         </div>
