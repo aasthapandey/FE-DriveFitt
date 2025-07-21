@@ -1,5 +1,14 @@
 import { NextResponse } from "next/server";
 import { getConnection } from "@/lib/database";
+import { RowDataPacket } from "mysql2";
+
+// Define error interface
+interface DatabaseError extends Error {
+  code?: string;
+  errno?: number;
+  sqlMessage?: string;
+  sqlState?: string;
+}
 
 export async function GET() {
   try {
@@ -7,7 +16,9 @@ export async function GET() {
 
     try {
       // Test the connection
-      const [result] = await connection.execute("SELECT 1 as test");
+      const [result] = await connection.execute<RowDataPacket[]>(
+        "SELECT 1 as test"
+      );
 
       return NextResponse.json({
         success: true,
@@ -20,15 +31,16 @@ export async function GET() {
         },
         result,
       });
-    } catch (error: any) {
+    } catch (error) {
+      const dbError = error as DatabaseError;
       return NextResponse.json(
         {
           success: false,
           message: "Database connection failed",
           error: {
-            code: error.code,
-            message: error.message,
-            errno: error.errno,
+            code: dbError.code,
+            message: dbError.message,
+            errno: dbError.errno,
           },
           config: {
             host: process.env.DB_HOST || "localhost",
@@ -40,15 +52,16 @@ export async function GET() {
         { status: 500 }
       );
     }
-  } catch (error: any) {
+  } catch (error) {
+    const dbError = error as DatabaseError;
     return NextResponse.json(
       {
         success: false,
         message: "Failed to create database connection",
         error: {
-          code: error.code,
-          message: error.message,
-          errno: error.errno,
+          code: dbError.code,
+          message: dbError.message,
+          errno: dbError.errno,
         },
         config: {
           host: process.env.DB_HOST || "localhost",
