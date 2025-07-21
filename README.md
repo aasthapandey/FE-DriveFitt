@@ -82,6 +82,26 @@ CREATE TABLE franchise_inquiries (
 );
 ```
 
+## Email Notifications with Brevo
+
+This application uses Brevo (formerly Sendinblue) for sending email notifications when forms are submitted. To configure Brevo, add the following environment variables to your `.env.local` file:
+
+```bash
+# Brevo email configuration
+BREVO_API_KEY=your_brevo_api_key
+NOTIFICATION_EMAIL=your_notification_email@example.com
+FRANCHISE_NOTIFICATION_EMAIL=your_franchise_email@example.com
+```
+
+To get your Brevo API key:
+
+1. Sign up or log in to your Brevo account at [https://app.brevo.com/](https://app.brevo.com/)
+2. Go to Settings → API Keys & Webhooks
+3. Generate a new API key with appropriate permissions
+4. Copy the API key to your `.env.local` file
+
+The application will automatically send email notifications to the specified email addresses when contact forms or franchise inquiry forms are submitted.
+
 ## API Endpoints
 
 The application provides the following API endpoints for form submissions:

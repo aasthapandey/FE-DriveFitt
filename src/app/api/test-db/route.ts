@@ -1,23 +1,61 @@
 import { NextResponse } from "next/server";
-import { executeQuery } from "@/lib/database";
+import { getConnection } from "@/lib/database";
 
 export async function GET() {
   try {
-    // Test the database connection
-    const result = await executeQuery("SELECT 1 as test");
+    const connection = await getConnection();
 
-    return NextResponse.json({
-      success: true,
-      message: "Database connection successful",
-      data: result,
-    });
-  } catch (error) {
-    console.error("Database connection test failed:", error);
+    try {
+      // Test the connection
+      const [result] = await connection.execute("SELECT 1 as test");
+
+      return NextResponse.json({
+        success: true,
+        message: "Database connection successful",
+        config: {
+          host: process.env.DB_HOST || "localhost",
+          user: process.env.DB_USER || "root",
+          database: process.env.DB_NAME || "drivefitt",
+          port: parseInt(process.env.DB_PORT || "3306"),
+        },
+        result,
+      });
+    } catch (error: any) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Database connection failed",
+          error: {
+            code: error.code,
+            message: error.message,
+            errno: error.errno,
+          },
+          config: {
+            host: process.env.DB_HOST || "localhost",
+            user: process.env.DB_USER || "root",
+            database: process.env.DB_NAME || "drivefitt",
+            port: parseInt(process.env.DB_PORT || "3306"),
+          },
+        },
+        { status: 500 }
+      );
+    }
+  } catch (error: any) {
     return NextResponse.json(
       {
         success: false,
-        error: "Database connection failed",
-        details: error instanceof Error ? error.message : "Unknown error",
+        message: "Failed to create database connection",
+        error: {
+          code: error.code,
+          message: error.message,
+          errno: error.errno,
+        },
+        config: {
+          host: process.env.DB_HOST || "localhost",
+          user: process.env.DB_USER || "root",
+          database: process.env.DB_NAME || "drivefitt",
+          port: parseInt(process.env.DB_PORT || "3306"),
+        },
       },
       { status: 500 }
     );
