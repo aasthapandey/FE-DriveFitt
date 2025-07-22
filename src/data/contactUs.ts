@@ -33,7 +33,7 @@ export const contactUsData: ContactUsPageData = {
       },
       {
         title: "Call Us",
-        description: "Mon - Sun between 10am and 10pm",
+        description: "Mon - Sun from 10AM to 10PM",
         email: "+91-9871836565",
         image: "https://da8nru77lsio9.cloudfront.net/images/CallUs.svg",
       },
