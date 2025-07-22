@@ -169,172 +169,172 @@ const ContactForm = ({
   };
 
   return (
-    <div className="w-full max-w-[1200px] mx-auto">
-      <div className="flex flex-col md:flex-row gap-6 md:gap-[60px]">
-        <ScrollAnimation
-          delay={0.2}
-          direction="left"
-          className="w-full md:w-1/3"
-        >
-          <div className="flex flex-col gap-3 md:gap-4">
-            <h2 className="text-2xl md:text-[32px] font-semibold tracking-[-1px] leading-[30px] md:leading-[40px]">
+    <div className="flex-1">
+      <div
+        className="rounded-[20px] md:rounded-[40px] p-[2px] h-full"
+        style={{
+          background:
+            "linear-gradient(180deg, #333333 29.36%, #00DBDC 120.13%)",
+        }}
+      >
+        <div className="rounded-[20px] md:rounded-[40px] w-full h-full p-8 md:p-12 flex flex-col bg-[#0D0D0D]">
+          <ScrollAnimation delay={0.2} direction="right">
+            <h2 className="text-2xl leading-7 md:text-[40px] font-semibold md:leading-[48px] tracking-[-1px] md:tracking-[-2px] mb-2">
               {title}
             </h2>
-            <p className="text-sm md:text-base font-light leading-[18px] md:leading-6 tracking-[-0.5px] text-[#FFFFFF]">
+            <p className="text-xs leading-4 tracking-[-1%] md:text-base md:leading-5 text-[#8A8A8A] mb-7 md:mb-10">
               {description}
             </p>
-          </div>
-        </ScrollAnimation>
+          </ScrollAnimation>
 
-        <ScrollAnimation
-          delay={0.3}
-          direction="right"
-          className="w-full md:w-2/3"
-        >
-          <form
-            className="flex flex-col gap-6 md:gap-8"
-            onSubmit={handleSubmit}
-          >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-              <div className="flex flex-col gap-1.5">
-                <label
-                  htmlFor="firstName"
-                  className="text-xs md:text-sm text-[#8A8A8A]"
-                >
-                  {fields.firstName.label}
-                </label>
-                <input
-                  id="firstName"
-                  type="text"
-                  name="firstName"
-                  value={formData.firstName}
-                  onChange={handleChange}
-                  placeholder={fields.firstName.placeholder}
-                  className={`bg-[#FFFFFF] border rounded-lg py-1.5 md:py-2 px-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[2px] focus:border-[#00DBDC] outline-none transition-colors ${
-                    errors.firstName ? "border-red-500" : "border-[#333333]"
-                  }`}
-                />
-              </div>
-              <div className="flex flex-col gap-1.5">
-                <label
-                  htmlFor="lastName"
-                  className="text-xs md:text-sm text-[#8A8A8A]"
-                >
-                  {fields.lastName.label}
-                </label>
-                <input
-                  id="lastName"
-                  type="text"
-                  name="lastName"
-                  value={formData.lastName}
-                  onChange={handleChange}
-                  placeholder={fields.lastName.placeholder}
-                  className="bg-[#FFFFFF] border border-[#333333] rounded-lg py-1.5 md:py-2 px-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[#00DBDC] outline-none transition-colors"
-                />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-              <div className="flex flex-col gap-1.5">
-                <label
-                  htmlFor="email"
-                  className="text-xs md:text-sm text-[#8A8A8A]"
-                >
-                  {fields.email.label}
-                </label>
-                <input
-                  id="email"
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder={fields.email.placeholder}
-                  className="bg-[#FFFFFF] border border-[#333333] rounded-lg py-1.5 md:py-2 px-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[#00DBDC] outline-none transition-colors"
-                />
-              </div>
-              <div className="flex flex-col gap-1.5">
-                <label
-                  htmlFor="phone"
-                  className="text-xs md:text-sm text-[#8A8A8A]"
-                >
-                  {fields.phone.label}
-                </label>
-                <div
-                  className={`bg-[#FFFFFF] border rounded-lg flex items-center transition-colors overflow-hidden ${
-                    errors.phone ? "border-red-500" : "border-[#333333]"
-                  } focus-within:border-[2px] focus-within:border-[#00DBDC]`}
-                >
-                  <span className="text-[#0D0D0D] px-4 py-1.5 md:py-2 font-medium flex-shrink-0">
-                    +91
-                  </span>
-                  <input
-                    id="phone"
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    placeholder={fields.phone.placeholder}
-                    className="bg-transparent flex-1 py-1.5 md:py-2 pr-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] outline-none min-w-0"
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div className="flex flex-col gap-1.5 flex-1">
-              <label htmlFor="message" className="text-sm text-[#8A8A8A]">
-                {fields.message.label}
-              </label>
-              <input
-                id="message"
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                placeholder={fields.message.placeholder}
-                className="bg-[#FFFFFF] border border-[#333333] rounded-lg py-1.5 md:py-2 px-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[#00DBDC] outline-none transition-colors"
-              />
-            </div>
-
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className={`w-full bg-[#00DBDC] border border-transparent text-black text-sm font-medium py-[10px] tracking-[-2%] md:tracking-[-6%] rounded-lg ${
-                isSubmitting
-                  ? "opacity-50 cursor-not-allowed"
-                  : isMobile
-                  ? ""
-                  : "hover:bg-transparent hover:border-[#00DBDC] hover:text-[#00DBDC]"
-              } transition-all duration-200`}
+          <ScrollAnimation delay={0.3} direction="right">
+            <form
+              onSubmit={handleSubmit}
+              className="flex flex-col gap-4 md:gap-6 flex-1"
             >
-              {isSubmitting ? "Sending..." : submitButtonText}
-            </button>
-
-            {messageState.type && (
-              <div className="flex justify-center md:-mb-[24px]">
-                <div className="flex items-center gap-2">
-                  <img
-                    src={
-                      messageState.type === "success" ||
-                      messageState.type === "error"
-                        ? "/images/success-tick.svg"
-                        : "/images/error-red.svg"
-                    }
-                    alt={messageState.type === "success" ? "Success" : "Error"}
-                    className="w-7 h-7 flex-shrink-0 mt-0"
-                  />
-                  <p
-                    className="text-white font-inter font-normal"
-                    style={{
-                      fontSize: "12px",
-                      lineHeight: "16px",
-                    }}
+              <div className="grid grid-row-2 gap-4 md:grid-cols-2 md:gap-6">
+                <div className="flex flex-col gap-1.5">
+                  <label
+                    htmlFor="firstName"
+                    className="text-xs md:text-sm text-[#8A8A8A]"
                   >
-                    {messageState.text}
-                  </p>
+                    {fields.firstName.label}
+                  </label>
+                  <input
+                    id="firstName"
+                    type="text"
+                    name="firstName"
+                    value={formData.firstName}
+                    onChange={handleChange}
+                    placeholder={fields.firstName.placeholder}
+                    className={`bg-[#FFFFFF] border rounded-lg py-1.5 md:py-2 px-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[2px] focus:border-[#00DBDC] outline-none transition-colors ${
+                      errors.firstName ? "border-red-500" : "border-[#333333]"
+                    }`}
+                  />
+                </div>
+                <div className="flex flex-col gap-1.5">
+                  <label
+                    htmlFor="lastName"
+                    className="text-xs md:text-sm text-[#8A8A8A]"
+                  >
+                    {fields.lastName.label}
+                  </label>
+                  <input
+                    id="lastName"
+                    type="text"
+                    name="lastName"
+                    value={formData.lastName}
+                    onChange={handleChange}
+                    placeholder={fields.lastName.placeholder}
+                    className="bg-[#FFFFFF] border border-[#333333] rounded-lg py-1.5 md:py-2 px-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[#00DBDC] outline-none transition-colors"
+                  />
                 </div>
               </div>
-            )}
-          </form>
-        </ScrollAnimation>
+
+              <div className="grid grid-row-2 gap-4 md:grid-cols-2 md:gap-6">
+                <div className="flex flex-col gap-1.5">
+                  <label
+                    htmlFor="email"
+                    className="text-xs md:text-sm text-[#8A8A8A]"
+                  >
+                    {fields.email.label}
+                  </label>
+                  <input
+                    id="email"
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder={fields.email.placeholder}
+                    className="bg-[#FFFFFF] border border-[#333333] rounded-lg py-1.5 md:py-2 px-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[#00DBDC] outline-none transition-colors"
+                  />
+                </div>
+                <div className="flex flex-col gap-1.5">
+                  <label
+                    htmlFor="phone"
+                    className="text-xs md:text-sm text-[#8A8A8A]"
+                  >
+                    {fields.phone.label}
+                  </label>
+                  <div
+                    className={`bg-[#FFFFFF] border rounded-lg flex items-center transition-colors overflow-hidden ${
+                      errors.phone ? "border-red-500" : "border-[#333333]"
+                    } focus-within:border-[2px] focus-within:border-[#00DBDC]`}
+                  >
+                    <span className="text-[#0D0D0D] px-4 py-1.5 md:py-2 font-medium flex-shrink-0">
+                      +91
+                    </span>
+                    <input
+                      id="phone"
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      placeholder={fields.phone.placeholder}
+                      className="bg-transparent flex-1 py-1.5 md:py-2 pr-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] outline-none min-w-0"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-1.5 flex-1">
+                <label htmlFor="message" className="text-sm text-[#8A8A8A]">
+                  {fields.message.label}
+                </label>
+                <input
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  placeholder={fields.message.placeholder}
+                  className="bg-[#FFFFFF] border border-[#333333] rounded-lg py-1.5 md:py-2 px-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[#00DBDC] outline-none transition-colors"
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className={`w-full bg-[#00DBDC] border border-transparent text-black text-sm font-medium py-[10px] tracking-[-2%] md:tracking-[-6%] rounded-lg ${
+                  isSubmitting
+                    ? "opacity-50 cursor-not-allowed"
+                    : isMobile
+                    ? ""
+                    : "hover:bg-transparent hover:border-[#00DBDC] hover:text-[#00DBDC]"
+                } transition-all duration-200`}
+              >
+                {isSubmitting ? "Sending..." : submitButtonText}
+              </button>
+
+              {messageState.type && (
+                <div className="flex justify-center md:-mb-[24px]">
+                  <div className="flex items-center gap-2">
+                    <img
+                      src={
+                        messageState.type === "success" ||
+                        messageState.type === "error"
+                          ? "/images/success-tick.svg"
+                          : "/images/error-red.svg"
+                      }
+                      alt={
+                        messageState.type === "success" ? "Success" : "Error"
+                      }
+                      className="w-7 h-7 flex-shrink-0 mt-0"
+                    />
+                    <p
+                      className="text-white font-inter font-normal"
+                      style={{
+                        fontSize: "12px",
+                        lineHeight: "16px",
+                      }}
+                    >
+                      {messageState.text}
+                    </p>
+                  </div>
+                </div>
+              )}
+            </form>
+          </ScrollAnimation>
+        </div>
       </div>
     </div>
   );

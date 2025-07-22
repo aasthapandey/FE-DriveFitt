@@ -1,5 +1,6 @@
 import { FooterInfoItem, SocialLinks } from "@/types/staticPages";
 import Image from "next/image";
+import ScrollAnimation from "@/components/common/ScrollAnimation";
 
 interface ChatWithUsProps {
   footerInfoList: FooterInfoItem[];
@@ -33,68 +34,76 @@ const ChatWithUs = ({
         {footerInfoList.map((item, index) => {
           const contactLink = getContactLink(item);
           return (
-            <div key={index} className="flex items-start gap-[14px] md:gap-8">
-              <div>
-                <div className="w-10 h-10 relative">
-                  <div
-                    className="absolute inset-0 rounded-full w-10 h-10"
-                    style={{
-                      boxShadow: "0px 7.2px 14.4px 0px #00DBDC33",
-                    }}
-                  >
-                    <div className="w-full h-full flex items-center justify-center bg-[#00DBDC] rounded-full">
-                      <Image
-                        src={item.image}
-                        alt={item.title}
-                        width={15}
-                        height={15}
-                        className="max-w-[15px] max-h-[15px] w-auto h-auto"
-                      />
+            <ScrollAnimation
+              key={index}
+              delay={0.2 + index * 0.1}
+              direction="left"
+            >
+              <div className="flex items-start gap-[14px] md:gap-8">
+                <div>
+                  <div className="w-10 h-10 relative">
+                    <div
+                      className="absolute inset-0 rounded-full w-10 h-10"
+                      style={{
+                        boxShadow: "0px 7.2px 14.4px 0px #00DBDC33",
+                      }}
+                    >
+                      <div className="w-full h-full flex items-center justify-center bg-[#00DBDC] rounded-full">
+                        <Image
+                          src={item.image}
+                          alt={item.title}
+                          width={15}
+                          height={15}
+                          className="max-w-[15px] max-h-[15px] w-auto h-auto"
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div>
-                <h3 className="text-sm leading-4 md:text-base md:leading-5 font-medium mb-2 md:mb-0.5">
-                  {item.title}
-                </h3>
-                <p className="text-xs md:text-sm font-normal text-[#8A8A8A] mb-2 md:mb-3">
-                  {item.description}
-                </p>
-                {contactLink ? (
-                  <a
-                    href={contactLink}
-                    className={`text-sm tracking-[0px] leading-5 w-[110%] md:w-full font-normal ${
-                      isMobile ? "" : "hover:text-[#00DBDC]"
-                    } transition-colors`}
-                  >
-                    {item.email}
-                  </a>
-                ) : (
-                  <p className="text-sm tracking-[0px] leading-5 w-[110%] md:w-full font-normal">
-                    {item.email}
+                <div>
+                  <h3 className="text-sm leading-4 md:text-base md:leading-5 font-medium mb-2 md:mb-0.5">
+                    {item.title}
+                  </h3>
+                  <p className="text-xs md:text-sm font-normal text-[#8A8A8A] mb-2 md:mb-3">
+                    {item.description}
                   </p>
-                )}
+                  {contactLink ? (
+                    <a
+                      href={contactLink}
+                      className={`text-sm tracking-[0px] leading-5 w-[110%] md:w-full font-normal ${
+                        isMobile ? "" : "hover:text-[#00DBDC]"
+                      } transition-colors`}
+                    >
+                      {item.email}
+                    </a>
+                  ) : (
+                    <p className="text-sm tracking-[0px] leading-5 w-[110%] md:w-full font-normal">
+                      {item.email}
+                    </p>
+                  )}
+                </div>
               </div>
-            </div>
+            </ScrollAnimation>
           );
         })}
 
-        <div className="flex gap-6 mt-auto pt-6 md:pt-10 border-t border-[#333333]">
-          {socialLinkList.map((link) => (
-            <a
-              key={link.link}
-              href={link.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`${
-                isMobile ? "" : "hover:opacity-80"
-              } transition-opacity`}
-            >
-              <Image src={link.image} alt="social" width={24} height={24} />
-            </a>
-          ))}
-        </div>
+        <ScrollAnimation delay={0.5} direction="left">
+          <div className="flex gap-6 mt-auto pt-6 md:pt-10 border-t border-[#333333]">
+            {socialLinkList.map((link) => (
+              <a
+                key={link.link}
+                href={link.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${
+                  isMobile ? "" : "hover:opacity-80"
+                } transition-opacity`}
+              >
+                <Image src={link.image} alt="social" width={24} height={24} />
+              </a>
+            ))}
+          </div>
+        </ScrollAnimation>
       </div>
     </div>
   );
