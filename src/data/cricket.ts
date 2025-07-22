@@ -12,7 +12,7 @@ export const cricketData: StaticPageData = {
     titleWords: [
       { text: "DRIVE:", color: "#00DBDC", isItalic: true },
       { text: " Cricket for ", color: "#FFFFFF" },
-      { text: "<br />", isBreak: true }, 
+      { isBreak: true },
       { text: "Every Player. Every Day.", color: "#FFFFFF" },
     ],
     description: "Play Better, Longer, and Safer - No Matter your Age or Skill",
