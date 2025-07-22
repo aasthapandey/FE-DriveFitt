@@ -1,41 +1,56 @@
-import type { ComingSoonSection } from "@/types/staticPages";
-import Link from "next/link";
+import { ComingSoonSection as ComingSoonSectionType } from "@/types/staticPages";
 import Image from "next/image";
+import Link from "next/link";
+import ScrollAnimation from "@/components/common/ScrollAnimation";
 
 interface ComingSoonSectionProps {
-  data: ComingSoonSection;
+  data: ComingSoonSectionType;
   isMobile?: boolean;
 }
 
-const ComingSoonSection = ({ data }: ComingSoonSectionProps) => {
+const ComingSoonSection = ({ data, isMobile }: ComingSoonSectionProps) => {
   const {
     title,
     description,
-    iconImage,
+    iconImage: illustration,
     btnPrimaryText,
     btnSecondaryText,
-    btnPrimaryLink = "#",
-    btnSecondaryLink = "/",
+    btnPrimaryLink = "/",
+    btnSecondaryLink,
   } = data;
 
   return (
-    <div className="flex items-center justify-center h-[calc(100vh-170px)]">
+    <div
+      className="flex items-center justify-center min-h-screen bg-no-repeat bg-cover"
+      style={{
+        backgroundImage: `url(${
+          isMobile
+            ? "https://da8nru77lsio9.cloudfront.net/images/countdown-bg-mobile.svg"
+            : "https://da8nru77lsio9.cloudfront.net/images/countdown-bg.svg"
+        })`,
+        backgroundPosition: "center",
+      }}
+    >
       <div className="mx-auto text-center px-4">
-        <div className="flex flex-col items-center justify-center">
+        <ScrollAnimation
+          delay={0.2}
+          direction="up"
+          className="flex flex-col items-center justify-center"
+        >
           <div className="mb-8 w-[80px] h-[80px] md:mb-[48px] md:w-[120px] md:h-[120px]">
             <Image
-              src={iconImage}
-              alt="Coming Soon"
+              src={illustration}
+              alt="Coming Soon Illustration"
               className="opacity-60 w-full h-full"
               width={120}
               height={120}
             />
           </div>
-          <h1 className="text-white text-[32px] font-semibold leading-[40px] tracking-[-1px] mb-4 md:text-[48px] md:font-bold md:leading-[60px] md:tracking-[-2px] md:mb-[24px] md:w-[497px] md:h-[120px]">
+          <h1 className="text-white text-[32px] font-semibold leading-[40px] tracking-[-1px] mb-4 max-w-[300px] md:text-[48px] md:font-bold md:leading-[60px] md:tracking-[-2px] md:mb-[24px] md:max-w-[479px]">
             {title}
           </h1>
 
-          <p className="text-[#FFFFFF] text-[14px] font-light leading-5 tracking-[-0.5px] mb-8 max-w-[300px] md:text-[16px] md:leading-6 md:tracking-[-1px] md:mb-[48px] md:max-w-none">
+          <p className="text-[#FFFFFF] text-[14px] font-light leading-5 tracking-[-0.5px] mb-8 max-w-[300px] md:text-[16px] md:leading-6 md:tracking-[-1px] md:mb-[48px] md:max-w-[262px]">
             {description}
           </p>
 
@@ -54,7 +69,7 @@ const ComingSoonSection = ({ data }: ComingSoonSectionProps) => {
               </button>
             </Link>
           </div>
-        </div>
+        </ScrollAnimation>
       </div>
     </div>
   );

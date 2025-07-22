@@ -3,6 +3,7 @@ import { ScrollingCardSection as ScrollingCardSectionType } from "@/types/static
 import TitleDescription from "@/components/common/TitleDescription";
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
+import ScrollAnimation from "@/components/common/ScrollAnimation";
 
 interface ScrollingCardSectionProps {
   data: ScrollingCardSectionType;
@@ -78,9 +79,15 @@ const ScrollingCardSection = ({
       ref={sectionRef}
       className="md:px-[120px] px-6 flex flex-col gap-5 md:gap-8"
     >
-      <TitleDescription title={title} description={description} />
+      <ScrollAnimation delay={0.2} direction="up">
+        <TitleDescription title={title} description={description} />
+      </ScrollAnimation>
       <div className="flex justify-between gap-[68px]">
-        <div className="flex flex-col md:w-[584px] w-full h-auto md:h-full justify-center border-t border-[#FFFFFF29] md:border-t-0">
+        <ScrollAnimation
+          delay={0.3}
+          direction="left"
+          className="flex flex-col md:w-[584px] w-full h-auto md:h-full justify-center border-t border-[#FFFFFF29] md:border-t-0"
+        >
           {cardSection.map((card, idx) => (
             <div
               key={idx}
@@ -152,8 +159,12 @@ const ScrollingCardSection = ({
               </div>
             </div>
           ))}
-        </div>
-        {isMobile ? null : <div className="w-[549px]">{renderCardImage}</div>}
+        </ScrollAnimation>
+        {isMobile ? null : (
+          <ScrollAnimation delay={0.4} direction="right" className="w-[549px]">
+            {renderCardImage}
+          </ScrollAnimation>
+        )}
       </div>
     </section>
   );

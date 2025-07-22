@@ -1,13 +1,14 @@
-import type { Error404Section } from "@/types/staticPages";
-import Link from "next/link";
+import { Error404Section as Error404SectionType } from "@/types/staticPages";
 import Image from "next/image";
+import Link from "next/link";
+import ScrollAnimation from "@/components/common/ScrollAnimation";
 
 interface Error404SectionProps {
-  data: Error404Section;
+  data: Error404SectionType;
   isMobile?: boolean;
 }
 
-const Error404Section = ({ data }: Error404SectionProps) => {
+const Error404Section = ({ data, isMobile }: Error404SectionProps) => {
   const {
     title,
     description,
@@ -19,7 +20,11 @@ const Error404Section = ({ data }: Error404SectionProps) => {
   return (
     <div className="flex items-center justify-center h-screen">
       <div className="mx-auto text-center px-4">
-        <div className="flex flex-col items-center justify-center">
+        <ScrollAnimation
+          delay={0.2}
+          direction="up"
+          className="flex flex-col items-center justify-center"
+        >
           <div className="mb-8 w-[80px] h-[80px] md:mb-[48px] md:w-[120px] md:h-[120px]">
             <Image
               src={illustration}
@@ -42,7 +47,7 @@ const Error404Section = ({ data }: Error404SectionProps) => {
               {btnText}
             </button>
           </Link>
-        </div>
+        </ScrollAnimation>
       </div>
     </div>
   );

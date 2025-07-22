@@ -1,6 +1,7 @@
 "use client";
 import { ContactFormProps } from "@/types/staticPages";
 import { useState } from "react";
+import ScrollAnimation from "@/components/common/ScrollAnimation";
 
 const ContactForm = ({
   data,
@@ -168,27 +169,33 @@ const ContactForm = ({
   };
 
   return (
-    <div className="flex-1">
-      <div
-        className="rounded-[20px] md:rounded-[40px] p-[2px] h-full"
-        style={{
-          background:
-            "linear-gradient(180deg, #333333 29.36%, #00DBDC 120.13%)",
-        }}
-      >
-        <div className="rounded-[20px] md:rounded-[40px] w-full h-full p-8 md:p-12 flex flex-col bg-[#0D0D0D]">
-          <h2 className="text-2xl leading-7 md:text-[40px] font-semibold md:leading-[48px] tracking-[-1px] md:tracking-[-2px] mb-2">
-            {title}
-          </h2>
-          <p className="text-xs leading-4 tracking-[-1%] md:text-base md:leading-5 text-[#8A8A8A] mb-7 md:mb-10">
-            {description}
-          </p>
+    <div className="w-full max-w-[1200px] mx-auto">
+      <div className="flex flex-col md:flex-row gap-6 md:gap-[60px]">
+        <ScrollAnimation
+          delay={0.2}
+          direction="left"
+          className="w-full md:w-1/3"
+        >
+          <div className="flex flex-col gap-3 md:gap-4">
+            <h2 className="text-2xl md:text-[32px] font-semibold tracking-[-1px] leading-[30px] md:leading-[40px]">
+              {title}
+            </h2>
+            <p className="text-sm md:text-base font-light leading-[18px] md:leading-6 tracking-[-0.5px] text-[#FFFFFF]">
+              {description}
+            </p>
+          </div>
+        </ScrollAnimation>
 
+        <ScrollAnimation
+          delay={0.3}
+          direction="right"
+          className="w-full md:w-2/3"
+        >
           <form
+            className="flex flex-col gap-6 md:gap-8"
             onSubmit={handleSubmit}
-            className="flex flex-col gap-4 md:gap-6 flex-1"
           >
-            <div className="grid grid-row-2 gap-4 md:grid-cols-2 md:gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
               <div className="flex flex-col gap-1.5">
                 <label
                   htmlFor="firstName"
@@ -227,7 +234,7 @@ const ContactForm = ({
               </div>
             </div>
 
-            <div className="grid grid-row-2 gap-4 md:grid-cols-2 md:gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
               <div className="flex flex-col gap-1.5">
                 <label
                   htmlFor="email"
@@ -327,7 +334,7 @@ const ContactForm = ({
               </div>
             )}
           </form>
-        </div>
+        </ScrollAnimation>
       </div>
     </div>
   );
