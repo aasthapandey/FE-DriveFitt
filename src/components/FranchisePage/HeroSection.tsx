@@ -55,14 +55,14 @@ const HeroSection = ({ data, isMobile }: HeroSectionProps) => {
 
           {/* Main Title */}
           <ScrollAnimation delay={0.3} direction="up">
-            <div className="text-[40px] w-[70%] md:w-full h-auto flex-wrap justify-center md:text-[68px] font-light text-white flex tracking-[-2px] leading-[44px] md:leading-[78px] text-center">
-              <span className="text-[#00DBDC] italic font-bold ">
-                Drive&nbsp;
-              </span>
-              <span className=" italic font-bold">FITT&nbsp;&nbsp;</span>
-              <span className="text-white">
-                {isMobile ? title.toUpperCase() : title}
-              </span>
+            <div className="text-center w-full">
+              <h1 className="text-[40px] md:text-[68px] font-light text-white tracking-[-2px] leading-[44px] md:leading-[78px]">
+                <span className="text-[#00DBDC] italic font-bold">Drive </span>
+                <span className="italic font-bold">FITT </span>
+                <span className="text-white block md:inline">
+                  {isMobile ? title.toUpperCase() : title}
+                </span>
+              </h1>
             </div>
           </ScrollAnimation>
 
