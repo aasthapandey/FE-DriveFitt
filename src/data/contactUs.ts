@@ -21,14 +21,14 @@ export const contactUsData: ContactUsPageData = {
     footerInfoList: [
       {
         title: "Write To Us",
-        description: "Our friendly team is Here to help",
+        description: "Our friendly team is here to help",
         email: "info@drivefitt.club",
         image: "https://da8nru77lsio9.cloudfront.net/images/ChatToUs.svg",
       },
       {
         title: "Visit Us",
         description: "Discover the best of what we offer at our Flagship Club",
-        email: "M3M 65th Avenue, Sector 65, Gurugram, Haryana 122022",
+        email: "M3M 65th Avenue, Sector 65, Gurugram, Haryana - 122022 India",
         image: "https://da8nru77lsio9.cloudfront.net/images/VisitUs.svg",
       },
       {
