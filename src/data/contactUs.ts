@@ -21,19 +21,19 @@ export const contactUsData: ContactUsPageData = {
     footerInfoList: [
       {
         title: "Write To Us",
-        description: "Our Friendly Team Is Here To Help",
+        description: "Our friendly team is here to help",
         email: "info@drivefitt.club",
         image: "https://da8nru77lsio9.cloudfront.net/images/ChatToUs.svg",
       },
       {
         title: "Visit Us",
-        description: "Discover The Best Of What We Offer At Our Flagship Club",
-        email: "M3M 65th Avenue, Sector 65, Gurugram, Haryana 122022",
+        description: "Discover the best of what we offer at our Flagship Club",
+        email: "M3M 65th Avenue, Sector 65, Gurugram, Haryana - 122022",
         image: "https://da8nru77lsio9.cloudfront.net/images/VisitUs.svg",
       },
       {
         title: "Call Us",
-        description: "Mon - Sun From 10am To 10pm",
+        description: "Mon - Sun between 10am and 10pm",
         email: "+91-9871836565",
         image: "https://da8nru77lsio9.cloudfront.net/images/CallUs.svg",
       },
@@ -61,7 +61,7 @@ export const contactUsData: ContactUsPageData = {
     ],
     contactFormSection: {
       title: "Get In Touch",
-      description: "We'd Love To Hear From You. Please Fill Out This Form.",
+      description: "We'd love to hear from you. Please fill out the form.",
       submitButtonText: "Send Message",
       fields: {
         firstName: {
