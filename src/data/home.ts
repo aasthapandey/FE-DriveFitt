@@ -1,5 +1,6 @@
 import { StaticPageData } from "@/types/staticPages";
 import { navbarData } from "./navbar";
+import { PROTEIN_BAR_TEXT } from "@/data/constants";
 
 export const homeData: StaticPageData = {
   title: "DriveFITT",
@@ -150,7 +151,7 @@ export const homeData: StaticPageData = {
     description: "Refuel. Recharge. Recover.",
     cardSection: [
       {
-        title: "Protein BAR",
+        title: PROTEIN_BAR_TEXT,
         description:
           "Fuel up with wholesome meals, recovery shakes, and smart hydration—designed for every fitness goal.",
         backgroundImage:

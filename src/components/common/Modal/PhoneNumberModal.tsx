@@ -48,9 +48,13 @@ const PhoneStep = ({
       <Image
         src="https://da8nru77lsio9.cloudfront.net/images/logo.svg"
         alt="DRIVEFITT"
-        width={212}
-        height={36}
-        className="w-auto h-auto"
+        width={isMobile ? 165 : 212}
+        height={isMobile ? 28 : 36}
+        style={{
+          width: isMobile ? "165px" : "212px",
+          height: isMobile ? "28px" : "36px",
+        }}
+        className="object-contain"
       />
     </div>
 
@@ -401,7 +405,7 @@ const PhoneNumberModal = ({
             alt="Close"
             width={16}
             height={16}
-            className="w-[48px] h-[48px]"
+            className="w-4 h-4 md:w-5 md:h-5"
           />
         </button>
 
