@@ -13,7 +13,7 @@ export const cricketData: StaticPageData = {
       { text: "DRIVE:", color: "#00DBDC", isItalic: true },
       { text: " Cricket for ", color: "#FFFFFF" },
       { isBreak: true },
-      { text: "Every Player. Every Day.", color: "#FFFFFF" },
+      { text: "Every Player. Every Day.", color: "#FFFFFF" }
     ],
     description: "Play Better, Longer, and Safer - No Matter your Age or Skill",
     desktopImage:
