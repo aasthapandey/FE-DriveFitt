@@ -7,6 +7,7 @@ import TitleDescription from "@/components/common/TitleDescription";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import ScrollAnimation from "@/components/common/ScrollAnimation";
 
 const MemberSection = ({
   data,
@@ -93,59 +94,65 @@ const MemberSection = ({
 
   return (
     <section className="md:px-[120px] px-6 flex flex-col gap-5 overflow-hidden">
-      <TitleDescription title={title || ""} description={description || ""} />
+      <ScrollAnimation delay={0.2} direction="up">
+        <TitleDescription title={title || ""} description={description || ""} />
+      </ScrollAnimation>
 
-      <div className="member-carousel">
-        <Slider ref={sliderRef} {...sliderSettings}>
-          {memberList.map((member) => (
-            <div key={member.title} className="px-[10px] md:px-5">
-              <MemberCard data={member} />
-            </div>
-          ))}
-        </Slider>
-      </div>
+      <ScrollAnimation delay={0.3} direction="up">
+        <div className="member-carousel">
+          <Slider ref={sliderRef} {...sliderSettings}>
+            {memberList.map((member) => (
+              <div key={member.title} className="px-[10px] md:px-5">
+                <MemberCard data={member} />
+              </div>
+            ))}
+          </Slider>
+        </div>
+      </ScrollAnimation>
 
       {isMobile ? null : (
-        <div className="flex items-center mt-8">
-          <div className="relative w-full max-w-[1200px] h-[1px] bg-[#1C1C1E] mb-2">
-            {/* White highlight below active card */}
-            <div
-              className="hidden md:block absolute top-0 h-[2px] bg-white transition-all duration-500 ease-in-out"
-              style={{
-                width: highlightStyle.width,
-                left: highlightStyle.left,
-              }}
-            />
-          </div>
-          <div className="h-16 p-2 rounded-[53.3px] bg-[#222226] hidden md:flex gap-4">
-            <button
-              onClick={handlePrevious}
-              className={`bg-[#373737] rounded-full p-4 ${
-                isMobile ? "" : "hover:bg-[#2C2C2E]"
-              } transition-colors`}
-            >
-              <Image
-                src="https://da8nru77lsio9.cloudfront.net/images/arrow-left.svg"
-                alt="Previous"
-                width={24}
-                height={24}
+        <ScrollAnimation delay={0.4} direction="up">
+          <div className="flex items-center mt-8">
+            <div className="relative w-full max-w-[1200px] h-[1px] bg-[#1C1C1E] mb-2">
+              {/* White highlight below active card */}
+              <div
+                className="hidden md:block absolute top-0 h-[2px] bg-white transition-all duration-500 ease-in-out"
+                style={{
+                  width: highlightStyle.width,
+                  left: highlightStyle.left,
+                }}
               />
-            </button>
-            <button
-              onClick={handleNext}
-              className={`bg-[#373737] rounded-full p-4 ${
-                isMobile ? "" : "hover:bg-[#2C2C2E]"
-              } transition-colors`}
-            >
-              <Image
-                src="https://da8nru77lsio9.cloudfront.net/images/arrow-right.svg"
-                alt="Next"
-                width={24}
-                height={24}
-              />
-            </button>
+            </div>
+            <div className="h-16 p-2 rounded-[53.3px] bg-[#222226] hidden md:flex gap-4">
+              <button
+                onClick={handlePrevious}
+                className={`bg-[#373737] rounded-full p-4 ${
+                  isMobile ? "" : "hover:bg-[#2C2C2E]"
+                } transition-colors`}
+              >
+                <Image
+                  src="https://da8nru77lsio9.cloudfront.net/images/arrow-left.svg"
+                  alt="Previous"
+                  width={24}
+                  height={24}
+                />
+              </button>
+              <button
+                onClick={handleNext}
+                className={`bg-[#373737] rounded-full p-4 ${
+                  isMobile ? "" : "hover:bg-[#2C2C2E]"
+                } transition-colors`}
+              >
+                <Image
+                  src="https://da8nru77lsio9.cloudfront.net/images/arrow-right.svg"
+                  alt="Next"
+                  width={24}
+                  height={24}
+                />
+              </button>
+            </div>
           </div>
-        </div>
+        </ScrollAnimation>
       )}
     </section>
   );
