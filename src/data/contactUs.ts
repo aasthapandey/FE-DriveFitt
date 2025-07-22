@@ -28,12 +28,12 @@ export const contactUsData: ContactUsPageData = {
       {
         title: "Visit Us",
         description: "Discover the best of what we offer at our Flagship Club",
-        email: "M3M 65th Avenue, Sector 65, Gurugram, Haryana - 122022",
+        email: "M3M 65th Avenue, Sector 65, Gurugram, Haryana - 122022 India",
         image: "https://da8nru77lsio9.cloudfront.net/images/VisitUs.svg",
       },
       {
         title: "Call Us",
-        description: "Mon - Sun between 10am and 10pm",
+        description: "Mon - Sun from 10AM to 10PM",
         email: "+91-9871836565",
         image: "https://da8nru77lsio9.cloudfront.net/images/CallUs.svg",
       },
