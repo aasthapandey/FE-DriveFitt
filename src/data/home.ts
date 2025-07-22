@@ -1,6 +1,6 @@
 import { StaticPageData } from "@/types/staticPages";
 import { navbarData } from "./navbar";
-import { PROTEIN_BAR_TEXT } from "./constants";
+import { PROTEIN_BAR_TEXT } from "@/data/constants";
 
 export const homeData: StaticPageData = {
   title: "DriveFITT",
