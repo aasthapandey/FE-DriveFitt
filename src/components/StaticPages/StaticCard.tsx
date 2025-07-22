@@ -1,5 +1,6 @@
 import { StaticCardType } from "@/types/staticPages";
 import Image from "next/image";
+import { PROTEIN_BAR_TEXT } from "@/data/constants";
 
 interface StaticCardProps {
   data: StaticCardType;
@@ -26,7 +27,7 @@ const StaticCard = ({ data, className }: StaticCardProps) => {
         >
           <div
             className={`absolute top-0 ${
-              title === "Protein BAR"
+              title === PROTEIN_BAR_TEXT
                 ? "right-[3%] top-[-10%] md:right-[3%] md:top-[-10%] h-[276px] md:h-[440px] w-[153px]  md:w-[244px]"
                 : "right-[-5%] top-[-9%] md:right-[-5%] md:top-[-27px] h-[271px] md:h-[430px]  w-[260px]  md:w-[412px]"
             }`}
@@ -34,10 +35,10 @@ const StaticCard = ({ data, className }: StaticCardProps) => {
             <Image
               src={modalImage || ""}
               alt="modal"
-              width={title === "Protein BAR" ? 244 : 412}
-              height={title === "Protein BAR" ? 440 : 430}
+              width={title === PROTEIN_BAR_TEXT ? 244 : 412}
+              height={title === PROTEIN_BAR_TEXT ? 440 : 430}
               className={`${
-                title === "Protein BAR"
+                title === PROTEIN_BAR_TEXT
                   ? "w-[153px] h-[276px] md:w-[244px] md:h-[440px]"
                   : "w-[260px] h-[271px] md:w-[412px] md:h-[430px]"
               } object-contain object-right`}
