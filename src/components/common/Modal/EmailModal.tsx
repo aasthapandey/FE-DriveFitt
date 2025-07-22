@@ -394,7 +394,7 @@ const EmailModal = ({ isOpen, onClose, isMobile }: EmailModalProps) => {
             alt="Close"
             width={16}
             height={16}
-            className="w-4 h-4 md:w-5 md:h-5"
+            className="w-[48px] h-[48px] "
           />
         </button>
 
