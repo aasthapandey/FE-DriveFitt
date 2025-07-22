@@ -75,7 +75,7 @@ export const homeData: StaticPageData = {
         description:
           "World-class indoor nets, ball tracking & analytics & pro coaching for all skill levels",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/homec/mobile-card4-1.webp",
+          "https://da8nru77lsio9.cloudfront.net/images/homec/card4-1.webp",
         link: "/cricket",
         redirectionIcon:
           "https://da8nru77lsio9.cloudfront.net/images/redirection.svg",
@@ -130,8 +130,7 @@ export const homeData: StaticPageData = {
         title: "Pilates",
         description:
           "Low-impact, high-control pilates workouts designed to improve flexibility, posture, and core strength in a group setting.",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/homec/card3-2.webp",
+        backgroundImage: "/images/homec/card3-2.webp",
         link: "/coming-soon",
         redirectionIcon: "/images/redirection.svg",
       },
