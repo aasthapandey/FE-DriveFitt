@@ -58,7 +58,7 @@ export const franchiseData: FranchisePageData = {
         icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/multi-revenue-icon-5.svg",
         title: "Retail & Café",
         description:
-          "Sports equipment, supplements, accessories, apparel, and healthy meal options",
+          "Sports equipments, supplements, accessories, apparel, and healthy meals",
       },
       {
         icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/multi-revenue-icon-6.svg",
