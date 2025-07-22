@@ -8,7 +8,7 @@ interface Error404SectionProps {
   isMobile?: boolean;
 }
 
-const Error404Section = ({ data, isMobile }: Error404SectionProps) => {
+const Error404Section = ({ data }: Error404SectionProps) => {
   const {
     title,
     description,
