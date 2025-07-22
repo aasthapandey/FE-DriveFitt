@@ -11,7 +11,7 @@ export const cricketData: StaticPageData = {
   hero: {
     titleWords: [
       { text: "DRIVE:", color: "#00DBDC", isItalic: true },
-      { text: " Cricket for <br/>Every Player. Every Day.", color: "#FFFFFF" },
+      { text: " Cricket for      Every Player. Every Day.", color: "#FFFFFF" },
     ],
     description: "Play Better, Longer, and Safer - No Matter your Age or Skill",
     desktopImage:
