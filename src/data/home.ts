@@ -44,11 +44,11 @@ export const homeData: StaticPageData = {
     btnSecondaryText: "Join Now",
   },
   countdownSection: {
-    title: "Your premium sports club. just days away. Launching in ",
-    date: "2025-11-25",
+    title: "Your Premium Sports Club. Just Days Away. Opening At ",
+    date: "2025-11-15",
     bgImage: "/images/counterbg.svg",
     mobileBgImage: "/images/counterbg-mobile.svg",
-    location: "65th Ave. Golf Course Extn Road",
+    location: "Golf Course Extn Road Gurugram",
     openingText: "Opening in",
     labels: {
       days: "DAYS",
@@ -60,7 +60,7 @@ export const homeData: StaticPageData = {
   carouselBanner: [
     {
       title: "Experience Premium Club. Launching in GURUGRAM",
-      countdownEnd: "2025-09-13",
+      countdownEnd: "2025-11-15",
       backgroundImage:
         "https://da8nru77lsio9.cloudfront.net/images/carouselBanner/banner-1.svg",
     },
@@ -75,7 +75,7 @@ export const homeData: StaticPageData = {
         description:
           "World-class indoor nets, ball tracking & analytics & pro coaching for all skill levels",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/homec/mobile-card4-1.webp",
+          "https://da8nru77lsio9.cloudfront.net/images/homec/card4-1.webp",
         link: "/cricket",
         redirectionIcon:
           "https://da8nru77lsio9.cloudfront.net/images/redirection.svg",
@@ -130,8 +130,7 @@ export const homeData: StaticPageData = {
         title: "Pilates",
         description:
           "Low-impact, high-control pilates workouts designed to improve flexibility, posture, and core strength in a group setting.",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/homec/card3-2.webp",
+        backgroundImage: "/images/homec/card3-2.webp",
         link: "/coming-soon",
         redirectionIcon: "/images/redirection.svg",
       },

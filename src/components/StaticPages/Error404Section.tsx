@@ -1,9 +1,10 @@
-import type { Error404Section } from "@/types/staticPages";
-import Link from "next/link";
+import { Error404Section as Error404SectionType } from "@/types/staticPages";
 import Image from "next/image";
+import Link from "next/link";
+import ScrollAnimation from "@/components/common/ScrollAnimation";
 
 interface Error404SectionProps {
-  data: Error404Section;
+  data: Error404SectionType;
   isMobile?: boolean;
 }
 
@@ -19,7 +20,11 @@ const Error404Section = ({ data }: Error404SectionProps) => {
   return (
     <div className="flex items-center justify-center h-screen">
       <div className="mx-auto text-center px-4">
-        <div className="flex flex-col items-center justify-center">
+        <ScrollAnimation
+          delay={0.2}
+          direction="up"
+          className="flex flex-col items-center justify-center"
+        >
           <div className="mb-8 w-[80px] h-[80px] md:mb-[48px] md:w-[120px] md:h-[120px]">
             <Image
               src={illustration}
@@ -29,11 +34,11 @@ const Error404Section = ({ data }: Error404SectionProps) => {
               height={120}
             />
           </div>
-          <h1 className="text-white text-[32px] font-semibold leading-[40px] tracking-[-1px] mb-4 max-w-[300px] md:text-[48px] md:font-bold md:leading-[60px] md:tracking-[-2px] md:mb-[24px] md:max-w-[479px]">
+          <h1 className="text-white text-[32px] font-semibold leading-[40px] tracking-[-1px] mb-4 md:text-[48px] md:font-bold md:leading-[60px] md:tracking-[-2px] md:mb-[24px] md:w-[497px] md:h-[120px]">
             {title}
           </h1>
 
-          <p className="text-[#FFFFFF] text-[14px] font-light leading-5 tracking-[-0.5px] mb-8 max-w-[300px] md:text-[16px] md:leading-6 md:tracking-[-1px] md:mb-[48px] md:max-w-[262px]">
+          <p className="text-[#FFFFFF] text-[14px] font-light leading-5 tracking-[-0.5px] mb-8 max-w-[300px] md:text-[16px] md:leading-6 md:tracking-[-1px] md:mb-[48px] md:max-w-none">
             {description}
           </p>
 
@@ -42,7 +47,7 @@ const Error404Section = ({ data }: Error404SectionProps) => {
               {btnText}
             </button>
           </Link>
-        </div>
+        </ScrollAnimation>
       </div>
     </div>
   );

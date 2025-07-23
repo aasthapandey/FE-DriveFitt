@@ -2,6 +2,7 @@ import { CardSection, CardType } from "@/types/staticPages";
 import Card from "@/components/StaticPages/Card";
 import TitleDescription from "@/components/common/TitleDescription";
 import Image from "next/image";
+import ScrollAnimation from "@/components/common/ScrollAnimation";
 
 const CardSection4 = ({
   data,
@@ -86,24 +87,29 @@ const CardSection4 = ({
 
   return (
     <section className="md:px-[120px] px-6 flex flex-col gap-5">
-      <TitleDescription title={title || ""} description={description || ""} />
+      <ScrollAnimation delay={0.2} direction="up">
+        <TitleDescription title={title || ""} description={description || ""} />
+      </ScrollAnimation>
       {isMobile ? (
         <div className="flex flex-col w-full gap-4">
           {cardSection.map((card, idx) => (
-            <CustomMobileCard card={card} key={idx} />
+            <ScrollAnimation key={idx} delay={0.3 + idx * 0.15} direction="up">
+              <CustomMobileCard card={card} />
+            </ScrollAnimation>
           ))}
         </div>
       ) : (
         <div className="grid grid-cols-2 grid-rows-2 gap-[40px]">
           {cardSection.map((card, idx) => (
-            <Card
-              data={card}
-              key={idx}
-              iconClass="!size-10"
-              textPlusImageClass="md:pb-[40px]"
-              imageClass="md:h-[360px]"
-              type={1}
-            />
+            <ScrollAnimation key={idx} delay={0.3 + idx * 0.15} direction="up">
+              <Card
+                data={card}
+                iconClass="!size-10"
+                textPlusImageClass="md:pb-[40px]"
+                imageClass="md:h-[360px]"
+                type={1}
+              />
+            </ScrollAnimation>
           ))}
         </div>
       )}

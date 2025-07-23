@@ -5,6 +5,7 @@ import { EvolutionSectionProps, EvolutionItem } from "@/types/staticPages";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import ScrollAnimation from "@/components/common/ScrollAnimation";
 
 const EvolutionSection = ({
   data,
@@ -78,49 +79,57 @@ const EvolutionSection = ({
 
   return (
     <section className="flex flex-col gap-5">
-      <TitleDescription title={title || ""} />
-      <div
-        className="h-[208px] md:h-[730px] w-full flex flex-col justify-end evolution-background"
-        style={{
-          background: `linear-gradient(179.2deg, rgba(0, 0, 0, 0) 0.87%, rgba(0, 0, 0, 0.2) 54.05%, #0D0D0D 99.5%), url(${backgroundImageUrl})`,
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center center",
-          backgroundAttachment: "local",
-        }}
-      >
-        {/* Desktop Hover View */}
-        <div className="hidden md:flex justify-between h-fit items-start w-full gap-10 md:px-[120px] pl-6 py-4 md:py-[60px]">
-          {evolutionList.map((evo, idx) => {
-            return (
-              <div
-                key={idx}
-                {...(!isMobile && {
-                  onMouseEnter: () => setActiveBackground(evo),
-                })}
-                className={`${
-                  activeBackground.title === evo.title
-                    ? "bg-white text-[#1C1C1C]"
-                    : "bg-transparent text-white"
-                } flex flex-col gap-4 p-8 ${
-                  isMobile ? "" : "cursor-pointer"
-                } h-full w-full md:w-[374px] border-t-[2px] border-white transition-colors duration-300`}
-              >
-                <h3 className="text-xl md:text-[32px] font-semibold leading-6 md:leading-9 tracking-[-1%]">
-                  {evo.title}
-                </h3>
-                <p className="text-sm tracking-[-1%] font-light md:text-base leading-5 md:tracking-[-2%]">
-                  {evo.description}
-                </p>
-              </div>
-            );
-          })}
+      <ScrollAnimation delay={0.2} direction="up">
+        <TitleDescription title={title || ""} />
+      </ScrollAnimation>
+      <ScrollAnimation delay={0.3} direction="up">
+        <div
+          className="h-[208px] md:h-[730px] w-full flex flex-col justify-end evolution-background"
+          style={{
+            background: `linear-gradient(179.2deg, rgba(0, 0, 0, 0) 0.87%, rgba(0, 0, 0, 0.2) 54.05%, #0D0D0D 99.5%), url(${backgroundImageUrl})`,
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center center",
+            backgroundAttachment: "local",
+          }}
+        >
+          {/* Desktop Hover View */}
+          <div className="hidden md:flex justify-between h-fit items-start w-full gap-10 md:px-[120px] pl-6 py-4 md:py-[60px]">
+            {evolutionList.map((evo, idx) => {
+              return (
+                <div
+                  key={idx}
+                  {...(!isMobile && {
+                    onMouseEnter: () => setActiveBackground(evo),
+                  })}
+                  className={`${
+                    activeBackground.title === evo.title
+                      ? "bg-white text-[#1C1C1C]"
+                      : "bg-transparent text-white"
+                  } flex flex-col gap-4 p-8 ${
+                    isMobile ? "" : "cursor-pointer"
+                  } h-full w-full md:w-[374px] border-t-[2px] border-white transition-colors duration-300`}
+                >
+                  <h3 className="text-xl md:text-[32px] font-semibold leading-6 md:leading-9 tracking-[-1%]">
+                    {evo.title}
+                  </h3>
+                  <p className="text-sm tracking-[-1%] font-light md:text-base leading-5 md:tracking-[-2%]">
+                    {evo.description}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
         </div>
-      </div>
+      </ScrollAnimation>
       {/* Mobile Carousel View */}
-      <div className="block md:hidden mt-[-70px] pl-4 evolutionCarousel">
+      <ScrollAnimation
+        delay={0.4}
+        direction="up"
+        className="block md:hidden mt-[-70px] pl-4 evolutionCarousel"
+      >
         <Slider {...sliderSettings}>
           {evolutionList.map((evo, idx) => (
-            <div key={idx} className="!w-full  pl-4">
+            <div key={idx} className="!w-full pl-4">
               <div
                 ref={(el) => {
                   cardRefs.current[idx] = el;
@@ -141,7 +150,7 @@ const EvolutionSection = ({
             </div>
           ))}
         </Slider>
-      </div>
+      </ScrollAnimation>
     </section>
   );
 };

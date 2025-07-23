@@ -3,6 +3,7 @@ import { GallerySectionProps } from "@/types/staticPages";
 import Image from "next/image";
 import { useState } from "react";
 import EmailModal from "@/components/common/Modal/EmailModal";
+import ScrollAnimation from "@/components/common/ScrollAnimation";
 
 const GallerySection = ({
   data,
@@ -25,7 +26,11 @@ const GallerySection = ({
   return (
     <>
       <div className="md:px-[120px] px-6 flex flex-col md:flex-row gap-[25px] md:gap-[104px] justify-between items-center">
-        <div className="w-full md:w-2/5 flex flex-col text-center justify-center items-center md:text-start md:justify-start md:items-start gap-3 md:gap-4">
+        <ScrollAnimation
+          delay={0.2}
+          direction="left"
+          className="w-full md:w-2/5 flex flex-col text-center justify-center items-center md:text-start md:justify-start md:items-start gap-3 md:gap-4"
+        >
           <h2
             className={`${
               isMobile
@@ -54,8 +59,12 @@ const GallerySection = ({
           >
             {btnLabel}
           </button>
-        </div>
-        <div className="w-full md:w-3/5">
+        </ScrollAnimation>
+        <ScrollAnimation
+          delay={0.3}
+          direction="right"
+          className="w-full md:w-3/5"
+        >
           <div className="grid grid-cols-5 gap-2 h-[316px] md:h-[577px]">
             <div className="col-span-2 grid grid-rows-2 gap-2">
               <div className="row-span-1 relative h-full w-full rounded-[20px] overflow-hidden">
@@ -84,7 +93,7 @@ const GallerySection = ({
               />
             </div>
           </div>
-        </div>
+        </ScrollAnimation>
       </div>
 
       {/* Email Modal */}

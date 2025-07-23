@@ -1,9 +1,10 @@
-import type { ComingSoonSection } from "@/types/staticPages";
-import Link from "next/link";
+import { ComingSoonSection as ComingSoonSectionType } from "@/types/staticPages";
 import Image from "next/image";
+import Link from "next/link";
+import ScrollAnimation from "@/components/common/ScrollAnimation";
 
 interface ComingSoonSectionProps {
-  data: ComingSoonSection;
+  data: ComingSoonSectionType;
   isMobile?: boolean;
 }
 
@@ -11,21 +12,25 @@ const ComingSoonSection = ({ data }: ComingSoonSectionProps) => {
   const {
     title,
     description,
-    iconImage,
+    iconImage: illustration,
     btnPrimaryText,
     btnSecondaryText,
-    btnPrimaryLink = "#",
-    btnSecondaryLink = "/",
+    btnPrimaryLink = "/",
+    btnSecondaryLink,
   } = data;
 
   return (
     <div className="flex items-center justify-center h-[calc(100vh-170px)]">
       <div className="mx-auto text-center px-4">
-        <div className="flex flex-col items-center justify-center">
+        <ScrollAnimation
+          delay={0.2}
+          direction="up"
+          className="flex flex-col items-center justify-center"
+        >
           <div className="mb-8 w-[80px] h-[80px] md:mb-[48px] md:w-[120px] md:h-[120px]">
             <Image
-              src={iconImage}
-              alt="Coming Soon"
+              src={illustration}
+              alt="Coming Soon Illustration"
               className="opacity-60 w-full h-full"
               width={120}
               height={120}
@@ -54,7 +59,7 @@ const ComingSoonSection = ({ data }: ComingSoonSectionProps) => {
               </button>
             </Link>
           </div>
-        </div>
+        </ScrollAnimation>
       </div>
     </div>
   );

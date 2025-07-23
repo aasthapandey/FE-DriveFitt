@@ -212,12 +212,7 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
             }
             if (key === "comingSoonSection") {
               return (
-                <div
-                  key={key}
-                  className={`w-full ${
-                    isMobile ? "bg-contain" : "bg-cover"
-                  } bg-center bg-no-repeat h-auto`}
-                >
+                <div key={key} className="w-full">
                   {component}
                 </div>
               );

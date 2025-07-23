@@ -58,7 +58,7 @@ export const fitnessData: StaticPageData = {
       {
         title: "Personal Training",
         description:
-          "Customized 1-on-1 coaching tailored to your body, goals, sport-specific performance—and complete recovery needs.",
+          "Customized 1-on-1 coaching tailored to your body, goals, sport-specific performance and complete recovery needs.",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-1.svg",
         iconImage:
@@ -66,7 +66,7 @@ export const fitnessData: StaticPageData = {
         link: "",
       },
       {
-        title: "High And Low Intensity Workout Zones",
+        title: "All New Micro HIIT",
         description:
           "From sweat-drenched HIIT sessions to mindful low-impact training, our zones allow you to train full spectrum",
         backgroundImage:

@@ -2,6 +2,7 @@ import { CardSection } from "@/types/staticPages";
 import TitleDescription from "@/components/common/TitleDescription";
 import CardInfoItem from "@/components/StaticPages/CardInfoItem";
 import { CardType } from "@/types/staticPages";
+import ScrollAnimation from "@/components/common/ScrollAnimation";
 
 // Custom Card component without hover effects
 const StaticCard = ({
@@ -83,59 +84,71 @@ const CardSection5 = ({
 }) => {
   const { title, description, cardSection } = data;
   return (
-    <section className="md:px-[120px] px-6 flex flex-col  gap-5 md:gap-8 md:mt-[-60px]">
-      <TitleDescription title={title || ""} description={description || ""} />
+    <section className="md:px-[120px] px-6 flex flex-col gap-5 md:gap-8 md:mt-[-60px]">
+      <ScrollAnimation delay={0.2} direction="up">
+        <TitleDescription title={title || ""} description={description || ""} />
+      </ScrollAnimation>
       {isMobile ? (
-        <div
-          className="rounded-[20px] md:rounded-[40px] p-[2px]"
-          style={{
-            background:
-              "linear-gradient(180deg, #333333 29.36%, #00DBDC 120.13%)",
-          }}
-        >
+        <ScrollAnimation delay={0.3} direction="up">
           <div
-            className="rounded-[20px] md:rounded-[40px] w-full h-full cursor-pointer flex flex-col justify-center"
+            className="rounded-[20px] md:rounded-[40px] p-[2px]"
             style={{
-              background: "linear-gradient(180deg, #1E1E1E 0%, #141414 100%)",
+              background:
+                "linear-gradient(180deg, #333333 29.36%, #00DBDC 120.13%)",
             }}
           >
-            {cardSection.map((card, idx) => {
-              return (
-                <div key={idx} className="flex flex-col">
-                  <CardInfoItem data={card} />
-                  {idx < cardSection.length - 1 && (
-                    <div className="border-b border-[#333333] mx-6" />
-                  )}
-                </div>
-              );
-            })}
+            <div
+              className="rounded-[20px] md:rounded-[40px] w-full h-full cursor-pointer flex flex-col justify-center"
+              style={{
+                background: "linear-gradient(180deg, #1E1E1E 0%, #141414 100%)",
+              }}
+            >
+              {cardSection.map((card, idx) => {
+                return (
+                  <div key={idx} className="flex flex-col">
+                    <CardInfoItem data={card} />
+                    {idx < cardSection.length - 1 && (
+                      <div className="border-b border-[#333333] mx-6" />
+                    )}
+                  </div>
+                );
+              })}
+            </div>
           </div>
-        </div>
+        </ScrollAnimation>
       ) : (
         <div className="grid grid-cols-3 gap-10 w-full h-[722px]">
-          <div className="flex flex-col gap-10">
+          <ScrollAnimation
+            delay={0.3}
+            direction="up"
+            className="flex flex-col gap-10"
+          >
             <StaticCard
               data={cardSection[0]}
               className="!h-[406px]"
               imageClass="!h-[402px]"
             />
             <StaticCardInfo data={cardSection[1]} className="!h-[276px]" />
-          </div>
-          <div className="flex flex-col">
+          </ScrollAnimation>
+          <ScrollAnimation delay={0.4} direction="up" className="flex flex-col">
             <StaticCard
               data={cardSection[2]}
               className="!h-[722px]"
               imageClass="!h-[718px]"
             />
-          </div>
-          <div className="flex flex-col gap-10">
+          </ScrollAnimation>
+          <ScrollAnimation
+            delay={0.5}
+            direction="up"
+            className="flex flex-col gap-10"
+          >
             <StaticCardInfo data={cardSection[3]} className="!h-[276px]" />
             <StaticCard
               data={cardSection[4]}
               className="!h-[406px]"
               imageClass="!h-[402px]"
             />
-          </div>
+          </ScrollAnimation>
         </div>
       )}
     </section>
