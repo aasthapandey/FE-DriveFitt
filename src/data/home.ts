@@ -44,11 +44,11 @@ export const homeData: StaticPageData = {
     btnSecondaryText: "Join Now",
   },
   countdownSection: {
-    title: "Your premium sports club. just days away. Launching in ",
-    date: "2025-11-25",
+    title: "Your Premium Sports Club. Just Days Away. Opening At ",
+    date: "2025-11-15",
     bgImage: "/images/counterbg.svg",
     mobileBgImage: "/images/counterbg-mobile.svg",
-    location: "65th Ave. Golf Course Extn Road",
+    location: "Golf Course Extn Road Gurugram",
     openingText: "Opening in",
     labels: {
       days: "DAYS",
@@ -60,7 +60,7 @@ export const homeData: StaticPageData = {
   carouselBanner: [
     {
       title: "Experience Premium Club. Launching in GURUGRAM",
-      countdownEnd: "2025-09-13",
+      countdownEnd: "2025-11-15",
       backgroundImage:
         "https://da8nru77lsio9.cloudfront.net/images/carouselBanner/banner-1.svg",
     },
