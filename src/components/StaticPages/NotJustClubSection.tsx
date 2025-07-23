@@ -1,16 +1,41 @@
-import { NotJustClubSectionProps } from "@/types/staticPages";
+import { NotJustClubItem, NotJustClubSectionProps } from "@/types/staticPages";
 import Image from "next/image";
+
+interface ListItemProps {
+  item: NotJustClubItem;
+  className?: string;
+}
+
+const ListItem = ({ item, className = "" }: ListItemProps) => (
+  <div className={`flex gap-6 items-center ${className}`}>
+    <Image
+      src={item.icon}
+      alt={item.description}
+      width={60}
+      height={60}
+      className="size-10 md:size-[60px]"
+    />
+    <span className="text-[#00DBDC] text-5xl font-semibold leading-[56px] tracking-[-2px]">
+      {item.description}
+    </span>
+  </div>
+);
+
+interface NotJustClubSectionComponentProps {
+  data: NotJustClubSectionProps;
+  className?: string;
+  isMobile?: boolean;
+}
 
 const NotJustClubSection = ({
   data,
-  isMobile,
-}: {
-  data: NotJustClubSectionProps;
-  isMobile?: boolean;
-}) => {
+  className = "",
+  isMobile = false,
+}: NotJustClubSectionComponentProps) => {
   const { title, bgImg, list } = data;
+
   return (
-    <section className="md:px-[120px] px-6 flex flex-col gap-5 ">
+    <section className={`md:px-[120px] px-6 flex flex-col gap-5 ${className}`}>
       <div
         className="rounded-[20px] md:rounded-[40px] p-[2px] h-[256px] md:h-[364px]"
         style={{
@@ -26,27 +51,14 @@ const NotJustClubSection = ({
             backgroundPosition: "center",
           }}
         >
-          <div className="flex px-[92px] gap-6 items-center justify-center">
-            <h1 className="text-5xl font-semibold leading-[56px] tracking-[-2px]">
+          <div className="flex gap-6 items-center justify-center">
+            <h1 className="text-5xl font-semibold leading-[56px] tracking-[-2px] w-[557px]">
               {title}
             </h1>
             <div className="flex flex-col gap-7">
-              {list.map((item) => {
-                return (
-                  <div className="flex gap-6 items-center">
-                    <Image
-                      src={item.icon}
-                      alt={item.description}
-                      width={60}
-                      height={60}
-                      className="size-10 md:size-[60px]"
-                    />
-                    <span className="text-[#00DBDC] text-5xl font-semibold leading-[56px] tracking-[-2px]">
-                      {item.description}
-                    </span>
-                  </div>
-                );
-              })}
+              {list.map((item, index) => (
+                <ListItem key={`${item.description}-${index}`} item={item} />
+              ))}
             </div>
           </div>
         </div>

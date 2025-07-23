@@ -263,34 +263,34 @@ export const homeData: StaticPageData = {
         icon: "/images/homec/animation/recovery-icon.svg",
         description: "Recovery Suite",
       },
-      // {
-      //   icon: "/images/homec/animation/3d-body-assessment.svg",
-      //   description: "3d Body Assessment",
-      // },
-      // {
-      //   icon: "/images/homec/animation/Physiotherapy.svg",
-      //   description: "Physiotherapy",
-      // },
-      // {
-      //   icon: "/images/homec/animation/Nutrition-Fuel.svg",
-      //   description: "Nutrition & Fuel",
-      // },
-      // {
-      //   icon: "/images/homec/animation/Group-Training.svg",
-      //   description: "Group Training",
-      // },
-      // {
-      //   icon: "/images/homec/animation/Merch-Retail.svg",
-      //   description: "Merch & Retail",
-      // },
-      // {
-      //   icon: "/images/homec/animation/Premium-member.svg",
-      //   description: "Premium Member Lounge",
-      // },
-      // {
-      //   icon: "/images/homec/animation/Workspace.svg",
-      //   description: "Workspace",
-      // },
+      {
+        icon: "/images/homec/animation/3d-body-assessment.svg",
+        description: "3d Body Assessment",
+      },
+      {
+        icon: "/images/homec/animation/Physiotherapy.svg",
+        description: "Physiotherapy",
+      },
+      {
+        icon: "/images/homec/animation/Nutrition-Fuel.svg",
+        description: "Nutrition & Fuel",
+      },
+      {
+        icon: "/images/homec/animation/Group-Training.svg",
+        description: "Group Training",
+      },
+      {
+        icon: "/images/homec/animation/Merch-Retail.svg",
+        description: "Merch & Retail",
+      },
+      {
+        icon: "/images/homec/animation/Premium-member.svg",
+        description: "Premium Member Lounge",
+      },
+      {
+        icon: "/images/homec/animation/Workspace.svg",
+        description: "Workspace",
+      },
     ],
   },
   footerInfoSection: {
