@@ -8,7 +8,7 @@ interface ComingSoonSectionProps {
   isMobile?: boolean;
 }
 
-const ComingSoonSection = ({ data, isMobile }: ComingSoonSectionProps) => {
+const ComingSoonSection = ({ data }: ComingSoonSectionProps) => {
   const {
     title,
     description,
