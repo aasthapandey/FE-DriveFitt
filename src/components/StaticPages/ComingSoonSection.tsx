@@ -20,7 +20,7 @@ const ComingSoonSection = ({ data }: ComingSoonSectionProps) => {
   } = data;
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
+    <div className="flex items-center justify-center h-[calc(100vh-170px)]">
       <div className="mx-auto text-center px-4">
         <ScrollAnimation
           delay={0.2}
