@@ -1,7 +1,7 @@
 "use client";
 import { NotJustClubItem, NotJustClubSectionProps } from "@/types/staticPages";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 import { useEffect, useState } from "react";
 
 interface ListItemProps {
@@ -17,38 +17,58 @@ const ListItem = ({
   position,
   className = "",
 }: ListItemProps) => {
-  const variants = {
+  const variants: Variants = {
     top: {
       opacity: 0.5,
-      y: 0,
-      scale: 0.9,
-      transition: { duration: 0.3 },
+      y: -20, // Moved up to show less of top item
+      color: "rgba(255, 255, 255, 0.5)",
+      transition: {
+        duration: 0.75,
+        ease: [0.4, 0, 0.2, 1], // easeInOut
+        color: { duration: 0.5 },
+        opacity: { duration: 0.5 },
+      },
     },
     middle: {
       opacity: 1,
-      y: 80,
-      scale: 1,
-      transition: { duration: 0.3 },
+      y: 60, // Middle item at 0 position
+      color: "#00DBDC",
+      transition: {
+        duration: 0.75,
+        ease: [0.4, 0, 0.2, 1], // easeInOut
+        color: { duration: 0.5 },
+        opacity: { duration: 0.5 },
+      },
     },
     bottom: {
       opacity: 0.5,
-      y: 160,
-      scale: 0.9,
-      transition: { duration: 0.3 },
+      y: 140, // Bottom item fully visible
+      color: "rgba(255, 255, 255, 0.5)",
+      transition: {
+        duration: 0.75,
+        ease: [0.4, 0, 0.2, 1], // easeInOut
+        color: { duration: 0.5 },
+        opacity: { duration: 0.5 },
+      },
     },
     exit: {
       opacity: 0,
-      y: -80,
-      scale: 0.8,
-      transition: { duration: 0.3 },
+      y: -160, // Adjusted exit position
+      color: "rgba(255, 255, 255, 0.5)",
+      transition: {
+        duration: 0.75,
+        ease: [0.4, 0, 0.2, 1], // easeInOut
+        color: { duration: 0.5 },
+        opacity: { duration: 0.5 },
+      },
     },
   };
 
   return (
     <motion.div
-      className={`flex gap-6 items-center absolute ${className}`}
+      className={`flex gap-6 items-center absolute left-0 ${className}`}
       variants={variants}
-      initial={position === "bottom" ? { opacity: 0, y: 240 } : false}
+      initial={position === "bottom" ? { opacity: 0, y: 160 } : false}
       animate={position}
       exit="exit"
     >
@@ -59,12 +79,9 @@ const ListItem = ({
         height={60}
         className="size-10 md:size-[60px]"
       />
-      <span
-        className={`text-5xl font-semibold leading-[56px] tracking-[-2px] transition-colors duration-300
-          ${isActive ? "text-[#00DBDC]" : "text-white/50"}`}
-      >
+      <motion.span className="text-5xl font-semibold leading-[56px] tracking-[-2px]">
         {item.description}
-      </span>
+      </motion.span>
     </motion.div>
   );
 };
@@ -89,19 +106,17 @@ const NotJustClubSection = ({
     const interval = setInterval(() => {
       setActiveIndex((prev) => {
         if (prev >= list.length - 1) {
-          // Reset animation when reaching the end
           setKey((k) => k + 1);
           return 0;
         }
         return prev + 1;
       });
-    }, 1000); // Change every 3 seconds
+    }, 750);
 
     return () => clearInterval(interval);
   }, [list.length]);
 
   useEffect(() => {
-    // Update visible items whenever activeIndex changes
     const items = [];
     for (let i = -1; i <= 1; i++) {
       const index = (activeIndex + i + list.length) % list.length;
@@ -127,11 +142,11 @@ const NotJustClubSection = ({
             backgroundPosition: "center",
           }}
         >
-          <div className="pl-[90px] flex gap-6 items-center justify-start">
-            <h1 className="text-5xl font-semibold leading-[56px] tracking-[-2px] w-[557px]">
+          <div className="pl-[92px] flex gap-6 items-center justify-start">
+            <h1 className="text-5xl font-semibold leading-[56px] tracking-[-2px] w-fit">
               {title}
             </h1>
-            <div className="flex flex-col gap-7 relative h-[240px] flex-1 justify-start">
+            <div className="flex flex-col gap-7 relative flex-1 h-[176px] overflow-hidden">
               <AnimatePresence mode="popLayout" key={key}>
                 {visibleItems.map((item, index) => (
                   <ListItem
