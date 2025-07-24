@@ -285,7 +285,7 @@ export const homeData: StaticPageData = {
       },
       {
         icon: "/images/homec/animation/Premium-member.svg",
-        description: "Premium Member Lounge",
+        description: "Premium Lounge",
       },
       {
         icon: "/images/homec/animation/Workspace.svg",

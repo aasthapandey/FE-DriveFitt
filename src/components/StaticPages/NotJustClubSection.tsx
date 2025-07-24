@@ -19,47 +19,51 @@ const ListItem = ({
 }: ListItemProps) => {
   const variants: Variants = {
     top: {
-      opacity: 0.5,
-      y: -20, // Moved up to show less of top item
-      color: "rgba(255, 255, 255, 0.5)",
+      opacity: [0, 0.05, 0.1],
+      y: -20,
       transition: {
         duration: 0.75,
-        ease: [0.4, 0, 0.2, 1], // easeInOut
-        color: { duration: 0.5 },
-        opacity: { duration: 0.5 },
+        ease: [0.4, 0, 0.2, 1],
+        opacity: {
+          duration: 0.75,
+          times: [0, 0.7, 1],
+        },
       },
     },
     middle: {
-      opacity: 1,
-      y: 60, // Middle item at 0 position
-      color: "#00DBDC",
+      opacity: [0, 0.5, 1],
+      y: 60,
       transition: {
         duration: 0.75,
-        ease: [0.4, 0, 0.2, 1], // easeInOut
-        color: { duration: 0.5 },
-        opacity: { duration: 0.5 },
+        ease: [0.4, 0, 0.2, 1],
+        opacity: {
+          duration: 0.75,
+          times: [0, 0.7, 1],
+        },
       },
     },
     bottom: {
-      opacity: 0.5,
-      y: 140, // Bottom item fully visible
-      color: "rgba(255, 255, 255, 0.5)",
+      opacity: [0, 0.05, 0.1],
+      y: 140,
       transition: {
         duration: 0.75,
-        ease: [0.4, 0, 0.2, 1], // easeInOut
-        color: { duration: 0.5 },
-        opacity: { duration: 0.5 },
+        ease: [0.4, 0, 0.2, 1],
+        opacity: {
+          duration: 0.75,
+          times: [0, 0.7, 1],
+        },
       },
     },
     exit: {
-      opacity: 0,
-      y: -160, // Adjusted exit position
-      color: "rgba(255, 255, 255, 0.5)",
+      opacity: [0.1, 0.05, 0],
+      y: -160,
       transition: {
         duration: 0.75,
-        ease: [0.4, 0, 0.2, 1], // easeInOut
-        color: { duration: 0.5 },
-        opacity: { duration: 0.5 },
+        ease: [0.4, 0, 0.2, 1],
+        opacity: {
+          duration: 0.75,
+          times: [0, 0.7, 1],
+        },
       },
     },
   };
@@ -68,7 +72,14 @@ const ListItem = ({
     <motion.div
       className={`flex gap-6 items-center absolute left-0 ${className}`}
       variants={variants}
-      initial={position === "bottom" ? { opacity: 0, y: 160 } : false}
+      initial={
+        position === "bottom"
+          ? {
+              opacity: 0,
+              y: 160,
+            }
+          : false
+      }
       animate={position}
       exit="exit"
     >
@@ -79,7 +90,7 @@ const ListItem = ({
         height={60}
         className="size-10 md:size-[60px]"
       />
-      <motion.span className="text-5xl font-semibold leading-[56px] tracking-[-2px]">
+      <motion.span className="text-5xl font-semibold leading-[56px] tracking-[-2px] text-[#91FFFF]">
         {item.description}
       </motion.span>
     </motion.div>
