@@ -10,7 +10,7 @@ export const cricketData: StaticPageData = {
   navbar: navbarData,
   hero: {
     titleWords: [
-      { text: "DRIVE:", color: "#00DBDC", isItalic: true },
+      { text: "DRIVE:", color: "#00DBDC", isItalic: false },
       { text: " Cricket for Every Player. Every Day.", color: "#FFFFFF" },
     ],
     description: "Play Better, Longer, and Safer - No Matter your Age or Skill",
