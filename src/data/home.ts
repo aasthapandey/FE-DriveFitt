@@ -44,11 +44,11 @@ export const homeData: StaticPageData = {
     btnSecondaryText: "Join Now",
   },
   countdownSection: {
-    title: "Your Premium Sports Club. Just Days Away. Opening At ",
+    title: "Your Premium Sports Club. Opening At ",
     date: "2025-11-15",
     bgImage: "/images/counterbg.svg",
     mobileBgImage: "/images/counterbg-mobile.svg",
-    location: "Golf Course Extn Road Gurugram",
+    location: "M3M 65th Ave, Golf Course Extn Road, Gurugram",
     openingText: "Opening in",
     labels: {
       days: "DAYS",
