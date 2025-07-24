@@ -139,7 +139,7 @@ export const recoveryData: StaticPageData = {
       },
       {
         title: "Call Us",
-        description: "Mon - Sun From 10am To 10pm",
+        description: "Mon - Sun from 10AM To 10PM",
         email: "+91-9871836565",
         image: "https://da8nru77lsio9.cloudfront.net/images/CallUs.svg",
       },
