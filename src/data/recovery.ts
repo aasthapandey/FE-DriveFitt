@@ -126,13 +126,14 @@ export const recoveryData: StaticPageData = {
     footerInfoList: [
       {
         title: "Write To Us",
-        description: "Our Friendly Team Is Here To Help",
+        description: "Our friendly team is here to help",
         email: "info@drivefitt.club",
         image: "https://da8nru77lsio9.cloudfront.net/images/ChatToUs.svg",
       },
       {
         title: "Visit Us",
-        description: "Discover The Best Of What We Offer At Our Flagship Club",
+        description:
+          "Discover the best of what we i offer at our Flagship Club",
         email: "M3M 65th Avenue, Sector 65, Gurugram, Haryana 122022",
         image: "https://da8nru77lsio9.cloudfront.net/images/VisitUs.svg",
       },
