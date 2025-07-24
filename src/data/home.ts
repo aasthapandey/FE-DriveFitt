@@ -324,7 +324,7 @@ export const homeData: StaticPageData = {
   footerSection: {
     logo: "https://da8nru77lsio9.cloudfront.net/images/logo.svg",
     description:
-      "Experience Gurugram's premier fitness & sports club – cricket, recovery & more",
+      "Experience Gurugram's premier fitness sports club - Cricket, Recovery & more",
     sections: [
       {
         title: "Quick Links",
