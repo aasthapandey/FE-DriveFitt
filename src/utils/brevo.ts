@@ -45,8 +45,8 @@ export async function sendContactFormEmail(formData: ContactUsFormData) {
 
   // Replace with your notification email
   sendSmtpEmail.sender = {
-    name: "DriveFitt Website",
-    email: "garvittyagicoe@gmail.com",
+    name: "Tech Katalyst",
+    email: "alerts@drivefitt.club",
   };
 
   // Replace with the email where you want to receive notifications
@@ -107,8 +107,8 @@ export async function sendFranchiseFormEmail(formData: FranchiseFormData) {
 
   // Replace with your notification email
   sendSmtpEmail.sender = {
-    name: "DriveFitt Website",
-    email: "garvittyagicoe@gmail.com",
+    name: "Tech Katalyst",
+    email: "alerts@drivefitt.club",
   };
 
   // Replace with the email where you want to receive franchise inquiries
