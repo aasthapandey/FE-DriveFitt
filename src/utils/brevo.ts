@@ -20,11 +20,11 @@ export async function sendContactFormEmail(formData: ContactUsFormData) {
   const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
 
   // Configure email parameters
-  sendSmtpEmail.subject = "New Contact Form Submission - DriveFitt";
+  sendSmtpEmail.subject = "New Contact Us Form Submission - By Tech Katalyst";
   sendSmtpEmail.htmlContent = `
     <html>
       <body>
-        <p>A site visitor just submitted your form Contact Form on DriveFitt</p>
+        <p>A site visitor just submitted your Contact Form on DriveFitt Brand Website</p>
         <hr>
         <h2>Submission summary:</h2>
         
@@ -78,11 +78,11 @@ export async function sendFranchiseFormEmail(formData: FranchiseFormData) {
   const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
 
   // Configure email parameters
-  sendSmtpEmail.subject = "Enquiry Form - New SD on DriveFitt";
+  sendSmtpEmail.subject = "New Franchise Enquiry Form - By Tech Katalyst";
   sendSmtpEmail.htmlContent = `
     <html>
       <body>
-        <p>A site visitor just submitted your form Enquiry Form - New SD on DriveFitt</p>
+        <p>A site visitor just submitted your Franchise Enquiry Form on DriveFitt Brand Website</p>
         <hr>
         <h2>Submission summary:</h2>
         
