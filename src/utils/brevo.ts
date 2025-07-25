@@ -64,7 +64,7 @@ export async function sendContactFormEmail(formData: ContactUsFormData) {
     const response = await apiInstance.sendTransacEmail(sendSmtpEmail);
     return response;
   } catch (error) {
-    console.error("Error sending email via Brevo:", error);
+    console.error("Error sending email via Brevo::", error);
     throw error;
   }
 }
