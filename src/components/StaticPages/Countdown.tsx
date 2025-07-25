@@ -32,7 +32,10 @@ const Countdown = ({ countdownData, isMobile }: CountdownProps) => {
         <div className="flex items-center px-8 md:px-0 md:w-[402px] md:ml-[59px] w-full md:flex-1">
           <h2 className="text-xl leading-7 text-white md:text-[32px] md:leading-[46px] font-semibold tracking-[-1px]">
             {title}
-            <span className="text-[#00DBDC] italic">{location}</span>
+            {!isMobile && <br />}
+            <span className="text-[#00DBDC] italic md:text-[30px]">
+              {location}
+            </span>
           </h2>
         </div>
         <div className="text-[#8A8A8A] text-[10px] md:text-sm md:leading-5 leading-3 text-center items-center flex flex-col gap-3">
