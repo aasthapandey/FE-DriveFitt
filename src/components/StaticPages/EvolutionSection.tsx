@@ -19,12 +19,15 @@ const EvolutionSection = ({
     evolutionList[0]
   );
   const [maxCardHeight, setMaxCardHeight] = useState<number>(144);
+  // ADD THIS NEW STATE
+  const [isHeightCalculated, setIsHeightCalculated] = useState<boolean>(false);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     cardRefs.current = new Array(evolutionList.length).fill(null);
   }, [evolutionList.length]);
 
+  // UPDATED useEffect for height calculation
   useEffect(() => {
     if (!isMobile) return;
 
@@ -32,14 +35,23 @@ const EvolutionSection = ({
       const validRefs = cardRefs.current.filter((ref) => ref !== null);
       if (validRefs.length === 0) return;
 
+      // First, reset to allow natural height calculation
+      setIsHeightCalculated(false);
+
       setTimeout(() => {
-        const heights = validRefs.map((ref) => ref?.offsetHeight || 0);
+        const heights = validRefs.current.map((ref) => ref?.offsetHeight || 0);
         const maxHeight = Math.max(...heights, 144);
+
+        // Debug logs (remove in production)
+        console.log("Card heights:", heights);
+        console.log("Max height calculated:", maxHeight);
+
         setMaxCardHeight(maxHeight);
-      }, 150);
+        setIsHeightCalculated(true);
+      }, 300); // Increased delay to ensure DOM is ready
     };
 
-    const timeoutId = setTimeout(measureHeights, 200);
+    const timeoutId = setTimeout(measureHeights, 100);
 
     return () => {
       clearTimeout(timeoutId);
@@ -136,7 +148,11 @@ const EvolutionSection = ({
                 }}
                 className="bg-white text-[#1C1C1C] flex flex-col justify-start gap-3 p-6 w-full"
                 style={{
-                  height: isMobile ? `${maxCardHeight + 24}px` : "auto",
+                  // UPDATED: Only apply fixed height AFTER calculation is done
+                  height:
+                    isMobile && isHeightCalculated
+                      ? `${maxCardHeight + 24}px`
+                      : "auto",
                   minHeight: "144px",
                 }}
               >

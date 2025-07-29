@@ -85,23 +85,18 @@ const HeroSection = ({ data, pageName, isMobile }: HeroSectionProps) => {
             <div className="flex gap-4 justify-center md:justify-start">
               {btnPrimaryText && (
                 <button
-                  onClick={
-                    isMobile && btnSecondaryText === "Join Online"
-                      ? handleSecondaryButtonClick
-                      : handlePrimaryButtonClick
-                  }
+                  onClick={handlePrimaryButtonClick}
                   className={`bg-[#00DBDC] border border-transparent text-[#0D0D0D] px-6 py-3 md:px-14 rounded-[4px] md:rounded-lg font-medium leading-[100%] tracking-[-5%] text-base md:text-lg ${
                     isMobile
                       ? ""
                       : " h-[56px] hover:bg-transparent hover:border-[#00DBDC] hover:text-[#00DBDC]"
                   } transition-all duration-200`}
                 >
-                  {isMobile ? btnSecondaryText : btnPrimaryText}
+                  {btnPrimaryText}
                 </button>
               )}
               {btnSecondaryText &&
                 btnSecondaryText !== "" &&
-                !isMobile &&
                 pageName !== "home" && (
                   <button
                     onClick={handleSecondaryButtonClick}
