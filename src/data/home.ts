@@ -250,6 +250,49 @@ export const homeData: StaticPageData = {
     mobileImage:
       "https://da8nru77lsio9.cloudfront.net/images/homec/card1-mobile.svg",
   },
+  notJustClubSection: {
+    title: "Not Just A Club, It's About",
+    bgImg: "/images/homec/animation/not-just-bg.svg",
+    list: [
+      { icon: "/images/homec/animation/Cricket.svg", description: "Cricket" },
+      {
+        icon: "/images/homec/animation/Fitness-zone.svg",
+        description: "Fitness Zone",
+      },
+      {
+        icon: "/images/homec/animation/recovery-icon.svg",
+        description: "Recovery Suite",
+      },
+      {
+        icon: "/images/homec/animation/3d-body-assessment.svg",
+        description: "3d Body Assessment",
+      },
+      {
+        icon: "/images/homec/animation/Physiotherapy.svg",
+        description: "Physiotherapy",
+      },
+      {
+        icon: "/images/homec/animation/Nutrition-Fuel.svg",
+        description: "Nutrition & Fuel",
+      },
+      {
+        icon: "/images/homec/animation/Group-Training.svg",
+        description: "Group Training",
+      },
+      {
+        icon: "/images/homec/animation/Merch-Retail.svg",
+        description: "Merch & Retail",
+      },
+      {
+        icon: "/images/homec/animation/Premium-member.svg",
+        description: "Premium Lounge",
+      },
+      {
+        icon: "/images/homec/animation/Workspace.svg",
+        description: "Workspace",
+      },
+    ],
+  },
   footerInfoSection: {
     footerInfoList: [
       {

@@ -257,6 +257,17 @@ export interface RecoveryBannerProps {
   mobileImage?: string;
 }
 
+export interface NotJustClubItem {
+  icon: string;
+  description: string;
+}
+
+export interface NotJustClubSectionProps {
+  title: string;
+  bgImg: string;
+  list: NotJustClubItem[];
+}
+
 export interface StaticPageData {
   title: string;
   description: string;
@@ -286,6 +297,7 @@ export interface StaticPageData {
   faqSection?: FaqSectionProps;
   bannerSection?: SportsClubSectionProps;
   scrollingCardSection?: ScrollingCardSection;
+  notJustClubSection?: NotJustClubSectionProps;
 }
 
 export interface ContactUsPageData {
