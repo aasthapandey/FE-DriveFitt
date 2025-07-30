@@ -17,71 +17,83 @@ const ListItem = ({
   position,
   className = "",
 }: ListItemProps) => {
+  // Check for reduced motion preference
+  const shouldReduceMotion =
+    typeof window !== "undefined" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
   const variants: Variants = {
     top: {
-      opacity: [0, 0.05, 0.1],
+      opacity: 0.1,
       y: -20,
-      transition: {
-        duration: 0.75,
-        ease: [0.4, 0, 0.2, 1],
-        opacity: {
-          duration: 0.75,
-          times: [0, 0.7, 1],
-        },
-      },
+      scale: 0.96,
+      filter: "blur(0.5px)",
+      transition: shouldReduceMotion
+        ? { duration: 0.3 }
+        : {
+            duration: 1.4,
+            ease: [0.25, 0.1, 0.25, 1],
+            delay: 0,
+          },
     },
     middle: {
-      opacity: [0, 0.5, 1],
+      opacity: 1,
       y: 60,
-      transition: {
-        duration: 0.75,
-        ease: [0.4, 0, 0.2, 1],
-        opacity: {
-          duration: 0.75,
-          times: [0, 0.7, 1],
-        },
-      },
+      scale: 1,
+      filter: "blur(0px)",
+      transition: shouldReduceMotion
+        ? { duration: 0.3 }
+        : {
+            duration: 1.4,
+            ease: [0.25, 0.1, 0.25, 1],
+            delay: 0.1,
+          },
     },
     bottom: {
-      opacity: [0, 0.05, 0.1],
+      opacity: 0.1,
       y: 140,
-      transition: {
-        duration: 0.75,
-        ease: [0.4, 0, 0.2, 1],
-        opacity: {
-          duration: 0.75,
-          times: [0, 0.7, 1],
-        },
-      },
+      scale: 0.96,
+      filter: "blur(0.5px)",
+      transition: shouldReduceMotion
+        ? { duration: 0.3 }
+        : {
+            duration: 1.4,
+            ease: [0.25, 0.1, 0.25, 1],
+            delay: 0,
+          },
     },
     exit: {
-      opacity: [0.1, 0.05, 0],
+      opacity: 0,
       y: -160,
-      transition: {
-        duration: 0.75,
-        ease: [0.4, 0, 0.2, 1],
-        opacity: {
-          duration: 0.75,
-          times: [0, 0.7, 1],
-        },
-      },
+      scale: 0.9,
+      filter: "blur(2px)",
+      transition: shouldReduceMotion
+        ? { duration: 0.2 }
+        : {
+            duration: 1.2,
+            ease: [0.4, 0, 0.2, 1],
+          },
     },
   };
 
   return (
     <motion.div
+      layoutId={`item-${item.description}`}
       className={`flex gap-6 items-center absolute left-0 ${className}`}
       variants={variants}
       initial={
         position === "bottom"
           ? {
-              opacity: 0,
               y: 160,
+              scale: 0.9,
+              filter: "blur(2px)",
             }
           : false
       }
       animate={position}
       exit="exit"
+      layout
+      style={{ willChange: "transform, opacity, filter" }}
     >
       <Image
         src={item.icon}
@@ -89,8 +101,18 @@ const ListItem = ({
         width={60}
         height={60}
         className="size-10 md:size-[60px]"
+        priority
+        style={{
+          willChange: "transform",
+          backfaceVisibility: "hidden",
+          perspective: 1000,
+        }}
+        unoptimized
       />
-      <motion.span className="text-5xl font-semibold leading-[56px] tracking-[-2px] text-[#91FFFF]">
+      <motion.span
+        className="text-5xl font-semibold leading-[56px] tracking-[-2px] text-[#91FFFF]"
+        layout
+      >
         {item.description}
       </motion.span>
     </motion.div>
@@ -122,7 +144,7 @@ const NotJustClubSection = ({
         }
         return prev + 1;
       });
-    }, 750);
+    }, 1200); // Reduced from 1500ms to 1200ms for faster cycling
 
     return () => clearInterval(interval);
   }, [list.length]);
@@ -161,7 +183,7 @@ const NotJustClubSection = ({
               <AnimatePresence mode="popLayout" key={key}>
                 {visibleItems.map((item, index) => (
                   <ListItem
-                    key={`${item.description}-${index}`}
+                    key={`${item.description}-${index}-${key}`}
                     item={item}
                     isActive={index === 1}
                     position={
