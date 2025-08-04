@@ -6,17 +6,11 @@ import { useEffect, useState } from "react";
 
 interface ListItemProps {
   item: NotJustClubItem;
-  isActive: boolean;
   position: "top" | "middle" | "bottom";
   className?: string;
 }
 
-const ListItem = ({
-  item,
-  isActive,
-  position,
-  className = "",
-}: ListItemProps) => {
+const ListItem = ({ item, position, className = "" }: ListItemProps) => {
   // Check for reduced motion preference
   const shouldReduceMotion =
     typeof window !== "undefined" &&
@@ -122,13 +116,11 @@ const ListItem = ({
 interface NotJustClubSectionComponentProps {
   data: NotJustClubSectionProps;
   className?: string;
-  isMobile?: boolean;
 }
 
 const NotJustClubSection = ({
   data,
   className = "",
-  isMobile = false,
 }: NotJustClubSectionComponentProps) => {
   const { title, bgImg, list } = data;
   const [activeIndex, setActiveIndex] = useState(0);
@@ -185,7 +177,6 @@ const NotJustClubSection = ({
                   <ListItem
                     key={`${item.description}-${index}-${key}`}
                     item={item}
-                    isActive={index === 1}
                     position={
                       index === 0 ? "top" : index === 1 ? "middle" : "bottom"
                     }

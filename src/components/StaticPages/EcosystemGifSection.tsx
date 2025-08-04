@@ -10,7 +10,6 @@ interface EcosystemGifSectionProps {
 }
 
 const EcosystemGifSection = ({
-  isMobile,
   title,
   description,
 }: EcosystemGifSectionProps) => {

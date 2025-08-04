@@ -184,16 +184,10 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
           />
         );
       case "notJustClubSection":
-        return (
-          <NotJustClubSection
-            data={value as NotJustClubSectionProps}
-            isMobile={isMobile}
-          />
-        );
+        return <NotJustClubSection data={value as NotJustClubSectionProps} />;
       case "ecosystemGifSection":
         return (
           <EcosystemGifSection
-            isMobile={isMobile}
             title={(value as EcosystemGifSectionProps).title}
             description={(value as EcosystemGifSectionProps).description}
           />
