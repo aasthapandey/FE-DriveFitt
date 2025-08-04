@@ -268,6 +268,11 @@ export interface NotJustClubSectionProps {
   list: NotJustClubItem[];
 }
 
+export interface EcosystemGifSectionProps {
+  title: string;
+  description: string;
+}
+
 export interface StaticPageData {
   title: string;
   description: string;
@@ -298,6 +303,7 @@ export interface StaticPageData {
   bannerSection?: SportsClubSectionProps;
   scrollingCardSection?: ScrollingCardSection;
   notJustClubSection?: NotJustClubSectionProps;
+  ecosystemGifSection?: EcosystemGifSectionProps;
 }
 
 export interface ContactUsPageData {

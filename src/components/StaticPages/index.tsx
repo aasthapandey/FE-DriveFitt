@@ -24,6 +24,7 @@ import {
   JoinNowSectionProps,
   RecoveryBannerProps,
   NotJustClubSectionProps,
+  EcosystemGifSectionProps,
 } from "@/types/staticPages";
 import CardSection4 from "@/components/StaticPages/CardSection4";
 import CardSection5 from "@/components/StaticPages/CardSection5";
@@ -46,6 +47,7 @@ import PolicySection from "@/components/StaticPages/PolicySection";
 import JoinNow from "@/components/common/JoinNow";
 import RecoveryBanner from "@/components/StaticPages/RecoveryBanner";
 import NotJustClubSection from "./NotJustClubSection";
+import EcosystemGifSection from "./EcosystemGifSection";
 
 interface StaticPageProps {
   data: StaticPageData;
@@ -78,6 +80,7 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
       | JoinNowSectionProps
       | RecoveryBannerProps
       | NotJustClubSectionProps
+      | EcosystemGifSectionProps
   ) => {
     switch (key) {
       case "hero":
@@ -185,6 +188,14 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
           <NotJustClubSection
             data={value as NotJustClubSectionProps}
             isMobile={isMobile}
+          />
+        );
+      case "ecosystemGifSection":
+        return (
+          <EcosystemGifSection
+            isMobile={isMobile}
+            title={(value as EcosystemGifSectionProps).title}
+            description={(value as EcosystemGifSectionProps).description}
           />
         );
       default:
