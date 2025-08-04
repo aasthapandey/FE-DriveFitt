@@ -57,7 +57,7 @@ const EcosystemGifSection = ({
           <div className="relative overflow-hidden rounded-lg">
             {isVisible && (
               <img
-                src="/images/ecosystem.gif"
+                src="https://da8nru77lsio9.cloudfront.net/images/ecosystem.gif"
                 alt="DriveFITT Ecosystem"
                 className={`w-full h-full object-cover transition-opacity duration-500 ${
                   isLoaded ? "opacity-100" : "opacity-0"
