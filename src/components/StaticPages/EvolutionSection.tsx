@@ -39,7 +39,7 @@ const EvolutionSection = ({
       setIsHeightCalculated(false);
 
       setTimeout(() => {
-        const heights = validRefs.current.map((ref) => ref?.offsetHeight || 0);
+        const heights = validRefs.map((ref) => ref?.offsetHeight || 0);
         const maxHeight = Math.max(...heights, 144);
 
         // Debug logs (remove in production)
