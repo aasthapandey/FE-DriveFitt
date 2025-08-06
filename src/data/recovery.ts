@@ -2,14 +2,14 @@ import { StaticPageData } from "@/types/staticPages";
 import { navbarData } from "./navbar";
 
 export const recoveryData: StaticPageData = {
-  title: "Recovery At DriveFITT",
+  title: "Recovery at Drive FITT",
   description: "Experience advanced recovery and wellness facilities.",
-  seoTitle: "Premium Recovery & Wellness | DriveFITT",
+  seoTitle: "Premium Recovery & Wellness | Drive FITT",
   seoDescription:
-    "Experience state-of-the-art recovery and wellness facilities at DriveFITT. Cold plunge, percussion therapy, and more.",
+    "Experience state-of-the-art recovery and wellness facilities at Drive FITT. Cold plunge, percussion therapy, and more.",
   navbar: navbarData,
   hero: {
-    titleWords: [{ text: "Recover at DriveFITT", color: "#FFFFFF" }],
+    titleWords: [{ text: "Recover at Drive FITT", color: "#FFFFFF" }],
     description: "Train hard. Recover smarter. Perform your best.",
     desktopImage:
       "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/hero.webp",
@@ -19,7 +19,7 @@ export const recoveryData: StaticPageData = {
     btnSecondaryText: "Join Online",
   },
   cardSection5: {
-    title: "Not Just Rest. Recovery Tech",
+    title: "Not Just Rest. Recovery Tech.",
     description: "",
     cardSection: [
       {
@@ -196,7 +196,7 @@ export const recoveryData: StaticPageData = {
   footerSection: {
     logo: "https://da8nru77lsio9.cloudfront.net/images/logo.svg",
     description:
-      "Experience Gurugram's premier fitness sports club - Cricket, Recovery & more",
+      "Experience Gurugram's Premier Sports Club - Cricket, Fitness, Recovery & more.",
     sections: [
       {
         title: "Quick links",
@@ -257,6 +257,6 @@ export const recoveryData: StaticPageData = {
       },
     ],
     copyright:
-      "DriveFITT. All Right Reserved. Designed and Developed by TechKatalyst",
+      "© 2025 Drive FITT by 24-7 Cricket Group India Private Limited. All rights reserved.",
   },
 };
