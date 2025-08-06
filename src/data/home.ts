@@ -44,11 +44,11 @@ export const homeData: StaticPageData = {
     btnSecondaryText: "Join Now",
   },
   countdownSection: {
-    title: "Your Premium Sports Club. Opening At ",
+    title: "Your Premium Sports Club. Opening Soon at ",
     date: "2025-11-15",
     bgImage: "/images/counterbg.svg",
     mobileBgImage: "/images/counterbg-mobile.svg",
-    location: "M3M 65th Ave, Golf Course Extn Road, Gurugram",
+    location: "M3M 65th Ave., Golf Course Extn Road, Gurugram",
     openingText: "Opening in",
     labels: {
       days: "DAYS",
@@ -226,7 +226,7 @@ export const homeData: StaticPageData = {
           },
           {
             image: "https://da8nru77lsio9.cloudfront.net/images/info3-3.svg",
-            description: "Family Plan",
+            description: "Family plan",
           },
         ],
       },
@@ -321,7 +321,7 @@ export const homeData: StaticPageData = {
   footerSection: {
     logo: "https://da8nru77lsio9.cloudfront.net/images/logo.svg",
     description:
-      "Experience Gurugram's premier fitness sports club - Cricket, Recovery & more",
+      "Experience Gurugram's Premier Sports Club - Cricket, Fitness, Recovery & more.",
     sections: [
       {
         title: "Quick Links",
@@ -430,6 +430,6 @@ export const homeData: StaticPageData = {
       },
     ],
     copyright:
-      "DriveFITT. All Right Reserved. Designed and Developed by TechKatalyst",
+      "DriveFITT. All Right Reserved.",
   },
 };
