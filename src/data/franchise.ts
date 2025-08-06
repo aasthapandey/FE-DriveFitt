@@ -2,9 +2,9 @@ import { FranchisePageData } from "@/types/franchisePage";
 import { navbarData } from "./navbar";
 
 export const franchiseData: FranchisePageData = {
-  title: "Franchise With DriveFITT",
+  title: "Franchise With Drive FITT",
   description: "Partner with India's premium fitness and sports club.",
-  seoTitle: "Franchise Opportunities | DriveFITT",
+  seoTitle: "Franchise Opportunities | Drive FITT",
   seoDescription:
     "Start your own DriveFITT franchise. Premium fitness and sports club with proven business model.",
   navbar: navbarData,
@@ -21,7 +21,7 @@ export const franchiseData: FranchisePageData = {
     btnPrimaryText: "Start Your Journey Now",
   },
   banner1Section: {
-    title: "DriveFITT?",
+    title: "Drive FITT?",
     subTitle: "Be The First To Disrupt",
     description1: "As category creators in",
     description2: "Cricket + Fitness + Recovery",
@@ -220,7 +220,7 @@ export const franchiseData: FranchisePageData = {
       {
         title: "Visit Us",
         description:
-          "Discover the best of what we i offer at our Flagship Club",
+          "Discover the best of what we offer at our Flagship Club",
         email: "M3M 65th Avenue, Sector 65, Gurugram, Haryana 122022",
         image: "https://da8nru77lsio9.cloudfront.net/images/VisitUs.svg",
       },
@@ -254,7 +254,7 @@ export const franchiseData: FranchisePageData = {
     ],
     contactFormSection: {
       title: "Get In Touch",
-      description: "We'd Love To Hear From You. Please Fill Out This Form.",
+      description: "We'd love to hear from you. Please fill out this form.",
       submitButtonText: "Send Message",
       fields: {
         firstName: {
@@ -283,7 +283,7 @@ export const franchiseData: FranchisePageData = {
   footerSection: {
     logo: "https://da8nru77lsio9.cloudfront.net/images/logo.svg",
     description:
-      "Experience Gurugram's premier fitness sports club - Cricket, Recovery & more",
+      "Experience Gurugram's Premier Sports Club - Cricket, Fitness, Recovery & more.",
     sections: [
       {
         title: "Quick links",
@@ -345,6 +345,6 @@ export const franchiseData: FranchisePageData = {
       },
     ],
     copyright:
-      "DriveFITT. All Right Reserved. Designed and Developed by TechKatalyst",
+      "© 2025 Drive FITT by 24-7 Cricket Group India Private Limited. All rights reserved.",
   },
 };
