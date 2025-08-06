@@ -2,11 +2,11 @@ import { StaticPageData } from "@/types/staticPages";
 import { navbarData } from "./navbar";
 
 export const fitnessData: StaticPageData = {
-  title: "Fitness At DriveFITT",
+  title: "Fitness At Drive FITT",
   description: "Step into a world of advanced fitness and training.",
-  seoTitle: "Premium Fitness Center | DriveFITT",
+  seoTitle: "Premium Fitness Center | Drive FITT",
   seoDescription:
-    "Achieve your fitness goals at DriveFITT. Modern equipment, expert trainers, and a motivating environment.",
+    "Achieve your fitness goals at Drive FITT. Modern equipment, expert trainers, and a motivating environment.",
   navbar: navbarData,
   hero: {
     titleWords: [
