@@ -1,55 +1,55 @@
 import { StaticPageData } from "@/types/staticPages";
 
 export const termsData: StaticPageData = {
-  title: "Terms & Conditions | DriveFITT Premium Club",
+  title: "Terms & Conditions | Drive FITT Premium Club",
   description:
     "Read our terms and conditions for membership and services at DriveFITT Premium Club.",
-  seoTitle: "Terms & Conditions | DriveFITT Premium Club",
+  seoTitle: "Terms & Conditions | Drive FITT Premium Club",
   seoDescription:
-    "Review the terms and conditions for DriveFITT membership and services.",
+    "Review the terms and conditions for Drive FITT membership and services.",
   policySection: {
     htmlContent: `
-      <h1>DRIVE FITT Terms & Conditions</h1>
+      <h1>Drive FITT Terms & Conditions</h1>
       
-      <p>Welcome to the Drive FITT's website at <a href="http://www.drivefitt.club">www.drivefitt.club</a> ("Site") is owned by 24-7 Cricket Group India Private Limited Hereinafter referred to as "Drive FITT". This Site is operated by Drive FITT and materials on the Site are primarily owned by DRIVE FITT. The Site may also include materials owned by third parties and posted on the Site by virtue of a license, grant or some other form of agreement between the third party and DRIVE FITT. DRIVE FITT has created this Site for your personal enjoyment, entertainment and education. However, you are only authorized to access this site and contents hereof or to use the materials contained in the Site (regardless of whether your access or use is intended) if you agree to abide by all applicable laws, and to these Terms of Use and Privacy Policy which constitute an Agreement between you and DRIVE FITT. Please read these Terms of Use carefully and save them. If you do not agree with them, you should leave this Site immediately. Any questions or comments regarding, or problems with, this Site should be sent to the Site Administrator at <a href="mailto:support@Drivefitt.club">support@Drivefitt.club</a></p>
+      <p>Welcome to the Drive FITT's website at <a href="http://www.drivefitt.club">www.drivefitt.club</a> ("Site") is owned by 24-7 Cricket Group India Private Limited Hereinafter referred to as "Drive FITT". This Site is operated by Drive FITT and materials on the Site are primarily owned by Drive FITT. The Site may also include materials owned by third parties and posted on the Site by virtue of a license, grant or some other form of agreement between the third party and Drive FITT. Drive FITT has created this Site for your personal enjoyment, entertainment and education. However, you are only authorized to access this site and contents hereof or to use the materials contained in the Site (regardless of whether your access or use is intended) if you agree to abide by all applicable laws, and to these Terms of Use and Privacy Policy which constitute an Agreement between you and Drive FITT. Please read these Terms of Use carefully and save them. If you do not agree with them, you should leave this Site immediately. Any questions or comments regarding, or problems with, this Site should be sent to the Site Administrator at <a href="mailto:support@Drivefitt.club">support@Drivefitt.club</a></p>
       
-      <p>The Terms and Conditions mentioned herein are to be read in tandem and in conjunction with the Privacy Policy of DRIVE FITT reserves the right to modify or amend this Agreement without notice at any time. It is therefore important that you read this page regularly to ensure you are updated as to any changes. If you become aware of misuse of this Site by any person, please contact the Site Administrator at <a href="mailto:Support@Drivefitt.club">Support@Drivefitt.club</a> with your concerns.</p>
+      <p>The Terms and Conditions mentioned herein are to be read in tandem and in conjunction with the Privacy Policy of Drive FITT reserves the right to modify or amend this Agreement without notice at any time. It is therefore important that you read this page regularly to ensure you are updated as to any changes. If you become aware of misuse of this Site by any person, please contact the Site Administrator at <a href="mailto:Support@Drivefitt.club">Support@Drivefitt.club</a> with your concerns.</p>
       
       <h2>ACCESS AND USE</h2>
       
       <p>All materials contained in this Site and contents hereof are protected by trademark and copyright laws and must only be used for personal, non- commercial purposes. This means that you may only view or download material from this Site for your own use and you must keep all copyright and other proprietary notices attached to the downloaded material.</p>
       
-      <p>The reproduction, duplication, distribution (including by way of email, facsimile or other electronic means), publication, modification, copying or transmission of material from this Site is STRICTLY PROHIBITED unless you have obtained the prior written consent of DRIVE FITT or unless it is expressly permitted by this Site. The material covered by this prohibition includes, without limitation, any text, graphics, logos, photographs, audio or video material or stills from audiovisual material available on this Site.</p>
+      <p>The reproduction, duplication, distribution (including by way of email, facsimile or other electronic means), publication, modification, copying or transmission of material from this Site is STRICTLY PROHIBITED unless you have obtained the prior written consent of Drive FITT or unless it is expressly permitted by this Site. The material covered by this prohibition includes, without limitation, any text, graphics, logos, photographs, audio or video material or stills from audiovisual material available on this Site.</p>
       
-      <p>The use of materials from this Site on any other web site or networked computer environment is similarly prohibited. Requests for permission to reproduce or distribute materials found on this Site can be made by contacting DRIVE FITT in writing at Business & Legal Affairs DRIVE FITT at 24-7 Cricket Group India Private Limited, email at <a href="mailto:Support@Drivefitt.club">Support@Drivefitt.club</a>.</p>
+      <p>The use of materials from this Site on any other web site or networked computer environment is similarly prohibited. Requests for permission to reproduce or distribute materials found on this Site can be made by contacting DRIVE FITT in writing at Business & Legal Affairs Drive FITT at 24-7 Cricket Group India Private Limited, email at <a href="mailto:Support@Drivefitt.club">Support@Drivefitt.club</a>.</p>
       
       <p>You are also strictly prohibited from creating works or materials that derive from or are based on the materials contained in this Site including, without limitation, fonts, icons, link buttons, wallpaper, desktop themes, on-line postcards and greeting cards and unlicensed merchandise. This prohibition applies regardless of whether the derivative materials are sold, bartered or given away.</p>
       
-      <p>You agree that any Message whatsoever submitted by you onto the site becomes the property of DRIVE FITT and may be used, copied, sublicensed, adapted, transmitted, distributed, publicly performed, published, displayed or deleted as DRIVE FITT sees fit.</p>
+      <p>You agree that any Message whatsoever submitted by you onto the site becomes the property of Drive FITT and may be used, copied, sublicensed, adapted, transmitted, distributed, publicly performed, published, displayed or deleted as DRIVE FITT sees fit.</p>
       
       <h2>UNSOLICITED SUBMISSIONS</h2>
       
-      <p>If unsolicited submissions are sent to DRIVE FITT via this Site, these submissions become the property of DRIVE FITT and may be used, copied, sublicensed, adapted, transmitted, distributed, publicly performed, published, displayed or deleted as DRIVE FITT sees fit. You agree that you are not entitled to any compensation, credit or notice whatsoever and that by sending an unsolicited submission you waive the right to make any claim against DRIVE FITT, its parents or affiliates relating to unsolicited submissions, including, without limitation, unfair competition, breach of implied contract or breach of confidentiality.</p>
+      <p>If unsolicited submissions are sent to Drive FITT via this Site, these submissions become the property of Drive FITT and may be used, copied, sublicensed, adapted, transmitted, distributed, publicly performed, published, displayed or deleted as Drive FITT sees fit. You agree that you are not entitled to any compensation, credit or notice whatsoever and that by sending an unsolicited submission you waive the right to make any claim against Drive FITT, its parents or affiliates relating to unsolicited submissions, including, without limitation, unfair competition, breach of implied contract or breach of confidentiality.</p>
       
       <h2>TERMINATION</h2>
       
-      <p>DRIVE FITT reserves the right to immediately terminate your use of, or access to, this Site at any time if DRIVE FITT decides at its sole discretion that you have breached this Agreement or any relevant law, rule or regulation or you have engaged in conduct that DRIVE FITT considers to be inappropriate or unacceptable. In such event DRIVE FITT reserves the right to take appropriate legal action against you.</p>
+      <p>Drive FITT reserves the right to immediately terminate your use of, or access to, this Site at any time if Drive FITT decides at its sole discretion that you have breached this Agreement or any relevant law, rule or regulation or you have engaged in conduct that Drive FITT considers to be inappropriate or unacceptable. In such event Drive FITT reserves the right to take appropriate legal action against you.</p>
       
       <h2>DISCLAIMER OF LIABILITY AND WARRANTIES</h2>
       
-      <p>While DRIVE FITT does its best to ensure the optimal performance of the Site, you agree that you use this Site and rely on material contained in this Site at your own risk. The Site, and all materials in this Site, are provided "as is" and, to the fullest extent permitted by law, are provided without warranties of any kind either express or implied. This means, without limitation, that DRIVE FITT DOES NOT WARRANT that the Site is fit for any particular purpose; that the functions contained in the materials in the Site will be uninterrupted; that defects will be corrected; that the Site is free of viruses and other harmful components or that the Site is accurate, error free or reliable.</p>
+      <p>While DRIVE FITT does its best to ensure the optimal performance of the Site, you agree that you use this Site and rely on material contained in this Site at your own risk. The Site, and all materials in this Site, are provided "as is" and, to the fullest extent permitted by law, are provided without warranties of any kind either express or implied. This means, without limitation, that Drive FITT DOES NOT WARRANT that the Site is fit for any particular purpose; that the functions contained in the materials in the Site will be uninterrupted; that defects will be corrected; that the Site is free of viruses and other harmful components or that the Site is accurate, error free or reliable.</p>
       
-      <p>You acknowledge that DRIVE FITT, its parents and affiliates together with their respective employees, agents, directors, officers and shareholders, IS NOT LIABLE for any delays, inaccuracies, failures, errors, omissions, interruptions, deletions, defects, viruses, communication line failures or for the theft, destruction, damage or unauthorized access to your computer system or network.</p>
+      <p>You acknowledge that Drive FITT, its parents and affiliates together with their respective employees, agents, directors, officers and shareholders, IS NOT LIABLE for any delays, inaccuracies, failures, errors, omissions, interruptions, deletions, defects, viruses, communication line failures or for the theft, destruction, damage or unauthorized access to your computer system or network.</p>
       
-      <p>You acknowledge that DRIVE FITT is not liable for any defamatory, offensive or illegal conduct or material found in connection with this Site, including such conduct or material transmitted by any means by any other person.</p>
+      <p>You acknowledge that Drive FITT is not liable for any defamatory, offensive or illegal conduct or material found in connection with this Site, including such conduct or material transmitted by any means by any other person.</p>
       
-      <p>You acknowledge that DRIVE FITT is not liable for any damages, including, without limitation, direct, incidental, special, consequential or punitive, civil or criminal damages or actions, in connection with or arising from your use or from your inability to use the Site.</p>
+      <p>You acknowledge that Drive FITT is not liable for any damages, including, without limitation, direct, incidental, special, consequential or punitive, civil or criminal damages or actions, in connection with or arising from your use or from your inability to use the Site.</p>
       
       <p><strong>NO WARRANTY WE, OUR SUBSIDIARIES, OFFICERS, DIRECTORS, EMPLOYEES AND OUR SUPPLIERS PROVIDE OUR WEB SITE AND SERVICES "AS IS" AND WITHOUT ANY WARRANTY OR CONDITION, EXPRESS, IMPLIED OR STATUTORY. WE, OUR SUBSIDIARIES, OFFICERS, DIRECTORS, EMPLOYEES AND OUR SUPPLIERS SPECIFICALLY DISCLAIM ANY IMPLIED WARRANTIES OF TITLE, MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.</strong></p>
       
       <h2>INDEMNITY</h2>
       
-      <p>You agree to defend, indemnify and hold harmless DRIVE FITT, its parents and affiliates together with their respective employees, agents, directors, officers and shareholders, from and against all the liabilities, claims, damages and expenses (including reasonable attorney's fees and costs) arising out of your use of this Site; your failure to use the Site; your breach or alleged breach of this Agreement or your breach or alleged breach of the copyright, trademark, proprietary or other rights of third parties.</p>
+      <p>You agree to defend, indemnify and hold harmless Drive FITT, its parents and affiliates together with their respective employees, agents, directors, officers and shareholders, from and against all the liabilities, claims, damages and expenses (including reasonable attorney's fees and costs) arising out of your use of this Site; your failure to use the Site; your breach or alleged breach of this Agreement or your breach or alleged breach of the copyright, trademark, proprietary or other rights of third parties.</p>
       
       <h2>LEGAL COMPLIANCE</h2>
       
@@ -57,7 +57,7 @@ export const termsData: StaticPageData = {
       
       <h2>NOTICES</h2>
       
-      <p>Except as explicitly stated otherwise, any notices shall be given by postal mail to DRIVE FITT Attn: Legal Department, 24-7 Cricket Group India Private Limited, or to the email address you provide to DRIVE FITT during the registration process (in your case). Notice shall be deemed given 24 hours after email is sent, unless the sending party is notified that the email address is invalid. Alternatively, we may give you notice by certified mail, postage prepaid and return receipt requested, to the address provided to DRIVE FITT during the registration process. In such case, notice shall be deemed given 3 days after the date of mailing. Rules & Regulations KFPL shall have the unqualified right to make such rules, regulations and restrictions in the use of the institute property as it may deem necessary. All signs posted in the institute premises shall be considered as a part of the rules and regulations.</p>
+      <p>Except as explicitly stated otherwise, any notices shall be given by postal mail to Drive FITT Attn: Legal Department, 24-7 Cricket Group India Private Limited, or to the email address you provide to Drive FITT during the registration process (in your case). Notice shall be deemed given 24 hours after email is sent, unless the sending party is notified that the email address is invalid. Alternatively, we may give you notice by certified mail, postage prepaid and return receipt requested, to the address provided to Drive FITT during the registration process. In such case, notice shall be deemed given 3 days after the date of mailing. Rules & Regulations KFPL shall have the unqualified right to make such rules, regulations and restrictions in the use of the institute property as it may deem necessary. All signs posted in the institute premises shall be considered as a part of the rules and regulations.</p>
       
       <h2>RULES AND REGULATIONS</h2>
       
@@ -148,7 +148,7 @@ export const termsData: StaticPageData = {
   footerSection: {
     logo: "https://da8nru77lsio9.cloudfront.net/images/logo.svg",
     description:
-      "Experience Gurugram's premier fitness sports club - Cricket, Recovery & more",
+      "Experience Gurugram's Premier Sports Club - Cricket, Fitness, Recovery & more.",
     sections: [
       {
         title: "Quick Links",
@@ -209,6 +209,6 @@ export const termsData: StaticPageData = {
       },
     ],
     copyright:
-      "DriveFITT. All Right Reserved. Designed and Developed by TechKatalyst",
+      "© 2025 Drive FITT by 24-7 Cricket Group India Private Limited. All rights reserved.",
   },
 };
