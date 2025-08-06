@@ -1,16 +1,16 @@
 import { StaticPageData } from "@/types/staticPages";
 
 export const comingSoonData: StaticPageData = {
-  title: "Coming Soon - DriveFITT Premium Club",
+  title: "Coming Soon - Drive FITT Premium Club",
   description:
     "Get early access to India's first cricket and fitness club before we launch.",
-  seoTitle: "Coming Soon | DriveFITT Premium Club",
+  seoTitle: "Coming Soon | Drive FITT Premium Club",
   seoDescription:
-    "Be the first to experience DriveFITT - India's premier cricket and fitness club. Book your free trial and get exclusive early access.",
+    "Join the waitlist now and be the first to access elite workouts, expert coaching, exclusive perks, member-only events, and special launch offers.",
   comingSoonSection: {
-    title: "Coming Soon – Early Access Now Open",
+    title: "Coming Soon - Join the Waitlist",
     description:
-      "Get privileged access to our game-changing facility before launch - plus enjoy a free session to experience the difference.",
+      "Join the waitlist now and be the first to access elite workouts, expert coaching, exclusive perks, member-only events, and special launch offers.",
     iconImage: "https://da8nru77lsio9.cloudfront.net/images/comingsoon.svg",
     btnPrimaryText: "Go to Home",
     btnSecondaryText: "/",
@@ -20,7 +20,7 @@ export const comingSoonData: StaticPageData = {
   footerSection: {
     logo: "https://da8nru77lsio9.cloudfront.net/images/logo.svg",
     description:
-      "Experience Gurugram's premier fitness sports club - Cricket, Recovery & more",
+      "Experience Gurugram's Premier Sports Club - Cricket, Fitness, Recovery & more.",
     sections: [
       {
         title: "Quick Links",
@@ -81,6 +81,6 @@ export const comingSoonData: StaticPageData = {
       },
     ],
     copyright:
-      "DriveFITT. All Right Reserved. Designed and Developed by TechKatalyst",
+      "© 2025 Drive FITT by 24-7 Cricket Group India Private Limited. All rights reserved.",
   },
 };
