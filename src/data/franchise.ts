@@ -146,7 +146,7 @@ export const franchiseData: FranchisePageData = {
   whatLookingForSection: {
     title: "Who We're Looking For",
     description:
-      "Drive FITT thrives on entrepreneurship. Ideal franchisees are those who:",
+      "Drive FITT thrives on entrepreneurship. Ideal franchisees are those who have:",
     cardList: [
       {
         icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/looking-for-1.svg",
