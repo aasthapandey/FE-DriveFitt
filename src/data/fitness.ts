@@ -104,7 +104,7 @@ export const fitnessData: StaticPageData = {
     ],
   },
   scrollingCardSection: {
-    title: "Train Hard. Tech Harder",
+    title: "Train Hard. Tech Harder.",
     description:
       "Smarter tools. Sharper results. Welcome to the future of performance",
     iconImage: "https://da8nru77lsio9.cloudfront.net/images/check-icon.svg",
@@ -231,7 +231,7 @@ export const fitnessData: StaticPageData = {
   footerSection: {
     logo: "https://da8nru77lsio9.cloudfront.net/images/logo.svg",
     description:
-      "Experience Gurugram's premier fitness sports club - Cricket, Recovery & more",
+      "Experience Gurugram's Premier Sports Club - Cricket, Fitness, Recovery & more.",
     sections: [
       {
         title: "Quick links",
@@ -292,6 +292,6 @@ export const fitnessData: StaticPageData = {
       },
     ],
     copyright:
-      "DriveFITT. All Right Reserved. Designed and Developed by TechKatalyst",
+      "© 2025 Drive FITT by 24-7 Cricket Group India Private Limited. All rights reserved.",
   },
 };
