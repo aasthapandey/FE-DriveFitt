@@ -3,11 +3,11 @@ import { navbarData } from "./navbar";
 import { PROTEIN_BAR_TEXT } from "@/data/constants";
 
 export const homeData: StaticPageData = {
-  title: "DriveFITT",
+  title: "Drive FITT",
   description: "Experience the best fitness and sports facilities.",
-  seoTitle: "DriveFITT - Premium Fitness & Sports Club",
+  seoTitle: "Drive FITT - Premium Fitness & Sports Club",
   seoDescription:
-    "Join DriveFITT, Gurugram's premier fitness & sports club. Experience state-of-the-art facilities for cricket, fitness, recovery, and more.",
+    "Join Drive FITT, Gurugram's premier fitness & sports club. Experience state-of-the-art facilities for cricket, fitness, recovery, and more.",
   navbar: navbarData,
   hero: {
     titleWords: [
@@ -430,6 +430,6 @@ export const homeData: StaticPageData = {
       },
     ],
     copyright:
-      "DriveFITT. All Right Reserved.",
+      "© 2025 Drive FITT by 24-7 Cricket Group India Private Limited. All rights reserved.",
   },
 };
