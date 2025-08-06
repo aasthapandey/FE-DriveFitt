@@ -1,11 +1,11 @@
 import { StaticPageData } from "@/types/staticPages";
 
 export const privacyData: StaticPageData = {
-  title: "Privacy Policy | DriveFITT Premium Club",
+  title: "Privacy Policy | Drive FITT Premium Club",
   description:
     "Learn how DriveFITT collects, uses, and protects your personal information.",
-  seoTitle: "Privacy Policy | DriveFITT Premium Club",
-  seoDescription: "Understand how DriveFITT handles your personal data.",
+  seoTitle: "Privacy Policy | Drive FITT Premium Club",
+  seoDescription: "Understand how Drive FITT handles your personal data.",
   policySection: {
     htmlContent: `
       <h1>Privacy Policy</h1>
@@ -192,7 +192,7 @@ export const privacyData: StaticPageData = {
   footerSection: {
     logo: "https://da8nru77lsio9.cloudfront.net/images/logo.svg",
     description:
-      "Experience Gurugram's premier fitness sports club - Cricket, Recovery & more",
+      "Experience Gurugram's Premier Sports Club - Cricket, Fitness, Recovery & more.",
     sections: [
       {
         title: "Quick Links",
@@ -253,6 +253,6 @@ export const privacyData: StaticPageData = {
       },
     ],
     copyright:
-      "DriveFITT. All Right Reserved. Designed and Developed by TechKatalyst",
+      "© 2025 Drive FITT by 24-7 Cricket Group India Private Limited. All rights reserved.",
   },
 };
