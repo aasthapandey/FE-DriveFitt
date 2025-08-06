@@ -243,12 +243,9 @@ export const homeData: StaticPageData = {
       "https://da8nru77lsio9.cloudfront.net/images/homec/gallery-3.webp",
     ],
   },
-  sportsClubSection: {
+  ecosystemGifSection: {
     title: "The Drive FITT Sports Club Philosophy",
     description: "The Drive FITT Model: Engineered for Excellence",
-    image: "https://da8nru77lsio9.cloudfront.net/images/homec/card1.svg",
-    mobileImage:
-      "https://da8nru77lsio9.cloudfront.net/images/homec/card1-mobile.svg",
   },
   footerInfoSection: {
     footerInfoList: [
@@ -261,7 +258,7 @@ export const homeData: StaticPageData = {
       {
         title: "Visit Us",
         description:
-          "Discover the best of what we i offer at our Flagship Club",
+          "Discover the best of what we offer at our Flagship Club",
         email: "M3M 65th Avenue, Sector 65, Gurugram, Haryana 122022",
         image: "https://da8nru77lsio9.cloudfront.net/images/VisitUs.svg",
       },
@@ -295,7 +292,7 @@ export const homeData: StaticPageData = {
     ],
     contactFormSection: {
       title: "Get In Touch",
-      description: "We'd Love To Hear From You. Please Fill Out This Form.",
+      description: "We'd love to hear from you. Please fill out this form.",
       submitButtonText: "Send Message",
       fields: {
         firstName: {

@@ -25,6 +25,28 @@
   .custom-dots li.slick-active div {
     background-color: white !important;
   }
+
+  /* ADD THESE NEW STYLES FOR HEIGHT EQUALIZATION */
+  .slick-list {
+    overflow: visible;
+  }
+  .slick-track {
+    display: flex !important;
+    align-items: stretch;
+  }
+  .slick-slide {
+    height: inherit !important;
+    display: flex !important;
+  }
+  .slick-slide > div {
+    height: 100% !important;
+    display: flex !important;
+  }
+  .slick-slide > div > div {
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column;
+  }
 }
 
 .evolution-background {
