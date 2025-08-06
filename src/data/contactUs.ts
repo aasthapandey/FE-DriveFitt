@@ -4,9 +4,9 @@ import { navbarData } from "./navbar";
 export const contactUsData: ContactUsPageData = {
   title: "Contact Us",
   description: "Get in touch with us.",
-  seoTitle: "Contact Us | DriveFITT",
+  seoTitle: "Contact Us | Drive FITT",
   seoDescription:
-    "Contact DriveFITT for any queries about our fitness and sports facilities.",
+    "Contact Drive FITT for any queries about our fitness and sports facilities.",
   navbar: navbarData,
   hero: {
     titleWords: [{ text: "Contact Us", color: "#FFFFFF" }],
@@ -90,7 +90,7 @@ export const contactUsData: ContactUsPageData = {
   footerSection: {
     logo: "https://da8nru77lsio9.cloudfront.net/images/logo.svg",
     description:
-      "Experience Gurugram's premier fitness sports club - Cricket, Recovery & more",
+      "Experience Gurugram's Premier Sports Club - Cricket, Fitness, Recovery & more.",
     sections: [
       {
         title: "Quick links",
@@ -153,6 +153,6 @@ export const contactUsData: ContactUsPageData = {
       },
     ],
     copyright:
-      "DriveFITT. All Right Reserved. Designed and Developed by TechKatalyst",
+      "© 2025 Drive FITT by 24-7 Cricket Group India Private Limited. All rights reserved.",
   },
 };
