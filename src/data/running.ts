@@ -2,16 +2,16 @@ import { StaticPageData } from "@/types/staticPages";
 import { navbarData } from "./navbar";
 
 export const runningData: StaticPageData = {
-  title: "Running At DriveFITT",
+  title: "Running At Drive FITT",
   description: "Experience advanced running facilities and training.",
-  seoTitle: "Premium Running Club | DriveFITT",
+  seoTitle: "Premium Running Club | Drive FITT",
   seoDescription:
     "Join DriveFITT's running club. Indoor running studio, expert coaching, and performance tracking.",
   navbar: navbarData,
   hero: {
     titleWords: [
       { text: "Running Redefined. Only at ", color: "#FFFFFF" },
-      { text: "DRIVE FITT", color: "#FFFFFF" },
+      { text: "Drive FITT", color: "#FFFFFF" },
     ],
     description:
       "India's First Professional Indoor Running Studio — Where Running Becomes a Lifestyle",
@@ -235,7 +235,7 @@ export const runningData: StaticPageData = {
   footerSection: {
     logo: "https://da8nru77lsio9.cloudfront.net/images/logo.svg",
     description:
-      "Experience Gurugram's premier fitness sports club - Cricket, Recovery & more",
+      "Experience Gurugram's Premier Sports Club - Cricket, Fitness, Recovery & more.",
     sections: [
       {
         title: "Quick links",
@@ -296,6 +296,6 @@ export const runningData: StaticPageData = {
       },
     ],
     copyright:
-      "DriveFITT. All Right Reserved. Designed and Developed by TechKatalyst",
+      "© 2025 Drive FITT by 24-7 Cricket Group India Private Limited. All rights reserved.",
   },
 };
