@@ -133,7 +133,7 @@ export const recoveryData: StaticPageData = {
       {
         title: "Visit Us",
         description:
-          "Discover the best of what we i offer at our Flagship Club",
+          "Discover the best of what we offer at our Flagship Club",
         email: "M3M 65th Avenue, Sector 65, Gurugram, Haryana 122022",
         image: "https://da8nru77lsio9.cloudfront.net/images/VisitUs.svg",
       },
@@ -167,7 +167,7 @@ export const recoveryData: StaticPageData = {
     ],
     contactFormSection: {
       title: "Get In Touch",
-      description: "We'd Love To Hear From You. Please Fill Out This Form.",
+      description: "We'd love to hear from you. Please fill out this form.",
       submitButtonText: "Send Message",
       fields: {
         firstName: {
