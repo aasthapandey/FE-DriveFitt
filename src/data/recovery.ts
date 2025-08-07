@@ -11,8 +11,10 @@ export const recoveryData: StaticPageData = {
   hero: {
     titleWords: [{ text: "Recover at Drive FITT", color: "#FFFFFF" }],
     description: "Train hard. Recover smarter. Perform your best.",
-    desktopImage: "/images/recovery-compressed/hero.svg",
-    mobileImage: "/images/recovery-compressed/mobile-hero.svg",
+    desktopImage:
+      "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/hero.svg",
+    mobileImage:
+      "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/mobile-hero.svg",
     btnPrimaryText: "Join the Waitlist",
     btnSecondaryText: "Join Online",
   },
@@ -97,8 +99,10 @@ export const recoveryData: StaticPageData = {
     title: "Recovery That Sets Us Apart",
     description:
       "Most fitness centers treat recovery as optional—we make it integral. Our multi-modal recovery zones, science-backed methods, and professional support help you train longer, recover faster, and perform at your peak. This isn't luxury—it's a performance essential.",
-    image: "/images/recovery-compressed/banner3.webp",
-    mobileImage: "/images/recovery-compressed/mobile-banner3.webp",
+    image:
+      "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/banner3.webp",
+    mobileImage:
+      "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/mobile-banner3.webp",
   },
   gallerySection: {
     title: "Step Inside the Future of Sports & Fitness",
@@ -112,7 +116,7 @@ export const recoveryData: StaticPageData = {
     description:
       "Join the waitlist now and be the first to access elite workouts, expert coaching, exclusive perks, member-only events, and special launch offers.",
     btnLabel: "Join the Waitlist",
-    image: "/images/becomeMember.svg",
+    image: "https://da8nru77lsio9.cloudfront.net/images/becomeMember.svg",
     mobileImage:
       "https://da8nru77lsio9.cloudfront.net/images/become-a-member-mobile.webp",
   },

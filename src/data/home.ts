@@ -127,7 +127,8 @@ export const homeData: StaticPageData = {
         title: "Pilates",
         description:
           "Low-impact, high-control pilates workouts designed to improve flexibility, posture, and core strength in a group setting.",
-        backgroundImage: "/images/homec/card3-2.webp",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/homec/card3-2.webp",
         link: "/coming-soon",
         redirectionIcon: "/images/redirection.svg",
       },

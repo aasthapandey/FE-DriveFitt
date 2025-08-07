@@ -150,7 +150,7 @@ export const runningData: StaticPageData = {
     description:
       "Join the waitlist now and be the first to access elite workouts, expert coaching, exclusive perks, member-only events, and special launch offers.",
     btnLabel: "Join the Waitlist",
-    image: "/images/becomeMember.svg",
+    image: "https://da8nru77lsio9.cloudfront.net/images/becomeMember.svg",
     mobileImage:
       "https://da8nru77lsio9.cloudfront.net/images/become-a-member-mobile.webp",
   },

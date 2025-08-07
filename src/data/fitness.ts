@@ -29,7 +29,8 @@ export const fitnessData: StaticPageData = {
         title: "Advanced 3D Body Scan",
         description:
           "Launch your fitness journey with actionable insights for best performance.",
-        backgroundImage: "/images/fitness-compressed/card5-1.svg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/card5-1.svg",
         iconImage:
           "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/icon-1.svg",
         link: "",
@@ -146,7 +147,7 @@ export const fitnessData: StaticPageData = {
     description:
       "Join the waitlist now and be the first to access elite workouts, expert coaching, exclusive perks, member-only events, and special launch offers.",
     btnLabel: "Join the Waitlist",
-    image: "/images/becomeMember.svg",
+    image: "https://da8nru77lsio9.cloudfront.net/images/becomeMember.svg",
     mobileImage:
       "https://da8nru77lsio9.cloudfront.net/images/become-a-member-mobile.webp",
   },
