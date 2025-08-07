@@ -12,7 +12,7 @@ const GallerySection = ({
   data: GallerySectionProps;
   isMobile?: boolean;
 }) => {
-  const { title, description, btnLabel, imageList } = data;
+  const { title, description, imageList } = data;
   const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
