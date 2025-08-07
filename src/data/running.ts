@@ -133,8 +133,10 @@ export const runningData: StaticPageData = {
           "Heart-rate zones and pace tracking for targeted, efficient effort.",
         ],
         extraTagLabel: "",
-        backgroundImage: "/images/running-compressed/scroll-card-3.svg",
-        mobileImage: "/images/running-compressed/scroll-card-3.svg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/running-compressed/scroll-card-3.svg",
+        mobileImage:
+          "https://da8nru77lsio9.cloudfront.net/images/running-compressed/scroll-card-3.svg",
       },
     ],
   },

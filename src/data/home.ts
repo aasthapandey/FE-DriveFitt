@@ -33,10 +33,12 @@ export const homeData: StaticPageData = {
       },
     ],
     description: "",
-    desktopImage: "/images/hero/home-shubhman-preity.svg",
+    desktopImage:
+      "https://da8nru77lsio9.cloudfront.net/images/hero/home-shubhman-preity.svg",
     originalDesktopImage:
       "https://da8nru77lsio9.cloudfront.net/images/hero/home-original.svg",
-    mobileImage: "/images/hero/home-shubhman-preity-mobile.svg",
+    mobileImage:
+      "https://da8nru77lsio9.cloudfront.net/images/hero/home-shubhman-preity-mobile.svg",
     originalMobileImage:
       "https://da8nru77lsio9.cloudfront.net/images/hero/home-mobile-original.svg",
     btnPrimaryText: "Join the Waitlist",
@@ -73,7 +75,8 @@ export const homeData: StaticPageData = {
         title: "Cricket",
         description:
           "World-class indoor nets, ball tracking & analytics & pro coaching for all skill levels",
-        backgroundImage: "/images/homec/card4-1.svg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/homec/card4-1.svg",
         link: "/cricket",
         redirectionIcon:
           "https://da8nru77lsio9.cloudfront.net/images/redirection.svg",
@@ -92,7 +95,8 @@ export const homeData: StaticPageData = {
         title: "Recovery",
         description:
           "Cold plunge, infrared sauna, compression & percussion therapy along with physiotherapy to recharge, recover, and reduce injury risk.",
-        backgroundImage: "/images/homec/card4-3.svg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/homec/card4-3.svg",
         link: "/recovery",
         redirectionIcon:
           "https://da8nru77lsio9.cloudfront.net/images/redirection.svg",
