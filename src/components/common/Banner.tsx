@@ -33,7 +33,7 @@ const Banner = ({ data, isMobile }: BannerType) => {
               backgroundRepeat: "no-repeat",
               backgroundPosition: "center center",
               backgroundAttachment: "local",
-              backgroundSize: "100% 100%",
+              backgroundSize: "cover",
             }}
           >
             <div className="flex flex-col justify-end md:justify-center h-full items-center gap-4 md:gap-10 md:pt-[115px]">

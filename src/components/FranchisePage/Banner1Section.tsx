@@ -23,7 +23,7 @@ const Banner1Section = ({ data, isMobile }: Banner1SectionProps) => {
             className="font-semibold h-full flex gap-1 flex-col justify-center md:text-5xl leading-[100%] md:leading-[60px] tracking-[-2px] text-[40px]"
           >
             Why&nbsp;
-            <span className="italic">{title}</span>
+            <span>{title}</span>
           </ScrollAnimation>
           <div
             className={`${isMobile ? "w-full h-[1px]" : "w-[1px] h-full"}`}

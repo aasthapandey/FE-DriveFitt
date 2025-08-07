@@ -68,7 +68,7 @@ const ScrollingCardSection = ({
           })`,
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center center",
-          backgroundSize: "100% 100%",
+          backgroundSize: "cover",
         }}
       />
     </div>

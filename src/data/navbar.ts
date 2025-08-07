@@ -11,7 +11,7 @@ export const navbarData: NavbarProps = {
     { title: "Franchise", href: "/franchise" },
   ],
   signInButton: {
-    text: "Join Now",
+    text: "Join the Waitlist",
   },
   loginModalType: LoginModalType.EMAIL,
 };

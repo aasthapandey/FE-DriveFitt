@@ -33,15 +33,14 @@ export const homeData: StaticPageData = {
       },
     ],
     description: "",
-    desktopImage: "https://da8nru77lsio9.cloudfront.net/images/hero/home.webp",
+    desktopImage: "/images/hero/home-shubhman-preity.svg",
     originalDesktopImage:
       "https://da8nru77lsio9.cloudfront.net/images/hero/home-original.svg",
-    mobileImage:
-      "https://da8nru77lsio9.cloudfront.net/images/hero/home-mobile.webp",
+    mobileImage: "/images/hero/home-shubhman-preity-mobile.svg",
     originalMobileImage:
       "https://da8nru77lsio9.cloudfront.net/images/hero/home-mobile-original.svg",
-    btnPrimaryText: "Join Now",
-    btnSecondaryText: "Join Now",
+    btnPrimaryText: "Join the Waitlist",
+    btnSecondaryText: "Join the Waitlist",
   },
   countdownSection: {
     title: "Your Premium Sports Club. Opening Soon at ",
@@ -74,8 +73,7 @@ export const homeData: StaticPageData = {
         title: "Cricket",
         description:
           "World-class indoor nets, ball tracking & analytics & pro coaching for all skill levels",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/homec/card4-1.webp",
+        backgroundImage: "/images/homec/card4-1.svg",
         link: "/cricket",
         redirectionIcon:
           "https://da8nru77lsio9.cloudfront.net/images/redirection.svg",
@@ -94,8 +92,7 @@ export const homeData: StaticPageData = {
         title: "Recovery",
         description:
           "Cold plunge, infrared sauna, compression & percussion therapy along with physiotherapy to recharge, recover, and reduce injury risk.",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/homec/card4-3.webp",
+        backgroundImage: "/images/homec/card4-3.svg",
         link: "/recovery",
         redirectionIcon:
           "https://da8nru77lsio9.cloudfront.net/images/redirection.svg",
@@ -257,8 +254,7 @@ export const homeData: StaticPageData = {
       },
       {
         title: "Visit Us",
-        description:
-          "Discover the best of what we offer at our Flagship Club",
+        description: "Discover the best of what we offer at our Flagship Club",
         email: "M3M 65th Avenue, Sector 65, Gurugram, Haryana 122022",
         image: "https://da8nru77lsio9.cloudfront.net/images/VisitUs.svg",
       },

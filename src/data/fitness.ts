@@ -18,7 +18,7 @@ export const fitnessData: StaticPageData = {
       "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/hero.webp",
     mobileImage:
       "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/mobile-hero.webp",
-    btnPrimaryText: "Book a Free Trial",
+    btnPrimaryText: "Join the Waitlist",
     btnSecondaryText: "Join Online",
   },
   cardSection5: {
@@ -29,8 +29,7 @@ export const fitnessData: StaticPageData = {
         title: "Advanced 3D Body Scan",
         description:
           "Launch your fitness journey with actionable insights for best performance.",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/card5-1.webp",
+        backgroundImage: "/images/fitness-compressed/card5-1.svg",
         iconImage:
           "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/icon-1.svg",
         link: "",
@@ -61,8 +60,7 @@ export const fitnessData: StaticPageData = {
           "Customized 1-on-1 coaching tailored to your body, goals, sport-specific performance and complete recovery needs.",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-1.svg",
-        iconImage:
-          "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/icon-4.svg",
+        iconImage: "/images/fitness-compressed/icon-4.svg",
         link: "",
       },
       {
@@ -124,8 +122,7 @@ export const fitnessData: StaticPageData = {
           "Eco-friendly equipment that's as good for the planet as it is for your workout. Our Yoga mats, towels, coffee cups make minimal environmental impact ",
         ],
         extraTagLabel: "",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/scroll-card-2.webp",
+        backgroundImage: "/images/fitness-compressed/scroll-card-2.svg",
       },
       {
         subTitle: "Smart Recovery Tools",
@@ -138,15 +135,6 @@ export const fitnessData: StaticPageData = {
       },
     ],
   },
-  bannerSection: {
-    title: "Become a DriveFITT member",
-    description:
-      "Whether you're taking your first swing or prepping for tournaments – we've got a proven path for you.",
-    btnLabel: "Explore Plan",
-    image: "https://da8nru77lsio9.cloudfront.net/images/become-a-member.webp",
-    mobileImage:
-      "https://da8nru77lsio9.cloudfront.net/images/become-a-member-mobile.webp",
-  },
   gallerySection: {
     title: "Fitness Unfiltered",
     description: "Where every drop of sweat writes your success story",
@@ -156,6 +144,15 @@ export const fitnessData: StaticPageData = {
       "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/gallery-2.webp",
       "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/gallery-3.webp",
     ],
+  },
+  bannerSection: {
+    title: "Become a DriveFITT member",
+    description:
+      "Whether you're taking your first swing or prepping for tournaments – we've got a proven path for you.",
+    btnLabel: "Join the Waitlist",
+    image: "/images/becomeMember.svg",
+    mobileImage:
+      "https://da8nru77lsio9.cloudfront.net/images/become-a-member-mobile.webp",
   },
   footerInfoSection: {
     footerInfoList: [
@@ -167,8 +164,7 @@ export const fitnessData: StaticPageData = {
       },
       {
         title: "Visit Us",
-        description:
-          "Discover the best of what we offer at our Flagship Club",
+        description: "Discover the best of what we offer at our Flagship Club",
         email: "M3M 65th Avenue, Sector 65, Gurugram, Haryana 122022",
         image: "https://da8nru77lsio9.cloudfront.net/images/VisitUs.svg",
       },

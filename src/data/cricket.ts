@@ -18,7 +18,7 @@ export const cricketData: StaticPageData = {
       "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/hero.webp",
     mobileImage:
       "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/mobile-hero.webp",
-    btnPrimaryText: "Book a Free Trial",
+    btnPrimaryText: "Join the Waitlist",
     btnSecondaryText: "Join Online",
   },
   cardSection5: {
@@ -81,8 +81,7 @@ export const cricketData: StaticPageData = {
         title: "Faster Skill Development",
         description:
           "See measurable improvements in weeks, not years, with integrated performance analytics.",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/evolution-1.webp",
+        backgroundImage: "/images/cricket-compressed/evolution-1.svg",
       },
       {
         title: "Train Smarter, Not Harder",
@@ -122,8 +121,7 @@ export const cricketData: StaticPageData = {
           "Intelligent simulation like Random, Match Practice or Match Situation",
         ],
         extraTagLabel: "",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/scroll-card-3.webp",
+        backgroundImage: "/images/cricket-compressed/scroll-card-3.svg",
       },
       {
         subTitle: "Advanced 3D Body Scan",
@@ -138,15 +136,6 @@ export const cricketData: StaticPageData = {
       },
     ],
   },
-  bannerSection: {
-    title: "Find Your Perfect Program",
-    description:
-      "Whether you're taking your first swing or prepping for tournaments – we've got a proven path for you.",
-    btnLabel: "Explore Plan",
-    image: "https://da8nru77lsio9.cloudfront.net/images/become-a-member.webp",
-    mobileImage:
-      "https://da8nru77lsio9.cloudfront.net/images/become-a-member-mobile.webp",
-  },
   gallerySection: {
     title: "Cricket In Action",
     description:
@@ -158,6 +147,15 @@ export const cricketData: StaticPageData = {
       "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/gallery-3.webp",
     ],
   },
+  bannerSection: {
+    title: "Find Your Perfect Program",
+    description:
+      "Whether you're taking your first swing or prepping for tournaments – we've got a proven path for you.",
+    btnLabel: "Join the Waitlist",
+    image: "/images/becomeMember.svg",
+    mobileImage:
+      "https://da8nru77lsio9.cloudfront.net/images/become-a-member-mobile.webp",
+  },
   footerInfoSection: {
     footerInfoList: [
       {
@@ -168,8 +166,7 @@ export const cricketData: StaticPageData = {
       },
       {
         title: "Visit Us",
-        description:
-          "Discover the best of what we offer at our Flagship Club",
+        description: "Discover the best of what we offer at our Flagship Club",
         email: "M3M 65th Avenue, Sector 65, Gurugram, Haryana 122022",
         image: "https://da8nru77lsio9.cloudfront.net/images/VisitUs.svg",
       },

@@ -17,20 +17,18 @@ const HeroSection = ({ data, pageName, isMobile }: HeroSectionProps) => {
   const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
 
   const handlePrimaryButtonClick = () => {
-    if (btnPrimaryText === "Book a Free Trial") {
-      window.location.href = "/coming-soon";
-    } else if (btnPrimaryText === "Join Now") {
-      setIsEmailModalOpen(true);
+    if (btnPrimaryText === "Join the Waitlist") {
+      window.location.href = "/contact-us";
     }
   };
 
-  const handleSecondaryButtonClick = () => {
-    if (btnSecondaryText === "Join Online") {
-      setIsEmailModalOpen(true);
-    } else if (btnSecondaryText === "Join Now") {
-      setIsEmailModalOpen(true);
-    }
-  };
+  // const handleSecondaryButtonClick = () => {
+  //   if (btnSecondaryText === "Join Online") {
+  //     setIsEmailModalOpen(true);
+  //   } else if (btnSecondaryText === "Join Now") {
+  //     setIsEmailModalOpen(true);
+  //   }
+  // };
 
   const renderTitle = (titleWords: TitleWord[]) => {
     return (
@@ -95,7 +93,7 @@ const HeroSection = ({ data, pageName, isMobile }: HeroSectionProps) => {
                   {btnPrimaryText}
                 </button>
               )}
-              {btnSecondaryText &&
+              {/* {btnSecondaryText &&
                 btnSecondaryText !== "" &&
                 pageName !== "home" && (
                   <button
@@ -108,7 +106,7 @@ const HeroSection = ({ data, pageName, isMobile }: HeroSectionProps) => {
                   >
                     {btnSecondaryText}
                   </button>
-                )}
+                )} */}
             </div>
           </ScrollAnimation>
         </div>

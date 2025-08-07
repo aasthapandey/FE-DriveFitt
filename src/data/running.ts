@@ -19,7 +19,7 @@ export const runningData: StaticPageData = {
       "https://da8nru77lsio9.cloudfront.net/images/running-compressed/hero.webp",
     mobileImage:
       "https://da8nru77lsio9.cloudfront.net/images/running-compressed/mobile-hero.webp",
-    btnPrimaryText: "Book a Free Trial",
+    btnPrimaryText: "Join the Waitlist",
     btnSecondaryText: "Join Online",
   },
   cardSection5: {
@@ -61,8 +61,7 @@ export const runningData: StaticPageData = {
         description: "Structured classes combine speed, hills, and active rest",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-1.svg",
-        iconImage:
-          "https://da8nru77lsio9.cloudfront.net/images/running/foot-massage.svg",
+        iconImage: "/images/running/HIIT.svg",
         link: "",
       },
       {
@@ -134,21 +133,10 @@ export const runningData: StaticPageData = {
           "Heart-rate zones and pace tracking for targeted, efficient effort.",
         ],
         extraTagLabel: "",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/running-compressed/scroll-card-3.webp",
-        mobileImage:
-          "https://da8nru77lsio9.cloudfront.net/images/running-compressed/mobile-scroll-card-3.webp",
+        backgroundImage: "/images/running-compressed/scroll-card-3.svg",
+        mobileImage: "/images/running-compressed/scroll-card-3.svg",
       },
     ],
-  },
-  bannerSection: {
-    title: "Find Your Perfect Program",
-    description:
-      "Whether you're taking your first swing or prepping for tournaments – we've got a proven path for you.",
-    btnLabel: "Explore Plan",
-    image: "https://da8nru77lsio9.cloudfront.net/images/become-a-member.webp",
-    mobileImage:
-      "https://da8nru77lsio9.cloudfront.net/images/become-a-member-mobile.webp",
   },
   gallerySection: {
     title: "Step Inside the Future of Sports & Fitness",
@@ -161,6 +149,15 @@ export const runningData: StaticPageData = {
       "https://da8nru77lsio9.cloudfront.net/images/running-compressed/gallery-3.webp",
     ],
   },
+  bannerSection: {
+    title: "Find Your Perfect Program",
+    description:
+      "Whether you're taking your first swing or prepping for tournaments – we've got a proven path for you.",
+    btnLabel: "Join the Waitlist",
+    image: "/images/becomeMember.svg",
+    mobileImage:
+      "https://da8nru77lsio9.cloudfront.net/images/become-a-member-mobile.webp",
+  },
   footerInfoSection: {
     footerInfoList: [
       {
@@ -171,8 +168,7 @@ export const runningData: StaticPageData = {
       },
       {
         title: "Visit Us",
-        description:
-          "Discover the best of what we offer at our Flagship Club",
+        description: "Discover the best of what we offer at our Flagship Club",
         email: "M3M 65th Avenue, Sector 65, Gurugram, Haryana 122022",
         image: "https://da8nru77lsio9.cloudfront.net/images/VisitUs.svg",
       },

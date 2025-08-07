@@ -82,7 +82,7 @@ const GallerySection = ({
           >
             {description}
           </p>
-          <button
+          {/* <button
             onClick={handleButtonClick}
             className={`bg-[#00DBDC] border border-transparent w-fit leading-[100%] tracking-[-5%] text-base text-[#0D0D0D] px-10 py-3 rounded-[4px] md:rounded-lg font-medium mt-2 md:mt-[60px] ${
               isMobile
@@ -91,7 +91,7 @@ const GallerySection = ({
             } transition-all duration-200 md:px-[48px] md:h-[50px]`}
           >
             {btnLabel}
-          </button>
+          </button> */}
         </ScrollAnimation>
         <ScrollAnimation
           delay={0.3}

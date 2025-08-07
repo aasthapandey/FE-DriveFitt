@@ -11,11 +11,9 @@ export const recoveryData: StaticPageData = {
   hero: {
     titleWords: [{ text: "Recover at Drive FITT", color: "#FFFFFF" }],
     description: "Train hard. Recover smarter. Perform your best.",
-    desktopImage:
-      "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/hero.webp",
-    mobileImage:
-      "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/mobile-hero.webp",
-    btnPrimaryText: "Book a Free Trial",
+    desktopImage: "/images/recovery-compressed/hero.svg",
+    mobileImage: "/images/recovery-compressed/mobile-hero.svg",
+    btnPrimaryText: "Join the Waitlist",
     btnSecondaryText: "Join Online",
   },
   cardSection5: {
@@ -102,15 +100,6 @@ export const recoveryData: StaticPageData = {
     image: "/images/recovery-compressed/banner3.webp",
     mobileImage: "/images/recovery-compressed/mobile-banner3.webp",
   },
-  bannerSection: {
-    title: "Become a DriveFITT member",
-    description:
-      "Whether you're taking your first swing or prepping for tournaments – we've got a proven path for you.",
-    btnLabel: "Explore Plan",
-    image: "https://da8nru77lsio9.cloudfront.net/images/become-a-member.webp",
-    mobileImage:
-      "https://da8nru77lsio9.cloudfront.net/images/become-a-member-mobile.webp",
-  },
   gallerySection: {
     title: "Step Inside the Future of Sports & Fitness",
     description:
@@ -122,6 +111,15 @@ export const recoveryData: StaticPageData = {
       "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/gallery-3.webp",
     ],
   },
+  bannerSection: {
+    title: "Become a DriveFITT member",
+    description:
+      "Whether you're taking your first swing or prepping for tournaments – we've got a proven path for you.",
+    btnLabel: "Join the Waitlist",
+    image: "/images/becomeMember.svg",
+    mobileImage:
+      "https://da8nru77lsio9.cloudfront.net/images/become-a-member-mobile.webp",
+  },
   footerInfoSection: {
     footerInfoList: [
       {
@@ -132,8 +130,7 @@ export const recoveryData: StaticPageData = {
       },
       {
         title: "Visit Us",
-        description:
-          "Discover the best of what we offer at our Flagship Club",
+        description: "Discover the best of what we offer at our Flagship Club",
         email: "M3M 65th Avenue, Sector 65, Gurugram, Haryana 122022",
         image: "https://da8nru77lsio9.cloudfront.net/images/VisitUs.svg",
       },
