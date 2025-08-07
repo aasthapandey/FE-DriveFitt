@@ -79,7 +79,7 @@ export const runningData: StaticPageData = {
   evolutionSection: {
     // title: "Join India’s One Of The First Indoor Run Movement",
     title:
-      "Forget traffic, pollution, or weather.  Choose DRIVE FITT’s indoor studio for:",
+      "Forget traffic, pollution, or weather. Choose Drive FITT’s indoor studio for:",
     evolutionList: [
       {
         title: "Community Energy",
