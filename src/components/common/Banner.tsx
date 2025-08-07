@@ -13,7 +13,7 @@ const Banner = ({ data, isMobile }: BannerType) => {
   const imageToUse = isMobile && mobileImage ? mobileImage : image;
 
   const handleButtonClick = () => {
-    window.location.href = "/coming-soon";
+    window.location.href = "/contact-us";
   };
 
   return (
