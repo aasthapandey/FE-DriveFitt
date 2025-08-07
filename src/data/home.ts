@@ -33,12 +33,11 @@ export const homeData: StaticPageData = {
       },
     ],
     description: "",
-    desktopImage:
-      "https://da8nru77lsio9.cloudfront.net/images/hero/home-shubhman-preity.svg",
+    desktopImage: "https://da8nru77lsio9.cloudfront.net/images/homec/hero.webp",
     originalDesktopImage:
-      "https://da8nru77lsio9.cloudfront.net/images/hero/home-original.svg",
+      "https://da8nru77lsio9.cloudfront.net/images/homec/hero-original.svg",
     mobileImage:
-      "https://da8nru77lsio9.cloudfront.net/images/hero/home-shubhman-preity-mobile.svg",
+      "https://da8nru77lsio9.cloudfront.net/images/homec/mobile-hero.webp",
     originalMobileImage:
       "https://da8nru77lsio9.cloudfront.net/images/hero/home-mobile-original.svg",
     btnPrimaryText: "Join the Waitlist",
