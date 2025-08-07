@@ -148,29 +148,29 @@ const GallerySection = ({
           onKeyDown={handleKeyDown}
           tabIndex={0}
         >
-          <div className="relative max-w-[90vw] max-h-[90vh] flex items-center justify-center">
-            {/* Close Button */}
-            <button
-              onClick={closeImageModal}
-              className="absolute top-[-80px] right-[-140px] z-10 text-white hover:text-gray-300 transition-colors duration-200"
+          {/* Close Button - Fixed to viewport */}
+          <button
+            onClick={closeImageModal}
+            className="fixed top-[275px] right-[133px] z-[60] text-white hover:text-gray-300 transition-colors duration-200"
+          >
+            <svg
+              width="42"
+              height="42"
+              viewBox="0 0 32 32"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
             >
-              <svg
-                width="42"
-                height="42"
-                viewBox="0 0 32 32"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M24 8L8 24M8 8L24 24"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </button>
+              <path
+                d="M24 8L8 24M8 8L24 24"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
 
+          <div className="relative max-w-[90vw] max-h-[90vh] flex items-center justify-center">
             {/* Navigation Arrows */}
             <button
               onClick={(e) => {
