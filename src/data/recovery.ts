@@ -105,11 +105,7 @@ export const recoveryData: StaticPageData = {
     description:
       "Tour our state-of-the-art club and discover how Drive FITT redefines space, energy, and purpose.",
     btnLabel: "View Gallery",
-    imageList: [
-      "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/gallery-1.webp",
-      "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/gallery-2.webp",
-      "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/gallery-3.webp",
-    ],
+    imageList: [13, 14, 15],
   },
   bannerSection: {
     title: "Become a DriveFITT member",

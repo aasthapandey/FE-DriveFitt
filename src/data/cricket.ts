@@ -141,11 +141,7 @@ export const cricketData: StaticPageData = {
     description:
       "Relive every swing, sprint and six—from net practice to match-day magic in action.",
     btnLabel: "View Gallery",
-    imageList: [
-      "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/gallery-1.webp",
-      "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/gallery-2.webp",
-      "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/gallery-3.webp",
-    ],
+    imageList: [4, 5, 6],
   },
   bannerSection: {
     title: "Become a Drive FIIT Member!",

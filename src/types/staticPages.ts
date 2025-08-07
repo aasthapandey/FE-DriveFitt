@@ -73,7 +73,7 @@ export interface GallerySectionProps {
   title: string;
   description: string;
   btnLabel: string;
-  imageList: string[];
+  imageList: number[];
 }
 
 export interface SportsClubSectionProps {

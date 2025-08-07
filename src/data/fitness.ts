@@ -139,11 +139,7 @@ export const fitnessData: StaticPageData = {
     title: "Fitness Unfiltered",
     description: "Where every drop of sweat writes your success story",
     btnLabel: "View Gallery",
-    imageList: [
-      "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/gallery-1.webp",
-      "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/gallery-2.webp",
-      "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/gallery-3.webp",
-    ],
+    imageList: [10, 11, 12],
   },
   bannerSection: {
     title: "Become a DriveFITT member",

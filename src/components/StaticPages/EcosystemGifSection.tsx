@@ -53,11 +53,11 @@ const EcosystemGifSection = ({
         ref={containerRef}
         className="w-full flex justify-center items-center"
       >
-        <div className="w-full px-4 md:px-[120px]">
+        <div className="w-full px-4 md:px-[120px] max-w-[1040px]">
           <div className="relative overflow-hidden rounded-lg">
             {isVisible && (
               <img
-                src="https://da8nru77lsio9.cloudfront.net/images/ecosystem.gif"
+                src="/images/ecosystem4.gif"
                 alt="DriveFITT Ecosystem"
                 className={`w-full h-full object-cover transition-opacity duration-500 ${
                   isLoaded ? "opacity-100" : "opacity-0"

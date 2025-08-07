@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import EmailModal from "@/components/common/Modal/EmailModal";
 import ScrollAnimation from "@/components/common/ScrollAnimation";
+import { GALLERY_IMAGES } from "@/data/constants";
 
 const GallerySection = ({
   data,
@@ -93,6 +94,7 @@ const GallerySection = ({
             {btnLabel}
           </button> */}
         </ScrollAnimation>
+
         <ScrollAnimation
           delay={0.3}
           direction="right"
@@ -102,10 +104,10 @@ const GallerySection = ({
             <div className="col-span-2 grid grid-rows-2 gap-2">
               <div
                 className="row-span-1 relative h-full w-full rounded-[20px] overflow-hidden cursor-pointer hover:opacity-90 transition-opacity duration-200"
-                onClick={() => openImageModal(0)}
+                onClick={() => openImageModal(imageList[0])}
               >
                 <Image
-                  src={imageList[0]}
+                  src={GALLERY_IMAGES[imageList[0]]?.CROPPED_IMAGE || ""}
                   alt="gallery-1"
                   fill
                   className="object-cover"
@@ -113,10 +115,10 @@ const GallerySection = ({
               </div>
               <div
                 className="row-span-1 relative h-full w-full rounded-[20px] overflow-hidden cursor-pointer hover:opacity-90 transition-opacity duration-200"
-                onClick={() => openImageModal(1)}
+                onClick={() => openImageModal(imageList[1])}
               >
                 <Image
-                  src={imageList[1]}
+                  src={GALLERY_IMAGES[imageList[1]]?.CROPPED_IMAGE || ""}
                   alt="gallery-2"
                   fill
                   className="object-cover"
@@ -125,10 +127,10 @@ const GallerySection = ({
             </div>
             <div
               className="col-span-3 relative h-full w-full rounded-[20px] overflow-hidden cursor-pointer hover:opacity-90 transition-opacity duration-200"
-              onClick={() => openImageModal(2)}
+              onClick={() => openImageModal(imageList[2])}
             >
               <Image
-                src={imageList[2]}
+                src={GALLERY_IMAGES[imageList[2]]?.CROPPED_IMAGE || ""}
                 alt="gallery-3"
                 fill
                 className="object-cover"
@@ -224,7 +226,10 @@ const GallerySection = ({
               onClick={(e) => e.stopPropagation()}
             >
               <Image
-                src={imageList[currentImageIndex]}
+                src={
+                  GALLERY_IMAGES[imageList[currentImageIndex]]?.GALLERY_IMAGE ||
+                  ""
+                }
                 alt={`gallery-${currentImageIndex + 1}`}
                 width={800}
                 height={600}
@@ -235,7 +240,7 @@ const GallerySection = ({
 
             {/* Image Counter */}
             <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10 bg-black bg-opacity-50 text-white px-4 py-2 rounded-full text-sm">
-              {currentImageIndex + 1} / {imageList.length}
+              {currentImageIndex + 1} / {Object.keys(GALLERY_IMAGES).length}
             </div>
           </div>
         </div>
