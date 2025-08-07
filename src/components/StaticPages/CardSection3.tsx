@@ -113,7 +113,7 @@ const CardSection3 = ({
               <Card
                 data={cardSection[0]}
                 className="!h-[660px]"
-                imageClass="!h-[654px]"
+                imageClass="!h-[655.5px]"
                 iconClass="!size-10"
                 textPlusImageClass="md:pb-[40px]"
               />
