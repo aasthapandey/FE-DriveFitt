@@ -13,7 +13,7 @@ interface HeroSectionProps {
 }
 
 const HeroSection = ({ data, pageName, isMobile }: HeroSectionProps) => {
-  const { titleWords, description, btnPrimaryText, btnSecondaryText } = data;
+  const { titleWords, description, btnPrimaryText } = data;
   const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
 
   const handlePrimaryButtonClick = () => {

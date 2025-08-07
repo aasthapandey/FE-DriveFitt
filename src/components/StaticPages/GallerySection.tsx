@@ -17,13 +17,13 @@ const GallerySection = ({
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  const handleButtonClick = () => {
-    if (btnLabel === "View Gallery") {
-      window.location.href = "/coming-soon";
-    } else if (btnLabel === "Join online" || btnLabel === "Join Online") {
-      setIsEmailModalOpen(true);
-    }
-  };
+  // const handleButtonClick = () => {
+  //   if (btnLabel === "View Gallery") {
+  //     window.location.href = "/coming-soon";
+  //   } else if (btnLabel === "Join online" || btnLabel === "Join Online") {
+  //     setIsEmailModalOpen(true);
+  //   }
+  // };
 
   const openImageModal = (index: number) => {
     setCurrentImageIndex(index);
