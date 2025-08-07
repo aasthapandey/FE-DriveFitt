@@ -1,19 +1,19 @@
 import Navbar from "@/components/common/Navbar";
 import { navbarData } from "@/data/navbar";
 import {
-  StaticPageData,
+  ContactUsPageData,
   Hero,
   AppDownloadProps,
-  FooterInfoProps,
+  ContactUsFooterInfoProps,
   FooterProps,
 } from "@/types/staticPages";
 import AppDownload from "@/components/common/AppDownload";
 import Footer from "@/components/common/Footer";
 import ChatWithUs from "@/components/common/ChatWithUs";
-import ContactForm from "@/components/common/ContactForm";
+import ContactUsContactForm from "@/components/ContactUsPage/ContactUsContactForm";
 
 interface StaticPageProps {
-  data: StaticPageData;
+  data: ContactUsPageData;
   pageName: string;
   isMobile?: boolean;
 }
@@ -22,7 +22,7 @@ const ContactUsPage = ({ data, isMobile }: StaticPageProps) => {
   const { hero, appDownloadSection, footerInfoSection, footerSection } = data;
   const { titleWords, description, mobileImage, desktopImage } = hero as Hero;
   const { footerInfoList, socialLinkList, contactFormSection } =
-    footerInfoSection as FooterInfoProps;
+    footerInfoSection as ContactUsFooterInfoProps;
 
   return (
     <div className="bg-[#0D0D0D] flex flex-col w-full relative">
@@ -62,7 +62,10 @@ const ContactUsPage = ({ data, isMobile }: StaticPageProps) => {
                   />
                 </div>
                 <div className="w-full md:w-3/5 h-full">
-                  <ContactForm data={contactFormSection} isMobile={isMobile} />
+                  <ContactUsContactForm
+                    data={contactFormSection}
+                    isMobile={isMobile}
+                  />
                 </div>
               </div>
               <AppDownload data={appDownloadSection as AppDownloadProps} />

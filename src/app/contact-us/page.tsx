@@ -1,11 +1,11 @@
 import { Metadata } from "next";
 import { contactUsData } from "@/data/contactUs";
-import { StaticPageData } from "@/types/staticPages";
+import { ContactUsPageData } from "@/types/staticPages";
 import ContactUsPage from "@/components/ContactUsPage";
 import { headers } from "next/headers";
 import { isMobileDevice } from "@/utils/deviceDetection";
 
-const pageData: StaticPageData = contactUsData;
+const pageData: ContactUsPageData = contactUsData;
 
 export async function generateMetadata(): Promise<Metadata> {
   return {

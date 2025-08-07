@@ -117,7 +117,6 @@ export interface FooterInfoItem {
   email: string;
   image: string;
 }
-
 export interface ContactFormProps {
   title: string;
   description: string;
@@ -146,10 +145,39 @@ export interface ContactFormProps {
   };
 }
 
+export interface ContactUsContactFormProps {
+  title: string;
+  description: string;
+  submitButtonText: string;
+  fields: {
+    name: {
+      label: string;
+      placeholder?: string;
+    };
+    phone: {
+      label: string;
+      placeholder?: string;
+    };
+    interests: {
+      label: string;
+    };
+    message: {
+      label: string;
+      placeholder?: string;
+    };
+  };
+}
+
 export interface FooterInfoProps {
   footerInfoList: FooterInfoItem[];
   socialLinkList: SocialLinks[];
   contactFormSection: ContactFormProps;
+}
+
+export interface ContactUsFooterInfoProps {
+  footerInfoList: FooterInfoItem[];
+  socialLinkList: SocialLinks[];
+  contactFormSection: ContactUsContactFormProps;
 }
 
 export interface FooterLink {
@@ -313,7 +341,7 @@ export interface ContactUsPageData {
   seoDescription: string;
   navbar: NavbarProps;
   hero: Hero;
-  footerInfoSection?: FooterInfoProps;
+  footerInfoSection?: ContactUsFooterInfoProps;
   footerSection?: FooterProps;
   appDownloadSection?: AppDownloadProps;
 }

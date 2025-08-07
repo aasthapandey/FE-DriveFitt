@@ -64,21 +64,16 @@ export const contactUsData: ContactUsPageData = {
       description: "We'd love to hear from you. Please fill out the form.",
       submitButtonText: "Send Message",
       fields: {
-        firstName: {
-          label: "First Name*",
-          placeholder: "Enter your first name",
-        },
-        lastName: {
-          label: "Last Name",
-          placeholder: "Enter your last name",
-        },
-        email: {
-          label: "Email ID",
-          placeholder: "Enter your email address",
+        name: {
+          label: "Name",
+          placeholder: "Enter your name",
         },
         phone: {
-          label: "Phone Number*",
+          label: "Phone Number",
           placeholder: "Enter phone number",
+        },
+        interests: {
+          label: "Choose your interest",
         },
         message: {
           label: "Message",
