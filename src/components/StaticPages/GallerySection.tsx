@@ -38,11 +38,11 @@ const GallerySection = ({
   const navigateImage = (direction: "prev" | "next") => {
     if (direction === "prev") {
       setCurrentImageIndex((prev) =>
-        prev === 0 ? imageList.length - 1 : prev - 1
+        prev === 1 ? Object.keys(GALLERY_IMAGES).length : prev - 1
       );
     } else {
       setCurrentImageIndex((prev) =>
-        prev === imageList.length - 1 ? 0 : prev + 1
+        prev === Object.keys(GALLERY_IMAGES).length ? 1 : prev + 1
       );
     }
   };
@@ -152,19 +152,19 @@ const GallerySection = ({
             {/* Close Button */}
             <button
               onClick={closeImageModal}
-              className="absolute top-4 right-4 z-10 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-3 rounded-full transition-all duration-200 hover:scale-110"
+              className="absolute top-[-80px] right-[-140px] z-10 text-white hover:text-gray-300 transition-colors duration-200"
             >
               <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
+                width="42"
+                height="42"
+                viewBox="0 0 32 32"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M18 6L6 18M6 6L18 18"
+                  d="M24 8L8 24M8 8L24 24"
                   stroke="currentColor"
-                  strokeWidth="2"
+                  strokeWidth="2.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
@@ -177,19 +177,19 @@ const GallerySection = ({
                 e.stopPropagation();
                 navigateImage("prev");
               }}
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-3 rounded-full transition-all duration-200 hover:scale-110"
+              className="absolute left-[-90px] top-1/2 transform -translate-y-1/2 z-10 text-white hover:text-gray-300 transition-colors duration-200"
             >
               <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
+                width="42"
+                height="42"
+                viewBox="0 0 32 32"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M15 18L9 12L15 6"
+                  d="M20 24L12 16L20 8"
                   stroke="currentColor"
-                  strokeWidth="2"
+                  strokeWidth="2.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
@@ -201,19 +201,19 @@ const GallerySection = ({
                 e.stopPropagation();
                 navigateImage("next");
               }}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-3 rounded-full transition-all duration-200 hover:scale-110"
+              className="absolute right-[-90px] top-1/2 transform -translate-y-1/2 z-10 text-white hover:text-gray-300 transition-colors duration-200"
             >
               <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
+                width="42"
+                height="42"
+                viewBox="0 0 32 32"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M9 18L15 12L9 6"
+                  d="M12 8L20 16L12 24"
                   stroke="currentColor"
-                  strokeWidth="2"
+                  strokeWidth="2.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
@@ -226,10 +226,7 @@ const GallerySection = ({
               onClick={(e) => e.stopPropagation()}
             >
               <Image
-                src={
-                  GALLERY_IMAGES[imageList[currentImageIndex]]?.GALLERY_IMAGE ||
-                  ""
-                }
+                src={GALLERY_IMAGES[currentImageIndex]?.GALLERY_IMAGE || ""}
                 alt={`gallery-${currentImageIndex + 1}`}
                 width={800}
                 height={600}
@@ -239,8 +236,8 @@ const GallerySection = ({
             </div>
 
             {/* Image Counter */}
-            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10 bg-black bg-opacity-50 text-white px-4 py-2 rounded-full text-sm">
-              {currentImageIndex + 1} / {Object.keys(GALLERY_IMAGES).length}
+            <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-10 bg-black bg-opacity-60 text-white px-4 py-2 rounded-full text-sm font-medium">
+              {currentImageIndex} / {Object.keys(GALLERY_IMAGES).length}
             </div>
           </div>
         </div>
