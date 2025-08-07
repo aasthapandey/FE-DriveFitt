@@ -107,13 +107,13 @@ const CardSection3 = ({
           ))}
         </div>
       ) : (
-        <div className="grid grid-cols-2 gap-10">
+        <div className="grid grid-cols-2 gap-10 h-[660px]">
           <ScrollAnimation delay={0.3} direction="up">
             <div className="col-span-1 row-span-2 h-full">
               <Card
                 data={cardSection[0]}
-                className="!h-[660px]"
-                imageClass="!h-[655.5px]"
+                className="!h-full"
+                imageClass="!h-full"
                 iconClass="!size-10"
                 textPlusImageClass="md:pb-[40px]"
               />
@@ -123,8 +123,8 @@ const CardSection3 = ({
             <ScrollAnimation delay={0.4} direction="up">
               <Card
                 data={cardSection[1]}
-                className="!h-[310px]"
-                imageClass="!h-[306px]"
+                className="!h-full"
+                imageClass="!h-full"
                 iconClass="!size-10"
                 textPlusImageClass="md:pb-[40px]"
               />
@@ -132,8 +132,8 @@ const CardSection3 = ({
             <ScrollAnimation delay={0.5} direction="up">
               <Card
                 data={cardSection[2]}
-                className="!h-[310px]"
-                imageClass="!h-[306px]"
+                className="!h-full"
+                imageClass="!h-full"
                 iconClass="!size-10"
                 textPlusImageClass="md:pb-[40px]"
               />
