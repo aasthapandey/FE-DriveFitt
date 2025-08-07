@@ -68,7 +68,7 @@ export const franchiseData: FranchisePageData = {
     ],
   },
   opportunitySection: {
-    title: "Your Opportunity At A Glance",
+    title: "Your Opportunity at a Glance",
     description:
       "A comprehensive look at what it takes to join the Drive FITT revolution",
     cardList: [
@@ -81,7 +81,7 @@ export const franchiseData: FranchisePageData = {
       {
         icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/ideal-location-icon.svg",
         title: "Ideal Location",
-        subTitle: "10,000 sq ft or above",
+        subTitle: "10,000 sq. ft. or above",
         description: "Premium mixed-use developments",
       },
       {
