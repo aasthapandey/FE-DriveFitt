@@ -273,6 +273,14 @@ export interface EcosystemGifSectionProps {
   description: string;
 }
 
+export interface JoinMovementSectionProps {
+  title: string;
+  description: string;
+  buttonText: string;
+  buttonLink?: string;
+  image?: string;
+}
+
 export interface StaticPageData {
   title: string;
   description: string;
@@ -304,6 +312,7 @@ export interface StaticPageData {
   scrollingCardSection?: ScrollingCardSection;
   notJustClubSection?: NotJustClubSectionProps;
   ecosystemGifSection?: EcosystemGifSectionProps;
+  joinMovementSection?: JoinMovementSectionProps;
 }
 
 export interface ContactUsPageData {

@@ -1,4 +1,9 @@
-import { FooterInfoProps, FooterProps, NavbarProps } from "./staticPages";
+import {
+  FooterInfoProps,
+  FooterProps,
+  NavbarProps,
+  JoinMovementSectionProps,
+} from "./staticPages";
 
 export interface FranchiseHero {
   title: string;
@@ -56,6 +61,7 @@ export interface FranchisePageData {
   whatLookingForSection: CardSection;
   banner2Section: Banner2SectionType;
   nextStepSection: CardSection;
+  joinMovementSection?: JoinMovementSectionProps;
   footerInfoSection: FooterInfoProps;
   footerSection: FooterProps;
 }
