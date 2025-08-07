@@ -48,7 +48,7 @@ export const fitnessData: StaticPageData = {
       {
         title: "International Fitness Formats",
         description:
-          "Experience the energy, structure, and challenge of the global fitness race at your club",
+          "Experience the energy, structure, and challenge of the global fitness race at your club.",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/card5-2.webp",
         iconImage:
@@ -67,7 +67,7 @@ export const fitnessData: StaticPageData = {
       {
         title: "All New Micro HIIT",
         description:
-          "From sweat-drenched HIIT sessions to mindful low-impact training, our zones allow you to train full spectrum",
+          "Deliver quick results for those short on time but big on goals.",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/card5-3.webp",
         iconImage:
