@@ -29,7 +29,7 @@ export const runningData: StaticPageData = {
       {
         title: "Race Day Prep",
         description:
-          "Exclusive group race training programs so you feel confident on race days",
+          "Exclusive group race training programs so you feel confident on race days.",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/running-compressed/card5-1.webp",
         iconImage:
@@ -39,7 +39,7 @@ export const runningData: StaticPageData = {
       {
         title: "Electric Studio Vibe",
         description:
-          "Pulsing lights, energizing playlists, and community camaraderie",
+          "Pulsing lights, energizing playlists, and community camaraderie.",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-5.svg",
         iconImage:
@@ -49,7 +49,7 @@ export const runningData: StaticPageData = {
       {
         title: "Indoor Running Revolution",
         description:
-          "Bringing running indoors as a science, skill, and powerful shared experience",
+          "Bringing running indoors as a science, skill, and powerful shared experience.",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/running-compressed/card5-2.webp",
         iconImage:
@@ -58,7 +58,7 @@ export const runningData: StaticPageData = {
       },
       {
         title: "HIIT + Intervals + Recovery ",
-        description: "Structured classes combine speed, hills, and active rest",
+        description: "Structured classes combine speed, hills, and active rest.",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-1.svg",
         iconImage: "/images/running/HIIT.svg",
@@ -67,7 +67,7 @@ export const runningData: StaticPageData = {
       {
         title: "Coach-Powered Motivation",
         description:
-          "Expert runners who inspire, instruct, and hold you accountable",
+          "Expert runners who inspire, instruct, and hold you accountable.",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/running-compressed/card5-3.webp",
         iconImage:
@@ -79,7 +79,7 @@ export const runningData: StaticPageData = {
   evolutionSection: {
     // title: "Join India’s One Of The First Indoor Run Movement",
     title:
-      "Forget traffic, pollution, or weather. Choose DRIVE FITT’s indoor studio for:",
+      "Forget traffic, pollution, or weather.  Choose DRIVE FITT’s indoor studio for:",
     evolutionList: [
       {
         title: "Community Energy",
