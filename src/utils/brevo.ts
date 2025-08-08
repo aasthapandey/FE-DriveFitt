@@ -164,7 +164,7 @@ export async function sendLeadGenFormEmail(formData: LeadGenFormData) {
 
   // Get selected interests
   const selectedInterests = Object.entries(formData.interests)
-    .filter(([_, value]) => value === 1)
+    .filter(([, value]) => value === 1)
     .map(([key]) => {
       // Convert camelCase to Title Case
       return key
