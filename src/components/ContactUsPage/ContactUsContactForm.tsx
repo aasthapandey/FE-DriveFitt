@@ -297,16 +297,16 @@ const ContactUsContactForm = ({
                 <label className="text-xs md:text-sm text-[#8A8A8A]">
                   {fields.interests.label}
                 </label>
-                <div className="flex flex-wrap gap-2 md:gap-3">
+                <div className="grid grid-cols-2 md:flex md:flex-wrap gap-2 md:gap-3">
                   {interestOptions.map((option) => (
                     <button
                       key={option.key}
                       type="button"
                       onClick={() => handleInterestChange(option.key)}
-                      className={`px-2 py-2 md:py-4 rounded-lg text-sm font-normal tracking-[0%] transition-all flex gap-[6px] duration-200 ${
+                      className={`px-2 py-2 md:py-4 rounded-lg text-sm font-normal tracking-[0%] transition-all flex items-center gap-[6px] duration-200 h-full ${
                         interests[option.key as keyof typeof interests]
                           ? "bg-[#00DBDC1A] text-[#00DBDC]"
-                          : "bg-[#1D1D1D] text-[#8A8A8A] hover:bg-[#00DBDC1A]"
+                          : "bg-[#1D1D1D] text-[#8A8A8A] hover:bg-[#00DBDC1A] hover:text-[#00DBDC]"
                       }`}
                     >
                       <Image

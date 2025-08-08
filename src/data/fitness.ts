@@ -124,7 +124,7 @@ export const fitnessData: StaticPageData = {
         ],
         extraTagLabel: "",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/scroll-card-2.svg",
+          "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/scroll-card-2.webp",
       },
       {
         subTitle: "Smart Recovery Tools",
@@ -149,8 +149,7 @@ export const fitnessData: StaticPageData = {
       "Join the waitlist now and be the first to access elite workouts, expert coaching, exclusive perks, member-only events, and special launch offers.",
     btnLabel: "Join the Waitlist",
     image: "https://da8nru77lsio9.cloudfront.net/images/becomeMember.svg",
-    mobileImage:
-      "https://da8nru77lsio9.cloudfront.net/images/become-a-member-mobile.webp",
+    mobileImage: "https://da8nru77lsio9.cloudfront.net/images/becomeMember.svg",
   },
   footerInfoSection: {
     footerInfoList: [
