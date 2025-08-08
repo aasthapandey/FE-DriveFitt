@@ -162,8 +162,9 @@ export default function Navbar({ data, isMobile }: Props) {
             <div className="px-6 mt-8">
               <button
                 onClick={() => {
-                  setIsLoginModalOpen(true);
+                  // setIsLoginModalOpen(true);
                   setIsMenuOpen(false);
+                  window.location.href = "/contact-us";
                 }}
                 className="w-full bg-[#00DBDC] border border-transparent rounded-lg py-4 text-[#0D0D0D] font-medium text-lg transition-all duration-200"
               >
