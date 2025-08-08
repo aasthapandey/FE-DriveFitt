@@ -303,7 +303,7 @@ const ContactUsContactForm = ({
                       key={option.key}
                       type="button"
                       onClick={() => handleInterestChange(option.key)}
-                      className={`px-2 py-2 md:py-4 rounded-lg text-sm font-normal tracking-[0%] transition-all flex items-center gap-[6px] duration-200 h-full ${
+                      className={`px-2 py-2 md:px-4 md:py-1 rounded-lg text-sm font-normal tracking-[0%] transition-all flex items-center gap-[6px] duration-200 ${
                         interests[option.key as keyof typeof interests]
                           ? "bg-[#00DBDC1A] text-[#00DBDC]"
                           : "bg-[#1D1D1D] text-[#8A8A8A] hover:bg-[#00DBDC1A] hover:text-[#00DBDC]"
