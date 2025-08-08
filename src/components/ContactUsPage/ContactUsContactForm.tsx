@@ -303,7 +303,7 @@ const ContactUsContactForm = ({
                       key={option.key}
                       type="button"
                       onClick={() => handleInterestChange(option.key)}
-                      className={`px-2 py-2 md:px-4 md:py-1 rounded-lg text-sm font-normal tracking-[0%] transition-all flex items-center gap-[6px] duration-200 ${
+                      className={`px-2 py-2 md:px-4 md:py-1 rounded-lg text-sm font-normal tracking-[0%] transition-all flex items-center justify-between duration-200 gap-[8px] ${
                         interests[option.key as keyof typeof interests]
                           ? "bg-[#00DBDC1A] text-[#00DBDC]"
                           : "bg-[#1D1D1D] text-[#8A8A8A] md:hover:bg-[#00DBDC1A] md:hover:text-[#00DBDC]"
@@ -320,9 +320,10 @@ const ContactUsContactForm = ({
                         height={16}
                         className="flex-shrink-0"
                       />
-                      <span className="text-left leading-tight">
+                      <span className="text-center leading-tight flex-1 pl-[16px]">
                         {option.label}
                       </span>
+                      <div className="flex-shrink-0 w-4"></div>
                     </button>
                   ))}
                 </div>
