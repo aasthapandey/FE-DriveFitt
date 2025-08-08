@@ -11,7 +11,7 @@ export const contactUsData: ContactUsPageData = {
   hero: {
     titleWords: [{ text: "Contact Us", color: "#FFFFFF" }],
     description:
-      "Please Feel Free to contact us and we will get back to you as soon as we can.",
+      "Please feel free to contact us and we will get back to you as soon as we can.",
     desktopImage:
       "https://da8nru77lsio9.cloudfront.net/images/contact-us-compressed/hero.webp",
     mobileImage:
