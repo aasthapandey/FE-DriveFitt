@@ -7,12 +7,6 @@ export async function POST(request: NextRequest) {
   try {
     const body: FranchiseFormData = await request.json();
 
-    // Return success immediately
-    const response = NextResponse.json(
-      { success: true, message: "Franchise inquiry submitted successfully" },
-      { status: 201 }
-    );
-
     // Handle database and email operations asynchronously
     Promise.allSettled([
       // Database operation
@@ -63,6 +57,11 @@ export async function POST(request: NextRequest) {
     ]).catch((error) => {
       console.error("Error in background operations:", error);
     });
+    // Return success immediately
+    const response = NextResponse.json(
+      { success: true, message: "Franchise inquiry submitted successfully" },
+      { status: 201 }
+    );
 
     return response;
   } catch (error) {
