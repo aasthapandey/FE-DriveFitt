@@ -35,7 +35,6 @@ const dbConfig = {
   connectTimeout: 10000, // 10 seconds
   enableKeepAlive: true,
   keepAliveInitialDelay: 0,
-  timezone: "+05:30", // Set timezone to IST
 };
 
 let pool: mysql.Pool | null = null;
@@ -53,9 +52,7 @@ const createPool = async (retries = MAX_RETRIES): Promise<mysql.Pool> => {
 
     // Set timezone for the connection
     const connection = await newPool.getConnection();
-    await connection.execute("SET GLOBAL time_zone = '+05:30'");
-    await connection.execute("SET time_zone = '+05:30'");
-    console.log("✓ Database connection successful! Timezone set to IST");
+    console.log("✓ Database connection successful!");
     connection.release();
     return newPool;
   } catch (error) {
