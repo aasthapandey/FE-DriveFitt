@@ -320,7 +320,7 @@ const ContactUsContactForm = ({
                         height={16}
                         className="flex-shrink-0"
                       />
-                      <span className="text-center leading-tight flex-1 pl-[4px] whitespace-nowrap ">
+                      <span className="text-left leading-tight flex-1 pl-[4px] whitespace-nowrap ">
                         {option.label}
                       </span>
                       <div className="flex-shrink-0 w-4"></div>
