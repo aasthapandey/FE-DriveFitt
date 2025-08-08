@@ -229,7 +229,7 @@ const ContactUsContactForm = ({
             "linear-gradient(180deg, #333333 29.36%, #00DBDC 120.13%)",
         }}
       >
-        <div className="rounded-[20px] md:rounded-[40px] w-full h-full p-8 md:p-12 flex flex-col bg-[#0D0D0D]">
+        <div className="rounded-[20px] md:rounded-[40px] w-full h-full p-4 md:p-12 flex flex-col bg-[#0D0D0D]">
           <ScrollAnimation delay={0.2} direction="right">
             <h2 className="text-2xl leading-7 md:text-[40px] font-semibold md:leading-[48px] tracking-[-1px] md:tracking-[-2px] mb-2">
               {title}
@@ -244,7 +244,7 @@ const ContactUsContactForm = ({
               onSubmit={handleSubmit}
               className="flex flex-col gap-4 md:gap-6 flex-1"
             >
-              <div className="grid grid-row-2 gap-4 md:grid-cols-2 md:gap-6">
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6">
                 <div className="flex flex-col gap-1.5">
                   <label
                     htmlFor="name"
@@ -259,7 +259,7 @@ const ContactUsContactForm = ({
                     value={formData.name}
                     onChange={handleChange}
                     placeholder={fields.name.placeholder}
-                    className={`bg-[#FFFFFF] border rounded-lg py-1.5 md:py-2 px-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[2px] focus:border-[#00DBDC] outline-none transition-colors ${
+                    className={`bg-[#FFFFFF] border rounded-lg py-1.5 md:py-2 px-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] focus:border-[2px] focus:border-[#00DBDC] outline-none transition-colors w-full ${
                       errors.name ? "border-red-500" : "border-[#333333]"
                     }`}
                   />
@@ -272,7 +272,7 @@ const ContactUsContactForm = ({
                     {fields.phone.label}
                   </label>
                   <div
-                    className={`bg-[#FFFFFF] border rounded-lg flex items-center transition-colors overflow-hidden ${
+                    className={`bg-[#FFFFFF] border rounded-lg flex items-center transition-colors overflow-hidden w-full ${
                       errors.phone ? "border-red-500" : "border-[#333333]"
                     } focus-within:border-[2px] focus-within:border-[#00DBDC]`}
                   >

@@ -86,7 +86,8 @@ export default function Navbar({ data, isMobile }: Props) {
           </Link>
           <div className="flex items-center gap-4">
             <button
-              onClick={() => setIsLoginModalOpen(true)}
+              // onClick={() => setIsLoginModalOpen(true)}
+              onClick={() => (window.location.href = "/contact-us")}
               className="bg-[#00DBDC] border border-transparent rounded-[4px] md:rounded-lg px-3 md:px-6 py-2 text-[#0D0D0D] font-medium text-xs md:text-sm transition-all duration-200"
             >
               {signInButton.text}
