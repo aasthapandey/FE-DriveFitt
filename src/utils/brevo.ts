@@ -3,6 +3,19 @@ import { ContactUsFormData, FranchiseFormData } from "@/types/database";
 import https from "https";
 import http from "http";
 
+// Define types for API instance
+type ApiInstance = SibApiV3Sdk.TransactionalEmailsApi & {
+  defaultHeaders?: Record<string, string>;
+  timeout?: number;
+  httpsAgent?: https.Agent;
+  httpAgent?: http.Agent;
+};
+
+// Define custom error type
+interface NetworkError extends Error {
+  code?: string;
+}
+
 // Configure HTTP agents with proper timeout and connection settings
 const httpsAgent = new https.Agent({
   keepAlive: true,
@@ -19,7 +32,7 @@ const httpAgent = new http.Agent({
 });
 
 // Initialize Brevo API instance
-const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
+const apiInstance: ApiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
 const apiKey = process.env.BREVO_API_KEY;
 
 // Set the API key for authentication
@@ -32,14 +45,14 @@ apiInstance.setApiKey(
 if (apiInstance.basePath) {
   const url = new URL(apiInstance.basePath);
   if (url.protocol === "https:") {
-    (apiInstance as any).defaultHeaders = {
-      ...((apiInstance as any).defaultHeaders || {}),
+    apiInstance.defaultHeaders = {
+      ...(apiInstance.defaultHeaders || {}),
     };
     // Set timeout and agent configuration
-    (apiInstance as any).timeout = 30000;
-    (apiInstance as any).httpsAgent = httpsAgent;
+    apiInstance.timeout = 30000;
+    apiInstance.httpsAgent = httpsAgent;
   } else {
-    (apiInstance as any).httpAgent = httpAgent;
+    apiInstance.httpAgent = httpAgent;
   }
 }
 
@@ -57,12 +70,12 @@ async function retryApiCall<T>(
 ): Promise<T> {
   try {
     return await apiCall();
-  } catch (error: any) {
+  } catch (error) {
+    const networkError = error as NetworkError;
     if (
       retries > 0 &&
-      (error.code === "ECONNRESET" ||
-        error.code === "ETIMEDOUT" ||
-        error.code === "ECONNREFUSED")
+      networkError.code &&
+      ["ECONNRESET", "ETIMEDOUT", "ECONNREFUSED"].includes(networkError.code)
     ) {
       console.log(`Retrying API call, ${retries} attempts remaining...`);
       await delay(RETRY_DELAY);
