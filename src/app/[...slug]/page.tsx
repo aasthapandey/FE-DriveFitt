@@ -8,6 +8,7 @@ import { StaticPageData } from "@/types/staticPages";
 import StaticPage from "@/components/StaticPages";
 import { headers } from "next/headers";
 import { isMobileDevice } from "@/utils/deviceDetection";
+import StructuredData from "@/components/common/StructuredData";
 
 type PageParams = {
   params: {
@@ -35,10 +36,54 @@ export async function generateMetadata({
     };
   }
 
+  const pageUrl = `https://drivefitt.club/${slug}`;
+  const heroImage =
+    data.hero?.desktopImage ||
+    "https://da8nru77lsio9.cloudfront.net/images/homec/hero.webp";
+
   return {
     title: data.seoTitle || data.title,
     description: data.seoDescription,
+    keywords: [
+      `${slug} gurugram`,
+      `${slug} training`,
+      `${slug} coaching`,
+      "drive fitt",
+      "premium sports club",
+      "fitness center",
+    ],
+    openGraph: {
+      title: data.seoTitle || data.title,
+      description: data.seoDescription,
+      url: pageUrl,
+      type: "website",
+      images: [
+        {
+          url: heroImage,
+          width: 1200,
+          height: 630,
+          alt: `${data.title} at Drive FITT Premium Club`,
+        },
+      ],
+    },
+    twitter: {
+      title: data.seoTitle || data.title,
+      description: data.seoDescription,
+      images: [heroImage],
+    },
+    alternates: {
+      canonical: pageUrl,
+    },
   };
+}
+
+export async function generateStaticParams() {
+  return [
+    { slug: "cricket" },
+    { slug: "fitness" },
+    { slug: "recovery" },
+    { slug: "running" },
+  ];
 }
 
 export default function Page({ params }: PageParams) {
@@ -55,8 +100,18 @@ export default function Page({ params }: PageParams) {
   const isMobile = userAgent ? isMobileDevice(userAgent) : false;
 
   return (
-    <main>
-      <StaticPage data={data} pageName={pageName} isMobile={isMobile} />
-    </main>
+    <>
+      <StructuredData
+        type="webpage"
+        data={{
+          title: data.seoTitle || data.title,
+          description: data.seoDescription,
+          url: `/${slug}`,
+        }}
+      />
+      <main>
+        <StaticPage data={data} pageName={pageName} isMobile={isMobile} />
+      </main>
+    </>
   );
 }
