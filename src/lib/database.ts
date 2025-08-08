@@ -1,5 +1,15 @@
 import mysql from "mysql2/promise";
 
+// Define proper error interfaces
+interface DatabaseError extends Error {
+  code?: string;
+  errno?: number;
+  syscall?: string;
+  hostname?: string;
+  sqlState?: string;
+  sqlMessage?: string;
+}
+
 const MAX_RETRIES = 3;
 const RETRY_DELAY = 1000; // 1 second
 
@@ -44,13 +54,14 @@ const createPool = async (retries = MAX_RETRIES): Promise<mysql.Pool> => {
     console.log("✓ Database connection successful!");
     connection.release();
     return newPool;
-  } catch (error: any) {
+  } catch (error) {
+    const dbError = error as DatabaseError;
     console.error("Database connection error details:", {
-      code: error.code,
-      errno: error.errno,
-      syscall: error.syscall,
-      hostname: error.hostname,
-      message: error.message,
+      code: dbError.code,
+      errno: dbError.errno,
+      syscall: dbError.syscall,
+      hostname: dbError.hostname,
+      message: dbError.message,
     });
 
     if (retries > 0) {
@@ -94,21 +105,22 @@ export const executeQuery = async <T = unknown>(
     const [rows] = await connection.execute(query, params);
     console.log("Query executed successfully");
     return rows as T;
-  } catch (error: any) {
+  } catch (error) {
+    const dbError = error as DatabaseError;
     console.error("Database query error:", {
-      message: error.message,
-      code: error.code,
-      errno: error.errno,
-      sqlState: error.sqlState,
-      sqlMessage: error.sqlMessage,
+      message: dbError.message,
+      code: dbError.code,
+      errno: dbError.errno,
+      sqlState: dbError.sqlState,
+      sqlMessage: dbError.sqlMessage,
     });
 
     // If it's a connection error and we have retries left
     if (
       retries > 0 &&
-      (error.code === "ECONNREFUSED" ||
-        error.code === "ENOTFOUND" ||
-        error.code === "PROTOCOL_CONNECTION_LOST")
+      (dbError.code === "ECONNREFUSED" ||
+        dbError.code === "ENOTFOUND" ||
+        dbError.code === "PROTOCOL_CONNECTION_LOST")
     ) {
       console.log(`Query failed, retrying... (${retries} attempts left)`);
       await sleep(RETRY_DELAY);
