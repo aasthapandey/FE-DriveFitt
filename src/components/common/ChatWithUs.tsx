@@ -105,7 +105,7 @@ const ChatWithUs = ({
                   isMobile ? "" : "hover:opacity-80"
                 } transition-opacity`}
               >
-                <Image src={link.image} alt="social" width={24} height={24} />
+                <Image src={link.image} alt="sociall" width={24} height={24} />
               </a>
             ))}
           </div>
