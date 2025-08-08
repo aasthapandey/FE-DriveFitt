@@ -11,6 +11,22 @@ apiInstance.setApiKey(
   apiKey || ""
 );
 
+interface LeadGenFormData {
+  name: string;
+  phone: string;
+  message?: string;
+  interests: {
+    cricket: number;
+    fitness: number;
+    recovery: number;
+    running: number;
+    pilates: number;
+    personalTraining: number;
+    physiotherapy: number;
+    groupClasses: number;
+  };
+}
+
 /**
  * Send a contact form submission email
  * @param formData - The contact form data
@@ -46,7 +62,7 @@ export async function sendContactFormEmail(formData: ContactUsFormData) {
   // Replace with your notification email
   sendSmtpEmail.sender = {
     name: "Tech Katalyst",
-    email: "alerts@drivefitt.club",
+    email: process.env.SENDER_EMAIL || "alerts@drivefitt.club",
   };
 
   // Replace with the email where you want to receive notifications
@@ -108,7 +124,7 @@ export async function sendFranchiseFormEmail(formData: FranchiseFormData) {
   // Replace with your notification email
   sendSmtpEmail.sender = {
     name: "Tech Katalyst",
-    email: "alerts@drivefitt.club",
+    email: process.env.SENDER_EMAIL || "alerts@drivefitt.club",
   };
 
   // Replace with the email where you want to receive franchise inquiries
@@ -134,6 +150,76 @@ export async function sendFranchiseFormEmail(formData: FranchiseFormData) {
     return response;
   } catch (error) {
     console.error("Error sending franchise inquiry email via Brevo:", error);
+    throw error;
+  }
+}
+
+/**
+ * Send a lead generation form submission email
+ * @param formData - The lead generation form data
+ * @returns Promise with the API response
+ */
+export async function sendLeadGenFormEmail(formData: LeadGenFormData) {
+  const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
+
+  // Get selected interests
+  const selectedInterests = Object.entries(formData.interests)
+    .filter(([_, value]) => value === 1)
+    .map(([key]) => {
+      // Convert camelCase to Title Case
+      return key
+        .replace(/([A-Z])/g, " $1")
+        .replace(/^./, (str) => str.toUpperCase())
+        .trim();
+    });
+
+  // Configure email parameters
+  sendSmtpEmail.subject =
+    "New Lead Generation Form Submission - By Tech Katalyst";
+  sendSmtpEmail.htmlContent = `
+    <html>
+      <body>
+        <p>A site visitor just submitted your Lead Generation Form on DriveFitt Brand Website</p>
+        <hr>
+        <h2>Submission summary:</h2>
+        
+        <p><strong>Full Name:</strong><br>
+        ${formData.name}</p>
+        
+        <p><strong>Mobile Number:</strong><br>
+        ${formData.phone}</p>
+        
+        <p><strong>Interested In:</strong><br>
+        ${
+          selectedInterests.length > 0
+            ? selectedInterests.join("<br>")
+            : "No specific interests selected"
+        }</p>
+        
+        <p><strong>Message:</strong><br>
+        ${formData.message || "No message provided"}</p>
+      </body>
+    </html>
+  `;
+
+  // Replace with your notification email
+  sendSmtpEmail.sender = {
+    name: "Tech Katalyst",
+    email: process.env.SENDER_EMAIL || "alerts@drivefitt.club",
+  };
+
+  // Replace with the email where you want to receive notifications
+  sendSmtpEmail.to = [
+    { email: process.env.NOTIFICATION_EMAIL || "garvittyagicoe@gmail.com" },
+  ];
+
+  try {
+    const response = await apiInstance.sendTransacEmail(sendSmtpEmail);
+    console.log("Lead generation email sent successfully");
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.error("Error sending lead generation email via Brevo:", error);
     throw error;
   }
 }

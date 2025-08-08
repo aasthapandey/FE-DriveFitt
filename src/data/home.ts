@@ -45,7 +45,7 @@ export const homeData: StaticPageData = {
   },
   countdownSection: {
     title: "Your Premium Sports Club. Opening Soon at ",
-    date: "2025-11-15",
+    date: "2025-11-15T11:00:00",
     bgImage: "/images/counterbg.svg",
     mobileBgImage: "/images/counterbg-mobile.svg",
     location: "M3M 65th Ave., Golf Course Extn Road, Gurugram",
