@@ -229,7 +229,7 @@ const ContactUsContactForm = ({
             "linear-gradient(180deg, #333333 29.36%, #00DBDC 120.13%)",
         }}
       >
-        <div className="rounded-[20px] md:rounded-[40px] w-full h-full p-[32px] md:p-12 flex flex-col bg-[#0D0D0D]">
+        <div className="rounded-[20px] md:rounded-[40px] w-full h-full p-[20px] md:p-12 flex flex-col bg-[#0D0D0D]">
           <ScrollAnimation delay={0.2} direction="right">
             <h2 className="text-2xl leading-7 md:text-[40px] font-semibold md:leading-[48px] tracking-[-1px] md:tracking-[-2px] mb-2">
               {title}
@@ -318,8 +318,11 @@ const ContactUsContactForm = ({
                         alt="redirectionBtn"
                         width={16}
                         height={16}
+                        className="flex-shrink-0"
                       />
-                      {option.label}
+                      <span className="text-left leading-tight">
+                        {option.label}
+                      </span>
                     </button>
                   ))}
                 </div>
