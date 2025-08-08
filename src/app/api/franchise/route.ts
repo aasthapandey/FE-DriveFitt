@@ -42,10 +42,16 @@ export async function POST(request: NextRequest) {
         }
       })(),
 
-      // Email operation
+      // Email operation with timeout
       (async () => {
         try {
-          await sendFranchiseFormEmail(body);
+          // Add timeout wrapper for email sending
+          const emailPromise = sendFranchiseFormEmail(body);
+          const timeoutPromise = new Promise((_, reject) =>
+            setTimeout(() => reject(new Error("Email sending timeout")), 25000)
+          );
+
+          await Promise.race([emailPromise, timeoutPromise]);
           console.log("Franchise inquiry email sent successfully");
         } catch (emailError) {
           console.error(

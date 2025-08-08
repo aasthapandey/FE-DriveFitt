@@ -1,5 +1,22 @@
 import * as SibApiV3Sdk from "@getbrevo/brevo";
 import { ContactUsFormData, FranchiseFormData } from "@/types/database";
+import https from "https";
+import http from "http";
+
+// Configure HTTP agents with proper timeout and connection settings
+const httpsAgent = new https.Agent({
+  keepAlive: true,
+  maxSockets: 50,
+  maxFreeSockets: 10,
+  timeout: 30000, // 30 seconds
+});
+
+const httpAgent = new http.Agent({
+  keepAlive: true,
+  maxSockets: 50,
+  maxFreeSockets: 10,
+  timeout: 30000, // 30 seconds
+});
 
 // Initialize Brevo API instance
 const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
@@ -10,6 +27,50 @@ apiInstance.setApiKey(
   SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey,
   apiKey || ""
 );
+
+// Configure the API instance with custom agents
+if (apiInstance.basePath) {
+  const url = new URL(apiInstance.basePath);
+  if (url.protocol === "https:") {
+    (apiInstance as any).defaultHeaders = {
+      ...((apiInstance as any).defaultHeaders || {}),
+    };
+    // Set timeout and agent configuration
+    (apiInstance as any).timeout = 30000;
+    (apiInstance as any).httpsAgent = httpsAgent;
+  } else {
+    (apiInstance as any).httpAgent = httpAgent;
+  }
+}
+
+// Retry configuration
+const MAX_RETRIES = 3;
+const RETRY_DELAY = 1000; // 1 second
+
+// Utility function to add delay
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+// Utility function to retry API calls
+async function retryApiCall<T>(
+  apiCall: () => Promise<T>,
+  retries: number = MAX_RETRIES
+): Promise<T> {
+  try {
+    return await apiCall();
+  } catch (error: any) {
+    if (
+      retries > 0 &&
+      (error.code === "ECONNRESET" ||
+        error.code === "ETIMEDOUT" ||
+        error.code === "ECONNREFUSED")
+    ) {
+      console.log(`Retrying API call, ${retries} attempts remaining...`);
+      await delay(RETRY_DELAY);
+      return retryApiCall(apiCall, retries - 1);
+    }
+    throw error;
+  }
+}
 
 interface LeadGenFormData {
   name: string;
@@ -77,7 +138,9 @@ export async function sendContactFormEmail(formData: ContactUsFormData) {
   };
 
   try {
-    const response = await apiInstance.sendTransacEmail(sendSmtpEmail);
+    const response = await retryApiCall(() =>
+      apiInstance.sendTransacEmail(sendSmtpEmail)
+    );
     return response;
   } catch (error) {
     console.error("Error sending email via Brevo::", error);
@@ -146,7 +209,9 @@ export async function sendFranchiseFormEmail(formData: FranchiseFormData) {
   }
 
   try {
-    const response = await apiInstance.sendTransacEmail(sendSmtpEmail);
+    const response = await retryApiCall(() =>
+      apiInstance.sendTransacEmail(sendSmtpEmail)
+    );
     return response;
   } catch (error) {
     console.error("Error sending franchise inquiry email via Brevo:", error);
@@ -214,7 +279,9 @@ export async function sendLeadGenFormEmail(formData: LeadGenFormData) {
   ];
 
   try {
-    const response = await apiInstance.sendTransacEmail(sendSmtpEmail);
+    const response = await retryApiCall(() =>
+      apiInstance.sendTransacEmail(sendSmtpEmail)
+    );
     console.log("Lead generation email sent successfully");
     console.log(response);
     return response;

@@ -32,10 +32,16 @@ export async function POST(request: NextRequest) {
         }
       })(),
 
-      // Email operation
+      // Email operation with timeout
       (async () => {
         try {
-          await sendContactFormEmail(body);
+          // Add timeout wrapper for email sending
+          const emailPromise = sendContactFormEmail(body);
+          const timeoutPromise = new Promise((_, reject) =>
+            setTimeout(() => reject(new Error("Email sending timeout")), 25000)
+          );
+
+          await Promise.race([emailPromise, timeoutPromise]);
           console.log("Contact form email sent successfully");
         } catch (emailError) {
           console.error(

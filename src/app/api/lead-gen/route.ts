@@ -63,10 +63,16 @@ export async function POST(request: NextRequest) {
         }
       })(),
 
-      // Email operation
+      // Email operation with timeout
       (async () => {
         try {
-          await sendLeadGenFormEmail(body);
+          // Add timeout wrapper for email sending
+          const emailPromise = sendLeadGenFormEmail(body);
+          const timeoutPromise = new Promise((_, reject) =>
+            setTimeout(() => reject(new Error("Email sending timeout")), 25000)
+          );
+
+          await Promise.race([emailPromise, timeoutPromise]);
           console.log("Lead gen email sent successfully");
         } catch (emailError) {
           console.error(
