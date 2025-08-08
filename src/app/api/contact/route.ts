@@ -6,53 +6,41 @@ import { sendContactFormEmail } from "@/utils/brevo";
 export async function POST(request: NextRequest) {
   try {
     const body: ContactUsFormData = await request.json();
-
-    // Handle database and email operations asynchronously
-    Promise.allSettled([
-      // Database operation
-      (async () => {
-        try {
-          const query = `
+    try {
+      const query = `
             INSERT INTO contact_us (first_name, last_name, email, phone, message)
             VALUES (?, ?, ?, ?, ?)
           `;
 
-          const params = [
-            body.first_name || null,
-            body.last_name || null,
-            body.email || null,
-            body.phone || null,
-            body.message || null,
-          ];
+      const params = [
+        body.first_name || null,
+        body.last_name || null,
+        body.email || null,
+        body.phone || null,
+        body.message || null,
+      ];
 
-          await executeQuery(query, params);
-          console.log("Contact form database record created successfully");
-        } catch (dbError) {
-          console.error("Contact form database error:", dbError);
-        }
-      })(),
+      await executeQuery(query, params);
+      console.log("Contact form database record created successfully");
+    } catch (dbError) {
+      console.error("Contact form database error:", dbError);
+    }
 
-      // Email operation with timeout
-      (async () => {
-        try {
-          // Add timeout wrapper for email sending
-          const emailPromise = sendContactFormEmail(body);
-          const timeoutPromise = new Promise((_, reject) =>
-            setTimeout(() => reject(new Error("Email sending timeout")), 25000)
-          );
+    try {
+      // Add timeout wrapper for email sending
+      const emailPromise = sendContactFormEmail(body);
+      const timeoutPromise = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error("Email sending timeout")), 25000)
+      );
 
-          await Promise.race([emailPromise, timeoutPromise]);
-          console.log("Contact form email sent successfully");
-        } catch (emailError) {
-          console.error(
-            "Error sending contact form email notification:",
-            emailError
-          );
-        }
-      })(),
-    ]).catch((error) => {
-      console.error("Error in background operations:", error);
-    });
+      await Promise.race([emailPromise, timeoutPromise]);
+      console.log("Contact form email sent successfully");
+    } catch (emailError) {
+      console.error(
+        "Error sending contact form email notification:",
+        emailError
+      );
+    }
 
     // Return success immediately
     const response = NextResponse.json(
