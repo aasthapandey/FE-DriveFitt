@@ -21,19 +21,8 @@ interface LeadGenFormData {
 export async function POST(request: NextRequest) {
   try {
     const body: LeadGenFormData = await request.json();
-
-    // Return success immediately
-    const response = NextResponse.json(
-      { success: true, message: "Lead generation form submitted successfully" },
-      { status: 201 }
-    );
-
-    // Handle database and email operations asynchronously
-    Promise.allSettled([
-      // Database operation
-      (async () => {
-        try {
-          const query = `
+    try {
+      const query = `
             INSERT INTO lead_generation (
               name, phone, message, 
               cricket, fitness, recovery, running, 
@@ -42,42 +31,44 @@ export async function POST(request: NextRequest) {
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
           `;
 
-          const params = [
-            body.name || null,
-            body.phone || null,
-            body.message || null,
-            body.interests.cricket || 0,
-            body.interests.fitness || 0,
-            body.interests.recovery || 0,
-            body.interests.running || 0,
-            body.interests.pilates || 0,
-            body.interests.personalTraining || 0,
-            body.interests.physiotherapy || 0,
-            body.interests.groupClasses || 0,
-          ];
+      const params = [
+        body.name || null,
+        body.phone || null,
+        body.message || null,
+        body.interests.cricket || 0,
+        body.interests.fitness || 0,
+        body.interests.recovery || 0,
+        body.interests.running || 0,
+        body.interests.pilates || 0,
+        body.interests.personalTraining || 0,
+        body.interests.physiotherapy || 0,
+        body.interests.groupClasses || 0,
+      ];
 
-          await executeQuery(query, params);
-          console.log("Lead generation database record created successfully");
-        } catch (dbError) {
-          console.error("Lead generation database error:", dbError);
-        }
-      })(),
+      await executeQuery(query, params);
+      console.log("Lead generation database record created successfully");
+    } catch (dbError) {
+      console.error("Lead generation database error:", dbError);
+    }
 
-      // Email operation
-      (async () => {
-        try {
-          await sendLeadGenFormEmail(body);
-          console.log("Lead gen email sent successfully");
-        } catch (emailError) {
-          console.error(
-            "Error sending lead gen email notification:",
-            emailError
-          );
-        }
-      })(),
-    ]).catch((error) => {
-      console.error("Error in background operations:", error);
-    });
+    try {
+      // Add timeout wrapper for email sending
+      const emailPromise = sendLeadGenFormEmail(body);
+      const timeoutPromise = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error("Email sending timeout")), 25000)
+      );
+
+      await Promise.race([emailPromise, timeoutPromise]);
+      console.log("Lead gen email sent successfully");
+    } catch (emailError) {
+      console.error("Error sending lead gen email notification:", emailError);
+    }
+
+    // Return success immediately
+    const response = NextResponse.json(
+      { success: true, message: "Lead generation form submitted successfully" },
+      { status: 201 }
+    );
 
     return response;
   } catch (error) {
