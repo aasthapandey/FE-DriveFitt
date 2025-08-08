@@ -229,7 +229,7 @@ const ContactUsContactForm = ({
             "linear-gradient(180deg, #333333 29.36%, #00DBDC 120.13%)",
         }}
       >
-        <div className="rounded-[20px] md:rounded-[40px] w-full h-full p-4 md:p-12 flex flex-col bg-[#0D0D0D]">
+        <div className="rounded-[20px] md:rounded-[40px] w-full h-full p-[32px] md:p-12 flex flex-col bg-[#0D0D0D]">
           <ScrollAnimation delay={0.2} direction="right">
             <h2 className="text-2xl leading-7 md:text-[40px] font-semibold md:leading-[48px] tracking-[-1px] md:tracking-[-2px] mb-2">
               {title}
@@ -306,7 +306,7 @@ const ContactUsContactForm = ({
                       className={`px-2 py-2 md:px-4 md:py-1 rounded-lg text-sm font-normal tracking-[0%] transition-all flex items-center gap-[6px] duration-200 ${
                         interests[option.key as keyof typeof interests]
                           ? "bg-[#00DBDC1A] text-[#00DBDC]"
-                          : "bg-[#1D1D1D] text-[#8A8A8A] hover:bg-[#00DBDC1A] hover:text-[#00DBDC]"
+                          : "bg-[#1D1D1D] text-[#8A8A8A] md:hover:bg-[#00DBDC1A] md:hover:text-[#00DBDC]"
                       }`}
                     >
                       <Image
