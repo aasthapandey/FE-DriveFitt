@@ -146,7 +146,7 @@ export const cricketData: StaticPageData = {
     imageList: [4, 5, 6],
   },
   bannerSection: {
-    title: "Become a Drive FIIT Member!",
+    title: "Become a Drive FITT Member!",
     description:
       "Join the waitlist now and be the first to access elite workouts, expert coaching, exclusive perks, member-only events, and special launch offers.",
     btnLabel: "Join the Waitlist",
