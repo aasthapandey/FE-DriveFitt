@@ -61,7 +61,7 @@ export const contactUsData: ContactUsPageData = {
     ],
     contactFormSection: {
       title: "Get In Touch",
-      description: "We'd love to hear from you. Please fill out the form.",
+      description: "",
       submitButtonText: "Send Message",
       fields: {
         name: {
