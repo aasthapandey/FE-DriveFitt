@@ -28,7 +28,7 @@ const OpportunitySection = ({ data }: OpportunitySectionProps) => {
               <OpportunityCard card={cardList[2]} className="w-full" />
             </ScrollAnimation>
           </div>
-          <div className="grid grid-cols-2 gap-4 md:gap-8">
+          <div className="grid grid-cols-2 gap-4 md:gap-8 items-stretch">
             <ScrollAnimation delay={0.6} direction="up">
               <OpportunityCard
                 card={cardList[3]}

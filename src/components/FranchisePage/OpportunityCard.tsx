@@ -15,7 +15,7 @@ const OpportunityCard = ({
   const { icon, title, description, subTitle } = card;
   return (
     <div
-      className={`rounded-[20px] md:rounded-[40px] h-auto p-4 md:p-10 flex ${
+      className={`rounded-[20px] md:rounded-[40px] h-full p-4 md:p-10 flex ${
         isHorizontal
           ? "flex-col md:flex-row md:items-start"
           : "flex-row md:flex-col items-center md:items-start"
