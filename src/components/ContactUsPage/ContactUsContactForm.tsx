@@ -234,9 +234,6 @@ const ContactUsContactForm = ({
             <h2 className="text-2xl leading-7 md:text-[40px] font-semibold md:leading-[48px] tracking-[-1px] md:tracking-[-2px] mb-2">
               {title}
             </h2>
-            <p className="text-xs leading-4 tracking-[-1%] md:text-base md:leading-5 text-[#8A8A8A] mb-7 md:mb-10">
-              {description}
-            </p>
           </ScrollAnimation>
 
           <ScrollAnimation delay={0.3} direction="right">
