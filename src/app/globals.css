@@ -28,7 +28,7 @@
 
   /* ADD THESE NEW STYLES FOR HEIGHT EQUALIZATION */
   .slick-list {
-    overflow: visible;
+    overflow: hidden;
   }
   .slick-track {
     display: flex !important;
