@@ -9,7 +9,7 @@ interface StaticCardProps {
 const StaticCard = ({ data, className }: StaticCardProps) => {
   const { title, description, backgroundImage, modalImage } = data;
   return (
-    <a className="cursor-default">
+    <div className="cursor-default">
       <div
         className={` rounded-[20px] md:rounded-[40px] p-[2px] ${className}`}
         style={{
@@ -34,7 +34,7 @@ const StaticCard = ({ data, className }: StaticCardProps) => {
           >
             <Image
               src={modalImage || ""}
-              alt="modal"
+              alt={`${title} - ${description}`}
               width={title === PROTEIN_BAR_TEXT ? 244 : 412}
               height={title === PROTEIN_BAR_TEXT ? 440 : 430}
               className={`${
@@ -60,7 +60,7 @@ const StaticCard = ({ data, className }: StaticCardProps) => {
           </div>
         </div>
       </div>
-    </a>
+    </div>
   );
 };
 
