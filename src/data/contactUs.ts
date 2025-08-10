@@ -61,6 +61,7 @@ export const contactUsData: ContactUsPageData = {
     ],
     contactFormSection: {
       title: "Get In Touch",
+      description: "",
       submitButtonText: "Send Message",
       fields: {
         name: {
