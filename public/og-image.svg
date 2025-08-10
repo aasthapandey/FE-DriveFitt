@@ -1,0 +1,44 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0D0D0D;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1A1A1A;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="accentGradient1" cx="20%" cy="80%" r="50%">
+      <stop offset="0%" style="stop-color:#00DBDC;stop-opacity:0.1" />
+      <stop offset="100%" style="stop-color:#00DBDC;stop-opacity:0" />
+    </radialGradient>
+    <radialGradient id="accentGradient2" cx="80%" cy="20%" r="50%">
+      <stop offset="0%" style="stop-color:#00DBDC;stop-opacity:0.1" />
+      <stop offset="100%" style="stop-color:#00DBDC;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGradient)"/>
+  <rect width="1200" height="630" fill="url(#accentGradient1)"/>
+  <rect width="1200" height="630" fill="url(#accentGradient2)"/>
+  
+  <!-- Logo -->
+  <g transform="translate(600, 200)">
+    <!-- DRIVE text -->
+    <text x="-80" y="0" font-family="Inter, sans-serif" font-size="48" font-weight="bold" fill="#00DBDC" text-anchor="middle">DRIVE</text>
+    <!-- FITT text -->
+    <text x="80" y="0" font-family="Inter, sans-serif" font-size="48" font-weight="bold" fill="#FFFFFF" text-anchor="middle">FITT</text>
+  </g>
+  
+  <!-- Main Title -->
+  <text x="600" y="320" font-family="Inter, sans-serif" font-size="64" font-weight="bold" fill="#FFFFFF" text-anchor="middle">Premium Fitness &amp; Sports Club</text>
+  
+  <!-- Subtitle -->
+  <text x="600" y="380" font-family="Inter, sans-serif" font-size="32" fill="#8A8A8A" text-anchor="middle">Cricket • Fitness • Recovery • Running</text>
+  
+  <!-- Location -->
+  <text x="600" y="420" font-family="Inter, sans-serif" font-size="24" font-weight="600" fill="#00DBDC" text-anchor="middle">Gurugram, Haryana</text>
+  
+  <!-- Bottom Accent -->
+  <rect x="0" y="622" width="1200" height="8" fill="url(#bgGradient)">
+    <animate attributeName="opacity" values="0.8;1;0.8" dur="3s" repeatCount="indefinite"/>
+  </rect>
+</svg>
