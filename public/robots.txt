@@ -1,0 +1,24 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://drivefitt.club/sitemap.xml
+
+# Disallow admin and API routes
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/
+Disallow: /static/
+
+# Allow important pages
+Allow: /
+Allow: /cricket
+Allow: /fitness
+Allow: /recovery
+Allow: /running
+Allow: /franchise
+Allow: /contact-us
+Allow: /terms
+Allow: /privacy
+Allow: /licenses
+
