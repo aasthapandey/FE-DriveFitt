@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import GoogleAnalytics from "@/components/common/GoogleAnalytics";
+import GoogleAnalyticsTracker from "@/components/common/GoogleAnalyticsTracker";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,6 +30,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} bg-black text-white`}>
+        <GoogleAnalytics />
+        <GoogleAnalyticsTracker />
         <div className="max-w-[1980px] mx-auto bg-[#0E1119]">{children}</div>
       </body>
     </html>
