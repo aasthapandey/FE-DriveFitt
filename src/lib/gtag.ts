@@ -12,9 +12,15 @@ declare global {
 
 export const pageview = (url: string) => {
   if (typeof window !== "undefined" && window.gtag) {
+    console.log("Sending pageview to GA:", url);
     window.gtag("config", GA_TRACKING_ID!, {
       page_location: url,
     });
+  } else {
+    console.log(
+      "GA not available - window.gtag:",
+      typeof window !== "undefined" ? !!window.gtag : "window undefined"
+    );
   }
 };
 
