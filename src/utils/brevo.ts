@@ -89,6 +89,7 @@ interface LeadGenFormData {
   name: string;
   phone: string;
   message?: string;
+  preferredLocation?: string;
   interests: {
     cricket: number;
     fitness: number;
@@ -266,6 +267,9 @@ export async function sendLeadGenFormEmail(formData: LeadGenFormData) {
         
         <p><strong>Mobile Number:</strong><br>
         ${formData.phone}</p>
+        
+        <p><strong>Preferred Location:</strong><br>
+        ${formData.preferredLocation || "Not specified"}</p>
         
         <p><strong>Interested In:</strong><br>
         ${

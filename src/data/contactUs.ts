@@ -75,6 +75,15 @@ export const contactUsData: ContactUsPageData = {
         interests: {
           label: "Choose your interest",
         },
+        preferredLocation: {
+          label: "Preferred Location",
+          placeholder: "Select Location",
+          options: [
+            "M3M 65th Avenue, Gurgaon",
+            "SilverGlades, Sushant Lok 1, Gurgaon",
+            "Pacific Mall, Tagore Garden, New Delhi",
+          ],
+        },
         message: {
           label: "Message",
           placeholder: "Write your message here...",

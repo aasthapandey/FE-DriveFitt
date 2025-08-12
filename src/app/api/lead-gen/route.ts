@@ -6,6 +6,7 @@ interface LeadGenFormData {
   name: string;
   phone: string;
   message?: string;
+  preferredLocation?: string;
   interests: {
     cricket: number;
     fitness: number;
@@ -24,17 +25,18 @@ export async function POST(request: NextRequest) {
     try {
       const query = `
             INSERT INTO lead_generation (
-              name, phone, message, 
+              name, phone, message, preferred_location,
               cricket, fitness, recovery, running, 
               pilates, personal_training, physiotherapy, group_classes
             )
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
           `;
 
       const params = [
         body.name || null,
         body.phone || null,
         body.message || null,
+        body.preferredLocation || null,
         body.interests.cricket || 0,
         body.interests.fitness || 0,
         body.interests.recovery || 0,

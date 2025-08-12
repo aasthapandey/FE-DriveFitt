@@ -161,6 +161,11 @@ export interface ContactUsContactFormProps {
     interests: {
       label: string;
     };
+    preferredLocation?: {
+      label: string;
+      placeholder?: string;
+      options?: string[];
+    };
     message: {
       label: string;
       placeholder?: string;
