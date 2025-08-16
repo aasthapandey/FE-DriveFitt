@@ -16,10 +16,13 @@ const PhotoCircleSection = ({
       style={{
         background: isMobile
           ? "none"
-          : "radial-gradient(50% 50% at 50% 50%, #00DBDC33 0%, transparent 100%)",
+          : "radial-gradient(circle at center, #00DBDC33 0%, transparent 50%)",
+        backgroundPosition: "center center",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "800px 800px",
       }}
     >
-      <div className="relative flex items-center justify-center min-h-[440px]">
+      <div className="relative flex items-center justify-center min-h-[440px] md:mb-[75px]">
         {/* Mobile Layout */}
         {isMobile ? (
           <div className="flex flex-col items-center justify-center w-full px-4">

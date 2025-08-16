@@ -60,6 +60,7 @@ import Banner1Section from "../FranchisePage/Banner1Section";
 import FranchiseHeroSection from "../FranchisePage/FranchiseHeroSection";
 import BannerCTASection from "./BannerCTASection";
 import VisionarySection from "./VisionariesSection";
+import BannerCTA from "./BannerCTA";
 
 interface StaticPageProps {
   data: StaticPageData;
@@ -240,10 +241,7 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
         );
       case "bannerCTASection":
         return (
-          <BannerCTASection
-            data={value as GallerySectionProps}
-            isMobile={isMobile}
-          />
+          <BannerCTA data={value as GallerySectionProps} isMobile={isMobile} />
         );
       default:
         return null;

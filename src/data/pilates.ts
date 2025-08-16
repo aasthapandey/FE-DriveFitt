@@ -2,11 +2,12 @@ import { StaticPageData } from "@/types/staticPages";
 import { navbarData } from "./navbar";
 
 export const pilatesData: StaticPageData = {
-  title: "Pilates At Drive FITT",
-  description: "Experience advanced recovery and wellness facilities.",
-  seoTitle: "Premium Recovery & Wellness | Drive FITT",
+  title: "Pilates at Drive FITT",
+  description:
+    "Build strength, improve flexibility, and enhance posture with expert-led Pilates sessions at Drive FITT.",
+  seoTitle: "Premium Pilates Classes | Drive FITT",
   seoDescription:
-    "Experience state-of-the-art recovery and wellness facilities at Drive FITT. Cold plunge, percussion therapy, and more.",
+    "Join expert-led Pilates classes at Drive FITT. Improve core strength, flexibility, and posture with a premium wellness experience.",
   navbar: navbarData,
   hero: {
     titleWords: [{ text: "Precision. Strength. Control.", color: "#FFFFFF" }],
@@ -130,14 +131,13 @@ export const pilatesData: StaticPageData = {
     image1: "/images/pilates/photoCircle1.svg",
     image2: "/images/pilates/photoCircle2.svg",
   },
-  recoveryBannerSection: {
-    title: "Recovery That Sets Us Apart",
+  bannerCTASection: {
+    title: "Find Your Center. Build Your Edge.",
     description:
-      "Most fitness centers treat recovery as optional—we make it integral. Our multi-modal recovery zones, science-backed methods, and professional support help you train longer, recover faster, and perform at your peak. This isn't luxury—it's a performance essential.",
-    image:
-      "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/banner3.webp",
-    mobileImage:
-      "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/mobile-banner3.webp",
+      "Book your class today and discover the transformative power of Pilates - only at Drive FITT.",
+    btnLabel: "Book Your Class Today",
+    desktopImage: "/images/pilates/bannerCTASectionDesktop.svg",
+    mobileImage: "/images/pilates/bannerCTASectionMobile.svg",
   },
   bannerSection: {
     title: "Become a DriveFITT member",
