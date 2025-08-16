@@ -4,14 +4,14 @@ import {
   FranchisePageData,
   FranchiseHero,
   BannerSection,
-  CardSection,
+  FranchiseCardSection,
   ImageCardSection,
   Banner2SectionType,
 } from "@/types/franchisePage";
 import { FooterInfoProps, FooterProps } from "@/types/staticPages";
 import FranchiseFooterInfo from "@/components/common/FranchiseFooterInfo";
 import Footer from "@/components/common/Footer";
-import HeroSection from "@/components/FranchisePage/HeroSection";
+import FranchiseHeroSection from "@/components/FranchisePage/FranchiseHeroSection";
 import Banner1Section from "@/components/FranchisePage/Banner1Section";
 import MultiRevenueSection from "@/components/FranchisePage/MultiRevenueSection";
 import OpportunitySection from "@/components/FranchisePage/OpportunitySection";
@@ -32,7 +32,7 @@ const FranchisePage = ({ data, pageName, isMobile }: FranchisePageProps) => {
     value:
       | FranchiseHero
       | BannerSection
-      | CardSection
+      | FranchiseCardSection
       | ImageCardSection
       | Banner2SectionType
       | FooterInfoProps
@@ -41,7 +41,7 @@ const FranchisePage = ({ data, pageName, isMobile }: FranchisePageProps) => {
     switch (key) {
       case "hero":
         return (
-          <HeroSection
+          <FranchiseHeroSection
             data={value as FranchiseHero}
             pageName={pageName}
             isMobile={isMobile}
@@ -54,13 +54,16 @@ const FranchisePage = ({ data, pageName, isMobile }: FranchisePageProps) => {
       case "multiRevenueSection":
         return (
           <MultiRevenueSection
-            data={value as CardSection}
+            data={value as FranchiseCardSection}
             isMobile={isMobile}
           />
         );
       case "opportunitySection":
         return (
-          <OpportunitySection data={value as CardSection} isMobile={isMobile} />
+          <OpportunitySection
+            data={value as FranchiseCardSection}
+            isMobile={isMobile}
+          />
         );
       case "whatYouReceiveSection":
         return (
@@ -72,7 +75,7 @@ const FranchisePage = ({ data, pageName, isMobile }: FranchisePageProps) => {
       case "whatLookingForSection":
         return (
           <WhoLookingForSection
-            data={value as CardSection}
+            data={value as FranchiseCardSection}
             isMobile={isMobile}
           />
         );
@@ -85,7 +88,10 @@ const FranchisePage = ({ data, pageName, isMobile }: FranchisePageProps) => {
         );
       case "nextStepSection":
         return (
-          <NextStepSection data={value as CardSection} isMobile={isMobile} />
+          <NextStepSection
+            data={value as FranchiseCardSection}
+            isMobile={isMobile}
+          />
         );
       case "footerInfoSection":
         return (

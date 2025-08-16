@@ -122,50 +122,51 @@ const GallerySection = ({
             {btnLabel}
           </button> */}
         </ScrollAnimation>
-
-        <ScrollAnimation
-          delay={0.3}
-          direction="right"
-          className="w-full md:w-3/5"
-        >
-          <div className="grid grid-cols-5 gap-2 h-[316px] md:h-[577px]">
-            <div className="col-span-2 grid grid-rows-2 gap-2">
-              <div
-                className="row-span-1 relative h-full w-full rounded-[20px] overflow-hidden cursor-pointer hover:opacity-90 transition-opacity duration-200"
-                onClick={() => openImageModal(imageList[0])}
-              >
-                <Image
-                  src={GALLERY_IMAGES[imageList[0]]?.CROPPED_IMAGE || ""}
-                  alt="gallery-1"
-                  fill
-                  className="object-cover"
-                />
+        {imageList && (
+          <ScrollAnimation
+            delay={0.3}
+            direction="right"
+            className="w-full md:w-3/5"
+          >
+            <div className="grid grid-cols-5 gap-2 h-[316px] md:h-[577px]">
+              <div className="col-span-2 grid grid-rows-2 gap-2">
+                <div
+                  className="row-span-1 relative h-full w-full rounded-[20px] overflow-hidden cursor-pointer hover:opacity-90 transition-opacity duration-200"
+                  onClick={() => openImageModal(imageList[0])}
+                >
+                  <Image
+                    src={GALLERY_IMAGES[imageList[0]]?.CROPPED_IMAGE || ""}
+                    alt="gallery-1"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div
+                  className="row-span-1 relative h-full w-full rounded-[20px] overflow-hidden cursor-pointer hover:opacity-90 transition-opacity duration-200"
+                  onClick={() => openImageModal(imageList[1])}
+                >
+                  <Image
+                    src={GALLERY_IMAGES[imageList[1]]?.CROPPED_IMAGE || ""}
+                    alt="gallery-2"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
               </div>
               <div
-                className="row-span-1 relative h-full w-full rounded-[20px] overflow-hidden cursor-pointer hover:opacity-90 transition-opacity duration-200"
-                onClick={() => openImageModal(imageList[1])}
+                className="col-span-3 relative h-full w-full rounded-[20px] overflow-hidden cursor-pointer hover:opacity-90 transition-opacity duration-200"
+                onClick={() => openImageModal(imageList[2])}
               >
                 <Image
-                  src={GALLERY_IMAGES[imageList[1]]?.CROPPED_IMAGE || ""}
-                  alt="gallery-2"
+                  src={GALLERY_IMAGES[imageList[2]]?.CROPPED_IMAGE || ""}
+                  alt="gallery-3"
                   fill
                   className="object-cover"
                 />
               </div>
             </div>
-            <div
-              className="col-span-3 relative h-full w-full rounded-[20px] overflow-hidden cursor-pointer hover:opacity-90 transition-opacity duration-200"
-              onClick={() => openImageModal(imageList[2])}
-            >
-              <Image
-                src={GALLERY_IMAGES[imageList[2]]?.CROPPED_IMAGE || ""}
-                alt="gallery-3"
-                fill
-                className="object-cover"
-              />
-            </div>
-          </div>
-        </ScrollAnimation>
+          </ScrollAnimation>
+        )}
       </div>
 
       {/* Image Preview Modal */}

@@ -3,12 +3,12 @@ import TitleDescription from "@/components/common/TitleDescription";
 import OpportunityCard from "@/components/FranchisePage/OpportunityCard";
 import ScrollAnimation from "@/components/common/ScrollAnimation";
 
-interface OpportunitySectionProps {
+interface VisionarySectionProps {
   data: FranchiseCardSection;
   isMobile?: boolean;
 }
 
-const OpportunitySection = ({ data }: OpportunitySectionProps) => {
+const VisionarySection = ({ data }: VisionarySectionProps) => {
   const { title, description, cardList } = data;
   return (
     <section className="md:px-[120px] px-6 flex flex-col gap-5">
@@ -50,4 +50,4 @@ const OpportunitySection = ({ data }: OpportunitySectionProps) => {
   );
 };
 
-export default OpportunitySection;
+export default VisionarySection;

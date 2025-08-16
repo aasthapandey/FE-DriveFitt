@@ -12,6 +12,7 @@ export interface FranchiseHero {
 }
 
 export interface BannerSection {
+  title1?: string;
   title: string;
   subTitle: string;
   description1: string;
@@ -26,13 +27,14 @@ export interface Card {
   subTitle?: string;
 }
 
-export interface CardSection {
+export interface FranchiseCardSection {
   title: string;
   description: string;
+  backgroundImage?: string;
   cardList: Card[];
 }
 
-export interface ImageCardSection extends CardSection {
+export interface ImageCardSection extends FranchiseCardSection {
   imageMobile: string;
   imageDesktop: string;
 }
@@ -50,12 +52,12 @@ export interface FranchisePageData {
   navbar: NavbarProps;
   hero: FranchiseHero;
   banner1Section: BannerSection;
-  multiRevenueSection: CardSection;
-  opportunitySection: CardSection;
+  multiRevenueSection: FranchiseCardSection;
+  opportunitySection: FranchiseCardSection;
   whatYouReceiveSection: ImageCardSection;
-  whatLookingForSection: CardSection;
+  whatLookingForSection: FranchiseCardSection;
   banner2Section: Banner2SectionType;
-  nextStepSection: CardSection;
+  nextStepSection: FranchiseCardSection;
   footerInfoSection: FooterInfoProps;
   footerSection: FooterProps;
 }

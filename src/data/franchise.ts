@@ -21,7 +21,8 @@ export const franchiseData: FranchisePageData = {
     btnPrimaryText: "Start Your Journey Now",
   },
   banner1Section: {
-    title: "Drive FITT?",
+    title: "Why",
+    title1: "Drive FITT?",
     subTitle: "Be The First To Disrupt",
     description1: "As category creators in",
     description2: "Cricket + Fitness + Recovery",
@@ -219,8 +220,7 @@ export const franchiseData: FranchisePageData = {
       },
       {
         title: "Visit Us",
-        description:
-          "Discover the best of what we offer at our Flagship Club",
+        description: "Discover the best of what we offer at our Flagship Club",
         email: "M3M 65th Avenue, Sector 65, Gurugram, Haryana 122022",
         image: "https://da8nru77lsio9.cloudfront.net/images/VisitUs.svg",
       },

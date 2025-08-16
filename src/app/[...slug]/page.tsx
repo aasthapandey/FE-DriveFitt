@@ -4,6 +4,7 @@ import { cricketData } from "@/data/cricket";
 import { fitnessData } from "@/data/fitness";
 import { recoveryData } from "@/data/recovery";
 import { runningData } from "@/data/running";
+import { pilatesData } from "@/data/pilates";
 import { StaticPageData } from "@/types/staticPages";
 import StaticPage from "@/components/StaticPages";
 import { headers } from "next/headers";
@@ -20,6 +21,7 @@ const pageData: { [key: string]: StaticPageData } = {
   fitness: fitnessData,
   recovery: recoveryData,
   running: runningData,
+  pilates: pilatesData,
 };
 
 export async function generateMetadata({
