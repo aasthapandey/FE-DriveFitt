@@ -2,6 +2,11 @@ import Navbar from "@/components/common/Navbar";
 import { navbarData } from "@/data/navbar";
 import HeroSection from "@/components/StaticPages/HeroSection";
 import {
+  BannerSection,
+  FranchiseCardSection,
+  FranchiseHero,
+} from "@/types/franchisePage";
+import {
   StaticPageData,
   Hero,
   CardSection,
@@ -27,6 +32,7 @@ import {
   EcosystemGifSectionProps,
   MeetYourCoachesSectionProps,
   ChooseYourPathSectionProps,
+  PhotoCircleSectionProps,
 } from "@/types/staticPages";
 import CardSection4 from "@/components/StaticPages/CardSection4";
 import CardSection5 from "@/components/StaticPages/CardSection5";
@@ -52,6 +58,12 @@ import NotJustClubSection from "./NotJustClubSection";
 import EcosystemGifSection from "./EcosystemGifSection";
 import MeetYourCoachesSection from "./MeetYourCoachesSection";
 import ChooseYourPathSection from "./ChooseYourPathSection";
+import MultiRevenueSection from "../FranchisePage/MultiRevenueSection";
+import PhotoCircleSection from "./PhotoCircleSection";
+import Banner1Section from "../FranchisePage/Banner1Section";
+import FranchiseHeroSection from "../FranchisePage/FranchiseHeroSection";
+import VisionarySection from "./VisionariesSection";
+import BannerCTA from "./BannerCTA";
 
 interface StaticPageProps {
   data: StaticPageData;
@@ -91,6 +103,14 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
         return (
           <HeroSection
             data={value as Hero}
+            pageName={pageName}
+            isMobile={isMobile}
+          />
+        );
+      case "franchiseHeroSection":
+        return (
+          <FranchiseHeroSection
+            data={value as FranchiseHero}
             pageName={pageName}
             isMobile={isMobile}
           />
@@ -213,6 +233,36 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
             buttonText={(value as ChooseYourPathSectionProps).buttonText}
             isMobile={isMobile}
           />
+        );
+      case "multiRevenueSection":
+        return (
+          <MultiRevenueSection
+            data={value as FranchiseCardSection}
+            isMobile={isMobile}
+          />
+        );
+      case "photoCircleSection":
+        return (
+          <PhotoCircleSection
+            data={value as PhotoCircleSectionProps}
+            isMobile={isMobile}
+          />
+        );
+
+      case "banner1Section":
+        return (
+          <Banner1Section data={value as BannerSection} isMobile={isMobile} />
+        );
+      case "visionariesSection":
+        return (
+          <VisionarySection
+            data={value as FranchiseCardSection}
+            isMobile={isMobile}
+          />
+        );
+      case "bannerCTASection":
+        return (
+          <BannerCTA data={value as GallerySectionProps} isMobile={isMobile} />
         );
       default:
         return null;

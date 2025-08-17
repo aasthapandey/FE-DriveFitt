@@ -1,3 +1,10 @@
+import {
+  FranchisePageData,
+  FranchiseCardSection,
+  FranchiseHero,
+  BannerSection,
+} from "@/types/franchisePage";
+
 export interface TitleWord {
   text: string;
   color?: string;
@@ -73,7 +80,9 @@ export interface GallerySectionProps {
   title: string;
   description: string;
   btnLabel: string;
-  imageList: number[];
+  imageList?: number[];
+  desktopImage?: string;
+  mobileImage?: string;
 }
 
 export interface SportsClubSectionProps {
@@ -306,6 +315,13 @@ export interface EcosystemGifSectionProps {
   description: string;
 }
 
+export interface PhotoCircleSectionProps {
+  title: string;
+  description: string;
+  image1: string;
+  image2: string;
+}
+
 export interface StaticPageData {
   title: string;
   description: string;
@@ -313,6 +329,7 @@ export interface StaticPageData {
   seoDescription: string;
   navbar?: NavbarProps;
   hero?: Hero;
+  franchiseHeroSection?: FranchiseHero;
   countdownSection?: CountdownSection;
   comingSoonSection?: ComingSoonSection;
   error404Section?: Error404Section;
@@ -339,6 +356,11 @@ export interface StaticPageData {
   ecosystemGifSection?: EcosystemGifSectionProps;
   meetYourCoachesSection?: MeetYourCoachesSectionProps;
   chooseYourPathSection?: ChooseYourPathSectionProps;
+  multiRevenueSection?: FranchiseCardSection;
+  photoCircleSection?: PhotoCircleSectionProps;
+  banner1Section?: BannerSection;
+  visionariesSection?: FranchiseCardSection;
+  bannerCTASection?: GallerySectionProps;
 }
 
 export interface ContactUsPageData {
