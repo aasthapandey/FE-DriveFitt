@@ -338,6 +338,7 @@ export interface StaticPageData {
   notJustClubSection?: NotJustClubSectionProps;
   ecosystemGifSection?: EcosystemGifSectionProps;
   meetYourCoachesSection?: MeetYourCoachesSectionProps;
+  chooseYourPathSection?: ChooseYourPathSectionProps;
 }
 
 export interface ContactUsPageData {
@@ -388,4 +389,16 @@ export interface MeetYourCoachesSectionProps {
   title: string;
   coaches: Coach[];
   seeMoreText?: string;
+}
+
+export interface Package {
+  name: string;
+  sessions: string;
+  includes: string;
+}
+
+export interface ChooseYourPathSectionProps {
+  title: string;
+  packages: Package[];
+  buttonText?: string;
 }

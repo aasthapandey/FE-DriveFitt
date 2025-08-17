@@ -286,6 +286,27 @@ export const homeData: StaticPageData = {
       },
     ],
   },
+  chooseYourPathSection: {
+    title: "Choose Your Path",
+    buttonText: "Book Your Class Today",
+    packages: [
+      {
+        name: "Starter",
+        sessions: "12 × 60 min",
+        includes: "Assessment, demo, personalized plan, habit check-ins",
+      },
+      {
+        name: "Pro Athlete",
+        sessions: "24 × 60 min",
+        includes: "Monthly metrics, nutrition audit, recovery session",
+      },
+      {
+        name: "Elite Performance",
+        sessions: "42 × 60 min",
+        includes: "Weekly check-ins, advanced metrics, recovery zone access",
+      },
+    ],
+  },
   footerInfoSection: {
     footerInfoList: [
       {

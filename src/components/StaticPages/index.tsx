@@ -26,6 +26,7 @@ import {
   NotJustClubSectionProps,
   EcosystemGifSectionProps,
   MeetYourCoachesSectionProps,
+  ChooseYourPathSectionProps,
 } from "@/types/staticPages";
 import CardSection4 from "@/components/StaticPages/CardSection4";
 import CardSection5 from "@/components/StaticPages/CardSection5";
@@ -50,6 +51,7 @@ import RecoveryBanner from "@/components/StaticPages/RecoveryBanner";
 import NotJustClubSection from "./NotJustClubSection";
 import EcosystemGifSection from "./EcosystemGifSection";
 import MeetYourCoachesSection from "./MeetYourCoachesSection";
+import ChooseYourPathSection from "./ChooseYourPathSection";
 
 interface StaticPageProps {
   data: StaticPageData;
@@ -200,6 +202,15 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
             title={(value as MeetYourCoachesSectionProps).title}
             coaches={(value as MeetYourCoachesSectionProps).coaches}
             seeMoreText={(value as MeetYourCoachesSectionProps).seeMoreText}
+            isMobile={isMobile}
+          />
+        );
+      case "chooseYourPathSection":
+        return (
+          <ChooseYourPathSection
+            title={(value as ChooseYourPathSectionProps).title}
+            packages={(value as ChooseYourPathSectionProps).packages}
+            buttonText={(value as ChooseYourPathSectionProps).buttonText}
             isMobile={isMobile}
           />
         );
