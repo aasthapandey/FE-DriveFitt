@@ -23,7 +23,7 @@ const pageData: { [key: string]: StaticPageData } = {
   recovery: recoveryData,
   running: runningData,
   pilates: pilatesData,
-  personalTraining: personalTrainingData,
+  "personal-training": personalTrainingData,
 };
 
 export async function generateMetadata({
