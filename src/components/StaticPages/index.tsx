@@ -25,6 +25,7 @@ import {
   RecoveryBannerProps,
   NotJustClubSectionProps,
   EcosystemGifSectionProps,
+  MeetYourCoachesSectionProps,
 } from "@/types/staticPages";
 import CardSection4 from "@/components/StaticPages/CardSection4";
 import CardSection5 from "@/components/StaticPages/CardSection5";
@@ -48,6 +49,7 @@ import JoinNow from "@/components/common/JoinNow";
 import RecoveryBanner from "@/components/StaticPages/RecoveryBanner";
 import NotJustClubSection from "./NotJustClubSection";
 import EcosystemGifSection from "./EcosystemGifSection";
+import MeetYourCoachesSection from "./MeetYourCoachesSection";
 
 interface StaticPageProps {
   data: StaticPageData;
@@ -190,6 +192,15 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
           <EcosystemGifSection
             title={(value as EcosystemGifSectionProps).title}
             description={(value as EcosystemGifSectionProps).description}
+          />
+        );
+      case "meetYourCoachesSection":
+        return (
+          <MeetYourCoachesSection
+            title={(value as MeetYourCoachesSectionProps).title}
+            coaches={(value as MeetYourCoachesSectionProps).coaches}
+            seeMoreText={(value as MeetYourCoachesSectionProps).seeMoreText}
+            isMobile={isMobile}
           />
         );
       default:

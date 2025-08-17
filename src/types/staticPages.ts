@@ -337,6 +337,7 @@ export interface StaticPageData {
   scrollingCardSection?: ScrollingCardSection;
   notJustClubSection?: NotJustClubSectionProps;
   ecosystemGifSection?: EcosystemGifSectionProps;
+  meetYourCoachesSection?: MeetYourCoachesSectionProps;
 }
 
 export interface ContactUsPageData {
@@ -374,4 +375,17 @@ export interface FlipCardProps {
   value: number;
   label: string;
   isMobile?: boolean;
+}
+
+export interface Coach {
+  id: string;
+  name: string;
+  description: string;
+  image: string;
+}
+
+export interface MeetYourCoachesSectionProps {
+  title: string;
+  coaches: Coach[];
+  seeMoreText?: string;
 }
