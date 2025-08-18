@@ -334,6 +334,7 @@ export interface Banner2WithImageProps {
   description: string;
   image: string;
   backgroundImage: string;
+  mobileBackgroundImage?: string;
   className?: string;
 }
 export interface StaticPageData {

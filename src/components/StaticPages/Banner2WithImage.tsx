@@ -5,6 +5,7 @@ interface Banner2WithImageProps {
   description: string;
   image: string;
   backgroundImage: string;
+  mobileBackgroundImage?: string;
   isMobile?: boolean;
   className?: string;
 }
@@ -14,6 +15,7 @@ const Banner2WithImage = ({
   description,
   image,
   backgroundImage,
+  mobileBackgroundImage,
   isMobile,
   className,
 }: Banner2WithImageProps) => {
@@ -26,11 +28,19 @@ const Banner2WithImage = ({
             background: "linear-gradient(180deg, #1E1E1E 0%, #141414 100%)",
           }}
         >
-          {/* Background image - only on right 50% */}
+          {/* Background image - desktop: right 50%, mobile: lower 60% */}
           <div
-            className="absolute top-0 right-0 w-1/2 h-full bg-cover bg-center -md:mr-[244px]"
+            className={`absolute bg-cover bg-center ${
+              isMobile
+                ? "bottom-0 left-0 w-full h-[60%]"
+                : "top-0 right-0 w-1/2 h-full -md:mr-[244px]"
+            }`}
             style={{
-              backgroundImage: `url(${backgroundImage})`,
+              backgroundImage: `url(${
+                isMobile && mobileBackgroundImage
+                  ? mobileBackgroundImage
+                  : backgroundImage
+              })`,
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",
             }}

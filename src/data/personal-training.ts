@@ -24,6 +24,7 @@ export const personalTrainingData: StaticPageData = {
       "Your goals deserve more than generic workouts. Our one-on-one coaching is rooted in science, personalized to your needs, and driven by data. We're not just trainers—we're performance architects.",
     image: "/images/personal-training/banner2.svg",
     backgroundImage: "/images/personal-training/banner2-bg.svg",
+    mobileBackgroundImage: "/images/personal-training/mobile-banner2-bg.svg",
     className: "md:-mt-[282px]",
   },
   scrollingCardSection: {

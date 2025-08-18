@@ -272,6 +272,9 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
             description={(value as Banner2WithImageProps).description}
             image={(value as Banner2WithImageProps).image}
             backgroundImage={(value as Banner2WithImageProps).backgroundImage}
+            mobileBackgroundImage={
+              (value as Banner2WithImageProps).mobileBackgroundImage
+            }
             isMobile={isMobile}
             className={(value as Banner2WithImageProps).className}
           />
