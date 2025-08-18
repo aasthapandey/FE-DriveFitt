@@ -325,6 +325,7 @@ export interface PhotoCircleSectionProps {
 export interface Banner2SectionType {
   title: string;
   description: string;
+  class?: string;
 }
 export interface StaticPageData {
   title: string;

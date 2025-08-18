@@ -42,6 +42,7 @@ export interface ImageCardSection extends FranchiseCardSection {
 export interface Banner2SectionType {
   title: string;
   description: string;
+  class?: string;
 }
 
 export interface FranchisePageData {

@@ -7,9 +7,9 @@ interface Banner2SectionProps {
 }
 
 const Banner2Section = ({ data }: Banner2SectionProps) => {
-  const { title, description } = data;
+  const { title, description, class: className } = data;
   return (
-    <div className="w-full px-6 md:px-[120px]">
+    <div className={`w-full px-6 md:px-[120px] ${className}`}>
       <ScrollAnimation delay={0.2} direction="up">
         <div
           className="w-full items-center justify-center text-center md:text-left h-fit rounded-[30px] border-[2px] border-[#333333] py-8 px-6 md:py-[72px] md:px-[245px] flex md:gap-[60px] md:flex-row flex-col gap-[30px]"

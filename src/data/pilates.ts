@@ -13,9 +13,9 @@ export const pilatesData: StaticPageData = {
     titleWords: [{ text: "Precision. Strength. Control.", color: "#FFFFFF" }],
     description: "Train hard. Recover smarter. Perform your best.",
     desktopImage:
-      "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/hero.svg",
+      "/images/pilates/hero.jpg",
     mobileImage:
-      "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/mobile-hero.svg",
+      "/images/pilates/mobile-hero.svg",
     btnPrimaryText: "Join the Waitlist",
     btnSecondaryText: "Join Online",
   },
@@ -23,6 +23,7 @@ export const pilatesData: StaticPageData = {
     title: "Welcome to Pilates at Drive FITT",
     description:
       "Step into a space where the session is engineered to realign, restore, and redefine the way your body moves - it's your foundation for lifelong strength, balance, and resilience.",
+    class: "-mt-[282px]"
   },
   multiRevenueSection: {
     title: "Why Pilates, Why Here?",
