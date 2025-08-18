@@ -118,29 +118,24 @@ const ChooseYourPathSection = ({
             {/* Inner container with dark background */}
             <div className="bg-[#141414] rounded-[38px] p-0">
               {packages.map((pkg, index) => (
-                <div key={index} className="p-4">
+                <div key={index} className="p-[24px] pb-0">
                   {/* Row 1: Package Name and Sessions */}
-                  <div className="flex items-start mb-1 gap-8">
-                    <div>
-                      <p className="text-white text-base font-normal leading-6">
+                  <div className="flex mb-[24px]" style={{ gap: "32px" }}>
+                    {/* Package Component */}
+                    <div className="flex flex-col">
+                      <p className="text-white text-base font-normal leading-6 mb-[2px]">
                         {pkg.name}
                       </p>
-                    </div>
-                    <div>
-                      <p className="text-white text-base font-normal leading-6">
-                        {pkg.sessions}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Row 2: Labels under respective content */}
-                  <div className="flex items-start mb-4 gap-8">
-                    <div>
                       <p className="text-[#8A8A8A] uppercase text-xs font-medium tracking-[2px] leading-4">
                         PACKAGE
                       </p>
                     </div>
-                    <div>
+
+                    {/* Sessions Component */}
+                    <div className="flex flex-col">
+                      <p className="text-white text-base font-normal leading-6 mb-[2px]">
+                        {pkg.sessions}
+                      </p>
                       <p className="text-[#8A8A8A] uppercase text-xs font-medium tracking-[2px] leading-4">
                         SESSIONS / MONTH
                       </p>
@@ -148,14 +143,14 @@ const ChooseYourPathSection = ({
                   </div>
 
                   {/* Row 3: Includes content (full width) */}
-                  <div className="mb-1">
-                    <p className="text-white text-base font-normal leading-6">
+                  <div className="mb-[2px]">
+                    <p className="text-white text-base font-normal leading-5">
                       {pkg.includes}
                     </p>
                   </div>
 
                   {/* Row 4: Includes label (left aligned) */}
-                  <div className="mb-4">
+                  <div className={`${index === packages.length - 1 ? "mb-0" : "mb-[24px]"}`}>
                     <p className="text-[#8A8A8A] uppercase text-xs font-medium tracking-[2px] leading-4">
                       INCLUDES
                     </p>
@@ -163,7 +158,10 @@ const ChooseYourPathSection = ({
 
                   {/* Divider between packages (except last one) */}
                   {index < packages.length - 1 && (
-                    <div className="border-b-2 border-[#333333] -mx-4 mb-4"></div>
+                    <div className="border-b-2 border-[#333333] -mx-[24px]"></div>
+                  )}
+                  {index === packages.length - 1 && (
+                    <div className="pb-[24px]"></div>
                   )}
                 </div>
               ))}
