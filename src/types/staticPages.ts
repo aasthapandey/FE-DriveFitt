@@ -322,6 +322,10 @@ export interface PhotoCircleSectionProps {
   image2: string;
 }
 
+export interface Banner2SectionType {
+  title: string;
+  description: string;
+}
 export interface StaticPageData {
   title: string;
   description: string;
@@ -359,6 +363,7 @@ export interface StaticPageData {
   multiRevenueSection?: FranchiseCardSection;
   photoCircleSection?: PhotoCircleSectionProps;
   banner1Section?: BannerSection;
+  banner2Section?: Banner2SectionType;
   visionariesSection?: FranchiseCardSection;
   bannerCTASection?: GallerySectionProps;
 }

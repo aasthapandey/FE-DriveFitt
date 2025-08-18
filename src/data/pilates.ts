@@ -19,106 +19,60 @@ export const pilatesData: StaticPageData = {
     btnPrimaryText: "Join the Waitlist",
     btnSecondaryText: "Join Online",
   },
-  cardSection5: {
-    title: "Not Just Rest. Recovery Tech.",
-    description: "",
-    cardSection: [
-      {
-        title: "Infrared Sauna",
-        description: "Deep detox. Better circulation. Less soreness.",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/card5-1.webp",
-        iconImage:
-          "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/icon-1.svg",
-        link: "",
-      },
-      {
-        title: "Cold Plunge",
-        description: "Ice-cold reset for muscles and mind.",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-5.svg",
-        iconImage:
-          "https://da8nru77lsio9.cloudfront.net/images/recovery/cold-plunge-icon.svg",
-        link: "",
-      },
-      {
-        title: "Compression Therapy",
-        description: "Circulation boost. Faster leg recovery.",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/card5-2.webp",
-        iconImage:
-          "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/icon-3.svg",
-        link: "",
-      },
-      {
-        title: "Percussion Therapy",
-        description: "Massage that hits the right spot.",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-1.svg",
-        iconImage:
-          "https://da8nru77lsio9.cloudfront.net/images/recovery/percussion-therapy-icon.svg",
-        link: "",
-      },
-      {
-        title: "Physiotherapy",
-        description: "Injury prevention. Rehab. Pro-level care.",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/card5-3.webp",
-        iconImage:
-          "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/icon-5.svg",
-        link: "",
-      },
-    ],
+  banner2Section: {
+    title: "Welcome to Pilates at Drive FITT",
+    description:
+      "Step into a space where the session is engineered to realign, restore, and redefine the way your body moves - it's your foundation for lifelong strength, balance, and resilience.",
   },
   multiRevenueSection: {
-    title: "Multi-Revenue, All-In-One Model",
+    title: "Why Pilates, Why Here?",
     description:
       "Unlike standalone gyms, monetize every square foot with Drive FITT's diverse revenue stream",
     cardList: [
       {
         icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/multi-revenue-icon-3.svg",
-        title: "Group Fitness & Personal Training",
-        description: "Diverse fitness classes and one-on-one training sessions",
+        title: "Expert-Led Sessions",
+        description: "Emphasizing alignment, mobility, and functional strength",
       },
       {
         icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/multi-revenue-icon-4.svg",
-        title: "Recovery Services",
-        description: "IR Sauna, compression, and cold plunge services",
+        title: "Mat & Equipment-based Formats",
+        description: "Professional cricket coaching with advanced analytics",
       },
       {
         icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/multi-revenue-icon-5.svg",
-        title: "Retail & Café",
+        title: "Small Groups",
         description:
-          "Sports equipments, supplements, accessories, apparel, and healthy meals",
+          "Personal formats for focused attention",
       },
       {
         icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/multi-revenue-icon-6.svg",
-        title: "Events & Corporate Programs",
-        description: "Corporate wellness programs and special events",
+        title: "Supportive Environment",
+        description: "Breath-centered space that restores as it strengthens",
       },
     ],
   },
   evolutionSection: {
-    title: "Why Recovery Matters",
+    title: "Pilates Formats Offered",
     evolutionList: [
       {
-        title: "For Cricketers",
+        title: "Mat Pilates",
         description:
-          "Bowling, batting, and fielding all stress joints and muscles. Recovery ensures season-long stamina, injury prevention, and match-day readiness.",
+          "The foundation. Grounded, focused, and precise. Strengthen from within using nothing but your body, gravity, and control.",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/evolution-1.webp",
       },
       {
-        title: "For Fitness Enthusiasts",
+        title: "Reformer Pilates",
         description:
-          "Intense training demands muscular repair and nervous system reset. Recovery helps you train harder without breaking down.",
+          "Experience Pilates on the reformer for dynamic resistance, precision-based movement, and deeply targeted strength.",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/evolution-2.webp",
       },
       {
-        title: "For Runners",
+        title: "Athletic Pilates",
         description:
-          "Recovery mitigates joint stress, prevents overuse injuries, and improves endurance through smarter mileage management.",
+          "Designed for performance-minded individuals - think enhanced mobility, core strength, and body awareness that elevates you in sport and life.",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/evolution-3.webp",
       },

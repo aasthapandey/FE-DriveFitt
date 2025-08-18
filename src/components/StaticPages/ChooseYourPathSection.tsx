@@ -29,9 +29,9 @@ const ChooseYourPathSection = ({
     <div className="w-full">
       <TitleDescription title={title} />
 
-      <div className="px-6 md:px-[120px] max-w-[1440px] mx-auto mt-8 md:mt-16">
+      <div className="px-6 md:px-[120px] max-w-[1440px] mx-auto mt-8 md:mt-[20px]">
         {/* Desktop Table View */}
-        <div className="hidden md:block bg-[#141414]">
+        <div className="hidden md:block">
           <div
             className="rounded-[40px] overflow-hidden relative p-[2px]"
             style={{
@@ -44,26 +44,26 @@ const ChooseYourPathSection = ({
             }}
           >
             {/* Inner container with dark background */}
-            <div className="bg-[#0D0D0D] rounded-[38px] w-full z-10 overflow-hidden h-auto">
+            <div className="bg-[#111111] rounded-[38px] w-full z-10 overflow-hidden h-auto">
               {/* Table Header */}
               <div
-                className="border-b border-[#333333] bg-[#1A1A1A]"
+                className="border-b border-[#333333] bg-[#151617] rounded-t-[38px]"
                 style={{
                   display: "grid",
                   gridTemplateColumns: "25% 25% 50%",
                 }}
               >
-                <div className="p-8 text-left">
+                <div className="px-[60px] py-[40px] text-left">
                   <h3 className="text-[#8A8A8A] uppercase text-base font-medium tracking-[4px] leading-5">
                     PACKAGE
                   </h3>
                 </div>
-                <div className="p-8 text-center border-l border-[#333333]">
+                <div className="py-[40px] text-center border-l border-[#333333]">
                   <h3 className="text-[#8A8A8A] uppercase text-base font-medium tracking-[4px] leading-5">
                     SESSIONS / MONTH
                   </h3>
                 </div>
-                <div className="p-8 text-left border-l border-[#333333]">
+                <div className="px-[60px] py-[40px] text-left border-l border-[#333333]">
                   <h3 className="text-[#8A8A8A] uppercase text-base font-medium tracking-[4px] leading-5">
                     INCLUDES
                   </h3>
@@ -84,17 +84,17 @@ const ChooseYourPathSection = ({
                     gridTemplateColumns: "25% 25% 50%",
                   }}
                 >
-                  <div className="p-8 text-left flex items-center">
+                  <div className="px-[60px] py-[40px] text-left flex items-center">
                     <p className="text-white text-2xl font-normal leading-7">
                       {pkg.name}
                     </p>
                   </div>
-                  <div className="p-8 text-center border-l border-[#333333] flex items-center justify-center">
+                  <div className="px-[60px] py-[40px] text-center border-l border-[#333333] flex items-center justify-center">
                     <p className="text-white text-2xl font-normal leading-7">
                       {pkg.sessions}
                     </p>
                   </div>
-                  <div className="p-8 text-left border-l border-[#333333] flex items-center">
+                  <div className="px-[60px] py-[40px] text-left border-l border-[#333333] flex items-center">
                     <p className="text-white text-2xl font-normal leading-7">
                       {pkg.includes}
                     </p>
