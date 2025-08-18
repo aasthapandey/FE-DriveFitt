@@ -36,7 +36,6 @@ const ChooseYourPathSection = ({
             className="rounded-[40px] overflow-hidden relative p-[2px]"
             style={{
               width: "100%",
-              height: "537px",
               maxWidth: "1200px",
               margin: "0 auto",
               opacity: 1,
@@ -45,10 +44,10 @@ const ChooseYourPathSection = ({
             }}
           >
             {/* Inner container with dark background */}
-            <div className="bg-[#0D0D0D] rounded-[38px] w-full z-10">
+            <div className="bg-[#0D0D0D] rounded-[38px] w-full z-10 overflow-hidden h-auto">
               {/* Table Header */}
               <div
-                className="border-b border-[#333333] bg-[#151617] z-0"
+                className="border-b border-[#333333] bg-[#1A1A1A]"
                 style={{
                   display: "grid",
                   gridTemplateColumns: "25% 25% 50%",
@@ -150,7 +149,11 @@ const ChooseYourPathSection = ({
                   </div>
 
                   {/* Row 4: Includes label (left aligned) */}
-                  <div className={`${index === packages.length - 1 ? "mb-0" : "mb-[24px]"}`}>
+                  <div
+                    className={`${
+                      index === packages.length - 1 ? "mb-0" : "mb-[24px]"
+                    }`}
+                  >
                     <p className="text-[#8A8A8A] uppercase text-xs font-medium tracking-[2px] leading-4">
                       INCLUDES
                     </p>
