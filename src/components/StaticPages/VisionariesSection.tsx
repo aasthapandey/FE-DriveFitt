@@ -8,7 +8,7 @@ interface VisionarySectionProps {
   isMobile?: boolean;
 }
 
-const VisionarySection = ({ data }: VisionarySectionProps) => {
+const VisionarySection = ({ data, isMobile }: VisionarySectionProps) => {
   const { title, description, cardList } = data;
   return (
     <section className="md:px-[120px] px-6 flex flex-col gap-5">
@@ -20,22 +20,42 @@ const VisionarySection = ({ data }: VisionarySectionProps) => {
           {/* First row - 2 cards on desktop, single column on mobile */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-[16px]">
             <ScrollAnimation delay={0.3} direction="up">
-              <VisionCard card={cardList[0]} className="w-full" />
+              <VisionCard
+                card={cardList[0]}
+                className="w-full"
+                isMobile={isMobile}
+              />
             </ScrollAnimation>
             <ScrollAnimation delay={0.4} direction="up">
-              <VisionCard card={cardList[1]} className="w-full" />
+              <VisionCard
+                card={cardList[1]}
+                className="w-full"
+                isMobile={isMobile}
+              />
             </ScrollAnimation>
           </div>
           {/* Second row - 3 cards on desktop, single column on mobile */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-[16px]">
             <ScrollAnimation delay={0.5} direction="up">
-              <VisionCard card={cardList[2]} className="w-full" />
+              <VisionCard
+                card={cardList[2]}
+                className="w-full"
+                isMobile={isMobile}
+              />
             </ScrollAnimation>
             <ScrollAnimation delay={0.6} direction="up">
-              <VisionCard card={cardList[3]} className="w-full" />
+              <VisionCard
+                card={cardList[3]}
+                className="w-full"
+                isMobile={isMobile}
+              />
             </ScrollAnimation>
             <ScrollAnimation delay={0.7} direction="up">
-              <VisionCard card={cardList[4]} className="w-full" />
+              <VisionCard
+                card={cardList[4]}
+                className="w-full"
+                isMobile={isMobile}
+              />
             </ScrollAnimation>
           </div>
         </div>

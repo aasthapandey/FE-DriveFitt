@@ -41,6 +41,7 @@ export const aboutUsData: StaticPageData = {
         description:
           "Global business strategist bringing international scale and operational excellence.",
         tooltipImage: "/images/MarkSellarName.svg",
+        tooltipImageMobile: "/images/MarkSellarNameMobile.svg",
       },
       {
         icon: "/images/Deke-Smith.svg",
@@ -49,6 +50,7 @@ export const aboutUsData: StaticPageData = {
         description:
           "Global business strategist bringing international scale and operational excellence.",
         tooltipImage: "/images/DekeSmithName.svg",
+        tooltipImageMobile: "/images/DekeSmithNameMobile.svg",
       },
       {
         icon: "/images/Shubman-Gill.svg",
@@ -57,6 +59,7 @@ export const aboutUsData: StaticPageData = {
         description:
           "International cricket star driving training innovation after experiencing facility gaps firsthand.",
         tooltipImage: "/images/ShubmanGillName.svg",
+        tooltipImageMobile: "/images/ShubmanGillNameMobile.svg",
       },
       {
         icon: "/images/Preity-G-Zinta.svg",
@@ -65,6 +68,7 @@ export const aboutUsData: StaticPageData = {
         description:
           "Bollywood icon bringing mass-appeal storytelling and brand vision to Drive FITT's narrative.",
         tooltipImage: "/images/PreityGZintaName.svg",
+        tooltipImageMobile: "/images/PreityGZintaNameMobile.svg",
       },
       {
         icon: "/images/Vikram-Bhatiya.svg",
@@ -73,6 +77,7 @@ export const aboutUsData: StaticPageData = {
         description:
           "Fitness industry veteran ensuring world-class execution across Operational verticals.",
         tooltipImage: "/images/VikramBhatiaName.svg",
+        tooltipImageMobile: "/images/VikramBhatiaNameMobile.svg",
       },
     ],
   },
