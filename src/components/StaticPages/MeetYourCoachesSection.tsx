@@ -37,11 +37,8 @@ const MeetYourCoachesSection = ({
           {coaches.map((coach) => (
             <div
               key={coach.id}
-              className="rounded-[40px] p-0 flex flex-col text-center overflow-hidden relative"
+              className="rounded-[40px] p-0 flex flex-col text-center overflow-hidden relative w-full max-w-[373px] h-[568px]"
               style={{
-                width: "373px",
-                height: "568px",
-                maxWidth: "373px",
                 opacity: 1,
               }}
             >
