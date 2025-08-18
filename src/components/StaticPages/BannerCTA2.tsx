@@ -27,13 +27,13 @@ const BannerCTA2 = ({
     <div className="relative mt-[15px] md:!mb-[-40px] md:mt-[-160px]">
       <div className="h-10 w-full bg-transparent"></div>
       <div
-        className="h-[540px] md:h-[492px] w-full pt-10 px-4 md:pt-[120px] md:pb-[100px] md:px-[120px]"
+        className="h-[540px] md:h-[492px] w-full pt-10 md:pt-[120px] md:pb-[100px] md:px-[120px]"
         style={{
           background: "#1D1D1D33",
         }}
       >
         <div className="flex flex-col md:flex-row md:items-center md:justify-between h-full">
-          <div className="flex-1  order-2 md:order-1">
+          <div className="flex-1 md:order-1 px-6">
             <ScrollAnimation
               delay={0.2}
               direction="left"
@@ -53,13 +53,13 @@ const BannerCTA2 = ({
               </button>
             </ScrollAnimation>
           </div>
-          <div className="flex-1 md:max-w-[656px] md:max-h-[564px] relative order-1 md:order-2 mb-6 md:mb-0 -md:mr-[120px]">
-            <div className="h-[341px] md:h-[564px] w-full relative">
+          <div className="flex-1 md:max-w-[656px] md:max-h-[564px] relative md:order-2 -md:mr-[120px] mt-8 md:mt-0">
+            <div className="h-[320px] md:h-[564px] w-full relative">
               <Image
                 src={`${isMobile ? mobileImage : desktopImage}`}
                 alt="gallery-1"
                 fill
-                className="object-cover rounded-lg"
+                className="object-cover rounded-lg md:rounded-lg"
               />
             </div>
           </div>
