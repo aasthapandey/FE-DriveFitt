@@ -379,6 +379,7 @@ export interface StaticPageData {
   nextStepSection?: FranchiseCardSection;
   visionariesSection?: FranchiseCardSection;
   bannerCTASection?: GallerySectionProps;
+  bannerCTASection2?: GallerySectionProps;
 }
 
 export interface ContactUsPageData {

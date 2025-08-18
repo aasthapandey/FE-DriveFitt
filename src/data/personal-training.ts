@@ -159,6 +159,14 @@ export const personalTrainingData: StaticPageData = {
       },
     ],
   },
+  bannerCTASection2: {
+    title:
+      "Book your free consult and feel the difference of Drive FIIT’s one-on-one coaching.",
+    description: "",
+    btnLabel: "Book Your Class Today",
+    desktopImage: "/images/personal-training/bannerCTASectionDesktop.svg",
+    mobileImage: "/images/personal-training/bannerCTASectionMobile.svg",
+  },
   footerInfoSection: {
     footerInfoList: [
       {
