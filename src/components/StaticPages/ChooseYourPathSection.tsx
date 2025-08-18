@@ -45,10 +45,10 @@ const ChooseYourPathSection = ({
             }}
           >
             {/* Inner container with dark background */}
-            <div className="bg-[#0D0D0D] rounded-[38px] h-full w-full">
+            <div className="bg-[#0D0D0D] rounded-[38px] w-full z-10">
               {/* Table Header */}
               <div
-                className="border-b border-[#333333]"
+                className="border-b border-[#333333] bg-[#151617] z-0"
                 style={{
                   display: "grid",
                   gridTemplateColumns: "25% 25% 50%",
