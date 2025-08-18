@@ -10,9 +10,7 @@ export const personalTrainingData: StaticPageData = {
     "Get personalized attention and achieve your fitness goals with expert-led personal training at Drive FITT.",
   navbar: navbarData,
   hero: {
-    titleWords: [
-      { text: "Personal Training At Drive FITT", color: "#FFFFFF" },
-    ],
+    titleWords: [{ text: "Personal Training At Drive FITT", color: "#FFFFFF" }],
     description: "",
     desktopImage:
       "https://da8nru77lsio9.cloudfront.net/images/personal-training/hero.svg",
@@ -21,10 +19,16 @@ export const personalTrainingData: StaticPageData = {
     btnPrimaryText: "Book a free trial",
     btnSecondaryText: "Join Online",
   },
+  banner2WithImageSection: {
+    title: "Transform Your Body. Sharpen Your Performance. Become Unshakable.",
+    description:
+      "Your goals deserve more than generic workouts. Our one-on-one coaching is rooted in science, personalized to your needs, and driven by data. We're not just trainers—we're performance architects.",
+    image: "/images/personal-training/banner2.svg",
+    backgroundImage: "/images/personal-training/banner2-bg.svg",
+  },
   scrollingCardSection: {
     title: "What We Offer",
-    description:
-      "",
+    description: "",
     iconImage: "https://da8nru77lsio9.cloudfront.net/images/check-icon.svg",
     cardSection: [
       {
@@ -130,7 +134,7 @@ export const personalTrainingData: StaticPageData = {
         includes: "Weekly check-ins, advanced metrics, recovery zone access",
       },
     ],
-  },  
+  },
   nextStepSection: {
     title: "Ready to Get Started?",
     description:
@@ -139,20 +143,18 @@ export const personalTrainingData: StaticPageData = {
       {
         icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/step-1.svg",
         title: "Book your free consult – meet your coach.",
-        description:
-          "",
+        description: "",
       },
       {
         icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/discovery-icon.svg",
         title: "Get your custom plan – designed around your performance goals.",
-        description:
-          "",
+        description: "",
       },
       {
         icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/franchise-icon.png",
-        title: "Start your transformation – train smarter, feel stronger, stay consistent.",
-        description:
-          "",
+        title:
+          "Start your transformation – train smarter, feel stronger, stay consistent.",
+        description: "",
       },
     ],
   },

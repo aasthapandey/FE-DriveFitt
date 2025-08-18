@@ -34,6 +34,7 @@ import {
   ChooseYourPathSectionProps,
   PhotoCircleSectionProps,
   Banner2SectionType,
+  Banner2WithImageProps,
 } from "@/types/staticPages";
 import CardSection4 from "@/components/StaticPages/CardSection4";
 import CardSection5 from "@/components/StaticPages/CardSection5";
@@ -63,6 +64,7 @@ import MultiRevenueSection from "../FranchisePage/MultiRevenueSection";
 import PhotoCircleSection from "./PhotoCircleSection";
 import Banner1Section from "../FranchisePage/Banner1Section";
 import Banner2Section from "../FranchisePage/Banner2Section";
+import Banner2WithImage from "./Banner2WithImage";
 import FranchiseHeroSection from "../FranchisePage/FranchiseHeroSection";
 import VisionarySection from "./VisionariesSection";
 import BannerCTA from "./BannerCTA";
@@ -259,6 +261,16 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
         return (
           <Banner2Section
             data={value as Banner2SectionType}
+            isMobile={isMobile}
+          />
+        );
+      case "banner2WithImageSection":
+        return (
+          <Banner2WithImage
+            title={(value as Banner2WithImageProps).title}
+            description={(value as Banner2WithImageProps).description}
+            image={(value as Banner2WithImageProps).image}
+            backgroundImage={(value as Banner2WithImageProps).backgroundImage}
             isMobile={isMobile}
           />
         );
