@@ -333,6 +333,7 @@ export interface Banner2WithImageProps {
   description: string;
   image: string;
   backgroundImage: string;
+  className?: string;
 }
 export interface StaticPageData {
   title: string;

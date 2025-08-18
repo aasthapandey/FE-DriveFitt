@@ -6,6 +6,7 @@ interface Banner2WithImageProps {
   image: string;
   backgroundImage: string;
   isMobile?: boolean;
+  className?: string;
 }
 
 const Banner2WithImage = ({
@@ -14,9 +15,10 @@ const Banner2WithImage = ({
   image,
   backgroundImage,
   isMobile,
+  className,
 }: Banner2WithImageProps) => {
   return (
-    <div className="w-full px-6 md:px-[120px]">
+    <div className={`w-full px-6 md:px-[120px] ${className}`}>
       <ScrollAnimation delay={0.2} direction="up">
         <div
           className="w-full h-fit rounded-[30px] border-[2px] border-[#333333] relative overflow-hidden"
@@ -35,12 +37,12 @@ const Banner2WithImage = ({
           />
 
           {/* Content container */}
-          <div className="relative z-10 flex flex-col md:flex-row items-center px-6 md:pr-[40px] md:pl-[60px] gap-8 md:gap-[60px]">
+          <div className="relative z-10 flex flex-col md:flex-row items-center px-6 md:pr-[40px] md:pl-[60px] gap-8 md:gap-[11px]">
             {/* Left side - Text content */}
-            <div className="flex-1 flex flex-col gap-4 md:gap-6 text-center md:text-left">
+            <div className="flex flex-col gap-4 md:gap-6 text-center md:text-left md:max-w-[617px]">
               <ScrollAnimation delay={0.3} direction="up">
                 <h2
-                  className="text-white"
+                  className="text-white font-semibold"
                   style={{
                     fontFamily: "Inter, sans-serif",
                     fontWeight: 600,
@@ -55,7 +57,7 @@ const Banner2WithImage = ({
 
               <ScrollAnimation delay={0.4} direction="up">
                 <p
-                  className="text-[#8A8A8A]"
+                  className="text-[#8A8A8A] font-light"
                   style={{
                     fontFamily: "Inter, sans-serif",
                     fontWeight: 300,
@@ -75,7 +77,7 @@ const Banner2WithImage = ({
                 <img
                   src={image}
                   alt="Personal Training"
-                  className="w-full max-w-[400px] md:max-w-[500px] h-auto object-cover rounded-[20px]"
+                  className="w-full max-w-[400px] md:max-w-[473px] h-auto object-cover rounded-[20px]"
                 />
               </ScrollAnimation>
             </div>

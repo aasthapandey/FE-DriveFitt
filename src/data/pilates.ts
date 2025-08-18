@@ -23,7 +23,7 @@ export const pilatesData: StaticPageData = {
     title: "Welcome to Pilates at Drive FITT",
     description:
       "Step into a space where the session is engineered to realign, restore, and redefine the way your body moves - it's your foundation for lifelong strength, balance, and resilience.",
-    class: "-mt-[282px]"
+    class: "md:-mt-[282px]"
   },
   multiRevenueSection: {
     title: "Why Pilates, Why Here?",

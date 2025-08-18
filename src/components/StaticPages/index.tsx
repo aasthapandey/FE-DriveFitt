@@ -272,6 +272,7 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
             image={(value as Banner2WithImageProps).image}
             backgroundImage={(value as Banner2WithImageProps).backgroundImage}
             isMobile={isMobile}
+            className={(value as Banner2WithImageProps).className}
           />
         );
       case "visionariesSection":

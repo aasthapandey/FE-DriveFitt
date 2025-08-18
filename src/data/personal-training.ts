@@ -12,8 +12,7 @@ export const personalTrainingData: StaticPageData = {
   hero: {
     titleWords: [{ text: "Personal Training At Drive FITT", color: "#FFFFFF" }],
     description: "",
-    desktopImage:
-      "https://da8nru77lsio9.cloudfront.net/images/personal-training/hero.svg",
+    desktopImage: "/images/personal-training/hero.jpg",
     mobileImage:
       "https://da8nru77lsio9.cloudfront.net/images/personal-training/mobile-hero.svg",
     btnPrimaryText: "Book a free trial",
@@ -25,6 +24,7 @@ export const personalTrainingData: StaticPageData = {
       "Your goals deserve more than generic workouts. Our one-on-one coaching is rooted in science, personalized to your needs, and driven by data. We're not just trainers—we're performance architects.",
     image: "/images/personal-training/banner2.svg",
     backgroundImage: "/images/personal-training/banner2-bg.svg",
+    className: "md:-mt-[282px]",
   },
   scrollingCardSection: {
     title: "What We Offer",
