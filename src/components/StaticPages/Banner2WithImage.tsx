@@ -28,7 +28,7 @@ const Banner2WithImage = ({
         >
           {/* Background image - only on right 50% */}
           <div
-            className="absolute top-0 right-0 w-1/2 h-full bg-cover bg-center opacity-20"
+            className="absolute top-0 right-0 w-1/2 h-full bg-cover bg-center -md:mr-[244px]"
             style={{
               backgroundImage: `url(${backgroundImage})`,
               backgroundPosition: "center",
@@ -37,7 +37,7 @@ const Banner2WithImage = ({
           />
 
           {/* Content container */}
-          <div className="relative z-10 flex flex-col md:flex-row items-center px-6 md:pr-[40px] md:pl-[60px] gap-8 md:gap-[11px]">
+          <div className="relative z-10 flex flex-col md:flex-row items-center px-6 pt-[32px] md:pr-[40px] md:pl-[60px] md:gap-[11px]">
             {/* Left side - Text content */}
             <div className="flex flex-col gap-4 md:gap-6 text-center md:text-left md:max-w-[617px]">
               <ScrollAnimation delay={0.3} direction="up">
@@ -72,7 +72,7 @@ const Banner2WithImage = ({
             </div>
 
             {/* Right side - Image */}
-            <div className="flex-1 flex justify-center md:justify-end">
+            <div className="flex-1 flex justify-center md:justify-end -mt-[10px]">
               <ScrollAnimation delay={0.5} direction="right">
                 <img
                   src={image}
