@@ -1,10 +1,10 @@
-import { CardSection } from "@/types/franchisePage";
+import { FranchiseCardSection } from "@/types/franchisePage";
 import TitleDescription from "@/components/common/TitleDescription";
 import Image from "next/image";
 import ScrollAnimation from "@/components/common/ScrollAnimation";
 
 interface NextStepSectionProps {
-  data: CardSection;
+  data: FranchiseCardSection;
   isMobile?: boolean;
 }
 
@@ -41,7 +41,7 @@ const NextStepSection = ({ data }: NextStepSectionProps) => {
                 direction="right"
               >
                 <div
-                  className="rounded-[20px] items-start md:items-center md:rounded-[40px] border border-[#333333] p-6 md:p-10 flex gap-4 md:gap-10"
+                  className="rounded-[20px] items-center md:rounded-[40px] border border-[#333333] p-6 md:p-10 flex gap-4 md:gap-10"
                   style={{
                     background:
                       "linear-gradient(180deg, #111111 0.77%, #141414 100%)",
