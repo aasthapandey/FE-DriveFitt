@@ -10,7 +10,14 @@ const BannerCTA = ({
   data: GallerySectionProps;
   isMobile?: boolean;
 }) => {
-  const { title, description, btnLabel, desktopImage, mobileImage } = data;
+  const {
+    title,
+    description,
+    btnLabel,
+    desktopImage,
+    mobileImage,
+    addGradient = true,
+  } = data;
 
   const handleButtonClick = () => {
     window.location.href = "/contact-us";
@@ -22,7 +29,9 @@ const BannerCTA = ({
       <div
         className="h-[540px] md:h-[568px] w-full pt-10 px-4 md:pt-[120px] md:pb-[100px] md:px-[120px]"
         style={{
-          background: "linear-gradient(180deg, #1D1D1D 0%, #0D0D0D 100%)",
+          background: addGradient
+            ? "linear-gradient(180deg, #1D1D1D 0%, #0D0D0D 100%)"
+            : "transparent",
         }}
       >
         <div className="flex">

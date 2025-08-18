@@ -83,6 +83,7 @@ export interface GallerySectionProps {
   imageList?: number[];
   desktopImage?: string;
   mobileImage?: string;
+  addGradient?: boolean;
 }
 
 export interface SportsClubSectionProps {
