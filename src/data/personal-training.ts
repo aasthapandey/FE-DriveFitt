@@ -11,150 +11,150 @@ export const personalTrainingData: StaticPageData = {
   navbar: navbarData,
   hero: {
     titleWords: [
-      { text: "Personalized. Performance. Progress.", color: "#FFFFFF" },
+      { text: "Personal Training At Drive FITT", color: "#FFFFFF" },
     ],
-    description: "Train hard. Recover smarter. Perform your best.",
+    description: "",
     desktopImage:
       "https://da8nru77lsio9.cloudfront.net/images/personal-training/hero.svg",
     mobileImage:
       "https://da8nru77lsio9.cloudfront.net/images/personal-training/mobile-hero.svg",
-    btnPrimaryText: "Join the Waitlist",
+    btnPrimaryText: "Book a free trial",
     btnSecondaryText: "Join Online",
   },
-  cardSection5: {
-    title: "Not Just Rest. Recovery Tech.",
-    description: "",
+  scrollingCardSection: {
+    title: "What We Offer",
+    description:
+      "",
+    iconImage: "https://da8nru77lsio9.cloudfront.net/images/check-icon.svg",
     cardSection: [
       {
-        title: "Infrared Sauna",
-        description: "Deep detox. Better circulation. Less soreness.",
+        subTitle: "Tailored Programming",
+        list: [
+          "Every plan starts with a full assessment—physical, movement, and lifestyle.",
+        ],
+        extraTagLabel: "",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/card5-1.webp",
-        iconImage:
-          "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/icon-1.svg",
-        link: "",
+          "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/scroll-card-1.webp",
       },
       {
-        title: "Cold Plunge",
-        description: "Ice-cold reset for muscles and mind.",
+        subTitle: "Data-Driven Progress",
+        list: [
+          "Delivers endless variations in speed, swing, and spin",
+          "Intelligent simulation like Random, Match Practice or Match Situation",
+        ],
+        extraTagLabel: "",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-5.svg",
-        iconImage:
-          "https://da8nru77lsio9.cloudfront.net/images/recovery/cold-plunge-icon.svg",
-        link: "",
+          "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/scroll-card-3.svg",
       },
       {
-        title: "Compression Therapy",
-        description: "Circulation boost. Faster leg recovery.",
+        subTitle: "Expert-Led Sessions",
+        list: [
+          "Prevent overuse and biomechanical injuries before they happen",
+          "Real-time motion capture reveals movement flaws, helping refine technique",
+          "Evidence-Based Recovery for a smarter, safer Return-to-Play",
+        ],
+        extraTagLabel: "",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/card5-2.webp",
-        iconImage:
-          "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/icon-3.svg",
-        link: "",
+          "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/scroll-card-2.webp",
       },
       {
-        title: "Percussion Therapy",
-        description: "Massage that hits the right spot.",
+        subTitle: "Lifestyle Integration",
+        list: [
+          "Track your progress with our smart tech—from 3D body scans to real-time motion capture.",
+        ],
+        extraTagLabel: "",
         backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/cricket/cricket-1.svg",
-        iconImage:
-          "https://da8nru77lsio9.cloudfront.net/images/recovery/percussion-therapy-icon.svg",
-        link: "",
-      },
-      {
-        title: "Physiotherapy",
-        description: "Injury prevention. Rehab. Pro-level care.",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/card5-3.webp",
-        iconImage:
-          "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/icon-5.svg",
-        link: "",
+          "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/scroll-card-4.svg",
       },
     ],
   },
-  multiRevenueSection: {
-    title: "Multi-Revenue, All-In-One Model",
+  meetYourCoachesSection: {
+    title: "Meet Your Coaches",
+    seeMoreText: "See more",
+    coaches: [
+      {
+        id: "aisha",
+        name: "Aisha",
+        description: "Strength & Tone Specialist",
+        image: "/images/personal-training/coach1.jpg",
+      },
+      {
+        id: "riya-awasthi",
+        name: "Riya Awasthi",
+        description: "Strength & Tone Specialist",
+        image: "/images/member-section/member-2.svg",
+      },
+      {
+        id: "sikha-kapoor",
+        name: "Sikha Kapoor",
+        description: "Strength & Tone Specialist",
+        image: "/images/member-section/member-3.svg",
+      },
+      {
+        id: "aisha-2",
+        name: "Aisha",
+        description: "Strength & Tone Specialist",
+        image: "/images/member-section/member-1.svg",
+      },
+      {
+        id: "riya-awasthi-2",
+        name: "Riya Awasthi",
+        description: "Strength & Tone Specialist",
+        image: "/images/member-section/member-2.svg",
+      },
+      {
+        id: "sikha-kapoor-2",
+        name: "Sikha Kapoor",
+        description: "Strength & Tone Specialist",
+        image: "/images/member-section/member-3.svg",
+      },
+    ],
+  },
+  chooseYourPathSection: {
+    title: "Choose Your Path",
+    buttonText: "Book Your Class Today",
+    packages: [
+      {
+        name: "Starter",
+        sessions: "12 × 60 min",
+        includes: "Assessment, demo, personalized plan, habit check-ins",
+      },
+      {
+        name: "Pro Athlete",
+        sessions: "24 × 60 min",
+        includes: "Monthly metrics, nutrition audit, recovery session",
+      },
+      {
+        name: "Elite Performance",
+        sessions: "42 × 60 min",
+        includes: "Weekly check-ins, advanced metrics, recovery zone access",
+      },
+    ],
+  },  
+  nextStepSection: {
+    title: "Ready to Get Started?",
     description:
-      "Unlike standalone gyms, monetize every square foot with Drive FITT's diverse revenue stream",
+      "Ready to lead the sports and fitness revolution in your city?",
     cardList: [
       {
-        icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/multi-revenue-icon-3.svg",
-        title: "Group Fitness & Personal Training",
-        description: "Diverse fitness classes and one-on-one training sessions",
-      },
-      {
-        icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/multi-revenue-icon-4.svg",
-        title: "Recovery Services",
-        description: "IR Sauna, compression, and cold plunge services",
-      },
-      {
-        icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/multi-revenue-icon-5.svg",
-        title: "Retail & Café",
+        icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/step-1.svg",
+        title: "Book your free consult – meet your coach.",
         description:
-          "Sports equipments, supplements, accessories, apparel, and healthy meals",
+          "",
       },
       {
-        icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/multi-revenue-icon-6.svg",
-        title: "Events & Corporate Programs",
-        description: "Corporate wellness programs and special events",
+        icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/discovery-icon.svg",
+        title: "Get your custom plan – designed around your performance goals.",
+        description:
+          "",
+      },
+      {
+        icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/franchise-icon.png",
+        title: "Start your transformation – train smarter, feel stronger, stay consistent.",
+        description:
+          "",
       },
     ],
-  },
-  evolutionSection: {
-    title: "Why Recovery Matters",
-    evolutionList: [
-      {
-        title: "For Cricketers",
-        description:
-          "Bowling, batting, and fielding all stress joints and muscles. Recovery ensures season-long stamina, injury prevention, and match-day readiness.",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/evolution-1.webp",
-      },
-      {
-        title: "For Fitness Enthusiasts",
-        description:
-          "Intense training demands muscular repair and nervous system reset. Recovery helps you train harder without breaking down.",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/evolution-2.webp",
-      },
-      {
-        title: "For Runners",
-        description:
-          "Recovery mitigates joint stress, prevents overuse injuries, and improves endurance through smarter mileage management.",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/evolution-3.webp",
-      },
-    ],
-  },
-  photoCircleSection: {
-    title: "Who It’s For",
-    description:
-      "From CXOs decompressing after a high-stakes day to young athletes building foundational mobility, Pilates fits into every lifestyle. It's the ideal complement to high-intensity training, sport performance, and recovery.",
-    image1: "/images/pilates/photoCircle1.svg",
-    image2: "/images/pilates/photoCircle2.svg",
-  },
-  bannerCTASection: {
-    title: "Find Your Center. Build Your Edge.",
-    description:
-      "Book your class today and discover the transformative power of Pilates - only at Drive FITT.",
-    btnLabel: "Book Your Class Today",
-    desktopImage: "/images/pilates/bannerCTASectionDesktop.svg",
-    mobileImage: "/images/pilates/bannerCTASectionMobile.svg",
-  },
-  bannerSection: {
-    title: "Become a DriveFITT member",
-    description:
-      "Join the waitlist now and be the first to access elite workouts, expert coaching, exclusive perks, member-only events, and special launch offers.",
-    btnLabel: "Join the Waitlist",
-    image: "https://da8nru77lsio9.cloudfront.net/images/becomeMember.svg",
-    mobileImage: "https://da8nru77lsio9.cloudfront.net/images/becomeMember.svg",
-  },
-  gallerySection: {
-    title: "Step Inside the Future of Sports & Fitness",
-    description:
-      "Tour our state-of-the-art club and discover how Drive FITT redefines space, energy, and purpose.",
-    btnLabel: "View Gallery",
-    imageList: [13, 14, 15],
   },
   footerInfoSection: {
     footerInfoList: [

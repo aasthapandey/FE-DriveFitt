@@ -365,6 +365,7 @@ export interface StaticPageData {
   photoCircleSection?: PhotoCircleSectionProps;
   banner1Section?: BannerSection;
   banner2Section?: Banner2SectionType;
+  nextStepSection?: FranchiseCardSection;
   visionariesSection?: FranchiseCardSection;
   bannerCTASection?: GallerySectionProps;
 }

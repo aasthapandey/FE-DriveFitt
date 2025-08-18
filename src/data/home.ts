@@ -244,69 +244,6 @@ export const homeData: StaticPageData = {
     title: "The Drive FITT Sports Club Philosophy",
     description: "The Drive FITT Model: Engineered for Excellence",
   },
-  meetYourCoachesSection: {
-    title: "Meet Your Coaches",
-    seeMoreText: "See more",
-    coaches: [
-      {
-        id: "aisha",
-        name: "Aisha",
-        description: "Strength & Tone Specialist",
-        image: "/images/personal-training/coach1.jpg",
-      },
-      {
-        id: "riya-awasthi",
-        name: "Riya Awasthi",
-        description: "Strength & Tone Specialist",
-        image: "/images/member-section/member-2.svg",
-      },
-      {
-        id: "sikha-kapoor",
-        name: "Sikha Kapoor",
-        description: "Strength & Tone Specialist",
-        image: "/images/member-section/member-3.svg",
-      },
-      {
-        id: "aisha-2",
-        name: "Aisha",
-        description: "Strength & Tone Specialist",
-        image: "/images/member-section/member-1.svg",
-      },
-      {
-        id: "riya-awasthi-2",
-        name: "Riya Awasthi",
-        description: "Strength & Tone Specialist",
-        image: "/images/member-section/member-2.svg",
-      },
-      {
-        id: "sikha-kapoor-2",
-        name: "Sikha Kapoor",
-        description: "Strength & Tone Specialist",
-        image: "/images/member-section/member-3.svg",
-      },
-    ],
-  },
-  chooseYourPathSection: {
-    title: "Choose Your Path",
-    buttonText: "Book Your Class Today",
-    packages: [
-      {
-        name: "Starter",
-        sessions: "12 × 60 min",
-        includes: "Assessment, demo, personalized plan, habit check-ins",
-      },
-      {
-        name: "Pro Athlete",
-        sessions: "24 × 60 min",
-        includes: "Monthly metrics, nutrition audit, recovery session",
-      },
-      {
-        name: "Elite Performance",
-        sessions: "42 × 60 min",
-        includes: "Weekly check-ins, advanced metrics, recovery zone access",
-      },
-    ],
-  },
   footerInfoSection: {
     footerInfoList: [
       {
