@@ -36,7 +36,7 @@ const CardParallax = ({
 }) => {
   const container = useRef(null);
 
-  const scale = useTransform(progress, range, [1, targetScale]);
+  // const scale = useTransform(progress, range, [1, targetScale]);
 
   // Helper function to render description with highlighted text
   const renderDescription = (text: string) => {
@@ -65,12 +65,7 @@ const CardParallax = ({
 
   return (
     <div ref={container} className={styles.cardContainer}>
-      <motion.div
-        className={styles.card}
-        style={{
-          scale,
-        }}
-      >
+      <motion.div className={styles.card}>
         <div className={styles.cardContent}>
           <div className={styles.leftContent}>
             <h1 className={styles.title}>{title}</h1>
