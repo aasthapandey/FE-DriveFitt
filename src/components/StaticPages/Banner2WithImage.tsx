@@ -33,7 +33,7 @@ const Banner2WithImage = ({
             className={`absolute bg-cover bg-center ${
               isMobile
                 ? "bottom-0 left-0 w-full h-[60%]"
-                : "top-0 right-0 w-1/2 h-full -md:mr-[244px]"
+                : "top-0 right-0 w-1/2 h-full -mr-[244px]"
             }`}
             style={{
               backgroundImage: `url(${

@@ -12,7 +12,7 @@ const Banner2Section = ({ data }: Banner2SectionProps) => {
     <div className={`w-full px-6 md:px-[120px] ${className}`}>
       <ScrollAnimation delay={0.2} direction="up">
         <div
-          className="w-full items-center justify-center text-center md:text-left h-fit rounded-[30px] border-[2px] border-[#333333] py-8 px-6 md:py-[72px] md:px-[245px] flex md:gap-[60px] md:flex-row flex-col gap-[30px]"
+          className="w-full items-center justify-center text-center md:text-left h-fit rounded-[30px] border-[2px] border-[#333333] py-8 px-6 md:py-[72px] md:px-[100px] flex md:gap-[60px] md:flex-row flex-col gap-[30px]"
           style={{
             background: "linear-gradient(180deg, #1E1E1E 0%, #141414 100%)",
           }}

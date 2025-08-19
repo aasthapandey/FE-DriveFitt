@@ -55,12 +55,14 @@ const NextStepSection = ({ data }: NextStepSectionProps) => {
                     className="size-[56px] md:size-[76px]"
                   />
                   <div className="flex flex-col gap-2 md:gap-4 tracking-[-1px]">
-                    <h3 className="font-semibold text-xl md:text-[32px] leading-6 md:leading-10">
+                    <h3 className="font-semibold text-xl md:text-[28px] leading-6 md:leading-10">
                       {card.title}
                     </h3>
-                    <p className="text-[#8A8A8A] font-light md:font-normal text-xs md:text-base leading-4 md:leading-5 tracking-[0%]">
-                      {card.description}
-                    </p>
+                    {card.description && (
+                      <p className="text-[#8A8A8A] font-light md:font-normal text-xs md:text-base leading-4 md:leading-5 tracking-[0%]">
+                        {card.description}
+                      </p>
+                    )}
                   </div>
                 </div>
               </ScrollAnimation>
