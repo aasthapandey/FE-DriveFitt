@@ -30,12 +30,15 @@ const CardsParallax = ({
 
     function raf(time: number) {
       lenis.raf(time);
-
       requestAnimationFrame(raf);
     }
 
     requestAnimationFrame(raf);
-  });
+
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
   return (
     <div ref={container} className={styles.main}>
       {cardSection.map((card, i) => {

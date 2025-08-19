@@ -58,6 +58,7 @@ export interface CardParallaxProps {
   title?: string;
   description?: string;
   src: string;
+  backgroundImage?: string;
   url: string;
   color: string;
 }
