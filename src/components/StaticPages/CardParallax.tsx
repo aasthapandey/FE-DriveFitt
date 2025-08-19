@@ -13,31 +13,29 @@ const CardParallax = ({
   src,
   backgroundImage,
   url,
+  mobileUrl,
   color,
   i,
   progress,
   range,
   targetScale,
+  isMobile,
 }: {
   title?: string;
   description?: string;
   src: string;
   backgroundImage?: string;
   url: string;
+  mobileUrl?: string;
   color: string;
   i: number;
   progress: MotionValue<number>;
   range: [number, number];
   targetScale: number;
+  isMobile?: boolean;
 }) => {
   const container = useRef(null);
 
-  const { scrollYProgress } = useScroll({
-    target: container,
-    offset: ["start end", "start start"],
-  });
-
-  const imageScale = useTransform(scrollYProgress, [0, 1], [1.2, 1]);
   const scale = useTransform(progress, range, [1, targetScale]);
 
   // Helper function to render description with highlighted text
@@ -91,19 +89,14 @@ const CardParallax = ({
                   }}
                 />
               )}
-              <motion.div
-                className={styles.imageWrapper}
-                style={{
-                  scale: imageScale,
-                }}
-              >
+              <div className={styles.imageWrapper}>
                 <Image
                   fill
-                  src={`/images/${src}`}
+                  src={isMobile && mobileUrl ? mobileUrl : url}
                   alt={title || "image"}
                   className={styles.image}
                 />
-              </motion.div>
+              </div>
             </div>
           </div>
         </div>

@@ -52,6 +52,7 @@ const CardsParallax = ({
             progress={scrollYProgress}
             range={[i * 0.25, 1]}
             targetScale={targetScale}
+            isMobile={isMobile}
           />
         );
       })}

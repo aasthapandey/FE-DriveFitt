@@ -60,6 +60,7 @@ export interface CardParallaxProps {
   src: string;
   backgroundImage?: string;
   url: string;
+  mobileUrl?: string;
   color: string;
 }
 

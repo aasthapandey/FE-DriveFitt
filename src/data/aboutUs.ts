@@ -117,31 +117,24 @@ export const aboutUsData: StaticPageData = {
   cardsParallaxSection: {
     cardSection: [
       {
-        title: "A Fusion of Passion & Purpose",
+        title: "Growth & Impact",
         description:
-          "Drive FITT isn't just a premium fitness brand—it's a movement. We bring cricket into wellness, tailor science into training, and unite members in a high-energy, aspirational community. With new shareholders like international cricket star Glenn Maxwell our approach to fitness, athlete development, and recovery is only getting sharper and more distinct.",
-        src: "rock.jpg",
-        backgroundImage: "cricket-compressed/hero.webp",
-        url: "https://www.ignant.com/2023/03/25/ad2186-matthias-leidingers-photographic-exploration-of-awe-and-wonder/",
+          "Our flagship club in Gurgaon launches this year, with Delhi and more to follow. We aim to deliver 300 Franchises across India within 3 Years , making sports–embedded fitness accessible to millions.",
+        src: "aboutUs/card-parallax-1.svg",
+        backgroundImage: "",
+        url: "/images/aboutUs/card-parallax-1.svg",
+        mobileUrl: "/images/aboutUs/card-parallax-1.svg",
         color: "#BBACAF",
       },
       {
-        title: "Elite Training Excellence",
+        title: "A Fusion of Passion & Purpose",
         description:
-          "Our state-of-the-art facilities feature cutting-edge technology and world-class coaching methodologies. From smart cricket nets to advanced fitness, athlete development, and recovery systems, we provide an unmatched training experience that transforms potential into performance.",
-        src: "tree.jpg",
-        backgroundImage: "fitness-compressed/hero.webp",
-        url: "https://www.ignant.com/2022/09/30/clement-chapillon-questions-geographical-and-mental-isolation-with-les-rochers-fauves/",
+          "Drive FITT isn't just a premium fitness brand—it's a movement. We bring cricket into wellness, tailor science into training, and unite members in a high-energy, aspirational community. With new shareholders like international cricket star Glenn Maxwell our approach to fitness, athlete development, and recovery is only getting sharper and more distinct.",
+        src: "aboutUs/card-parallax-2.svg",
+        backgroundImage: "",
+        url: "/images/aboutUs/card-parallax-2.svg",
+        mobileUrl: "/images/aboutUs/card-parallax-2.svg",
         color: "#977F6D",
-      },
-      {
-        title: "Community & Innovation",
-        description:
-          "At Drive FITT, we believe in the power of community-driven excellence. Our innovative approach combines traditional sports wisdom with modern technology, creating an environment where athletes and fitness enthusiasts alike can push their boundaries and achieve greatness.",
-        src: "water.jpg",
-        backgroundImage: "homec/hero.webp",
-        url: "https://www.ignant.com/2023/10/28/capturing-balis-many-faces-zissou-documents-the-sacred-and-the-mundane-of-a-fragile-island/",
-        color: "#C2491D",
       },
     ],
   },
