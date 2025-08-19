@@ -111,7 +111,7 @@ export async function sendContactFormEmail(formData: ContactUsFormData) {
   const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
 
   // Configure email parameters
-  sendSmtpEmail.subject = "New Contact Us Form Submission - By Tech Katalyst";
+  sendSmtpEmail.subject = "New Contact Us Form Submission";
   sendSmtpEmail.htmlContent = `
     <html>
       <body>
@@ -171,7 +171,7 @@ export async function sendFranchiseFormEmail(formData: FranchiseFormData) {
   const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
 
   // Configure email parameters
-  sendSmtpEmail.subject = "New Franchise Enquiry Form - By Tech Katalyst";
+  sendSmtpEmail.subject = "New Franchise Enquiry Form";
   sendSmtpEmail.htmlContent = `
     <html>
       <body>
@@ -254,7 +254,7 @@ export async function sendLeadGenFormEmail(formData: LeadGenFormData) {
 
   // Configure email parameters
   sendSmtpEmail.subject =
-    "New Lead Generation Form Submission - By Tech Katalyst";
+    "New Lead Generation Form Submission";
   sendSmtpEmail.htmlContent = `
     <html>
       <body>
