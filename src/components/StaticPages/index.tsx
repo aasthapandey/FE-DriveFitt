@@ -35,6 +35,7 @@ import {
   PhotoCircleSectionProps,
   Banner2SectionType,
   Banner2WithImageProps,
+  CardsParallaxProps,
 } from "@/types/staticPages";
 import CardSection4 from "@/components/StaticPages/CardSection4";
 import CardSection5 from "@/components/StaticPages/CardSection5";
@@ -70,6 +71,7 @@ import VisionarySection from "./VisionariesSection";
 import BannerCTA from "./BannerCTA";
 import BannerCTA2 from "./BannerCTA2";
 import NextStepSection from "../FranchisePage/NextStepSection";
+import CardsParallax from "./CardsParallax";
 
 interface StaticPageProps {
   data: StaticPageData;
@@ -103,6 +105,7 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
       | RecoveryBannerProps
       | NotJustClubSectionProps
       | EcosystemGifSectionProps
+      | CardsParallaxProps
   ) => {
     switch (key) {
       case "hero":
@@ -299,6 +302,13 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
         return (
           <NextStepSection
             data={value as FranchiseCardSection}
+            isMobile={isMobile}
+          />
+        );
+      case "cardsParallaxSection":
+        return (
+          <CardsParallax
+            data={value as CardsParallaxProps}
             isMobile={isMobile}
           />
         );

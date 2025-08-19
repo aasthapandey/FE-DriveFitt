@@ -54,6 +54,17 @@ export interface StaticCardType extends CardType {
   modalImage: string;
 }
 
+export interface CardParallaxProps {
+  title?: string;
+  description?: string;
+  src: string;
+  url: string;
+  color: string;
+}
+
+export interface CardsParallaxProps {
+  cardSection: CardParallaxProps[];
+}
 export interface StaticCardProps {
   title?: string;
   description?: string;
@@ -380,6 +391,7 @@ export interface StaticPageData {
   visionariesSection?: FranchiseCardSection;
   bannerCTASection?: GallerySectionProps;
   bannerCTASection2?: GallerySectionProps;
+  cardsParallaxSection?: CardsParallaxProps;
 }
 
 export interface ContactUsPageData {
