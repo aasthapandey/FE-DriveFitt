@@ -164,6 +164,7 @@ export const aboutUsData: StaticPageData = {
     desktopImage: "/images/aboutUs/bannerCta.svg",
     mobileImage: "/images/aboutUs/bannerCta-mobile.jpg",
     addGradient: false,
+    mobileImageUp: true,
   },
   bannerSection: {
     title: "Become a DriveFITT member",

@@ -17,6 +17,7 @@ const BannerCTA = ({
     desktopImage,
     mobileImage,
     addGradient = true,
+    mobileImageUp = false,
   } = data;
 
   const handleButtonClick = () => {
@@ -35,7 +36,7 @@ const BannerCTA = ({
         }}
       >
         <div className="flex">
-          <div>
+          <div className={`${isMobile && mobileImageUp ? "mt-[258px]" : ""}`}>
             <ScrollAnimation
               delay={0.2}
               direction="left"
@@ -55,7 +56,14 @@ const BannerCTA = ({
               </button>
             </ScrollAnimation>
           </div>
-          <div className="h-[341px] md:h-[568px] w-full absolute bottom-0 right-0 md:top-0">
+          <div
+            className={`h-[341px] md:h-[568px] w-full absolute ${
+              isMobile && mobileImageUp ? "top-0" : "bottom-0"
+            } right-0 md:top-0`}
+            style={{
+              zIndex: isMobile && mobileImageUp ? 20 : 1,
+            }}
+          >
             <Image
               src={`${isMobile ? mobileImage : desktopImage}`}
               alt="book-now-pilates"

@@ -17,6 +17,7 @@ const BannerCTA2 = ({
     desktopImage,
     mobileImage,
     addGradient = true,
+    mobileImageUp = false,
   } = data;
 
   const handleButtonClick = () => {
@@ -28,7 +29,11 @@ const BannerCTA2 = ({
       <div className="h-10 w-full bg-transparent"></div>
       <div className="h-[540px] md:h-[492px] w-full pt-10 md:pt-[120px] md:pb-[100px] md:px-[120px]">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between h-full">
-          <div className="flex-1 md:order-1 px-6">
+          <div
+            className={`flex-1 md:order-1 px-6 ${
+              isMobile && mobileImageUp ? "order-2" : ""
+            }`}
+          >
             <ScrollAnimation
               delay={0.2}
               direction="left"
@@ -48,7 +53,11 @@ const BannerCTA2 = ({
               </button>
             </ScrollAnimation>
           </div>
-          <div className="flex-1 md:max-w-[656px] md:max-h-[564px] relative md:order-2 -md:mr-[120px] mt-8 md:mt-0">
+          <div
+            className={`flex-1 md:max-w-[656px] md:max-h-[564px] relative md:order-2 -md:mr-[120px] ${
+              isMobile && mobileImageUp ? "order-first" : "mt-8"
+            } md:mt-0`}
+          >
             <div className="h-[320px] md:h-[564px] w-full relative">
               <Image
                 src={`${isMobile ? mobileImage : desktopImage}`}
