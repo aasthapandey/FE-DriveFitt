@@ -119,14 +119,13 @@ export const aboutUsData: StaticPageData = {
       },
     ],
   },
-  bannerCTASection: {
+  banner3JoinUsSection: {
     title: "Join The Movement",
     description:
       "Train like the pros. Recover like champions. Build a life where performance, health, and sport co-exist in harmony - it starts here at Drive FITT.",
     btnLabel: "Book a free trial",
     desktopImage: "/images/join-the-movement.svg",
-    mobileImage:
-      "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/mobile-banner3.webp",
+    mobileImage: "/images/join-the-movement-mobile.svg",
     addGradient: false,
   },
   cardsParallaxSection: {

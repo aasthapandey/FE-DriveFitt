@@ -72,6 +72,7 @@ import BannerCTA from "./BannerCTA";
 import BannerCTA2 from "./BannerCTA2";
 import NextStepSection from "../FranchisePage/NextStepSection";
 import CardsParallax from "./CardsParallax";
+import Banner3JoinUs from "./Banner3JoinUs";
 
 interface StaticPageProps {
   data: StaticPageData;
@@ -281,6 +282,13 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
             }
             isMobile={isMobile}
             className={(value as Banner2WithImageProps).className}
+          />
+        );
+      case "banner3JoinUsSection":
+        return (
+          <Banner3JoinUs
+            data={value as GallerySectionProps}
+            isMobile={isMobile}
           />
         );
       case "visionariesSection":
