@@ -57,7 +57,7 @@ const CardParallax = ({
               <div className={styles.imageWrapper}>
                 <Image
                   fill
-                  src={mobileUrl ? mobileUrl : url}
+                  src={mobileUrl || ""}
                   alt={title || "image"}
                   className={styles.image}
                 />

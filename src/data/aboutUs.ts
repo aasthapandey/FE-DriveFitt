@@ -138,7 +138,7 @@ export const aboutUsData: StaticPageData = {
         src: "aboutUs/card-parallax-1.svg",
         backgroundImage: "",
         url: "/images/aboutUs/card-parallax-1.svg",
-        mobileUrl: "/images/aboutUs/card-parallax-1.svg",
+        mobileUrl: "/images/aboutUs/card-parallax-mobile-1.svg",
         color: "#BBACAF",
       },
       {
@@ -148,7 +148,7 @@ export const aboutUsData: StaticPageData = {
         src: "aboutUs/card-parallax-2.svg",
         backgroundImage: "",
         url: "/images/aboutUs/card-parallax-2.svg",
-        mobileUrl: "/images/aboutUs/card-parallax-2.svg",
+        mobileUrl: "/images/aboutUs/card-parallax-mobile-2.svg",
         color: "#977F6D",
       },
     ],
