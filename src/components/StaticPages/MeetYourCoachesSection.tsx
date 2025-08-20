@@ -98,7 +98,7 @@ const MeetYourCoachesSection = ({
             className="flex gap-4 overflow-x-auto px-6 pb-4"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
-            {coaches.map((coach, index) => (
+            {coaches.map((coach) => (
               <div
                 key={coach.id}
                 className="rounded-[20px] p-0 flex flex-col text-center overflow-hidden relative flex-shrink-0"
