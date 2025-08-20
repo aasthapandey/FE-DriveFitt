@@ -99,7 +99,7 @@ export const contactUsData: ContactUsPageData = {
       {
         title: "Quick links",
         links: [
-          { title: "About us", link: "/about" },
+          { title: "About us", link: "/about-us" },
           { title: "Our services", link: "/services" },
           { title: "Blogs", link: "/blogs" },
           { title: "Career", link: "/career" },
