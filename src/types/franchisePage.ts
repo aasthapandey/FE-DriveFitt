@@ -34,6 +34,8 @@ export interface FranchiseCardSection {
   description: string;
   backgroundImage?: string;
   cardList: Card[];
+  cardTitleClass?: string;
+  cardDescriptionClass?: string;
 }
 
 export interface ImageCardSection extends FranchiseCardSection {
@@ -45,6 +47,8 @@ export interface Banner2SectionType {
   title: string;
   description: string;
   class?: string;
+  titleClass?: string;
+  descriptionClass?: string;
 }
 
 export interface FranchisePageData {

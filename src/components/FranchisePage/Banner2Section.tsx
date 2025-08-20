@@ -7,7 +7,13 @@ interface Banner2SectionProps {
 }
 
 const Banner2Section = ({ data }: Banner2SectionProps) => {
-  const { title, description, class: className } = data;
+  const {
+    title,
+    description,
+    class: className,
+    titleClass,
+    descriptionClass,
+  } = data;
   return (
     <div className={`w-full px-6 md:px-[120px] ${className}`}>
       <ScrollAnimation delay={0.2} direction="up">
@@ -22,10 +28,20 @@ const Banner2Section = ({ data }: Banner2SectionProps) => {
             direction="up"
             className="flex flex-col gap-4 md:gap-6"
           >
-            <h2 className="px-5 md:px-0 text-2xl md:text-5xl font-semibold leading-7 md:leading-[56px] tracking-[-1px] md:tracking-[-2px] text-center">
+            <h2
+              className={`px-5 md:px-0 ${
+                titleClass ||
+                "text-2xl md:text-5xl font-semibold leading-7 md:leading-[56px] tracking-[-1px] md:tracking-[-2px] text-center"
+              }`}
+            >
               {title}
             </h2>
-            <p className="text-xs md:text-base font-light leading-4 md:leading-5 tracking-[-1%] text-[#8A8A8A] text-center">
+            <p
+              className={`${
+                descriptionClass ||
+                "text-xs md:text-base font-light leading-4 md:leading-5 tracking-[-1%] text-[#8A8A8A] text-center"
+              }`}
+            >
               {description}
             </p>
           </ScrollAnimation>

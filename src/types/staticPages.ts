@@ -339,6 +339,8 @@ export interface Banner2SectionType {
   title: string;
   description: string;
   class?: string;
+  titleClass?: string;
+  descriptionClass?: string;
 }
 
 export interface Banner2WithImageProps {

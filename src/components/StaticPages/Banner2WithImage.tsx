@@ -56,9 +56,9 @@ const Banner2WithImage = ({
                   style={{
                     fontFamily: "Inter, sans-serif",
                     fontWeight: 600,
-                    fontSize: isMobile ? "32px" : "48px",
-                    lineHeight: isMobile ? "40px" : "56px",
-                    letterSpacing: "-2px",
+                    fontSize: isMobile ? "24px" : "48px",
+                    lineHeight: isMobile ? "28px" : "56px",
+                    letterSpacing: "-1px",
                   }}
                 >
                   {title}
@@ -67,12 +67,12 @@ const Banner2WithImage = ({
 
               <ScrollAnimation delay={0.4} direction="up">
                 <p
-                  className="text-[#8A8A8A] font-light"
+                  className="text-[#FFFFFF] font-light"
                   style={{
                     fontFamily: "Inter, sans-serif",
                     fontWeight: 300,
-                    fontSize: "16px",
-                    lineHeight: "24px",
+                    fontSize: isMobile ? "14px" : "16px",
+                    lineHeight: isMobile ? "20px" : "24px",
                     letterSpacing: "0px",
                   }}
                 >

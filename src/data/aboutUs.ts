@@ -29,7 +29,7 @@ export const aboutUsData: StaticPageData = {
     description3: "",
   },
   visionariesSection: {
-    title: "Your Opportunity at a Glance",
+    title: "The Visionaries",
     description:
       "A comprehensive look at what it takes to join the Drive FITT revolution",
     backgroundImage: "",
@@ -82,13 +82,15 @@ export const aboutUsData: StaticPageData = {
     ],
   },
   scrollingCardSection: {
-    title: "Engineered For Progress",
+    title: "What We Offer",
     description: "Our sessions are scientifically designed:",
     iconImage: "https://da8nru77lsio9.cloudfront.net/images/check-icon.svg",
     cardSection: [
       {
-        subTitle: "Precision Run Analysis",
-        list: ["3D gait and form assessment to perfect posture and stride."],
+        subTitle: "Cricket Performance Hub",
+        list: [
+          "High-tech nets with ball-tracking, programming from elite cricket athletes such as Shubman Gill, Glen Maxwell and Ryan Harris.",
+        ],
         extraTagLabel: "",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/running-compressed/scroll-card-1.webp",
@@ -96,7 +98,7 @@ export const aboutUsData: StaticPageData = {
           "https://da8nru77lsio9.cloudfront.net/images/running-compressed/mobile-scroll-card-1.webp",
       },
       {
-        subTitle: "Strength & Power Integration",
+        subTitle: "Fitness & Conditioning Zone",
         list: [
           "Interval treadmills and lower-body routines to build explosive strength.",
         ],
@@ -107,7 +109,18 @@ export const aboutUsData: StaticPageData = {
           "https://da8nru77lsio9.cloudfront.net/images/running-compressed/mobile-scroll-card-2.webp",
       },
       {
-        subTitle: "Smart Performance Tracking",
+        subTitle: "Recovery & Wellness Studios",
+        list: [
+          "Heart-rate zones and pace tracking for targeted, efficient effort.",
+        ],
+        extraTagLabel: "",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/running-compressed/scroll-card-3.svg",
+        mobileImage:
+          "https://da8nru77lsio9.cloudfront.net/images/running-compressed/scroll-card-3.svg",
+      },
+      {
+        subTitle: "Cohesive Community",
         list: [
           "Heart-rate zones and pace tracking for targeted, efficient effort.",
         ],
@@ -118,16 +131,6 @@ export const aboutUsData: StaticPageData = {
           "https://da8nru77lsio9.cloudfront.net/images/running-compressed/scroll-card-3.svg",
       },
     ],
-  },
-  bannerCTASection: {
-    title: "Join The Movement",
-    description:
-      "Train like the pros. Recover like champions. Build a life where performance, health, and sport co-exist in harmony - it starts here at Drive FITT.",
-    btnLabel: "Book a free trial",
-    desktopImage: "/images/join-the-movement.svg",
-    mobileImage:
-      "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/mobile-banner3.webp",
-    addGradient: false,
   },
   cardsParallaxSection: {
     cardSection: [
@@ -152,6 +155,16 @@ export const aboutUsData: StaticPageData = {
         color: "#977F6D",
       },
     ],
+  },
+  bannerCTASection: {
+    title: "Join The Movement",
+    description:
+      "Train like the pros. Recover like champions. Build a life where performance, health, and sport co-exist in harmony - it starts here at Drive FITT.",
+    btnLabel: "Book a free trial",
+    desktopImage: "/images/join-the-movement.svg",
+    mobileImage:
+      "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/mobile-banner3.webp",
+    addGradient: false,
   },
   bannerSection: {
     title: "Become a DriveFITT member",

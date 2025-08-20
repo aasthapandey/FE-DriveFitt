@@ -13,8 +13,7 @@ export const personalTrainingData: StaticPageData = {
     titleWords: [{ text: "Personal Training At Drive FITT", color: "#FFFFFF" }],
     description: "",
     desktopImage: "/images/personal-training/hero.jpg",
-    mobileImage:
-      "https://da8nru77lsio9.cloudfront.net/images/personal-training/mobile-hero.svg",
+    mobileImage: "/images/personal-training/hero-mobile.jpg",
     btnPrimaryText: "Book a free trial",
     btnSecondaryText: "Join Online",
   },
@@ -142,22 +141,24 @@ export const personalTrainingData: StaticPageData = {
       "Ready to lead the sports and fitness revolution in your city?",
     cardList: [
       {
-        icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/step-1.svg",
+        icon: "/images/personal-training/step1.svg",
         title: "Book your free consult – meet your coach.",
         description: "",
       },
       {
-        icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/discovery-icon.svg",
+        icon: "/images/personal-training/step2.svg",
         title: "Get your custom plan – designed around your performance goals.",
         description: "",
       },
       {
-        icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/franchise-icon.png",
+        icon: "/images/personal-training/step3.svg",
         title:
           "Start your transformation – train smarter, feel stronger, stay consistent.",
         description: "",
       },
     ],
+    cardTitleClass: "font-medium text-base leading-5 tracking-0 capitalize",
+    cardDescriptionClass: "",
   },
   bannerCTASection2: {
     title:

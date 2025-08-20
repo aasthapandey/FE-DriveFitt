@@ -13,7 +13,7 @@ export const pilatesData: StaticPageData = {
     titleWords: [{ text: "Precision. Strength. Control.", color: "#FFFFFF" }],
     description: "",
     desktopImage: "/images/pilates/hero.jpg",
-    mobileImage: "/images/pilates/mobile-hero.svg",
+    mobileImage: "/images/pilates/hero-mobile.jpg",
     btnPrimaryText: "Join the Waitlist",
     btnSecondaryText: "Join Online",
   },
@@ -22,11 +22,14 @@ export const pilatesData: StaticPageData = {
     description:
       "Step into a space where the session is engineered to realign, restore, and redefine the way your body moves - it's your foundation for lifelong strength, balance, and resilience.",
     class: "md:-mt-[282px]",
+    titleClass:
+      "font-semibold text-[40px] leading-none tracking-[-2px] text-center",
+    descriptionClass:
+      "font-inter font-light text-base leading-6 tracking-0 text-center",
   },
   multiRevenueSection: {
     title: "Why Pilates, Why Here?",
-    description:
-      "Unlike standalone gyms, monetize every square foot with Drive FITT's diverse revenue stream",
+    description: "",
     cardList: [
       {
         icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/multi-revenue-icon-3.svg",
