@@ -11,18 +11,26 @@ const PhotoCircleSection = ({
   const { title, description, image1, image2 } = data;
 
   return (
-    <section
-      className="md:px-[120px] px-6 flex flex-col gap-5 md:gap-8"
-      style={{
-        background: isMobile
-          ? "none"
-          : "radial-gradient(circle at center, #00DBDC33 0%, transparent 50%)",
-        backgroundPosition: "center center",
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "800px 800px",
-      }}
-    >
-      <div className="relative flex items-center justify-center min-h-[440px] md:mb-[75px]">
+    <section className="md:px-[120px] px-6 flex flex-col gap-5 md:gap-8 relative md:mb-[-160px]">
+      {!isMobile && (
+        <div
+          className="absolute pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(circle at center, #00DBDC33 5%, transparent 50%)",
+            backgroundPosition: "center center",
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "1000px 1000px",
+            top: "-160px",
+            bottom: "-160px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: "100vw",
+            zIndex: 10,
+          }}
+        />
+      )}
+      <div className="relative flex items-center justify-center min-h-[440px] md:mb-[75px] z-20">
         {/* Mobile Layout */}
         {isMobile ? (
           <div className="flex flex-col items-center justify-center w-full px-4">
