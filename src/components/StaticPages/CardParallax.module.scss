@@ -183,6 +183,7 @@
   text-align: center;
   padding: 44px 16px 24px 16px;
   margin: 0;
+
   :global(.highlight) {
     background-color: rgba(0, 219, 220, 0.15);
     color: #00dbdc;
@@ -191,6 +192,22 @@
     border-radius: 12px;
     display: inline;
     margin: 0 2px;
+  }
+
+  :global(.special-text) {
+    color: #00dbdc;
+    font-weight: 300;
+    font-style: Light;
+    font-size: 16px;
+    line-height: 28px;
+    letter-spacing: 0;
+  }
+
+  :global(.inline-svg) {
+    display: inline-block;
+    vertical-align: middle;
+    max-width: none;
+    height: auto;
   }
 }
 
