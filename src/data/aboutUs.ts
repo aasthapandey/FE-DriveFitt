@@ -30,8 +30,7 @@ export const aboutUsData: StaticPageData = {
   },
   visionariesSection: {
     title: "The Visionaries",
-    description:
-      "A comprehensive look at what it takes to join the Drive FITT revolution",
+    description: "",
     backgroundImage: "",
     cardList: [
       {
@@ -84,7 +83,7 @@ export const aboutUsData: StaticPageData = {
   scrollingCardSection: {
     title: "What We Offer",
     description: "Our sessions are scientifically designed:",
-    iconImage: "https://da8nru77lsio9.cloudfront.net/images/check-icon.svg",
+    iconImage: "",
     cardSection: [
       {
         subTitle: "Cricket Performance Hub",
@@ -92,43 +91,35 @@ export const aboutUsData: StaticPageData = {
           "High-tech nets with ball-tracking, programming from elite cricket athletes such as Shubman Gill, Glen Maxwell and Ryan Harris.",
         ],
         extraTagLabel: "",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/running-compressed/scroll-card-1.webp",
-        mobileImage:
-          "https://da8nru77lsio9.cloudfront.net/images/running-compressed/mobile-scroll-card-1.webp",
+        backgroundImage: "/images/aboutUs/scroll-card-1.jpg",
+        mobileImage: "/images/aboutUs/scroll-card-1.jpg",
       },
       {
         subTitle: "Fitness & Conditioning Zone",
         list: [
-          "Interval treadmills and lower-body routines to build explosive strength.",
+          "Advanced strength, cardio, and functional training rooted in sports science.",
         ],
         extraTagLabel: "",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/running-compressed/scroll-card-2.webp",
-        mobileImage:
-          "https://da8nru77lsio9.cloudfront.net/images/running-compressed/mobile-scroll-card-2.webp",
+        backgroundImage: "/images/aboutUs/scroll-card-2.jpg",
+        mobileImage: "/images/aboutUs/scroll-card-2.jpg",
       },
       {
         subTitle: "Recovery & Wellness Studios",
         list: [
-          "Heart-rate zones and pace tracking for targeted, efficient effort.",
+          "Infrared saunas, cold plunge, compression, percussion, yoga, mobility sessions, and more—built for longevity and well-being.",
         ],
         extraTagLabel: "",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/running-compressed/scroll-card-3.svg",
-        mobileImage:
-          "https://da8nru77lsio9.cloudfront.net/images/running-compressed/scroll-card-3.svg",
+        backgroundImage: "/images/aboutUs/scroll-card-3.jpg",
+        mobileImage: "/images/aboutUs/scroll-card-3.jpg",
       },
       {
         subTitle: "Cohesive Community",
         list: [
-          "Heart-rate zones and pace tracking for targeted, efficient effort.",
+          "A culture that blends group classes, coaching, app-based tracking, and fitness challenges.",
         ],
         extraTagLabel: "",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/running-compressed/scroll-card-3.svg",
-        mobileImage:
-          "https://da8nru77lsio9.cloudfront.net/images/running-compressed/scroll-card-3.svg",
+        backgroundImage: "/images/aboutUs/scroll-card-3.jpg",
+        mobileImage: "/images/aboutUs/scroll-card-3.jpg",
       },
     ],
   },

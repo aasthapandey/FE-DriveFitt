@@ -32,22 +32,22 @@ export const pilatesData: StaticPageData = {
     description: "",
     cardList: [
       {
-        icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/multi-revenue-icon-3.svg",
+        icon: "/images/pilates/icon-1.svg",
         title: "Expert-Led Sessions",
         description: "Emphasizing alignment, mobility, and functional strength",
       },
       {
-        icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/multi-revenue-icon-4.svg",
+        icon: "/images/pilates/icon-2.svg",
         title: "Mat & Equipment-based Formats",
         description: "Professional cricket coaching with advanced analytics",
       },
       {
-        icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/multi-revenue-icon-5.svg",
+        icon: "/images/pilates/icon-3.svg",
         title: "Small Groups",
         description: "Personal formats for focused attention",
       },
       {
-        icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/multi-revenue-icon-6.svg",
+        icon: "/images/pilates/icon-4.svg",
         title: "Supportive Environment",
         description: "Breath-centered space that restores as it strengthens",
       },
@@ -60,22 +60,19 @@ export const pilatesData: StaticPageData = {
         title: "Mat Pilates",
         description:
           "The foundation. Grounded, focused, and precise. Strengthen from within using nothing but your body, gravity, and control.",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/evolution-1.webp",
+        backgroundImage: "/images/pilates/evolution-1.jpg",
       },
       {
         title: "Reformer Pilates",
         description:
           "Experience Pilates on the reformer for dynamic resistance, precision-based movement, and deeply targeted strength.",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/evolution-2.webp",
+        backgroundImage: "/images/pilates/evolution-2.jpg",
       },
       {
         title: "Athletic Pilates",
         description:
           "Designed for performance-minded individuals - think enhanced mobility, core strength, and body awareness that elevates you in sport and life.",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/evolution-3.webp",
+        backgroundImage: "/images/pilates/evolution-3.jpg",
       },
     ],
   },
