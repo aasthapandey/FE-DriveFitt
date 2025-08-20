@@ -24,7 +24,7 @@ const BannerCTA = ({
   };
 
   return (
-    <div className="relative mt-[15px] md:!mb-[-40px] md:mt-[-160px]">
+    <div className="relative mt-[15px] md:!mb-[-40px]">
       <div className="h-10 w-full bg-transparent"></div>
       <div
         className="h-[540px] md:h-[568px] w-full pt-10 px-4 md:pt-[120px] md:pb-[100px] md:px-[120px]"

@@ -1,9 +1,6 @@
 "use client";
 
-import { CardsParallaxProps, StaticCardProps } from "@/types/staticPages";
-import StaticCard from "@/components/StaticPages/StaticCard";
-import TitleDescription from "@/components/common/TitleDescription";
-import ScrollAnimation from "@/components/common/ScrollAnimation";
+import { CardsParallaxProps } from "@/types/staticPages";
 import CardParallax from "@/components/StaticPages/CardParallax";
 import styles from "./CardParallax.module.scss";
 import { useScroll } from "framer-motion";

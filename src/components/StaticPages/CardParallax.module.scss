@@ -12,8 +12,6 @@
 }
 
 .card {
-  width: 100%;
-  max-width: 1200px;
   height: 476px;
   border-radius: 40px;
   background: linear-gradient(180deg, #111111 0.77%, #141414 100%);
@@ -81,16 +79,41 @@
 .description {
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     sans-serif;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 28px;
-  letter-spacing: -0.5px;
-  color: rgba(255, 255, 255, 0.8);
+  color: #8a8a8a;
   margin: 0;
   width: 84%;
   text-align: justify;
   word-wrap: break-word;
   overflow-wrap: break-word;
+  font-family: Inter;
+  font-weight: 300;
+  font-style: Light;
+  font-size: 20px;
+  leading-trim: NONE;
+  line-height: 42px;
+  letter-spacing: 0%;
+
+  // Global styles for highlighted elements in HTML
+  :global(.highlight) {
+    background-color: rgba(0, 219, 220, 0.15);
+    color: #00dbdc;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 12px;
+    display: inline;
+    margin: 0 2px;
+  }
+
+  :global(.special-text) {
+    color: #00dbdc;
+    font-family: Inter;
+    font-weight: 300;
+    font-style: Light;
+    font-size: 20px;
+    leading-trim: NONE;
+    line-height: 42px;
+    letter-spacing: 0%;
+  }
 
   @media (max-width: 768px) {
     font-size: 16px;
@@ -102,25 +125,6 @@
     font-size: 14px;
     line-height: 24px;
   }
-}
-
-.highlighted {
-  background: linear-gradient(90deg, #00dbdc 0%, #00a8cc 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-weight: 600;
-  padding: 4px 12px;
-  border-radius: 20px;
-  background-color: rgba(0, 219, 220, 0.1);
-  -webkit-text-fill-color: #00dbdc;
-  display: inline-block;
-  margin: 0 4px;
-}
-
-.specialText {
-  color: #00dbdc;
-  font-weight: 500;
 }
 
 .rightContent {
@@ -211,8 +215,8 @@
 
 // Animation states
 .card:hover {
-  .highlighted {
-    background-color: rgba(0, 219, 220, 0.2);
+  .description :global(.highlight) {
+    background-color: rgba(0, 219, 220, 0.25);
   }
 }
 
