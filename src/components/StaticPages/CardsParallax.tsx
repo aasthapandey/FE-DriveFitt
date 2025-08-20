@@ -46,6 +46,12 @@ const CardsParallax = ({
             key={`p_${i}`}
             i={i}
             {...card}
+            mobileUrl={
+              card.mobileUrl ??
+              (i % 2 === 0
+                ? "/images/aboutUs/card-parallax-mobile-1.svg"
+                : "/images/aboutUs/card-parallax-mobile-2.svg")
+            }
             progress={scrollYProgress}
             range={[i * 0.25, 1]}
             targetScale={targetScale}

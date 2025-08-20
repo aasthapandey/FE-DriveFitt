@@ -43,19 +43,9 @@ const CardParallax = ({
           scale,
         }}
       >
-        <div className={styles.cardContent}>
-          <div className={styles.leftContent}>
-            <h1 className={styles.title}>{title}</h1>
-            <p
-              className={styles.description}
-              dangerouslySetInnerHTML={
-                description ? createMarkup(description) : undefined
-              }
-            />
-          </div>
-
-          <div className={styles.rightContent}>
-            <div className={styles.imageContainer}>
+        {isMobile ? (
+          <div className={styles.cardContentMobile}>
+            <div className={styles.imageContainerMobile}>
               {backgroundImage && (
                 <div
                   className={styles.backgroundImage}
@@ -67,14 +57,54 @@ const CardParallax = ({
               <div className={styles.imageWrapper}>
                 <Image
                   fill
-                  src={isMobile && mobileUrl ? mobileUrl : url}
+                  src={mobileUrl ? mobileUrl : url}
                   alt={title || "image"}
                   className={styles.image}
                 />
               </div>
             </div>
+            <h1 className={styles.mobileTitle}>{title}</h1>
+            <p
+              className={styles.mobileDescription}
+              dangerouslySetInnerHTML={
+                description ? createMarkup(description) : undefined
+              }
+            />
           </div>
-        </div>
+        ) : (
+          <div className={styles.cardContent}>
+            <div className={styles.leftContent}>
+              <h1 className={styles.title}>{title}</h1>
+              <p
+                className={styles.description}
+                dangerouslySetInnerHTML={
+                  description ? createMarkup(description) : undefined
+                }
+              />
+            </div>
+
+            <div className={styles.rightContent}>
+              <div className={styles.imageContainer}>
+                {backgroundImage && (
+                  <div
+                    className={styles.backgroundImage}
+                    style={{
+                      backgroundImage: `url(/images/${backgroundImage})`,
+                    }}
+                  />
+                )}
+                <div className={styles.imageWrapper}>
+                  <Image
+                    fill
+                    src={url}
+                    alt={title || "image"}
+                    className={styles.image}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </motion.div>
     </div>
   );
