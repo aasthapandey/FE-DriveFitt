@@ -30,9 +30,30 @@ const CardParallax = ({
 
   const scale = useTransform(progress, range, [1, targetScale]);
 
-  // Helper function to render HTML description
+  // Helper function to render HTML description with mobile/desktop image handling
   const createMarkup = (htmlString: string) => {
-    return { __html: htmlString };
+    if (!htmlString) return { __html: "" };
+
+    let processedHtml = htmlString;
+
+    if (isMobile) {
+      // Replace desktop images with mobile versions
+      processedHtml = processedHtml
+        .replace(
+          /src="\/images\/aboutUs\/3Years\.svg"/g,
+          'src="/images/aboutUs/3Years-mobile.svg"'
+        )
+        .replace(
+          /src="\/images\/aboutUs\/300Franchise\.svg"/g,
+          'src="/images/aboutUs/300Franchise-mobile.svg"'
+        )
+        .replace(
+          /src="\/images\/aboutUs\/GlennMaxwell\.svg"/g,
+          'src="/images/aboutUs/GlennMaxwell-mobile.svg"'
+        );
+    }
+
+    return { __html: processedHtml };
   };
 
   return (
