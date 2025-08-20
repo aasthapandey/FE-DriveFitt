@@ -26,7 +26,7 @@ const Banner3JoinUs = ({
   return (
     <div className="relative mt-[15px] md:!mb-[-40px]">
       <div
-        className="h-[540px] md:h-[460px] w-full md:pt-10 px-6 md:py-[106px] md:px-[120px]"
+        className=" md:h-[460px] w-full md:pt-10 px-6 md:py-[106px] md:px-[120px]"
         style={{
           background: addGradient
             ? "linear-gradient(180deg, #1D1D1D 0%, #0D0D0D 100%)"
@@ -48,7 +48,7 @@ const Banner3JoinUs = ({
               </p>
               <button
                 onClick={() => handleButtonClick()}
-                className={`bg-[#00DBDC] w-[166px] md:w-[231px] h-[43px] md:h-[52px] text-sm md:text-base leading-5 tracking-[5%] py-[10px] md:py-4 text-[#0D0D0D] rounded-[4px] md:rounded-lg mt-1 md:mt-7 hover:bg-transparent border border-transparent hover:border-[#00DBDC] hover:text-[#00DBDC] transition-all duration-200`}
+                className={`bg-[#00DBDC] h-[37px] font-medium text-sm leading-none tracking-tighter md:w-[231px]  md:h-[52px] text-sm md:text-base px-10 py-3 md:py-4 text-[#0D0D0D] rounded-[4px] md:rounded-lg mt-1 md:mt-7 hover:bg-transparent border border-transparent hover:border-[#00DBDC] hover:text-[#00DBDC] transition-all duration-200`}
               >
                 {btnLabel}
               </button>
