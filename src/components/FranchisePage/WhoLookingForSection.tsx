@@ -1,4 +1,4 @@
-import { CardSection } from "@/types/franchisePage";
+import { CardSection } from "@/types/staticPages";
 import TitleDescription from "@/components/common/TitleDescription";
 import Image from "next/image";
 import ScrollAnimation from "@/components/common/ScrollAnimation";
