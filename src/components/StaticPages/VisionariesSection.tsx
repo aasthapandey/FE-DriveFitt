@@ -10,6 +10,15 @@ interface VisionarySectionProps {
 
 const VisionarySection = ({ data, isMobile }: VisionarySectionProps) => {
   const { title, description, cardList } = data;
+  const list = isMobile
+    ? [
+        cardList[0],
+        cardList[1],
+        cardList[3], // swap: 4th item goes to 3rd position
+        cardList[2], // swap: 3rd item goes to 4th position
+        ...cardList.slice(4), // rest of the items if any
+      ]
+    : cardList;
   return (
     <section className="md:px-[120px] px-6 flex flex-col gap-5">
       <ScrollAnimation delay={0.2} direction="up">
@@ -21,14 +30,14 @@ const VisionarySection = ({ data, isMobile }: VisionarySectionProps) => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-[16px]">
             <ScrollAnimation delay={0.3} direction="up">
               <VisionCard
-                card={cardList[0]}
+                card={list[0]}
                 className="w-full"
                 isMobile={isMobile}
               />
             </ScrollAnimation>
             <ScrollAnimation delay={0.4} direction="up">
               <VisionCard
-                card={cardList[1]}
+                card={list[1]}
                 className="w-full"
                 isMobile={isMobile}
               />
@@ -38,21 +47,21 @@ const VisionarySection = ({ data, isMobile }: VisionarySectionProps) => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-[16px]">
             <ScrollAnimation delay={0.5} direction="up">
               <VisionCard
-                card={cardList[2]}
+                card={list[2]}
                 className="w-full"
                 isMobile={isMobile}
               />
             </ScrollAnimation>
             <ScrollAnimation delay={0.6} direction="up">
               <VisionCard
-                card={cardList[3]}
+                card={list[3]}
                 className="w-full"
                 isMobile={isMobile}
               />
             </ScrollAnimation>
             <ScrollAnimation delay={0.7} direction="up">
               <VisionCard
-                card={cardList[4]}
+                card={list[4]}
                 className="w-full"
                 isMobile={isMobile}
               />
