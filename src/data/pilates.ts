@@ -12,10 +12,8 @@ export const pilatesData: StaticPageData = {
   hero: {
     titleWords: [{ text: "Precision. Strength. Control.", color: "#FFFFFF" }],
     description: "Train hard. Recover smarter. Perform your best.",
-    desktopImage:
-      "/images/pilates/hero.jpg",
-    mobileImage:
-      "/images/pilates/mobile-hero.svg",
+    desktopImage: "/images/pilates/hero.jpg",
+    mobileImage: "/images/pilates/mobile-hero.svg",
     btnPrimaryText: "Join the Waitlist",
     btnSecondaryText: "Join Online",
   },
@@ -23,7 +21,7 @@ export const pilatesData: StaticPageData = {
     title: "Welcome to Pilates at Drive FITT",
     description:
       "Step into a space where the session is engineered to realign, restore, and redefine the way your body moves - it's your foundation for lifelong strength, balance, and resilience.",
-    class: "md:-mt-[282px]"
+    class: "md:-mt-[282px]",
   },
   multiRevenueSection: {
     title: "Why Pilates, Why Here?",
@@ -43,8 +41,7 @@ export const pilatesData: StaticPageData = {
       {
         icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/multi-revenue-icon-5.svg",
         title: "Small Groups",
-        description:
-          "Personal formats for focused attention",
+        description: "Personal formats for focused attention",
       },
       {
         icon: "https://da8nru77lsio9.cloudfront.net/images/franchise/multi-revenue-icon-6.svg",
@@ -187,7 +184,7 @@ export const pilatesData: StaticPageData = {
       {
         title: "Quick links",
         links: [
-          { title: "About us", link: "/coming-soon" },
+          { title: "About us", link: "/about-us" },
           { title: "Blogs", link: "/coming-soon" },
           { title: "Career", link: "/coming-soon" },
           { title: "Partner with us", link: "/franchise" },
@@ -201,8 +198,8 @@ export const pilatesData: StaticPageData = {
           { title: "Recovery", link: "/recovery" },
           { title: "Running", link: "/running" },
           { title: "Group Classes", link: "/coming-soon" },
-          { title: "Pilates", link: "/coming-soon" },
-          { title: "Personal Training", link: "/coming-soon" },
+          { title: "Pilates", link: "/pilates" },
+          { title: "Personal Training", link: "/personal-training" },
         ],
       },
       {

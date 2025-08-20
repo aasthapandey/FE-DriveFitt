@@ -231,7 +231,7 @@ export const cricketData: StaticPageData = {
       {
         title: "Quick links",
         links: [
-          { title: "About us", link: "/coming-soon" },
+          { title: "About us", link: "/about-us" },
           { title: "Blogs", link: "/coming-soon" },
           { title: "Career", link: "/coming-soon" },
           { title: "Partner with us", link: "/franchise" },
@@ -245,8 +245,8 @@ export const cricketData: StaticPageData = {
           { title: "Recovery", link: "/recovery" },
           { title: "Running", link: "/running" },
           { title: "Group Classes", link: "/coming-soon" },
-          { title: "Pilates", link: "/coming-soon" },
-          { title: "Personal Training", link: "/coming-soon" },
+          { title: "Pilates", link: "/pilates" },
+          { title: "Personal Training", link: "/personal-training" },
         ],
       },
       {
