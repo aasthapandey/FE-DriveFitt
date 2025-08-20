@@ -1,11 +1,9 @@
-import Image from "next/image";
 import styles from "./CardParallax.module.scss";
 import { useTransform, motion, MotionValue } from "framer-motion";
 import { useRef } from "react";
 const CardParallax = ({
   title,
   description,
-  backgroundImage,
   url,
   mobileUrl,
   progress,
