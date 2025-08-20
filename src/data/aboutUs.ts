@@ -161,9 +161,8 @@ export const aboutUsData: StaticPageData = {
     description:
       "Train like the pros. Recover like champions. Build a life where performance, health, and sport co-exist in harmony - it starts here at Drive FITT.",
     btnLabel: "Book a free trial",
-    desktopImage: "/images/join-the-movement.svg",
-    mobileImage:
-      "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/mobile-banner3.webp",
+    desktopImage: "/images/aboutUs/bannerCta.svg",
+    mobileImage: "/images/aboutUs/bannerCta-mobile.jpg",
     addGradient: false,
   },
   bannerSection: {

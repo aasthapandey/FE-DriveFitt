@@ -49,7 +49,7 @@ const BannerCTA = ({
               </p>
               <button
                 onClick={() => handleButtonClick()}
-                className={`bg-[#00DBDC] w-[255px] h-[43px] md:h-[52px] text-base leading-5 tracking-[5%] py-3 md:py-4 text-[#0D0D0D] rounded-[4px] md:rounded-lg mt-4 md:mt-[72px] hover:bg-transparent border border-transparent hover:border-[#00DBDC] hover:text-[#00DBDC] transition-all duration-200`}
+                className={`bg-[#00DBDC] h-[37px] py-3 px-10 font-medium text-sm leading-none tracking-tighter md:h-[52px] md:py-4 text-[#0D0D0D] rounded-[4px] md:rounded-lg mt-4 md:mt-[72px] hover:bg-transparent border border-transparent hover:border-[#00DBDC] hover:text-[#00DBDC] transition-all duration-200`}
               >
                 {btnLabel}
               </button>
