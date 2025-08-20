@@ -62,28 +62,15 @@ const CardParallax = ({
         className={styles.card}
         style={{
           scale,
+          backgroundImage: `url(${isMobile ? mobileUrl || url : url})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
         }}
       >
         {isMobile ? (
           <div className={styles.cardContentMobile}>
-            <div className={styles.imageContainerMobile}>
-              {backgroundImage && (
-                <div
-                  className={styles.backgroundImage}
-                  style={{
-                    backgroundImage: `url(/images/${backgroundImage})`,
-                  }}
-                />
-              )}
-              <div className={styles.imageWrapper}>
-                <Image
-                  fill
-                  src={mobileUrl || ""}
-                  alt={title || "image"}
-                  className={styles.image}
-                />
-              </div>
-            </div>
+            {/* Image now applied as background to main card */}
             <h1 className={styles.mobileTitle}>{title}</h1>
             <p
               className={styles.mobileDescription}
@@ -105,24 +92,7 @@ const CardParallax = ({
             </div>
 
             <div className={styles.rightContent}>
-              <div className={styles.imageContainer}>
-                {backgroundImage && (
-                  <div
-                    className={styles.backgroundImage}
-                    style={{
-                      backgroundImage: `url(/images/${backgroundImage})`,
-                    }}
-                  />
-                )}
-                <div className={styles.imageWrapper}>
-                  <Image
-                    fill
-                    src={url}
-                    alt={title || "image"}
-                    className={styles.image}
-                  />
-                </div>
-              </div>
+              {/* Image now applied as background to main card */}
             </div>
           </div>
         )}
