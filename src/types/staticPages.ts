@@ -396,6 +396,7 @@ export interface StaticPageData {
   bannerCTASection?: GallerySectionProps;
   bannerCTASection2?: GallerySectionProps;
   cardsParallaxSection?: CardsParallaxProps;
+  banner3JoinUsSection?: GallerySectionProps;
 }
 
 export interface ContactUsPageData {

@@ -11,13 +11,7 @@ interface VisionarySectionProps {
 const VisionarySection = ({ data, isMobile }: VisionarySectionProps) => {
   const { title, description, cardList } = data;
   const list = isMobile
-    ? [
-        cardList[0],
-        cardList[1],
-        cardList[3], // swap: 4th item goes to 3rd position
-        cardList[2], // swap: 3rd item goes to 4th position
-        ...cardList.slice(4), // rest of the items if any
-      ]
+    ? [cardList[0], cardList[1], cardList[3], cardList[2], ...cardList.slice(4)]
     : cardList;
   return (
     <section className="md:px-[120px] px-6 flex flex-col gap-5">

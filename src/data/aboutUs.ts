@@ -147,7 +147,7 @@ export const aboutUsData: StaticPageData = {
       },
     ],
   },
-  bannerCTASection: {
+  banner3JoinUsSection: {
     title: "Join The Movement",
     description:
       "Train like the pros. Recover like champions. Build a life where performance, health, and sport co-exist in harmony - it starts here at Drive FITT.",
