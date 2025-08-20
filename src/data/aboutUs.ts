@@ -119,7 +119,7 @@ export const aboutUsData: StaticPageData = {
       {
         title: "Growth & Impact",
         description:
-          'Our flagship club in <span class="special-text">Gurgaon</span> launches this year, with Delhi and more to follow. We aim to deliver <span class="highlight">300 Franchises</span> across India within <span class="highlight">3 Years</span>, making <span class="special-text">sports–embedded fitness</span> accessible to millions.',
+          'Our flagship club in <span class="special-text">Gurgaon</span> launches this year, with Delhi and more to follow. We aim to deliver <img src="/images/aboutUs/300Franchise.svg" alt="300 Franchises" class="inline-svg" style="display: inline-block; vertical-align:" /> across India within <img src="/images/aboutUs/3Years.svg" alt="3 Years" class="inline-svg" style=" display: inline-block; vertical-align:" />, making <span class="special-text">sports–embedded fitness</span> accessible to millions.',
         src: "aboutUs/card-parallax-1.svg",
         backgroundImage: "",
         url: "/images/aboutUs/card-parallax-1.svg",
@@ -129,7 +129,7 @@ export const aboutUsData: StaticPageData = {
       {
         title: "A Fusion of Passion & Purpose",
         description:
-          'Drive FITT isn\'t just a premium fitness brand—it\'s a movement. We bring cricket into wellness, tailor science into training, and unite members in a high-energy, aspirational community. With new shareholders like international cricket star <span class="highlight">Glenn Maxwell</span> our approach to <span class="special-text">fitness, athlete development, and recovery</span> is only getting sharper and more distinct.',
+          'Drive FITT isn\'t just a premium fitness brand—it\'s a movement. We bring cricket into wellness, tailor science into training, and unite members in a high-energy, aspirational community. With new shareholders like international cricket star <img src="/images/aboutUs/GlennMaxwell.svg" alt="Glenn Maxwell" class="inline-svg" style="display: inline-block; vertical-align: middle;" /> our approach to <span class="special-text">fitness, athlete development, and recovery</span> is only getting sharper and more distinct.',
         src: "aboutUs/card-parallax-2.svg",
         backgroundImage: "",
         url: "/images/aboutUs/card-parallax-2.svg",
