@@ -36,33 +36,48 @@ export const aboutUsData: StaticPageData = {
     cardList: [
       {
         icon: "/images/Mark-Sellar.svg",
-        title: "Initial Investment",
-        subTitle: "₹8 - 10 Cr",
-        description: "Club size, location-dependent",
+        title: "Mark Sellar",
+        subTitle: "Co-Founder & Executive Chairman",
+        description:
+          "Global business strategist bringing international scale and operational excellence.",
+        tooltipImage: "/images/MarkSellarName.svg",
+        tooltipImageMobile: "/images/MarkSellarNameMobile.svg",
       },
       {
         icon: "/images/Deke-Smith.svg",
-        title: "Ideal Location",
-        subTitle: "10,000 sq. ft. or above",
-        description: "Premium mixed-use developments",
+        title: "Deke Smith",
+        subTitle: "Co-Founder & Director",
+        description:
+          "Global business strategist bringing international scale and operational excellence.",
+        tooltipImage: "/images/DekeSmithName.svg",
+        tooltipImageMobile: "/images/DekeSmithNameMobile.svg",
       },
       {
         icon: "/images/Shubman-Gill.svg",
-        title: "Projected ROI",
-        subTitle: "30 - 40%",
-        description: "Strong return on investment",
+        title: "Shubman Gill",
+        subTitle: "Co-Founder",
+        description:
+          "International cricket star driving training innovation after experiencing facility gaps firsthand.",
+        tooltipImage: "/images/ShubmanGillName.svg",
+        tooltipImageMobile: "/images/ShubmanGillNameMobile.svg",
       },
       {
         icon: "/images/Preity-G-Zinta.svg",
-        title: "Payback",
-        subTitle: "2.5 years",
-        description: "Quick capital recovery",
+        title: "Preity G Zinta",
+        subTitle: "Co-Founder",
+        description:
+          "Bollywood icon bringing mass-appeal storytelling and brand vision to Drive FITT's narrative.",
+        tooltipImage: "/images/PreityGZintaName.svg",
+        tooltipImageMobile: "/images/PreityGZintaNameMobile.svg",
       },
       {
         icon: "/images/Vikram-Bhatiya.svg",
-        title: "Capex Recovery",
-        subTitle: "15%",
-        description: "Prior to launch",
+        title: "Vikram Bhatia",
+        subTitle: "Co-Founder & CEO",
+        description:
+          "Fitness industry veteran ensuring world-class execution across Operational verticals.",
+        tooltipImage: "/images/VikramBhatiaName.svg",
+        tooltipImageMobile: "/images/VikramBhatiaNameMobile.svg",
       },
     ],
   },

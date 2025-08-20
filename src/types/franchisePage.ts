@@ -25,6 +25,8 @@ export interface Card {
   title: string;
   description?: string | string[];
   subTitle?: string;
+  tooltipImage?: string;
+  tooltipImageMobile?: string;
 }
 
 export interface FranchiseCardSection {
