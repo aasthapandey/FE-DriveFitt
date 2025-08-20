@@ -324,7 +324,7 @@ export const homeData: StaticPageData = {
         links: [
           {
             title: "About Us",
-            link: "/coming-soon",
+            link: "/about-us",
           },
           {
             title: "Blogs",
@@ -365,11 +365,11 @@ export const homeData: StaticPageData = {
           },
           {
             title: "Pilates",
-            link: "/coming-soon",
+            link: "/pilates",
           },
           {
             title: "Personal Training",
-            link: "/coming-soon",
+            link: "/personal-training",
           },
         ],
       },
