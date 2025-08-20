@@ -11,7 +11,7 @@ export const pilatesData: StaticPageData = {
   navbar: navbarData,
   hero: {
     titleWords: [{ text: "Precision. Strength. Control.", color: "#FFFFFF" }],
-    description: "Train hard. Recover smarter. Perform your best.",
+    description: "",
     desktopImage: "/images/pilates/hero.jpg",
     mobileImage: "/images/pilates/mobile-hero.svg",
     btnPrimaryText: "Join the Waitlist",

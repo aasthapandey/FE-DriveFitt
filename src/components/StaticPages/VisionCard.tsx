@@ -80,28 +80,28 @@ const VisionCard = ({ card, className, isMobile }: VisionCardProps) => {
           objectPosition: "center bottom",
           objectFit: "cover" as const,
           left: "16%",
-          top: "4%",
+          top: "12%",
         };
       case "Shubman Gill":
         return {
           objectPosition: "center bottom",
           objectFit: "cover" as const,
           right: "25%",
-          top: "10%",
+          top: "12%",
         };
       case "Preity G Zinta":
         return {
           objectPosition: "center bottom",
           objectFit: "cover" as const,
           left: "8%",
-          top: "5%",
+          top: "12%",
         };
       case "Vikram Bhatia":
         return {
           objectPosition: "center bottom",
           objectFit: "cover" as const,
           left: "25%",
-          top: "10%",
+          top: "12%",
         };
       default:
         return {
@@ -160,24 +160,24 @@ const VisionCard = ({ card, className, isMobile }: VisionCardProps) => {
       case "Deke Smith":
         return {
           // right: "15%",
-          top: "45%",
+          top: "50%",
           left: "10%",
         };
       case "Shubman Gill":
         return {
           // right: "7%",
-          top: "35%",
+          top: "39%",
           left: "60%",
         };
       case "Preity G Zinta":
         return {
           right: "15%",
-          top: "18%",
+          top: "22%",
         };
       case "Vikram Bhatia":
         return {
           left: "12%",
-          top: "42%",
+          top: "45%",
         };
       default:
         return {
@@ -257,8 +257,14 @@ const VisionCard = ({ card, className, isMobile }: VisionCardProps) => {
         </p>
       </div>
       {/* Content */}
-      <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
-        <p className="text-[#FFFFFF99] font-light text-sm tracking-[-2%] text-center leading-5">
+      <div
+        className={`${
+          title === "Mark Sellar" || title === "Deke Smith"
+            ? "md:py-6 md:px-[60px]"
+            : "md:px-5 md:py-3"
+        } absolute bottom-0 p-5 left-0 right-0 z-10`}
+      >
+        <p className="text-[#FFFFFF99] font-light text-xs md:text-sm tracking-[0%] md:tracking-[-2%] text-center leading-4 md:leading-5">
           {description}
         </p>
       </div>
