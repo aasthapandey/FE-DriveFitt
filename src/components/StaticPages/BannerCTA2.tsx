@@ -16,7 +16,6 @@ const BannerCTA2 = ({
     btnLabel,
     desktopImage,
     mobileImage,
-    addGradient = true,
     mobileImageUp = false,
   } = data;
 
