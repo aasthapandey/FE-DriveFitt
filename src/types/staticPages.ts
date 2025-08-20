@@ -1,5 +1,4 @@
 import {
-  FranchisePageData,
   FranchiseCardSection,
   FranchiseHero,
   BannerSection,

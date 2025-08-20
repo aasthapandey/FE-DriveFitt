@@ -11,6 +11,10 @@
   }
 }
 
+.main {
+  margin-bottom: -55px;
+}
+
 .card {
   height: 476px;
   border-radius: 40px;
@@ -23,7 +27,7 @@
   margin-bottom: 55px;
 
   @media (max-width: 768px) {
-    height: 500px;
+    height: auto;
     border-radius: 20px;
   }
 }
@@ -36,10 +40,17 @@
 
   @media (max-width: 768px) {
     flex-direction: column;
-    padding: 40px 30px;
+    padding: 0;
     text-align: center;
     align-items: center;
   }
+}
+
+.cardContentMobile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
 }
 
 .leftContent {
@@ -62,7 +73,6 @@
   color: #ffffff;
   margin: 0;
 
-  font-family: Inter;
   font-style: Semi Bold;
 
   @media (max-width: 768px) {
@@ -77,16 +87,26 @@
   }
 }
 
+.mobileTitle {
+  font-family: Inter, sans-serif;
+  font-weight: 600;
+  font-style: Semi Bold;
+  font-size: 24px;
+  line-height: 28px;
+  letter-spacing: -1px;
+  text-align: center;
+  color: #ffffff;
+  margin: 10px 0 0 0;
+}
+
 .description {
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    sans-serif;
   color: #8a8a8a;
   margin: 0;
   width: 84%;
   text-align: justify;
   word-wrap: break-word;
   overflow-wrap: break-word;
-  font-family: Inter;
+
   font-weight: 300;
   font-style: Light;
   font-size: 20px;
@@ -107,7 +127,7 @@
 
   :global(.special-text) {
     color: #00dbdc;
-    font-family: Inter;
+
     font-weight: 300;
     font-style: Light;
     font-size: 20px;
@@ -133,6 +153,28 @@
   @media (max-width: 480px) {
     font-size: 14px;
     line-height: 24px;
+  }
+}
+
+.mobileDescription {
+  color: #8a8a8a;
+  font-family: Inter, sans-serif;
+  font-weight: 300;
+  font-style: Light;
+  font-size: 16px;
+  line-height: 28px;
+  letter-spacing: 0;
+  text-align: center;
+  padding: 44px 16px 24px 16px;
+  margin: 0;
+  :global(.highlight) {
+    background-color: rgba(0, 219, 220, 0.15);
+    color: #00dbdc;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 12px;
+    display: inline;
+    margin: 0 2px;
   }
 }
 
@@ -173,14 +215,26 @@
   }
 
   @media (max-width: 768px) {
-    width: 300px;
-    height: 300px;
+    width: 100%;
+    max-width: 320px;
+    height: 240px;
   }
 
   @media (max-width: 480px) {
-    width: 250px;
-    height: 250px;
+    width: 100%;
+    max-width: 300px;
+    height: 220px;
   }
+}
+
+.imageContainerMobile {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  border-radius: 0;
+  overflow: hidden;
+  background: transparent;
+  padding: 0;
 }
 
 .backgroundImage {
@@ -219,10 +273,6 @@
 
 // Responsive improvements
 @media (max-width: 1024px) {
-  .cardContainer {
-    padding: 0 60px;
-  }
-
   .title {
     font-size: 42px;
     line-height: 50px;
