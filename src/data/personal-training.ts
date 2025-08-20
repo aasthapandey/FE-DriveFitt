@@ -153,7 +153,8 @@ export const personalTrainingData: StaticPageData = {
         description: "",
       },
     ],
-    cardTitleClass: "font-medium text-base leading-5 tracking-0 capitalize",
+    cardTitleClass:
+      "font-medium md:font-semibold text-base md:text-[28px] leading-5 md:leading-[36px] tracking-[0px] md:tracking-[-1px]",
     cardDescriptionClass: "",
   },
   bannerCTASection2: {
