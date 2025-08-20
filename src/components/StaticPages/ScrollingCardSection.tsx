@@ -137,13 +137,15 @@ const ScrollingCardSection = ({
                       key={itemIdx}
                       className="flex items-start gap-[14px] md:gap-[26px]"
                     >
-                      <Image
-                        src={iconImage}
-                        alt="check"
-                        width={23.33}
-                        height={23.33}
-                        className="mt-1 size-5 md:size-[23.33px]"
-                      />
+                      {iconImage && (
+                        <Image
+                          src={iconImage}
+                          alt="check"
+                          width={23.33}
+                          height={23.33}
+                          className="mt-1 size-5 md:size-[23.33px]"
+                        />
+                      )}
                       <span className="text-xs font-light md:text-base tracking-[-1%]">
                         {item}
                       </span>

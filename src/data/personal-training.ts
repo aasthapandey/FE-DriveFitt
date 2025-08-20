@@ -29,7 +29,7 @@ export const personalTrainingData: StaticPageData = {
   scrollingCardSection: {
     title: "What We Offer",
     description: "",
-    iconImage: "https://da8nru77lsio9.cloudfront.net/images/check-icon.svg",
+    iconImage: "",
     cardSection: [
       {
         subTitle: "Tailored Programming",
@@ -37,8 +37,7 @@ export const personalTrainingData: StaticPageData = {
           "Every plan starts with a full assessment—physical, movement, and lifestyle.",
         ],
         extraTagLabel: "",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/scroll-card-1.webp",
+        backgroundImage: "/images/personal-training/scroll-card-1.jpg",
       },
       {
         subTitle: "Data-Driven Progress",
@@ -47,8 +46,7 @@ export const personalTrainingData: StaticPageData = {
           "Intelligent simulation like Random, Match Practice or Match Situation",
         ],
         extraTagLabel: "",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/scroll-card-3.svg",
+        backgroundImage: "/images/personal-training/scroll-card-2.jpg",
       },
       {
         subTitle: "Expert-Led Sessions",
@@ -58,8 +56,7 @@ export const personalTrainingData: StaticPageData = {
           "Evidence-Based Recovery for a smarter, safer Return-to-Play",
         ],
         extraTagLabel: "",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/scroll-card-2.webp",
+        backgroundImage: "/images/personal-training/scroll-card-3.jpg",
       },
       {
         subTitle: "Lifestyle Integration",
@@ -67,8 +64,7 @@ export const personalTrainingData: StaticPageData = {
           "Track your progress with our smart tech—from 3D body scans to real-time motion capture.",
         ],
         extraTagLabel: "",
-        backgroundImage:
-          "https://da8nru77lsio9.cloudfront.net/images/cricket-compressed/scroll-card-4.svg",
+        backgroundImage: "/images/personal-training/scroll-card-4.jpg",
       },
     ],
   },
