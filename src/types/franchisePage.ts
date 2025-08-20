@@ -68,3 +68,20 @@ export interface FranchisePageData {
   footerInfoSection: FooterInfoProps;
   footerSection: FooterProps;
 }
+
+export interface CardType {
+  title?: string;
+  description?: string;
+  backgroundImage?: string;
+  link?: string;
+  className?: string;
+  iconImage?: string;
+  redirectionIcon?: string;
+}
+
+export interface CardSection {
+  title?: string;
+  description?: string;
+  isMobile?: boolean;
+  cardSection: CardType[];
+}
