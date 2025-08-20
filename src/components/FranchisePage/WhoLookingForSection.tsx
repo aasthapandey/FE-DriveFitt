@@ -1,10 +1,10 @@
-import { CardSection } from "@/types/staticPages";
+import { FranchiseCardSection } from "@/types/franchisePage";
 import TitleDescription from "@/components/common/TitleDescription";
 import Image from "next/image";
 import ScrollAnimation from "@/components/common/ScrollAnimation";
 
 interface WhatLookingForSectionProps {
-  data: CardSection;
+  data: FranchiseCardSection;
   isMobile?: boolean;
 }
 
