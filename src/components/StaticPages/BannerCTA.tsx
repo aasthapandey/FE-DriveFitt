@@ -58,7 +58,7 @@ const BannerCTA = ({
           <div className="h-[341px] md:h-[568px] w-full absolute bottom-0 right-0 md:top-0">
             <Image
               src={`${isMobile ? mobileImage : desktopImage}`}
-              alt="gallery-1"
+              alt="book-now-pilates"
               fill
               className="object-cover"
             />

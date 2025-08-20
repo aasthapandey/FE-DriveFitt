@@ -366,6 +366,13 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
                 </div>
               );
             }
+            if (key === "photoCircleSection") {
+              return (
+                <div key={key} className="relative">
+                  {component}
+                </div>
+              );
+            }
             return <div key={key}>{component}</div>;
           }
           return null;
