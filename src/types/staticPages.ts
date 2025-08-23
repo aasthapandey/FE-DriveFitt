@@ -398,6 +398,7 @@ export interface StaticPageData {
   visionariesSection?: FranchiseCardSection;
   bannerCTASection?: GallerySectionProps;
   bannerCTASection2?: GallerySectionProps;
+  signatureClassesSection?: SignatureClassesSection;
   cardsParallaxSection?: CardsParallaxProps;
   banner3JoinUsSection?: GallerySectionProps;
 }
@@ -462,4 +463,16 @@ export interface ChooseYourPathSectionProps {
   title: string;
   packages: Package[];
   buttonText?: string;
+}
+
+export interface SignatureClassCard {
+  title: string;
+  description: string;
+  backgroundImage: string;
+}
+
+export interface SignatureClassesSection {
+  title: string;
+  cardList: SignatureClassCard[];
+  cardList2: SignatureClassCard[];
 }

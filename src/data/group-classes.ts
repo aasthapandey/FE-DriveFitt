@@ -26,6 +26,97 @@ export const groupClassesData: StaticPageData = {
     class: "md:px-[168px] md:-mt-[200px]",
     subClass: "px-0 py-0 md:px-0 md:py-0",
   },
+  signatureClassesSection: {
+    title: "Explore Our Signature Classes",
+    cardList: [
+      {
+        title: "Power Yoga",
+        description:
+          "Strength-driven flow that blends breath and movement to sculpt, focus, and build resilience.",
+        backgroundImage: "/images/group-classes/yoga.jpg",
+      },
+      {
+        title: "Circuit Training",
+        description:
+          "Fast-paced, high-intensity stations that torch calories, boost endurance, and build strength.",
+        backgroundImage: "/images/group-classes/yoga.jpg",
+      },
+      {
+        title: "HIIT",
+        description:
+          "Intense intervals for serious burn, performance gains, and next-level conditioning.",
+        backgroundImage: "/images/group-classes/yoga.jpg",
+      },
+      {
+        title: "Boxing",
+        description:
+          "Real fight-style drills, pad work, and conditioning — not just cardio-boxing.",
+        backgroundImage: "/images/group-classes/yoga.jpg",
+      },
+      {
+        title: "Core Blast",
+        description:
+          "30 minutes to strengthen your core, protect your back, and improve control.",
+        backgroundImage: "/images/group-classes/yoga.jpg",
+      },
+      {
+        title: "Spinning",
+        description:
+          "Performance-tracked cycling fused with music for an unmatched cardio high.",
+        backgroundImage: "/images/group-classes/yoga.jpg",
+      },
+      {
+        title: "TRX",
+        description:
+          "Suspension training to build strength, mobility, and core power at any level.",
+        backgroundImage: "/images/group-classes/yoga.jpg",
+      },
+    ],
+    cardList2: [
+      {
+        title: "Dance Fitness",
+        description:
+          "Music-fueled, high-energy moves that feel like a party, not a workout.",
+        backgroundImage: "/images/group-classes/yoga.jpg",
+      },
+      {
+        title: "Pilates",
+        description:
+          "Core-toning, posture-improving, and flexibility-boosting precision training.",
+        backgroundImage: "/images/group-classes/yoga.jpg",
+      },
+      {
+        title: "Vinyasa Yoga",
+        description:
+          "Breath-led, flowing practice that restores balance and deepens mind-body connection.",
+        backgroundImage: "/images/group-classes/yoga.jpg",
+      },
+      {
+        title: "Flexi Strength",
+        description:
+          "Flexibility meets functional strength for mobility, injury prevention, and longevity.",
+        backgroundImage: "/images/group-classes/yoga.jpg",
+      },
+      {
+        title: "ABT (Abs, Butt, Thighs)",
+        description:
+          "Targeted toning for glutes, core, and thighs with high-rep, sculpting moves.",
+        backgroundImage: "/images/group-classes/yoga.jpg",
+      },
+      {
+        title: "Zumba",
+        description:
+          "Latin-inspired cardio dance for endurance, coordination, and pure joy.",
+        backgroundImage: "/images/group-classes/yoga.jpg",
+      },
+      {
+        title: "Yoga",
+        description:
+          "Modern yet timeless sequences to strengthen, restore, and ground your body and mind.",
+        backgroundImage: "/images/group-classes/yoga.jpg",
+      },
+    ],
+  },
   bannerCTASection2: {
     title: "More Than a Class. It’s a Culture.",
     description:
