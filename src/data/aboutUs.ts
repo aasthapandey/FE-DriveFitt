@@ -15,8 +15,8 @@ export const aboutUsData: StaticPageData = {
       "Drive FITT is redefining India’s fitness landscape by blending the nation’s passion for cricket with world-class training, recovery, and performance facilities.",
     roiTag: "",
     roiIcon: "https://da8nru77lsio9.cloudfront.net/images/roi-icon.svg",
-    desktopImage: "/images/AboutUsHero.svg",
-    mobileImage: "/images/AboutUsHero.svg",
+    desktopImage: "/images/aboutUs/hero.svg",
+    mobileImage: "/images/aboutUs/hero-mobile.svg",
     btnPrimaryText: "",
   },
   banner1Section: {

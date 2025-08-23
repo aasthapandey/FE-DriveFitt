@@ -376,7 +376,7 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
                         : (value as FranchiseHero).desktopImage
                     })`,
                     backgroundPosition: "top center",
-                    backgroundSize: "cover",
+                    backgroundSize: isMobile ? "100% auto" : "cover",
                     backgroundRepeat: "no-repeat",
                     minHeight: isMobile ? "400px" : "600px",
                   }}
