@@ -82,91 +82,100 @@ const ScrollingCardSection = ({
       <ScrollAnimation delay={0.2} direction="up">
         <TitleDescription title={title} description={description} />
       </ScrollAnimation>
-      <div className="flex justify-between gap-[68px]">
-        <ScrollAnimation
-          delay={0.3}
-          direction="left"
-          className="flex flex-col md:w-[584px] w-full h-auto md:h-full justify-center border-t border-[#FFFFFF29] md:border-t-0"
+      <div className="flex justify-center">
+        <div
+          className="flex gap-[68px] justify-center"
+          style={{ maxWidth: "1201px" }}
         >
-          {cardSection.map((card, idx) => (
-            <div
-              key={idx}
-              ref={(el) => {
-                cardRefs.current[idx] = el;
-              }}
-              style={{
-                background: `${
-                  activeIndex === idx && !isMobile
-                    ? "linear-gradient(90deg, #1E1E1E 0%, #0D0D0D 100%)"
-                    : ""
-                }`,
-              }}
-              className="flex flex-col cursor-pointer border-b border-[#FFFFFF29]"
-              onMouseEnter={() => !isMobile && setActiveIndex(idx)}
-              onClick={() => isMobile && handleAccordionToggle(idx)}
-            >
-              <div className="flex items-center justify-between py-6 md:px-10 md:pt-8 md:pb-6">
-                <h3 className="text-base md:text-[32px] font-semibold md:font-medium leading-6 md:leading-10 tracking-[-1px]">
-                  {card.subTitle}
-                </h3>
-                {isMobile && (
-                  <Image
-                    src={
-                      activeIndex === idx
-                        ? "https://da8nru77lsio9.cloudfront.net/images/accordian-up-arrow.svg"
-                        : "https://da8nru77lsio9.cloudfront.net/images/accordian-down-arrow.svg"
-                    }
-                    alt={activeIndex === idx ? "collapse" : "expand"}
-                    width={24}
-                    height={24}
-                    className="transition-transform duration-200"
-                  />
-                )}
-              </div>
-
+          <ScrollAnimation
+            delay={0.3}
+            direction="left"
+            className="flex flex-col md:w-[584px] w-full h-auto md:h-full justify-center border-t border-[#FFFFFF29] md:border-t-0"
+          >
+            {cardSection.map((card, idx) => (
               <div
-                className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                  activeIndex === idx
-                    ? "max-h-[1000px] opacity-100"
-                    : "max-h-0 opacity-0"
-                }`}
+                key={idx}
+                ref={(el) => {
+                  cardRefs.current[idx] = el;
+                }}
+                style={{
+                  background: `${
+                    activeIndex === idx && !isMobile
+                      ? "linear-gradient(90deg, #1E1E1E 0%, #0D0D0D 100%)"
+                      : ""
+                  }`,
+                }}
+                className="flex flex-col cursor-pointer border-b border-[#FFFFFF29]"
+                onMouseEnter={() => !isMobile && setActiveIndex(idx)}
+                onClick={() => isMobile && handleAccordionToggle(idx)}
               >
-                <div className="flex flex-col gap-4 md:gap-3 pb-6 md:px-10">
-                  {card.list.map((item, itemIdx) => (
-                    <div
-                      key={itemIdx}
-                      className="flex items-start gap-[14px] md:gap-[26px]"
-                    >
-                      {iconImage && (
-                        <Image
-                          src={iconImage}
-                          alt="check"
-                          width={23.33}
-                          height={23.33}
-                          className="mt-1 size-5 md:size-[23.33px]"
-                        />
-                      )}
-                      <span className="text-xs font-light md:text-base tracking-[-1%]">
-                        {item}
-                      </span>
-                    </div>
-                  ))}
-                  {card.extraTagLabel && !isMobile && (
-                    <span className="text-right text-sm text-[#808080] mt-2 italic">
-                      {card.extraTagLabel}
-                    </span>
+                <div className="flex items-center justify-between py-6 md:px-10 md:pt-8 md:pb-6">
+                  <h3 className="text-base md:text-[32px] font-semibold md:font-medium leading-6 md:leading-10 tracking-[-1px]">
+                    {card.subTitle}
+                  </h3>
+                  {isMobile && (
+                    <Image
+                      src={
+                        activeIndex === idx
+                          ? "https://da8nru77lsio9.cloudfront.net/images/accordian-up-arrow.svg"
+                          : "https://da8nru77lsio9.cloudfront.net/images/accordian-down-arrow.svg"
+                      }
+                      alt={activeIndex === idx ? "collapse" : "expand"}
+                      width={24}
+                      height={24}
+                      className="transition-transform duration-200"
+                    />
                   )}
-                  {isMobile && activeIndex === idx && renderCardImage}
+                </div>
+
+                <div
+                  className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                    activeIndex === idx
+                      ? "max-h-[1000px] opacity-100"
+                      : "max-h-0 opacity-0"
+                  }`}
+                >
+                  <div className="flex flex-col gap-4 md:gap-3 pb-6 md:px-10">
+                    {card.list.map((item, itemIdx) => (
+                      <div
+                        key={itemIdx}
+                        className="flex items-start gap-[14px] md:gap-[26px]"
+                      >
+                        {iconImage && (
+                          <Image
+                            src={iconImage}
+                            alt="check"
+                            width={23.33}
+                            height={23.33}
+                            className="mt-1 size-5 md:size-[23.33px]"
+                          />
+                        )}
+                        <span className="text-xs font-light md:text-base tracking-[-1%]">
+                          {item}
+                        </span>
+                      </div>
+                    ))}
+                    {card.extraTagLabel && !isMobile && (
+                      <span className="text-right text-sm text-[#808080] mt-2 italic">
+                        {card.extraTagLabel}
+                      </span>
+                    )}
+                    {isMobile && activeIndex === idx && renderCardImage}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </ScrollAnimation>
-        {isMobile ? null : (
-          <ScrollAnimation delay={0.4} direction="right" className="w-[549px]">
-            {renderCardImage}
+            ))}
           </ScrollAnimation>
-        )}
+          {isMobile ? null : (
+            <ScrollAnimation
+              delay={0.4}
+              direction="right"
+              className="w-[549px]"
+            >
+              {renderCardImage}
+            </ScrollAnimation>
+          )}
+        </div>
       </div>
     </section>
   );
