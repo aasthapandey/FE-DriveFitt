@@ -13,7 +13,7 @@ export const groupClassesData: StaticPageData = {
     titleWords: [{ text: "Group Training, Reimagined.", color: "#FFFFFF" }],
     description: "",
     desktopImage: "/images/group-classes/hero.jpg",
-    mobileImage: "/images/group-classes/hero-mobile.png",
+    mobileImage: "/images/group-classes/hero-mobile3.png",
     btnPrimaryText: "Book a free trial",
     btnSecondaryText: "Join Online",
   },
@@ -25,6 +25,14 @@ export const groupClassesData: StaticPageData = {
       "px-6 py-10 md:px-[48px] md:py-[60px] text-xl font-normal leading-[30px] tracking-[0px] md:text-[40px] md:font-normal md:leading-[56px] md:tracking-[-2px] text-center",
     class: "md:px-[168px] md:-mt-[200px]",
     subClass: "px-0 py-0 md:px-0 md:py-0",
+  },
+  bannerCTASection2: {
+    title:
+      "More Than a Class. It’s a Culture.",
+    description: "Every session at Drive FITT is intentionally designed, professionally led, and performance-driven. Whether you're leveling up your strength, chasing recovery, or finding your flow - our group classes meet you at your edge and take you beyond.",
+    btnLabel: "Book a free trial",
+    desktopImage: "/images/group-classes/bannerCta2.png",
+    mobileImage: "/images/group-classes/bannerCta2Mobile.png",
   },
   footerInfoSection: {
     footerInfoList: [
