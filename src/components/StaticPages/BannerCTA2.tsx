@@ -23,7 +23,13 @@ const BannerCTA2 = ({
   };
 
   return (
-    <div className="relative mt-[15px] md:!mb-[-40px] md:mt-[-100px] bg-[#1D1D1D33]">
+    <div
+      className="relative mt-[15px] md:!mb-[-40px] md:mt-[-100px]"
+      style={{
+        background:
+          "linear-gradient(to bottom, #000000 0%, #000000 8%, #1D1D1D33 8%, #1D1D1D33 100%)",
+      }}
+    >
       {!isMobile && <div className="h-10 w-full bg-transparent"></div>}
       <div className="h-[540px] md:h-[492px] w-full pt-10 md:pt-[120px] md:pb-[100px] md:pl-[120px]">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between h-full ">
