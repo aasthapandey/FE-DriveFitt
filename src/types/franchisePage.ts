@@ -18,6 +18,7 @@ export interface BannerSection {
   description1: string;
   description2: string;
   description3: string;
+  className?: string;
 }
 
 export interface Card {

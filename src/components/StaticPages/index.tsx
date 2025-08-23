@@ -67,6 +67,7 @@ import Banner1Section from "../FranchisePage/Banner1Section";
 import Banner2Section from "../FranchisePage/Banner2Section";
 import Banner2WithImage from "./Banner2WithImage";
 import FranchiseHeroSection from "../FranchisePage/FranchiseHeroSection";
+import AboutUsHeroSection from "./AboutUsHeroSection";
 import VisionarySection from "./VisionariesSection";
 import BannerCTA from "./BannerCTA";
 import BannerCTA2 from "./BannerCTA2";
@@ -122,6 +123,13 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
           <FranchiseHeroSection
             data={value as FranchiseHero}
             pageName={pageName}
+            isMobile={isMobile}
+          />
+        );
+      case "aboutUsHeroSection":
+        return (
+          <AboutUsHeroSection
+            data={value as FranchiseHero}
             isMobile={isMobile}
           />
         );
@@ -347,6 +355,30 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
                     backgroundPosition: "top center",
                     backgroundSize: "100% auto",
                     backgroundRepeat: "no-repeat",
+                  }}
+                >
+                  <div className="pt-[84px] md:pt-[140px]">{component}</div>
+                </div>
+              );
+            }
+            if (
+              key === "franchiseHeroSection" ||
+              key === "aboutUsHeroSection"
+            ) {
+              return (
+                <div
+                  key={key}
+                  className="w-full bg-center bg-no-repeat md:mb-[-60px] -mt-[60px] md:-mt-[105px]"
+                  style={{
+                    background: `url(${
+                      isMobile
+                        ? (value as FranchiseHero).mobileImage
+                        : (value as FranchiseHero).desktopImage
+                    })`,
+                    backgroundPosition: "top center",
+                    backgroundSize: "cover",
+                    backgroundRepeat: "no-repeat",
+                    minHeight: isMobile ? "400px" : "600px",
                   }}
                 >
                   <div className="pt-[84px] md:pt-[140px]">{component}</div>

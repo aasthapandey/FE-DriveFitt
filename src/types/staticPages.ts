@@ -360,6 +360,7 @@ export interface StaticPageData {
   navbar?: NavbarProps;
   hero?: Hero;
   franchiseHeroSection?: FranchiseHero;
+  aboutUsHeroSection?: FranchiseHero;
   countdownSection?: CountdownSection;
   comingSoonSection?: ComingSoonSection;
   error404Section?: Error404Section;

@@ -8,7 +8,7 @@ export const aboutUsData: StaticPageData = {
   seoDescription:
     "Start your own DriveFITT franchise. Premium fitness and sports club with proven business model.",
   navbar: navbarData,
-  franchiseHeroSection: {
+  aboutUsHeroSection: {
     title: "About Drive FITT",
     subTitle: "",
     description:
@@ -27,6 +27,7 @@ export const aboutUsData: StaticPageData = {
       "India invests billions in cricket, yet public access to high quality cricket training is limited. Drive FITT bridges this divide with a premium sports club offering smart cricket nets, pro-grade coaching, performance fitness zones, and recovery amenities—accessible to everyone, from aspiring athletes to wellness seekers. ",
     description2: "",
     description3: "",
+    className: "-mt-[95px] md:-mt-[200px]",
   },
   visionariesSection: {
     title: "The Visionaries",

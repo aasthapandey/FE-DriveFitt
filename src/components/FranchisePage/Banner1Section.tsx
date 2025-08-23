@@ -7,10 +7,19 @@ interface Banner1SectionProps {
 }
 
 const Banner1Section = ({ data, isMobile }: Banner1SectionProps) => {
-  const { title, title1, subTitle, description1, description2, description3 } =
-    data;
+  const {
+    title,
+    title1,
+    subTitle,
+    description1,
+    description2,
+    description3,
+    className,
+  } = data;
   return (
-    <div className="w-full px-6 md:px-[120px] mt-12 md:mt-0">
+    <div
+      className={`w-full px-6 md:px-[120px] mt-12 md:mt-0 ${className || ""}`}
+    >
       <ScrollAnimation delay={0.2} direction="up">
         <div
           className="w-full items-center justify-between text-center md:text-left h-fit md:h-[236px] rounded-[30px] border-[2px] border-[#333333] py-6 px-6 md:py-[38px] md:px-[86px] flex md:gap-[60px] md:flex-row flex-col gap-8"
