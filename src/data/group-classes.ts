@@ -27,12 +27,13 @@ export const groupClassesData: StaticPageData = {
     subClass: "px-0 py-0 md:px-0 md:py-0",
   },
   bannerCTASection2: {
-    title:
-      "More Than a Class. It’s a Culture.",
-    description: "Every session at Drive FITT is intentionally designed, professionally led, and performance-driven. Whether you're leveling up your strength, chasing recovery, or finding your flow - our group classes meet you at your edge and take you beyond.",
+    title: "More Than a Class. It’s a Culture.",
+    description:
+      "Every session at Drive FITT is intentionally designed, professionally led, and performance-driven. Whether you're leveling up your strength, chasing recovery, or finding your flow - our group classes meet you at your edge and take you beyond.",
     btnLabel: "Book a free trial",
     desktopImage: "/images/group-classes/bannerCta2.png",
     mobileImage: "/images/group-classes/bannerCta2Mobile.png",
+    imageClass: "mt-0",
   },
   footerInfoSection: {
     footerInfoList: [

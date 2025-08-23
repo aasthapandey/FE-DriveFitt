@@ -16,6 +16,7 @@ const BannerCTA2 = ({
     desktopImage,
     mobileImage,
     mobileImageUp = false,
+    imageClass,
   } = data;
 
   const handleButtonClick = () => {
@@ -24,10 +25,11 @@ const BannerCTA2 = ({
 
   return (
     <div
-      className="relative mt-[15px] md:!mb-[-40px] md:mt-[-100px]"
+      className="relative mt-[15px] md:!mb-[-40px] md:mt-[-100px] bg-[#1D1D1D33]"
       style={{
-        background:
-          "linear-gradient(to bottom, #000000 0%, #000000 8%, #1D1D1D33 8%, #1D1D1D33 100%)",
+        background: !isMobile
+          ? "linear-gradient(to bottom, #000000 0%, #000000 8%, #1D1D1D33 8%, #1D1D1D33 100%)"
+          : undefined,
       }}
     >
       {!isMobile && <div className="h-10 w-full bg-transparent"></div>}
@@ -42,7 +44,7 @@ const BannerCTA2 = ({
               <h2 className="w-full text-center md:text-left font-semibold text-[24px] leading-[28px] md:text-[48px] md:leading-[56px] tracking-[-1px] md:tracking-[-2px] text-white">
                 {title}
               </h2>
-              <p className="font-normal w-full text-center md:text-left md:w-[593px] text-sm leading-5 tracking-[0%] text-[#8A8A8A] md:text-base md:tracking-[-1%]">
+              <p className="font-normal w-full text-center md:text-left md:w-[593px] text-sm leading-5 tracking-[0%] font-light text-[#FFFFFF] md:text-base md:tracking-[-1%]">
                 {description}
               </p>
               <button
@@ -55,7 +57,7 @@ const BannerCTA2 = ({
           </div>
           <div
             className={`flex-1 md:max-w-[656px] md:max-h-[564px] relative md:order-2 -md:mr-[120px] md:mb-[96px] ${
-              isMobile && mobileImageUp ? "order-first" : "mt-8"
+              isMobile && mobileImageUp ? "order-first" : imageClass || "mt-8"
             } md:mt-0`}
           >
             <div className="h-[320px] md:h-[564px] w-full relative">

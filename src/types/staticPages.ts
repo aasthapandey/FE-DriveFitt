@@ -97,6 +97,7 @@ export interface GallerySectionProps {
   mobileImage?: string;
   addGradient?: boolean;
   mobileImageUp?: boolean;
+  imageClass?: string;
 }
 
 export interface SportsClubSectionProps {
