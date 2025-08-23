@@ -10,6 +10,7 @@ import StaticPage from "@/components/StaticPages";
 import { headers } from "next/headers";
 import { isMobileDevice } from "@/utils/deviceDetection";
 import { personalTrainingData } from "@/data/personal-training";
+import { groupClassesData } from "@/data/group-classes";
 
 type PageParams = {
   params: {
@@ -24,6 +25,7 @@ const pageData: { [key: string]: StaticPageData } = {
   running: runningData,
   pilates: pilatesData,
   "personal-training": personalTrainingData,
+  "group-classes": groupClassesData,
 };
 
 export async function generateMetadata({

@@ -50,6 +50,7 @@ export interface Banner2SectionType {
   class?: string;
   titleClass?: string;
   descriptionClass?: string;
+  subClass?: string;
 }
 
 export interface FranchisePageData {

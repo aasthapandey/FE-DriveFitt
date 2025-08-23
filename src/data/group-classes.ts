@@ -1,110 +1,30 @@
 import { StaticPageData } from "@/types/staticPages";
 import { navbarData } from "./navbar";
 
-export const pilatesData: StaticPageData = {
-  title: "Pilates at Drive FITT",
+export const groupClassesData: StaticPageData = {
+  title: "Group Classes at Drive FITT",
   description:
-    "Build strength, improve flexibility, and enhance posture with expert-led Pilates sessions at Drive FITT.",
-  seoTitle: "Premium Pilates Classes | Drive FITT",
+    "Get personalized attention and achieve your fitness goals with expert-led group classes at Drive FITT.",
+  seoTitle: "Group Classes | Drive FITT",
   seoDescription:
-    "Join expert-led Pilates classes at Drive FITT. Improve core strength, flexibility, and posture with a premium wellness experience.",
+    "Get personalized attention and achieve your fitness goals with expert-led group classes at Drive FITT.",
   navbar: navbarData,
   hero: {
-    titleWords: [{ text: "Precision. Strength. Control.", color: "#FFFFFF" }],
+    titleWords: [{ text: "Group Training, Reimagined.", color: "#FFFFFF" }],
     description: "",
-    desktopImage: "/images/pilates/hero.jpg",
-    mobileImage: "/images/pilates/hero-mobile.jpg",
-    btnPrimaryText: "Join the Waitlist",
+    desktopImage: "/images/group-classes/hero.jpg",
+    mobileImage: "/images/group-classes/hero-mobile.png",
+    btnPrimaryText: "Book a free trial",
     btnSecondaryText: "Join Online",
   },
   banner2Section: {
-    title: "Welcome to Pilates at Drive FITT",
-    description:
-      "Step into a space where the session is engineered to realign, restore, and redefine the way your body moves - it's your foundation for lifelong strength, balance, and resilience.",
-    class: "md:-mt-[282px]",
-    titleClass:
-      "font-semibold text-[40px] leading-none tracking-[-2px] text-center",
-    descriptionClass:
-      "font-inter font-light text-base leading-6 tracking-0 text-center",
-  },
-  multiRevenueSection: {
-    title: "Why Pilates, Why Here?",
+    title:
+      " At Drive FITT, group classes are science-backed, coach-led, and community-powered — blending intensity, flow, rhythm, and recovery to move, challenge, and elevate you.",
     description: "",
-    cardList: [
-      {
-        icon: "/images/pilates/icon-1.svg",
-        title: "Expert-Led Sessions",
-        description: "Emphasizing alignment, mobility, and functional strength",
-      },
-      {
-        icon: "/images/pilates/icon-2.svg",
-        title: "Mat & Equipment-based Formats",
-        description: "Professional cricket coaching with advanced analytics",
-      },
-      {
-        icon: "/images/pilates/icon-3.svg",
-        title: "Small Groups",
-        description: "Personal formats for focused attention",
-      },
-      {
-        icon: "/images/pilates/icon-4.svg",
-        title: "Supportive Environment",
-        description: "Breath-centered space that restores as it strengthens",
-      },
-    ],
-  },
-  evolutionSection: {
-    title: "Pilates Formats Offered",
-    evolutionList: [
-      {
-        title: "Mat Pilates",
-        description:
-          "The foundation. Grounded, focused, and precise. Strengthen from within using nothing but your body, gravity, and control.",
-        backgroundImage: "/images/pilates/evolution-1.jpg",
-      },
-      {
-        title: "Reformer Pilates",
-        description:
-          "Experience Pilates on the reformer for dynamic resistance, precision-based movement, and deeply targeted strength.",
-        backgroundImage: "/images/pilates/evolution-2.jpg",
-      },
-      {
-        title: "Athletic Pilates",
-        description:
-          "Designed for performance-minded individuals - think enhanced mobility, core strength, and body awareness that elevates you in sport and life.",
-        backgroundImage: "/images/pilates/evolution-3.jpg",
-      },
-    ],
-  },
-  photoCircleSection: {
-    title: "Who It’s For",
-    description:
-      "From CXOs decompressing after a high-stakes day to young athletes building foundational mobility, Pilates fits into every lifestyle. It's the ideal complement to high-intensity training, sport performance, and recovery.",
-    image1: "/images/pilates/photoCircle1.svg",
-    image2: "/images/pilates/photoCircle2.svg",
-  },
-  bannerCTASection: {
-    title: "Find Your Center. Build Your Edge.",
-    description:
-      "Book your class today and discover the transformative power of Pilates - only at Drive FITT.",
-    btnLabel: "Book Your Class Today",
-    desktopImage: "/images/pilates/bannerCTASectionDesktop.svg",
-    mobileImage: "/images/pilates/bannerCTASectionMobile.svg",
-  },
-  bannerSection: {
-    title: "Become a DriveFITT member",
-    description:
-      "Join the waitlist now and be the first to access elite workouts, expert coaching, exclusive perks, member-only events, and special launch offers.",
-    btnLabel: "Join the Waitlist",
-    image: "https://da8nru77lsio9.cloudfront.net/images/becomeMember.svg",
-    mobileImage: "https://da8nru77lsio9.cloudfront.net/images/becomeMember.svg",
-  },
-  gallerySection: {
-    title: "Step Inside the Future of Sports & Fitness",
-    description:
-      "Tour our state-of-the-art club and discover how Drive FITT redefines space, energy, and purpose.",
-    btnLabel: "View Gallery",
-    imageList: [13, 14, 15],
+    titleClass:
+      "px-6 py-10 md:px-[48px] md:py-[60px] text-xl font-normal leading-[30px] tracking-[0px] md:text-[40px] md:font-normal md:leading-[56px] md:tracking-[-2px] text-center",
+    class: "md:px-[168px] md:-mt-[200px]",
+    subClass: "px-0 py-0 md:px-0 md:py-0",
   },
   footerInfoSection: {
     footerInfoList: [

@@ -361,7 +361,7 @@ export const homeData: StaticPageData = {
           },
           {
             title: "Group Classes",
-            link: "/coming-soon",
+            link: "/group-classes",
           },
           {
             title: "Pilates",

@@ -38,7 +38,7 @@ export const comingSoonData: StaticPageData = {
           { title: "Fitness", link: "/fitness" },
           { title: "Recovery", link: "/recovery" },
           { title: "Running", link: "/running" },
-          { title: "Group Classes", link: "/coming-soon" },
+          { title: "Group Classes", link: "/group-classes" },
           { title: "Pilates", link: "/pilates" },
           { title: "Personal Training", link: "/personal-training" },
         ],
