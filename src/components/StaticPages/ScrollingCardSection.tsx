@@ -4,6 +4,7 @@ import TitleDescription from "@/components/common/TitleDescription";
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import ScrollAnimation from "@/components/common/ScrollAnimation";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface ScrollingCardSectionProps {
   data: ScrollingCardSectionType;
@@ -48,7 +49,7 @@ const ScrollingCardSection = ({
   };
 
   const renderCardImage = (
-    <div
+    <motion.div
       key={activeIndex}
       className={`rounded-[20px] md:rounded-[40px] p-[2px] h-[396px] md:h-[598px] ${
         isMobile && isInView ? "sticky top-4" : ""
@@ -56,22 +57,31 @@ const ScrollingCardSection = ({
       style={{
         background: "linear-gradient(180deg, #333333 29.36%, #00DBDC 120.13%)",
       }}
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1.0] }}
     >
-      <div
-        key={`card-image-${activeIndex}`}
-        className="rounded-[20px] md:rounded-[40px] w-full h-full cursor-pointer flex flex-col justify-center transition-all duration-500 ease-in-out"
-        style={{
-          background: `linear-gradient(180.09deg, rgba(13, 13, 13, 0) 50%, #0D0D0D 99.92%), url(${
-            isMobile && cardSection[activeIndex]?.mobileImage
-              ? cardSection[activeIndex].mobileImage
-              : cardSection[activeIndex]?.backgroundImage
-          })`,
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center center",
-          backgroundSize: "cover",
-        }}
-      />
-    </div>
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={`card-image-${activeIndex}`}
+          className="rounded-[20px] md:rounded-[40px] w-full h-full cursor-pointer flex flex-col justify-center"
+          style={{
+            background: `linear-gradient(180.09deg, rgba(13, 13, 13, 0) 50%, #0D0D0D 99.92%), url(${
+              isMobile && cardSection[activeIndex]?.mobileImage
+                ? cardSection[activeIndex].mobileImage
+                : cardSection[activeIndex]?.backgroundImage
+            })`,
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center center",
+            backgroundSize: "cover",
+          }}
+          initial={{ opacity: 0, scale: 1.05 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.95 }}
+          transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] }}
+        />
+      </AnimatePresence>
+    </motion.div>
   );
 
   return (
@@ -93,7 +103,7 @@ const ScrollingCardSection = ({
             className="flex flex-col md:w-[584px] w-full h-auto md:h-full justify-center border-t border-[#FFFFFF29] md:border-t-0"
           >
             {cardSection.map((card, idx) => (
-              <div
+              <motion.div
                 key={idx}
                 ref={(el) => {
                   cardRefs.current[idx] = el;
@@ -108,11 +118,32 @@ const ScrollingCardSection = ({
                 className="flex flex-col cursor-pointer border-b border-[#FFFFFF29]"
                 onMouseEnter={() => !isMobile && setActiveIndex(idx)}
                 onClick={() => isMobile && handleAccordionToggle(idx)}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.5,
+                  delay: idx * 0.1,
+                  ease: [0.25, 0.1, 0.25, 1.0],
+                }}
+                whileHover={{
+                  backgroundColor:
+                    activeIndex !== idx ? "rgba(30, 30, 30, 0.3)" : undefined,
+                  transition: { duration: 0.3 },
+                }}
               >
-                <div className="flex items-center justify-between py-6 md:px-10 md:pt-8 md:pb-6">
-                  <h3 className="text-base md:text-[32px] font-semibold md:font-medium leading-6 md:leading-10 tracking-[-1px]">
+                <motion.div
+                  className="flex items-center justify-between py-6 md:px-10 md:pt-8 md:pb-6"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.4, delay: 0.1 }}
+                >
+                  <motion.h3
+                    className="text-base md:text-[32px] font-semibold md:font-medium leading-6 md:leading-10 tracking-[-1px]"
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.2 }}
+                  >
                     {card.subTitle}
-                  </h3>
+                  </motion.h3>
                   {isMobile && (
                     <Image
                       src={
@@ -126,14 +157,19 @@ const ScrollingCardSection = ({
                       className="transition-transform duration-200"
                     />
                   )}
-                </div>
+                </motion.div>
 
-                <div
-                  className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                    activeIndex === idx
-                      ? "max-h-[1000px] opacity-100"
-                      : "max-h-0 opacity-0"
-                  }`}
+                <motion.div
+                  className="overflow-hidden"
+                  initial={false}
+                  animate={{
+                    height: activeIndex === idx ? "auto" : 0,
+                    opacity: activeIndex === idx ? 1 : 0,
+                  }}
+                  transition={{
+                    duration: 0.5,
+                    ease: [0.25, 0.1, 0.25, 1.0],
+                  }}
                 >
                   <div className="flex flex-col gap-4 md:gap-3 pb-6 md:px-10">
                     {card.list.map((item, itemIdx) => (
@@ -162,8 +198,8 @@ const ScrollingCardSection = ({
                     )}
                     {isMobile && activeIndex === idx && renderCardImage}
                   </div>
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
             ))}
           </ScrollAnimation>
           {isMobile ? null : (
