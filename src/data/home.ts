@@ -123,7 +123,7 @@ export const homeData: StaticPageData = {
           "Our expert-led group sessions fuel your energy and connect you with a community that shares your drive.",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/homec/card3-1.webp",
-        link: "/coming-soon",
+        link: "/group-classes",
         redirectionIcon: "/images/redirection.svg",
       },
       {
@@ -132,7 +132,7 @@ export const homeData: StaticPageData = {
           "Low-impact, high-control pilates workouts designed to improve flexibility, posture, and core strength in a group setting.",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/homec/card3-2.webp",
-        link: "/coming-soon",
+        link: "/pilates",
         redirectionIcon: "/images/redirection.svg",
       },
       {
@@ -141,7 +141,7 @@ export const homeData: StaticPageData = {
           "Customized 1-on-1 coaching tailored to your body, goals, sport-specific performance—and complete recovery needs.",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/homec/card3-3.webp",
-        link: "/coming-soon",
+        link: "/personal-training",
         redirectionIcon: "/images/redirection.svg",
       },
     ],
