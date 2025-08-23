@@ -18,7 +18,7 @@ const Banner1Section = ({ data, isMobile }: Banner1SectionProps) => {
   } = data;
   return (
     <div
-      className={`w-full px-6 md:px-[120px] mt-12 ${className || "md:mt-0"}`}
+      className={`w-full px-6 md:px-[120px] ${className || "md:mt-0"}`}
     >
       <ScrollAnimation delay={0.2} direction="up">
         <div

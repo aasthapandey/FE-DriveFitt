@@ -33,7 +33,7 @@ export const groupClassesData: StaticPageData = {
     btnLabel: "Book a free trial",
     desktopImage: "/images/group-classes/bannerCta2.png",
     mobileImage: "/images/group-classes/bannerCta2Mobile.png",
-    imageClass: "mt-0",
+    imageClass: "md:max-h-[564px]",
   },
   footerInfoSection: {
     footerInfoList: [

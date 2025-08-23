@@ -28,6 +28,7 @@ export const franchiseData: FranchisePageData = {
     description2: "Cricket + Fitness + Recovery",
     description3:
       "we've built India's only 360° sports and fitness performance ecosystem under one roof. Now, we're expanding — and looking for passionate partners to lead the way.",
+    className: " mt-12",
   },
   multiRevenueSection: {
     title: "Multi-Revenue, All-In-One Model",
