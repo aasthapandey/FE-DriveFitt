@@ -26,7 +26,7 @@ const SignatureClassesSection = ({
     setScrollPosition((prev) => Math.min(maxScrollPosition, prev + 1));
   };
 
-  const maxScrollPosition = Math.max(0, cardList.length - 2);
+  const maxScrollPosition = Math.max(0, cardList.length - 5);
   const canGoPrevious = scrollPosition > 0;
   const canGoNext = scrollPosition < maxScrollPosition;
 
@@ -111,20 +111,20 @@ const SignatureClassesSection = ({
                 {cardList.map((card, index) => (
                   <div
                     key={index}
-                    className="relative flex-shrink-0 rounded-[40px] overflow-hidden group cursor-pointer"
+                    className="relative flex-shrink-0 rounded-[40px] overflow-hidden group cursor-pointer transition-all duration-700 ease-in-out transform hover:scale-105 hover:shadow-2xl"
                     style={{
-                      width: "300px",
-                      height: "300px",
+                      width: "256px",
+                      height: "256px",
                       backgroundImage: `url(${card.backgroundImage})`,
                       backgroundSize: "cover",
                       backgroundPosition: "center",
                     }}
                   >
-                    <div className="absolute bottom-8 left-8 flex flex-col gap-4 transition-all duration-300 group-hover:bottom-[40px]">
-                      <h3 className="text-white font-semibold text-[28px] leading-8 tracking-[-1px] transition-transform duration-300 group-hover:translate-y-0 translate-y-0">
+                    <div className="absolute bottom-8 left-8 flex flex-col gap-4 transition-all duration-700 ease-in-out group-hover:bottom-[40px]">
+                      <h3 className="text-white font-medium text-[24px] leading-8 tracking-[-1px] transition-all duration-700 ease-in-out group-hover:translate-y-0 translate-y-0">
                         {card.title}
                       </h3>
-                      <p className="text-white font-light text-base leading-6 tracking-[-0.32px] max-w-[400px] hidden group-hover:block transition-all duration-300">
+                      <p className="text-white font-light text-base leading-6 tracking-[-0.32px] max-w-[400px] hidden group-hover:block transition-all duration-700 ease-in-out">
                         {card.description}
                       </p>
                     </div>
@@ -142,20 +142,20 @@ const SignatureClassesSection = ({
                 {cardList2.map((card, index) => (
                   <div
                     key={index}
-                    className="relative flex-shrink-0 rounded-[40px] overflow-hidden group cursor-pointer"
+                    className="relative flex-shrink-0 rounded-[40px] overflow-hidden group cursor-pointer transition-all duration-700 ease-in-out transform hover:scale-105 hover:shadow-2xl"
                     style={{
-                      width: "300px",
-                      height: "300px",
+                      width: "256px",
+                      height: "256px",
                       backgroundImage: `url(${card.backgroundImage})`,
                       backgroundSize: "cover",
                       backgroundPosition: "center",
                     }}
                   >
-                    <div className="absolute bottom-8 left-8 flex flex-col gap-4 transition-all duration-300 group-hover:bottom-[40px]">
-                      <h3 className="text-white font-semibold text-[28px] leading-8 tracking-[-1px] transition-transform duration-300 group-hover:translate-y-0 translate-y-0">
+                    <div className="absolute bottom-8 left-8 flex flex-col gap-4 transition-all duration-700 ease-in-out group-hover:bottom-[40px]">
+                      <h3 className="text-white font-medium text-[24px] leading-8 tracking-[-1px] transition-all duration-700 ease-in-out group-hover:translate-y-0 translate-y-0">
                         {card.title}
                       </h3>
-                      <p className="text-white font-light text-base leading-6 tracking-[-0.32px] max-w-[400px] hidden group-hover:block transition-all duration-300">
+                      <p className="text-white font-light text-base leading-6 tracking-[-0.32px] max-w-[400px] hidden group-hover:block transition-all duration-700 ease-in-out">
                         {card.description}
                       </p>
                     </div>
