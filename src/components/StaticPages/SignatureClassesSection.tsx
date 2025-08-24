@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { SignatureClassesSection as SignatureClassesSectionType } from "@/types/staticPages";
 import Image from "next/image";
 import ScrollAnimation from "@/components/common/ScrollAnimation";
@@ -16,13 +16,31 @@ const SignatureClassesSection = ({
 }: SignatureClassesSectionProps) => {
   const { title, cardList, cardList2 } = data;
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+  const [animatedCards, setAnimatedCards] = useState<number[]>([]);
+
+  useEffect(() => {
+    setIsVisible(true);
+
+    // Staggered animation for cards
+    const timer = setTimeout(() => {
+      const allCards = [...cardList, ...cardList2];
+      allCards.forEach((_, index) => {
+        setTimeout(() => {
+          setAnimatedCards((prev) => [...prev, index]);
+        }, index * 100);
+      });
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, [cardList, cardList2]);
 
   const handlePrevious = () => {
     setScrollPosition((prev) => Math.max(0, prev - 1));
   };
 
   const handleNext = () => {
-    const maxScrollPosition = Math.max(0, cardList.length - 2); // Show 2 cards at a time
+    const maxScrollPosition = Math.max(0, cardList.length - 2);
     setScrollPosition((prev) => Math.min(maxScrollPosition, prev + 1));
   };
 
@@ -38,11 +56,17 @@ const SignatureClassesSection = ({
       <ScrollAnimation delay={0.3} direction="up">
         <div className="flex flex-col items-center gap-9 mt-[4px] md:-mt-[14px]">
           {!isMobile && (
-            <div className="flex items-center gap-8 md:mb-[52px] ">
+            <div
+              className={`flex items-center gap-8 md:mb-[52px] transition-all duration-700 ease-out transform ${
+                isVisible
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-4"
+              }`}
+            >
               <button
                 onClick={handlePrevious}
                 disabled={!canGoPrevious}
-                className={`rounded-full flex items-center justify-center transition-all duration-300 ${
+                className={`rounded-full flex items-center justify-center transition-all duration-500 ease-out transform hover:scale-110 ${
                   canGoPrevious
                     ? "bg-[#00DBDC] cursor-pointer hover:bg-[#00B8B9]"
                     : "bg-[#333333] cursor-not-allowed opacity-50"
@@ -59,7 +83,7 @@ const SignatureClassesSection = ({
               <button
                 onClick={handleNext}
                 disabled={!canGoNext}
-                className={`rounded-full flex items-center justify-center transition-all duration-300 ${
+                className={`rounded-full flex items-center justify-center transition-all duration-500 ease-out transform hover:scale-110 ${
                   canGoNext
                     ? "bg-[#00DBDC] cursor-pointer hover:bg-[#00B8B9]"
                     : "bg-[#333333] cursor-not-allowed opacity-50"
@@ -84,11 +108,16 @@ const SignatureClassesSection = ({
             {[...cardList, ...cardList2].map((card, index) => (
               <div
                 key={index}
-                className="relative w-[174px] h-[174px] rounded-[12px] overflow-hidden"
+                className={`relative w-[174px] h-[174px] rounded-[12px] overflow-hidden transition-all duration-700 ease-out transform ${
+                  animatedCards.includes(index)
+                    ? "opacity-100 translate-y-0 scale-100"
+                    : "opacity-0 translate-y-8 scale-95"
+                }`}
                 style={{
                   backgroundImage: `url(${card.backgroundImage})`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",
+                  transitionDelay: `${index * 50}ms`,
                 }}
               >
                 <div className="absolute bottom-4 left-4">
@@ -111,13 +140,18 @@ const SignatureClassesSection = ({
                 {cardList.map((card, index) => (
                   <div
                     key={index}
-                    className="relative flex-shrink-0 rounded-[40px] overflow-hidden group cursor-pointer transition-all duration-700 ease-in-out transform hover:scale-105 hover:shadow-2xl"
+                    className={`relative flex-shrink-0 rounded-[40px] overflow-hidden group cursor-pointer transition-all duration-700 ease-out transform hover:scale-105 hover:shadow-2xl ${
+                      animatedCards.includes(index)
+                        ? "opacity-100 translate-y-0 scale-100"
+                        : "opacity-0 translate-y-12 scale-95"
+                    }`}
                     style={{
                       width: "256px",
                       height: "256px",
                       backgroundImage: `url(${card.backgroundImage})`,
                       backgroundSize: "cover",
                       backgroundPosition: "center",
+                      transitionDelay: `${index * 100}ms`,
                     }}
                   >
                     <div className="absolute bottom-8 left-8 flex flex-col gap-4 transition-all duration-700 ease-in-out group-hover:bottom-[40px]">
@@ -142,13 +176,18 @@ const SignatureClassesSection = ({
                 {cardList2.map((card, index) => (
                   <div
                     key={index}
-                    className="relative flex-shrink-0 rounded-[40px] overflow-hidden group cursor-pointer transition-all duration-700 ease-in-out transform hover:scale-105 hover:shadow-2xl"
+                    className={`relative flex-shrink-0 rounded-[40px] overflow-hidden group cursor-pointer transition-all duration-700 ease-out transform hover:scale-105 hover:shadow-2xl ${
+                      animatedCards.includes(index + cardList.length)
+                        ? "opacity-100 translate-y-0 scale-100"
+                        : "opacity-0 translate-y-12 scale-95"
+                    }`}
                     style={{
                       width: "256px",
                       height: "256px",
                       backgroundImage: `url(${card.backgroundImage})`,
                       backgroundSize: "cover",
                       backgroundPosition: "center",
+                      transitionDelay: `${(index + cardList.length) * 100}ms`,
                     }}
                   >
                     <div className="absolute bottom-8 left-8 flex flex-col gap-4 transition-all duration-700 ease-in-out group-hover:bottom-[40px]">
