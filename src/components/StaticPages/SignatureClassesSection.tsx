@@ -142,7 +142,7 @@ const SignatureClassesSection = ({
                 {cardList2.map((card, index) => (
                   <div
                     key={index}
-                    className="relative flex-shrink-0 border-2 border-[#333333] rounded-[40px] overflow-hidden"
+                    className="relative flex-shrink-0 rounded-[40px] overflow-hidden"
                     style={{
                       width: "480px",
                       height: "clamp(400px, 50vw, 480px)",
