@@ -50,6 +50,17 @@ export const plansData: StaticPageData = {
   },
   includedPlansSection: {
     title: "Included in all plans",
+    className: "-md:mt-[150px]",
+    items: [
+      "30 Cricket Sessions",
+      "8 Pilates Sessions",
+      "6 Run Studio Sessions",
+      "6 Recovery Classes",
+      "4 Physio Sessions",
+      "Unlimited Group Classes (Spinning, etc.)",
+      "Unlimited Small Group Training",
+      "Included: Fitness Induction + Events/Workshops/Outdoor Runs/Bootcamps",
+    ],
   },
   footerInfoSection: {
     footerInfoList: [

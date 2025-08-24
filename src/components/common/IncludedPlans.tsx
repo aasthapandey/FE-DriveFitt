@@ -5,20 +5,14 @@ import ScrollAnimation from "@/components/common/ScrollAnimation";
 interface IncludedPlansProps {
   className?: string;
   isMobile?: boolean;
+  data: {
+    title: string;
+    items: string[];
+    className?: string;
+  };
 }
 
-const IncludedPlans = ({ className, isMobile }: IncludedPlansProps) => {
-  const includedItems = [
-    "30 Cricket Sessions",
-    "8 Pilates Sessions",
-    "6 Run Studio Sessions",
-    "6 Recovery Classes",
-    "4 Physio Sessions",
-    "Unlimited Group Classes (Spinning, etc.)",
-    "Unlimited Small Group Training",
-    "Included: Fitness Induction + Events/Workshops/Outdoor Runs/Bootcamps",
-  ];
-
+const IncludedPlans = ({ className, isMobile, data }: IncludedPlansProps) => {
   if (isMobile) {
     return (
       <section className={`px-6 ${className}`}>
@@ -37,7 +31,7 @@ const IncludedPlans = ({ className, isMobile }: IncludedPlansProps) => {
               </h2>
 
               <div className="flex flex-col gap-3">
-                {includedItems.map((item, index) => (
+                {data.items.map((item, index) => (
                   <div key={index} className="flex items-start gap-3">
                     <Image
                       src="/images/plans/check-circle.svg"
@@ -60,7 +54,7 @@ const IncludedPlans = ({ className, isMobile }: IncludedPlansProps) => {
   }
 
   return (
-    <section className={`px-[60px] ${className}`}>
+    <section className={`px-[60px] md:-mt-[60px] ${className}`}>
       <div className="flex flex-col items-center w-full max-w-[1200px] mx-auto">
         <ScrollAnimation delay={0.2} direction="up">
           <div
@@ -76,7 +70,7 @@ const IncludedPlans = ({ className, isMobile }: IncludedPlansProps) => {
             </h2>
 
             <div className="grid grid-cols-[auto_1fr] gap-x-[88px] gap-y-5">
-              {includedItems.map((item, index) => (
+              {data.items.map((item, index) => (
                 <div key={index} className="flex items-start gap-[19px]">
                   <Image
                     src="/images/plans/check-circle.svg"

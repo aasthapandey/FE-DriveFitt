@@ -495,4 +495,6 @@ export interface PricingPlansSection {
 
 export interface IncludedPlansSection {
   title: string;
+  items: string[];
+  className?: string;
 }
