@@ -33,43 +33,43 @@ export const groupClassesData: StaticPageData = {
         title: "Power Yoga",
         description:
           "Strength-driven flow that blends breath and movement to sculpt, focus, and build resilience.",
-        backgroundImage: "/images/group-classes/yoga.jpg",
+        backgroundImage: "/images/group-classes/power-yoga.jpg",
       },
       {
         title: "Circuit Training",
         description:
           "Fast-paced, high-intensity stations that torch calories, boost endurance, and build strength.",
-        backgroundImage: "/images/group-classes/yoga.jpg",
+        backgroundImage: "/images/group-classes/circuit-training.jpg",
       },
       {
         title: "HIIT",
         description:
           "Intense intervals for serious burn, performance gains, and next-level conditioning.",
-        backgroundImage: "/images/group-classes/yoga.jpg",
+        backgroundImage: "/images/group-classes/HIIT.jpg",
       },
       {
         title: "Boxing",
         description:
           "Real fight-style drills, pad work, and conditioning — not just cardio-boxing.",
-        backgroundImage: "/images/group-classes/yoga.jpg",
+        backgroundImage: "/images/group-classes/boxing.jpg",
       },
       {
         title: "Core Blast",
         description:
           "30 minutes to strengthen your core, protect your back, and improve control.",
-        backgroundImage: "/images/group-classes/yoga.jpg",
+        backgroundImage: "/images/group-classes/core-blast.jpg",
       },
       {
         title: "Spinning",
         description:
           "Performance-tracked cycling fused with music for an unmatched cardio high.",
-        backgroundImage: "/images/group-classes/yoga.jpg",
+        backgroundImage: "/images/group-classes/spining.jpg",
       },
       {
         title: "TRX",
         description:
           "Suspension training to build strength, mobility, and core power at any level.",
-        backgroundImage: "/images/group-classes/yoga.jpg",
+        backgroundImage: "/images/group-classes/TRX.jpg",
       },
     ],
     cardList2: [
@@ -77,43 +77,43 @@ export const groupClassesData: StaticPageData = {
         title: "Dance Fitness",
         description:
           "Music-fueled, high-energy moves that feel like a party, not a workout.",
-        backgroundImage: "/images/group-classes/yoga.jpg",
+        backgroundImage: "/images/group-classes/dance-fitness.jpg",
       },
       {
         title: "Pilates",
         description:
           "Core-toning, posture-improving, and flexibility-boosting precision training.",
-        backgroundImage: "/images/group-classes/yoga.jpg",
+        backgroundImage: "/images/group-classes/pilates.jpg",
       },
       {
         title: "Vinyasa Yoga",
         description:
           "Breath-led, flowing practice that restores balance and deepens mind-body connection.",
-        backgroundImage: "/images/group-classes/yoga.jpg",
+        backgroundImage: "/images/group-classes/vinyasa-yoga.jpg",
       },
       {
         title: "Flexi Strength",
         description:
           "Flexibility meets functional strength for mobility, injury prevention, and longevity.",
-        backgroundImage: "/images/group-classes/yoga.jpg",
+        backgroundImage: "/images/group-classes/flexi-strength.jpg",
       },
       {
         title: "ABT (Abs, Butt, Thighs)",
         description:
           "Targeted toning for glutes, core, and thighs with high-rep, sculpting moves.",
-        backgroundImage: "/images/group-classes/yoga.jpg",
+        backgroundImage: "/images/group-classes/Abt.jpg",
       },
       {
         title: "Zumba",
         description:
           "Latin-inspired cardio dance for endurance, coordination, and pure joy.",
-        backgroundImage: "/images/group-classes/yoga.jpg",
+        backgroundImage: "/images/group-classes/zumba.jpg",
       },
       {
         title: "Yoga",
         description:
           "Modern yet timeless sequences to strengthen, restore, and ground your body and mind.",
-        backgroundImage: "/images/group-classes/yoga.jpg",
+        backgroundImage: "/images/group-classes/yoga1.jpg",
       },
     ],
   },

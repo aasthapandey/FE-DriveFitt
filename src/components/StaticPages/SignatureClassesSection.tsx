@@ -84,9 +84,9 @@ const SignatureClassesSection = ({
             {[...cardList, ...cardList2].map((card, index) => (
               <div
                 key={index}
-                className="relative w-[174px] h-[174px] border-2 border-[#333333] rounded-[12px] overflow-hidden"
+                className="relative w-[174px] h-[174px] rounded-[12px] overflow-hidden"
                 style={{
-                  backgroundImage: `linear-gradient(0deg, #2C2826 0%, rgba(44, 40, 38, 0) 100%), url(${card.backgroundImage})`,
+                  backgroundImage: `url(${card.backgroundImage})`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                 }}
@@ -111,11 +111,11 @@ const SignatureClassesSection = ({
                 {cardList.map((card, index) => (
                   <div
                     key={index}
-                    className="relative flex-shrink-0 border-2 border-[#333333] rounded-[40px] overflow-hidden"
+                    className="relative flex-shrink-0 rounded-[40px] overflow-hidden"
                     style={{
                       width: "480px",
                       height: "clamp(400px, 50vw, 480px)",
-                      backgroundImage: `linear-gradient(0deg, #2C2826 0%, rgba(44, 40, 38, 0) 100%), url(${card.backgroundImage})`,
+                      backgroundImage: `url(${card.backgroundImage})`,
                       backgroundSize: "cover",
                       backgroundPosition: "center",
                     }}
@@ -146,7 +146,7 @@ const SignatureClassesSection = ({
                     style={{
                       width: "480px",
                       height: "clamp(400px, 50vw, 480px)",
-                      backgroundImage: `linear-gradient(0deg, #2C2826 0%, rgba(44, 40, 38, 0) 100%), url(${card.backgroundImage})`,
+                      backgroundImage: `url(${card.backgroundImage})`,
                       backgroundSize: "cover",
                       backgroundPosition: "center",
                     }}
