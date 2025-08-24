@@ -26,7 +26,7 @@ const SignatureClassesSection = ({
     setScrollPosition((prev) => Math.min(maxScrollPosition, prev + 1));
   };
 
-  const maxScrollPosition = Math.max(0, cardList.length - 5);
+  const maxScrollPosition = Math.max(0, cardList.length - 4);
   const canGoPrevious = scrollPosition > 0;
   const canGoNext = scrollPosition < maxScrollPosition;
 
@@ -105,7 +105,7 @@ const SignatureClassesSection = ({
               <div
                 className="flex gap-10 transition-transform duration-500 ease-in-out"
                 style={{
-                  transform: `translateX(-${scrollPosition * 520}px)`,
+                  transform: `translateX(-${scrollPosition * 296}px)`,
                 }}
               >
                 {cardList.map((card, index) => (
@@ -136,7 +136,7 @@ const SignatureClassesSection = ({
               <div
                 className="flex gap-10 transition-transform duration-500 ease-in-out"
                 style={{
-                  transform: `translateX(-${scrollPosition * 520}px)`,
+                  transform: `translateX(-${scrollPosition * 296}px)`,
                 }}
               >
                 {cardList2.map((card, index) => (
