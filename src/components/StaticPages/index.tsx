@@ -38,7 +38,6 @@ import {
   CardsParallaxProps,
   SignatureClassesSection as SignatureClassesSectionType,
   PricingPlansSection,
-  IncludedPlansSection,
 } from "@/types/staticPages";
 import CardSection4 from "@/components/StaticPages/CardSection4";
 import CardSection5 from "@/components/StaticPages/CardSection5";
