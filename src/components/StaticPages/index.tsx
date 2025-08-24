@@ -273,7 +273,12 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
           />
         );
       case "pricingPlansSection":
-        return <PricingPlans plans={(value as PricingPlansSection).plans} />;
+        return (
+          <PricingPlans
+            plans={(value as PricingPlansSection).plans}
+            isMobile={isMobile}
+          />
+        );
 
       case "banner1Section":
         return (
