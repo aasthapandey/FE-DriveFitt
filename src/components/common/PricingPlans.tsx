@@ -48,78 +48,111 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
                   }}
                 >
                   {/* Plan Selection Tabs - Inside the card */}
-                  <div className="flex w-full mb-6">
-                    <div className="flex w-full bg-[#111111] rounded-[12px] border border-[#00DBDC] overflow-hidden">
-                      {plans.map((plan, index) => (
-                        <button
-                          key={index}
-                          onClick={() => handlePlanSwitch(index)}
-                          className={`flex-1 py-3 px-4 transition-all duration-200 font-medium text-base leading-5 tracking-[0px] text-center ${
-                            activePlanIndex === index
-                              ? "bg-[#00DBDC] text-[#111111]"
-                              : "bg-transparent text-[#00DBDC] hover:bg-[#00DBDC]/10"
-                          }`}
-                        >
-                          {plan.title}
-                        </button>
-                      ))}
+                  <ScrollAnimation delay={0.1} direction="up" distance={15}>
+                    <div className="flex w-full mb-6">
+                      <div className="flex w-full bg-[#111111] rounded-[12px] border border-[#00DBDC] overflow-hidden">
+                        {plans.map((plan, index) => (
+                          <button
+                            key={index}
+                            onClick={() => handlePlanSwitch(index)}
+                            className={`flex-1 py-3 px-4 transition-all duration-200 font-medium text-base leading-5 tracking-[0px] text-center ${
+                              activePlanIndex === index
+                                ? "bg-[#00DBDC] text-[#111111]"
+                                : "bg-transparent text-[#00DBDC] hover:bg-[#00DBDC]/10"
+                            }`}
+                          >
+                            {plan.title}
+                          </button>
+                        ))}
+                      </div>
                     </div>
-                  </div>
+                  </ScrollAnimation>
 
                   <div className="flex flex-col items-center text-center w-full">
                     {/* Discounted Price */}
-                    <div className="text-[40px] font-semibold leading-[100%] tracking-[0px] text-center text-[#00DBDC] mb-5">
-                      {plans[activePlanIndex].discountedPrice}
-                    </div>
+                    <ScrollAnimation
+                      key={`price-${activePlanIndex}`}
+                      delay={0.1}
+                      direction="up"
+                      distance={15}
+                    >
+                      <div className="text-[40px] font-semibold leading-[100%] tracking-[0px] text-center text-[#00DBDC] mb-5">
+                        {plans[activePlanIndex].discountedPrice}
+                      </div>
+                    </ScrollAnimation>
 
                     {/* Original Price Line */}
-                    <div className="flex items-center justify-center gap-3 mb-[47px]">
-                      <span className="text-base font-normal leading-[100%] tracking-[0px] text-center text-[#6A6A6A]">
-                        Original price:{" "}
-                        <span className="line-through">
-                          {plans[activePlanIndex].originalPrice}
+                    <ScrollAnimation
+                      key={`original-${activePlanIndex}`}
+                      delay={0.2}
+                      direction="up"
+                      distance={15}
+                    >
+                      <div className="flex items-center justify-center gap-3 mb-[47px]">
+                        <span className="text-base font-normal leading-[100%] tracking-[0px] text-center text-[#6A6A6A]">
+                          Original price:{" "}
+                          <span className="line-through">
+                            {plans[activePlanIndex].originalPrice}
+                          </span>
                         </span>
-                      </span>
-                      <Image
-                        src="/images/plans/discount-tag.svg"
-                        alt="Discount"
-                        width={104}
-                        height={36}
-                        className="w-16 h-6"
-                      />
-                    </div>
+                        <Image
+                          src="/images/plans/discount-tag.svg"
+                          alt="Discount"
+                          width={104}
+                          height={36}
+                          className="w-16 h-6"
+                        />
+                      </div>
+                    </ScrollAnimation>
 
                     {/* Divider Line */}
                     <div className="w-full border-t border-[#333333] mb-[33px]" />
 
                     {/* Limited Period Text */}
-                    <p className="text-sm font-light leading-5 tracking-[0px] text-center text-white mb-4">
-                      Limited period offer for first{" "}
-                      <span className="font-bold text-sm leading-5 tracking-[0px] text-center text-white">
-                        100 members
-                      </span>
-                    </p>
+                    <ScrollAnimation delay={0.3} direction="up" distance={15}>
+                      <p className="text-sm font-light leading-5 tracking-[0px] text-center text-white mb-4">
+                        Limited period offer for first{" "}
+                        <span className="font-bold text-sm leading-5 tracking-[0px] text-center text-white">
+                          100 members
+                        </span>
+                      </p>
+                    </ScrollAnimation>
 
                     {/* Button */}
-                    <button className="w-full mx-6 h-12 rounded-lg bg-[#00DBDC] py-[10px] mb-4">
-                      <span className="text-base font-medium leading-[100%] tracking-[-5%] text-[#0D0D0D]">
-                        {plans[activePlanIndex].buttonText}
-                      </span>
-                    </button>
+                    <ScrollAnimation
+                      key={`button-${activePlanIndex}`}
+                      delay={0.4}
+                      direction="up"
+                      distance={15}
+                      className="w-full mx-6"
+                    >
+                      <button className="w-full h-12 rounded-lg bg-[#00DBDC] py-[10px] mb-4">
+                        <span className="text-base font-medium leading-[100%] tracking-[-5%] text-[#0D0D0D]">
+                          {plans[activePlanIndex].buttonText}
+                        </span>
+                      </button>
+                    </ScrollAnimation>
 
                     {/* Seats Left */}
-                    <div className="flex items-center gap-2 mb-[16px]">
-                      <Image
-                        src="/images/plans/clock.svg"
-                        alt="Clock"
-                        width={20}
-                        height={20}
-                        className="w-5 h-5"
-                      />
-                      <span className="text-sm font-light leading-5 tracking-[0px] text-center text-[#0BFFB6]">
-                        {plans[activePlanIndex].seatsLeft}
-                      </span>
-                    </div>
+                    <ScrollAnimation
+                      key={`seats-${activePlanIndex}`}
+                      delay={0.5}
+                      direction="up"
+                      distance={15}
+                    >
+                      <div className="flex items-center gap-2 mb-[16px]">
+                        <Image
+                          src="/images/plans/clock.svg"
+                          alt="Clock"
+                          width={20}
+                          height={20}
+                          className="w-5 h-5"
+                        />
+                        <span className="text-sm font-light leading-5 tracking-[0px] text-center text-[#0BFFB6]">
+                          {plans[activePlanIndex].seatsLeft}
+                        </span>
+                      </div>
+                    </ScrollAnimation>
                   </div>
                 </div>
               </div>
