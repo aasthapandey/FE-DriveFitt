@@ -32,18 +32,25 @@ const IncludedPlans = ({ className, isMobile, data }: IncludedPlansProps) => {
 
               <div className="flex flex-col gap-3">
                 {data.items.map((item, index) => (
-                  <div key={index} className="flex items-start gap-3">
-                    <Image
-                      src="/images/plans/check-circle.svg"
-                      alt="Check"
-                      width={24}
-                      height={24}
-                      className="w-6 h-6 flex-shrink-0 mt-0.5"
-                    />
-                    <span className="font-light text-base leading-5 tracking-[0px] text-white">
-                      {item}
-                    </span>
-                  </div>
+                  <ScrollAnimation
+                    key={index}
+                    delay={0.3 + index * 0.1}
+                    direction="up"
+                    distance={20}
+                  >
+                    <div className="flex items-start gap-3">
+                      <Image
+                        src="/images/plans/check-circle.svg"
+                        alt="Check"
+                        width={24}
+                        height={24}
+                        className="w-6 h-6 flex-shrink-0 mt-0.5"
+                      />
+                      <span className="font-light text-base leading-5 tracking-[0px] text-white">
+                        {item}
+                      </span>
+                    </div>
+                  </ScrollAnimation>
                 ))}
               </div>
             </div>
@@ -71,18 +78,25 @@ const IncludedPlans = ({ className, isMobile, data }: IncludedPlansProps) => {
 
             <div className="grid grid-cols-[auto_1fr] gap-x-[88px] gap-y-5">
               {data.items.map((item, index) => (
-                <div key={index} className="flex items-start gap-[19px]">
-                  <Image
-                    src="/images/plans/check-circle.svg"
-                    alt="Check"
-                    width={28}
-                    height={28}
-                    className="w-7 h-7 flex-shrink-0 mt-0.5"
-                  />
-                  <span className="font-light text-xl leading-7 tracking-[0px] text-white">
-                    {item}
-                  </span>
-                </div>
+                <ScrollAnimation
+                  key={index}
+                  delay={0.3 + index * 0.1}
+                  direction="up"
+                  distance={20}
+                >
+                  <div className="flex items-start gap-[19px]">
+                    <Image
+                      src="/images/plans/check-circle.svg"
+                      alt="Check"
+                      width={28}
+                      height={28}
+                      className="w-7 h-7 flex-shrink-0 mt-0.5"
+                    />
+                    <span className="font-light text-xl leading-7 tracking-[0px] text-white">
+                      {item}
+                    </span>
+                  </div>
+                </ScrollAnimation>
               ))}
             </div>
           </div>
