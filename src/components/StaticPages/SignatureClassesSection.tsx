@@ -187,7 +187,7 @@ const SignatureClassesSection = ({
                       backgroundImage: `url(${card.backgroundImage})`,
                       backgroundSize: "cover",
                       backgroundPosition: "center",
-                      transitionDelay: `${(index + cardList.length) * 100}ms`,
+                      transitionDelay: `${(index) * 100}ms`,
                     }}
                   >
                     <div className="absolute bottom-8 left-8 flex flex-col gap-4 transition-all duration-700 ease-in-out group-hover:bottom-[40px]">
