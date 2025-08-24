@@ -111,20 +111,20 @@ const SignatureClassesSection = ({
                 {cardList.map((card, index) => (
                   <div
                     key={index}
-                    className="relative flex-shrink-0 rounded-[40px] overflow-hidden"
+                    className="relative flex-shrink-0 rounded-[40px] overflow-hidden group cursor-pointer"
                     style={{
-                      width: "480px",
-                      height: "clamp(400px, 50vw, 480px)",
+                      width: "300px",
+                      height: "300px",
                       backgroundImage: `url(${card.backgroundImage})`,
                       backgroundSize: "cover",
                       backgroundPosition: "center",
                     }}
                   >
-                    <div className="absolute bottom-8 left-8 flex flex-col gap-4">
-                      <h3 className="text-white font-semibold text-[28px] leading-8 tracking-[-1px]">
+                    <div className="absolute bottom-8 left-8 flex flex-col gap-4 transition-all duration-300 group-hover:bottom-[40px]">
+                      <h3 className="text-white font-semibold text-[28px] leading-8 tracking-[-1px] transition-transform duration-300 group-hover:translate-y-0 translate-y-0">
                         {card.title}
                       </h3>
-                      <p className="text-white font-light text-base leading-6 tracking-[-0.32px] max-w-[400px]">
+                      <p className="text-white font-light text-base leading-6 tracking-[-0.32px] max-w-[400px] hidden group-hover:block transition-all duration-300">
                         {card.description}
                       </p>
                     </div>
@@ -142,20 +142,20 @@ const SignatureClassesSection = ({
                 {cardList2.map((card, index) => (
                   <div
                     key={index}
-                    className="relative flex-shrink-0 rounded-[40px] overflow-hidden"
+                    className="relative flex-shrink-0 rounded-[40px] overflow-hidden group cursor-pointer"
                     style={{
-                      width: "480px",
-                      height: "clamp(400px, 50vw, 480px)",
+                      width: "300px",
+                      height: "300px",
                       backgroundImage: `url(${card.backgroundImage})`,
                       backgroundSize: "cover",
                       backgroundPosition: "center",
                     }}
                   >
-                    <div className="absolute bottom-8 left-8 flex flex-col gap-4">
-                      <h3 className="text-white font-semibold text-[28px] leading-8 tracking-[-1px]">
+                    <div className="absolute bottom-8 left-8 flex flex-col gap-4 transition-all duration-300 group-hover:bottom-[40px]">
+                      <h3 className="text-white font-semibold text-[28px] leading-8 tracking-[-1px] transition-transform duration-300 group-hover:translate-y-0 translate-y-0">
                         {card.title}
                       </h3>
-                      <p className="text-white font-light text-base leading-6 tracking-[-0.32px] max-w-[400px]">
+                      <p className="text-white font-light text-base leading-6 tracking-[-0.32px] max-w-[400px] hidden group-hover:block transition-all duration-300">
                         {card.description}
                       </p>
                     </div>
