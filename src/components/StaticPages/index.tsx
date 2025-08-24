@@ -38,6 +38,7 @@ import {
   CardsParallaxProps,
   SignatureClassesSection as SignatureClassesSectionType,
   PricingPlansSection,
+  IncludedPlansSection,
 } from "@/types/staticPages";
 import CardSection4 from "@/components/StaticPages/CardSection4";
 import CardSection5 from "@/components/StaticPages/CardSection5";
@@ -78,6 +79,7 @@ import CardsParallax from "./CardsParallax";
 import Banner3JoinUs from "./Banner3JoinUs";
 import SignatureClassesSection from "./SignatureClassesSection";
 import PricingPlans from "@/components/common/PricingPlans";
+import IncludedPlans from "@/components/common/IncludedPlans";
 
 interface StaticPageProps {
   data: StaticPageData;
@@ -279,6 +281,8 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
             isMobile={isMobile}
           />
         );
+      case "includedPlansSection":
+        return <IncludedPlans isMobile={isMobile} />;
 
       case "banner1Section":
         return (

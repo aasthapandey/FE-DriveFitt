@@ -402,6 +402,7 @@ export interface StaticPageData {
   cardsParallaxSection?: CardsParallaxProps;
   banner3JoinUsSection?: GallerySectionProps;
   pricingPlansSection?: PricingPlansSection;
+  includedPlansSection?: IncludedPlansSection;
 }
 
 export interface ContactUsPageData {
@@ -490,4 +491,8 @@ export interface PricingPlan {
 
 export interface PricingPlansSection {
   plans: PricingPlan[];
+}
+
+export interface IncludedPlansSection {
+  title: string;
 }

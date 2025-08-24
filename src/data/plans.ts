@@ -24,7 +24,8 @@ export const plansData: StaticPageData = {
     class: "-mt-[195px] md:-mt-[282px]",
     titleClass:
       "font-semibold text-2xl leading-7 tracking-[-1px] text-center px-[34px] md:font-semibold md:text-[40px] md:leading-[56px] md:tracking-[-2px] md:text-center",
-    descriptionClass: "md:font-normal md:text-base md:leading-5 md:tracking-0 md:text-center",
+    descriptionClass:
+      "md:font-normal md:text-base md:leading-5 md:tracking-0 md:text-center",
   },
   pricingPlansSection: {
     plans: [
@@ -46,6 +47,9 @@ export const plansData: StaticPageData = {
         seatsLeft: "Less than 50 spots left!",
       },
     ],
+  },
+  includedPlansSection: {
+    title: "Included in all plans",
   },
   footerInfoSection: {
     footerInfoList: [
