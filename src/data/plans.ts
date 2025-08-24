@@ -5,14 +5,12 @@ export const plansData: StaticPageData = {
   title: "Plans",
   description: "Choose the plan that's right for you.",
   seoTitle: "Plans | Drive FITT",
-  seoDescription:
-    "Choose the plan that's right for you.",
+  seoDescription: "Choose the plan that's right for you.",
   navbar: navbarData,
   aboutUsHeroSection: {
     title: "Plans & Pricing",
     subTitle: "",
-    description:
-      "",
+    description: "",
     roiTag: "",
     roiIcon: "https://da8nru77lsio9.cloudfront.net/images/roi-icon.svg",
     desktopImage: "/images/plans/hero.svg",
@@ -26,145 +24,28 @@ export const plansData: StaticPageData = {
     class: "md:-mt-[282px]",
     titleClass:
       "font-semibold text-[40px] leading-[56px] tracking-[-2px] text-center",
-    descriptionClass:
-      "font-normal text-base leading-5 tracking-0 text-center",
+    descriptionClass: "font-normal text-base leading-5 tracking-0 text-center",
   },
-  visionariesSection: {
-    title: "The Visionaries",
-    description: "",
-    backgroundImage: "",
-    cardList: [
+  pricingPlansSection: {
+    plans: [
       {
-        icon: "/images/Mark-Sellar.svg",
-        title: "Mark Sellar",
-        subTitle: "Co-Founder & Executive Chairman",
-        description:
-          "Global business strategist bringing international scale and operational excellence.",
-        tooltipImage: "/images/MarkSellarName.svg",
-        tooltipImageMobile: "/images/MarkSellarNameMobile.svg",
+        title: "Individual Annual Plan",
+        discountedPrice: "₹47,116",
+        originalPrice: "₹63,130",
+        discountPercentage: "30%",
+        buttonText: "Lock this Price @ ₹999",
+        seatsLeft: "Less than 50 spots left!",
       },
       {
-        icon: "/images/Deke-Smith.svg",
-        title: "Deke Smith",
-        subTitle: "Co-Founder & Director",
-        description:
-          "Global business strategist bringing international scale and operational excellence.",
-        tooltipImage: "/images/DekeSmithName.svg",
-        tooltipImageMobile: "/images/DekeSmithNameMobile.svg",
-      },
-      {
-        icon: "/images/Shubman-Gill.svg",
-        title: "Shubman Gill",
-        subTitle: "Co-Founder",
-        description:
-          "International cricket star driving training innovation after experiencing facility gaps firsthand.",
-        tooltipImage: "/images/ShubmanGillName.svg",
-        tooltipImageMobile: "/images/ShubmanGillNameMobile.svg",
-      },
-      {
-        icon: "/images/Preity-G-Zinta.svg",
-        title: "Preity G Zinta",
-        subTitle: "Co-Founder",
-        description:
-          "Bollywood icon bringing mass-appeal storytelling and brand vision to Drive FITT's narrative.",
-        tooltipImage: "/images/PreityGZintaName.svg",
-        tooltipImageMobile: "/images/PreityGZintaNameMobile.svg",
-      },
-      {
-        icon: "/images/Vikram-Bhatiya.svg",
-        title: "Vikram Bhatia",
-        subTitle: "Co-Founder & CEO",
-        description:
-          "Fitness industry veteran ensuring world-class execution across Operational verticals.",
-        tooltipImage: "/images/VikramBhatiaName.svg",
-        tooltipImageMobile: "/images/VikramBhatiaNameMobile.svg",
+        title: "Family Annual Plan",
+        subtitle: "3 Members",
+        discountedPrice: "₹1,14,282",
+        originalPrice: "₹1,64,688",
+        discountPercentage: "30%",
+        buttonText: "Lock this Price @ ₹999",
+        seatsLeft: "Less than 50 spots left!",
       },
     ],
-  },
-  scrollingCardSection: {
-    title: "What We Offer",
-    description: "Our sessions are scientifically designed:",
-    iconImage: "",
-    cardSection: [
-      {
-        subTitle: "Cricket Performance Hub",
-        list: [
-          "High-tech nets with ball-tracking, programming from elite cricket athletes such as Shubman Gill, Glen Maxwell and Ryan Harris.",
-        ],
-        extraTagLabel: "",
-        backgroundImage: "/images/aboutUs/scroll-card-1.jpg",
-        mobileImage: "/images/aboutUs/scroll-card-1.jpg",
-      },
-      {
-        subTitle: "Fitness & Conditioning Zone",
-        list: [
-          "Advanced strength, cardio, and functional training rooted in sports science.",
-        ],
-        extraTagLabel: "",
-        backgroundImage: "/images/aboutUs/scroll-card-2.jpg",
-        mobileImage: "/images/aboutUs/scroll-card-2.jpg",
-      },
-      {
-        subTitle: "Recovery & Wellness Studios",
-        list: [
-          "Infrared saunas, cold plunge, compression, percussion, yoga, mobility sessions, and more—built for longevity and well-being.",
-        ],
-        extraTagLabel: "",
-        backgroundImage: "/images/aboutUs/scroll-card-3.jpg",
-        mobileImage: "/images/aboutUs/scroll-card-3.jpg",
-      },
-      {
-        subTitle: "Cohesive Community",
-        list: [
-          "A culture that blends group classes, coaching, app-based tracking, and fitness challenges.",
-        ],
-        extraTagLabel: "",
-        backgroundImage: "/images/aboutUs/scroll-card-4.jpg",
-        mobileImage: "/images/aboutUs/scroll-card-4.jpg",
-      },
-    ],
-  },
-  cardsParallaxSection: {
-    cardSection: [
-      {
-        title: "Growth & Impact",
-        description:
-          'Our flagship club in <span class="special-text">Gurgaon</span> launches this year, with Delhi and more to follow. We aim to deliver <img src="/images/aboutUs/300Franchise.svg" alt="300 Franchises" class="inline-svg" style="display: inline-block; vertical-align:" /> across India within <img src="/images/aboutUs/3Years.svg" alt="3 Years" class="inline-svg" style=" display: inline-block; vertical-align:" />, making <span class="special-text">sports–embedded fitness</span> accessible to millions.',
-        src: "aboutUs/card-parallax-full-1.png",
-        backgroundImage: "",
-        url: "/images/aboutUs/card-parallax-full-1.png",
-        mobileUrl: "/images/aboutUs/card-parallax-full-mobile-1.jpg",
-        color: "#BBACAF",
-      },
-      {
-        title: "A Fusion of Passion & Purpose",
-        description:
-          'Drive FITT isn\'t just a premium fitness brand—it\'s a movement. We bring cricket into wellness, tailor science into training, and unite members in a high-energy, aspirational community. With new shareholders like international cricket star <img src="/images/aboutUs/GlennMaxwell.svg" alt="Glenn Maxwell" class="inline-svg" style="display: inline-block; vertical-align: middle;" /> our approach to <span class="special-text">fitness, athlete development, and recovery</span> is only getting sharper and more distinct.',
-        src: "aboutUs/card-parallax-full-2.png",
-        backgroundImage: "",
-        url: "/images/aboutUs/card-parallax-full-2.png",
-        mobileUrl: "/images/aboutUs/card-parallax-full-mobile-2.jpg",
-        color: "#977F6D",
-      },
-    ],
-  },
-  banner3JoinUsSection: {
-    title: "Join The Movement",
-    description:
-      "Train like the pros. Recover like champions. Build a life where performance, health, and sport co-exist in harmony - it starts here at Drive FITT.",
-    btnLabel: "Book a free trial",
-    desktopImage: "/images/aboutUs/bannerCta.svg",
-    mobileImage: "/images/aboutUs/bannerCta-mobile.jpg",
-    addGradient: false,
-    mobileImageUp: true,
-  },
-  bannerSection: {
-    title: "Become a DriveFITT member",
-    description:
-      "Join the waitlist now and be the first to access elite workouts, expert coaching, exclusive perks, member-only events, and special launch offers.",
-    btnLabel: "Join the Waitlist",
-    image: "https://da8nru77lsio9.cloudfront.net/images/becomeMember.svg",
-    mobileImage: "https://da8nru77lsio9.cloudfront.net/images/becomeMember.svg",
   },
   footerInfoSection: {
     footerInfoList: [

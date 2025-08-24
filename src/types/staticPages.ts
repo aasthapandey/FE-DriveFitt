@@ -401,6 +401,7 @@ export interface StaticPageData {
   signatureClassesSection?: SignatureClassesSection;
   cardsParallaxSection?: CardsParallaxProps;
   banner3JoinUsSection?: GallerySectionProps;
+  pricingPlansSection?: PricingPlansSection;
 }
 
 export interface ContactUsPageData {
@@ -475,4 +476,18 @@ export interface SignatureClassesSection {
   title: string;
   cardList: SignatureClassCard[];
   cardList2: SignatureClassCard[];
+}
+
+export interface PricingPlan {
+  title: string;
+  subtitle?: string;
+  discountedPrice: string;
+  originalPrice: string;
+  discountPercentage: string;
+  buttonText: string;
+  seatsLeft: string;
+}
+
+export interface PricingPlansSection {
+  plans: PricingPlan[];
 }

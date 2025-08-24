@@ -11,6 +11,7 @@ import { headers } from "next/headers";
 import { isMobileDevice } from "@/utils/deviceDetection";
 import { personalTrainingData } from "@/data/personal-training";
 import { groupClassesData } from "@/data/group-classes";
+import { plansData } from "@/data/plans";
 
 type PageParams = {
   params: {
@@ -26,6 +27,7 @@ const pageData: { [key: string]: StaticPageData } = {
   pilates: pilatesData,
   "personal-training": personalTrainingData,
   "group-classes": groupClassesData,
+  plans: plansData,
 };
 
 export async function generateMetadata({

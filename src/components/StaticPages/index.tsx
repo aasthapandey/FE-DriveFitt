@@ -37,6 +37,7 @@ import {
   Banner2WithImageProps,
   CardsParallaxProps,
   SignatureClassesSection as SignatureClassesSectionType,
+  PricingPlansSection,
 } from "@/types/staticPages";
 import CardSection4 from "@/components/StaticPages/CardSection4";
 import CardSection5 from "@/components/StaticPages/CardSection5";
@@ -76,6 +77,7 @@ import NextStepSection from "../FranchisePage/NextStepSection";
 import CardsParallax from "./CardsParallax";
 import Banner3JoinUs from "./Banner3JoinUs";
 import SignatureClassesSection from "./SignatureClassesSection";
+import PricingPlans from "@/components/common/PricingPlans";
 
 interface StaticPageProps {
   data: StaticPageData;
@@ -111,6 +113,7 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
       | EcosystemGifSectionProps
       | CardsParallaxProps
       | SignatureClassesSectionType
+      | PricingPlansSection
   ) => {
     switch (key) {
       case "hero":
@@ -269,6 +272,8 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
             isMobile={isMobile}
           />
         );
+      case "pricingPlansSection":
+        return <PricingPlans plans={(value as PricingPlansSection).plans} />;
 
       case "banner1Section":
         return (
@@ -419,6 +424,13 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
             if (key === "photoCircleSection") {
               return (
                 <div key={key} className="relative">
+                  {component}
+                </div>
+              );
+            }
+            if (key === "pricingPlansSection") {
+              return (
+                <div key={key} className="w-full">
                   {component}
                 </div>
               );
