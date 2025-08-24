@@ -1,7 +1,6 @@
 "use client";
 import { PhotoCircleSectionProps } from "@/types/staticPages";
 import Image from "next/image";
-import ScrollAnimation from "@/components/common/ScrollAnimation";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
