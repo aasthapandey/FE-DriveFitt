@@ -1,33 +1,33 @@
 import { navbarData } from "./navbar";
 import { StaticPageData } from "@/types/staticPages";
 
-export const aboutUsData: StaticPageData = {
-  title: "Franchise With Drive FITT",
-  description: "Partner with India's premium fitness and sports club.",
-  seoTitle: "About Us | Drive FITT",
+export const plansData: StaticPageData = {
+  title: "Plans",
+  description: "Choose the plan that's right for you.",
+  seoTitle: "Plans | Drive FITT",
   seoDescription:
-    "Start your own DriveFITT franchise. Premium fitness and sports club with proven business model.",
+    "Choose the plan that's right for you.",
   navbar: navbarData,
   aboutUsHeroSection: {
-    title: "About Drive FITT",
+    title: "Plans & Pricing",
     subTitle: "",
     description:
-      "Drive FITT is redefining India’s fitness landscape by blending the nation’s passion for cricket with world-class training, recovery, and performance facilities.",
+      "",
     roiTag: "",
     roiIcon: "https://da8nru77lsio9.cloudfront.net/images/roi-icon.svg",
-    desktopImage: "/images/aboutUs/hero.svg",
-    mobileImage: "/images/aboutUs/hero-mobile.svg",
+    desktopImage: "/images/plans/hero.svg",
+    mobileImage: "/images/plans/hero-mobile.svg",
     btnPrimaryText: "",
   },
-  banner1Section: {
-    title: "Our",
-    title1: "Mission",
-    subTitle: "We Spotted a Unique Gap",
-    description1:
-      "India invests billions in cricket, yet public access to high quality cricket training is limited. Drive FITT bridges this divide with a premium sports club offering smart cricket nets, pro-grade coaching, performance fitness zones, and recovery amenities—accessible to everyone, from aspiring athletes to wellness seekers. ",
-    description2: "",
-    description3: "",
-    className: "-mt-[95px] md:-mt-[200px]",
+  banner2Section: {
+    title: "Train. Play. Recover. Your way.",
+    description:
+      "Enjoy unlimited club access, group classes*, a complimentary fitness assessment + 2 Personal Training sessions and more.",
+    class: "md:-mt-[282px]",
+    titleClass:
+      "font-semibold text-[40px] leading-[56px] tracking-[-2px] text-center",
+    descriptionClass:
+      "font-normal text-base leading-5 tracking-0 text-center",
   },
   visionariesSection: {
     title: "The Visionaries",
