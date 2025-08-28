@@ -157,7 +157,7 @@ const SignatureClassesSection = ({
                       <h3 className="text-white font-medium text-[24px] leading-8 tracking-[0px] transition-all duration-700 ease-in-out group-hover:translate-y-0 translate-y-0">
                         {card.title}
                       </h3>
-                      <p className="text-white font-light text-base leading-6 tracking-[-0.32px] max-w-[400px] hidden group-hover:block transition-all duration-700 ease-in-out ">
+                      <p className="text-white font-light text-base leading-6 tracking-[-0.32px] max-w-[400px] hidden group-hover:block transition-all duration-700 ease-in-out pr-8">
                         {card.description}
                       </p>
                     </div>
@@ -192,7 +192,7 @@ const SignatureClassesSection = ({
                       <h3 className="text-white font-medium text-[24px] leading-8 tracking-[-1px] transition-all duration-700 ease-in-out group-hover:translate-y-0 translate-y-0">
                         {card.title}
                       </h3>
-                      <p className="text-white font-light text-base leading-6 tracking-[-0.32px] max-w-[400px] hidden group-hover:block transition-all duration-700 ease-in-out">
+                      <p className="text-white font-light text-base leading-6 tracking-[-0.32px] max-w-[400px] hidden group-hover:block transition-all duration-700 ease-in-out pr-8">
                         {card.description}
                       </p>
                     </div>
