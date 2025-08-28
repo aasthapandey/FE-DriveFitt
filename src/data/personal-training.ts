@@ -164,6 +164,9 @@ export const personalTrainingData: StaticPageData = {
     btnLabel: "Book Your Class Today",
     desktopImage: "/images/personal-training/bannerCta.png",
     mobileImage: "/images/personal-training/bannerCTASectionMobile.svg",
+    specialBackgroundClass: "#1D1D1DB2",
+    showStrip: false,
+    parentClass: "md:!mt-[70px]",
   },
   footerInfoSection: {
     footerInfoList: [

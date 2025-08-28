@@ -17,6 +17,9 @@ const BannerCTA2 = ({
     mobileImage,
     mobileImageUp = false,
     imageClass,
+    specialBackgroundClass,
+    showStrip = true,
+    parentClass,
   } = data;
 
   const handleButtonClick = () => {
@@ -28,12 +31,17 @@ const BannerCTA2 = ({
       className="relative mt-[15px] md:!mb-[-40px] md:mt-[-100px] bg-[#1D1D1D33] z-50"
       style={{
         background: !isMobile
-          ? "linear-gradient(to bottom, #000000 0%, #000000 8%, #1D1D1D33 8%, #1D1D1D33 100%)"
+          ? specialBackgroundClass ||
+            "linear-gradient(to bottom, #000000 0%, #000000 8%, #1D1D1D33 8%, #1D1D1D33 100%)"
           : undefined,
       }}
     >
-      {!isMobile && <div className="h-10 w-full bg-transparent"></div>}
-      <div className="h-[540px] md:h-[492px] w-full pt-10 md:pt-[120px] md:pb-[100px] md:pl-[120px]">
+      {!isMobile && showStrip && (
+        <div className="h-10 w-full bg-transparent"></div>
+      )}
+      <div
+        className={`h-[540px] md:h-[492px] w-full pt-10 md:pt-[120px] md:pb-[100px] md:pl-[120px] ${parentClass}`}
+      >
         <div className="flex flex-col md:flex-row md:items-center md:justify-between h-full ">
           <div
             className={`flex-1 md:order-1 px-6 ${
