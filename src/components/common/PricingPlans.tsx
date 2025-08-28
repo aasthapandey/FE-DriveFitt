@@ -222,12 +222,14 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
 
                   <div className="w-full border-t border-[#333333] mb-6 md:mb-8 lg:mb-10" />
 
-                  <p className="text-sm md:text-base font-light leading-4 md:leading-5 tracking-[0px] text-center text-white mb-3 md:mb-4 px-2">
-                    Limited period offer for first{" "}
-                    <span className="font-bold text-sm md:text-base leading-4 md:leading-5 tracking-[0px] text-center text-white">
-                      100 members
-                    </span>
-                  </p>
+                  <ScrollAnimation delay={0.3} direction="up" distance={15}>
+                    <p className="text-sm md:text-base font-light leading-4 md:leading-5 tracking-[0px] text-center text-white mb-3 md:mb-4 px-2">
+                      Limited period offer for first{" "}
+                      <span className="font-bold text-sm md:text-base leading-4 md:leading-5 tracking-[0px] text-center text-white">
+                        100 members
+                      </span>
+                    </p>
+                  </ScrollAnimation>
 
                   <button className="w-full h-12 md:h-14 lg:h-[56px] rounded-lg bg-[#00DBDC] px-4 md:px-[60px] lg:px-[60px] py-3 md:py-4 mb-3 md:mb-4">
                     <span className="text-sm md:text-lg lg:text-xl font-medium leading-[100%] tracking-[-5%] text-[#0D0D0D]">
