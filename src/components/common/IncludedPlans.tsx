@@ -15,7 +15,7 @@ interface IncludedPlansProps {
 const IncludedPlans = ({ className, isMobile, data }: IncludedPlansProps) => {
   if (isMobile) {
     return (
-      <section className={`px-6 ${className}`}>
+      <section className={`px-6 ${className} -mt-[36px]`}>
         <div className="flex flex-col items-center w-full max-w-[1200px] mx-auto">
           <ScrollAnimation delay={0.2} direction="up">
             <div
@@ -27,7 +27,7 @@ const IncludedPlans = ({ className, isMobile, data }: IncludedPlansProps) => {
               }}
             >
               <h2 className="font-semibold text-xl leading-6 tracking-[0px] text-white mb-4">
-                Included in all plans
+              Exclusive Benefits Valued at ₹40,000 - Complimentary with Annual Plan
               </h2>
 
               <div className="flex flex-col gap-3">
@@ -65,7 +65,7 @@ const IncludedPlans = ({ className, isMobile, data }: IncludedPlansProps) => {
       <div className="flex flex-col items-center w-full max-w-[1200px] mx-auto">
         <ScrollAnimation delay={0.2} direction="up">
           <div
-            className="w-full rounded-[20px] p-[60px] border-2"
+            className="w-full rounded-[30px] p-[60px] border-2"
             style={{
               borderColor: "#333333",
               background:
@@ -73,7 +73,7 @@ const IncludedPlans = ({ className, isMobile, data }: IncludedPlansProps) => {
             }}
           >
             <h2 className="font-semibold text-[28px] leading-[28px] tracking-[0px] text-white mb-8">
-              Included in all plans
+            Exclusive Benefits Valued at ₹40,000 - Complimentary with Annual Plan
             </h2>
 
             <div className="grid grid-cols-[auto_1fr] gap-x-[88px] gap-y-5">
