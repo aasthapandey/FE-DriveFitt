@@ -125,6 +125,9 @@ export const groupClassesData: StaticPageData = {
     desktopImage: "/images/group-classes/bannerCta2.png",
     mobileImage: "/images/group-classes/bannerCta2Mobile.png",
     imageClass: "md:max-h-[564px]",
+    specialBackgroundClass: "#1D1D1DB2",
+    showStrip: false,
+    parentClass: "md:!mt-[140px]",
   },
   footerInfoSection: {
     footerInfoList: [
