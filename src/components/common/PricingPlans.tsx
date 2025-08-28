@@ -109,7 +109,12 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
                     <div className="w-full border-t border-[#333333] mb-[33px]" />
 
                     {/* Limited Period Text */}
-                    <ScrollAnimation delay={0.3} direction="up" distance={15}>
+                    <ScrollAnimation
+                      key={`limited-offer-${activePlanIndex}`}
+                      delay={0.3}
+                      direction="up"
+                      distance={15}
+                    >
                       <p className="text-sm font-light leading-5 tracking-[0px] text-center text-white mb-4">
                         Limited period offer for first{" "}
                         <span className="font-bold text-sm leading-5 tracking-[0px] text-center text-white">
@@ -222,7 +227,12 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
 
                   <div className="w-full border-t border-[#333333] mb-6 md:mb-8 lg:mb-10" />
 
-                  <ScrollAnimation delay={0.3} direction="up" distance={15}>
+                  <ScrollAnimation
+                    key={`limited-offer-desktop-${index}`}
+                    delay={0.2 + index * 0.1}
+                    direction="up"
+                    distance={15}
+                  >
                     <p className="text-sm md:text-base font-light leading-4 md:leading-5 tracking-[0px] text-center text-white mb-3 md:mb-4 px-2">
                       Limited period offer for first{" "}
                       <span className="font-bold text-sm md:text-base leading-4 md:leading-5 tracking-[0px] text-center text-white">
