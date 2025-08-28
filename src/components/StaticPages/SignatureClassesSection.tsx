@@ -130,7 +130,7 @@ const SignatureClassesSection = ({
           </div>
         ) : (
           <div className="flex flex-col gap-10">
-            <div className="relative overflow-hidden">
+            <div className="relative">
               <div
                 className="flex gap-10 transition-transform duration-500 ease-in-out"
                 style={{
@@ -140,25 +140,24 @@ const SignatureClassesSection = ({
                 {cardList.map((card, index) => (
                   <div
                     key={index}
-                    className={`relative flex-shrink-0 rounded-[40px] overflow-hidden group cursor-pointer transition-all duration-700 ease-out transform hover:scale-105 hover:shadow-2xl ${
+                    className={`relative flex-shrink-0 w-64 h-64 rounded-[40px] overflow-hidden group cursor-pointer transition-all duration-700 ease-out transform hover:scale-105 hover:shadow-2xl ${
                       animatedCards.includes(index)
                         ? "opacity-100 translate-y-0 scale-100"
                         : "opacity-0 translate-y-12 scale-95"
                     }`}
                     style={{
-                      width: "256px",
-                      height: "256px",
                       backgroundImage: `url(${card.backgroundImage})`,
                       backgroundSize: "cover",
                       backgroundPosition: "center",
                       transitionDelay: `${index * 100}ms`,
                     }}
                   >
-                    <div className="absolute bottom-8 left-8 flex flex-col gap-4 transition-all duration-700 ease-in-out group-hover:bottom-[40px]">
+                    <div className="absolute inset-0 bg-black/20 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-700 ease-in-out"></div>
+                    <div className="absolute bottom-8 left-8 flex flex-col gap-4 transition-all duration-700 ease-in-out group-hover:bottom-[40px] z-10">
                       <h3 className="text-white font-medium text-[24px] leading-8 tracking-[0px] transition-all duration-700 ease-in-out group-hover:translate-y-0 translate-y-0">
                         {card.title}
                       </h3>
-                      <p className="text-white font-light text-base leading-6 tracking-[-0.32px] max-w-[400px] hidden group-hover:block transition-all duration-700 ease-in-out">
+                      <p className="text-white font-light text-base leading-6 tracking-[-0.32px] max-w-[400px] hidden group-hover:block transition-all duration-700 ease-in-out ">
                         {card.description}
                       </p>
                     </div>
@@ -166,7 +165,7 @@ const SignatureClassesSection = ({
                 ))}
               </div>
             </div>
-            <div className="relative overflow-hidden">
+            <div className="relative">
               <div
                 className="flex gap-10 transition-transform duration-500 ease-in-out"
                 style={{
@@ -176,21 +175,20 @@ const SignatureClassesSection = ({
                 {cardList2.map((card, index) => (
                   <div
                     key={index}
-                    className={`relative flex-shrink-0 rounded-[40px] overflow-hidden group cursor-pointer transition-all duration-700 ease-out transform hover:scale-105 hover:shadow-2xl ${
+                    className={`relative flex-shrink-0 w-64 h-64 rounded-[40px] overflow-hidden group cursor-pointer transition-all duration-700 ease-out transform hover:scale-105 hover:shadow-2xl ${
                       animatedCards.includes(index + cardList.length)
                         ? "opacity-100 translate-y-0 scale-100"
                         : "opacity-0 translate-y-12 scale-95"
                     }`}
                     style={{
-                      width: "256px",
-                      height: "256px",
                       backgroundImage: `url(${card.backgroundImage})`,
                       backgroundSize: "cover",
                       backgroundPosition: "center",
                       transitionDelay: `${index * 100}ms`,
                     }}
                   >
-                    <div className="absolute bottom-8 left-8 flex flex-col gap-4 transition-all duration-700 ease-in-out group-hover:bottom-[40px]">
+                    <div className="absolute inset-0 bg-black/20 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-700 ease-in-out"></div>
+                    <div className="absolute bottom-8 left-8 flex flex-col gap-4 transition-all duration-700 ease-in-out group-hover:bottom-[40px] z-10">
                       <h3 className="text-white font-medium text-[24px] leading-8 tracking-[-1px] transition-all duration-700 ease-in-out group-hover:translate-y-0 translate-y-0">
                         {card.title}
                       </h3>
