@@ -25,7 +25,7 @@ const BannerCTA2 = ({
 
   return (
     <div
-      className="relative mt-[15px] md:!mb-[-40px] md:mt-[-100px] bg-[#1D1D1D33]"
+      className="relative mt-[15px] md:!mb-[-40px] md:mt-[-100px] bg-[#1D1D1D33] z-50"
       style={{
         background: !isMobile
           ? "linear-gradient(to bottom, #000000 0%, #000000 8%, #1D1D1D33 8%, #1D1D1D33 100%)"

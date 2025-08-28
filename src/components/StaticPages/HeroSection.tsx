@@ -55,7 +55,7 @@ const HeroSection = ({ data, pageName, isMobile }: HeroSectionProps) => {
 
   return (
     <>
-      <div className="h-fit md:h-[745px] flex flex-col justify-center md:justify-start items-center md:items-start text-center md:text-start px-6 md:px-[120px]">
+      <div className="h-fit md:min-h-[745px] flex flex-col justify-center md:justify-start items-center md:items-start text-center md:text-start px-6 md:px-[120px]">
         <div
           className={`${
             pageName === "cricket"
