@@ -28,12 +28,12 @@ const BannerCTA2 = ({
 
   return (
     <div
-      className="relative mt-[15px] md:!mb-[-40px] md:mt-[-100px] bg-[#1D1D1D33] z-10"
+      className={`relative mt-[15px] md:!mb-[-40px] md:mt-[-100px] bg-[#1D1D1D33] z-10 pb-[35px]`}
       style={{
         background: !isMobile
           ? specialBackgroundClass ||
             "linear-gradient(to bottom, #000000 0%, #000000 8%, #1D1D1D33 8%, #1D1D1D33 100%)"
-          : undefined,
+          : "#1D1D1DB2",
       }}
     >
       {!isMobile && showStrip && (
@@ -65,7 +65,7 @@ const BannerCTA2 = ({
           </div>
           <div
             className={`flex-1 md:max-w-[656px] md:max-h-[564px] relative md:order-2 -md:mr-[120px] md:mb-[96px] ${
-              isMobile && mobileImageUp ? "order-first" : imageClass || "mt-8"
+              isMobile && mobileImageUp ? "order-first" : imageClass || "mt-12"
             } md:mt-[4px]`}
           >
             <div className="h-[320px] md:h-[564px] w-full relative">
