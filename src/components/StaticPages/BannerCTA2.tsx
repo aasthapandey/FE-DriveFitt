@@ -28,7 +28,7 @@ const BannerCTA2 = ({
 
   return (
     <div
-      className="relative mt-[15px] md:!mb-[-40px] md:mt-[-100px] bg-[#1D1D1D33] z-50"
+      className="relative mt-[15px] md:!mb-[-40px] md:mt-[-100px] bg-[#1D1D1D33] z-10"
       style={{
         background: !isMobile
           ? specialBackgroundClass ||
@@ -66,7 +66,7 @@ const BannerCTA2 = ({
           <div
             className={`flex-1 md:max-w-[656px] md:max-h-[564px] relative md:order-2 -md:mr-[120px] md:mb-[96px] ${
               isMobile && mobileImageUp ? "order-first" : imageClass || "mt-8"
-            } md:mt-0`}
+            } md:mt-[4px]`}
           >
             <div className="h-[320px] md:h-[564px] w-full relative">
               <Image
