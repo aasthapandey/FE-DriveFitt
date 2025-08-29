@@ -19,9 +19,9 @@ const VisionarySection = ({ data, isMobile }: VisionarySectionProps) => {
         <TitleDescription title={title || ""} description={description || ""} />
       </ScrollAnimation>
       <div className="flex flex-col items-center text-center gap-12">
-        <div className="flex flex-col w-full gap-[16px]">
+        <div className="flex flex-col w-full gap-[16px] md:gap-[40px]">
           {/* First row - 2 cards on desktop, single column on mobile */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-[16px]">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-[16px] md:gap-[40px]">
             <ScrollAnimation delay={0.3} direction="up">
               <VisionCard
                 card={list[0]}
@@ -38,7 +38,7 @@ const VisionarySection = ({ data, isMobile }: VisionarySectionProps) => {
             </ScrollAnimation>
           </div>
           {/* Second row - 3 cards on desktop, single column on mobile */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-[16px]">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-[16px] md:gap-[40px]">
             <ScrollAnimation delay={0.5} direction="up">
               <VisionCard
                 card={list[2]}
