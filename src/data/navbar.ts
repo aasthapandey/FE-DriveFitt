@@ -9,6 +9,7 @@ export const navbarData: NavbarProps = {
     { title: "Recovery", href: "/recovery" },
     { title: "Running", href: "/running" },
     { title: "Pilates", href: "/pilates" },
+    { title: "Membership", href: "/membership" },
     { title: "Franchise", href: "/franchise" },
   ],
   signInButton: {

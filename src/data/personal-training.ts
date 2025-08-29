@@ -24,7 +24,7 @@ export const personalTrainingData: StaticPageData = {
     description:
       "Your goals deserve more than generic workouts. Our one-on-one coaching is rooted in science, personalized to your needs, and driven by data. We're not just trainers—we're performance architects.",
     image:
-      "https://da8nru77lsio9.cloudfront.net/images/personal-training-c/banner2.svg",
+      "https://da8nru77lsio9.cloudfront.net/images/personal-training-c/banner2-embedded.svg",
     backgroundImage:
       "https://da8nru77lsio9.cloudfront.net/images/personal-training-c/banner2-bg.svg",
     mobileBackgroundImage:
@@ -175,7 +175,7 @@ export const personalTrainingData: StaticPageData = {
     desktopImage:
       "https://da8nru77lsio9.cloudfront.net/images/personal-training-c/bannerCta.webp",
     mobileImage:
-      "https://da8nru77lsio9.cloudfront.net/images/personal-training-c/bannerCTASectionMobile.svg",
+      "https://da8nru77lsio9.cloudfront.net/images/personal-training-c/bannerCTASectionMobile-embedded.svg",
     specialBackgroundClass: "#1D1D1DB2",
     showStrip: false,
     parentClass: "md:!mt-[70px]",

@@ -85,17 +85,20 @@ export const pilatesData: StaticPageData = {
     title: "Who It’s For",
     description:
       "From CXOs decompressing after a high-stakes day to young athletes building foundational mobility, Pilates fits into every lifestyle. It's the ideal complement to high-intensity training, sport performance, and recovery.",
-    image1: "/images/pilates-c/photoCircle1.svg",
-    image2: "/images/pilates-c/photoCircle2.svg",
+    image1:
+      "https://da8nru77lsio9.cloudfront.net/images/pilates-c/photoCircle1-embedded.svg",
+    image2:
+      "https://da8nru77lsio9.cloudfront.net/images/pilates-c/photoCircle2-embedded.svg",
   },
   bannerCTASection: {
     title: "Find Your Center. Build Your Edge.",
     description:
       "Book your class today and discover the transformative power of Pilates - only at Drive FITT.",
     btnLabel: "Book Your Class Today",
-    desktopImage: "/images/pilates-c/bannerCTASectionDesktop.svg",
+    desktopImage:
+      "https://da8nru77lsio9.cloudfront.net/images/pilates-c/bannerCTASectionDesktop-embedded.svg",
     mobileImage:
-      "https://da8nru77lsio9.cloudfront.net/images/pilates-c/bannerCTASectionMobile.svg",
+      "https://da8nru77lsio9.cloudfront.net/images/pilates-c/bannerCTASectionMobile-embedded.svg",
   },
   bannerSection: {
     title: "Become a DriveFITT member",
