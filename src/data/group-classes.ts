@@ -15,7 +15,7 @@ export const groupClassesData: StaticPageData = {
     desktopImage:
       "https://da8nru77lsio9.cloudfront.net/images/group-classes-c/hero.webp",
     mobileImage:
-      "https://da8nru77lsio9.cloudfront.net/images/group-classes-c/hero-mobile3.webp",
+      "/images/group-classes/hero-mobile.jpg",
     btnPrimaryText: "Book a free trial",
     btnSecondaryText: "Join Online",
   },
