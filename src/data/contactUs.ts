@@ -73,7 +73,7 @@ export const contactUsData: ContactUsPageData = {
           placeholder: "Enter phone number",
         },
         interests: {
-          label: "Choose your interest",
+          label: "Choose Your Interest",
         },
         preferredLocation: {
           label: "Preferred Location",
