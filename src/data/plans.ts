@@ -13,8 +13,9 @@ export const plansData: StaticPageData = {
     description: "",
     roiTag: "",
     roiIcon: "https://da8nru77lsio9.cloudfront.net/images/roi-icon.svg",
-    desktopImage: "/images/plans/hero.svg",
-    mobileImage: "/images/plans/hero-mobile.svg",
+    desktopImage: "https://da8nru77lsio9.cloudfront.net/images/plans/hero.svg",
+    mobileImage:
+      "https://da8nru77lsio9.cloudfront.net/images/plans/hero-mobile.svg",
     btnPrimaryText: "",
   },
   banner2Section: {

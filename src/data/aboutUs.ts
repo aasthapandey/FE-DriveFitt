@@ -37,49 +37,59 @@ export const aboutUsData: StaticPageData = {
     backgroundImage: "",
     cardList: [
       {
-        icon: "/images/Mark-Sellar.svg",
+        icon: "https://da8nru77lsio9.cloudfront.net/images/Mark-Sellar.svg",
         title: "Mark Sellar",
         subTitle: "Co-Founder & Executive Chairman",
         description:
           "Global business strategist bringing international scale and operational excellence.",
-        tooltipImage: "/images/MarkSellarName.svg",
-        tooltipImageMobile: "/images/MarkSellarNameMobile.svg",
+        tooltipImage:
+          "https://da8nru77lsio9.cloudfront.net/images/MarkSellarName.svg",
+        tooltipImageMobile:
+          "https://da8nru77lsio9.cloudfront.net/images/MarkSellarNameMobile.svg",
       },
       {
-        icon: "/images/Deke-Smith.svg",
+        icon: "https://da8nru77lsio9.cloudfront.net/images/Deke-Smith.svg",
         title: "Deke Smith",
         subTitle: "Co-Founder & Director",
         description:
           "Global business strategist bringing international scale and operational excellence.",
-        tooltipImage: "/images/DekeSmithName.svg",
-        tooltipImageMobile: "/images/DekeSmithNameMobile.svg",
+        tooltipImage:
+          "https://da8nru77lsio9.cloudfront.net/images/DekeSmithName.svg",
+        tooltipImageMobile:
+          "https://da8nru77lsio9.cloudfront.net/images/DekeSmithNameMobile.svg",
       },
       {
-        icon: "/images/Shubman-Gill.svg",
+        icon: "https://da8nru77lsio9.cloudfront.net/images/Shubman-Gill.svg",
         title: "Shubman Gill",
         subTitle: "Co-Founder",
         description:
           "International cricket star driving training innovation after experiencing facility gaps firsthand.",
-        tooltipImage: "/images/ShubmanGillName.svg",
-        tooltipImageMobile: "/images/ShubmanGillNameMobile.svg",
+        tooltipImage:
+          "https://da8nru77lsio9.cloudfront.net/images/ShubmanGillName.svg",
+        tooltipImageMobile:
+          "https://da8nru77lsio9.cloudfront.net/images/ShubmanGillNameMobile.svg",
       },
       {
-        icon: "/images/Preity-G-Zinta.svg",
+        icon: "https://da8nru77lsio9.cloudfront.net/images/Preity-G-Zinta.svg",
         title: "Preity G Zinta",
         subTitle: "Co-Founder",
         description:
           "Bollywood icon bringing mass-appeal storytelling and brand vision to Drive FITT's narrative.",
-        tooltipImage: "/images/PreityGZintaName.svg",
-        tooltipImageMobile: "/images/PreityGZintaNameMobile.svg",
+        tooltipImage:
+          "https://da8nru77lsio9.cloudfront.net/images/PreityGZintaName.svg",
+        tooltipImageMobile:
+          "https://da8nru77lsio9.cloudfront.net/images/PreityGZintaNameMobile.svg",
       },
       {
-        icon: "/images/Vikram-Bhatiya.svg",
+        icon: "https://da8nru77lsio9.cloudfront.net/images/Vikram-Bhatiya.svg",
         title: "Vikram Bhatia",
         subTitle: "Co-Founder & CEO",
         description:
           "Fitness industry veteran ensuring world-class execution across Operational verticals.",
-        tooltipImage: "/images/VikramBhatiaName.svg",
-        tooltipImageMobile: "/images/VikramBhatiaNameMobile.svg",
+        tooltipImage:
+          "https://da8nru77lsio9.cloudfront.net/images/VikramBhatiaName.svg",
+        tooltipImageMobile:
+          "https://da8nru77lsio9.cloudfront.net/images/VikramBhatiaNameMobile.svg",
       },
     ],
   },
