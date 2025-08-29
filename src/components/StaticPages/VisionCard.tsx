@@ -16,6 +16,7 @@ const VisionCard = ({ card, className, isMobile }: VisionCardProps) => {
     subTitle,
     tooltipImage,
     tooltipImageMobile,
+    backgroundImage,
   } = card;
 
   // Define specific positioning for each person based on their image
@@ -203,7 +204,7 @@ const VisionCard = ({ card, className, isMobile }: VisionCardProps) => {
       <div
         className="absolute inset-0 w-full h-full"
         style={{
-          backgroundImage: `url("/images/VisionaryCardBg.svg")`,
+          backgroundImage: backgroundImage ? `url("${backgroundImage}")` : `url("/images/VisionaryCardBg.svg")`,
           backgroundPosition: "center center",
           backgroundSize: "cover",
         }}

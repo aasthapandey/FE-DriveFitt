@@ -46,6 +46,8 @@ export const aboutUsData: StaticPageData = {
           "https://da8nru77lsio9.cloudfront.net/images/MarkSellarName.svg",
         tooltipImageMobile:
           "https://da8nru77lsio9.cloudfront.net/images/MarkSellarNameMobile.svg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/VisionaryCardBg.svg",
       },
       {
         icon: "https://da8nru77lsio9.cloudfront.net/images/Deke-Smith.svg",
@@ -57,6 +59,8 @@ export const aboutUsData: StaticPageData = {
           "https://da8nru77lsio9.cloudfront.net/images/DekeSmithName.svg",
         tooltipImageMobile:
           "https://da8nru77lsio9.cloudfront.net/images/DekeSmithNameMobile.svg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/VisionaryCardBg2.svg",
       },
       {
         icon: "https://da8nru77lsio9.cloudfront.net/images/Shubman-Gill.svg",
@@ -68,6 +72,8 @@ export const aboutUsData: StaticPageData = {
           "https://da8nru77lsio9.cloudfront.net/images/ShubmanGillName.svg",
         tooltipImageMobile:
           "https://da8nru77lsio9.cloudfront.net/images/ShubmanGillNameMobile.svg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/VisionaryCardBg3.svg",
       },
       {
         icon: "https://da8nru77lsio9.cloudfront.net/images/Preity-G-Zinta.svg",
@@ -79,6 +85,8 @@ export const aboutUsData: StaticPageData = {
           "https://da8nru77lsio9.cloudfront.net/images/PreityGZintaName.svg",
         tooltipImageMobile:
           "https://da8nru77lsio9.cloudfront.net/images/PreityGZintaNameMobile.svg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/VisionaryCardBg3.svg",
       },
       {
         icon: "https://da8nru77lsio9.cloudfront.net/images/Vikram-Bhatiya.svg",
@@ -90,6 +98,8 @@ export const aboutUsData: StaticPageData = {
           "https://da8nru77lsio9.cloudfront.net/images/VikramBhatiaName.svg",
         tooltipImageMobile:
           "https://da8nru77lsio9.cloudfront.net/images/VikramBhatiaNameMobile.svg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/VisionaryCardBg3.svg",
       },
     ],
   },
