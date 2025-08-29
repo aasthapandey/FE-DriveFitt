@@ -67,7 +67,7 @@ const HeroSection = ({ data, pageName, isMobile }: HeroSectionProps) => {
               : `${
                   pageName === "recovery"
                     ? "md:mt-[197px] mt-[170px]"
-                    : "md:mt-[125px] mt-[275px]"
+                    : "md:mt-[125px] mt-[170px]"
                 }`
           }`}
         >
