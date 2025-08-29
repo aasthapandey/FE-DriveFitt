@@ -12,8 +12,10 @@ export const pilatesData: StaticPageData = {
   hero: {
     titleWords: [{ text: "Precision. Strength. Control.", color: "#FFFFFF" }],
     description: "",
-    desktopImage: "/images/pilates/hero.jpg",
-    mobileImage: "/images/pilates/hero-mobile.jpg",
+    desktopImage:
+      "https://da8nru77lsio9.cloudfront.net/images/pilates-c/hero.webp",
+    mobileImage:
+      "https://da8nru77lsio9.cloudfront.net/images/pilates-c/hero-mobile.webp",
     btnPrimaryText: "Join the Waitlist",
     btnSecondaryText: "Join Online",
   },
@@ -32,22 +34,22 @@ export const pilatesData: StaticPageData = {
     description: "",
     cardList: [
       {
-        icon: "/images/pilates/icon-1.svg",
+        icon: "https://da8nru77lsio9.cloudfront.net/images/pilates-c/icon-1.svg",
         title: "Expert-Led Sessions",
         description: "Emphasizing alignment, mobility, and functional strength",
       },
       {
-        icon: "/images/pilates/icon-2.svg",
+        icon: "https://da8nru77lsio9.cloudfront.net/images/pilates-c/icon-2.svg",
         title: "Mat & Equipment-based Formats",
         description: "Professional cricket coaching with advanced analytics",
       },
       {
-        icon: "/images/pilates/icon-3.svg",
+        icon: "https://da8nru77lsio9.cloudfront.net/images/pilates-c/icon-3.svg",
         title: "Small Groups",
         description: "Personal formats for focused attention",
       },
       {
-        icon: "/images/pilates/icon-4.svg",
+        icon: "https://da8nru77lsio9.cloudfront.net/images/pilates-c/icon-4.svg",
         title: "Supportive Environment",
         description: "Breath-centered space that restores as it strengthens",
       },
@@ -60,19 +62,22 @@ export const pilatesData: StaticPageData = {
         title: "Mat Pilates",
         description:
           "The foundation. Grounded, focused, and precise. Strengthen from within using nothing but your body, gravity, and control.",
-        backgroundImage: "/images/pilates/evolution-1.jpg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/pilates-c/evolution-1.webp",
       },
       {
         title: "Reformer Pilates",
         description:
           "Experience Pilates on the reformer for dynamic resistance, precision-based movement, and deeply targeted strength.",
-        backgroundImage: "/images/pilates/evolution-2.jpg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/pilates-c/evolution-2.webp",
       },
       {
         title: "Athletic Pilates",
         description:
           "Designed for performance-minded individuals - think enhanced mobility, core strength, and body awareness that elevates you in sport and life.",
-        backgroundImage: "/images/pilates/evolution-3.jpg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/pilates-c/evolution-3.webp",
       },
     ],
   },
@@ -80,16 +85,17 @@ export const pilatesData: StaticPageData = {
     title: "Who It’s For",
     description:
       "From CXOs decompressing after a high-stakes day to young athletes building foundational mobility, Pilates fits into every lifestyle. It's the ideal complement to high-intensity training, sport performance, and recovery.",
-    image1: "/images/pilates/photoCircle1.svg",
-    image2: "/images/pilates/photoCircle2.svg",
+    image1: "/images/pilates-c/photoCircle1.svg",
+    image2: "/images/pilates-c/photoCircle2.svg",
   },
   bannerCTASection: {
     title: "Find Your Center. Build Your Edge.",
     description:
       "Book your class today and discover the transformative power of Pilates - only at Drive FITT.",
     btnLabel: "Book Your Class Today",
-    desktopImage: "/images/pilates/bannerCTASectionDesktop.svg",
-    mobileImage: "/images/pilates/bannerCTASectionMobile.svg",
+    desktopImage: "/images/pilates-c/bannerCTASectionDesktop.svg",
+    mobileImage:
+      "https://da8nru77lsio9.cloudfront.net/images/pilates-c/bannerCTASectionMobile.svg",
   },
   bannerSection: {
     title: "Become a DriveFITT member",

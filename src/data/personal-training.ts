@@ -12,8 +12,10 @@ export const personalTrainingData: StaticPageData = {
   hero: {
     titleWords: [{ text: "Personal Training At Drive FITT", color: "#FFFFFF" }],
     description: "",
-    desktopImage: "/images/personal-training/hero.jpg",
-    mobileImage: "/images/personal-training/hero-mobile.jpg",
+    desktopImage:
+      "https://da8nru77lsio9.cloudfront.net/images/personal-training-c/hero.webp",
+    mobileImage:
+      "https://da8nru77lsio9.cloudfront.net/images/personal-training-c/hero-mobile.webp",
     btnPrimaryText: "Book a free trial",
     btnSecondaryText: "Join Online",
   },
@@ -21,9 +23,12 @@ export const personalTrainingData: StaticPageData = {
     title: "Transform Your Body. Sharpen Your Performance. Become Unshakable.",
     description:
       "Your goals deserve more than generic workouts. Our one-on-one coaching is rooted in science, personalized to your needs, and driven by data. We're not just trainers—we're performance architects.",
-    image: "/images/personal-training/banner2.svg",
-    backgroundImage: "/images/personal-training/banner2-bg.svg",
-    mobileBackgroundImage: "/images/personal-training/mobile-banner2-bg.svg",
+    image:
+      "https://da8nru77lsio9.cloudfront.net/images/personal-training-c/banner2.svg",
+    backgroundImage:
+      "https://da8nru77lsio9.cloudfront.net/images/personal-training-c/banner2-bg.svg",
+    mobileBackgroundImage:
+      "https://da8nru77lsio9.cloudfront.net/images/personal-training-c/mobile-banner2-bg.svg",
     className: "md:-mt-[282px]",
   },
   scrollingCardSection: {
@@ -37,7 +42,8 @@ export const personalTrainingData: StaticPageData = {
           "Every plan starts with a full assessment—physical, movement, and lifestyle.",
         ],
         extraTagLabel: "",
-        backgroundImage: "/images/personal-training/scroll-card-1.jpg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/personal-training-c/scroll-card-1.webp",
       },
       {
         subTitle: "Data-Driven Progress",
@@ -46,7 +52,8 @@ export const personalTrainingData: StaticPageData = {
           "Intelligent simulation like Random, Match Practice or Match Situation",
         ],
         extraTagLabel: "",
-        backgroundImage: "/images/personal-training/scroll-card-2.jpg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/personal-training-c/scroll-card-2.webp",
       },
       {
         subTitle: "Expert-Led Sessions",
@@ -56,7 +63,8 @@ export const personalTrainingData: StaticPageData = {
           "Evidence-Based Recovery for a smarter, safer Return-to-Play",
         ],
         extraTagLabel: "",
-        backgroundImage: "/images/personal-training/scroll-card-3.jpg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/personal-training-c/scroll-card-3.webp",
       },
       {
         subTitle: "Lifestyle Integration",
@@ -64,7 +72,8 @@ export const personalTrainingData: StaticPageData = {
           "Track your progress with our smart tech—from 3D body scans to real-time motion capture.",
         ],
         extraTagLabel: "",
-        backgroundImage: "/images/personal-training/scroll-card-4.jpg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/personal-training-c/scroll-card-4.webp",
       },
     ],
   },
@@ -76,7 +85,8 @@ export const personalTrainingData: StaticPageData = {
         id: "aisha",
         name: "Aisha",
         description: "Strength & Tone Specialist",
-        image: "/images/personal-training/coach1.jpg",
+        image:
+          "https://da8nru77lsio9.cloudfront.net/images/personal-training-c/coach1.jpg",
       },
       {
         id: "riya-awasthi",
@@ -137,17 +147,17 @@ export const personalTrainingData: StaticPageData = {
       "Ready to lead the sports and fitness revolution in your city?",
     cardList: [
       {
-        icon: "/images/personal-training/step1.svg",
+        icon: "https://da8nru77lsio9.cloudfront.net/images/personal-training-c/step1.svg",
         title: "Book your free consult – meet your coach.",
         description: "",
       },
       {
-        icon: "/images/personal-training/step2.svg",
+        icon: "https://da8nru77lsio9.cloudfront.net/images/personal-training-c/step2.svg",
         title: "Get your custom plan – designed around your performance goals.",
         description: "",
       },
       {
-        icon: "/images/personal-training/step3.svg",
+        icon: "https://da8nru77lsio9.cloudfront.net/images/personal-training-c/step3.svg",
         title:
           "Start your transformation – train smarter, feel stronger, stay consistent.",
         description: "",
@@ -162,8 +172,10 @@ export const personalTrainingData: StaticPageData = {
       "Book your free consult and feel the difference of Drive FIIT’s one-on-one coaching.",
     description: "",
     btnLabel: "Book Your Class Today",
-    desktopImage: "/images/personal-training/bannerCta.png",
-    mobileImage: "/images/personal-training/bannerCTASectionMobile.svg",
+    desktopImage:
+      "https://da8nru77lsio9.cloudfront.net/images/personal-training-c/bannerCta.webp",
+    mobileImage:
+      "https://da8nru77lsio9.cloudfront.net/images/personal-training-c/bannerCTASectionMobile.svg",
     specialBackgroundClass: "#1D1D1DB2",
     showStrip: false,
     parentClass: "md:!mt-[70px]",

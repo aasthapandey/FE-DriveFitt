@@ -15,8 +15,10 @@ export const aboutUsData: StaticPageData = {
       "Drive FITT is redefining India’s fitness landscape by blending the nation’s passion for cricket with world-class training, recovery, and performance facilities.",
     roiTag: "",
     roiIcon: "https://da8nru77lsio9.cloudfront.net/images/roi-icon.svg",
-    desktopImage: "/images/aboutUs/hero.svg",
-    mobileImage: "/images/aboutUs/hero-mobile.svg",
+    desktopImage:
+      "https://da8nru77lsio9.cloudfront.net/images/aboutUs-c/hero.svg",
+    mobileImage:
+      "https://da8nru77lsio9.cloudfront.net/images/aboutUs-c/hero-mobile.svg",
     btnPrimaryText: "",
   },
   banner1Section: {
@@ -92,8 +94,10 @@ export const aboutUsData: StaticPageData = {
           "High-tech nets with ball-tracking, programming from elite cricket athletes such as Shubman Gill, Glen Maxwell and Ryan Harris.",
         ],
         extraTagLabel: "",
-        backgroundImage: "/images/aboutUs/scroll-card-1.jpg",
-        mobileImage: "/images/aboutUs/scroll-card-1.jpg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/aboutUs-c/scroll-card-1.webp",
+        mobileImage:
+          "https://da8nru77lsio9.cloudfront.net/images/aboutUs-c/scroll-card-1.webp",
       },
       {
         subTitle: "Fitness & Conditioning Zone",
@@ -101,8 +105,10 @@ export const aboutUsData: StaticPageData = {
           "Advanced strength, cardio, and functional training rooted in sports science.",
         ],
         extraTagLabel: "",
-        backgroundImage: "/images/aboutUs/scroll-card-2.jpg",
-        mobileImage: "/images/aboutUs/scroll-card-2.jpg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/aboutUs-c/scroll-card-2.webp",
+        mobileImage:
+          "https://da8nru77lsio9.cloudfront.net/images/aboutUs-c/scroll-card-2.webp",
       },
       {
         subTitle: "Recovery & Wellness Studios",
@@ -110,8 +116,10 @@ export const aboutUsData: StaticPageData = {
           "Infrared saunas, cold plunge, compression, percussion, yoga, mobility sessions, and more—built for longevity and well-being.",
         ],
         extraTagLabel: "",
-        backgroundImage: "/images/aboutUs/scroll-card-3.jpg",
-        mobileImage: "/images/aboutUs/scroll-card-3.jpg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/aboutUs-c/scroll-card-3.webp",
+        mobileImage:
+          "https://da8nru77lsio9.cloudfront.net/images/aboutUs-c/scroll-card-3.webp",
       },
       {
         subTitle: "Cohesive Community",
@@ -119,8 +127,10 @@ export const aboutUsData: StaticPageData = {
           "A culture that blends group classes, coaching, app-based tracking, and fitness challenges.",
         ],
         extraTagLabel: "",
-        backgroundImage: "/images/aboutUs/scroll-card-4.jpg",
-        mobileImage: "/images/aboutUs/scroll-card-4.jpg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/aboutUs-c/scroll-card-4.webp",
+        mobileImage:
+          "https://da8nru77lsio9.cloudfront.net/images/aboutUs-c/scroll-card-4.webp",
       },
     ],
   },
@@ -129,21 +139,23 @@ export const aboutUsData: StaticPageData = {
       {
         title: "Growth & Impact",
         description:
-          'Our flagship club in <span class="special-text">Gurgaon</span> launches this year, with Delhi and more to follow. We aim to deliver <img src="/images/aboutUs/300Franchise.svg" alt="300 Franchises" class="inline-svg" style="display: inline-block; vertical-align:" /> across India within <img src="/images/aboutUs/3Years.svg" alt="3 Years" class="inline-svg" style=" display: inline-block; vertical-align:" />, making <span class="special-text">sports–embedded fitness</span> accessible to millions.',
+          'Our flagship club in <span class="special-text">Gurgaon</span> launches this year, with Delhi and more to follow. We aim to deliver <img src="https://da8nru77lsio9.cloudfront.net/images/aboutUs-c/300Franchise.svg" alt="300 Franchises" class="inline-svg" style="display: inline-block; vertical-align:" /> across India within <img src="https://da8nru77lsio9.cloudfront.net/images/aboutUs-c/3Years.svg" alt="3 Years" class="inline-svg" style=" display: inline-block; vertical-align:" />, making <span class="special-text">sports–embedded fitness</span> accessible to millions.',
         src: "aboutUs/card-parallax-full-1.png",
         backgroundImage: "",
-        url: "/images/aboutUs/card-parallax-full-1.png",
-        mobileUrl: "/images/aboutUs/card-parallax-full-mobile-1.jpg",
+        url: "https://da8nru77lsio9.cloudfront.net/images/aboutUs-c/card-parallax-full-1.webp",
+        mobileUrl:
+          "https://da8nru77lsio9.cloudfront.net/images/aboutUs-c/card-parallax-full-mobile-1.webp",
         color: "#BBACAF",
       },
       {
         title: "A Fusion of Passion & Purpose",
         description:
-          'Drive FITT isn\'t just a premium fitness brand—it\'s a movement. We bring cricket into wellness, tailor science into training, and unite members in a high-energy, aspirational community. With new shareholders like international cricket star <img src="/images/aboutUs/GlennMaxwell.svg" alt="Glenn Maxwell" class="inline-svg" style="display: inline-block; vertical-align: middle;" /> our approach to <span class="special-text">fitness, athlete development, and recovery</span> is only getting sharper and more distinct.',
+          'Drive FITT isn\'t just a premium fitness brand—it\'s a movement. We bring cricket into wellness, tailor science into training, and unite members in a high-energy, aspirational community. With new shareholders like international cricket star <img src="https://da8nru77lsio9.cloudfront.net/images/aboutUs-c/GlennMaxwell.svg" alt="Glenn Maxwell" class="inline-svg" style="display: inline-block; vertical-align: middle;" /> our approach to <span class="special-text">fitness, athlete development, and recovery</span> is only getting sharper and more distinct.',
         src: "aboutUs/card-parallax-full-2.png",
         backgroundImage: "",
-        url: "/images/aboutUs/card-parallax-full-2.png",
-        mobileUrl: "/images/aboutUs/card-parallax-full-mobile-2.jpg",
+        url: "https://da8nru77lsio9.cloudfront.net/images/aboutUs-c/card-parallax-full-2.webp",
+        mobileUrl:
+          "https://da8nru77lsio9.cloudfront.net/images/aboutUs-c/card-parallax-full-mobile-2.webp",
         color: "#977F6D",
       },
     ],
@@ -153,8 +165,10 @@ export const aboutUsData: StaticPageData = {
     description:
       "Train like the pros. Recover like champions. Build a life where performance, health, and sport co-exist in harmony - it starts here at Drive FITT.",
     btnLabel: "Book a free trial",
-    desktopImage: "/images/aboutUs/bannerCta.svg",
-    mobileImage: "/images/aboutUs/bannerCta-mobile.jpg",
+    desktopImage:
+      "https://da8nru77lsio9.cloudfront.net/images/aboutUs-c/bannerCta.svg",
+    mobileImage:
+      "https://da8nru77lsio9.cloudfront.net/images/aboutUs-c/bannerCta-mobile.webp",
     addGradient: false,
     mobileImageUp: true,
   },

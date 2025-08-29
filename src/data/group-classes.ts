@@ -12,8 +12,10 @@ export const groupClassesData: StaticPageData = {
   hero: {
     titleWords: [{ text: "Group Training, Reimagined.", color: "#FFFFFF" }],
     description: "",
-    desktopImage: "/images/group-classes/hero.jpg",
-    mobileImage: "/images/group-classes/hero-mobile3.png",
+    desktopImage:
+      "https://da8nru77lsio9.cloudfront.net/images/group-classes-c/hero.webp",
+    mobileImage:
+      "https://da8nru77lsio9.cloudfront.net/images/group-classes-c/hero-mobile3.webp",
     btnPrimaryText: "Book a free trial",
     btnSecondaryText: "Join Online",
   },
@@ -33,43 +35,50 @@ export const groupClassesData: StaticPageData = {
         title: "Power Yoga",
         description:
           "Strength-driven flow that blends breath and movement to sculpt, focus, and build resilience.",
-        backgroundImage: "/images/group-classes/power-yoga.jpg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/group-classes-c/power-yoga.webp",
       },
       {
         title: "Circuit Training",
         description:
           "Fast-paced, high-intensity stations that torch calories, boost endurance, and build strength.",
-        backgroundImage: "/images/group-classes/circuit-training.jpg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/group-classes-c/circuit-training.webp",
       },
       {
         title: "HIIT",
         description:
           "Intense intervals for serious burn, performance gains, and next-level conditioning.",
-        backgroundImage: "/images/group-classes/HIIT.jpg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/group-classes-c/HIIT.webp",
       },
       {
         title: "Boxing",
         description:
           "Real fight-style drills, pad work, and conditioning — not just cardio-boxing.",
-        backgroundImage: "/images/group-classes/boxing.jpg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/group-classes-c/boxing.webp",
       },
       {
         title: "Core Blast",
         description:
           "30 minutes to strengthen your core, protect your back, and improve control.",
-        backgroundImage: "/images/group-classes/core-blast.jpg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/group-classes-c/core-blast.webp",
       },
       {
         title: "Spinning",
         description:
           "Performance-tracked cycling fused with music for an unmatched cardio high.",
-        backgroundImage: "/images/group-classes/spining.jpg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/group-classes-c/spining.webp",
       },
       {
         title: "TRX",
         description:
           "Suspension training to build strength, mobility, and core power at any level.",
-        backgroundImage: "/images/group-classes/TRX.jpg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/group-classes-c/TRX.webp",
       },
     ],
     cardList2: [
@@ -77,43 +86,50 @@ export const groupClassesData: StaticPageData = {
         title: "Dance Fitness",
         description:
           "Music-fueled, high-energy moves that feel like a party, not a workout.",
-        backgroundImage: "/images/group-classes/dance-fitness.jpg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/group-classes-c/dance-fitness.webp",
       },
       {
         title: "Pilates",
         description:
           "Core-toning, posture-improving, and flexibility-boosting precision training.",
-        backgroundImage: "/images/group-classes/pilates.jpg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/group-classes-c/pilates.webp",
       },
       {
         title: "Vinyasa Yoga",
         description:
           "Breath-led, flowing practice that restores balance and deepens mind-body connection.",
-        backgroundImage: "/images/group-classes/vinyasa-yoga.jpg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/group-classes-c/vinyasa-yoga.webp",
       },
       {
         title: "Flexi Strength",
         description:
           "Flexibility meets functional strength for mobility, injury prevention, and longevity.",
-        backgroundImage: "/images/group-classes/flexi-strength.jpg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/group-classes-c/flexi-strength.webp",
       },
       {
         title: "ABT (Abs, Butt, Thighs)",
         description:
           "Targeted toning for glutes, core, and thighs with high-rep, sculpting moves.",
-        backgroundImage: "/images/group-classes/Abt.jpg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/group-classes-c/Abt.webp",
       },
       {
         title: "Zumba",
         description:
           "Latin-inspired cardio dance for endurance, coordination, and pure joy.",
-        backgroundImage: "/images/group-classes/zumba.jpg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/group-classes-c/zumba.webp",
       },
       {
         title: "Yoga",
         description:
           "Modern yet timeless sequences to strengthen, restore, and ground your body and mind.",
-        backgroundImage: "/images/group-classes/yoga1.jpg",
+        backgroundImage:
+          "https://da8nru77lsio9.cloudfront.net/images/group-classes-c/yoga1.webp",
       },
     ],
   },
@@ -122,8 +138,10 @@ export const groupClassesData: StaticPageData = {
     description:
       "Every session at Drive FITT is intentionally designed, professionally led, and performance-driven. Whether you're leveling up your strength, chasing recovery, or finding your flow - our group classes meet you at your edge and take you beyond.",
     btnLabel: "Book a free trial",
-    desktopImage: "/images/group-classes/bannerCta2.png",
-    mobileImage: "/images/group-classes/bannerCta2Mobile.png",
+    desktopImage:
+      "https://da8nru77lsio9.cloudfront.net/images/group-classes-c/bannerCta2.webp",
+    mobileImage:
+      "https://da8nru77lsio9.cloudfront.net/images/group-classes-c/bannerCta2Mobile.webp",
     imageClass: "md:max-h-[564px]",
     specialBackgroundClass: "#1D1D1DB2",
     showStrip: false,
