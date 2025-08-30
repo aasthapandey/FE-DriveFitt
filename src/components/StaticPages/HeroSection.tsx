@@ -77,7 +77,7 @@ const HeroSection = ({ data, pageName, isMobile }: HeroSectionProps) => {
               : "max-w-full md:max-w-[600px]"
           } ${
             pageName === "home"
-              ? "mt-[267px] md:mt-[145px]"
+              ? "mt-[200px] md:mt-[145px]"
               : `${
                   pageName === "recovery"
                     ? "md:mt-[197px] mt-[170px]"

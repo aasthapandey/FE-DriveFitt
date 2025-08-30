@@ -90,7 +90,6 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
                     >
                       <div className="flex items-center justify-center gap-3 mb-[47px]">
                         <span className="text-base font-normal leading-[100%] tracking-[0px] text-center text-[#6A6A6A]">
-                          Original price:{" "}
                           <span className="line-through">
                             {plans[activePlanIndex].originalPrice}
                           </span>
