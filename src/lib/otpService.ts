@@ -10,7 +10,7 @@ class OTPService {
   private readonly MAX_ATTEMPTS = parseInt(process.env.OTP_MAX_ATTEMPTS || "3");
 
   generateOTP(): string {
-    return crypto.randomInt(100000, 999999).toString();
+    return crypto.randomInt(1000, 9999).toString();
   }
 
   async sendOTP(phone: string, purpose: OTPPurpose): Promise<boolean> {

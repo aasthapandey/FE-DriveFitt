@@ -30,11 +30,11 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    if (!/^\d{6}$/.test(otp)) {
+    if (!/^\d{4}$/.test(otp)) {
       return NextResponse.json<AuthResponse>(
         {
           success: false,
-          message: "Invalid OTP format. Please enter a 6-digit code.",
+          message: "Invalid OTP format. Please enter a 4-digit code.",
         },
         { status: 400 }
       );

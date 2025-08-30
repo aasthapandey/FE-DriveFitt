@@ -19,7 +19,7 @@ ADD COLUMN vendor_response TEXT NULL COMMENT 'Stores Gupshup API response';
 CREATE TABLE otp_verification (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     phone VARCHAR(20) NOT NULL,
-    otp VARCHAR(6) NOT NULL,
+    otp VARCHAR(4) NOT NULL,
     purpose TINYINT NOT NULL COMMENT '1=login, 2=registration, 3=password_reset',
     attempts INT DEFAULT 0,
     is_verified BOOLEAN DEFAULT FALSE,

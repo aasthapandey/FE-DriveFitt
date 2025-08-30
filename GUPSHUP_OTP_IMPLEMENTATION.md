@@ -4,7 +4,7 @@ This document outlines the complete implementation of Gupshup OTP authentication
 
 ## 🚀 Features Implemented
 
-- **OTP Generation & Verification**: Secure 6-digit OTP generation and validation
+- **OTP Generation & Verification**: Secure 4-digit OTP generation and validation
 - **Gupshup SMS Integration**: Real-time SMS delivery via Gupshup API
 - **User Authentication**: JWT-based authentication with session management
 - **Rate Limiting**: Protection against OTP abuse (3 requests per hour)
@@ -117,7 +117,7 @@ Content-Type: application/json
 
 {
   "phone": "9876543210",
-  "otp": "123456",
+  "otp": "1234",
   "purpose": 1
 }
 ```
@@ -139,7 +139,7 @@ Content-Type: application/json
 
 {
   "phone": "9876543210",
-  "otp": "123456"
+  "otp": "1234"
 }
 ```
 
@@ -235,7 +235,7 @@ import { OTPPurpose } from "@/types/auth";
 const response = await authAPI.sendOTP("9876543210", OTPPurpose.LOGIN);
 
 // Login with OTP
-const loginResponse = await authAPI.loginWithOTP("9876543210", "123456");
+const loginResponse = await authAPI.loginWithOTP("9876543210", "1234");
 
 // Store token
 if (loginResponse.success && loginResponse.data?.token) {
