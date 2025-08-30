@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import ScrollAnimation from "@/components/common/ScrollAnimation";
+import EnhancedPaymentModal from "./EnhancedPaymentModal";
 
 interface PricingPlan {
   title: string;
@@ -21,9 +22,37 @@ interface PricingPlansProps {
 
 const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
   const [activePlanIndex, setActivePlanIndex] = useState(0);
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState<PricingPlan | null>(null);
 
   const handlePlanSwitch = (index: number) => {
     setActivePlanIndex(index);
+  };
+
+  const handlePaymentClick = (plan: PricingPlan) => {
+    setSelectedPlan(plan);
+    setShowPaymentModal(true);
+  };
+
+  const handlePaymentClose = () => {
+    setShowPaymentModal(false);
+    setSelectedPlan(null);
+  };
+
+  const handlePaymentSuccess = (paymentId: string) => {
+    console.log(
+      "Payment successful for plan:",
+      selectedPlan?.title,
+      "Payment ID:",
+      paymentId
+    );
+    // You can add additional success handling here
+    // For example, redirect to a success page or show a success message
+  };
+
+  const handlePaymentError = (error: string) => {
+    console.error("Payment failed:", error);
+    // You can add additional error handling here
   };
 
   if (isMobile) {
@@ -131,7 +160,12 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
                       distance={15}
                       className="w-full mx-6"
                     >
-                      <button className="w-full h-12 rounded-lg bg-[#00DBDC] py-[10px] mb-4">
+                      <button
+                        className="w-full h-12 rounded-lg bg-[#00DBDC] py-[10px] mb-4 hover:bg-[#00DBDC]/90 transition-colors"
+                        onClick={() =>
+                          handlePaymentClick(plans[activePlanIndex])
+                        }
+                      >
                         <span className="text-base font-medium leading-[100%] tracking-[-5%] text-[#0D0D0D]">
                           {plans[activePlanIndex].buttonText}
                         </span>
@@ -164,6 +198,16 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
             </div>
           </ScrollAnimation>
         </div>
+
+        {/* Payment Modal */}
+        {selectedPlan && (
+          <EnhancedPaymentModal
+            isOpen={showPaymentModal}
+            onClose={handlePaymentClose}
+            membershipType={selectedPlan.title}
+            amount={1} // 1 rupee for testing
+          />
+        )}
       </section>
     );
   }
@@ -240,7 +284,10 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
                     </p>
                   </ScrollAnimation>
 
-                  <button className="w-full h-12 md:h-14 lg:h-[56px] rounded-lg bg-[#00DBDC] px-4 md:px-[60px] lg:px-[60px] py-3 md:py-4 mb-3 md:mb-4">
+                  <button
+                    className="w-full h-12 md:h-14 lg:h-[56px] rounded-lg bg-[#00DBDC] px-4 md:px-[60px] lg:px-[60px] py-3 md:py-4 mb-3 md:mb-4 hover:bg-[#00DBDC]/90 transition-colors"
+                    onClick={() => handlePaymentClick(plan)}
+                  >
                     <span className="text-sm md:text-lg lg:text-xl font-medium leading-[100%] tracking-[-5%] text-[#0D0D0D]">
                       {plan.buttonText}
                     </span>
@@ -264,6 +311,16 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
           </ScrollAnimation>
         ))}
       </div>
+
+      {/* Payment Modal */}
+      {selectedPlan && (
+        <EnhancedPaymentModal
+          isOpen={showPaymentModal}
+          onClose={handlePaymentClose}
+          membershipType={selectedPlan.title}
+          amount={1} // 1 rupee for testing
+        />
+      )}
     </section>
   );
 };
