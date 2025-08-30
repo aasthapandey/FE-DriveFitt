@@ -88,17 +88,21 @@ export const insertMembership = async (
   membership: Partial<Membership>
 ): Promise<void> => {
   const query = `
-    INSERT INTO memberships (user_id, order_id, payment_id, membership_type, status, created_at)
+    INSERT INTO memberships (user_id, order_id, payment_id, membership_type, status, expires_at)
     VALUES (?, ?, ?, ?, ?, ?)
   `;
+
+  // Calculate expiry date (1 year from now)
+  const expiresAt = new Date();
+  expiresAt.setFullYear(expiresAt.getFullYear() + 1);
 
   await executeQuery(query, [
     membership.user_id,
     membership.order_id,
     membership.payment_id,
-    membership.membership_type || null,
+    membership.membership_type,
     membership.status || "active",
-    membership.created_at || new Date(),
+    expiresAt,
   ]);
 };
 

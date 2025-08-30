@@ -94,13 +94,14 @@ export async function POST(request: NextRequest) {
         user_id: userDetails.user_id || userDetails.id,
         order_id: orderId,
         payment_id: paymentId,
-        membership_type: userDetails.membership_type || null,
+        membership_type: userDetails.membership_type,
         status: "active",
-        created_at: new Date(),
       });
       console.log(
         "Membership record created for user_id:",
-        userDetails.user_id || userDetails.id
+        userDetails.user_id || userDetails.id,
+        "with membership_type:",
+        userDetails.membership_type
       );
     } catch (dbError) {
       console.error("Failed to create membership record:", dbError);

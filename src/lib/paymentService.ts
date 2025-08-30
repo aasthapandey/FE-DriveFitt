@@ -44,7 +44,11 @@ export class PaymentService {
   }
 
   // Verify payment on server
-  static async verifyPayment(paymentData: any, userDetails: any) {
+  static async verifyPayment(
+    paymentData: any,
+    userDetails: any,
+    membershipType: number
+  ) {
     console.log("🔍 Verifying payment...", paymentData);
 
     const response = await fetch("/api/payments/verify", {
@@ -57,7 +61,7 @@ export class PaymentService {
         userDetails: {
           ...userDetails,
           user_id: userDetails.id,
-          membership_type: userDetails.membershipType,
+          membership_type: membershipType,
         },
       }),
     });
@@ -109,7 +113,8 @@ export class PaymentService {
                 console.log("🔍 Step 3: Verifying payment...");
                 const verificationResult = await this.verifyPayment(
                   paymentResponse,
-                  options.userDetails
+                  options.userDetails,
+                  options.membershipType
                 );
                 console.log("✅ Payment verified:", verificationResult);
 
