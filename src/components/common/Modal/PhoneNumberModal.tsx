@@ -14,6 +14,7 @@ interface PhoneNumberModalProps {
   isOpen: boolean;
   onClose: () => void;
   isMobile?: boolean;
+  onSuccess?: (phoneNumber: string, userData?: any) => void; // Optional callback for successful authentication with user data
 }
 
 interface PhoneStepProps {
@@ -268,6 +269,7 @@ const PhoneNumberModal = ({
   isOpen,
   onClose,
   isMobile,
+  onSuccess,
 }: PhoneNumberModalProps) => {
   const [modalState, setModalState] = useState<ModalState>("phone");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -415,7 +417,36 @@ const PhoneNumberModal = ({
           console.log("PhoneNumberModal: Login result:", loginResult);
 
           if (loginResult.type === "auth/loginUser/fulfilled") {
-            // Check membership status
+            // Check if user has complete profile data
+            const hasCompleteProfile =
+              user.name && user.email && user.phone && user.dateOfBirth;
+
+            console.log("PhoneNumberModal: User data after login:", {
+              id: user.id,
+              name: user.name,
+              email: user.email,
+              phone: user.phone,
+              dateOfBirth: user.dateOfBirth,
+              hasCompleteProfile,
+            });
+
+            if (!hasCompleteProfile) {
+              // User exists but profile is incomplete, open UserInfoModal
+              console.log(
+                "PhoneNumberModal: User profile incomplete, opening UserInfoModal"
+              );
+              setIsUserInfoModalOpen(true);
+              return;
+            }
+
+            // If onSuccess callback is provided, use it instead of redirecting
+            if (onSuccess) {
+              onSuccess(phoneNumber, user);
+              onClose();
+              return;
+            }
+
+            // Default behavior: Check membership status and redirect
             const membershipResult = await checkUserMembership(user.id);
 
             if (membershipResult.type === "auth/checkMembership/fulfilled") {

@@ -123,6 +123,12 @@ class AuthService {
   async verifyToken(token: string): Promise<boolean> {
     try {
       console.log("authService.verifyToken: Verifying token...");
+      console.log("authService.verifyToken: Token length:", token?.length);
+      console.log(
+        "authService.verifyToken: Token preview:",
+        token?.substring(0, 20) + "..."
+      );
+
       const response = await this.makeRequest("/api/auth/verify-token", {
         method: "POST",
         body: JSON.stringify({ token }),

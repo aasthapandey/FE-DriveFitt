@@ -119,6 +119,11 @@ export const loadUserFromStorage = createAsyncThunk(
       const userData = sessionStorage.getItem("user_data");
 
       console.log("loadUserFromStorage: token exists:", !!token);
+      console.log("loadUserFromStorage: token length:", token?.length);
+      console.log(
+        "loadUserFromStorage: token preview:",
+        token?.substring(0, 20) + "..."
+      );
       console.log("loadUserFromStorage: userData exists:", !!userData);
 
       if (token && userData) {

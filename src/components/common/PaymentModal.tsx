@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { PaymentService, PaymentOptions } from "@/lib/paymentService";
 import { RootState } from "@/store";
@@ -23,41 +23,46 @@ export default function PaymentModal({
 }: PaymentModalProps) {
   const { user } = useSelector((state: RootState) => state.auth);
   const [isLoading, setIsLoading] = useState(false);
-  const [userDetails, setUserDetails] = useState({
+
+  // Since user is already authenticated and has complete profile (verified in PricingPlans),
+  // we can directly use the user data from Redux
+  const userDetails = {
     name: user?.name || "",
     email: user?.email || "",
     contact: user?.phone || "",
-  });
-  const [errors, setErrors] = useState<{ [key: string]: string }>({});
-
-  const validateForm = () => {
-    const newErrors: { [key: string]: string } = {};
-
-    if (!userDetails.name.trim()) {
-      newErrors.name = "Name is required";
-    }
-
-    if (!userDetails.email.trim()) {
-      newErrors.email = "Email is required";
-    } else if (!/\S+@\S+\.\S+/.test(userDetails.email)) {
-      newErrors.email = "Please enter a valid email";
-    }
-
-    if (!userDetails.contact.trim()) {
-      newErrors.contact = "Phone number is required";
-    } else if (!/^\d{10}$/.test(userDetails.contact.replace(/\D/g, ""))) {
-      newErrors.contact = "Please enter a valid 10-digit phone number";
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
   };
 
-  const handlePayment = async () => {
-    if (!validateForm()) {
-      return;
+  // Automatically start payment when modal opens (user is already authenticated and has complete profile)
+  useEffect(() => {
+    const hasCompleteProfile =
+      user?.name && user?.email && user?.phone && user?.dateOfBirth;
+    if (
+      isOpen &&
+      user?.id &&
+      hasCompleteProfile &&
+      userDetails.name &&
+      userDetails.email &&
+      userDetails.contact
+    ) {
+      console.log(
+        "PaymentModal: Auto-starting payment for authenticated user with complete profile"
+      );
+      handlePayment();
     }
+  }, [
+    isOpen,
+    user?.id,
+    user?.name,
+    user?.email,
+    user?.phone,
+    user?.dateOfBirth,
+    userDetails.name,
+    userDetails.email,
+    userDetails.contact,
+  ]);
 
+  const handlePayment = async () => {
+    // Skip form validation since user is already authenticated and validated
     setIsLoading(true);
 
     try {
@@ -77,13 +82,6 @@ export default function PaymentModal({
       if (result.success) {
         onSuccess?.(result.paymentId!);
         onClose();
-        // Reset form
-        setUserDetails({
-          name: user?.name || "",
-          email: user?.email || "",
-          contact: user?.phone || "",
-        });
-        setErrors({});
       } else {
         onError?.(result.error || "Payment failed");
       }
@@ -92,14 +90,6 @@ export default function PaymentModal({
       onError?.(error instanceof Error ? error.message : "Payment failed");
     } finally {
       setIsLoading(false);
-    }
-  };
-
-  const handleInputChange = (field: string, value: string) => {
-    setUserDetails((prev) => ({ ...prev, [field]: value }));
-    // Clear error when user starts typing
-    if (errors[field]) {
-      setErrors((prev) => ({ ...prev, [field]: "" }));
     }
   };
 
@@ -130,91 +120,27 @@ export default function PaymentModal({
           </p>
         </div>
 
-        <div className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Full Name *
-            </label>
-            <input
-              type="text"
-              placeholder="Enter your full name"
-              value={userDetails.name}
-              onChange={(e) => handleInputChange("name", e.target.value)}
-              className={`w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                errors.name ? "border-red-500" : "border-gray-300"
-              }`}
-              disabled={isLoading}
-            />
-            {errors.name && (
-              <p className="text-red-500 text-sm mt-1">{errors.name}</p>
-            )}
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Email Address *
-            </label>
-            <input
-              type="email"
-              placeholder="Enter your email"
-              value={userDetails.email}
-              onChange={(e) => handleInputChange("email", e.target.value)}
-              className={`w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                errors.email ? "border-red-500" : "border-gray-300"
-              }`}
-              disabled={isLoading}
-            />
-            {errors.email && (
-              <p className="text-red-500 text-sm mt-1">{errors.email}</p>
-            )}
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Phone Number *
-            </label>
-            <input
-              type="tel"
-              placeholder="Enter your phone number"
-              value={userDetails.contact}
-              onChange={(e) => handleInputChange("contact", e.target.value)}
-              className={`w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                errors.contact ? "border-red-500" : "border-gray-300"
-              }`}
-              disabled={isLoading}
-            />
-            {errors.contact && (
-              <p className="text-red-500 text-sm mt-1">{errors.contact}</p>
-            )}
+        <div className="text-center py-8">
+          <div className="flex flex-col items-center space-y-4">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+            <div>
+              <h3 className="text-lg font-semibold text-gray-800 mb-2">
+                Opening Payment Gateway...
+              </h3>
+              <p className="text-sm text-gray-600">
+                Please wait while we redirect you to complete your payment
+              </p>
+            </div>
           </div>
         </div>
 
-        <div className="flex gap-4 mt-6">
+        <div className="flex justify-center mt-6">
           <button
             onClick={onClose}
-            className="flex-1 px-4 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
+            className="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
             disabled={isLoading}
           >
             Cancel
-          </button>
-          <button
-            onClick={handlePayment}
-            disabled={
-              isLoading ||
-              !userDetails.name ||
-              !userDetails.email ||
-              !userDetails.contact
-            }
-            className="flex-1 px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-          >
-            {isLoading ? (
-              <div className="flex items-center justify-center">
-                <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                Processing...
-              </div>
-            ) : (
-              "Pay Now"
-            )}
           </button>
         </div>
 

@@ -3,6 +3,11 @@ import Image from "next/image";
 import { useState } from "react";
 import ScrollAnimation from "@/components/common/ScrollAnimation";
 import PaymentModal from "./PaymentModal";
+import PhoneNumberModal from "./Modal/PhoneNumberModal";
+import UserInfoModal from "./Modal/UserInfoModal";
+import { useAuth } from "@/hooks/useAuth";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
 
 interface PricingPlan {
   title: string;
@@ -24,6 +29,14 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
   const [activePlanIndex, setActivePlanIndex] = useState(0);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState<PricingPlan | null>(null);
+  const [showPhoneModal, setShowPhoneModal] = useState(false);
+  const [showUserInfoModal, setShowUserInfoModal] = useState(false);
+  const [tempPhoneNumber, setTempPhoneNumber] = useState<string>("");
+
+  const { isAuthenticated, user } = useSelector(
+    (state: RootState) => state.auth
+  );
+  const { checkUserMembership } = useAuth();
 
   // Map plan titles to integers
   const getMembershipType = (title: string): number => {
@@ -36,8 +49,46 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
     setActivePlanIndex(index);
   };
 
-  const handlePaymentClick = (plan: PricingPlan) => {
+  const handlePaymentClick = async (plan: PricingPlan) => {
     setSelectedPlan(plan);
+
+    // Step 1: Check if user is authenticated
+    if (!isAuthenticated) {
+      console.log("User not authenticated, opening phone modal");
+      setShowPhoneModal(true);
+      return;
+    }
+
+    // Step 2: Check if user has complete profile (name, email, phone, dateOfBirth)
+    const hasCompleteProfile =
+      user?.name && user?.email && user?.phone && user?.dateOfBirth;
+    if (!hasCompleteProfile) {
+      console.log("User profile incomplete, opening user info modal");
+      setShowUserInfoModal(true);
+      return;
+    }
+
+    // Step 3: Check if user already has an active membership
+    try {
+      const membershipResult = await checkUserMembership(user.id);
+      if (membershipResult.type === "auth/checkMembership/fulfilled") {
+        const membershipData = membershipResult.payload as {
+          hasMembership: boolean;
+        };
+        if (membershipData.hasMembership) {
+          alert(
+            "You already have an active membership! Please check your profile."
+          );
+          return;
+        }
+      }
+    } catch (error) {
+      console.error("Error checking membership:", error);
+      // Continue with payment flow even if membership check fails
+    }
+
+    // Step 4: All checks passed, proceed to payment
+    console.log("All checks passed, opening payment modal");
     setShowPaymentModal(true);
   };
 
@@ -65,6 +116,52 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
     // For example, show an error message to the user
     setShowPaymentModal(false);
     setSelectedPlan(null);
+  };
+
+  const handlePhoneModalClose = () => {
+    setShowPhoneModal(false);
+  };
+
+  const handleUserInfoModalClose = () => {
+    setShowUserInfoModal(false);
+  };
+
+  const handlePhoneModalSuccess = (phoneNumber: string, userData?: any) => {
+    setTempPhoneNumber(phoneNumber);
+    setShowPhoneModal(false);
+
+    // Use user data from callback instead of Redux state to avoid timing issues
+    const userToCheck = userData || user;
+    const hasCompleteProfile =
+      userToCheck?.name &&
+      userToCheck?.email &&
+      userToCheck?.phone &&
+      userToCheck?.dateOfBirth;
+
+    console.log("PricingPlans: Profile completeness check with user data:", {
+      userData: userData,
+      reduxUser: user,
+      hasCompleteProfile,
+    });
+
+    if (!hasCompleteProfile) {
+      console.log(
+        "PricingPlans: User profile incomplete, opening user info modal"
+      );
+      setShowUserInfoModal(true);
+    } else {
+      console.log(
+        "PricingPlans: User has complete profile, proceeding to payment"
+      );
+      // User is authenticated and has complete profile, proceed to payment
+      setShowPaymentModal(true);
+    }
+  };
+
+  const handleUserInfoModalSuccess = () => {
+    setShowUserInfoModal(false);
+    // After successful profile completion, proceed to payment
+    setShowPaymentModal(true);
   };
 
   if (isMobile) {
@@ -336,6 +433,24 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
           onError={handlePaymentError}
         />
       )}
+
+      {/* Phone Number Modal */}
+      <PhoneNumberModal
+        isOpen={showPhoneModal}
+        onClose={handlePhoneModalClose}
+        isMobile={isMobile}
+        onSuccess={handlePhoneModalSuccess}
+      />
+
+      {/* User Info Modal */}
+      <UserInfoModal
+        isOpen={showUserInfoModal}
+        onClose={handleUserInfoModalClose}
+        isMobile={isMobile}
+        phoneNumber={tempPhoneNumber}
+        onParentClose={handleUserInfoModalClose}
+        onSuccess={handleUserInfoModalSuccess}
+      />
     </section>
   );
 };

@@ -7,12 +7,14 @@ interface UserInfoFormProps {
   isMobile?: boolean;
   phoneNumber?: string;
   onParentClose?: () => void;
+  onSuccess?: () => void; // Optional callback for successful registration
 }
 
 const UserInfoForm = ({
   isMobile,
   phoneNumber,
   onParentClose,
+  onSuccess,
 }: UserInfoFormProps) => {
   const [formData, setFormData] = useState({
     name: "",
@@ -203,11 +205,18 @@ const UserInfoForm = ({
           gender: "",
         });
 
-        // Close parent modal and redirect to membership page after a short delay
-        setTimeout(() => {
-          onParentClose?.(); // Close the PhoneNumberModal
-          window.location.href = "/membership";
-        }, 500);
+        // If onSuccess callback is provided, use it instead of redirecting
+        if (onSuccess) {
+          setTimeout(() => {
+            onSuccess();
+          }, 500);
+        } else {
+          // Default behavior: Close parent modal and redirect to membership page
+          setTimeout(() => {
+            onParentClose?.(); // Close the PhoneNumberModal
+            window.location.href = "/membership";
+          }, 500);
+        }
       } else {
         setMessageState({
           type: "error",

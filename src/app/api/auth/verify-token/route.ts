@@ -6,6 +6,12 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { token } = body;
 
+    console.log("verify-token: Received token length:", token?.length);
+    console.log(
+      "verify-token: Token preview:",
+      token?.substring(0, 20) + "..."
+    );
+
     if (!token) {
       return NextResponse.json(
         {
