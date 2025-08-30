@@ -225,9 +225,15 @@ RATE_LIMIT_OTP_PER_HOUR=3
 ### **Gupshup Configuration:**
 
 ```env
-GUPSHUP_USERNAME=your_username
+GUPSHUP_USERID=2000259058
 GUPSHUP_PASSWORD=your_password
-GUPSHUP_SENDER_ID=DRIVEF
 ```
+
+### **Updated API Endpoint:**
+
+- **URL**: `https://mediaapi.smsgupshup.com/GatewayAPI/rest`
+- **Method**: `SENDMESSAGE` with `isTemplate=true`
+- **Format**: JSON response format
+- **Message Template**: `%2A{otp}%2A+is+your+verification+code.+For+your+security%2C+do+not+share+this+code.`
 
 This asynchronous implementation provides better user experience, improved error handling, and comprehensive vendor response tracking for monitoring and analytics.

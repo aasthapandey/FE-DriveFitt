@@ -43,9 +43,8 @@ DB_PORT=3306
 JWT_SECRET=your_jwt_secret_key_here_make_it_long_and_secure
 
 # Gupshup SMS Configuration
-GUPSHUP_USERNAME=your_gupshup_username
+GUPSHUP_USERID=2000259058
 GUPSHUP_PASSWORD=your_gupshup_password
-GUPSHUP_SENDER_ID=DRIVEF
 
 # OTP Configuration
 OTP_EXPIRY_MINUTES=5
@@ -308,8 +307,10 @@ if (loginResponse.success && loginResponse.data?.token) {
 
 ### SMS Settings
 
-- **Sender ID**: Configurable via `GUPSHUP_SENDER_ID`
-- **Message Template**: Customizable in `gupshupService.ts`
+- **API Endpoint**: `https://mediaapi.smsgupshup.com/GatewayAPI/rest`
+- **Method**: `SENDMESSAGE` with `isTemplate=true`
+- **Format**: JSON response format
+- **Message Template**: `%2A{otp}%2A+is+your+verification+code.+For+your+security%2C+do+not+share+this+code.`
 
 ## 🚀 Deployment Checklist
 

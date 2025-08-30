@@ -1,9 +1,8 @@
 import axios from "axios";
 
 interface GupshupConfig {
-  username: string;
+  userid: string;
   password: string;
-  senderId: string;
   baseURL: string;
 }
 
@@ -12,10 +11,9 @@ class GupshupService {
 
   constructor() {
     this.config = {
-      username: process.env.GUPSHUP_USERNAME!,
+      userid: process.env.GUPSHUP_USERID!,
       password: process.env.GUPSHUP_PASSWORD!,
-      senderId: process.env.GUPSHUP_SENDER_ID || "DRIVEF",
-      baseURL: "https://enterprise.smsgupshup.com/GatewayAPI/rest",
+      baseURL: "https://mediaapi.smsgupshup.com/GatewayAPI/rest",
     };
   }
 
@@ -24,35 +22,61 @@ class GupshupService {
     otp: string
   ): Promise<{ success: boolean; response: string }> {
     try {
-      const message = `${otp} is your verification code. For your security, do not share this code.\nThis code expires in 15 minutes`;
+      console.log("Sending OTP to", phone);
+      const message = `%2A${otp}%2A+is+your+verification+code.+For+your+security%2C+do+not+share+this+code.`;
 
       const params = new URLSearchParams({
-        method: "sendMessage",
-        send_to: phone,
-        msg: message,
-        msg_type: "TEXT",
-        userid: this.config.username,
+        userid: this.config.userid,
         password: this.config.password,
-        auth_scheme: "plain",
+        send_to: phone,
         v: "1.1",
-        format: "text",
+        format: "json",
+        msg_type: "TEXT",
+        method: "SENDMESSAGE",
+        msg: message,
+        isTemplate: "true",
       });
 
+      // const response = await axios.get(
+      //   `${this.config.baseURL}?${params.toString()}`,
+      //   {
+      //     timeout: 10000,
+      //   }
+      // );
+
       const response = await axios.get(
-        `${this.config.baseURL}?${params.toString()}`,
-        {
-          timeout: 10000,
-        }
+        `https://mediaapi.smsgupshup.com/GatewayAPI/rest?userid=${this.config.userid}&password=${this.config.password}&send_to=${phone}&v=1.1&format=json&msg_type=TEXT&method=SENDMESSAGE&msg=%2A${otp}%2A+is+your+verification+code.+For+your+security%2C+do+not+share+this+code.&isTemplate=true`
       );
 
-      // Gupshup returns success response in format: "success | messageId"
       const result = response.data;
       console.log("Gupshup response:", result);
 
-      return {
-        success: result.startsWith("success"),
-        response: result,
-      };
+      // Handle nested response format
+      if (
+        typeof result === "object" &&
+        result.response &&
+        result.response.status === "success"
+      ) {
+        return {
+          success: true,
+          response: JSON.stringify(result),
+        };
+      } else if (typeof result === "object" && result.status === "success") {
+        return {
+          success: true,
+          response: JSON.stringify(result),
+        };
+      } else if (typeof result === "string" && result.startsWith("success")) {
+        return {
+          success: true,
+          response: result,
+        };
+      } else {
+        return {
+          success: false,
+          response: JSON.stringify(result),
+        };
+      }
     } catch (error) {
       console.error("Gupshup SMS error:", error);
       return {
@@ -66,11 +90,10 @@ class GupshupService {
     try {
       const params = new URLSearchParams({
         method: "GetBalance",
-        userid: this.config.username,
+        userid: this.config.userid,
         password: this.config.password,
-        auth_scheme: "plain",
         v: "1.1",
-        format: "text",
+        format: "json",
       });
 
       const response = await axios.get(
@@ -78,7 +101,16 @@ class GupshupService {
       );
       const result = response.data;
 
-      if (result.startsWith("success")) {
+      // Handle nested response format for balance
+      if (
+        typeof result === "object" &&
+        result.response &&
+        result.response.status === "success"
+      ) {
+        return parseFloat(result.response.balance || result.balance || "0");
+      } else if (typeof result === "object" && result.status === "success") {
+        return parseFloat(result.balance || "0");
+      } else if (typeof result === "string" && result.startsWith("success")) {
         const balance = result.split("|")[1];
         return parseFloat(balance);
       }
