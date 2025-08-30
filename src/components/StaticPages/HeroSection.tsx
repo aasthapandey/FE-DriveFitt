@@ -4,6 +4,7 @@ import { homeData } from "@/data/home";
 import CountdownTimer from "./CountdownTimer";
 import { useState } from "react";
 import EmailModal from "@/components/common/Modal/EmailModal";
+import PhoneNumberModal from "@/components/common/Modal/PhoneNumberModal";
 import ScrollAnimation from "@/components/common/ScrollAnimation";
 
 interface HeroSectionProps {
@@ -13,8 +14,9 @@ interface HeroSectionProps {
 }
 
 const HeroSection = ({ data, pageName, isMobile }: HeroSectionProps) => {
-  const { titleWords, description, btnPrimaryText } = data;
+  const { titleWords, description, btnPrimaryText, btnSecondaryText } = data;
   const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
+  const [isPhoneModalOpen, setIsPhoneModalOpen] = useState(false);
 
   const handlePrimaryButtonClick = () => {
     if (btnPrimaryText === "Join the Waitlist") {
@@ -22,13 +24,9 @@ const HeroSection = ({ data, pageName, isMobile }: HeroSectionProps) => {
     }
   };
 
-  // const handleSecondaryButtonClick = () => {
-  //   if (btnSecondaryText === "Join Online") {
-  //     setIsEmailModalOpen(true);
-  //   } else if (btnSecondaryText === "Join Now") {
-  //     setIsEmailModalOpen(true);
-  //   }
-  // };
+  const handleSecondaryButtonClick = () => {
+    setIsPhoneModalOpen(true);
+  };
 
   const renderTitle = (titleWords: TitleWord[]) => {
     return (
@@ -93,9 +91,9 @@ const HeroSection = ({ data, pageName, isMobile }: HeroSectionProps) => {
                   {btnPrimaryText}
                 </button>
               )}
-              {/* {btnSecondaryText &&
+              {
                 btnSecondaryText !== "" &&
-                pageName !== "home" && (
+                 (
                   <button
                     onClick={handleSecondaryButtonClick}
                     className={`bg-transparent border border-[#00DBDC] text-[#00DBDC] px-10 py-3 md:px-14 rounded-lg font-medium leading-[100%] tracking-[-5%] text-base md:text-lg ${
@@ -106,7 +104,7 @@ const HeroSection = ({ data, pageName, isMobile }: HeroSectionProps) => {
                   >
                     {btnSecondaryText}
                   </button>
-                )} */}
+                )}
             </div>
           </ScrollAnimation>
         </div>
@@ -124,6 +122,13 @@ const HeroSection = ({ data, pageName, isMobile }: HeroSectionProps) => {
       <EmailModal
         isOpen={isEmailModalOpen}
         onClose={() => setIsEmailModalOpen(false)}
+        isMobile={isMobile}
+      />
+
+      {/* Phone Number Modal */}
+      <PhoneNumberModal
+        isOpen={isPhoneModalOpen}
+        onClose={() => setIsPhoneModalOpen(false)}
         isMobile={isMobile}
       />
     </>

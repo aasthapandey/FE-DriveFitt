@@ -2,6 +2,8 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
+import { authAPI } from "@/services/authAPI";
+import { OTPPurpose } from "@/types/auth";
 
 type ModalState = "phone" | "otp";
 
@@ -19,6 +21,8 @@ interface PhoneStepProps {
   onBlur: () => void;
   onContinue: () => void;
   isMobile?: boolean;
+  isLoading?: boolean;
+  error?: string;
 }
 
 interface OTPStepProps {
@@ -30,6 +34,8 @@ interface OTPStepProps {
   timeLeft: number;
   onResendOTP: () => void;
   isMobile?: boolean;
+  isLoading?: boolean;
+  error?: string;
 }
 
 // Phone Number Step Component
@@ -41,6 +47,8 @@ const PhoneStep = ({
   onBlur,
   onContinue,
   isMobile,
+  isLoading,
+  error,
 }: PhoneStepProps) => (
   <>
     {/* Logo */}
@@ -72,17 +80,24 @@ const PhoneStep = ({
       />
     </div>
 
+    {/* Error Message */}
+    {error && (
+      <div className="w-full mb-4 text-center">
+        <p className="text-red-400 text-sm font-medium">{error}</p>
+      </div>
+    )}
+
     {/* Continue Button */}
     <button
       onClick={onContinue}
-      disabled={phoneNumber.length !== 10}
+      disabled={phoneNumber.length !== 10 || isLoading}
       className={`w-full bg-[#00DBDC] border border-transparent rounded-lg py-3 md:py-3 text-[#0D0D0D] font-medium text-base md:text-lg mb-6 md:mb-[48px] ${
         isMobile
           ? ""
           : "hover:bg-transparent hover:border-[#00DBDC] hover:text-[#00DBDC]"
       } transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-[#00DBDC] disabled:hover:text-[#0D0D0D] disabled:hover:border-transparent`}
     >
-      Continue
+      {isLoading ? "Sending..." : "Continue"}
     </button>
 
     {/* Terms and Privacy */}
@@ -121,6 +136,8 @@ const OTPStep = ({
   timeLeft,
   onResendOTP,
   isMobile,
+  isLoading,
+  error,
 }: OTPStepProps) => {
   const firstInputRef = useRef<HTMLInputElement>(null);
   const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
@@ -199,17 +216,24 @@ const OTPStep = ({
         ))}
       </div>
 
+      {/* Error Message */}
+      {error && (
+        <div className="w-full mb-4 text-center">
+          <p className="text-red-400 text-sm font-medium">{error}</p>
+        </div>
+      )}
+
       {/* Verify Button */}
       <button
         onClick={onVerify}
-        disabled={otpValues.some((val) => val === "")}
+        disabled={otpValues.some((val) => val === "") || isLoading}
         className={`w-full bg-[#00DBDC] border border-transparent rounded-lg py-3 md:py-3 text-[#0D0D0D] font-medium text-base md:text-lg mb-6 md:mb-8 ${
           isMobile
             ? ""
             : "hover:bg-transparent hover:border-[#00DBDC] hover:text-[#00DBDC]"
         } transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-[#00DBDC] disabled:hover:text-[#0D0D0D] disabled:hover:border-transparent`}
       >
-        Verify
+        {isLoading ? "Verifying..." : "Verify"}
       </button>
 
       {/* Resend OTP */}
@@ -224,9 +248,12 @@ const OTPStep = ({
         ) : (
           <button
             onClick={onResendOTP}
-            className="text-[#00DBDC] font-medium text-base leading-[20px] tracking-[-0.02em]"
+            disabled={isLoading}
+            className={`text-[#00DBDC] font-medium text-base leading-[20px] tracking-[-0.02em] ${
+              isLoading ? "opacity-50 cursor-not-allowed" : ""
+            }`}
           >
-            Resend
+            {isLoading ? "Sending..." : "Resend"}
           </button>
         )}
       </div>
@@ -245,6 +272,8 @@ const PhoneNumberModal = ({
   const [otpValues, setOtpValues] = useState<string[]>(["", "", "", ""]);
   const [timeLeft, setTimeLeft] = useState(59);
   const [isMounted, setIsMounted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
   const modalRef = useRef<HTMLDivElement>(null);
 
   // Check if component is mounted (client-side)
@@ -315,11 +344,24 @@ const PhoneNumberModal = ({
     []
   );
 
-  const handleContinue = useCallback(() => {
+  const handleContinue = useCallback(async () => {
     if (phoneNumber.length === 10) {
-      setModalState("otp");
-      // Here you would typically send OTP request
-      console.log("Sending OTP to:", phoneNumber);
+      setIsLoading(true);
+      setError("");
+
+      try {
+        const response = await authAPI.sendOTP(phoneNumber, OTPPurpose.LOGIN);
+
+        if (response.success) {
+          setModalState("otp");
+        } else {
+          setError(response.message || "Failed to send OTP");
+        }
+      } catch (error) {
+        setError("Network error. Please try again.");
+      } finally {
+        setIsLoading(false);
+      }
     }
   }, [phoneNumber]);
 
@@ -342,15 +384,30 @@ const PhoneNumberModal = ({
     [otpValues]
   );
 
-  const handleVerify = useCallback(() => {
+  const handleVerify = useCallback(async () => {
     const otp = otpValues.join("");
 
-    // Validate that all 4 digits are entered
     if (otp.length === 4 && otpValues.every((val) => val !== "")) {
-      console.log("Verifying OTP:", otp, "for phone:", phoneNumber);
-      // Handle OTP verification logic here
-      // Close the modal after successful validation
-      onClose();
+      setIsLoading(true);
+      setError("");
+
+      try {
+        const response = await authAPI.loginWithOTP(phoneNumber, otp);
+
+        if (response.success && response.data) {
+          // Store token in localStorage
+          localStorage.setItem("authToken", response.data.token!);
+
+          // Close modal
+          onClose();
+        } else {
+          setError(response.message || "Invalid OTP");
+        }
+      } catch (error) {
+        setError("Network error. Please try again.");
+      } finally {
+        setIsLoading(false);
+      }
     }
   }, [otpValues, phoneNumber, onClose]);
 
@@ -359,10 +416,24 @@ const PhoneNumberModal = ({
     setTimeLeft(59); // Reset timer when going back to phone input
   }, []);
 
-  const handleResendOTP = useCallback(() => {
-    setTimeLeft(59);
-    setOtpValues(["", "", "", ""]);
-    console.log("Resending OTP to:", phoneNumber);
+  const handleResendOTP = useCallback(async () => {
+    setIsLoading(true);
+    setError("");
+
+    try {
+      const response = await authAPI.sendOTP(phoneNumber, OTPPurpose.LOGIN);
+
+      if (response.success) {
+        setTimeLeft(59);
+        setOtpValues(["", "", "", ""]);
+      } else {
+        setError(response.message || "Failed to resend OTP");
+      }
+    } catch (error) {
+      setError("Network error. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
   }, [phoneNumber]);
 
   if (!isOpen || !isMounted) return null;
@@ -426,6 +497,8 @@ const PhoneNumberModal = ({
                 onBlur={() => setIsFocused(false)}
                 onContinue={handleContinue}
                 isMobile={isMobile}
+                isLoading={isLoading}
+                error={error}
               />
             ) : (
               <OTPStep
@@ -437,6 +510,8 @@ const PhoneNumberModal = ({
                 timeLeft={timeLeft}
                 onResendOTP={handleResendOTP}
                 isMobile={isMobile}
+                isLoading={isLoading}
+                error={error}
               />
             )}
           </div>
