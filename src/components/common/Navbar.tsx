@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { NavbarProps, LoginModalType } from "@/types/staticPages";
 import { PhoneNumberModal, EmailModal } from "./Modal";
 import UserProfileDropdown from "./UserProfileDropdown";
@@ -19,8 +19,9 @@ export default function Navbar({ data, isMobile }: Props) {
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
   const { logo, navLinks, signInButton, loginModalType } = data;
-  const { isAuthenticated, loadUser } = useAuth();
+  const { isAuthenticated, loadUser, logout } = useAuth();
   const hasLoadedUser = useRef(false);
+  const router = useRouter();
 
   // Debug: Log authentication state changes
   useEffect(() => {
@@ -137,12 +138,12 @@ export default function Navbar({ data, isMobile }: Props) {
           }`}
         >
           <div
-            className={`fixed inset-0 bg-[#1A1A1A] transform transition-transform duration-300 ease-in-out ${
+            className={`fixed inset-0 bg-[#1A1A1A] transform transition-transform duration-300 ease-in-out flex flex-col ${
               isMenuOpen ? "translate-x-0" : "-translate-x-full"
             }`}
           >
             {/* Header with Close Button */}
-            <div className="flex justify-between items-center py-5 px-6 border-b border-[#333333]">
+            <div className="flex justify-between items-center py-5 px-6 border-b border-[#333333] flex-shrink-0">
               <Link href="/" onClick={handleLinkClick}>
                 <Image src={logo} alt="logo" width={141} height={24} />
               </Link>
@@ -160,59 +161,66 @@ export default function Navbar({ data, isMobile }: Props) {
               </button>
             </div>
 
-            {/* Navigation Links */}
-            <div className="flex flex-col py-8 px-6 space-y-2">
-              {navLinks.map((link, idx) => (
-                <Link
-                  key={idx}
-                  href={link.href}
-                  className={`py-4 px-4 rounded-lg text-lg font-medium transition-all duration-200 ${
-                    isActiveLink(link.href)
-                      ? "text-[#00DBDC] bg-[#00DBDC]/10 border-l-4 border-[#00DBDC]"
-                      : "text-white hover:text-[#00DBDC] hover:bg-[#333333]/50"
-                  }`}
-                  onClick={handleLinkClick}
-                >
-                  {link.title}
-                </Link>
-              ))}
-            </div>
+            {/* Scrollable Content Area */}
+            <div className="flex-1 overflow-y-auto">
+              {/* Navigation Links */}
+              <div className="flex flex-col py-8 px-6 space-y-2">
+                {navLinks.map((link, idx) => (
+                  <Link
+                    key={idx}
+                    href={link.href}
+                    className={`py-4 px-4 rounded-lg text-lg font-medium transition-all duration-200 ${
+                      isActiveLink(link.href)
+                        ? "text-[#00DBDC] bg-[#00DBDC]/10 border-l-4 border-[#00DBDC]"
+                        : "text-white hover:text-[#00DBDC] hover:bg-[#333333]/50"
+                    }`}
+                    onClick={handleLinkClick}
+                  >
+                    {link.title}
+                  </Link>
+                ))}
+              </div>
 
-            {/* Sign In Button in Menu */}
-            <div className="px-6 mt-8">
-              {isAuthenticated ? (
-                <div className="flex flex-col gap-4">
+              {/* User Actions in Menu */}
+              <div className="px-6 mt-2 pb-8">
+                {isAuthenticated ? (
+                  <div className="flex gap-3">
+                    <button
+                      onClick={() => {
+                        setIsMenuOpen(false);
+                        router.push("/profile");
+                      }}
+                      className="flex-1 bg-[#00DBDC] border border-transparent rounded-lg py-3 text-[#0D0D0D] font-medium text-sm transition-all duration-200"
+                    >
+                      Your Profile
+                    </button>
+                    <button
+                      onClick={async () => {
+                        setIsMenuOpen(false);
+                        try {
+                          await logout();
+                          router.push("/");
+                        } catch (error) {
+                          console.error("Logout failed:", error);
+                        }
+                      }}
+                      className="flex-1 bg-transparent border border-[#00DBDC] rounded-lg py-3 text-[#00DBDC] font-medium text-sm transition-all duration-200"
+                    >
+                      Sign Out
+                    </button>
+                  </div>
+                ) : (
                   <button
                     onClick={() => {
+                      setIsLoginModalOpen(true);
                       setIsMenuOpen(false);
-                      window.location.href = "/profile";
                     }}
                     className="w-full bg-[#00DBDC] border border-transparent rounded-lg py-4 text-[#0D0D0D] font-medium text-lg transition-all duration-200"
                   >
-                    Your Profile
+                    Sign in
                   </button>
-                  <button
-                    onClick={async () => {
-                      setIsMenuOpen(false);
-                      // Logout will be handled by UserProfileDropdown
-                      window.location.href = "/";
-                    }}
-                    className="w-full bg-transparent border border-[#00DBDC] rounded-lg py-4 text-[#00DBDC] font-medium text-lg transition-all duration-200"
-                  >
-                    Sign Out
-                  </button>
-                </div>
-              ) : (
-                <button
-                  onClick={() => {
-                    setIsLoginModalOpen(true);
-                    setIsMenuOpen(false);
-                  }}
-                  className="w-full bg-[#00DBDC] border border-transparent rounded-lg py-4 text-[#0D0D0D] font-medium text-lg transition-all duration-200"
-                >
-                  Sign in
-                </button>
-              )}
+                )}
+              </div>
             </div>
           </div>
         </div>

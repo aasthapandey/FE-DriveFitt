@@ -14,5 +14,5 @@ export const navbarData: NavbarProps = {
   signInButton: {
     text: "Sign in",
   },
-  loginModalType: LoginModalType.EMAIL,
+  loginModalType: LoginModalType.PHONE,
 };
