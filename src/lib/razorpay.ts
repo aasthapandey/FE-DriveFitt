@@ -4,8 +4,8 @@ import crypto from "crypto";
 // Initialize Razorpay instance
 
 export const razorpayInstance = new Razorpay({
-  key_id:  "rzp_live_RBcCfbzN35eWx4",
-  key_secret:  "f0dAf49wOscpoZZzQ5HJzkUE",
+  key_id: "rzp_live_RBcCfbzN35eWx4",
+  key_secret: "f0dAf49wOscpoZZzQ5HJzkUE",
 });
 
 // Verify payment signature
@@ -60,7 +60,7 @@ export interface PaymentOrder {
   amount: number;
   currency: string;
   status: PaymentStatus;
-  membership_type?: string;
+  membership_type?: number;
   payment_id?: string;
   signature?: string;
   user_details?: any;
@@ -74,9 +74,8 @@ export interface Membership {
   user_email: string;
   order_id: string;
   payment_id: string;
-  membership_type?: string;
+  membership_type?: number;
   status: "active" | "expired" | "cancelled";
   created_at: Date;
   expires_at?: Date;
 }
-

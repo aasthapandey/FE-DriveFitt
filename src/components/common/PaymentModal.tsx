@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { PaymentService, PaymentOptions } from "@/lib/paymentService";
+import { getMembershipTypeFromName } from "@/lib/membershipTypes";
 
 interface PaymentModalProps {
   isOpen: boolean;
@@ -60,7 +61,7 @@ export default function PaymentModal({
     try {
       const result = await PaymentService.processPayment({
         amount,
-        membershipType,
+        membershipType: getMembershipTypeFromName(membershipType),
         userDetails,
       });
 
@@ -212,4 +213,3 @@ export default function PaymentModal({
     </div>
   );
 }
-

@@ -143,7 +143,7 @@ export class RazorpayHostedCheckout {
             },
           },
         },
-      }
+      };
       console.log("a:", a);
       const rzp = new window.Razorpay(a);
 

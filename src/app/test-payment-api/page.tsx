@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { PaymentService } from "@/lib/paymentService";
+import { MEMBERSHIP_TYPES } from "@/lib/membershipTypes";
 
 export default function TestPaymentApiPage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -18,7 +19,7 @@ export default function TestPaymentApiPage() {
     try {
       const result = await PaymentService.processPayment({
         amount: 999,
-        membershipType: "Premium",
+        membershipType: MEMBERSHIP_TYPES.INDIVIDUAL_ANNUAL,
         userDetails,
       });
 

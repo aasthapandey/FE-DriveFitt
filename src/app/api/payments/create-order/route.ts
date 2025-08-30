@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { razorpayApiClient } from "@/lib/razorpayApiClient";
 import { insertPaymentOrder } from "@/lib/paymentDatabase";
 import { PaymentStatus } from "@/lib/razorpay";
+import { getMembershipTypeFromName } from "@/lib/membershipTypes";
 
 export async function POST(request: NextRequest) {
   console.log("🎯 Create Order API endpoint called");
@@ -21,7 +22,7 @@ export async function POST(request: NextRequest) {
       membership_type,
     });
 
-    if (!amount || !membership_type) {
+    if (!amount || membership_type === undefined) {
       console.error("❌ Validation failed - missing required fields");
       return NextResponse.json(
         { error: "Amount and membership type are required" },
@@ -29,9 +30,14 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Convert membership_type to integer if it's a string
+    const membershipTypeInt = typeof membership_type === 'string' 
+      ? getMembershipTypeFromName(membership_type)
+      : membership_type;
+
     console.log("✅ Order creation request received:", {
       amount,
-      membership_type,
+      membership_type: membershipTypeInt,
       currency,
     });
 
@@ -41,7 +47,7 @@ export async function POST(request: NextRequest) {
       currency,
       receipt: receipt || `receipt_${Date.now()}`,
       notes: {
-        membership_type,
+        membership_type: membershipTypeInt.toString(),
         created_at: new Date().toISOString(),
       },
     });
@@ -67,7 +73,7 @@ export async function POST(request: NextRequest) {
         amount: amount, // Keep original amount in rupees for database
         currency: order.currency,
         status: PaymentStatus.CREATED,
-        membership_type,
+        membership_type: membershipTypeInt,
         created_at: new Date(),
       });
       console.log("Order saved to database successfully:", order.id);

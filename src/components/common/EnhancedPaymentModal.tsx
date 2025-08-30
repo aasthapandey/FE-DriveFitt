@@ -3,6 +3,7 @@ import { useState } from "react";
 import PaymentModal from "./PaymentModal";
 import PaymentSuccess from "./PaymentSuccess";
 import PaymentError from "./PaymentError";
+import { getMembershipTypeFromName } from "@/lib/membershipTypes";
 
 interface EnhancedPaymentModalProps {
   isOpen: boolean;
@@ -48,10 +49,10 @@ export default function EnhancedPaymentModal({
   if (showSuccess) {
     return (
       <PaymentSuccess
+        isOpen={isOpen}
+        onClose={handleClose}
         paymentId={paymentId}
         membershipType={membershipType}
-        amount={amount}
-        onClose={handleClose}
       />
     );
   }
@@ -59,9 +60,10 @@ export default function EnhancedPaymentModal({
   if (showError) {
     return (
       <PaymentError
-        error={errorMessage}
+        isOpen={isOpen}
         onClose={handleClose}
         onRetry={handleRetry}
+        error={errorMessage}
       />
     );
   }
@@ -77,4 +79,3 @@ export default function EnhancedPaymentModal({
     />
   );
 }
-

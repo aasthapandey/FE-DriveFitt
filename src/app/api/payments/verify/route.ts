@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { verifyPaymentSignature, PaymentStatus } from "@/lib/razorpay";
 import { updatePaymentOrder, insertMembership } from "@/lib/paymentDatabase";
 import { razorpayApiClient } from "@/lib/razorpayApiClient";
+import { getMembershipTypeFromName } from "@/lib/membershipTypes";
 
 export async function POST(request: NextRequest) {
   try {
@@ -90,11 +91,16 @@ export async function POST(request: NextRequest) {
 
     // Create membership record
     try {
+      // Convert membership_type to integer if it's a string
+      const membershipTypeInt = typeof userDetails.membership_type === 'string' 
+        ? getMembershipTypeFromName(userDetails.membership_type)
+        : userDetails.membership_type;
+
       await insertMembership({
         user_email: userDetails.email,
         order_id: orderId,
         payment_id: paymentId,
-        membership_type: userDetails.membership_type,
+        membership_type: membershipTypeInt,
         status: "active",
         created_at: new Date(),
       });

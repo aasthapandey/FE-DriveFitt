@@ -9,7 +9,7 @@ export const createPaymentOrdersTable = async (): Promise<void> => {
       amount DECIMAL(10, 2) NOT NULL,
       currency VARCHAR(3) DEFAULT 'INR',
       status ENUM('created', 'completed', 'failed', 'pending') DEFAULT 'created',
-      membership_type VARCHAR(100),
+      membership_type INT,
       payment_id VARCHAR(255),
       signature VARCHAR(255),
       user_details JSON,
@@ -30,7 +30,7 @@ export const createMembershipsTable = async (): Promise<void> => {
       user_email VARCHAR(255) NOT NULL,
       order_id VARCHAR(255) NOT NULL,
       payment_id VARCHAR(255) NOT NULL,
-      membership_type VARCHAR(100),
+      membership_type INT,
       status ENUM('active', 'expired', 'cancelled') DEFAULT 'active',
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
       expires_at TIMESTAMP NULL,
@@ -96,7 +96,7 @@ export const insertMembership = async (
     membership.user_email,
     membership.order_id,
     membership.payment_id,
-    membership.membership_type,
+    membership.membership_type || null, // Convert undefined to null
     membership.status || "active",
     membership.created_at || new Date(),
   ]);
