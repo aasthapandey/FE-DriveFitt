@@ -44,6 +44,16 @@ export interface AuthResponse {
   };
 }
 
+export interface SendOTPRequest {
+  phone: string;
+  purpose: OTPPurpose;
+}
+
+export interface LoginWithOTPRequest {
+  phone: string;
+  otp: string;
+}
+
 export interface UserRegistrationData {
   name: string;
   email: string;

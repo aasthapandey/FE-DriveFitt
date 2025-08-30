@@ -4,8 +4,8 @@ import crypto from "crypto";
 // Initialize Razorpay instance
 
 export const razorpayInstance = new Razorpay({
-  key_id:  "rzp_live_RB2d3kXODuUvYi",
-  key_secret:  "Id53VaAT0290MOxXhzXxZk1o",
+  key_id:  "rzp_live_RBcCfbzN35eWx4",
+  key_secret:  "f0dAf49wOscpoZZzQ5HJzkUE",
 });
 
 // Verify payment signature
@@ -79,3 +79,4 @@ export interface Membership {
   created_at: Date;
   expires_at?: Date;
 }
+

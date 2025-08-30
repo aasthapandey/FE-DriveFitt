@@ -163,3 +163,4 @@ export const isPaymentMethodSupported = (method: string): boolean => {
   const supportedMethods = ["card", "upi", "netbanking", "wallet", "emi"];
   return supportedMethods.includes(method);
 };
+

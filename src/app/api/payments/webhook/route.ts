@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifyWebhookSignature, PaymentStatus } from "@/lib/razorpay";
 import { updatePaymentOrder } from "@/lib/paymentDatabase";
+import { validateWebhookEvent } from "@/lib/razorpayUtils";
 
 // Handle payment captured event
 const handlePaymentCaptured = async (payment: any) => {
   try {
-    console.log("Payment captured:", payment.id);
+    console.log("Payment captured webhook received:", payment.id);
 
     // Update payment status in database
     await updatePaymentOrder(payment.order_id, {
@@ -14,7 +15,7 @@ const handlePaymentCaptured = async (payment: any) => {
       completed_at: new Date(),
     });
 
-    console.log("Payment status updated successfully");
+    console.log("Payment status updated successfully via webhook");
   } catch (error) {
     console.error("Error handling payment captured:", error);
   }
@@ -23,7 +24,7 @@ const handlePaymentCaptured = async (payment: any) => {
 // Handle payment failed event
 const handlePaymentFailed = async (payment: any) => {
   try {
-    console.log("Payment failed:", payment.id);
+    console.log("Payment failed webhook received:", payment.id);
 
     // Update payment status in database
     await updatePaymentOrder(payment.order_id, {
@@ -32,7 +33,7 @@ const handlePaymentFailed = async (payment: any) => {
       completed_at: new Date(),
     });
 
-    console.log("Payment failure recorded successfully");
+    console.log("Payment failure recorded successfully via webhook");
   } catch (error) {
     console.error("Error handling payment failed:", error);
   }
@@ -58,6 +59,16 @@ export async function POST(request: NextRequest) {
 
     const event = JSON.parse(body);
     console.log("Webhook event received:", event.event);
+
+    // Validate webhook event with Razorpay API
+    const validation = await validateWebhookEvent(event);
+    if (!validation.isValid) {
+      console.error("Webhook event validation failed:", validation.error);
+      return NextResponse.json(
+        { error: "Invalid webhook event" },
+        { status: 400 }
+      );
+    }
 
     // Handle different webhook events
     switch (event.event) {

@@ -1,7 +1,7 @@
 "use client";
-import { useState } from "react";
-import PaymentButton from "@/components/common/PaymentButton";
-import EnhancedPaymentModal from "@/components/common/EnhancedPaymentModal";
+import React, { useState } from "react";
+import PaymentButton from "../../components/common/PaymentButton";
+import EnhancedPaymentModal from "../../components/common/EnhancedPaymentModal";
 
 export default function TestPaymentPage() {
   const [showModal, setShowModal] = useState(false);

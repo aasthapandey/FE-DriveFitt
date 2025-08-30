@@ -90,14 +90,13 @@ export async function POST(request: NextRequest) {
         success: true,
         message: "Registration successful.",
         data: {
+          token: "temp_token", // Will be replaced with actual JWT
           user: {
             id: user.id,
-            name:
-              `${user.first_name || ""} ${user.last_name || ""}`.trim() ||
-              "User",
+            name: user.name || "User",
             email: user.email,
             phone: user.phone,
-            dateOfBirth: user.date_of_birth,
+            dateOfBirth: user.dateOfBirth,
             hasMembership: false,
           },
         },

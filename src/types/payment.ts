@@ -112,3 +112,4 @@ export interface PaymentMethodConfig {
   displayName: string;
   icon?: string;
 }
+
