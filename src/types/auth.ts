@@ -75,3 +75,9 @@ export interface OTPVerification {
   verified_at?: Date;
   vendor_response?: string;
 }
+
+export interface VerifyOTPRequest {
+  phone: string;
+  otp: string;
+  purpose: OTPPurpose;
+}

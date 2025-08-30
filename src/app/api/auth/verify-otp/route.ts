@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { otpService } from "@/lib/otpService";
 import { VerifyOTPRequest, AuthResponse, OTPPurpose } from "@/types/auth";
 import { executeQuery } from "@/lib/database";
+import { jwtService } from "@/lib/jwtService";
 
 export async function POST(request: NextRequest) {
   try {
@@ -65,15 +66,22 @@ export async function POST(request: NextRequest) {
       console.log("user", user);
 
       if (user) {
-        // User exists, return user data
+        // User exists, generate JWT token and return user data
         const fullName =
           `${user.first_name || ""} ${user.last_name || ""}`.trim() || "User";
+
+        // Generate JWT token
+        const token = jwtService.generateToken({
+          user_id: user.id,
+          phone: user.phone,
+        });
 
         return NextResponse.json<AuthResponse>(
           {
             success: true,
             message: "OTP verified successfully. User found.",
             data: {
+              token,
               user: {
                 id: user.id,
                 name: fullName,

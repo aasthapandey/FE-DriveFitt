@@ -111,12 +111,15 @@ class AuthService {
 
   async verifyToken(token: string): Promise<boolean> {
     try {
-      await this.makeRequest("/api/auth/verify-token", {
+      console.log("authService.verifyToken: Verifying token...");
+      const response = await this.makeRequest("/api/auth/verify-token", {
         method: "POST",
         body: JSON.stringify({ token }),
       });
+      console.log("authService.verifyToken: Response:", response);
       return true;
     } catch (error) {
+      console.error("authService.verifyToken: Error:", error);
       return false;
     }
   }

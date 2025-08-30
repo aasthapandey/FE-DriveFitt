@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
 import ProfilePage from "./ProfilePage";
@@ -19,10 +19,14 @@ export default function ProfilePageWrapper({
 }: ProfilePageWrapperProps) {
   const { isAuthenticated, user, loadUser, loading } = useAuth();
   const router = useRouter();
+  const hasLoadedUser = useRef(false);
 
   useEffect(() => {
-    // Load user from storage on component mount
-    loadUser();
+    // Load user from storage on component mount (only once)
+    if (!hasLoadedUser.current) {
+      hasLoadedUser.current = true;
+      loadUser();
+    }
   }, [loadUser]);
 
   useEffect(() => {

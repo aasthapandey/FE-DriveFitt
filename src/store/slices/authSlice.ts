@@ -73,19 +73,34 @@ export const logoutUser = createAsyncThunk(
 
 export const loadUserFromStorage = createAsyncThunk(
   "auth/loadUserFromStorage",
-  async (_, { rejectWithValue }) => {
+  async (_, { rejectWithValue, getState }) => {
     try {
+      const state = getState() as { auth: AuthState };
+
+      // Prevent multiple simultaneous calls
+      if (state.auth.loading) {
+        console.log("loadUserFromStorage: Already loading, skipping...");
+        return null;
+      }
+
       const token = sessionStorage.getItem("auth_token");
       const userData = sessionStorage.getItem("user_data");
+
+      console.log("loadUserFromStorage: token exists:", !!token);
+      console.log("loadUserFromStorage: userData exists:", !!userData);
 
       if (token && userData) {
         const user = JSON.parse(userData);
         // Verify token is still valid
+        console.log("loadUserFromStorage: Verifying token...");
         const isValid = await authService.verifyToken(token);
+        console.log("loadUserFromStorage: Token valid:", isValid);
+
         if (isValid) {
           return { token, user };
         } else {
           // Clear invalid data
+          console.log("loadUserFromStorage: Token invalid, clearing storage");
           sessionStorage.removeItem("auth_token");
           sessionStorage.removeItem("user_data");
           return null;
@@ -93,6 +108,7 @@ export const loadUserFromStorage = createAsyncThunk(
       }
       return null;
     } catch (error: any) {
+      console.error("loadUserFromStorage: Error:", error);
       return rejectWithValue(
         error.message || "Failed to load user from storage"
       );
@@ -141,7 +157,7 @@ const authSlice = createSlice({
             JSON.stringify(action.payload.data.user)
           );
         } else {
-          state.error = action.payload.message || "Login failed";
+          state.error = "Login failed";
         }
       })
       .addCase(loginUser.rejected, (state, action) => {

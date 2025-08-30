@@ -2,6 +2,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { authAPI } from "@/services/authAPI";
 import { OTPPurpose } from "@/types/auth";
 import { useAuth } from "@/hooks/useAuth";
@@ -279,6 +280,7 @@ const PhoneNumberModal = ({
   const [isUserInfoModalOpen, setIsUserInfoModalOpen] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
   const { login, checkUserMembership } = useAuth();
+  const router = useRouter();
 
   // Check if component is mounted (client-side)
   useEffect(() => {
@@ -405,12 +407,12 @@ const PhoneNumberModal = ({
         if (response.success && response.data) {
           // User exists, store user data and token in Redux
           const user = response.data.user;
-
-          // Generate a temporary token for the user (in real app, this would come from backend)
-          const tempToken = `temp_token_${user.id}_${Date.now()}`;
+          const token = response.data.token;
 
           // Store user data in Redux
-          const loginResult = await login({ user, token: tempToken });
+          console.log("PhoneNumberModal: Attempting to login user:", user);
+          const loginResult = await login({ user, token });
+          console.log("PhoneNumberModal: Login result:", loginResult);
 
           if (loginResult.type === "auth/loginUser/fulfilled") {
             // Check membership status
@@ -422,16 +424,16 @@ const PhoneNumberModal = ({
               if (membershipData.hasMembership) {
                 // User has membership, redirect to profile
                 onClose();
-                window.location.href = "/profile";
+                router.push("/profile");
               } else {
                 // User doesn't have membership, redirect to membership page
                 onClose();
-                window.location.href = "/membership";
+                router.push("/membership");
               }
             } else {
               // Error checking membership, redirect to membership page
               onClose();
-              window.location.href = "/membership";
+              router.push("/membership");
             }
           } else {
             setError("Login failed. Please try again.");

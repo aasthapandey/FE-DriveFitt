@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
+import { useCallback } from "react";
 import { RootState, AppDispatch } from "@/store";
 import {
   loginUser,
@@ -10,43 +11,58 @@ import {
   setLoading,
   updateUser,
 } from "@/store/slices/authSlice";
-import { UserRegistrationData } from "@/types/auth";
+import { UserRegistrationData, User } from "@/types/auth";
 
 export const useAuth = () => {
   const dispatch = useDispatch<AppDispatch>();
   const auth = useSelector((state: RootState) => state.auth);
 
-  const login = (userData: { user: any; token: string }) => {
-    return dispatch(loginUser(userData));
-  };
+  const login = useCallback(
+    (userData: { user: any; token: string }) => {
+      return dispatch(loginUser(userData));
+    },
+    [dispatch]
+  );
 
-  const register = (userData: UserRegistrationData) => {
-    return dispatch(registerUser(userData));
-  };
+  const register = useCallback(
+    (userData: UserRegistrationData) => {
+      return dispatch(registerUser(userData));
+    },
+    [dispatch]
+  );
 
-  const checkUserMembership = (userId: number) => {
-    return dispatch(checkMembership(userId));
-  };
+  const checkUserMembership = useCallback(
+    (userId: number) => {
+      return dispatch(checkMembership(userId));
+    },
+    [dispatch]
+  );
 
-  const logout = () => {
+  const logout = useCallback(() => {
     return dispatch(logoutUser());
-  };
+  }, [dispatch]);
 
-  const loadUser = () => {
+  const loadUser = useCallback(() => {
     return dispatch(loadUserFromStorage());
-  };
+  }, [dispatch]);
 
-  const clearAuthError = () => {
+  const clearAuthError = useCallback(() => {
     dispatch(clearError());
-  };
+  }, [dispatch]);
 
-  const setAuthLoading = (loading: boolean) => {
-    dispatch(setLoading(loading));
-  };
+  const setAuthLoading = useCallback(
+    (loading: boolean) => {
+      dispatch(setLoading(loading));
+    },
+    [dispatch]
+  );
 
-  const updateUserData = (userData: Partial<typeof auth.user>) => {
-    dispatch(updateUser(userData));
-  };
+  const updateUserData = useCallback(
+    (userData: Partial<User>) => {
+      dispatch(updateUser(userData));
+    },
+    [dispatch]
+  );
 
   return {
     ...auth,

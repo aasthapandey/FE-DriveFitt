@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { NavbarProps, LoginModalType } from "@/types/staticPages";
 import { PhoneNumberModal, EmailModal } from "./Modal";
@@ -20,6 +20,12 @@ export default function Navbar({ data, isMobile }: Props) {
   const pathname = usePathname();
   const { logo, navLinks, signInButton, loginModalType } = data;
   const { isAuthenticated, loadUser } = useAuth();
+  const hasLoadedUser = useRef(false);
+
+  // Debug: Log authentication state changes
+  useEffect(() => {
+    console.log("Navbar: isAuthenticated changed to:", isAuthenticated);
+  }, [isAuthenticated]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,9 +37,12 @@ export default function Navbar({ data, isMobile }: Props) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Load user from storage on component mount
+  // Load user from storage on component mount (only once)
   useEffect(() => {
-    loadUser();
+    if (!hasLoadedUser.current) {
+      hasLoadedUser.current = true;
+      loadUser();
+    }
   }, [loadUser]);
 
   useEffect(() => {
