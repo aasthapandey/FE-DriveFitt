@@ -2,11 +2,11 @@ import { NextRequest, NextResponse } from "next/server";
 import { otpService } from "@/lib/otpService";
 import { userService } from "@/lib/userService";
 import { jwtService } from "@/lib/jwtService";
-import { LoginWithOTPRequest, AuthResponse, OTPPurpose } from "@/types/auth";
+import { AuthResponse, OTPPurpose } from "@/types/auth";
 
 export async function POST(request: NextRequest) {
   try {
-    const body: LoginWithOTPRequest = await request.json();
+    const body: { phone: string; otp: string } = await request.json();
     const { phone, otp } = body;
 
     // Validate inputs
@@ -60,17 +60,7 @@ export async function POST(request: NextRequest) {
       user = await userService.createUser(phone);
     }
 
-    // Check if user is active
-    if (user.status !== 1) {
-      // UserStatus.ACTIVE
-      return NextResponse.json<AuthResponse>(
-        {
-          success: false,
-          message: "Your account is not active. Please contact support.",
-        },
-        { status: 403 }
-      );
-    }
+    // User is active by default (no status check needed)
 
     // Update phone verification and last login
     await userService.updatePhoneVerification(user.id);
@@ -95,18 +85,12 @@ export async function POST(request: NextRequest) {
           token,
           user: {
             id: user.id,
-            phone: user.phone,
+            name: user.name,
             email: user.email,
-            first_name: user.first_name,
-            last_name: user.last_name,
-            phone_verified: true,
-            phone_verified_at: user.phone_verified_at,
-            status: user.status,
-            last_login_at: user.last_login_at,
-            created_at: user.created_at,
-            updated_at: user.updated_at,
+            phone: user.phone,
+            dateOfBirth: user.dateOfBirth,
+            hasMembership: false,
           },
-          expires_in: 7 * 24 * 60 * 60, // 7 days in seconds
         },
       },
       { status: 200 }

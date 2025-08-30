@@ -419,7 +419,9 @@ const PhoneNumberModal = ({
             const membershipResult = await checkUserMembership(user.id);
 
             if (membershipResult.type === "auth/checkMembership/fulfilled") {
-              const membershipData = membershipResult.payload;
+              const membershipData = membershipResult.payload as {
+                hasMembership: boolean;
+              };
 
               if (membershipData.hasMembership) {
                 // User has membership, redirect to profile

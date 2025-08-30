@@ -7,6 +7,7 @@ import SpeedInsightsComponent from "@/components/common/SpeedInsights";
 import WebVitals from "@/components/common/WebVitals";
 import WebAnalytics from "@/components/common/WebAnalytics";
 import { ReduxProvider } from "@/components/common/ReduxProvider";
+import RazorpayScript from "@/components/common/RazorpayScript";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -40,6 +41,7 @@ export default function RootLayout({
           <SpeedInsightsComponent />
           <WebVitals />
           <WebAnalytics />
+          <RazorpayScript />
           <div className="max-w-[1980px] mx-auto bg-[#0E1119]">{children}</div>
         </ReduxProvider>
       </body>
