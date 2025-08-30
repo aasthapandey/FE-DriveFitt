@@ -1,11 +1,17 @@
 import { executeQuery } from "./database";
-import { User, UserStatus } from "@/types/auth";
+import { User } from "@/types/auth";
 import { jwtService } from "./jwtService";
 
 class UserService {
   async getUserByPhone(phone: string): Promise<User | null> {
     const query = "SELECT * FROM users WHERE phone = ?";
     const result = await executeQuery<User[]>(query, [phone]);
+    return result?.[0] || null;
+  }
+
+  async getUserByEmail(email: string): Promise<User | null> {
+    const query = "SELECT * FROM users WHERE email = ?";
+    const result = await executeQuery<User[]>(query, [email]);
     return result?.[0] || null;
   }
 
@@ -16,8 +22,8 @@ class UserService {
     lastName?: string
   ): Promise<User> {
     const query = `
-      INSERT INTO users (phone, email, first_name, last_name, status) 
-      VALUES (?, ?, ?, ?, ?)
+      INSERT INTO users (phone, email, first_name, last_name) 
+      VALUES (?, ?, ?, ?)
     `;
 
     const result = await executeQuery(query, [
@@ -25,7 +31,34 @@ class UserService {
       email,
       firstName,
       lastName,
-      UserStatus.ACTIVE,
+    ]);
+    const userId = (result as any).insertId;
+
+    return this.getUserById(userId) as Promise<User>;
+  }
+
+  async createUserWithDetails(userData: {
+    name: string;
+    email: string;
+    phone: string;
+    dateOfBirth: string;
+    gender: string;
+  }): Promise<User> {
+    const [firstName, ...lastNameParts] = userData.name.split(" ");
+    const lastName = lastNameParts.join(" ") || "";
+
+    const query = `
+      INSERT INTO users (phone, email, first_name, last_name, date_of_birth, gender) 
+      VALUES (?, ?, ?, ?, ?, ?)
+    `;
+
+    const result = await executeQuery(query, [
+      userData.phone,
+      userData.email,
+      firstName,
+      lastName,
+      userData.dateOfBirth,
+      userData.gender,
     ]);
     const userId = (result as any).insertId;
 
@@ -97,7 +130,7 @@ class UserService {
     await executeQuery(query, [userId, tokenHash]);
   }
 
-  async updateUserStatus(userId: number, status: UserStatus): Promise<void> {
+  async updateUserStatus(userId: number, status: number): Promise<void> {
     const query = `
       UPDATE users 
       SET status = ? 

@@ -4,6 +4,8 @@ import { createPortal } from "react-dom";
 import Image from "next/image";
 import { authAPI } from "@/services/authAPI";
 import { OTPPurpose } from "@/types/auth";
+import { useAuth } from "@/hooks/useAuth";
+import { UserInfoModal } from "./";
 
 type ModalState = "phone" | "otp";
 
@@ -274,7 +276,9 @@ const PhoneNumberModal = ({
   const [isMounted, setIsMounted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [isUserInfoModalOpen, setIsUserInfoModalOpen] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
+  const { login, checkUserMembership } = useAuth();
 
   // Check if component is mounted (client-side)
   useEffect(() => {
@@ -392,24 +396,60 @@ const PhoneNumberModal = ({
       setError("");
 
       try {
-        const response = await authAPI.loginWithOTP(phoneNumber, otp);
+        const response = await authAPI.verifyOTP(
+          phoneNumber,
+          otp,
+          OTPPurpose.LOGIN
+        );
 
         if (response.success && response.data) {
-          // Store token in localStorage
-          localStorage.setItem("authToken", response.data.token!);
+          // User exists, store user data and token in Redux
+          const user = response.data.user;
 
-          // Close modal
-          onClose();
+          // Generate a temporary token for the user (in real app, this would come from backend)
+          const tempToken = `temp_token_${user.id}_${Date.now()}`;
+
+          // Store user data in Redux
+          const loginResult = await login({ user, token: tempToken });
+
+          if (loginResult.type === "auth/loginUser/fulfilled") {
+            // Check membership status
+            const membershipResult = await checkUserMembership(user.id);
+
+            if (membershipResult.type === "auth/checkMembership/fulfilled") {
+              const membershipData = membershipResult.payload;
+
+              if (membershipData.hasMembership) {
+                // User has membership, redirect to profile
+                onClose();
+                window.location.href = "/profile";
+              } else {
+                // User doesn't have membership, redirect to membership page
+                onClose();
+                window.location.href = "/membership";
+              }
+            } else {
+              // Error checking membership, redirect to membership page
+              onClose();
+              window.location.href = "/membership";
+            }
+          } else {
+            setError("Login failed. Please try again.");
+          }
+        } else if (response.success && !response.data) {
+          // User doesn't exist, open UserInfoModal for registration
+          setIsUserInfoModalOpen(true);
+          // Don't close the modal yet - let UserInfoModal handle the flow
         } else {
           setError(response.message || "Invalid OTP");
         }
-      } catch (error) {
-        setError("Network error. Please try again.");
+      } catch (error: any) {
+        setError(error.message || "Server Down, Please try again later.");
       } finally {
         setIsLoading(false);
       }
     }
-  }, [otpValues, phoneNumber, onClose]);
+  }, [otpValues, phoneNumber, onClose, login, checkUserMembership]);
 
   const handleChangePhone = useCallback(() => {
     setModalState("phone");
@@ -520,7 +560,20 @@ const PhoneNumberModal = ({
     </div>
   );
 
-  return createPortal(modalContent, document.body);
+  return (
+    <>
+      {!isUserInfoModalOpen && createPortal(modalContent, document.body)}
+      <UserInfoModal
+        isOpen={isUserInfoModalOpen}
+        onClose={() => {
+          setIsUserInfoModalOpen(false);
+        }}
+        isMobile={isMobile}
+        phoneNumber={phoneNumber}
+        onParentClose={onClose}
+      />
+    </>
+  );
 };
 
 export default PhoneNumberModal;

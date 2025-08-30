@@ -1,12 +1,19 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
+import { useAuth } from "@/hooks/useAuth";
 
 interface UserInfoFormProps {
   isMobile?: boolean;
+  phoneNumber?: string;
+  onParentClose?: () => void;
 }
 
-const UserInfoForm = ({ isMobile }: UserInfoFormProps) => {
+const UserInfoForm = ({
+  isMobile,
+  phoneNumber,
+  onParentClose,
+}: UserInfoFormProps) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -32,6 +39,14 @@ const UserInfoForm = ({ isMobile }: UserInfoFormProps) => {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { register } = useAuth();
+
+  // Set phone number from props
+  useEffect(() => {
+    if (phoneNumber) {
+      setFormData((prev) => ({ ...prev, phone: phoneNumber }));
+    }
+  }, [phoneNumber]);
 
   const validateName = (value: string) => {
     if (!value.trim()) {
@@ -155,48 +170,57 @@ const UserInfoForm = ({ isMobile }: UserInfoFormProps) => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("/api/user-info", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          birthday: formData.birthday,
-          gender: formData.gender,
-        }),
-      });
+      const userData = {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        dateOfBirth: formData.birthday,
+        gender: formData.gender as "Male" | "Female",
+      };
 
-      if (!response.ok) {
-        throw new Error("Failed to submit form");
+      const result = await register(userData);
+
+      if (result.type === "auth/registerUser/fulfilled") {
+        // Registration successful, redirect to membership page
+        setMessageState({
+          type: "success",
+          text: "Registration successful!",
+        });
+
+        // Clear form
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          birthday: "",
+          gender: "",
+        });
+        setErrors({
+          name: "",
+          email: "",
+          phone: "",
+          birthday: "",
+          gender: "",
+        });
+
+        // Close parent modal and redirect to membership page after a short delay
+        setTimeout(() => {
+          onParentClose?.(); // Close the PhoneNumberModal
+          window.location.href = "/membership";
+        }, 500);
+      } else {
+        setMessageState({
+          type: "error",
+          text:
+            (result.payload as string) ||
+            "Registration failed. Please try again.",
+        });
       }
-
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        birthday: "",
-        gender: "",
-      });
-      setErrors({
-        name: "",
-        email: "",
-        phone: "",
-        birthday: "",
-        gender: "",
-      });
-
-      setMessageState({
-        type: "success",
-        text: "Thank you! Your information has been submitted successfully.",
-      });
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error submitting user info form:", error);
       setMessageState({
         type: "error",
-        text: "Oops! Something went wrong while submitting the form. Please try again later.",
+        text: error.message || "Server Down, Please try again later.",
       });
     } finally {
       setIsSubmitting(false);
@@ -272,9 +296,9 @@ const UserInfoForm = ({ isMobile }: UserInfoFormProps) => {
                     Phone number *
                   </label>
                   <div
-                    className={`bg-[#FFFFFF] border rounded-lg flex items-center transition-colors overflow-hidden ${
+                    className={`bg-[#F5F5F5] border rounded-lg flex items-center transition-colors overflow-hidden ${
                       errors.phone ? "border-red-500" : "border-[#333333]"
-                    } focus-within:border-[2px] focus-within:border-[#00DBDC]`}
+                    }`}
                   >
                     <span className="text-[#0D0D0D] px-4 py-1.5 md:py-2 font-medium flex-shrink-0">
                       +91
@@ -284,9 +308,9 @@ const UserInfoForm = ({ isMobile }: UserInfoFormProps) => {
                       type="tel"
                       name="phone"
                       value={formData.phone}
-                      onChange={handleChange}
+                      readOnly
                       placeholder="Enter phone number"
-                      className="bg-transparent flex-1 py-1.5 md:py-2 pr-4 text-[#0D0D0D] placeholder:text-[#8A8A8A] outline-none min-w-0"
+                      className="bg-transparent flex-1 py-1.5 md:py-2 pr-4 text-[#666666] placeholder:text-[#8A8A8A] outline-none min-w-0 cursor-not-allowed"
                     />
                   </div>
                 </div>
@@ -335,9 +359,9 @@ const UserInfoForm = ({ isMobile }: UserInfoFormProps) => {
                   <button
                     type="button"
                     onClick={() => handleGenderChange("male")}
-                    className={`pl-2 py-2 md:px-4 md:py-1 rounded-lg text-sm font-normal tracking-[0%] transition-all flex items-center justify-between duration-200 ${
+                    className={`group pl-2 py-2 md:px-4 md:py-2 rounded-lg text-sm font-normal tracking-[0%] transition-all flex items-center justify-between duration-200 ${
                       formData.gender === "male"
-                        ? "bg-[#00DBDC] text-white"
+                        ? "bg-[#00DBDC1A] text-[#00DBDC]"
                         : "bg-[#1D1D1D] text-[#8A8A8A] md:hover:bg-[#00DBDC1A] md:hover:text-[#00DBDC]"
                     }`}
                   >
@@ -350,7 +374,20 @@ const UserInfoForm = ({ isMobile }: UserInfoFormProps) => {
                       alt="check"
                       width={16}
                       height={16}
-                      className="flex-shrink-0"
+                      className={`flex-shrink-0 transition-all duration-200 ${
+                        formData.gender === "male" ? "" : "group-hover:hidden"
+                      }`}
+                    />
+                    <Image
+                      src="/images/enabled-check-tick.svg"
+                      alt="check"
+                      width={16}
+                      height={16}
+                      className={`flex-shrink-0 transition-all duration-200 ${
+                        formData.gender === "male"
+                          ? "hidden"
+                          : "hidden group-hover:block"
+                      }`}
                     />
                     <span className="text-left leading-tight flex-1 pl-[4px] whitespace-nowrap">
                       Male
@@ -361,9 +398,9 @@ const UserInfoForm = ({ isMobile }: UserInfoFormProps) => {
                   <button
                     type="button"
                     onClick={() => handleGenderChange("female")}
-                    className={`pl-2 py-2 md:px-4 md:py-1 rounded-lg text-sm font-normal tracking-[0%] transition-all flex items-center justify-between duration-200 ${
+                    className={`group pl-2 py-2 md:px-4 md:py-2 rounded-lg text-sm font-normal tracking-[0%] transition-all flex items-center justify-between duration-200 ${
                       formData.gender === "female"
-                        ? "bg-[#00DBDC] text-white"
+                        ? "bg-[#00DBDC1A] text-[#00DBDC]"
                         : "bg-[#1D1D1D] text-[#8A8A8A] md:hover:bg-[#00DBDC1A] md:hover:text-[#00DBDC]"
                     }`}
                   >
@@ -376,7 +413,20 @@ const UserInfoForm = ({ isMobile }: UserInfoFormProps) => {
                       alt="check"
                       width={16}
                       height={16}
-                      className="flex-shrink-0"
+                      className={`flex-shrink-0 transition-all duration-200 ${
+                        formData.gender === "female" ? "" : "group-hover:hidden"
+                      }`}
+                    />
+                    <Image
+                      src="/images/enabled-check-tick.svg"
+                      alt="check"
+                      width={16}
+                      height={16}
+                      className={`flex-shrink-0 transition-all duration-200 ${
+                        formData.gender === "female"
+                          ? "hidden"
+                          : "hidden group-hover:block"
+                      }`}
                     />
                     <span className="text-left leading-tight flex-1 pl-[4px] whitespace-nowrap">
                       Female
@@ -406,8 +456,7 @@ const UserInfoForm = ({ isMobile }: UserInfoFormProps) => {
                 <div className="flex items-center gap-2">
                   <img
                     src={
-                      messageState.type === "success" ||
-                      messageState.type === "error"
+                      messageState.type === "success"
                         ? "/images/success-tick.svg"
                         : "/images/error-red.svg"
                     }

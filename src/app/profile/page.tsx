@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { profileData } from "@/data/profile";
 import { ProfilePageData } from "@/types/staticPages";
-import ProfilePage from "@/components/ProfilePage";
+import ProfilePageWrapper from "@/components/ProfilePage/ProfilePageWrapper";
 import { headers } from "next/headers";
 import { isMobileDevice } from "@/utils/deviceDetection";
 
@@ -21,7 +21,11 @@ export default function Profile() {
 
   return (
     <main>
-      <ProfilePage data={profileData} pageName="profile" isMobile={isMobile} />
+      <ProfilePageWrapper
+        data={profileData}
+        pageName="profile"
+        isMobile={isMobile}
+      />
     </main>
   );
 }

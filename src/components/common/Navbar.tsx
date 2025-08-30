@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { NavbarProps, LoginModalType } from "@/types/staticPages";
 import { PhoneNumberModal, EmailModal } from "./Modal";
+import UserProfileDropdown from "./UserProfileDropdown";
+import { useAuth } from "@/hooks/useAuth";
 
 interface Props {
   data: NavbarProps;
@@ -17,6 +19,7 @@ export default function Navbar({ data, isMobile }: Props) {
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
   const { logo, navLinks, signInButton, loginModalType } = data;
+  const { isAuthenticated, loadUser } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,6 +30,11 @@ export default function Navbar({ data, isMobile }: Props) {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Load user from storage on component mount
+  useEffect(() => {
+    loadUser();
+  }, [loadUser]);
 
   useEffect(() => {
     if (isMenuOpen) {
@@ -85,13 +93,16 @@ export default function Navbar({ data, isMobile }: Props) {
             />
           </Link>
           <div className="flex items-center gap-4">
-            <button
-              // onClick={() => setIsLoginModalOpen(true)}
-              onClick={() => (window.location.href = "/contact-us")}
-              className="bg-[#00DBDC] border border-transparent rounded-[4px] md:rounded-lg px-3 md:px-6 py-2 text-[#0D0D0D] font-medium text-xs md:text-sm transition-all duration-200"
-            >
-              {signInButton.text}
-            </button>
+            {isAuthenticated ? (
+              <UserProfileDropdown isMobile={isMobile} />
+            ) : (
+              <button
+                onClick={() => setIsLoginModalOpen(true)}
+                className="bg-[#00DBDC] border border-transparent rounded-[4px] md:rounded-lg px-3 md:px-6 py-2 text-[#0D0D0D] font-medium text-xs md:text-sm transition-all duration-200"
+              >
+                Sign in
+              </button>
+            )}
           </div>
 
           {/* Login Modals */}
@@ -160,16 +171,39 @@ export default function Navbar({ data, isMobile }: Props) {
 
             {/* Sign In Button in Menu */}
             <div className="px-6 mt-8">
-              <button
-                onClick={() => {
-                  // setIsLoginModalOpen(true);
-                  setIsMenuOpen(false);
-                  window.location.href = "/contact-us";
-                }}
-                className="w-full bg-[#00DBDC] border border-transparent rounded-lg py-4 text-[#0D0D0D] font-medium text-lg transition-all duration-200"
-              >
-                {signInButton.text}
-              </button>
+              {isAuthenticated ? (
+                <div className="flex flex-col gap-4">
+                  <button
+                    onClick={() => {
+                      setIsMenuOpen(false);
+                      window.location.href = "/profile";
+                    }}
+                    className="w-full bg-[#00DBDC] border border-transparent rounded-lg py-4 text-[#0D0D0D] font-medium text-lg transition-all duration-200"
+                  >
+                    Your Profile
+                  </button>
+                  <button
+                    onClick={async () => {
+                      setIsMenuOpen(false);
+                      // Logout will be handled by UserProfileDropdown
+                      window.location.href = "/";
+                    }}
+                    className="w-full bg-transparent border border-[#00DBDC] rounded-lg py-4 text-[#00DBDC] font-medium text-lg transition-all duration-200"
+                  >
+                    Sign Out
+                  </button>
+                </div>
+              ) : (
+                <button
+                  onClick={() => {
+                    setIsLoginModalOpen(true);
+                    setIsMenuOpen(false);
+                  }}
+                  className="w-full bg-[#00DBDC] border border-transparent rounded-lg py-4 text-[#0D0D0D] font-medium text-lg transition-all duration-200"
+                >
+                  Sign in
+                </button>
+              )}
             </div>
           </div>
         </div>
@@ -204,12 +238,16 @@ export default function Navbar({ data, isMobile }: Props) {
           </Link>
         ))}
       </div>
-      <button
-        onClick={() => (window.location.href = "/contact-us")}
-        className="bg-[#00DBDC] border border-transparent rounded-lg px-10 md:px-[48px] md:h-[50px] text-[#0D0D0D] font-medium text-base hover:bg-transparent hover:border-[#00DBDC] hover:text-[#00DBDC] transition-all duration-200"
-      >
-        {signInButton.text}
-      </button>
+      {isAuthenticated ? (
+        <UserProfileDropdown isMobile={isMobile} />
+      ) : (
+        <button
+          onClick={() => setIsLoginModalOpen(true)}
+          className="bg-[#00DBDC] border border-transparent rounded-lg px-10 md:px-[48px] md:h-[50px] text-[#0D0D0D] font-medium text-base hover:bg-transparent hover:border-[#00DBDC] hover:text-[#00DBDC] transition-all duration-200"
+        >
+          Sign in
+        </button>
+      )}
 
       {/* Login Modals */}
       {loginModalType === LoginModalType.PHONE ? (

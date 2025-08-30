@@ -40,8 +40,8 @@ export const homeData: StaticPageData = {
       "https://da8nru77lsio9.cloudfront.net/images/homec/mobile-hero.webp",
     originalMobileImage:
       "https://da8nru77lsio9.cloudfront.net/images/hero/home-mobile-original.svg",
-    btnPrimaryText: "Join the Waitlist",
-    btnSecondaryText: "Join the Waitlist",
+    btnPrimaryText: "Join Now",
+    btnSecondaryText: "Join Now",
   },
   countdownSection: {
     title: "Your Premium Sports Club. Opening Soon at ",

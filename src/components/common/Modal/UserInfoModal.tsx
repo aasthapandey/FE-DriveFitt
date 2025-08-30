@@ -7,9 +7,17 @@ interface UserInfoModalProps {
   isOpen: boolean;
   onClose: () => void;
   isMobile?: boolean;
+  phoneNumber?: string;
+  onParentClose?: () => void; // Callback to close parent PhoneNumberModal
 }
 
-const UserInfoModal = ({ isOpen, onClose, isMobile }: UserInfoModalProps) => {
+const UserInfoModal = ({
+  isOpen,
+  onClose,
+  isMobile,
+  phoneNumber,
+  onParentClose,
+}: UserInfoModalProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -36,7 +44,7 @@ const UserInfoModal = ({ isOpen, onClose, isMobile }: UserInfoModalProps) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
+    <div className="fixed inset-0 z-[10001] flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
       <div
         ref={modalRef}
         className="relative w-full max-w-4xl mx-4 max-h-[90vh] overflow-y-auto flex flex-col items-center"
@@ -55,7 +63,11 @@ const UserInfoModal = ({ isOpen, onClose, isMobile }: UserInfoModalProps) => {
             className="w-[48px] h-[48px]"
           />
         </button>
-        <UserInfoForm isMobile={isMobile} />
+        <UserInfoForm
+          isMobile={isMobile}
+          phoneNumber={phoneNumber}
+          onParentClose={onParentClose}
+        />
       </div>
     </div>
   );

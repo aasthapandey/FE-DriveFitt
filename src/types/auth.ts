@@ -1,14 +1,66 @@
-// Integer enums for better performance
 export enum OTPPurpose {
-  LOGIN = 1,
-  REGISTRATION = 2,
-  PASSWORD_RESET = 3,
+  LOGIN = "login",
+  REGISTRATION = "registration",
 }
 
-export enum UserStatus {
-  ACTIVE = 1,
-  INACTIVE = 2,
-  SUSPENDED = 3,
+export interface User {
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
+  dateOfBirth?: string;
+  hasMembership: boolean;
+  membershipInfo?: {
+    id: number;
+    membershipType: string;
+    status: "active" | "expired" | "cancelled";
+    expiresAt: string;
+  };
+}
+
+export interface AuthState {
+  isAuthenticated: boolean;
+  user: User | null;
+  token: string | null;
+  loading: boolean;
+  error: string | null;
+}
+
+export interface LoginResponse {
+  success: boolean;
+  message: string;
+  data?: {
+    token: string;
+    user: User;
+  };
+}
+
+export interface AuthResponse {
+  success: boolean;
+  message: string;
+  data?: {
+    token: string;
+    user: User;
+  };
+}
+
+export interface UserRegistrationData {
+  name: string;
+  email: string;
+  phone: string;
+  dateOfBirth: string;
+  gender: "Male" | "Female";
+}
+
+export interface MembershipInfo {
+  id: number;
+  userId: string;
+  orderId: string;
+  paymentId: string;
+  membershipType: string;
+  status: "active" | "expired" | "cancelled";
+  createdAt: string;
+  expiresAt: string;
 }
 
 export interface OTPVerification {
@@ -19,55 +71,7 @@ export interface OTPVerification {
   attempts: number;
   is_verified: boolean;
   expires_at: Date;
-  vendor_response?: string;
   created_at: Date;
   verified_at?: Date;
-}
-
-export interface User {
-  id: number;
-  phone: string;
-  email?: string;
-  first_name?: string;
-  last_name?: string;
-  phone_verified: boolean;
-  phone_verified_at?: Date;
-  status: UserStatus;
-  last_login_at?: Date;
-  created_at: Date;
-  updated_at: Date;
-}
-
-export interface UserSession {
-  id: number;
-  user_id: number;
-  token_hash: string;
-  expires_at: Date;
-  created_at: Date;
-}
-
-export interface SendOTPRequest {
-  phone: string;
-  purpose: OTPPurpose;
-}
-
-export interface VerifyOTPRequest {
-  phone: string;
-  otp: string;
-  purpose: OTPPurpose;
-}
-
-export interface LoginWithOTPRequest {
-  phone: string;
-  otp: string;
-}
-
-export interface AuthResponse {
-  success: boolean;
-  message: string;
-  data?: {
-    token?: string;
-    user?: User;
-    expires_in?: number;
-  };
+  vendor_response?: string;
 }

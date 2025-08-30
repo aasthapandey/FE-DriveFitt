@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { otpService } from "@/lib/otpService";
 import { VerifyOTPRequest, AuthResponse, OTPPurpose } from "@/types/auth";
+import { executeQuery } from "@/lib/database";
 
 export async function POST(request: NextRequest) {
   try {
@@ -52,13 +53,49 @@ export async function POST(request: NextRequest) {
     const isValid = await otpService.verifyOTP(phone, otp, purpose);
 
     if (isValid) {
-      return NextResponse.json<AuthResponse>(
-        {
-          success: true,
-          message: "OTP verified successfully.",
-        },
-        { status: 200 }
-      );
+      // Check if user exists in database
+      const userQuery = `
+        SELECT id, first_name, last_name, email, phone, date_of_birth, created_at 
+        FROM users 
+        WHERE phone = ?
+      `;
+
+      const userResult = await executeQuery<any[]>(userQuery, [phone]);
+      const user = userResult?.[0];
+      console.log("user", user);
+
+      if (user) {
+        // User exists, return user data
+        const fullName =
+          `${user.first_name || ""} ${user.last_name || ""}`.trim() || "User";
+
+        return NextResponse.json<AuthResponse>(
+          {
+            success: true,
+            message: "OTP verified successfully. User found.",
+            data: {
+              user: {
+                id: user.id,
+                name: fullName,
+                email: user.email,
+                phone: user.phone,
+                dateOfBirth: user.date_of_birth,
+                hasMembership: false, // Will be checked separately
+              },
+            },
+          },
+          { status: 200 }
+        );
+      } else {
+        // User doesn't exist, return success without user data
+        return NextResponse.json<AuthResponse>(
+          {
+            success: true,
+            message: "OTP verified successfully. User not found.",
+          },
+          { status: 200 }
+        );
+      }
     } else {
       return NextResponse.json<AuthResponse>(
         {

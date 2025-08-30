@@ -12,7 +12,7 @@ export const navbarData: NavbarProps = {
     { title: "Franchise", href: "/franchise" },
   ],
   signInButton: {
-    text: "Join the Waitlist",
+    text: "Sign in",
   },
   loginModalType: LoginModalType.EMAIL,
 };
