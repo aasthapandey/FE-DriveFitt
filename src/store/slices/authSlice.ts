@@ -4,6 +4,8 @@ import {
   User,
   LoginResponse,
   UserRegistrationData,
+  ProfileUpdateRequest,
+  ProfileUpdateResponse,
 } from "@/types/auth";
 import { authService } from "@/services/authService";
 
@@ -67,6 +69,18 @@ export const logoutUser = createAsyncThunk(
       return true;
     } catch (error: any) {
       return rejectWithValue(error.message || "Logout failed");
+    }
+  }
+);
+
+export const updateProfile = createAsyncThunk(
+  "auth/updateProfile",
+  async (updateData: ProfileUpdateRequest, { rejectWithValue }) => {
+    try {
+      const response = await authService.updateProfile(updateData);
+      return response;
+    } catch (error: any) {
+      return rejectWithValue(error.message || "Failed to update profile");
     }
   }
 );
@@ -247,6 +261,23 @@ const authSlice = createSlice({
         state.user = null;
         state.token = null;
         state.loading = false;
+        state.error = action.payload as string;
+      })
+
+      // Update profile (no global loading state)
+      .addCase(updateProfile.pending, (state) => {
+        // Don't set global loading state for profile updates
+        state.error = null;
+      })
+      .addCase(updateProfile.fulfilled, (state, action) => {
+        if (action.payload.success && action.payload.data) {
+          state.user = action.payload.data.user;
+          state.error = null;
+        } else {
+          state.error = action.payload.message || "Profile update failed";
+        }
+      })
+      .addCase(updateProfile.rejected, (state, action) => {
         state.error = action.payload as string;
       });
   },

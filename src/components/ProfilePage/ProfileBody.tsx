@@ -1,6 +1,11 @@
 "use client";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { ProfilePageData } from "@/types/staticPages";
+import { ProfileEditState } from "@/types/auth";
+import { useAuth } from "@/hooks/useAuth";
+import EditableField from "@/components/common/EditableField";
+import { validateField } from "@/utils/profileValidation";
 
 interface ProfileBodyProps {
   data: ProfilePageData;
@@ -9,9 +14,123 @@ interface ProfileBodyProps {
 
 const ProfileBody = ({ data, isMobile }: ProfileBodyProps) => {
   const { userInfo, actions } = data;
+  const { user, updateUserProfile, updateUserData } = useAuth();
+
+  // Initialize edit state
+  const [editState, setEditState] = useState<ProfileEditState>({
+    editingField: null,
+    fieldValues: {
+      name: user?.name || userInfo.name,
+      email: user?.email || userInfo.email,
+      dateOfBirth: user?.dateOfBirth || userInfo.dateOfBirth,
+    },
+    validation: {
+      name: { isValid: true, message: "" },
+      email: { isValid: true, message: "" },
+      dateOfBirth: { isValid: true, message: "" },
+    },
+    errors: {
+      name: "",
+      email: "",
+      dateOfBirth: "",
+    },
+  });
+
+  // Update field values when user data changes
+  useEffect(() => {
+    if (user) {
+      setEditState((prev) => ({
+        ...prev,
+        fieldValues: {
+          name: user.name || userInfo.name,
+          email: user.email || userInfo.email,
+          dateOfBirth: user.dateOfBirth || userInfo.dateOfBirth,
+        },
+      }));
+    }
+  }, [user, userInfo]);
+
+  const handleStartEdit = (field: string) => {
+    setEditState((prev) => ({
+      ...prev,
+      editingField: field,
+      errors: {
+        ...prev.errors,
+        [field]: "",
+      },
+    }));
+  };
+
+  const handleSave = async (field: string, value: string) => {
+    // Optimistically update the UI immediately
+    setEditState((prev) => ({
+      ...prev,
+      fieldValues: {
+        ...prev.fieldValues,
+        [field]: value,
+      },
+      errors: {
+        ...prev.errors,
+        [field]: "",
+      },
+    }));
+
+    // Update Redux store optimistically
+    updateUserData({
+      [field === "dateOfBirth" ? "dateOfBirth" : field]: value,
+    });
+
+    // Save asynchronously in background
+    try {
+      const result = await updateUserProfile({
+        field: field as "name" | "email" | "dateOfBirth",
+        value,
+      });
+
+      if (result.type === "auth/updateProfile/rejected") {
+        // Error - revert the optimistic update and show error
+        setEditState((prev) => ({
+          ...prev,
+          fieldValues: {
+            ...prev.fieldValues,
+            [field]: user?.[field as keyof typeof user] || value, // Revert to original value
+          },
+          errors: {
+            ...prev.errors,
+            [field]: (result.payload as string) || "Failed to update profile",
+          },
+        }));
+      }
+    } catch (error) {
+      // Error - revert the optimistic update and show error
+      setEditState((prev) => ({
+        ...prev,
+        fieldValues: {
+          ...prev.fieldValues,
+          [field]: user?.[field as keyof typeof user] || value, // Revert to original value
+        },
+        errors: {
+          ...prev.errors,
+          [field]: "Failed to update profile",
+        },
+      }));
+    }
+  };
+
+  const handleCancel = (field: string) => {
+    setEditState((prev) => ({
+      ...prev,
+      editingField: null,
+      errors: {
+        ...prev.errors,
+        [field]: "",
+      },
+    }));
+  };
 
   const handleAction = (actionType: string) => {
     console.log(`${actionType} clicked`);
+    // Handle non-editable actions like viewPlan, renewPlan
   };
 
   const renderActionButton = (action: any, actionType: string) => {
@@ -90,47 +209,53 @@ const ProfileBody = ({ data, isMobile }: ProfileBodyProps) => {
             </div>
 
             <div className="w-full space-y-[24px]">
-              <div className="flex flex-col">
-                <span className="font-light text-xs leading-4 mb-1 text-[#8A8A8A]">
-                  Name
-                </span>
-                <span className="font-normal text-xl leading-7 mb-2 text-white">
-                  {userInfo.name}
-                </span>
-                {renderMobileActionButton(actions.changeName, "changeName")}
-              </div>
+              <EditableField
+                field="name"
+                label="Name"
+                value={editState.fieldValues.name}
+                isEditing={editState.editingField === "name"}
+                error={editState.errors.name}
+                isMobile={isMobile}
+                onStartEdit={() => handleStartEdit("name")}
+                onSave={(value) => handleSave("name", value)}
+                onCancel={() => handleCancel("name")}
+                onValidate={(value) => validateField("name", value)}
+              />
 
-              <div className="flex flex-col">
-                <span className="font-light text-xs leading-4 mb-1 text-[#8A8A8A]">
-                  Email
-                </span>
-                <span className="font-normal text-xl leading-7 mb-2 text-white">
-                  {userInfo.email}
-                </span>
-                {renderMobileActionButton(actions.changeEmail, "changeEmail")}
-              </div>
+              <EditableField
+                field="email"
+                label="Email"
+                value={editState.fieldValues.email}
+                isEditing={editState.editingField === "email"}
+                error={editState.errors.email}
+                isMobile={isMobile}
+                onStartEdit={() => handleStartEdit("email")}
+                onSave={(value) => handleSave("email", value)}
+                onCancel={() => handleCancel("email")}
+                onValidate={(value) => validateField("email", value)}
+              />
 
               <div className="flex flex-col">
                 <span className="font-light text-xs leading-4 mb-1 text-[#8A8A8A]">
                   Phone number
                 </span>
                 <span className="font-normal text-xl leading-7 mb-2 text-white">
-                  {userInfo.phone}
+                  {user?.phone || userInfo.phone}
                 </span>
               </div>
 
-              <div className="flex flex-col">
-                <span className="font-light text-xs leading-4 mb-1 text-[#8A8A8A]">
-                  Date of birth
-                </span>
-                <span className="font-normal text-xl leading-7 mb-2 text-white">
-                  {userInfo.dateOfBirth}
-                </span>
-                {renderMobileActionButton(
-                  actions.changeBirthday,
-                  "changeBirthday"
-                )}
-              </div>
+              <EditableField
+                field="dateOfBirth"
+                label="Date of birth"
+                value={editState.fieldValues.dateOfBirth}
+                isEditing={editState.editingField === "dateOfBirth"}
+                error={editState.errors.dateOfBirth}
+                isMobile={isMobile}
+                onStartEdit={() => handleStartEdit("dateOfBirth")}
+                onSave={(value) => handleSave("dateOfBirth", value)}
+                onCancel={() => handleCancel("dateOfBirth")}
+                onValidate={(value) => validateField("dateOfBirth", value)}
+              />
 
               <div className="flex flex-col">
                 <span className="font-light text-xs leading-4 mb-1 text-[#8A8A8A]">
@@ -180,22 +305,25 @@ const ProfileBody = ({ data, isMobile }: ProfileBodyProps) => {
 
           <div className="flex-1 grid grid-cols-2 gap-[84px]">
             <div className="space-y-[68px]">
-              <div className="flex flex-col">
-                <span className="font-light text-base leading-5 mb-2 text-[#8A8A8A]">
-                  Name
-                </span>
-                <span className="font-normal text-2xl leading-7 mb-5 text-white">
-                  {userInfo.name}
-                </span>
-                {renderActionButton(actions.changeName, "changeName")}
-              </div>
+              <EditableField
+                field="name"
+                label="Name"
+                value={editState.fieldValues.name}
+                isEditing={editState.editingField === "name"}
+                error={editState.errors.name}
+                isMobile={isMobile}
+                onStartEdit={() => handleStartEdit("name")}
+                onSave={(value) => handleSave("name", value)}
+                onCancel={() => handleCancel("name")}
+                onValidate={(value) => validateField("name", value)}
+              />
 
               <div className="flex flex-col">
                 <span className="font-light text-base leading-5 mb-2 text-[#8A8A8A]">
                   Phone number
                 </span>
                 <span className="font-normal text-2xl leading-7 mb-5 text-white">
-                  {userInfo.phone}
+                  {user?.phone || userInfo.phone}
                 </span>
               </div>
 
@@ -211,25 +339,31 @@ const ProfileBody = ({ data, isMobile }: ProfileBodyProps) => {
             </div>
 
             <div className="space-y-[68px]">
-              <div className="flex flex-col">
-                <span className="font-light text-base leading-5 mb-2 text-[#8A8A8A]">
-                  Email
-                </span>
-                <span className="font-normal text-2xl leading-7 mb-5 text-white">
-                  {userInfo.email}
-                </span>
-                {renderActionButton(actions.changeEmail, "changeEmail")}
-              </div>
+              <EditableField
+                field="email"
+                label="Email"
+                value={editState.fieldValues.email}
+                isEditing={editState.editingField === "email"}
+                error={editState.errors.email}
+                isMobile={isMobile}
+                onStartEdit={() => handleStartEdit("email")}
+                onSave={(value) => handleSave("email", value)}
+                onCancel={() => handleCancel("email")}
+                onValidate={(value) => validateField("email", value)}
+              />
 
-              <div className="flex flex-col">
-                <span className="font-light text-base leading-5 mb-2 text-[#8A8A8A]">
-                  Date of birth
-                </span>
-                <span className="font-normal text-2xl leading-7 mb-5 text-white">
-                  {userInfo.dateOfBirth}
-                </span>
-                {renderActionButton(actions.changeBirthday, "changeBirthday")}
-              </div>
+              <EditableField
+                field="dateOfBirth"
+                label="Date of birth"
+                value={editState.fieldValues.dateOfBirth}
+                isEditing={editState.editingField === "dateOfBirth"}
+                error={editState.errors.dateOfBirth}
+                isMobile={isMobile}
+                onStartEdit={() => handleStartEdit("dateOfBirth")}
+                onSave={(value) => handleSave("dateOfBirth", value)}
+                onCancel={() => handleCancel("dateOfBirth")}
+                onValidate={(value) => validateField("dateOfBirth", value)}
+              />
 
               <div className="flex flex-col">
                 <span className="font-light text-base leading-5 mb-2 text-[#8A8A8A]">

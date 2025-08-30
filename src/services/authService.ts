@@ -4,6 +4,8 @@ import {
   UserRegistrationData,
   MembershipInfo,
   OTPPurpose,
+  ProfileUpdateRequest,
+  ProfileUpdateResponse,
 } from "@/types/auth";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
@@ -154,6 +156,23 @@ class AuthService {
   // Helper method to get current token from session storage
   getCurrentToken(): string | null {
     return sessionStorage.getItem("auth_token");
+  }
+
+  async updateProfile(
+    updateData: ProfileUpdateRequest
+  ): Promise<ProfileUpdateResponse> {
+    const token = this.getCurrentToken();
+    if (!token) {
+      throw new Error("No authentication token found");
+    }
+
+    return this.makeRequest("/api/user/profile/update", {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(updateData),
+    });
   }
 }
 

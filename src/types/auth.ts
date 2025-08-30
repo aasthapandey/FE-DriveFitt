@@ -81,3 +81,41 @@ export interface VerifyOTPRequest {
   otp: string;
   purpose: OTPPurpose;
 }
+
+// Profile editing types
+export interface ProfileEditState {
+  editingField: string | null;
+  fieldValues: {
+    name: string;
+    email: string;
+    dateOfBirth: string;
+  };
+  validation: {
+    name: { isValid: boolean; message: string };
+    email: { isValid: boolean; message: string };
+    dateOfBirth: { isValid: boolean; message: string };
+  };
+  errors: {
+    name: string;
+    email: string;
+    dateOfBirth: string;
+  };
+}
+
+export interface ProfileUpdateRequest {
+  field: "name" | "email" | "dateOfBirth";
+  value: string;
+}
+
+export interface ProfileUpdateResponse {
+  success: boolean;
+  message: string;
+  data?: {
+    user: User;
+  };
+}
+
+export interface FieldValidation {
+  isValid: boolean;
+  message: string;
+}

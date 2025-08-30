@@ -37,8 +37,8 @@ export default function ProfilePageWrapper({
     }
   }, [isAuthenticated, loading, router]);
 
-  // Show loading state while checking authentication
-  if (loading) {
+  // Show loading state only for initial authentication check, not for profile updates
+  if (loading && !user) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-white text-lg">Loading...</div>

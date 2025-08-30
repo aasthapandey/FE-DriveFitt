@@ -10,8 +10,9 @@ import {
   clearError,
   setLoading,
   updateUser,
+  updateProfile,
 } from "@/store/slices/authSlice";
-import { UserRegistrationData, User } from "@/types/auth";
+import { UserRegistrationData, User, ProfileUpdateRequest } from "@/types/auth";
 
 export const useAuth = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -64,6 +65,13 @@ export const useAuth = () => {
     [dispatch]
   );
 
+  const updateUserProfile = useCallback(
+    (updateData: ProfileUpdateRequest) => {
+      return dispatch(updateProfile(updateData));
+    },
+    [dispatch]
+  );
+
   return {
     ...auth,
     login,
@@ -74,5 +82,6 @@ export const useAuth = () => {
     clearAuthError,
     setAuthLoading,
     updateUserData,
+    updateUserProfile,
   };
 };
