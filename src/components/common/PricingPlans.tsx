@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import ScrollAnimation from "@/components/common/ScrollAnimation";
-import EnhancedPaymentModal from "./EnhancedPaymentModal";
+import PaymentModal from "./PaymentModal";
 
 interface PricingPlan {
   title: string;
@@ -24,6 +24,13 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
   const [activePlanIndex, setActivePlanIndex] = useState(0);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState<PricingPlan | null>(null);
+
+  // Map plan titles to integers
+  const getMembershipType = (title: string): number => {
+    if (title.includes("Individual")) return 1;
+    if (title.includes("Family")) return 2;
+    return 1; // default to Individual
+  };
 
   const handlePlanSwitch = (index: number) => {
     setActivePlanIndex(index);
@@ -48,11 +55,16 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
     );
     // You can add additional success handling here
     // For example, redirect to a success page or show a success message
+    setShowPaymentModal(false);
+    setSelectedPlan(null);
   };
 
   const handlePaymentError = (error: string) => {
     console.error("Payment failed:", error);
     // You can add additional error handling here
+    // For example, show an error message to the user
+    setShowPaymentModal(false);
+    setSelectedPlan(null);
   };
 
   if (isMobile) {
@@ -200,11 +212,13 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
 
         {/* Payment Modal */}
         {selectedPlan && (
-          <EnhancedPaymentModal
+          <PaymentModal
             isOpen={showPaymentModal}
             onClose={handlePaymentClose}
-            membershipType={selectedPlan.title}
+            membershipType={getMembershipType(selectedPlan.title)}
             amount={1} // 1 rupee for testing
+            onSuccess={handlePaymentSuccess}
+            onError={handlePaymentError}
           />
         )}
       </section>
@@ -313,11 +327,13 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
 
       {/* Payment Modal */}
       {selectedPlan && (
-        <EnhancedPaymentModal
+        <PaymentModal
           isOpen={showPaymentModal}
           onClose={handlePaymentClose}
-          membershipType={selectedPlan.title}
+          membershipType={getMembershipType(selectedPlan.title)}
           amount={1} // 1 rupee for testing
+          onSuccess={handlePaymentSuccess}
+          onError={handlePaymentError}
         />
       )}
     </section>

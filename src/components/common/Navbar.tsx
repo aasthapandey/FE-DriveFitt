@@ -187,6 +187,9 @@ export default function Navbar({ data, isMobile }: Props) {
                   <div className="flex gap-3">
                     <button
                       onClick={() => {
+                        console.log(
+                          "Navbar: Profile button clicked, navigating to /profile"
+                        );
                         setIsMenuOpen(false);
                         router.push("/profile");
                       }}

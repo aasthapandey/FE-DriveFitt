@@ -12,7 +12,7 @@ export interface User {
   hasMembership: boolean;
   membershipInfo?: {
     id: number;
-    membershipType: string;
+    membershipType: number; // 1 = Individual Annual Plan, 2 = Family Annual Plan
     status: "active" | "expired" | "cancelled";
     expiresAt: string;
   };
@@ -64,10 +64,10 @@ export interface UserRegistrationData {
 
 export interface MembershipInfo {
   id: number;
-  userId: string;
+  userId: number;
   orderId: string;
   paymentId: string;
-  membershipType: string;
+  membershipType: number; // 1 = Individual Annual Plan, 2 = Family Annual Plan
   status: "active" | "expired" | "cancelled";
   createdAt: string;
   expiresAt: string;

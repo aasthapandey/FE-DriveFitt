@@ -61,6 +61,18 @@ export const checkMembership = createAsyncThunk(
   }
 );
 
+export const fetchUserProfile = createAsyncThunk(
+  "auth/fetchUserProfile",
+  async (_, { rejectWithValue }) => {
+    try {
+      const userData = await authService.getUserProfile();
+      return userData;
+    } catch (error: any) {
+      return rejectWithValue(error.message || "Failed to fetch user profile");
+    }
+  }
+);
+
 export const logoutUser = createAsyncThunk(
   "auth/logoutUser",
   async (_, { rejectWithValue }) => {
@@ -91,10 +103,16 @@ export const loadUserFromStorage = createAsyncThunk(
     try {
       const state = getState() as { auth: AuthState };
 
-      // Prevent multiple simultaneous calls
+      // Prevent multiple simultaneous calls or calls when already authenticated
       if (state.auth.loading) {
         console.log("loadUserFromStorage: Already loading, skipping...");
         return null;
+      }
+
+      // If already authenticated with user data, don't reload
+      if (state.auth.isAuthenticated && state.auth.user) {
+        console.log("loadUserFromStorage: Already authenticated, skipping...");
+        return { token: state.auth.token, user: state.auth.user };
       }
 
       const token = sessionStorage.getItem("auth_token");
@@ -249,9 +267,13 @@ const authSlice = createSlice({
           state.loading = false;
           state.error = null;
         } else {
-          state.isAuthenticated = false;
-          state.user = null;
-          state.token = null;
+          // Only set isAuthenticated to false if we don't already have a user
+          // This prevents race conditions during token verification
+          if (!state.user) {
+            state.isAuthenticated = false;
+            state.user = null;
+            state.token = null;
+          }
           state.loading = false;
           state.error = null;
         }
@@ -278,6 +300,24 @@ const authSlice = createSlice({
         }
       })
       .addCase(updateProfile.rejected, (state, action) => {
+        state.error = action.payload as string;
+      })
+
+      // Fetch user profile
+      .addCase(fetchUserProfile.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchUserProfile.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = action.payload;
+        state.error = null;
+
+        // Update session storage
+        sessionStorage.setItem("user_data", JSON.stringify(action.payload));
+      })
+      .addCase(fetchUserProfile.rejected, (state, action) => {
+        state.loading = false;
         state.error = action.payload as string;
       });
   },

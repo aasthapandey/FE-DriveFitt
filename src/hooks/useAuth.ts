@@ -11,6 +11,7 @@ import {
   setLoading,
   updateUser,
   updateProfile,
+  fetchUserProfile,
 } from "@/store/slices/authSlice";
 import { UserRegistrationData, User, ProfileUpdateRequest } from "@/types/auth";
 
@@ -72,6 +73,10 @@ export const useAuth = () => {
     [dispatch]
   );
 
+  const fetchProfile = useCallback(() => {
+    return dispatch(fetchUserProfile());
+  }, [dispatch]);
+
   return {
     ...auth,
     login,
@@ -83,5 +88,6 @@ export const useAuth = () => {
     setAuthLoading,
     updateUserData,
     updateUserProfile,
+    fetchProfile,
   };
 };

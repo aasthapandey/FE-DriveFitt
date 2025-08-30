@@ -245,21 +245,15 @@ The utility module provides helper functions:
 
 ## Testing
 
-### Test Script
-
-Run the test script to verify the implementation:
-
-```bash
-node scripts/test-razorpay-api.js
-```
-
 ### Test Coverage
 
-- Order creation
-- Order details fetching
-- Payment verification
-- Refund creation
-- Error handling
+The implementation can be tested through:
+
+- Order creation API
+- Payment verification API
+- Refund creation API
+- Webhook handling
+- Error scenarios
 
 ## Environment Configuration
 

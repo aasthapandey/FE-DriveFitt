@@ -9,7 +9,7 @@ export const createPaymentOrdersTable = async (): Promise<void> => {
       amount DECIMAL(10, 2) NOT NULL,
       currency VARCHAR(3) DEFAULT 'INR',
       status ENUM('created', 'completed', 'failed', 'pending') DEFAULT 'created',
-      membership_type INT,
+      membership_type VARCHAR(100),
       payment_id VARCHAR(255),
       signature VARCHAR(255),
       user_details JSON,
@@ -27,7 +27,7 @@ export const createMembershipsTable = async (): Promise<void> => {
   const query = `
     CREATE TABLE IF NOT EXISTS memberships (
       id INT AUTO_INCREMENT PRIMARY KEY,
-      user_email VARCHAR(255) NOT NULL,
+      user_id INT NOT NULL,
       order_id VARCHAR(255) NOT NULL,
       payment_id VARCHAR(255) NOT NULL,
       membership_type INT,
@@ -88,15 +88,15 @@ export const insertMembership = async (
   membership: Partial<Membership>
 ): Promise<void> => {
   const query = `
-    INSERT INTO memberships (user_email, order_id, payment_id, membership_type, status, created_at)
+    INSERT INTO memberships (user_id, order_id, payment_id, membership_type, status, created_at)
     VALUES (?, ?, ?, ?, ?, ?)
   `;
 
   await executeQuery(query, [
-    membership.user_email,
+    membership.user_id,
     membership.order_id,
     membership.payment_id,
-    membership.membership_type || null, // Convert undefined to null
+    membership.membership_type || null,
     membership.status || "active",
     membership.created_at || new Date(),
   ]);
@@ -111,12 +111,12 @@ export const getPaymentOrder = async (
   return result.length > 0 ? result[0] : null;
 };
 
-// Get membership by email
-export const getMembershipByEmail = async (
-  email: string
+// Get membership by user_id
+export const getMembershipByUserId = async (
+  userId: number
 ): Promise<Membership | null> => {
-  const query = `SELECT * FROM memberships WHERE user_email = ? ORDER BY created_at DESC LIMIT 1`;
-  const result = await executeQuery<Membership[]>(query, [email]);
+  const query = `SELECT * FROM memberships WHERE user_id = ? ORDER BY created_at DESC LIMIT 1`;
+  const result = await executeQuery<Membership[]>(query, [userId]);
   return result.length > 0 ? result[0] : null;
 };
 

@@ -1,19 +1,27 @@
 "use client";
+import { useEffect } from "react";
 
 interface PaymentSuccessProps {
-  isOpen: boolean;
-  onClose: () => void;
   paymentId: string;
   membershipType: string;
+  amount: number;
+  onClose: () => void;
 }
 
 export default function PaymentSuccess({
-  isOpen,
-  onClose,
   paymentId,
   membershipType,
+  amount,
+  onClose,
 }: PaymentSuccessProps) {
-  if (!isOpen) return null;
+  useEffect(() => {
+    // Auto-close after 5 seconds
+    const timer = setTimeout(() => {
+      onClose();
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, [onClose]);
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
@@ -38,31 +46,44 @@ export default function PaymentSuccess({
             Payment Successful!
           </h2>
           <p className="text-gray-600">
-            Thank you for your payment. Your {membershipType} membership has been activated.
+            Your membership has been activated successfully.
           </p>
         </div>
 
         <div className="bg-gray-50 rounded-lg p-4 mb-6">
-          <h3 className="font-semibold text-gray-900 mb-2">Payment Details</h3>
-          <div className="text-sm text-gray-600 space-y-1">
-            <p>Payment ID: {paymentId}</p>
-            <p>Membership: {membershipType}</p>
+          <div className="space-y-2 text-sm">
+            <div className="flex justify-between">
+              <span className="text-gray-600">Membership Type:</span>
+              <span className="font-semibold">{membershipType}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-gray-600">Amount Paid:</span>
+              <span className="font-semibold">₹{amount.toLocaleString()}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-gray-600">Payment ID:</span>
+              <span className="font-mono text-xs">{paymentId}</span>
+            </div>
           </div>
         </div>
 
         <div className="space-y-3">
           <button
             onClick={onClose}
-            className="w-full py-3 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            className="w-full px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
           >
-            Continue
+            Continue to Dashboard
+          </button>
+          <button
+            onClick={() => window.print()}
+            className="w-full px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+          >
+            Print Receipt
           </button>
         </div>
 
-        <div className="mt-6 text-xs text-gray-500">
-          <p>
-            If you have any questions, please contact our support team.
-          </p>
+        <div className="mt-4 text-xs text-gray-500">
+          A confirmation email has been sent to your registered email address.
         </div>
       </div>
     </div>

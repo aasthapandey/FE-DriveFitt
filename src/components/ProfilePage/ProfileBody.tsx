@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { ProfilePageData } from "@/types/staticPages";
 import { ProfileEditState } from "@/types/auth";
@@ -14,7 +15,8 @@ interface ProfileBodyProps {
 
 const ProfileBody = ({ data, isMobile }: ProfileBodyProps) => {
   const { userInfo, actions } = data;
-  const { user, updateUserProfile, updateUserData } = useAuth();
+  const { user, updateUserProfile, updateUserData, fetchProfile } = useAuth();
+  const router = useRouter();
 
   // Initialize edit state
   const [editState, setEditState] = useState<ProfileEditState>({
@@ -35,6 +37,13 @@ const ProfileBody = ({ data, isMobile }: ProfileBodyProps) => {
       dateOfBirth: "",
     },
   });
+
+  // Fetch user profile data when component mounts
+  useEffect(() => {
+    if (user?.id && (!user.membershipInfo || !user.hasMembership)) {
+      fetchProfile();
+    }
+  }, [user?.id, fetchProfile]);
 
   // Update field values when user data changes
   useEffect(() => {
@@ -130,7 +139,14 @@ const ProfileBody = ({ data, isMobile }: ProfileBodyProps) => {
 
   const handleAction = (actionType: string) => {
     console.log(`${actionType} clicked`);
-    // Handle non-editable actions like viewPlan, renewPlan
+
+    if (actionType === "viewPlan") {
+      // Redirect to membership page
+      router.push("/membership");
+    } else if (actionType === "renewPlan") {
+      // Redirect to membership page for renewal
+      router.push("/membership");
+    }
   };
 
   const renderActionButton = (action: any, actionType: string) => {
@@ -262,7 +278,11 @@ const ProfileBody = ({ data, isMobile }: ProfileBodyProps) => {
                   Plan expires
                 </span>
                 <span className="font-normal text-xl leading-7 mb-2 text-white">
-                  {userInfo.planExpires}
+                  {user?.membershipInfo?.expiresAt
+                    ? new Date(
+                        user.membershipInfo.expiresAt
+                      ).toLocaleDateString()
+                    : "No active plan"}
                 </span>
                 {renderMobileActionButton(actions.renewPlan, "renewPlan")}
               </div>
@@ -272,7 +292,13 @@ const ProfileBody = ({ data, isMobile }: ProfileBodyProps) => {
                   Active plan
                 </span>
                 <span className="font-normal text-xl leading-7 mb-2 text-white">
-                  {userInfo.activePlan}
+                  {user?.membershipInfo?.membershipType
+                    ? user.membershipInfo.membershipType === 1
+                      ? "Individual Annual Plan"
+                      : user.membershipInfo.membershipType === 2
+                      ? "Family Annual Plan"
+                      : "Unknown Plan"
+                    : "No active plan"}
                 </span>
                 {renderMobileActionButton(actions.viewPlan, "viewPlan")}
               </div>
@@ -332,7 +358,13 @@ const ProfileBody = ({ data, isMobile }: ProfileBodyProps) => {
                   Active plan
                 </span>
                 <span className="font-normal text-2xl leading-7 mb-5 text-white">
-                  {userInfo.activePlan}
+                  {user?.membershipInfo?.membershipType
+                    ? user.membershipInfo.membershipType === 1
+                      ? "Individual Annual Plan"
+                      : user.membershipInfo.membershipType === 2
+                      ? "Family Annual Plan"
+                      : "Unknown Plan"
+                    : "No active plan"}
                 </span>
                 {renderActionButton(actions.viewPlan, "viewPlan")}
               </div>
@@ -370,7 +402,11 @@ const ProfileBody = ({ data, isMobile }: ProfileBodyProps) => {
                   Plan expires
                 </span>
                 <span className="font-normal text-2xl leading-7 mb-5 text-white">
-                  {userInfo.planExpires}
+                  {user?.membershipInfo?.expiresAt
+                    ? new Date(
+                        user.membershipInfo.expiresAt
+                      ).toLocaleDateString()
+                    : "No active plan"}
                 </span>
                 {renderActionButton(actions.renewPlan, "renewPlan")}
               </div>

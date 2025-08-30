@@ -1,12 +1,13 @@
 "use client";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { PaymentService, PaymentOptions } from "@/lib/paymentService";
-import { getMembershipTypeFromName } from "@/lib/membershipTypes";
+import { RootState } from "@/store";
 
 interface PaymentModalProps {
   isOpen: boolean;
   onClose: () => void;
-  membershipType: string;
+  membershipType: number;
   amount: number;
   onSuccess?: (paymentId: string) => void;
   onError?: (error: string) => void;
@@ -20,11 +21,12 @@ export default function PaymentModal({
   onSuccess,
   onError,
 }: PaymentModalProps) {
+  const { user } = useSelector((state: RootState) => state.auth);
   const [isLoading, setIsLoading] = useState(false);
   const [userDetails, setUserDetails] = useState({
-    name: "",
-    email: "",
-    contact: "",
+    name: user?.name || "",
+    email: user?.email || "",
+    contact: user?.phone || "",
   });
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
@@ -59,17 +61,28 @@ export default function PaymentModal({
     setIsLoading(true);
 
     try {
+      if (!user?.id) {
+        throw new Error("User not authenticated");
+      }
+
       const result = await PaymentService.processPayment({
         amount,
-        membershipType: getMembershipTypeFromName(membershipType),
-        userDetails,
+        membershipType,
+        userDetails: {
+          ...userDetails,
+          id: user.id,
+        },
       });
 
       if (result.success) {
         onSuccess?.(result.paymentId!);
         onClose();
         // Reset form
-        setUserDetails({ name: "", email: "", contact: "" });
+        setUserDetails({
+          name: user?.name || "",
+          email: user?.email || "",
+          contact: user?.phone || "",
+        });
         setErrors({});
       } else {
         onError?.(result.error || "Payment failed");

@@ -41,10 +41,11 @@ export default function PaymentSuccessPage() {
           paymentId,
           signature,
           userDetails: {
+            id: 1, // Test user ID
             name: "User",
             email: "user@example.com",
             contact: "9876543210",
-            membership_type: "Premium",
+            membership_type: 1, // 1 = Individual Annual Plan
           },
         }),
       });

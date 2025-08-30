@@ -1,12 +1,12 @@
 import { RazorpayHostedCheckout } from "./razorpayHostedCheckout";
 import { RazorpayRedirect } from "./razorpayRedirect";
-import { getMembershipTypeFromName } from "./membershipTypes";
 
 export interface PaymentOptions {
   amount: number;
   currency?: string;
   membershipType: number;
   userDetails: {
+    id: number;
     name: string;
     email: string;
     contact: string;
@@ -56,6 +56,7 @@ export class PaymentService {
         signature: paymentData.razorpay_signature,
         userDetails: {
           ...userDetails,
+          user_id: userDetails.id,
           membership_type: userDetails.membershipType,
         },
       }),

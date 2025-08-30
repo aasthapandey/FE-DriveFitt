@@ -71,7 +71,7 @@ export interface PaymentOrder {
 // Membership interface
 export interface Membership {
   id?: number;
-  user_email: string;
+  user_id: number;
   order_id: string;
   payment_id: string;
   membership_type?: number;

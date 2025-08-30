@@ -97,18 +97,27 @@ class AuthService {
     });
   }
 
-  async getUserProfile(userId: number): Promise<User> {
+  async getUserProfile(): Promise<User> {
     const token = sessionStorage.getItem("auth_token");
     if (!token) {
       throw new Error("No authentication token found");
     }
 
-    return this.makeRequest(`/api/user/profile/${userId}`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await this.makeRequest<{ success: boolean; data: User }>(
+      "/api/user/profile",
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    if (!response.success) {
+      throw new Error("Failed to fetch user profile");
+    }
+
+    return response.data;
   }
 
   async verifyToken(token: string): Promise<boolean> {

@@ -36,6 +36,9 @@ export default function UserProfileDropdown({
   }, []);
 
   const handleProfileClick = () => {
+    console.log(
+      "UserProfileDropdown: Profile button clicked, navigating to /profile"
+    );
     router.push("/profile");
     setIsDropdownOpen(false);
   };

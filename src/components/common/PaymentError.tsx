@@ -1,20 +1,16 @@
 "use client";
 
 interface PaymentErrorProps {
-  isOpen: boolean;
-  onClose: () => void;
-  onRetry: () => void;
   error: string;
+  onClose: () => void;
+  onRetry?: () => void;
 }
 
 export default function PaymentError({
-  isOpen,
+  error,
   onClose,
   onRetry,
-  error,
 }: PaymentErrorProps) {
-  if (!isOpen) return null;
-
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
       <div className="bg-white p-8 rounded-lg max-w-md w-full shadow-xl text-center">
@@ -37,35 +33,35 @@ export default function PaymentError({
           <h2 className="text-2xl font-bold text-gray-800 mb-2">
             Payment Failed
           </h2>
-          <p className="text-gray-600">
+          <p className="text-gray-600 mb-4">
             We couldn't process your payment. Please try again.
           </p>
-        </div>
 
-        <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
-          <h3 className="font-semibold text-red-800 mb-2">Error Details:</h3>
-          <p className="text-red-700 text-sm">{error}</p>
+          <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+            <p className="text-red-700 text-sm font-medium">Error Details:</p>
+            <p className="text-red-600 text-sm mt-1">{error}</p>
+          </div>
         </div>
 
         <div className="space-y-3">
-          <button
-            onClick={onRetry}
-            className="w-full py-3 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-          >
-            Try Again
-          </button>
+          {onRetry && (
+            <button
+              onClick={onRetry}
+              className="w-full px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            >
+              Try Again
+            </button>
+          )}
           <button
             onClick={onClose}
-            className="w-full py-3 px-4 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+            className="w-full px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
           >
             Close
           </button>
         </div>
 
-        <div className="mt-6 text-xs text-gray-500">
-          <p>
-            If the problem persists, please contact our support team.
-          </p>
+        <div className="mt-4 text-xs text-gray-500">
+          If the problem persists, please contact our support team.
         </div>
       </div>
     </div>
