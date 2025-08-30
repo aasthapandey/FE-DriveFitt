@@ -420,6 +420,45 @@ export interface ContactUsPageData {
   appDownloadSection?: AppDownloadProps;
 }
 
+export interface ProfilePageData {
+  title: string;
+  seoTitle: string;
+  seoDescription: string;
+  userInfo: {
+    name: string;
+    email: string;
+    phone: string;
+    dateOfBirth: string;
+    activePlan: string;
+    planExpires: string;
+  };
+  actions: {
+    changeName: {
+      text: string;
+      enabled: boolean;
+    };
+    changeEmail: {
+      text: string;
+      enabled: boolean;
+    };
+    changeBirthday: {
+      text: string;
+      enabled: boolean;
+    };
+    viewPlan: {
+      text: string;
+      enabled: boolean;
+      isButton: boolean;
+    };
+    renewPlan: {
+      text: string;
+      enabled: boolean;
+    };
+  };
+  footerInfoSection?: FooterInfoProps;
+  footerSection?: FooterProps;
+}
+
 export interface NavLink {
   title: string;
   href: string;
