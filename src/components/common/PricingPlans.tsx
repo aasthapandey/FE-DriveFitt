@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ScrollAnimation from "@/components/common/ScrollAnimation";
 import PaymentModal from "./PaymentModal";
 import PhoneNumberModal from "./Modal/PhoneNumberModal";
@@ -32,11 +32,63 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
   const [showPhoneModal, setShowPhoneModal] = useState(false);
   const [showUserInfoModal, setShowUserInfoModal] = useState(false);
   const [tempPhoneNumber, setTempPhoneNumber] = useState<string>("");
+  const [waitingForUserData, setWaitingForUserData] = useState(false);
 
   const { isAuthenticated, user } = useSelector(
     (state: RootState) => state.auth
   );
   const { checkUserMembership } = useAuth();
+
+  // Watch for user data changes and open payment modal when ready
+  useEffect(() => {
+    console.log("PricingPlans: useEffect triggered", {
+      waitingForUserData,
+      userExists: !!user,
+      userId: user?.id,
+      userName: user?.name,
+      userEmail: user?.email,
+      userPhone: user?.phone,
+      userDateOfBirth: user?.dateOfBirth,
+    });
+
+    if (waitingForUserData && user) {
+      console.log(
+        "PricingPlans: waitingForUserData is true and user exists, checking profile completeness"
+      );
+      const hasCompleteProfile =
+        user?.name && user?.email && user?.phone && user?.dateOfBirth;
+
+      console.log(
+        "PricingPlans: User data updated, checking profile completeness:",
+        {
+          hasCompleteProfile,
+          hasName: !!user?.name,
+          hasEmail: !!user?.email,
+          hasPhone: !!user?.phone,
+          hasDateOfBirth: !!user?.dateOfBirth,
+          userData: user,
+        }
+      );
+
+      if (hasCompleteProfile) {
+        console.log("PricingPlans: Profile complete, opening payment modal");
+        setWaitingForUserData(false);
+        setShowPaymentModal(true);
+      } else {
+        console.log(
+          "PricingPlans: Profile incomplete, not opening payment modal"
+        );
+      }
+    } else if (waitingForUserData && !user) {
+      console.log(
+        "PricingPlans: waitingForUserData is true but user is null/undefined"
+      );
+    } else if (!waitingForUserData) {
+      console.log(
+        "PricingPlans: waitingForUserData is false, not checking profile completeness"
+      );
+    }
+  }, [waitingForUserData, user]);
 
   // Map plan titles to integers
   const getMembershipType = (title: string): number => {
@@ -50,11 +102,22 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
   };
 
   const handlePaymentClick = async (plan: PricingPlan) => {
+    console.log("PricingPlans: handlePaymentClick called for plan:", plan);
+    console.log("PricingPlans: Current auth state:", {
+      isAuthenticated,
+      userExists: !!user,
+      userId: user?.id,
+      userName: user?.name,
+      userEmail: user?.email,
+      userPhone: user?.phone,
+      userDateOfBirth: user?.dateOfBirth,
+    });
+
     setSelectedPlan(plan);
 
     // Step 1: Check if user is authenticated
     if (!isAuthenticated) {
-      console.log("User not authenticated, opening phone modal");
+      console.log("PricingPlans: User not authenticated, opening phone modal");
       setShowPhoneModal(true);
       return;
     }
@@ -63,7 +126,16 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
     const hasCompleteProfile =
       user?.name && user?.email && user?.phone && user?.dateOfBirth;
     if (!hasCompleteProfile) {
-      console.log("User profile incomplete, opening user info modal");
+      console.log(
+        "PricingPlans: User profile incomplete, opening user info modal"
+      );
+      console.log("PricingPlans: Profile check details:", {
+        hasName: !!user?.name,
+        hasEmail: !!user?.email,
+        hasPhone: !!user?.phone,
+        hasDateOfBirth: !!user?.dateOfBirth,
+        userData: user,
+      });
       setShowUserInfoModal(true);
       return;
     }
@@ -88,7 +160,8 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
     }
 
     // Step 4: All checks passed, proceed to payment
-    console.log("All checks passed, opening payment modal");
+    console.log("PricingPlans: All checks passed, opening payment modal");
+    console.log("PricingPlans: Final user data:", user);
     setShowPaymentModal(true);
   };
 
@@ -159,9 +232,32 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
   };
 
   const handleUserInfoModalSuccess = () => {
+    console.log("PricingPlans: handleUserInfoModalSuccess called");
     setShowUserInfoModal(false);
-    // After successful profile completion, proceed to payment
-    setShowPaymentModal(true);
+    // After successful profile completion, wait for Redux state to update
+    console.log(
+      "PricingPlans: Profile completion successful, waiting for user data update"
+    );
+    setWaitingForUserData(true);
+    console.log("PricingPlans: waitingForUserData set to true");
+
+    // Also check if we can proceed immediately
+    setTimeout(() => {
+      console.log(
+        "PricingPlans: Checking if we can proceed immediately after UserInfoModal success"
+      );
+      if (user && user.name && user.email && user.phone && user.dateOfBirth) {
+        console.log(
+          "PricingPlans: User data already complete, opening payment modal immediately"
+        );
+        setWaitingForUserData(false);
+        setShowPaymentModal(true);
+      } else {
+        console.log(
+          "PricingPlans: User data not yet complete, waiting for Redux update"
+        );
+      }
+    }, 100);
   };
 
   if (isMobile) {

@@ -127,14 +127,39 @@ export const loadUserFromStorage = createAsyncThunk(
       console.log("loadUserFromStorage: userData exists:", !!userData);
 
       if (token && userData) {
-        const user = JSON.parse(userData);
+        const storedUser = JSON.parse(userData);
         // Verify token is still valid
         console.log("loadUserFromStorage: Verifying token...");
         const isValid = await authService.verifyToken(token);
         console.log("loadUserFromStorage: Token valid:", isValid);
 
         if (isValid) {
-          return { token, user };
+          // Fetch fresh user data from backend to ensure we have complete profile
+          console.log(
+            "loadUserFromStorage: Fetching fresh user data from backend"
+          );
+          try {
+            const freshUserData = await authService.getUserProfile();
+            if (freshUserData) {
+              console.log(
+                "loadUserFromStorage: Fresh user data:",
+                freshUserData
+              );
+              // Update session storage with fresh data
+              sessionStorage.setItem(
+                "user_data",
+                JSON.stringify(freshUserData)
+              );
+              return { token, user: freshUserData };
+            }
+          } catch (error) {
+            console.error(
+              "loadUserFromStorage: Error fetching fresh user data:",
+              error
+            );
+            // Fallback to stored data if API call fails
+            return { token, user: storedUser };
+          }
         } else {
           // Clear invalid data
           console.log("loadUserFromStorage: Token invalid, clearing storage");

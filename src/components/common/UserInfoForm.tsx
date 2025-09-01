@@ -180,10 +180,16 @@ const UserInfoForm = ({
         gender: formData.gender as "Male" | "Female",
       };
 
+      console.log("UserInfoForm: Starting registration with data:", userData);
       const result = await register(userData);
+      console.log("UserInfoForm: Registration result:", result);
 
       if (result.type === "auth/registerUser/fulfilled") {
         // Registration successful, redirect to membership page
+        console.log(
+          "UserInfoForm: Registration successful, payload:",
+          result.payload
+        );
         setMessageState({
           type: "success",
           text: "Registration successful!",
@@ -207,7 +213,9 @@ const UserInfoForm = ({
 
         // If onSuccess callback is provided, use it instead of redirecting
         if (onSuccess) {
+          console.log("UserInfoForm: Calling onSuccess callback");
           setTimeout(() => {
+            console.log("UserInfoForm: Executing onSuccess callback");
             onSuccess();
           }, 500);
         } else {

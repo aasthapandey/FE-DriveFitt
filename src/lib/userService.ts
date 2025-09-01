@@ -5,14 +5,46 @@ import { jwtService } from "./jwtService";
 class UserService {
   async getUserByPhone(phone: string): Promise<User | null> {
     const query = "SELECT * FROM users WHERE phone = ?";
-    const result = await executeQuery<User[]>(query, [phone]);
-    return result?.[0] || null;
+    const result = await executeQuery<any[]>(query, [phone]);
+    const user = result?.[0];
+
+    if (!user) return null;
+
+    // Combine first_name and last_name into name field
+    const fullName = [user.first_name, user.last_name]
+      .filter(Boolean)
+      .join(" ");
+
+    return {
+      id: user.id,
+      name: fullName || "User",
+      email: user.email,
+      phone: user.phone,
+      dateOfBirth: user.date_of_birth,
+      hasMembership: false, // This will be updated by other functions
+    } as User;
   }
 
   async getUserByEmail(email: string): Promise<User | null> {
     const query = "SELECT * FROM users WHERE email = ?";
-    const result = await executeQuery<User[]>(query, [email]);
-    return result?.[0] || null;
+    const result = await executeQuery<any[]>(query, [email]);
+    const user = result?.[0];
+
+    if (!user) return null;
+
+    // Combine first_name and last_name into name field
+    const fullName = [user.first_name, user.last_name]
+      .filter(Boolean)
+      .join(" ");
+
+    return {
+      id: user.id,
+      name: fullName || "User",
+      email: user.email,
+      phone: user.phone,
+      dateOfBirth: user.date_of_birth,
+      hasMembership: false, // This will be updated by other functions
+    } as User;
   }
 
   async createUser(
@@ -67,8 +99,24 @@ class UserService {
 
   async getUserById(id: number): Promise<User | null> {
     const query = "SELECT * FROM users WHERE id = ?";
-    const result = await executeQuery<User[]>(query, [id]);
-    return result?.[0] || null;
+    const result = await executeQuery<any[]>(query, [id]);
+    const user = result?.[0];
+
+    if (!user) return null;
+
+    // Combine first_name and last_name into name field
+    const fullName = [user.first_name, user.last_name]
+      .filter(Boolean)
+      .join(" ");
+
+    return {
+      id: user.id,
+      name: fullName || "User",
+      email: user.email,
+      phone: user.phone,
+      dateOfBirth: user.date_of_birth,
+      hasMembership: false, // This will be updated by other functions
+    } as User;
   }
 
   async updatePhoneVerification(userId: number): Promise<void> {

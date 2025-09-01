@@ -34,8 +34,27 @@ export default function PaymentModal({
 
   // Automatically start payment when modal opens (user is already authenticated and has complete profile)
   useEffect(() => {
+    console.log("PaymentModal: useEffect triggered", {
+      isOpen,
+      userId: user?.id,
+      userName: user?.name,
+      userEmail: user?.email,
+      userPhone: user?.phone,
+      userDateOfBirth: user?.dateOfBirth,
+      userDetailsName: userDetails.name,
+      userDetailsEmail: userDetails.email,
+      userDetailsContact: userDetails.contact,
+    });
+
     const hasCompleteProfile =
       user?.name && user?.email && user?.phone && user?.dateOfBirth;
+
+    console.log("PaymentModal: Profile completeness check", {
+      hasCompleteProfile,
+      hasUserDetails:
+        userDetails.name && userDetails.email && userDetails.contact,
+    });
+
     if (
       isOpen &&
       user?.id &&
@@ -48,6 +67,14 @@ export default function PaymentModal({
         "PaymentModal: Auto-starting payment for authenticated user with complete profile"
       );
       handlePayment();
+    } else {
+      console.log("PaymentModal: Not starting payment - conditions not met", {
+        isOpen,
+        hasUserId: !!user?.id,
+        hasCompleteProfile,
+        hasUserDetails:
+          userDetails.name && userDetails.email && userDetails.contact,
+      });
     }
   }, [
     isOpen,

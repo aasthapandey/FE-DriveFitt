@@ -90,7 +90,7 @@ export async function POST(request: NextRequest) {
         success: true,
         message: "Registration successful.",
         data: {
-          token: "temp_token", // Will be replaced with actual JWT
+          token: token, // Use the actual JWT token
           user: {
             id: user.id,
             name: user.name || "User",
