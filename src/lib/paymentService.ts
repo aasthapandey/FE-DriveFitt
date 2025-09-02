@@ -177,7 +177,7 @@ export class PaymentService {
                 email: options.userDetails.email,
                 contact: options.userDetails.contact,
               },
-              keyId: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "",
+              keyId: process.env.RAZORPAY_KEY_ID || "",
             });
 
             // For redirect approach, we can't verify payment immediately

@@ -56,7 +56,7 @@ class RazorpayApiClient {
 
   constructor() {
     this.baseUrl = "https://api.razorpay.com/v1";
-    this.keyId = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "";
+    this.keyId = process.env.RAZORPAY_KEY_ID || "";
     this.keySecret = process.env.RAZORPAY_KEY_SECRET || "";
 
     // Create Basic Auth header
