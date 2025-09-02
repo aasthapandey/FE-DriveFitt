@@ -18,7 +18,7 @@ export default function Navbar({ data, isMobile }: Props) {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
-  const { logo, navLinks, signInButton, loginModalType } = data;
+  const { logo, navLinks, loginModalType } = data;
   const { isAuthenticated, loadUser, logout } = useAuth();
   const hasLoadedUser = useRef(false);
   const router = useRouter();

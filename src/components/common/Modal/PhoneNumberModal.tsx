@@ -14,13 +14,16 @@ interface PhoneNumberModalProps {
   isOpen: boolean;
   onClose: () => void;
   isMobile?: boolean;
-  onSuccess?: (phoneNumber: string, userData?: {
-    id: number;
-    name: string;
-    email: string;
-    phone: string;
-    dateOfBirth: string;
-  }) => void; // Optional callback for successful authentication with user data
+  onSuccess?: (
+    phoneNumber: string,
+    userData?: {
+      id: number;
+      name: string;
+      email: string;
+      phone: string;
+      dateOfBirth: string;
+    }
+  ) => void; // Optional callback for successful authentication with user data
 }
 
 interface PhoneStepProps {
@@ -371,7 +374,7 @@ const PhoneNumberModal = ({
         } else {
           setError(response.message || "Failed to send OTP");
         }
-      } catch (error) {
+      } catch {
         setError("Network error. Please try again.");
       } finally {
         setIsLoading(false);
@@ -484,13 +487,25 @@ const PhoneNumberModal = ({
         } else {
           setError(response.message || "Invalid OTP");
         }
-      } catch (error: any) {
-        setError(error.message || "Server Down, Please try again later.");
+      } catch (error: unknown) {
+        setError(
+          error instanceof Error
+            ? error.message
+            : "Server Down, Please try again later."
+        );
       } finally {
         setIsLoading(false);
       }
     }
-  }, [otpValues, phoneNumber, onClose, login, checkUserMembership]);
+  }, [
+    otpValues,
+    phoneNumber,
+    onClose,
+    login,
+    checkUserMembership,
+    onSuccess,
+    router,
+  ]);
 
   const handleChangePhone = useCallback(() => {
     setModalState("phone");
@@ -510,7 +525,7 @@ const PhoneNumberModal = ({
       } else {
         setError(response.message || "Failed to resend OTP");
       }
-    } catch (error) {
+    } catch {
       setError("Network error. Please try again.");
     } finally {
       setIsLoading(false);

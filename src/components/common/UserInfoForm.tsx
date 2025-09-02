@@ -340,7 +340,7 @@ const UserInfoForm = ({
                     htmlFor="birthday"
                     className="text-xs md:text-sm text-white"
                   >
-                    When's your birthday?
+                    When&apos;s your birthday?
                   </label>
                   <div
                     className={`bg-[#FFFFFF] border rounded-lg flex items-center transition-colors overflow-hidden ${
