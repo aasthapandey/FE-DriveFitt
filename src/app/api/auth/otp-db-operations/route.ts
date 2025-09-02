@@ -1,11 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { otpService } from "@/lib/otpService";
-import { OTPPurpose } from "@/types/auth";
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { operation, phone, purpose, otp, vendorResponse } = body;
+    const { operation, phone, purpose, vendorResponse } = body;
 
     switch (operation) {
       case "generate_and_store":
