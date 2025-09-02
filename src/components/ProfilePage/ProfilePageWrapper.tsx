@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
 import ProfilePage from "./ProfilePage";
@@ -17,51 +17,31 @@ export default function ProfilePageWrapper({
   pageName,
   isMobile,
 }: ProfilePageWrapperProps) {
-  const { isAuthenticated, user, loadUser, loading } = useAuth();
+  const { isAuthenticated, user } = useAuth();
   const router = useRouter();
-  const hasLoadedUser = useRef(false);
   const [hasCheckedAuth, setHasCheckedAuth] = useState(false);
 
   useEffect(() => {
-    // Load user from storage on component mount (only once)
-    if (!hasLoadedUser.current) {
-      hasLoadedUser.current = true;
-      loadUser();
-    }
-  }, [loadUser]);
+    // Mark that we've completed the initial auth check
+    setHasCheckedAuth(true);
+  }, []);
 
   useEffect(() => {
     console.log(
-      "ProfilePageWrapper: Authentication check - loading:",
-      loading,
-      "isAuthenticated:",
+      "ProfilePageWrapper: Authentication check - isAuthenticated:",
       isAuthenticated,
       "hasCheckedAuth:",
       hasCheckedAuth
     );
 
     // Only redirect if we've completed the initial auth check and user is not authenticated
-    if (!loading && hasCheckedAuth && !isAuthenticated) {
+    if (hasCheckedAuth && !isAuthenticated) {
       console.log(
         "ProfilePageWrapper: Not authenticated after initial check, redirecting to home"
       );
       router.push("/");
     }
-
-    // Mark that we've completed the initial auth check
-    if (!loading) {
-      setHasCheckedAuth(true);
-    }
-  }, [isAuthenticated, loading, router, hasCheckedAuth]);
-
-  // Show loading state only for initial authentication check, not for profile updates
-  if (loading && !hasCheckedAuth) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-white text-lg">Loading...</div>
-      </div>
-    );
-  }
+  }, [isAuthenticated, hasCheckedAuth, router]);
 
   // If not authenticated after initial check, don't render the profile page
   if (hasCheckedAuth && !isAuthenticated) {

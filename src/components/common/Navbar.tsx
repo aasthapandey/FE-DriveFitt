@@ -19,14 +19,22 @@ export default function Navbar({ data, isMobile }: Props) {
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
   const { logo, navLinks, loginModalType } = data;
-  const { isAuthenticated, loadUser, logout } = useAuth();
-  const hasLoadedUser = useRef(false);
+  const { isAuthenticated, logout, user } = useAuth();
   const router = useRouter();
 
   // Debug: Log authentication state changes
   useEffect(() => {
     console.log("Navbar: isAuthenticated changed to:", isAuthenticated);
-  }, [isAuthenticated]);
+    console.log("Navbar: Current user:", user);
+    console.log(
+      "Navbar: Session storage - token:",
+      !!sessionStorage.getItem("auth_token")
+    );
+    console.log(
+      "Navbar: Session storage - userData:",
+      !!sessionStorage.getItem("user_data")
+    );
+  }, [isAuthenticated, user]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,14 +45,6 @@ export default function Navbar({ data, isMobile }: Props) {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  // Load user from storage on component mount (only once)
-  useEffect(() => {
-    if (!hasLoadedUser.current) {
-      hasLoadedUser.current = true;
-      loadUser();
-    }
-  }, [loadUser]);
 
   useEffect(() => {
     if (isMenuOpen) {

@@ -113,7 +113,7 @@ export const loadUserFromStorage = createAsyncThunk(
     try {
       const state = getState() as { auth: AuthState };
 
-      // Prevent multiple simultaneous calls or calls when already authenticated
+      // Prevent multiple simultaneous calls
       if (state.auth.loading) {
         console.log("loadUserFromStorage: Already loading, skipping...");
         return null;
@@ -129,58 +129,68 @@ export const loadUserFromStorage = createAsyncThunk(
       const userData = sessionStorage.getItem("user_data");
 
       console.log("loadUserFromStorage: token exists:", !!token);
-      console.log("loadUserFromStorage: token length:", token?.length);
-      console.log(
-        "loadUserFromStorage: token preview:",
-        token?.substring(0, 20) + "..."
-      );
       console.log("loadUserFromStorage: userData exists:", !!userData);
 
-      if (token && userData) {
+      if (!token || !userData) {
+        console.log("loadUserFromStorage: No token or user data found");
+        return null;
+      }
+
+      try {
         const storedUser = JSON.parse(userData);
-        // Verify token is still valid
+
+        // First, try to verify the token
         console.log("loadUserFromStorage: Verifying token...");
         const isValid = await authService.verifyToken(token);
         console.log("loadUserFromStorage: Token valid:", isValid);
 
-        if (isValid) {
-          // Fetch fresh user data from backend to ensure we have complete profile
-          console.log(
-            "loadUserFromStorage: Fetching fresh user data from backend"
-          );
-          try {
-            const freshUserData = await authService.getUserProfile();
-            if (freshUserData) {
-              console.log(
-                "loadUserFromStorage: Fresh user data:",
-                freshUserData
-              );
-              // Update session storage with fresh data
-              sessionStorage.setItem(
-                "user_data",
-                JSON.stringify(freshUserData)
-              );
-              return { token, user: freshUserData };
-            }
-          } catch (error) {
-            console.error(
-              "loadUserFromStorage: Error fetching fresh user data:",
-              error
-            );
-            // Fallback to stored data if API call fails
-            return { token, user: storedUser };
-          }
-        } else {
-          // Clear invalid data
+        if (!isValid) {
           console.log("loadUserFromStorage: Token invalid, clearing storage");
           sessionStorage.removeItem("auth_token");
           sessionStorage.removeItem("user_data");
           return null;
         }
+
+        // Token is valid, try to get fresh user data
+        console.log(
+          "loadUserFromStorage: Fetching fresh user data from backend"
+        );
+        try {
+          const freshUserData = await authService.getUserProfile();
+          if (freshUserData) {
+            console.log(
+              "loadUserFromStorage: Fresh user data fetched successfully"
+            );
+            // Update session storage with fresh data
+            sessionStorage.setItem("user_data", JSON.stringify(freshUserData));
+            return { token, user: freshUserData };
+          }
+        } catch (profileError) {
+          console.warn(
+            "loadUserFromStorage: Failed to fetch fresh profile, using stored data:",
+            profileError
+          );
+          // If we can't fetch fresh data but token is valid, use stored data
+          return { token, user: storedUser };
+        }
+
+        // If we reach here, something went wrong
+        console.error(
+          "loadUserFromStorage: Unexpected error in profile fetching"
+        );
+        return null;
+      } catch (parseError) {
+        console.error(
+          "loadUserFromStorage: Error parsing stored user data:",
+          parseError
+        );
+        // Clear corrupted data
+        sessionStorage.removeItem("auth_token");
+        sessionStorage.removeItem("user_data");
+        return null;
       }
-      return null;
     } catch (error: unknown) {
-      console.error("loadUserFromStorage: Error:", error);
+      console.error("loadUserFromStorage: Unexpected error:", error);
       return rejectWithValue(
         error instanceof Error
           ? error.message
@@ -207,6 +217,17 @@ const authSlice = createSlice({
         // Update session storage
         sessionStorage.setItem("user_data", JSON.stringify(state.user));
       }
+    },
+    restoreFromStorage: (
+      state,
+      action: PayloadAction<{ token: string; user: User }>
+    ) => {
+      state.isAuthenticated = true;
+      state.user = action.payload.user;
+      state.token = action.payload.token;
+      state.loading = false;
+      state.error = null;
+      console.log("Auth slice: State restored from storage manually");
     },
   },
   extraReducers: (builder) => {
@@ -301,6 +322,10 @@ const authSlice = createSlice({
       })
 
       // Load user from storage
+      .addCase(loadUserFromStorage.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
       .addCase(loadUserFromStorage.fulfilled, (state, action) => {
         if (action.payload) {
           state.isAuthenticated = true;
@@ -365,5 +390,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { clearError, setLoading, updateUser } = authSlice.actions;
+export const { clearError, setLoading, updateUser, restoreFromStorage } =
+  authSlice.actions;
 export default authSlice.reducer;

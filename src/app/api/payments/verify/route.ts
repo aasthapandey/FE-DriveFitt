@@ -97,7 +97,8 @@ export async function POST(request: NextRequest) {
       currency: paymentDetails.currency,
       method: mapPaymentMethod(paymentDetails.method || "card"),
       bank: (paymentDetails as unknown as { bank?: string }).bank || null,
-      card_id: (paymentDetails as unknown as { card_id?: string }).card_id || null,
+      card_id:
+        (paymentDetails as unknown as { card_id?: string }).card_id || null,
       wallet: (paymentDetails as unknown as { wallet?: string }).wallet || null,
       vpa: (paymentDetails as unknown as { vpa?: string }).vpa || null,
       email: paymentDetails.email || null,

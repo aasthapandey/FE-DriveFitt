@@ -132,12 +132,15 @@ class AuthService {
         token?.substring(0, 20) + "..."
       );
 
-      const response = await this.makeRequest("/api/auth/verify-token", {
+      const response = await this.makeRequest<{
+        success: boolean;
+        message?: string;
+      }>("/api/auth/verify-token", {
         method: "POST",
         body: JSON.stringify({ token }),
       });
       console.log("authService.verifyToken: Response:", response);
-      return true;
+      return response.success;
     } catch (error) {
       console.error("authService.verifyToken: Error:", error);
       return false;
