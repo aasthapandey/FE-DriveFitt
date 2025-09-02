@@ -89,13 +89,13 @@ export const createMembershipsTable = async (): Promise<void> => {
 export const insertOrder = async (order: Partial<Order>): Promise<number> => {
   const query = `
     INSERT INTO orders (
-      razorpay_order_id, user_id, membership_type, amount, currency, 
+      razorpay_order_id, user_id, membership_type, amount, currency,
       receipt, invoice_number, status, notes, razorpay_create_order_response
-    ) 
+    )
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `;
 
-  const result = await executeQuery(query, [
+  await executeQuery(query, [
     order.razorpay_order_id,
     order.user_id,
     order.membership_type,
@@ -362,9 +362,9 @@ export interface Order {
   receipt?: string | null;
   invoice_number?: string | null;
   status: OrderStatus;
-  notes?: any | null;
-  razorpay_create_order_response?: any | null;
-  razorpay_order_status_response?: any | null;
+  notes?: unknown | null;
+  razorpay_create_order_response?: unknown | null;
+  razorpay_order_status_response?: unknown | null;
   created_at?: Date;
   updated_at?: Date;
 }
@@ -390,10 +390,10 @@ export interface Payment {
   refunded_at?: Date | null;
   refund_amount?: number | null;
   refund_status?: RefundStatus | null;
-  razorpay_payment_response?: any | null;
-  razorpay_capture_response?: any | null;
-  razorpay_refund_response?: any | null;
-  razorpay_payment_status_response?: any | null;
+  razorpay_payment_response?: unknown | null;
+  razorpay_capture_response?: unknown | null;
+  razorpay_refund_response?: unknown | null;
+  razorpay_payment_status_response?: unknown | null;
   created_at?: Date;
   updated_at?: Date;
 }

@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { TextField } from "@mui/material";
 import { FieldValidation } from "@/types/auth";
+import { formatDateForDisplay, formatDateForInput } from "@/utils/dateUtils";
 
 interface EditableFieldProps {
   field: "name" | "email" | "dateOfBirth";
@@ -88,6 +89,22 @@ const EditableField = ({
     }
   };
 
+  const getInputValue = () => {
+    if (field === "dateOfBirth") {
+      // Convert DD-MM-YYYY to YYYY-MM-DD for HTML date input
+      return formatDateForInput(localValue);
+    }
+    return localValue;
+  };
+
+  const getDisplayValue = () => {
+    if (field === "dateOfBirth") {
+      // Convert YYYY-MM-DD to DD-MM-YYYY for display
+      return formatDateForDisplay(value);
+    }
+    return value;
+  };
+
   const renderActionButton = (
     text: string,
     onClick: () => void,
@@ -122,7 +139,7 @@ const EditableField = ({
         </span>
         <TextField
           type={getInputType()}
-          value={localValue}
+          value={getInputValue()}
           onChange={handleValueChange}
           onKeyDown={handleKeyDown}
           error={!!(error || (!validation.isValid && validation.message))}
@@ -178,7 +195,7 @@ const EditableField = ({
           isMobile ? "text-xl leading-7" : "text-2xl leading-7"
         }`}
       >
-        {value}
+        {getDisplayValue()}
       </span>
       {renderActionButton("Change", onStartEdit)}
     </div>

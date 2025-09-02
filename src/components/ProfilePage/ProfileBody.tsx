@@ -7,6 +7,7 @@ import { ProfileEditState } from "@/types/auth";
 import { useAuth } from "@/hooks/useAuth";
 import EditableField from "@/components/common/EditableField";
 import { validateField } from "@/utils/profileValidation";
+import { formatDateForInput } from "@/utils/dateUtils";
 
 interface ProfileBodyProps {
   data: ProfilePageData;
@@ -71,6 +72,12 @@ const ProfileBody = ({ data, isMobile }: ProfileBodyProps) => {
   };
 
   const handleSave = async (field: string, value: string) => {
+    // Convert date format if needed before saving
+    let valueToSave = value;
+    if (field === "dateOfBirth") {
+      valueToSave = formatDateForInput(value);
+    }
+
     // Optimistically update the UI immediately
     setEditState((prev) => ({
       ...prev,
@@ -93,7 +100,7 @@ const ProfileBody = ({ data, isMobile }: ProfileBodyProps) => {
     try {
       const result = await updateUserProfile({
         field: field as "name" | "email" | "dateOfBirth",
-        value,
+        value: valueToSave, // Use converted value for API call
       });
 
       if (result.type === "auth/updateProfile/rejected") {
