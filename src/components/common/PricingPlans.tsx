@@ -38,7 +38,7 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
   const { isAuthenticated, user } = useSelector(
     (state: RootState) => state.auth
   );
-  const { checkUserMembership, fetchProfile } = useAuth();
+  const { checkUserMembership, fetchProfile, updateUserData } = useAuth();
   const router = useRouter();
 
   // Watch for user data changes and open payment modal when ready
@@ -172,23 +172,38 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
     setSelectedPlan(null);
   };
 
-  const handlePaymentSuccess = async (paymentId: string) => {
+  const handlePaymentSuccess = async (
+    paymentId: string,
+    membershipData?: any
+  ) => {
     console.log(
       "Payment successful for plan:",
       selectedPlan?.title,
       "Payment ID:",
-      paymentId
+      paymentId,
+      "Membership Data:",
+      membershipData
     );
 
     try {
-      // Fetch fresh user data including new membership information
-      console.log("🔄 Fetching fresh user data after successful payment...");
-      await fetchProfile();
+      if (membershipData) {
+        // ✅ OPTIMIZATION: Update Redux state directly with membership data
+        console.log("🔄 Updating Redux state with new membership data...");
 
-      // Wait a moment for Redux state to update
-      await new Promise((resolve) => setTimeout(resolve, 500));
+        // Update user's membership status in Redux
+        updateUserData({
+          hasMembership: true,
+          membershipInfo: membershipData,
+        });
 
-      console.log("✅ Fresh user data fetched, redirecting to profile page...");
+        console.log("✅ Redux state updated, redirecting to profile page...");
+      } else {
+        // Fallback: Fetch fresh user data if membership data not available
+        console.log(
+          "🔄 Fallback: Fetching fresh user data after successful payment..."
+        );
+        await fetchProfile();
+      }
 
       // Close modals
       setShowPaymentModal(false);
@@ -197,9 +212,9 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
       // Redirect to profile page where updated membership data will be visible
       router.push("/profile");
     } catch (error) {
-      console.error("❌ Error fetching fresh user data after payment:", error);
+      console.error("❌ Error handling payment success:", error);
 
-      // Even if fetching fails, still redirect to profile page
+      // Even if updating fails, still redirect to profile page
       setShowPaymentModal(false);
       setSelectedPlan(null);
       router.push("/profile");

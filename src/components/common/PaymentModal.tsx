@@ -9,7 +9,7 @@ interface PaymentModalProps {
   onClose: () => void;
   membershipType: number;
   amount: number;
-  onSuccess?: (paymentId: string) => void;
+  onSuccess?: (paymentId: string, membershipData?: any) => void;
   onError?: (error: string) => void;
 }
 
@@ -107,7 +107,7 @@ export default function PaymentModal({
       });
 
       if (result.success) {
-        onSuccess?.(result.paymentId!);
+        onSuccess?.(result.paymentId!, result.membershipData); // ✅ Pass membership data
         onClose();
       } else {
         onError?.(result.error || "Payment failed");

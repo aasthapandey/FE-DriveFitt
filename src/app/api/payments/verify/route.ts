@@ -12,6 +12,7 @@ import {
   calculateExpiryDate,
   mapPaymentMethod,
 } from "@/lib/paymentDatabase";
+import { executeQuery } from "@/lib/database";
 import { razorpayApiClient } from "@/lib/razorpayApiClient";
 
 export async function POST(request: NextRequest) {
@@ -124,8 +125,9 @@ export async function POST(request: NextRequest) {
     }
 
     // Create membership record
+    let membershipRecordId: number;
     try {
-      await insertMembership({
+      membershipRecordId = await insertMembership({
         user_id: order.user_id,
         order_id: order.id!,
         payment_id: paymentRecordId,
@@ -137,14 +139,65 @@ export async function POST(request: NextRequest) {
         "Membership record created for user_id:",
         order.user_id,
         "with membership_type:",
-        order.membership_type
+        order.membership_type,
+        "and ID:",
+        membershipRecordId
       );
     } catch (dbError) {
       console.error("Failed to create membership record:", dbError);
       // Don't fail the entire request if membership creation fails
+      membershipRecordId = 0;
     }
 
     console.log("Payment verified successfully:", paymentId);
+
+    // Fetch the newly created membership data to return to frontend
+    let membershipData = null;
+    if (membershipRecordId > 0) {
+      const membershipQuery = `
+        SELECT 
+          m.id,
+          m.user_id,
+          m.order_id,
+          m.payment_id,
+          m.membership_type,
+          m.status,
+          m.start_date,
+          m.end_date,
+          o.invoice_number
+        FROM memberships m
+        INNER JOIN orders o ON m.order_id = o.id
+        WHERE m.id = ?
+      `;
+
+      const membershipResult = await executeQuery<
+        Array<{
+          id: number;
+          user_id: number;
+          order_id: number;
+          payment_id: number;
+          membership_type: number;
+          status: string;
+          start_date: string;
+          end_date: string;
+          invoice_number: string;
+        }>
+      >(membershipQuery, [membershipRecordId]);
+
+      const membership = membershipResult?.[0];
+      if (membership) {
+        membershipData = {
+          id: membership.id,
+          membershipType: membership.membership_type,
+          status: membership.status,
+          startDate: membership.start_date,
+          expiresAt: membership.end_date,
+          invoiceNumber: membership.invoice_number,
+          orderId: membership.order_id,
+          paymentId: membership.payment_id,
+        };
+      }
+    }
 
     return NextResponse.json({
       success: true,
@@ -155,6 +208,7 @@ export async function POST(request: NextRequest) {
       internalPaymentId: paymentRecordId,
       paymentStatus: paymentDetails.status,
       amount: paymentDetails.amount,
+      membership: membershipData,
     });
   } catch (error) {
     console.error("Payment verification failed:", error);

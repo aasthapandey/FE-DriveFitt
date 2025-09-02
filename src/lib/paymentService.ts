@@ -18,6 +18,7 @@ export interface PaymentResponse {
   paymentId?: string;
   orderId?: string;
   error?: string;
+  membershipData?: any; // ✅ New: Include membership data from payment verification
 }
 
 export class PaymentService {
@@ -94,9 +95,12 @@ export class PaymentService {
   }
 
   // Complete payment flow using Razorpay hosted checkout
-  static async processPayment(
-    options: PaymentOptions
-  ): Promise<{ success: boolean; paymentId?: string; error?: string }> {
+  static async processPayment(options: PaymentOptions): Promise<{
+    success: boolean;
+    paymentId?: string;
+    error?: string;
+    membershipData?: any;
+  }> {
     return new Promise(async (resolve) => {
       try {
         console.log("🚀 Starting payment process...", options);
@@ -141,6 +145,7 @@ export class PaymentService {
                   resolve({
                     success: true,
                     paymentId: paymentResponse.razorpay_payment_id,
+                    membershipData: verificationResult.membership, // ✅ New: Include membership data
                   });
                 } else {
                   resolve({

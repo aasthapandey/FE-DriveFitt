@@ -282,13 +282,13 @@ export const getPaymentByRazorpayId = async (
 // Insert membership
 export const insertMembership = async (
   membership: Partial<Membership>
-): Promise<void> => {
+): Promise<number> => {
   const query = `
     INSERT INTO memberships (user_id, order_id, payment_id, membership_type, status, end_date)
     VALUES (?, ?, ?, ?, ?, ?)
   `;
 
-  await executeQuery(query, [
+  const result = await executeQuery(query, [
     membership.user_id,
     membership.order_id,
     membership.payment_id,
@@ -296,6 +296,9 @@ export const insertMembership = async (
     membership.status || "active",
     membership.end_date,
   ]);
+
+  // Return the inserted ID directly from the result object (mySQL2, for example, returns insertId)
+  return (result as any).insertId || 0;
 };
 
 // Get membership by user_id
