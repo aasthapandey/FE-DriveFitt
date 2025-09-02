@@ -14,6 +14,8 @@ import {
 } from "@/lib/paymentDatabase";
 import { executeQuery } from "@/lib/database";
 import { razorpayApiClient } from "@/lib/razorpayApiClient";
+import { generateInvoiceBuffer } from "@/utils/invoiceGenerator";
+import { sendMembershipSuccessEmail } from "@/utils/brevo";
 
 export async function POST(request: NextRequest) {
   try {
@@ -152,7 +154,16 @@ export async function POST(request: NextRequest) {
     console.log("Payment verified successfully:", paymentId);
 
     // Fetch the newly created membership data to return to frontend
-    let membershipData = null;
+    let membershipData: {
+      id: number;
+      membershipType: number;
+      status: string;
+      startDate: string;
+      expiresAt: string;
+      invoiceNumber?: string;
+      orderId: number;
+      paymentId: number;
+    } | null = null;
     if (membershipRecordId > 0) {
       const membershipQuery = `
         SELECT 
@@ -196,6 +207,75 @@ export async function POST(request: NextRequest) {
           orderId: membership.order_id,
           paymentId: membership.payment_id,
         };
+
+        // Generate and send invoice email asynchronously
+        try {
+          // Get user details for invoice
+          const userQuery = `
+            SELECT first_name, last_name, email, phone
+            FROM users 
+            WHERE id = ?
+          `;
+
+          const userResult = await executeQuery<
+            Array<{
+              first_name: string;
+              last_name: string;
+              email: string;
+              phone: string;
+            }>
+          >(userQuery, [order.user_id]);
+
+          const user = userResult?.[0];
+          if (user) {
+            // Generate invoice data
+            const invoiceData = {
+              invoiceNumber: membership.invoice_number || `INV-${Date.now()}`,
+              invoiceDate: new Date().toLocaleDateString("en-IN"),
+              customerName: `${user.first_name} ${user.last_name}`.trim(),
+              customerEmail: user.email,
+              amount: 999.0,
+              membershipType:
+                membership.membership_type === 1
+                  ? "Individual Annual Plan"
+                  : "Family Annual Plan",
+              paymentId: paymentId,
+              orderId: orderId,
+            };
+
+            // Generate invoice PDF
+            const invoiceBuffer = generateInvoiceBuffer(invoiceData);
+
+            // Send email with invoice attachment asynchronously
+            if (membershipData) {
+              setImmediate(async () => {
+                try {
+                  await sendMembershipSuccessEmail(
+                    {
+                      name: invoiceData.customerName,
+                      email: invoiceData.customerEmail,
+                      phone: user.phone,
+                    },
+                    membershipData!,
+                    invoiceBuffer
+                  );
+                  console.log(
+                    "Invoice email sent successfully for user:",
+                    user.email
+                  );
+                } catch (emailError) {
+                  console.error("Failed to send invoice email:", emailError);
+                }
+              });
+            }
+          }
+        } catch (invoiceError) {
+          console.error(
+            "Failed to generate invoice or send email:",
+            invoiceError
+          );
+          // Don't fail the payment verification if invoice generation fails
+        }
       }
     }
 
