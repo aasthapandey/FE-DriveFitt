@@ -1,7 +1,7 @@
 import Navbar from "@/components/common/Navbar";
 import { navbarData } from "@/data/navbar";
 import { ProfilePageData } from "@/types/staticPages";
-import { FooterInfoProps, FooterProps } from "@/types/staticPages";
+
 import FooterInfo from "@/components/common/FooterInfo";
 import Footer from "@/components/common/Footer";
 import ProfileBody from "./ProfileBody";
@@ -12,7 +12,7 @@ interface ProfilePageProps {
   isMobile?: boolean;
 }
 
-const ProfilePage = ({ data, pageName, isMobile }: ProfilePageProps) => {
+const ProfilePage = ({ data, isMobile }: ProfilePageProps) => {
   return (
     <div className="bg-[#0D0D0D] w-full">
       <Navbar data={navbarData} isMobile={isMobile} />

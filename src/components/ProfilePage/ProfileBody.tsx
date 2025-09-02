@@ -110,7 +110,7 @@ const ProfileBody = ({ data, isMobile }: ProfileBodyProps) => {
           },
         }));
       }
-    } catch (error) {
+    } catch {
       // Error - revert the optimistic update and show error
       setEditState((prev) => ({
         ...prev,
@@ -149,7 +149,14 @@ const ProfileBody = ({ data, isMobile }: ProfileBodyProps) => {
     }
   };
 
-  const renderActionButton = (action: any, actionType: string) => {
+  const renderActionButton = (
+    action: {
+      isButton?: boolean;
+      text: string;
+      enabled?: boolean;
+    },
+    actionType: string
+  ) => {
     if (action.isButton) {
       return (
         <button
@@ -176,7 +183,14 @@ const ProfileBody = ({ data, isMobile }: ProfileBodyProps) => {
     );
   };
 
-  const renderMobileActionButton = (action: any, actionType: string) => {
+  const renderMobileActionButton = (
+    action: {
+      isButton?: boolean;
+      text: string;
+      enabled?: boolean;
+    },
+    actionType: string
+  ) => {
     if (action.isButton) {
       return (
         <button

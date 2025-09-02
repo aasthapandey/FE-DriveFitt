@@ -41,14 +41,17 @@ class AuthService {
       }
 
       return await response.json();
-    } catch (error: any) {
-      if (error.message === "Server Down, Please try again later.") {
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        if (error.message === "Server Down, Please try again later.") {
+          throw error;
+        }
+        if (error.name === "TypeError" && error.message.includes("fetch")) {
+          throw new Error("Server Down, Please try again later.");
+        }
         throw error;
       }
-      if (error.name === "TypeError" && error.message.includes("fetch")) {
-        throw new Error("Server Down, Please try again later.");
-      }
-      throw error;
+      throw new Error(String(error));
     }
   }
 
@@ -151,7 +154,7 @@ class AuthService {
             Authorization: `Bearer ${token}`,
           },
         });
-      } catch (error) {
+      } catch {
         // Even if logout fails on server, we should clear local data
         console.warn("Server logout failed, clearing local data");
       }
@@ -163,7 +166,7 @@ class AuthService {
     try {
       const userData = sessionStorage.getItem("user_data");
       return userData ? JSON.parse(userData) : null;
-    } catch (error) {
+    } catch {
       return null;
     }
   }

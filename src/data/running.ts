@@ -20,7 +20,6 @@ export const runningData: StaticPageData = {
     mobileImage:
       "https://da8nru77lsio9.cloudfront.net/images/running-compressed/mobile-hero.webp",
     btnPrimaryText: "Join the Waitlist",
-    btnSecondaryText: "Join Online",
   },
   cardSection5: {
     title: "Why You'll Love It Here",

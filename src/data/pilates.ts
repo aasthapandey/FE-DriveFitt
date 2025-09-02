@@ -17,7 +17,6 @@ export const pilatesData: StaticPageData = {
     mobileImage:
       "https://da8nru77lsio9.cloudfront.net/images/pilates-c/hero-mobile.webp",
     btnPrimaryText: "Join the Waitlist",
-    btnSecondaryText: "Join Online",
   },
   banner2Section: {
     title: "Welcome to Pilates at Drive FITT",

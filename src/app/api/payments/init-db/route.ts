@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { initializePaymentDatabase } from "@/lib/paymentDatabase";
 
-export async function POST(request: NextRequest) {
+export async function POST() {
   try {
     // Initialize payment database tables
     await initializePaymentDatabase();
@@ -21,4 +21,3 @@ export async function POST(request: NextRequest) {
     );
   }
 }
-

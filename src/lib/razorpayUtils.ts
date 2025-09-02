@@ -12,7 +12,15 @@ export async function verifyPaymentCompletion(
   orderId: string
 ): Promise<{
   isValid: boolean;
-  paymentDetails?: any;
+  paymentDetails?: {
+    id: string;
+    amount: number;
+    currency: string;
+    status: string;
+    order_id: string;
+    method: string;
+    created_at: number;
+  };
   error?: string;
 }> {
   try {
@@ -66,7 +74,18 @@ export async function verifyPaymentCompletion(
  */
 export async function getOrderDetails(orderId: string): Promise<{
   success: boolean;
-  orderDetails?: any;
+  orderDetails?: {
+    id: string;
+    amount: number;
+    amount_due: number;
+    amount_paid: number;
+    attempts: number;
+    created_at: number;
+    currency: string;
+    entity: string;
+    receipt: string;
+    status: string;
+  };
   error?: string;
 }> {
   try {
@@ -96,7 +115,15 @@ export async function getOrderDetails(orderId: string): Promise<{
  */
 export async function getOrderPayments(orderId: string): Promise<{
   success: boolean;
-  payments?: any[];
+  payments?: Array<{
+    id: string;
+    amount: number;
+    currency: string;
+    status: string;
+    order_id: string;
+    method: string;
+    created_at: number;
+  }>;
   error?: string;
 }> {
   try {
@@ -129,7 +156,15 @@ export async function captureAuthorizedPayment(
   amount?: number
 ): Promise<{
   success: boolean;
-  paymentDetails?: any;
+  paymentDetails?: {
+    id: string;
+    amount: number;
+    currency: string;
+    status: string;
+    order_id: string;
+    method: string;
+    created_at: number;
+  };
   error?: string;
 }> {
   try {
@@ -166,7 +201,13 @@ export async function createRefund(
   notes?: Record<string, string>
 ): Promise<{
   success: boolean;
-  refundDetails?: any;
+  refundDetails?: {
+    id: string;
+    amount: number;
+    currency: string;
+    status: string;
+    created_at: number;
+  };
   error?: string;
 }> {
   try {
@@ -198,7 +239,24 @@ export async function createRefund(
 /**
  * Validate webhook event by cross-referencing with API
  */
-export async function validateWebhookEvent(event: any): Promise<{
+export async function validateWebhookEvent(event: {
+  event: string;
+  payload: {
+    payment: {
+      entity: {
+        id: string;
+        order_id: string;
+        status: string;
+      };
+    };
+    order: {
+      entity: {
+        id: string;
+        status: string;
+      };
+    };
+  };
+}): Promise<{
   isValid: boolean;
   error?: string;
 }> {

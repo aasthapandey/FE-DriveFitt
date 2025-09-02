@@ -7,7 +7,12 @@ export interface PaymentOrder {
   membership_type?: string;
   payment_id?: string;
   signature?: string;
-  user_details?: any;
+  user_details?: {
+    id: number;
+    name: string;
+    email: string;
+    contact: string;
+  };
   created_at: Date;
   completed_at?: Date;
 }
@@ -84,10 +89,17 @@ export interface WebhookEvent {
   event: string;
   payload: {
     payment?: {
-      entity: any;
+      entity: {
+        id: string;
+        order_id: string;
+        status: string;
+      };
     };
     order?: {
-      entity: any;
+      entity: {
+        id: string;
+        status: string;
+      };
     };
   };
 }
@@ -112,4 +124,3 @@ export interface PaymentMethodConfig {
   displayName: string;
   icon?: string;
 }
-

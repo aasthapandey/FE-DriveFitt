@@ -71,10 +71,10 @@ export async function PUT(request: NextRequest) {
     if (field === "email") {
       const emailCheckQuery =
         "SELECT id FROM users WHERE email = ? AND id != ?";
-      const emailResult = await executeQuery<any[]>(emailCheckQuery, [
-        value,
-        decoded.user_id,
-      ]);
+      const emailResult = await executeQuery<Array<{ id: number }>>(
+        emailCheckQuery,
+        [value, decoded.user_id]
+      );
       if (emailResult && emailResult.length > 0) {
         return NextResponse.json<ProfileUpdateResponse>(
           {
@@ -88,7 +88,7 @@ export async function PUT(request: NextRequest) {
 
     // Update the field in database
     let updateQuery: string;
-    let updateValue: any;
+    let updateValue: (string | number)[];
 
     switch (field) {
       case "name":
@@ -121,7 +121,16 @@ export async function PUT(request: NextRequest) {
     // Get updated user data
     const userQuery =
       "SELECT id, first_name, last_name, email, phone, date_of_birth FROM users WHERE id = ?";
-    const userResult = await executeQuery<any[]>(userQuery, [decoded.user_id]);
+    const userResult = await executeQuery<
+      Array<{
+        id: number;
+        first_name: string;
+        last_name: string;
+        email: string;
+        phone: string;
+        date_of_birth: string;
+      }>
+    >(userQuery, [decoded.user_id]);
     const user = userResult?.[0];
 
     if (!user) {

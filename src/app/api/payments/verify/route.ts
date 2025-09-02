@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { verifyPaymentSignature, PaymentStatus } from "@/lib/razorpay";
+import { PaymentStatus } from "@/lib/razorpay";
 import { updatePaymentOrder, insertMembership } from "@/lib/paymentDatabase";
 import { razorpayApiClient } from "@/lib/razorpayApiClient";
 

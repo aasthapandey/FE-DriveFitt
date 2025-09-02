@@ -63,7 +63,12 @@ export interface PaymentOrder {
   membership_type?: number;
   payment_id?: string;
   signature?: string;
-  user_details?: any;
+  user_details?: {
+    id: number;
+    name: string;
+    email: string;
+    contact: string;
+  };
   created_at: Date;
   completed_at?: Date;
 }

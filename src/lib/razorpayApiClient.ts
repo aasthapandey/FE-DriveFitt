@@ -1,4 +1,4 @@
-interface RazorpayApiResponse<T = any> {
+interface RazorpayApiResponse<T = unknown> {
   success: boolean;
   data?: T;
   error?: string;
@@ -60,16 +60,13 @@ class RazorpayApiClient {
     this.keySecret = process.env.RAZORPAY_KEY_SECRET || "";
 
     // Create Basic Auth header
-    const credentials = Buffer.from(`${this.keyId}:${this.keySecret}`).toString(
-      "base64"
-    );
     this.authHeader = `Basic cnpwX2xpdmVfUkJjQ2Ziek4zNWVXeDQ6ZjBkQWY0OXdPc2Nwb1paelE1SEp6a1VF`;
   }
 
   private async makeRequest<T>(
     endpoint: string,
     method: "GET" | "POST" | "PUT" | "DELETE" = "GET",
-    data?: any
+    data?: unknown
   ): Promise<RazorpayApiResponse<T>> {
     try {
       const url = `${this.baseUrl}${endpoint}`;
@@ -236,7 +233,15 @@ class RazorpayApiClient {
     paymentId: string,
     amount?: number,
     notes?: Record<string, string>
-  ): Promise<RazorpayApiResponse<any>> {
+  ): Promise<
+    RazorpayApiResponse<{
+      id: string;
+      amount: number;
+      currency: string;
+      status: string;
+      created_at: number;
+    }>
+  > {
     if (!paymentId) {
       return {
         success: false,

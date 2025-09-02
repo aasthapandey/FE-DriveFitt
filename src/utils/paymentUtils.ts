@@ -108,7 +108,11 @@ export const sanitizeInput = (input: string): string => {
 // Generate order notes
 export const generateOrderNotes = (
   membershipType: string,
-  userDetails: any
+  userDetails: {
+    name: string;
+    email: string;
+    contact: string;
+  }
 ): Record<string, string> => {
   return {
     membership_type: membershipType,
@@ -163,4 +167,3 @@ export const isPaymentMethodSupported = (method: string): boolean => {
   const supportedMethods = ["card", "upi", "netbanking", "wallet", "emi"];
   return supportedMethods.includes(method);
 };
-

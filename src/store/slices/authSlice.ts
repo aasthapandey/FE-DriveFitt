@@ -2,10 +2,8 @@ import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import {
   AuthState,
   User,
-  LoginResponse,
   UserRegistrationData,
   ProfileUpdateRequest,
-  ProfileUpdateResponse,
 } from "@/types/auth";
 import { authService } from "@/services/authService";
 
@@ -21,7 +19,7 @@ const initialState: AuthState = {
 // Async thunks
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
-  async (userData: { user: any; token: string }, { rejectWithValue }) => {
+  async (userData: { user: User; token: string }, { rejectWithValue }) => {
     try {
       // Return the user data and token directly
       return {
@@ -31,8 +29,10 @@ export const loginUser = createAsyncThunk(
           token: userData.token,
         },
       };
-    } catch (error: any) {
-      return rejectWithValue(error.message || "Login failed");
+    } catch (error: unknown) {
+      return rejectWithValue(
+        error instanceof Error ? error.message : "Login failed"
+      );
     }
   }
 );
@@ -43,8 +43,10 @@ export const registerUser = createAsyncThunk(
     try {
       const response = await authService.registerUser(userData);
       return response;
-    } catch (error: any) {
-      return rejectWithValue(error.message || "Registration failed");
+    } catch (error: unknown) {
+      return rejectWithValue(
+        error instanceof Error ? error.message : "Registration failed"
+      );
     }
   }
 );
@@ -55,8 +57,10 @@ export const checkMembership = createAsyncThunk(
     try {
       const response = await authService.checkUserMembership(userId);
       return response;
-    } catch (error: any) {
-      return rejectWithValue(error.message || "Failed to check membership");
+    } catch (error: unknown) {
+      return rejectWithValue(
+        error instanceof Error ? error.message : "Failed to check membership"
+      );
     }
   }
 );
@@ -67,8 +71,10 @@ export const fetchUserProfile = createAsyncThunk(
     try {
       const userData = await authService.getUserProfile();
       return userData;
-    } catch (error: any) {
-      return rejectWithValue(error.message || "Failed to fetch user profile");
+    } catch (error: unknown) {
+      return rejectWithValue(
+        error instanceof Error ? error.message : "Failed to fetch user profile"
+      );
     }
   }
 );
@@ -79,8 +85,10 @@ export const logoutUser = createAsyncThunk(
     try {
       await authService.logout();
       return true;
-    } catch (error: any) {
-      return rejectWithValue(error.message || "Logout failed");
+    } catch (error: unknown) {
+      return rejectWithValue(
+        error instanceof Error ? error.message : "Logout failed"
+      );
     }
   }
 );
@@ -91,8 +99,10 @@ export const updateProfile = createAsyncThunk(
     try {
       const response = await authService.updateProfile(updateData);
       return response;
-    } catch (error: any) {
-      return rejectWithValue(error.message || "Failed to update profile");
+    } catch (error: unknown) {
+      return rejectWithValue(
+        error instanceof Error ? error.message : "Failed to update profile"
+      );
     }
   }
 );
@@ -169,10 +179,12 @@ export const loadUserFromStorage = createAsyncThunk(
         }
       }
       return null;
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("loadUserFromStorage: Error:", error);
       return rejectWithValue(
-        error.message || "Failed to load user from storage"
+        error instanceof Error
+          ? error.message
+          : "Failed to load user from storage"
       );
     }
   }

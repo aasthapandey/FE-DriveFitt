@@ -4,7 +4,11 @@ import { useSearchParams } from "next/navigation";
 
 export default function PaymentSuccessPage() {
   const searchParams = useSearchParams();
-  const [paymentDetails, setPaymentDetails] = useState<any>(null);
+  const [paymentDetails, setPaymentDetails] = useState<{
+    paymentId: string;
+    orderId: string;
+    signature: string;
+  } | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {

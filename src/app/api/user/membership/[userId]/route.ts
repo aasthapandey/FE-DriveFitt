@@ -37,9 +37,18 @@ export async function GET(
       LIMIT 1
     `;
 
-    const membershipResult = await executeQuery<any[]>(membershipQuery, [
-      userId,
-    ]);
+    const membershipResult = await executeQuery<
+      Array<{
+        id: number;
+        user_id: number;
+        order_id: string;
+        payment_id: string;
+        membership_type: number;
+        status: string;
+        created_at: string;
+        expires_at: string;
+      }>
+    >(membershipQuery, [userId]);
     const membership = membershipResult?.[0];
 
     if (membership) {

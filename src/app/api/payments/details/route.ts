@@ -18,7 +18,12 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    let responseData: any = {};
+    const responseData: {
+      order?: any;
+      payments?: any;
+      paymentVerification?: any;
+      payment?: any;
+    } = {};
 
     // Get order details if orderId is provided
     if (orderId) {

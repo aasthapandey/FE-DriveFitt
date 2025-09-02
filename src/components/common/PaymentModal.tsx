@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { PaymentService, PaymentOptions } from "@/lib/paymentService";
+import { PaymentService } from "@/lib/paymentService";
 import { RootState } from "@/store";
 
 interface PaymentModalProps {

@@ -233,11 +233,14 @@ const UserInfoForm = ({
             "Registration failed. Please try again.",
         });
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Error submitting user info form:", error);
       setMessageState({
         type: "error",
-        text: error.message || "Server Down, Please try again later.",
+        text:
+          error instanceof Error
+            ? error.message
+            : "Server Down, Please try again later.",
       });
     } finally {
       setIsSubmitting(false);

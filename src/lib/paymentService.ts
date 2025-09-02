@@ -45,8 +45,17 @@ export class PaymentService {
 
   // Verify payment on server
   static async verifyPayment(
-    paymentData: any,
-    userDetails: any,
+    paymentData: {
+      razorpay_order_id: string;
+      razorpay_payment_id: string;
+      razorpay_signature: string;
+    },
+    userDetails: {
+      id: number;
+      name: string;
+      email: string;
+      contact: string;
+    },
     membershipType: number
   ) {
     console.log("🔍 Verifying payment...", paymentData);

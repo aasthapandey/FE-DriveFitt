@@ -17,7 +17,6 @@ export const personalTrainingData: StaticPageData = {
     mobileImage:
       "https://da8nru77lsio9.cloudfront.net/images/personal-training-c/hero-mobile.webp",
     btnPrimaryText: "Book a free trial",
-    btnSecondaryText: "Join Online",
   },
   banner2WithImageSection: {
     title: "Transform Your Body. Sharpen Your Performance. Become Unshakable.",

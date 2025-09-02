@@ -107,7 +107,7 @@ const HeroSection = ({ data, pageName, isMobile }: HeroSectionProps) => {
                   {isAuthenticated ? "Join Now" : btnPrimaryText}
                 </button>
               )}
-              {btnSecondaryText !== "" && (
+              {/* {btnSecondaryText !== "" && (
                 <button
                   onClick={handleSecondaryButtonClick}
                   className={`bg-transparent border border-[#00DBDC] text-[#00DBDC] px-10 py-3 md:px-14 rounded-lg font-medium leading-[100%] tracking-[-5%] text-base md:text-lg ${
@@ -118,7 +118,7 @@ const HeroSection = ({ data, pageName, isMobile }: HeroSectionProps) => {
                 >
                   {isAuthenticated ? "Join Now" : btnSecondaryText}
                 </button>
-              )}
+              )} */}
             </div>
           </ScrollAnimation>
         </div>

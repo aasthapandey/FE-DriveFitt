@@ -42,7 +42,16 @@ export async function GET(request: NextRequest) {
       FROM users 
       WHERE id = ?
     `;
-    const userResult = await executeQuery<any[]>(userQuery, [decoded.user_id]);
+    const userResult = await executeQuery<
+      Array<{
+        id: number;
+        first_name: string;
+        last_name: string;
+        email: string;
+        phone: string;
+        date_of_birth: string;
+      }>
+    >(userQuery, [decoded.user_id]);
     const user = userResult?.[0];
 
     if (!user) {
@@ -74,25 +83,22 @@ export async function GET(request: NextRequest) {
       LIMIT 1
     `;
 
-    const membershipResult = await executeQuery<any[]>(membershipQuery, [
-      decoded.user_id,
-    ]);
+    const membershipResult = await executeQuery<
+      Array<{
+        id: number;
+        user_id: number;
+        order_id: string;
+        payment_id: string;
+        membership_type: number;
+        status: string;
+        created_at: string;
+        expires_at: string;
+      }>
+    >(membershipQuery, [decoded.user_id]);
     const membership = membershipResult?.[0];
 
     const fullName =
       `${user.first_name || ""} ${user.last_name || ""}`.trim() || "User";
-
-    // Format membership type name
-    const getMembershipTypeName = (type: number): string => {
-      switch (type) {
-        case 1:
-          return "Individual Annual Plan";
-        case 2:
-          return "Family Annual Plan";
-        default:
-          return "Unknown Plan";
-      }
-    };
 
     const userData: User = {
       id: user.id,

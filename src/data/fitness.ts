@@ -19,7 +19,6 @@ export const fitnessData: StaticPageData = {
     mobileImage:
       "https://da8nru77lsio9.cloudfront.net/images/fitness-compressed/mobile-hero.webp",
     btnPrimaryText: "Join the Waitlist",
-    btnSecondaryText: "Join Online",
   },
   cardSection5: {
     title: "The Ultimate Fitness Experience",

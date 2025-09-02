@@ -34,7 +34,7 @@ export default function PaymentError({
             Payment Failed
           </h2>
           <p className="text-gray-600 mb-4">
-            We couldn't process your payment. Please try again.
+            We couldn&apos;t process your payment. Please try again.
           </p>
 
           <div className="bg-red-50 border border-red-200 rounded-lg p-4">

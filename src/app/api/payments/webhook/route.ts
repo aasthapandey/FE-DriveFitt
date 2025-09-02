@@ -4,7 +4,10 @@ import { updatePaymentOrder } from "@/lib/paymentDatabase";
 import { validateWebhookEvent } from "@/lib/razorpayUtils";
 
 // Handle payment captured event
-const handlePaymentCaptured = async (payment: any) => {
+const handlePaymentCaptured = async (payment: {
+  id: string;
+  order_id: string;
+}) => {
   try {
     console.log("Payment captured webhook received:", payment.id);
 
@@ -22,7 +25,10 @@ const handlePaymentCaptured = async (payment: any) => {
 };
 
 // Handle payment failed event
-const handlePaymentFailed = async (payment: any) => {
+const handlePaymentFailed = async (payment: {
+  id: string;
+  order_id: string;
+}) => {
   try {
     console.log("Payment failed webhook received:", payment.id);
 

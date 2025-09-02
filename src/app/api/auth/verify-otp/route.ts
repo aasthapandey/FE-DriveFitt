@@ -61,7 +61,17 @@ export async function POST(request: NextRequest) {
         WHERE phone = ?
       `;
 
-      const userResult = await executeQuery<any[]>(userQuery, [phone]);
+      const userResult = await executeQuery<
+        Array<{
+          id: number;
+          first_name: string;
+          last_name: string;
+          email: string;
+          phone: string;
+          date_of_birth: string;
+          created_at: string;
+        }>
+      >(userQuery, [phone]);
       const user = userResult?.[0];
       console.log("user", user);
 

@@ -199,7 +199,15 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
     setShowUserInfoModal(false);
   };
 
-  const handlePhoneModalSuccess = (phoneNumber: string, userData?: any) => {
+  const handlePhoneModalSuccess = (
+    phoneNumber: string,
+    userData?: {
+      name?: string;
+      email?: string;
+      phone?: string;
+      dateOfBirth?: string;
+    }
+  ) => {
     setTempPhoneNumber(phoneNumber);
     setShowPhoneModal(false);
 

@@ -20,7 +20,7 @@ export const useAuth = () => {
   const auth = useSelector((state: RootState) => state.auth);
 
   const login = useCallback(
-    (userData: { user: any; token: string }) => {
+    (userData: { user: User; token: string }) => {
       return dispatch(loginUser(userData));
     },
     [dispatch]

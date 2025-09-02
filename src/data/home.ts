@@ -41,7 +41,6 @@ export const homeData: StaticPageData = {
     originalMobileImage:
       "https://da8nru77lsio9.cloudfront.net/images/hero/home-mobile-original.svg",
     btnPrimaryText: "Join Now",
-    btnSecondaryText: "Join Now",
   },
   countdownSection: {
     title: "Your Premium Sports Club. Opening Soon at ",

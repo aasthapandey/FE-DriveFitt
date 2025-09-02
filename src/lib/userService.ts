@@ -1,11 +1,19 @@
 import { executeQuery } from "./database";
 import { User } from "@/types/auth";
-import { jwtService } from "./jwtService";
 
 class UserService {
   async getUserByPhone(phone: string): Promise<User | null> {
     const query = "SELECT * FROM users WHERE phone = ?";
-    const result = await executeQuery<any[]>(query, [phone]);
+    const result = await executeQuery<
+      Array<{
+        id: number;
+        first_name: string;
+        last_name: string;
+        email: string;
+        phone: string;
+        date_of_birth: string;
+      }>
+    >(query, [phone]);
     const user = result?.[0];
 
     if (!user) return null;
@@ -27,7 +35,16 @@ class UserService {
 
   async getUserByEmail(email: string): Promise<User | null> {
     const query = "SELECT * FROM users WHERE email = ?";
-    const result = await executeQuery<any[]>(query, [email]);
+    const result = await executeQuery<
+      Array<{
+        id: number;
+        first_name: string;
+        last_name: string;
+        email: string;
+        phone: string;
+        date_of_birth: string;
+      }>
+    >(query, [email]);
     const user = result?.[0];
 
     if (!user) return null;
@@ -64,7 +81,7 @@ class UserService {
       firstName,
       lastName,
     ]);
-    const userId = (result as any).insertId;
+    const userId = (result as { insertId: number }).insertId;
 
     return this.getUserById(userId) as Promise<User>;
   }
@@ -92,14 +109,23 @@ class UserService {
       userData.dateOfBirth,
       userData.gender,
     ]);
-    const userId = (result as any).insertId;
+    const userId = (result as { insertId: number }).insertId;
 
     return this.getUserById(userId) as Promise<User>;
   }
 
   async getUserById(id: number): Promise<User | null> {
     const query = "SELECT * FROM users WHERE id = ?";
-    const result = await executeQuery<any[]>(query, [id]);
+    const result = await executeQuery<
+      Array<{
+        id: number;
+        first_name: string;
+        last_name: string;
+        email: string;
+        phone: string;
+        date_of_birth: string;
+      }>
+    >(query, [id]);
     const user = result?.[0];
 
     if (!user) return null;

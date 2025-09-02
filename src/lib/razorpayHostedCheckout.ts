@@ -12,8 +12,12 @@ export interface RazorpayCheckoutOptions {
   theme: {
     color: string;
   };
-  onSuccess: (response: any) => void;
-  onError: (error: any) => void;
+  onSuccess: (response: {
+    razorpay_payment_id: string;
+    razorpay_order_id: string;
+    razorpay_signature: string;
+  }) => void;
+  onError: (error: Error) => void;
 }
 
 export class RazorpayHostedCheckout {
@@ -152,7 +156,9 @@ export class RazorpayHostedCheckout {
       console.log("✅ Razorpay checkout opened successfully");
     } catch (error) {
       console.error("❌ Failed to open Razorpay checkout:", error);
-      options.onError(error);
+      options.onError(
+        error instanceof Error ? error : new Error(String(error))
+      );
     }
   }
 }
@@ -160,6 +166,45 @@ export class RazorpayHostedCheckout {
 // Declare global Razorpay type
 declare global {
   interface Window {
-    Razorpay: any;
+    Razorpay: new (options: {
+      key: string;
+      amount: number;
+      currency: string;
+      name: string;
+      description: string;
+      order_id: string;
+      prefill: {
+        name: string;
+        email: string;
+        contact: string;
+      };
+      theme: {
+        color: string;
+      };
+      handler: (response: {
+        razorpay_payment_id: string;
+        razorpay_order_id: string;
+        razorpay_signature: string;
+      }) => void;
+      modal: {
+        ondismiss: () => void;
+      };
+      config: {
+        display: {
+          blocks: {
+            banks: { name: string; instruments: Array<{ method: string }> };
+            cards: { name: string; instruments: Array<{ method: string }> };
+            netbanking: {
+              name: string;
+              instruments: Array<{ method: string }>;
+            };
+          };
+          sequence: string[];
+          preferences: { show_default_blocks: boolean };
+        };
+      };
+    }) => {
+      open: () => void;
+    };
   }
 }

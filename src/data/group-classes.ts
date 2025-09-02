@@ -17,7 +17,6 @@ export const groupClassesData: StaticPageData = {
     mobileImage:
       "/images/group-classes/hero-mobile.jpg",
     btnPrimaryText: "Book a free trial",
-    btnSecondaryText: "Join Online",
   },
   banner2Section: {
     title:
