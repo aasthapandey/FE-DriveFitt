@@ -42,7 +42,7 @@ const HeroSection = ({ data, pageName, isMobile }: HeroSectionProps) => {
   //     // If not logged in, open phone modal
   //     setIsPhoneModalOpen(true);
   //   }
-  };
+  // };
 
   const renderTitle = (titleWords: TitleWord[]) => {
     return (
