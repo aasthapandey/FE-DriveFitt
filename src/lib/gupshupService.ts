@@ -44,7 +44,10 @@ class GupshupService {
       // );
 
       const response = await axios.get(
-        `https://mediaapi.smsgupshup.com/GatewayAPI/rest?userid=${this.config.userid}&password=${this.config.password}&send_to=${phone}&v=1.1&format=json&msg_type=TEXT&method=SENDMESSAGE&msg=%2A${otp}%2A+is+your+verification+code.+For+your+security%2C+do+not+share+this+code.&isTemplate=true`
+        `https://mediaapi.smsgupshup.com/GatewayAPI/rest?userid=${this.config.userid}&password=${this.config.password}&send_to=${phone}&v=1.1&format=json&msg_type=TEXT&method=SENDMESSAGE&msg=%2A${otp}%2A+is+your+verification+code.+For+your+security%2C+do+not+share+this+code.&isTemplate=true`,
+          {
+            timeout: 10000,
+          }
       );
 
       const result = response.data;
