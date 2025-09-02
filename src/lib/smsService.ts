@@ -1,5 +1,3 @@
-import axios from "axios";
-
 interface SMSConfig {
   userid: string;
   password: string;
@@ -24,14 +22,23 @@ class SMSService {
     try {
       console.log("Sending OTP to", phone);
 
-      const response = await axios.get(
-        `${this.config.baseURL}?userid=${this.config.userid}&password=${this.config.password}&send_to=${phone}&v=1.1&format=json&msg_type=TEXT&method=SENDMESSAGE&msg=%2A${otp}%2A+is+your+verification+code.+For+your+security%2C+do+not+share+this+code.&isTemplate=true`,
-        {
-          timeout: 15000, // 30 seconds timeout
-        }
-      );
+      const url = `${this.config.baseURL}?userid=${this.config.userid}&password=${this.config.password}&send_to=${phone}&v=1.1&format=json&msg_type=TEXT&method=SENDMESSAGE&msg=%2A${otp}%2A+is+your+verification+code.+For+your+security%2C+do+not+share+this+code.&isTemplate=true`;
 
-      const result = response.data;
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 seconds timeout
+
+      const response = await fetch(url, {
+        method: "GET",
+        signal: controller.signal,
+      });
+
+      clearTimeout(timeoutId);
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
       console.log("Gupshup response:", result);
 
       // Handle nested response format
