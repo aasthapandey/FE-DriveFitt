@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { otpService } from "@/lib/otpService";
-// import { rateLimitService } from "@/lib/rateLimitService";
+import { smsService } from "@/lib/smsService";
 import { SendOTPRequest, AuthResponse, OTPPurpose } from "@/types/auth";
+
+// Use Edge Runtime for better performance in serverless environment
+export const runtime = "edge";
 
 export async function POST(request: NextRequest) {
   try {
@@ -31,22 +33,13 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Rate limiting check
-    // const canSendOTP = await rateLimitService.canSendOTP(phone);
-    // if (!canSendOTP) {
-    //   const count = await rateLimitService.getOTPCountLastHour(phone);
-    //   return NextResponse.json<AuthResponse>(
-    //     {
-    //       success: false,
-    //       message: `Too many OTP requests. You have requested ${count} OTPs in the last hour. Please try again after 1 hour.`,
-    //     },
-    //     { status: 429 }
-    //   );
-    // }
+    // Generate OTP locally (4 digits)
+    const otp = Math.floor(1000 + Math.random() * 9000).toString();
 
-    const success = await otpService.sendOTP(phone, purpose);
+    // Send OTP via SMS
+    const smsResult = await smsService.sendOTP(phone, otp);
 
-    if (success) {
+    if (smsResult.success) {
       return NextResponse.json<AuthResponse>(
         {
           success: true,
