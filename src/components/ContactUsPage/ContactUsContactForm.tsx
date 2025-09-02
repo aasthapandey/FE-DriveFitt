@@ -409,13 +409,15 @@ const ContactUsContactForm = ({
                       fields.preferredLocation?.placeholder ||
                       "Select Location"}
                   </span>
-                  <img
+                  <Image
                     src={
                       isLocationOpen
                         ? "/images/accordian-up-arrow.svg"
                         : "/images/accordian-down-arrow.svg"
                     }
                     alt="toggle"
+                    width={16}
+                    height={16}
                     className="w-4 h-4"
                   />
                 </button>
@@ -483,7 +485,7 @@ const ContactUsContactForm = ({
               {messageState.type && (
                 <div className="flex justify-center md:-mb-[24px]">
                   <div className="flex items-center gap-2">
-                    <img
+                    <Image
                       src={
                         messageState.type === "success" ||
                         messageState.type === "error"
@@ -493,6 +495,8 @@ const ContactUsContactForm = ({
                       alt={
                         messageState.type === "success" ? "Success" : "Error"
                       }
+                      width={28}
+                      height={28}
                       className="w-7 h-7 flex-shrink-0 mt-0"
                     />
                     <p

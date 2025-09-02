@@ -43,7 +43,7 @@ const ProfileBody = ({ data, isMobile }: ProfileBodyProps) => {
     if (user?.id && (!user.membershipInfo || !user.hasMembership)) {
       fetchProfile();
     }
-  }, [user?.id, fetchProfile]);
+  }, [user?.id, user?.membershipInfo, user?.hasMembership, fetchProfile]);
 
   // Update field values when user data changes
   useEffect(() => {

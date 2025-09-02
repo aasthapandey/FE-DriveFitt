@@ -19,10 +19,58 @@ export async function GET(request: NextRequest) {
     }
 
     const responseData: {
-      order?: any;
-      payments?: any;
-      paymentVerification?: any;
-      payment?: any;
+      order?: {
+        id: string;
+        amount: number;
+        amount_due: number;
+        amount_paid: number;
+        attempts: number;
+        created_at: number;
+        currency: string;
+        entity: string;
+        receipt: string;
+        status: string;
+      };
+      payments?: Array<{
+        id: string;
+        amount: number;
+        currency: string;
+        status: string;
+        order_id: string;
+        method: string;
+        created_at: number;
+      }>;
+      paymentVerification?: {
+        isValid: boolean;
+        paymentDetails?: {
+          id: string;
+          amount: number;
+          currency: string;
+          status: string;
+          order_id: string;
+          method: string;
+          created_at: number;
+        };
+        error?: string;
+      };
+      payment?: {
+        id: string;
+        amount: number;
+        currency: string;
+        status: string;
+        order_id: string;
+        method: string;
+        description?: string;
+        vpa?: string;
+        email?: string;
+        contact?: string;
+        notes?: Record<string, string>;
+        fee?: number;
+        tax?: number;
+        error_code?: string;
+        error_description?: string;
+        created_at: number;
+      };
     } = {};
 
     // Get order details if orderId is provided

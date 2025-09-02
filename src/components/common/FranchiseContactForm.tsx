@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Image from "next/image";
 
 interface FranchiseContactFormProps {
   isMobile?: boolean;
@@ -347,7 +348,7 @@ const FranchiseContactForm = ({ isMobile }: FranchiseContactFormProps) => {
             {messageState.type && (
               <div className="flex justify-center md:-mb-[24px]">
                 <div className="flex items-center gap-2">
-                  <img
+                  <Image
                     src={
                       messageState.type === "success" ||
                       messageState.type === "error"
@@ -355,6 +356,8 @@ const FranchiseContactForm = ({ isMobile }: FranchiseContactFormProps) => {
                         : "/images/error-red.svg"
                     }
                     alt={messageState.type === "success" ? "Success" : "Error"}
+                    width={28}
+                    height={28}
                     className="w-7 h-7 flex-shrink-0 mt-0"
                   />
                   <p

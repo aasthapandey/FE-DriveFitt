@@ -4,6 +4,7 @@ import TitleDescription from "../common/TitleDescription";
 import ScrollAnimation from "../common/ScrollAnimation";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import Image from "next/image";
 
 interface Coach {
   id: string;
@@ -72,9 +73,11 @@ const MeetYourCoachesSection = ({
               {/* Coach Image Container */}
               <div className="w-full h-full relative">
                 {/* Image */}
-                <img
+                <Image
                   src={coach.image}
                   alt={coach.name}
+                  width={400}
+                  height={400}
                   className="w-full h-full object-cover"
                 />
                 {/* Gradient Overlay */}
@@ -156,9 +159,11 @@ const MeetYourCoachesSection = ({
                 {/* Coach Image Container */}
                 <div className="w-full h-full relative">
                   {/* Image */}
-                  <img
+                  <Image
                     src={coach.image}
                     alt={coach.name}
+                    width={400}
+                    height={400}
                     className="w-full h-full object-cover"
                   />
                   {/* Gradient Overlay */}

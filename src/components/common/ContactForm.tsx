@@ -2,6 +2,7 @@
 import { ContactFormProps } from "@/types/staticPages";
 import { useState } from "react";
 import ScrollAnimation from "@/components/common/ScrollAnimation";
+import Image from "next/image";
 
 const ContactForm = ({
   data,
@@ -308,7 +309,7 @@ const ContactForm = ({
               {messageState.type && (
                 <div className="flex justify-center md:-mb-[24px]">
                   <div className="flex items-center gap-2">
-                    <img
+                    <Image
                       src={
                         messageState.type === "success" ||
                         messageState.type === "error"
@@ -318,6 +319,8 @@ const ContactForm = ({
                       alt={
                         messageState.type === "success" ? "Success" : "Error"
                       }
+                      width={28}
+                      height={28}
                       className="w-7 h-7 flex-shrink-0 mt-0"
                     />
                     <p

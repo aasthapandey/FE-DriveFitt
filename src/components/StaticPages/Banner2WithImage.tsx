@@ -1,4 +1,5 @@
 import ScrollAnimation from "@/components/common/ScrollAnimation";
+import Image from "next/image";
 
 interface Banner2WithImageProps {
   title: string;
@@ -84,9 +85,11 @@ const Banner2WithImage = ({
             {/* Right side - Image */}
             <div className="flex-1 flex justify-center md:justify-end -mt-[10px]">
               <ScrollAnimation delay={0.5} direction="right">
-                <img
+                <Image
                   src={image}
                   alt="Personal Training"
+                  width={473}
+                  height={400}
                   className="w-full max-w-[400px] md:max-w-[473px] h-auto object-cover rounded-[20px]"
                 />
               </ScrollAnimation>
