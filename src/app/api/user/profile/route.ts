@@ -111,7 +111,7 @@ export async function GET(request: NextRequest) {
         ? {
             id: membership.id,
             membershipType: membership.membership_type,
-            status: membership.status,
+            status: membership.status as "active" | "expired" | "cancelled",
             expiresAt: membership.expires_at,
           }
         : undefined,

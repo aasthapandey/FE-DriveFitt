@@ -116,10 +116,8 @@ class OTPService {
     `;
 
     const result = await executeQuery(query, [phone, otp, purpose, expiresAt]);
-    return (
-      (result as { insertId?: number; affectedRows?: number }).insertId ||
-      (result as { insertId?: number; affectedRows?: number }).affectedRows
-    );
+    const typedResult = result as { insertId?: number; affectedRows?: number };
+    return typedResult.insertId || typedResult.affectedRows || 0;
   }
 
   private async updateVendorResponse(

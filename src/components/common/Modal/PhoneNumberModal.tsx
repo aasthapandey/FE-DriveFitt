@@ -21,7 +21,7 @@ interface PhoneNumberModalProps {
       name: string;
       email: string;
       phone: string;
-      dateOfBirth: string;
+      dateOfBirth?: string;
     }
   ) => void; // Optional callback for successful authentication with user data
 }
