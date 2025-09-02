@@ -367,14 +367,59 @@ const PhoneNumberModal = ({
       setError("");
 
       try {
-        const response = await authAPI.sendOTP(phoneNumber, OTPPurpose.LOGIN);
+        // Step 1: Generate OTP and store in database
+        const dbResponse = await fetch("/api/auth/otp-db-operations", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            operation: "generate_and_store",
+            phone: phoneNumber,
+            purpose: OTPPurpose.LOGIN,
+          }),
+        });
 
-        if (response.success) {
-          setModalState("otp");
-        } else {
-          setError(response.message || "Failed to send OTP");
+        const dbResult = await dbResponse.json();
+        if (!dbResult.success) {
+          setError("Failed to generate OTP");
+          return;
         }
-      } catch {
+
+        // Step 2: Send SMS with the generated OTP via Edge Runtime
+        const smsResponse = await fetch("/api/auth/send-otp", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            phone: phoneNumber,
+            purpose: OTPPurpose.LOGIN,
+            otp: dbResult.otp, // Use the OTP from Step 1
+          }),
+        });
+
+        const smsResult = await smsResponse.json();
+        if (!smsResult.success) {
+          setError(smsResult.message || "Failed to send OTP");
+          return;
+        }
+
+        // Step 3: Update vendor response in database
+        await fetch("/api/auth/otp-db-operations", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            operation: "update_vendor_response",
+            phone: phoneNumber,
+            purpose: OTPPurpose.LOGIN,
+            vendorResponse: {
+              success: smsResult.success,
+              response: smsResult.message || "OTP sent successfully",
+            },
+          }),
+        });
+
+        // All steps completed successfully
+        setModalState("otp");
+      } catch (error) {
+        console.error("Error in OTP flow:", error);
         setError("Network error. Please try again.");
       } finally {
         setIsLoading(false);

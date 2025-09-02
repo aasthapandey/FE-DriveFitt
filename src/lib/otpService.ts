@@ -35,6 +35,25 @@ class OTPService {
     }
   }
 
+  async generateAndStoreOTP(
+    phone: string,
+    purpose: OTPPurpose
+  ): Promise<{ success: boolean; otpId?: number; otp?: string }> {
+    const otp = this.generateOTP();
+    const expiresAt = new Date(
+      Date.now() + this.OTP_EXPIRY_MINUTES * 60 * 1000
+    );
+
+    try {
+      // Store OTP in database first (without vendor response)
+      const otpId = await this.storeOTP(phone, otp, purpose, expiresAt);
+      return { success: true, otpId, otp };
+    } catch (error) {
+      console.error("Error in generateAndStoreOTP:", error);
+      return { success: false };
+    }
+  }
+
   private async sendOTPAsync(
     phone: string,
     otp: string,
@@ -120,7 +139,7 @@ class OTPService {
     return typedResult.insertId || typedResult.affectedRows || 0;
   }
 
-  private async updateVendorResponse(
+  async updateVendorResponse(
     otpId: number,
     result: { success: boolean; response: string }
   ): Promise<void> {
@@ -134,7 +153,7 @@ class OTPService {
     await executeQuery(query, [responseData, otpId]);
   }
 
-  private async getOTPRecord(
+  async getOTPRecord(
     phone: string,
     purpose: OTPPurpose
   ): Promise<OTPVerification | null> {

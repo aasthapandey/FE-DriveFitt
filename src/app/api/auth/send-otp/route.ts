@@ -7,8 +7,8 @@ export const runtime = "edge";
 
 export async function POST(request: NextRequest) {
   try {
-    const body: SendOTPRequest = await request.json();
-    const { phone, purpose } = body;
+    const body: SendOTPRequest & { otp?: string } = await request.json();
+    const { phone, purpose, otp } = body;
 
     // Validate phone number
     if (!phone || !/^[6-9]\d{9}$/.test(phone)) {
@@ -33,11 +33,11 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Generate OTP locally (4 digits)
-    const otp = Math.floor(1000 + Math.random() * 9000).toString();
+    // Use provided OTP or generate new one if not provided
+    const otpToSend = otp || Math.floor(1000 + Math.random() * 9000).toString();
 
     // Send OTP via SMS
-    const smsResult = await smsService.sendOTP(phone, otp);
+    const smsResult = await smsService.sendOTP(phone, otpToSend);
 
     if (smsResult.success) {
       return NextResponse.json<AuthResponse>(
