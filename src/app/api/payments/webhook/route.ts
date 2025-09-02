@@ -1,6 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
-import { verifyWebhookSignature, PaymentStatus } from "@/lib/razorpay";
-import { updatePaymentOrder } from "@/lib/paymentDatabase";
+import { verifyWebhookSignature } from "@/lib/razorpay";
+import {
+  getOrderByRazorpayId,
+  getPaymentByRazorpayId,
+  updateOrder,
+  updatePayment,
+  OrderStatus,
+  PaymentStatus,
+} from "@/lib/paymentDatabase";
 import { validateWebhookEvent } from "@/lib/razorpayUtils";
 
 // Handle payment captured event
@@ -11,11 +18,31 @@ const handlePaymentCaptured = async (payment: {
   try {
     console.log("Payment captured webhook received:", payment.id);
 
-    // Update payment status in database
-    await updatePaymentOrder(payment.order_id, {
-      payment_id: payment.id,
-      status: PaymentStatus.COMPLETED,
-      completed_at: new Date(),
+    // Get order by razorpay_order_id
+    const order = await getOrderByRazorpayId(payment.order_id);
+    if (!order) {
+      console.error("Order not found for webhook:", payment.order_id);
+      return;
+    }
+
+    // Get payment by razorpay_payment_id
+    const paymentRecord = await getPaymentByRazorpayId(payment.id);
+    if (!paymentRecord) {
+      console.error("Payment record not found for webhook:", payment.id);
+      return;
+    }
+
+    // Update payment status
+    await updatePayment(paymentRecord.id!, {
+      status: PaymentStatus.CAPTURED,
+      captured_at: new Date(),
+      razorpay_payment_status_response: payment,
+    });
+
+    // Update order status
+    await updateOrder(order.id!, {
+      status: OrderStatus.PAID,
+      razorpay_order_status_response: payment,
     });
 
     console.log("Payment status updated successfully via webhook");
@@ -28,15 +55,38 @@ const handlePaymentCaptured = async (payment: {
 const handlePaymentFailed = async (payment: {
   id: string;
   order_id: string;
+  error_code?: string;
+  error_description?: string;
 }) => {
   try {
     console.log("Payment failed webhook received:", payment.id);
 
-    // Update payment status in database
-    await updatePaymentOrder(payment.order_id, {
-      payment_id: payment.id,
+    // Get order by razorpay_order_id
+    const order = await getOrderByRazorpayId(payment.order_id);
+    if (!order) {
+      console.error("Order not found for webhook:", payment.order_id);
+      return;
+    }
+
+    // Get payment by razorpay_payment_id
+    const paymentRecord = await getPaymentByRazorpayId(payment.id);
+    if (!paymentRecord) {
+      console.error("Payment record not found for webhook:", payment.id);
+      return;
+    }
+
+    // Update payment status
+    await updatePayment(paymentRecord.id!, {
       status: PaymentStatus.FAILED,
-      completed_at: new Date(),
+      error_code: payment.error_code,
+      error_description: payment.error_description,
+      razorpay_payment_status_response: payment,
+    });
+
+    // Update order status
+    await updateOrder(order.id!, {
+      status: OrderStatus.FAILED,
+      razorpay_order_status_response: payment,
     });
 
     console.log("Payment failure recorded successfully via webhook");

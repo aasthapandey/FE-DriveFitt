@@ -32,6 +32,7 @@ export class PaymentService {
         currency: options.currency || "INR",
         receipt: `receipt_${Date.now()}`,
         membership_type: options.membershipType,
+        user_id: options.userDetails.id,
       }),
     });
 
@@ -40,7 +41,16 @@ export class PaymentService {
       throw new Error(error.error || "Failed to create order");
     }
 
-    return response.json();
+    const data = await response.json();
+
+    return {
+      orderId: data.orderId, // Razorpay order ID for frontend compatibility
+      internalOrderId: data.internalOrderId, // Internal auto-increment ID
+      amount: data.amount,
+      currency: data.currency,
+      receipt: data.receipt,
+      invoiceNumber: data.invoiceNumber,
+    };
   }
 
   // Verify payment on server

@@ -1,6 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
-import { PaymentStatus } from "@/lib/razorpay";
-import { updatePaymentOrder, insertMembership } from "@/lib/paymentDatabase";
+import {
+  OrderStatus,
+  PaymentStatus,
+  MembershipStatus,
+} from "@/lib/paymentDatabase";
+import {
+  getOrderByRazorpayId,
+  updateOrder,
+  insertPayment,
+  insertMembership,
+  calculateExpiryDate,
+  mapPaymentMethod,
+} from "@/lib/paymentDatabase";
 import { razorpayApiClient } from "@/lib/razorpayApiClient";
 
 export async function POST(request: NextRequest) {
@@ -70,38 +81,62 @@ export async function POST(request: NextRequest) {
       orderId: paymentDetails.order_id,
     });
 
-    // Update payment status in database
+    // Get order by razorpay_order_id to get internal order.id
+    const order = await getOrderByRazorpayId(orderId);
+    if (!order) {
+      console.error("Order not found in database:", orderId);
+      return NextResponse.json({ error: "Order not found" }, { status: 404 });
+    }
+
+    // Create payment record in payments table
+    const paymentRecordId = await insertPayment({
+      razorpay_payment_id: paymentId,
+      order_id: order.id!,
+      user_id: order.user_id,
+      amount: paymentDetails.amount / 100, // Convert from paise
+      currency: paymentDetails.currency,
+      method: mapPaymentMethod(paymentDetails.method || "card"),
+      bank: (paymentDetails as any).bank || null,
+      card_id: (paymentDetails as any).card_id || null,
+      wallet: (paymentDetails as any).wallet || null,
+      vpa: (paymentDetails as any).vpa || null,
+      email: paymentDetails.email || null,
+      contact: paymentDetails.contact || null,
+      status: PaymentStatus.CAPTURED,
+      captured_at: new Date(),
+      razorpay_payment_response: paymentDetails,
+      razorpay_capture_response: paymentDetails,
+    });
+
+    console.log("Payment record created with ID:", paymentRecordId);
+
+    // Update order status
     try {
-      await updatePaymentOrder(orderId, {
-        payment_id: paymentId,
-        signature: signature,
-        status: PaymentStatus.COMPLETED,
-        user_details: userDetails,
-        completed_at: new Date(),
+      await updateOrder(order.id!, {
+        status: OrderStatus.PAID,
+        razorpay_order_status_response: paymentDetails,
       });
-      console.log("Payment order updated in database");
+      console.log("Order status updated to paid");
     } catch (dbError) {
-      console.error("Failed to update payment order:", dbError);
-      return NextResponse.json(
-        { error: "Database update failed" },
-        { status: 500 }
-      );
+      console.error("Failed to update order status:", dbError);
+      // Don't fail the entire request if order update fails
     }
 
     // Create membership record
     try {
       await insertMembership({
-        user_id: userDetails.user_id || userDetails.id,
-        order_id: orderId,
-        payment_id: paymentId,
-        membership_type: userDetails.membership_type,
-        status: "active",
+        user_id: order.user_id,
+        order_id: order.id!,
+        payment_id: paymentRecordId,
+        membership_type: order.membership_type,
+        status: MembershipStatus.ACTIVE,
+        end_date: calculateExpiryDate(),
       });
       console.log(
         "Membership record created for user_id:",
-        userDetails.user_id || userDetails.id,
+        order.user_id,
         "with membership_type:",
-        userDetails.membership_type
+        order.membership_type
       );
     } catch (dbError) {
       console.error("Failed to create membership record:", dbError);
@@ -115,6 +150,8 @@ export async function POST(request: NextRequest) {
       message: "Payment verified successfully",
       paymentId: paymentId,
       orderId: orderId,
+      internalOrderId: order.id,
+      internalPaymentId: paymentRecordId,
       paymentStatus: paymentDetails.status,
       amount: paymentDetails.amount,
     });

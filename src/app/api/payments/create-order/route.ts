@@ -1,7 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { razorpayApiClient } from "@/lib/razorpayApiClient";
-import { insertPaymentOrder } from "@/lib/paymentDatabase";
-import { PaymentStatus } from "@/lib/razorpay";
+import {
+  insertOrder,
+  generateInvoiceNumber,
+  OrderStatus,
+} from "@/lib/paymentDatabase";
 
 export async function POST(request: NextRequest) {
   console.log("🎯 Create Order API endpoint called");
@@ -12,6 +15,7 @@ export async function POST(request: NextRequest) {
       currency = "INR",
       receipt,
       membership_type,
+      user_id,
     } = await request.json();
 
     console.log("📝 Request body parsed:", {
@@ -19,12 +23,18 @@ export async function POST(request: NextRequest) {
       currency,
       receipt,
       membership_type,
+      user_id,
     });
 
-    if (!amount || membership_type === undefined || membership_type === null) {
+    if (
+      !amount ||
+      membership_type === undefined ||
+      membership_type === null ||
+      !user_id
+    ) {
       console.error("❌ Validation failed - missing required fields");
       return NextResponse.json(
-        { error: "Amount and membership type are required" },
+        { error: "Amount, membership type, and user_id are required" },
         { status: 400 }
       );
     }
@@ -33,6 +43,7 @@ export async function POST(request: NextRequest) {
       amount,
       membership_type,
       currency,
+      user_id,
     });
 
     // Create order using Razorpay API client
@@ -42,6 +53,7 @@ export async function POST(request: NextRequest) {
       receipt: receipt || `receipt_${Date.now()}`,
       notes: {
         membership_type,
+        user_id,
         created_at: new Date().toISOString(),
       },
     });
@@ -60,28 +72,38 @@ export async function POST(request: NextRequest) {
     const order = orderResponse.data!;
     console.log("Razorpay order created successfully:", order.id);
 
+    // Generate invoice number
+    const invoiceNumber = generateInvoiceNumber();
+    console.log("Generated invoice number:", invoiceNumber);
+
     // Save order to database
+    let internalOrderId: number = 0;
     try {
-      await insertPaymentOrder({
-        id: order.id,
+      internalOrderId = await insertOrder({
+        razorpay_order_id: order.id,
+        user_id: user_id,
+        membership_type: membership_type,
         amount: amount, // Keep original amount in rupees for database
         currency: order.currency,
-        status: PaymentStatus.CREATED,
-        membership_type,
-        created_at: new Date(),
+        receipt: order.receipt,
+        invoice_number: invoiceNumber,
+        status: OrderStatus.CREATED,
+        razorpay_create_order_response: order,
       });
-      console.log("Order saved to database successfully:", order.id);
+      console.log("Order saved to database successfully:", internalOrderId);
     } catch (dbError) {
       console.error("Failed to save order to database:", dbError);
       // Don't fail the request if database save fails, as the order was created in Razorpay
     }
 
     return NextResponse.json({
-      orderId: order.id,
+      orderId: order.id, // Return Razorpay order ID for frontend compatibility
+      internalOrderId: internalOrderId, // Return internal auto-increment ID
       amount: order.amount,
       currency: order.currency,
       receipt: order.receipt,
       status: order.status,
+      invoiceNumber: invoiceNumber,
     });
   } catch (error) {
     console.error("Order creation failed:", error);

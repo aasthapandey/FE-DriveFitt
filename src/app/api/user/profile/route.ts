@@ -64,7 +64,7 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // Get active membership data
+    // Get active membership data with order and payment information
     const membershipQuery = `
       SELECT 
         m.id,
@@ -73,12 +73,14 @@ export async function GET(request: NextRequest) {
         m.payment_id,
         m.membership_type,
         m.status,
-        m.created_at,
-        m.expires_at
+        m.start_date,
+        m.end_date,
+        o.invoice_number
       FROM memberships m
+      INNER JOIN orders o ON m.order_id = o.id
       WHERE m.user_id = ? 
         AND m.status = 'active' 
-        AND m.expires_at > NOW()
+        AND m.end_date > NOW()
       ORDER BY m.created_at DESC
       LIMIT 1
     `;
@@ -87,12 +89,13 @@ export async function GET(request: NextRequest) {
       Array<{
         id: number;
         user_id: number;
-        order_id: string;
-        payment_id: string;
+        order_id: number;
+        payment_id: number;
         membership_type: number;
         status: string;
-        created_at: string;
-        expires_at: string;
+        start_date: string;
+        end_date: string;
+        invoice_number: string;
       }>
     >(membershipQuery, [decoded.user_id]);
     const membership = membershipResult?.[0];
@@ -111,8 +114,16 @@ export async function GET(request: NextRequest) {
         ? {
             id: membership.id,
             membershipType: membership.membership_type,
-            status: membership.status as "active" | "expired" | "cancelled",
-            expiresAt: membership.expires_at,
+            status: membership.status as
+              | "active"
+              | "expired"
+              | "cancelled"
+              | "suspended",
+            startDate: membership.start_date,
+            expiresAt: membership.end_date,
+            invoiceNumber: membership.invoice_number,
+            orderId: membership.order_id,
+            paymentId: membership.payment_id,
           }
         : undefined,
     };

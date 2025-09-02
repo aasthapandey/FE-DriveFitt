@@ -13,8 +13,12 @@ export interface User {
   membershipInfo?: {
     id: number;
     membershipType: number; // 1 = Individual Annual Plan, 2 = Family Annual Plan
-    status: "active" | "expired" | "cancelled";
+    status: "active" | "expired" | "cancelled" | "suspended";
+    startDate: string;
     expiresAt: string;
+    invoiceNumber?: string;
+    orderId: number;
+    paymentId: number;
   };
 }
 
@@ -65,12 +69,13 @@ export interface UserRegistrationData {
 export interface MembershipInfo {
   id: number;
   userId: number;
-  orderId: string;
-  paymentId: string;
+  orderId: number; // Now auto increment ID
+  paymentId: number; // Now auto increment ID
   membershipType: number; // 1 = Individual Annual Plan, 2 = Family Annual Plan
-  status: "active" | "expired" | "cancelled";
-  createdAt: string;
+  status: "active" | "expired" | "cancelled" | "suspended";
+  startDate: string;
   expiresAt: string;
+  invoiceNumber?: string;
 }
 
 export interface OTPVerification {

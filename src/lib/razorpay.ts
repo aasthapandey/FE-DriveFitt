@@ -2,7 +2,6 @@ import Razorpay from "razorpay";
 import crypto from "crypto";
 
 // Initialize Razorpay instance
-
 export const razorpayInstance = new Razorpay({
   key_id: "rzp_live_RBcCfbzN35eWx4",
   key_secret: "f0dAf49wOscpoZZzQ5HJzkUE",
@@ -46,41 +45,47 @@ export const verifyWebhookSignature = (
   }
 };
 
-// Payment status enum
+// New enums for the updated table structure
+export enum OrderStatus {
+  CREATED = "created",
+  ATTEMPTED = "attempted",
+  PAID = "paid",
+  FAILED = "failed",
+}
+
 export enum PaymentStatus {
+  CREATED = "created",
+  AUTHORIZED = "authorized",
+  CAPTURED = "captured",
+  FAILED = "failed",
+  REFUNDED = "refunded",
+}
+
+export enum PaymentMethod {
+  CARD = "card",
+  UPI = "upi",
+  NETBANKING = "netbanking",
+  WALLET = "wallet",
+  EMI = "emi",
+}
+
+export enum MembershipStatus {
+  ACTIVE = "active",
+  EXPIRED = "expired",
+  CANCELLED = "cancelled",
+  SUSPENDED = "suspended",
+}
+
+export enum RefundStatus {
+  PENDING = "pending",
+  PROCESSED = "processed",
+  FAILED = "failed",
+}
+
+// Legacy PaymentStatus enum for backward compatibility (deprecated)
+export enum PaymentStatusLegacy {
   CREATED = "created",
   COMPLETED = "completed",
   FAILED = "failed",
   PENDING = "pending",
-}
-
-// Payment order interface
-export interface PaymentOrder {
-  id: string;
-  amount: number;
-  currency: string;
-  status: PaymentStatus;
-  membership_type?: number;
-  payment_id?: string;
-  signature?: string;
-  user_details?: {
-    id: number;
-    name: string;
-    email: string;
-    contact: string;
-  };
-  created_at: Date;
-  completed_at?: Date;
-}
-
-// Membership interface
-export interface Membership {
-  id?: number;
-  user_id: number;
-  order_id: string;
-  payment_id: string;
-  membership_type?: number;
-  status: "active" | "expired" | "cancelled";
-  created_at: Date;
-  expires_at?: Date;
 }
