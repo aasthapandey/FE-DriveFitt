@@ -54,11 +54,28 @@ export async function POST(request: NextRequest) {
     const isValid = await otpService.verifyOTP(phone, otp, purpose);
 
     if (isValid) {
-      // Check if user exists in database
+      // Fetch user and membership data in a single JOIN query
       const userQuery = `
-        SELECT id, first_name, last_name, email, phone, date_of_birth, created_at 
-        FROM users 
-        WHERE phone = ?
+        SELECT 
+          u.id, 
+          u.first_name, 
+          u.last_name, 
+          u.email, 
+          u.phone, 
+          u.date_of_birth, 
+          u.created_at,
+          m.id as membership_id,
+          m.membership_type,
+          m.status as membership_status,
+          m.start_date,
+          m.end_date,
+          m.order_id,
+          m.payment_id
+        FROM users u
+        LEFT JOIN memberships m ON u.id = m.user_id AND m.status = 'active'
+        WHERE u.phone = ?
+        ORDER BY m.created_at DESC
+        LIMIT 1
       `;
 
       const userResult = await executeQuery<
@@ -70,15 +87,43 @@ export async function POST(request: NextRequest) {
           phone: string;
           date_of_birth: string;
           created_at: string;
+          membership_id: number | null;
+          membership_type: number | null;
+          membership_status: string | null;
+          start_date: string | null;
+          end_date: string | null;
+          order_id: number | null;
+          payment_id: number | null;
         }>
       >(userQuery, [phone]);
       const user = userResult?.[0];
-      console.log("user", user);
+      console.log("user with membership data:", user);
 
       if (user) {
-        // User exists, generate JWT token and return user data
+        // User exists, generate JWT token and return user data with membership info
         const fullName =
           `${user.first_name || ""} ${user.last_name || ""}`.trim() || "User";
+
+        // Check if user has active membership
+        const hasMembership =
+          user.membership_id !== null && user.membership_status === "active";
+
+        // Prepare membership info if exists
+        const membershipInfo = hasMembership
+          ? {
+              id: user.membership_id!,
+              membershipType: user.membership_type!,
+              status: user.membership_status! as
+                | "active"
+                | "expired"
+                | "cancelled"
+                | "suspended",
+              startDate: user.start_date!,
+              expiresAt: user.end_date!,
+              orderId: user.order_id!,
+              paymentId: user.payment_id!,
+            }
+          : undefined;
 
         // Generate JWT token
         const token = jwtService.generateToken({
@@ -98,7 +143,8 @@ export async function POST(request: NextRequest) {
                 email: user.email,
                 phone: user.phone,
                 dateOfBirth: user.date_of_birth,
-                hasMembership: false, // Will be checked separately
+                hasMembership,
+                membershipInfo,
               },
             },
           },

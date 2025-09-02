@@ -290,7 +290,7 @@ const PhoneNumberModal = ({
   const [error, setError] = useState("");
   const [isUserInfoModalOpen, setIsUserInfoModalOpen] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
-  const { login, checkUserMembership } = useAuth();
+  const { login } = useAuth();
   const router = useRouter();
 
   // Check if component is mounted (client-side)
@@ -513,25 +513,19 @@ const PhoneNumberModal = ({
               return;
             }
 
-            // Default behavior: Check membership status and redirect
-            const membershipResult = await checkUserMembership(user.id);
-
-            if (membershipResult.type === "auth/checkMembership/fulfilled") {
-              const membershipData = membershipResult.payload as {
-                hasMembership: boolean;
-              };
-
-              if (membershipData.hasMembership) {
-                // User has membership, redirect to profile
-                onClose();
-                router.push("/profile");
-              } else {
-                // User doesn't have membership, redirect to membership page
-                onClose();
-                router.push("/membership");
-              }
+            // Default behavior: Use membership data from OTP verification response
+            if (user.hasMembership) {
+              // User has membership, redirect to profile
+              console.log(
+                "PhoneNumberModal: User has membership, redirecting to profile"
+              );
+              onClose();
+              router.push("/profile");
             } else {
-              // Error checking membership, redirect to membership page
+              // User doesn't have membership, redirect to membership page
+              console.log(
+                "PhoneNumberModal: User has no membership, redirecting to membership page"
+              );
               onClose();
               router.push("/membership");
             }
@@ -555,15 +549,7 @@ const PhoneNumberModal = ({
         setIsLoading(false);
       }
     }
-  }, [
-    otpValues,
-    phoneNumber,
-    onClose,
-    login,
-    checkUserMembership,
-    onSuccess,
-    router,
-  ]);
+  }, [otpValues, phoneNumber, onClose, login, onSuccess, router]);
 
   const handleChangePhone = useCallback(() => {
     setModalState("phone");
