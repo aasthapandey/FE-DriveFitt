@@ -22,7 +22,7 @@ export default function PaymentModal({
   onError,
 }: PaymentModalProps) {
   const { user } = useSelector((state: RootState) => state.auth);
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
 
   // Since user is already authenticated and has complete profile (verified in PricingPlans),
   // we can directly use the user data from Redux
@@ -90,7 +90,7 @@ export default function PaymentModal({
 
   const handlePayment = async () => {
     // Skip form validation since user is already authenticated and validated
-    setIsLoading(true);
+    // setIsLoading(true);
 
     try {
       if (!user?.id) {
@@ -116,7 +116,7 @@ export default function PaymentModal({
       console.error("Payment failed:", error);
       onError?.(error instanceof Error ? error.message : "Payment failed");
     } finally {
-      setIsLoading(false);
+      // setIsLoading(false);
     }
   };
 
