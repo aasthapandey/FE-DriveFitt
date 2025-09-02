@@ -174,7 +174,16 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
 
   const handlePaymentSuccess = async (
     paymentId: string,
-    membershipData?: any
+    membershipData?: {
+      id: number;
+      membershipType: number;
+      status: "active" | "expired" | "cancelled" | "suspended";
+      startDate: string;
+      expiresAt: string;
+      invoiceNumber?: string;
+      orderId: number;
+      paymentId: number;
+    } | null
   ) => {
     console.log(
       "Payment successful for plan:",

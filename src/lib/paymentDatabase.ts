@@ -298,7 +298,7 @@ export const insertMembership = async (
   ]);
 
   // Return the inserted ID directly from the result object (mySQL2, for example, returns insertId)
-  return (result as any).insertId || 0;
+  return (result as { insertId?: number }).insertId || 0;
 };
 
 // Get membership by user_id

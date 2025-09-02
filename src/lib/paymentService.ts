@@ -18,7 +18,16 @@ export interface PaymentResponse {
   paymentId?: string;
   orderId?: string;
   error?: string;
-  membershipData?: any; // ✅ New: Include membership data from payment verification
+  membershipData?: {
+    id: number;
+    membershipType: number;
+    status: "active" | "expired" | "cancelled" | "suspended";
+    startDate: string;
+    expiresAt: string;
+    invoiceNumber?: string;
+    orderId: number;
+    paymentId: number;
+  } | null;
 }
 
 export class PaymentService {
@@ -99,7 +108,16 @@ export class PaymentService {
     success: boolean;
     paymentId?: string;
     error?: string;
-    membershipData?: any;
+    membershipData?: {
+      id: number;
+      membershipType: number;
+      status: "active" | "expired" | "cancelled" | "suspended";
+      startDate: string;
+      expiresAt: string;
+      invoiceNumber?: string;
+      orderId: number;
+      paymentId: number;
+    } | null;
   }> {
     return new Promise(async (resolve) => {
       try {

@@ -99,43 +99,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#00DBDC] mx-auto mb-4"></div>
           <p className="text-white text-lg">Initializing...</p>
           <p className="text-white text-sm mt-2">Attempt {initAttempts}</p>
-
-          {/* Debug Panel */}
-          <div className="mt-4 p-4 bg-gray-800 rounded-lg text-left text-xs">
-            <p className="text-gray-300">Debug Info:</p>
-            <p>Redux Auth: {isAuthenticated ? "true" : "false"}</p>
-            <p>Redux User: {user ? "exists" : "null"}</p>
-            <p>Redux Loading: {loading ? "true" : "false"}</p>
-            <p>
-              Session Token:{" "}
-              {sessionStorage.getItem("auth_token") ? "exists" : "null"}
-            </p>
-            <p>
-              Session User:{" "}
-              {sessionStorage.getItem("user_data") ? "exists" : "null"}
-            </p>
-          </div>
         </div>
       </div>
     );
   }
 
-  return (
-    <>
-      {/* Debug Panel - Only show in development */}
-      {process.env.NODE_ENV === "development" && (
-        <div className="fixed top-4 right-4 z-50 p-3 bg-black/80 rounded-lg text-white text-xs border border-gray-600">
-          <div className="font-bold mb-2">Auth Debug</div>
-          <div>Authenticated: {isAuthenticated ? "✅" : "❌"}</div>
-          <div>User: {user ? "✅" : "❌"}</div>
-          <div>Loading: {loading ? "🔄" : "⏸️"}</div>
-          <div>Token: {sessionStorage.getItem("auth_token") ? "✅" : "❌"}</div>
-          <div>
-            UserData: {sessionStorage.getItem("user_data") ? "✅" : "❌"}
-          </div>
-        </div>
-      )}
-      {children}
-    </>
-  );
+  return <>{children}</>;
 }

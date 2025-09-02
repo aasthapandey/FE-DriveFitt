@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { NavbarProps, LoginModalType } from "@/types/staticPages";
 import { PhoneNumberModal, EmailModal } from "./Modal";
