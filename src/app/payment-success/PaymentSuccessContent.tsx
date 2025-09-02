@@ -1,15 +1,19 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function PaymentSuccessContent() {
   const searchParams = useSearchParams();
+  const router = useRouter();
+  const { fetchProfile } = useAuth();
   const [paymentDetails, setPaymentDetails] = useState<{
     paymentId: string;
     orderId: string;
     signature: string;
   } | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [verificationComplete, setVerificationComplete] = useState(false);
 
   useEffect(() => {
     // Get payment details from URL parameters
@@ -56,6 +60,36 @@ export default function PaymentSuccessContent() {
 
       const result = await response.json();
       console.log("Payment verification result:", result);
+
+      if (result.success) {
+        setVerificationComplete(true);
+
+        // Fetch fresh user data including new membership information
+        try {
+          console.log(
+            "🔄 Fetching fresh user data after successful payment verification..."
+          );
+          await fetchProfile();
+
+          // Wait a moment for Redux state to update
+          await new Promise((resolve) => setTimeout(resolve, 500));
+
+          console.log(
+            "✅ Fresh user data fetched, redirecting to profile page..."
+          );
+
+          // Redirect to profile page where updated membership data will be visible
+          router.push("/profile");
+        } catch (error) {
+          console.error(
+            "❌ Error fetching fresh user data after payment:",
+            error
+          );
+
+          // Even if fetching fails, still redirect to profile page
+          router.push("/profile");
+        }
+      }
     } catch (error) {
       console.error("Payment verification failed:", error);
     } finally {
@@ -69,6 +103,19 @@ export default function PaymentSuccessContent() {
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600 mx-auto mb-4"></div>
           <p className="text-gray-600">Verifying your payment...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (verificationComplete) {
+    return (
+      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">
+            Payment verified! Redirecting to profile...
+          </p>
         </div>
       </div>
     );
@@ -115,13 +162,19 @@ export default function PaymentSuccessContent() {
 
         <div className="space-y-3">
           <button
-            onClick={() => (window.location.href = "/membership")}
+            onClick={() => router.push("/profile")}
             className="w-full py-3 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            View My Profile
+          </button>
+          <button
+            onClick={() => router.push("/membership")}
+            className="w-full py-3 px-4 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
           >
             Back to Membership
           </button>
           <button
-            onClick={() => (window.location.href = "/")}
+            onClick={() => router.push("/")}
             className="w-full py-3 px-4 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
           >
             Go to Home

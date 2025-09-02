@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import ScrollAnimation from "@/components/common/ScrollAnimation";
 import PaymentModal from "./PaymentModal";
 import PhoneNumberModal from "./Modal/PhoneNumberModal";
@@ -37,7 +38,8 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
   const { isAuthenticated, user } = useSelector(
     (state: RootState) => state.auth
   );
-  const { checkUserMembership } = useAuth();
+  const { checkUserMembership, fetchProfile } = useAuth();
+  const router = useRouter();
 
   // Watch for user data changes and open payment modal when ready
   useEffect(() => {
@@ -170,17 +172,38 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
     setSelectedPlan(null);
   };
 
-  const handlePaymentSuccess = (paymentId: string) => {
+  const handlePaymentSuccess = async (paymentId: string) => {
     console.log(
       "Payment successful for plan:",
       selectedPlan?.title,
       "Payment ID:",
       paymentId
     );
-    // You can add additional success handling here
-    // For example, redirect to a success page or show a success message
-    setShowPaymentModal(false);
-    setSelectedPlan(null);
+
+    try {
+      // Fetch fresh user data including new membership information
+      console.log("🔄 Fetching fresh user data after successful payment...");
+      await fetchProfile();
+
+      // Wait a moment for Redux state to update
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
+      console.log("✅ Fresh user data fetched, redirecting to profile page...");
+
+      // Close modals
+      setShowPaymentModal(false);
+      setSelectedPlan(null);
+
+      // Redirect to profile page where updated membership data will be visible
+      router.push("/profile");
+    } catch (error) {
+      console.error("❌ Error fetching fresh user data after payment:", error);
+
+      // Even if fetching fails, still redirect to profile page
+      setShowPaymentModal(false);
+      setSelectedPlan(null);
+      router.push("/profile");
+    }
   };
 
   const handlePaymentError = (error: string) => {
