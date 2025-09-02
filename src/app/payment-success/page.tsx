@@ -1,6 +1,6 @@
 "use client";
 import { Suspense } from "react";
-import PaymentSuccessContent from "./PaymentSuccessContent";
+import PaymentSuccessContent from "@/app/payment-success/PaymentSuccessContent";
 
 export default function PaymentSuccessPage() {
   return (
