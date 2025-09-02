@@ -14,7 +14,13 @@ interface PhoneNumberModalProps {
   isOpen: boolean;
   onClose: () => void;
   isMobile?: boolean;
-  onSuccess?: (phoneNumber: string, userData?: any) => void; // Optional callback for successful authentication with user data
+  onSuccess?: (phoneNumber: string, userData?: {
+    id: number;
+    name: string;
+    email: string;
+    phone: string;
+    dateOfBirth: string;
+  }) => void; // Optional callback for successful authentication with user data
 }
 
 interface PhoneStepProps {

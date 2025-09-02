@@ -1,11 +1,11 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import {
   getOrderDetails,
   getOrderPayments,
   verifyPaymentCompletion,
 } from "@/lib/razorpayUtils";
 
-export async function GET(request: NextRequest) {
+export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
     const orderId = searchParams.get("orderId");

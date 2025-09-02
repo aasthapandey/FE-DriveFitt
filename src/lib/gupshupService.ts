@@ -23,7 +23,6 @@ class GupshupService {
   ): Promise<{ success: boolean; response: string }> {
     try {
       console.log("Sending OTP to", phone);
-      const message = `%2A${otp}%2A+is+your+verification+code.+For+your+security%2C+do+not+share+this+code.`;
 
       // const params = new URLSearchParams({
       //   userid: this.config.userid,

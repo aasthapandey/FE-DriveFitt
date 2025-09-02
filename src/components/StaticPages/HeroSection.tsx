@@ -15,7 +15,7 @@ interface HeroSectionProps {
 }
 
 const HeroSection = ({ data, pageName, isMobile }: HeroSectionProps) => {
-  const { titleWords, description, btnPrimaryText, btnSecondaryText } = data;
+  const { titleWords, description, btnPrimaryText } = data;
   const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
   const [isPhoneModalOpen, setIsPhoneModalOpen] = useState(false);
 
@@ -34,14 +34,14 @@ const HeroSection = ({ data, pageName, isMobile }: HeroSectionProps) => {
     }
   };
 
-  const handleSecondaryButtonClick = () => {
-    if (isAuthenticated) {
-      // If logged in, redirect to membership/plans page
-      window.location.href = "/membership";
-    } else {
-      // If not logged in, open phone modal
-      setIsPhoneModalOpen(true);
-    }
+  // const handleSecondaryButtonClick = () => {
+  //   if (isAuthenticated) {
+  //     // If logged in, redirect to membership/plans page
+  //     window.location.href = "/membership";
+  //   } else {
+  //     // If not logged in, open phone modal
+  //     setIsPhoneModalOpen(true);
+  //   }
   };
 
   const renderTitle = (titleWords: TitleWord[]) => {
