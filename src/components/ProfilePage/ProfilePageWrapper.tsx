@@ -77,7 +77,8 @@ export default function ProfilePageWrapper({
       phone: user?.phone || data.userInfo.phone,
       dateOfBirth: user?.dateOfBirth || data.userInfo.dateOfBirth,
       activePlan:
-        user?.membershipInfo?.membershipType || data.userInfo.activePlan,
+        user?.membershipInfo?.membershipType?.toString() ||
+        data.userInfo.activePlan,
       planExpires: user?.membershipInfo?.expiresAt || data.userInfo.planExpires,
     },
   };
