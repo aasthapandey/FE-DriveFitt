@@ -189,7 +189,7 @@ const OTPStep = ({
       {/* Description */}
       <div className="mb-8 md:mb-10 text-center">
         <p className="text-[#8A8A8A] font-light text-[20px] leading-[28px] tracking-[0%]">
-          We&apos;ve sent an SMS with an
+          We&apos;ve sent an WhatsApp message with an
         </p>
         <p className="text-[#8A8A8A] font-light text-[20px] leading-[28px] tracking-[0%]">
           activation code to your phone
