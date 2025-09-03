@@ -458,26 +458,100 @@ export async function sendMembershipSuccessEmail(
     console.log("🚀 Sending email via Brevo API...");
     console.log("⏱️ Starting email send with 30s timeout...");
 
-    // Add timeout wrapper to prevent hanging
-    const timeoutPromise = new Promise((_, reject) => {
-      setTimeout(() => {
+    // IMMEDIATE logging to ensure we capture the start
+    const startTimestamp = new Date().toISOString();
+    console.log("📅 Email send started at:", startTimestamp);
+    console.log(
+      "⏱️ Will timeout at:",
+      new Date(Date.now() + 30000).toISOString()
+    );
+
+    // Create a more robust timeout mechanism with IMMEDIATE logging
+    let timeoutId: NodeJS.Timeout | undefined;
+    const timeoutPromise = new Promise<never>((_, reject) => {
+      timeoutId = setTimeout(() => {
+        const timeoutTimestamp = new Date().toISOString();
+        console.log("⏰ TIMEOUT TRIGGERED at:", timeoutTimestamp);
+        console.log(
+          "⏰ Email send duration:",
+          Date.now() - new Date(startTimestamp).getTime(),
+          "ms"
+        );
+        console.log("⏰ This means the Brevo API call hung for 30+ seconds");
         reject(new Error("Email sending timeout after 30 seconds"));
       }, 30000);
     });
 
-    const emailPromise = retryApiCall(() =>
-      apiInstance.sendTransacEmail(sendSmtpEmail)
-    );
+    // Add heartbeat BEFORE the API call to ensure it's running
+    const heartbeatId = setInterval(() => {
+      const now = new Date().toISOString();
+      const elapsed = Date.now() - new Date(startTimestamp).getTime();
+      console.log("💓 Heartbeat at:", now, "- Elapsed:", elapsed, "ms");
+    }, 3000); // Every 3 seconds for more frequent monitoring
 
-    // Race between timeout and email sending
-    const response = await Promise.race([emailPromise, timeoutPromise]);
+    // NUCLEAR OPTION: Backup timeout that will definitely fire
+    const nuclearTimeoutId = setTimeout(() => {
+      const nuclearTimestamp = new Date().toISOString();
+      const nuclearElapsed = Date.now() - new Date(startTimestamp).getTime();
+      console.log("☢️ NUCLEAR TIMEOUT FIRED at:", nuclearTimestamp);
+      console.log("☢️ This is a backup timeout after:", nuclearElapsed, "ms");
+      console.log(
+        "☢️ The primary timeout mechanism failed - this is critical!"
+      );
 
-    console.log(
-      "✅ Membership success email sent successfully to:",
-      userData.email
-    );
-    console.log("📨 Brevo API response received successfully");
-    return response;
+      // Force process exit if we're still hanging (nuclear option)
+      if (nuclearElapsed > 60000) {
+        // After 60 seconds
+        console.log("☢️ FORCING PROCESS EXIT after 60 seconds of hanging");
+        process.exit(1);
+      }
+    }, 45000); // 45 seconds - longer than primary timeout
+
+    // Log the exact moment before API call
+    console.log("📡 About to call Brevo API at:", new Date().toISOString());
+
+    const emailPromise = retryApiCall(() => {
+      console.log("📡 Inside retryApiCall - calling Brevo API...");
+      return apiInstance.sendTransacEmail(sendSmtpEmail);
+    });
+
+    // Race between timeout and email sending with cleanup
+    try {
+      console.log("🏁 Starting race between email and timeout...");
+      const response = await Promise.race([emailPromise, timeoutPromise]);
+
+      // Clear timeout and heartbeat if email succeeds
+      if (timeoutId) clearTimeout(timeoutId);
+      clearInterval(heartbeatId);
+      if (nuclearTimeoutId) clearTimeout(nuclearTimeoutId);
+
+      const successTimestamp = new Date().toISOString();
+      const totalDuration = Date.now() - new Date(startTimestamp).getTime();
+
+      console.log(
+        "✅ Membership success email sent successfully to:",
+        userData.email
+      );
+      console.log("📨 Brevo API response received successfully");
+      console.log("⏱️ Total email send duration:", totalDuration, "ms");
+      console.log("📅 Success timestamp:", successTimestamp);
+
+      return response;
+    } catch (raceError) {
+      // Clear timeout and heartbeat if there's an error
+      if (timeoutId) clearTimeout(timeoutId);
+      clearInterval(heartbeatId);
+      if (nuclearTimeoutId) clearTimeout(nuclearTimeoutId);
+
+      const errorTimestamp = new Date().toISOString();
+      const totalDuration = Date.now() - new Date(startTimestamp).getTime();
+
+      console.log("❌ Race error occurred at:", errorTimestamp);
+      console.log("⏱️ Total duration before error:", totalDuration, "ms");
+      console.log("❌ Race error details:", raceError);
+
+      throw raceError;
+    }
   } catch (error) {
     console.error(
       "❌ Error sending membership success email via Brevo:",

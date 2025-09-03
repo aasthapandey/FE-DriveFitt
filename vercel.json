@@ -11,6 +11,12 @@
     },
     "src/app/api/test-brevo/route.ts": {
       "maxDuration": 60
+    },
+    "src/app/api/test-brevo-aggressive/route.ts": {
+      "maxDuration": 60
+    },
+    "src/app/api/test-brevo-bulletproof/route.ts": {
+      "maxDuration": 60
     }
   },
   "env": {
