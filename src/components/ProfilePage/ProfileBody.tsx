@@ -289,14 +289,7 @@ const ProfileBody = ({ data, isMobile }: ProfileBodyProps) => {
                 onValidate={(value) => validateField("dateOfBirth", value)}
               />
 
-              <div className="flex flex-col" style={{ marginTop: '0px' }}>
-                <style jsx>{`
-                  @media (min-width: 768px) {
-                    div[data-margin-top] {
-                      margin-top: 50px !important;
-                    }
-                  }
-                `}</style>
+              <div className="flex flex-col md:mt-[50px]">
                 <span className="font-light text-xs leading-4 mb-1 text-[#8A8A8A]">
                   Plan expires
                 </span>
@@ -420,7 +413,7 @@ const ProfileBody = ({ data, isMobile }: ProfileBodyProps) => {
                 onValidate={(value) => validateField("dateOfBirth", value)}
               />
 
-              <div className="flex flex-col">
+              <div className="flex flex-col md:!mt-[50px]">
                 <span className="font-light text-base leading-5 mb-2 text-[#8A8A8A]">
                   Plan expires
                 </span>
