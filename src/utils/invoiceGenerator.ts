@@ -1,6 +1,11 @@
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
+// Extend jsPDF interface to include our custom property
+interface ExtendedJsPDF extends jsPDF {
+  lastAutoTable?: { finalY: number };
+}
+
 export interface InvoiceData {
   invoiceNumber: string;
   invoiceDate: string;
@@ -12,8 +17,8 @@ export interface InvoiceData {
   orderId: string;
 }
 
-export function generateInvoicePDF(data: InvoiceData): jsPDF {
-  const doc = new jsPDF();
+export function generateInvoicePDF(data: InvoiceData): ExtendedJsPDF {
+  const doc = new jsPDF() as ExtendedJsPDF;
 
   // Set document properties
   doc.setProperties({
@@ -98,14 +103,14 @@ export function generateInvoicePDF(data: InvoiceData): jsPDF {
       3: { cellWidth: 35, halign: "center" }, // Amount - compact
     },
     margin: { left: 20, right: 20 },
-    didDrawPage: function (data) {
+    didDrawPage: function (data: unknown) {
       // Store the final Y position of the table
-      (doc as any).lastAutoTable = data;
+      (doc as jsPDF & { lastAutoTable?: unknown }).lastAutoTable = data;
     },
   });
 
   // Amount in Words - positioned below table with minimal spacing
-  const tableEndY = (doc as any).lastAutoTable?.finalY || 150;
+  const tableEndY = doc.lastAutoTable?.finalY || 150;
   const amountWordsY = tableEndY + 8; // Reduced space below table
 
   doc.setFontSize(10);

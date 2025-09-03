@@ -401,7 +401,11 @@ export async function sendMembershipSuccessEmail(
   sendSmtpEmail.to = [{ email: userData.email, name: userData.name }];
 
   // Add invoice attachment
-  (sendSmtpEmail as any).attachment = [
+  (
+    sendSmtpEmail as SibApiV3Sdk.SendSmtpEmail & {
+      attachment?: Array<{ name: string; content: string; type: string }>;
+    }
+  ).attachment = [
     {
       name: `Invoice-${membershipData.invoiceNumber || "DriveFITT"}.pdf`,
       content: invoiceBuffer.toString("base64"),
