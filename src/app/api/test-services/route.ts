@@ -1,15 +1,45 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { executeQuery } from "@/lib/database";
 import { sendMembershipSuccessEmail } from "@/utils/brevo";
 
-export async function GET(request: NextRequest) {
+interface ServiceResults {
+  environmentVariables: Record<string, string>;
+  database: {
+    status: string;
+    testQuery?: unknown;
+    error?: string;
+  };
+  brevo: {
+    status: string;
+    message?: string;
+    reason?: string;
+    error?: string;
+  };
+  pdfGeneration: {
+    status: string;
+    bufferSize?: number;
+    testData?: unknown;
+    error?: string;
+  };
+}
+
+export async function GET() {
   try {
     console.log("🧪 Testing services endpoint called");
 
-    const results: Record<string, any> = {
+    const results: {
+      timestamp: string;
+      environment: string;
+      services: ServiceResults;
+    } = {
       timestamp: new Date().toISOString(),
       environment: process.env.NODE_ENV || "unknown",
-      services: {},
+      services: {
+        environmentVariables: {},
+        database: { status: "" },
+        brevo: { status: "" },
+        pdfGeneration: { status: "" },
+      },
     };
 
     // Test 1: Environment Variables
