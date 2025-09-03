@@ -450,10 +450,6 @@ export interface ProfilePageData {
       enabled: boolean;
       isButton: boolean;
     };
-    renewPlan: {
-      text: string;
-      enabled: boolean;
-    };
   };
   footerInfoSection?: FooterInfoProps;
   footerSection?: FooterProps;

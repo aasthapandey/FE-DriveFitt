@@ -1,5 +1,6 @@
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
+import { getLogoForPDF } from "./logoConverter";
 
 export interface InvoiceData {
   invoiceNumber: string;
@@ -24,19 +25,48 @@ export function generateInvoicePDF(data: InvoiceData): jsPDF {
   });
 
   // Company Information (Top Left)
-  doc.setFontSize(20);
-  doc.setFont("helvetica", "bold");
-  doc.text("Drive FITT", 20, 30);
+  // Add the actual Drive FITT logo
+  try {
+    const logoData = getLogoForPDF();
 
-  doc.setFontSize(9);
-  doc.setFont("helvetica", "normal");
-  doc.text("NM/Block-2/R2 LG", 20, 40);
-  doc.text("11-18,46-57,UG 06-17,46-57", 20, 44);
-  doc.text("M3M 65th Avenue Sector-65", 20, 48);
-  doc.text("Gurgaon Haryana - 122022", 20, 52);
-  doc.text("GSTIN: 06AACCZ3846N1ZS", 20, 56);
-  doc.text("Phone: 9871836565", 20, 60);
-  doc.text("Email: info@drivefitt.club", 20, 64);
+    // Add the logo image directly
+    doc.addImage(
+      logoData.dataUrl,
+      "PNG",
+      20,
+      30,
+      logoData.width / 8,
+      logoData.height / 8
+    );
+
+    // Company details below the logo
+    const companyDetailsY = 30 + logoData.height / 8 + 5;
+    doc.setFontSize(9);
+    doc.setFont("helvetica", "normal");
+    doc.text("NM/Block-2/R2 LG", 20, companyDetailsY);
+    doc.text("11-18,46-57,UG 06-17,46-57", 20, companyDetailsY + 4);
+    doc.text("M3M 65th Avenue Sector-65", 20, companyDetailsY + 8);
+    doc.text("Gurgaon Haryana - 122022", 20, companyDetailsY + 12);
+    doc.text("GSTIN: 06AACCZ3846N1ZS", 20, companyDetailsY + 16);
+    doc.text("Phone: 9871836565", 20, companyDetailsY + 20);
+    doc.text("Email: info@drivefitt.club", 20, companyDetailsY + 24);
+  } catch (error) {
+    console.error("Error loading logo:", error);
+    // Fallback to text if logo loading fails
+    doc.setFontSize(20);
+    doc.setFont("helvetica", "bold");
+    doc.text("Drive FITT", 20, 30);
+
+    doc.setFontSize(9);
+    doc.setFont("helvetica", "normal");
+    doc.text("NM/Block-2/R2 LG", 20, 40);
+    doc.text("11-18,46-57,UG 06-17,46-57", 20, 44);
+    doc.text("M3M 65th Avenue Sector-65", 20, 48);
+    doc.text("Gurgaon Haryana - 122022", 20, 52);
+    doc.text("GSTIN: 06AACCZ3846N1ZS", 20, 56);
+    doc.text("Phone: 9871836565", 20, 60);
+    doc.text("Email: info@drivefitt.club", 20, 64);
+  }
 
   // Invoice Header (Top Right)
   doc.setFontSize(16);
@@ -53,7 +83,7 @@ export function generateInvoicePDF(data: InvoiceData): jsPDF {
   const tableY = 90;
 
   // Table headers
-  const headers = [["Description", "Quantity", "Rate (₹)", "Amount (₹)"]];
+  const headers = [["Description", "Quantity", "Rate (Rs.)", "Amount (Rs.)"]];
 
   // Calculate GST values
   const subtotal = 846.61; // Before GST
@@ -66,7 +96,7 @@ export function generateInvoicePDF(data: InvoiceData): jsPDF {
     ["", "", "", ""], // Empty row for spacing
     ["Subtotal (before GST)", "", "", subtotal.toFixed(2)],
     ["GST @18% (IGST/CGST+SGST)", "", "", gstAmount.toFixed(2)],
-    ["Total Amount (₹)", "", "", totalAmount.toFixed(2)],
+    ["Total Amount (Rs.)", "", "", totalAmount.toFixed(2)],
   ];
 
   // Create table
@@ -89,10 +119,10 @@ export function generateInvoicePDF(data: InvoiceData): jsPDF {
       cellPadding: 6,
     },
     columnStyles: {
-      0: { cellWidth: 90, halign: "left" }, // Description - wider for text
-      1: { cellWidth: 20, halign: "center" }, // Quantity - compact
-      2: { cellWidth: 30, halign: "right" }, // Rate - compact
-      3: { cellWidth: 30, halign: "right" }, // Amount - compact
+      0: { cellWidth: 70, halign: "left" }, // Description - wider for text
+      1: { cellWidth: 30, halign: "center" }, // Quantity - compact
+      2: { cellWidth: 35, halign: "center" }, // Rate - compact
+      3: { cellWidth: 35, halign: "center" }, // Amount - compact
     },
     margin: { left: 20, right: 20 },
     didDrawPage: function (data) {
