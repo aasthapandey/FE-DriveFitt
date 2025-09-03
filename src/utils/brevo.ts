@@ -19,16 +19,18 @@ interface NetworkError extends Error {
 // Configure HTTP agents with proper timeout and connection settings
 const httpsAgent = new https.Agent({
   keepAlive: true,
-  maxSockets: 50,
-  maxFreeSockets: 10,
+  maxSockets: 10,
+  maxFreeSockets: 5,
   timeout: 30000, // 30 seconds
+  keepAliveMsecs: 1000,
 });
 
 const httpAgent = new http.Agent({
   keepAlive: true,
-  maxSockets: 50,
-  maxFreeSockets: 10,
+  maxSockets: 10,
+  maxFreeSockets: 5,
   timeout: 30000, // 30 seconds
+  keepAliveMsecs: 1000,
 });
 
 // Initialize Brevo API instance
@@ -454,9 +456,22 @@ export async function sendMembershipSuccessEmail(
 
   try {
     console.log("🚀 Sending email via Brevo API...");
-    const response = await retryApiCall(() =>
+    console.log("⏱️ Starting email send with 30s timeout...");
+
+    // Add timeout wrapper to prevent hanging
+    const timeoutPromise = new Promise((_, reject) => {
+      setTimeout(() => {
+        reject(new Error("Email sending timeout after 30 seconds"));
+      }, 30000);
+    });
+
+    const emailPromise = retryApiCall(() =>
       apiInstance.sendTransacEmail(sendSmtpEmail)
     );
+
+    // Race between timeout and email sending
+    const response = await Promise.race([emailPromise, timeoutPromise]);
+
     console.log(
       "✅ Membership success email sent successfully to:",
       userData.email
@@ -484,6 +499,22 @@ export async function sendMembershipSuccessEmail(
       SENDER_EMAIL: process.env.SENDER_EMAIL ? "✓ Set" : "✗ Not Set",
       NODE_ENV: process.env.NODE_ENV,
     });
+
+    // Log network-specific error details
+    if (error instanceof Error) {
+      if (error.message.includes("timeout")) {
+        console.error("⏰ TIMEOUT ERROR: Email sending timed out");
+        console.error(
+          "This usually indicates a network connectivity issue between Vercel and Brevo"
+        );
+      } else if (
+        error.message.includes("ECONNRESET") ||
+        error.message.includes("ENOTFOUND")
+      ) {
+        console.error("🌐 NETWORK ERROR: Connection issue detected");
+        console.error("This suggests network connectivity problems");
+      }
+    }
 
     throw error;
   }
