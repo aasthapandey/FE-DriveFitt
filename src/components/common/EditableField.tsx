@@ -191,8 +191,8 @@ const EditableField = ({
         {label}
       </span>
       <span
-        className={`font-normal mb-5 text-white ${
-          isMobile ? "text-xl leading-7" : "text-2xl leading-7"
+        className={`font-normal text-white ${
+          isMobile ? "text-xl leading-7 mb-1" : "text-2xl leading-7 mb-5"
         }`}
       >
         {getDisplayValue()}
