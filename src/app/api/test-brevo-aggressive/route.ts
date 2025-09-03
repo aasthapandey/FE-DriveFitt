@@ -90,7 +90,7 @@ export async function GET() {
       });
 
       // Race between our timeout and the email function
-      const response = await Promise.race([testPromise, aggressiveTimeout]);
+      await Promise.race([testPromise, aggressiveTimeout]);
 
       const endTime = Date.now();
       const duration = endTime - startTime;

@@ -47,6 +47,12 @@ export async function GET() {
     // Test 2: BULLETPROOF test with multiple timeout mechanisms
     console.log("📧 BULLETPROOF Brevo API test with multiple timeouts...");
 
+    // MULTIPLE TIMEOUT MECHANISMS - declare outside try block
+    let primaryTimeoutId: NodeJS.Timeout | undefined;
+    let secondaryTimeoutId: NodeJS.Timeout | undefined;
+    let nuclearTimeoutId: NodeJS.Timeout | undefined;
+    let heartbeatId: NodeJS.Timeout | undefined;
+
     try {
       const startTime = Date.now();
       const startTimestamp = new Date().toISOString();
@@ -56,11 +62,6 @@ export async function GET() {
       const testEmailBuffer = Buffer.from(
         "Test invoice content for bulletproof testing"
       );
-
-      // MULTIPLE TIMEOUT MECHANISMS
-      let primaryTimeoutId: NodeJS.Timeout;
-      let secondaryTimeoutId: NodeJS.Timeout;
-      let nuclearTimeoutId: NodeJS.Timeout;
 
       // Primary timeout (25 seconds)
       const primaryTimeout = new Promise<never>((_, reject) => {
@@ -112,7 +113,7 @@ export async function GET() {
       });
 
       // Heartbeat every 2 seconds
-      const heartbeatId = setInterval(() => {
+      heartbeatId = setInterval(() => {
         const now = new Date().toISOString();
         const elapsed = Date.now() - startTime;
         console.log("💓 Heartbeat at:", now, "- Elapsed:", elapsed, "ms");
@@ -142,7 +143,7 @@ export async function GET() {
 
       // RACE ALL THE TIMEOUTS
       console.log("🏁 Starting race between email and ALL timeouts...");
-      const response = await Promise.race([
+      await Promise.race([
         emailPromise,
         primaryTimeout,
         secondaryTimeout,
