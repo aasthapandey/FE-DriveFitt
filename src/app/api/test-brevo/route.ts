@@ -66,7 +66,7 @@ export async function GET() {
       );
 
       // Test the actual email sending function
-      const response = await sendMembershipSuccessEmail(
+      await sendMembershipSuccessEmail(
         {
           name: "Test User",
           email: process.env.NOTIFICATION_EMAIL || "test@example.com",
