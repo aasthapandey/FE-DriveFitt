@@ -92,11 +92,7 @@ export async function GET() {
       console.log(
         "🚀 Calling sendMembershipSuccessEmail in payment context..."
       );
-      const response = await sendMembershipSuccessEmail(
-        userData,
-        membershipData,
-        invoiceBuffer
-      );
+      await sendMembershipSuccessEmail(userData, membershipData, invoiceBuffer);
 
       const endTime = Date.now();
       const duration = endTime - startTime;
