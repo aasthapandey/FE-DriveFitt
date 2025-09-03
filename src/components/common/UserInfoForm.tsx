@@ -77,13 +77,6 @@ const UserInfoForm = ({
     return "";
   };
 
-  const validateBirthday = (value: string) => {
-    if (!value.trim()) {
-      return "Birthday is required";
-    }
-    return "";
-  };
-
   const validateGender = (value: string) => {
     if (!value.trim()) {
       return "Gender is required";
@@ -122,11 +115,6 @@ const UserInfoForm = ({
           ...prev,
           email: validateEmail(value),
         }));
-      } else if (name === "birthday") {
-        setErrors((prev) => ({
-          ...prev,
-          birthday: validateBirthday(value),
-        }));
       }
     }
   };
@@ -150,18 +138,17 @@ const UserInfoForm = ({
     const nameError = validateName(formData.name);
     const phoneError = validatePhone(formData.phone);
     const emailError = validateEmail(formData.email);
-    const birthdayError = validateBirthday(formData.birthday);
     const genderError = validateGender(formData.gender);
 
     setErrors({
       name: nameError,
       phone: phoneError,
       email: emailError,
-      birthday: birthdayError,
+      birthday: "",
       gender: genderError,
     });
 
-    if (nameError || phoneError || emailError || birthdayError || genderError) {
+    if (nameError || phoneError || emailError || genderError) {
       setMessageState({
         type: "validation",
         text: "Please fill in all required fields before submitting.",
@@ -342,13 +329,9 @@ const UserInfoForm = ({
                   >
                     When&apos;s your birthday?
                   </label>
-                  <div
-                    className={`bg-[#FFFFFF] border rounded-lg flex items-center transition-colors overflow-hidden ${
-                      errors.birthday ? "border-red-500" : "border-[#333333]"
-                    } focus-within:border-[2px] focus-within:border-[#00DBDC]`}
-                  >
+                  <div className="bg-[#FFFFFF] border border-[#333333] rounded-lg flex items-center transition-colors overflow-hidden focus-within:border-[2px] focus-within:border-[#00DBDC]">
                     <Image
-                      src="/images/hourglass-icon.svg"
+                      src="/images/calendar-event.svg"
                       alt="Calendar"
                       width={16}
                       height={16}
