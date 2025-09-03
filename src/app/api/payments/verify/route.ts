@@ -284,37 +284,37 @@ export async function POST(request: NextRequest) {
               "bytes"
             );
 
-            // Send email with invoice attachment asynchronously
+            // Send email with invoice attachment synchronously (removed setImmediate)
             if (membershipData) {
-              console.log("📤 Scheduling email sending...");
-              setImmediate(async () => {
-                try {
-                  console.log("🚀 Executing email sending...");
-                  await sendMembershipSuccessEmail(
-                    {
-                      name: invoiceData.customerName,
-                      email: invoiceData.customerEmail,
-                      phone: user.phone,
-                    },
-                    membershipData!,
-                    invoiceBuffer
-                  );
-                  console.log(
-                    "✅ Invoice email sent successfully for user:",
-                    user.email
-                  );
-                } catch (emailError) {
-                  console.error("❌ Failed to send invoice email:", emailError);
-                  console.error("Email error details:", {
-                    userEmail: user.email,
-                    userName: invoiceData.customerName,
-                    error:
-                      emailError instanceof Error
-                        ? emailError.message
-                        : String(emailError),
-                  });
-                }
-              });
+              console.log(
+                "📤 Sending email immediately (removed setImmediate wrapper)..."
+              );
+              try {
+                console.log("🚀 Executing email sending...");
+                await sendMembershipSuccessEmail(
+                  {
+                    name: invoiceData.customerName,
+                    email: invoiceData.customerEmail,
+                    phone: user.phone,
+                  },
+                  membershipData!,
+                  invoiceBuffer
+                );
+                console.log(
+                  "✅ Invoice email sent successfully for user:",
+                  user.email
+                );
+              } catch (emailError) {
+                console.error("❌ Failed to send invoice email:", emailError);
+                console.error("Email error details:", {
+                  userEmail: user.email,
+                  userName: invoiceData.customerName,
+                  error:
+                    emailError instanceof Error
+                      ? emailError.message
+                      : String(emailError),
+                });
+              }
             } else {
               console.warn("⚠️ membershipData is null, skipping email sending");
             }

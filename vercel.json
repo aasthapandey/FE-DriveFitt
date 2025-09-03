@@ -17,6 +17,9 @@
     },
     "src/app/api/test-brevo-bulletproof/route.ts": {
       "maxDuration": 60
+    },
+    "src/app/api/test-payment-context/route.ts": {
+      "maxDuration": 60
     }
   },
   "env": {
