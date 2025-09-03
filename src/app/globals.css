@@ -8,6 +8,18 @@
       BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
       "Noto Sans", sans-serif;
   }
+
+  /* Hide default date input icons */
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none !important;
+  }
+  input[type="date"]::-webkit-inner-spin-button,
+  input[type="date"]::-webkit-outer-spin-button {
+    display: none !important;
+  }
+  input[type="date"]::-moz-calendar-picker-indicator {
+    display: none !important;
+  }
 }
 
 .evolutionCarousel {
