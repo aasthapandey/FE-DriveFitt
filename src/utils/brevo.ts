@@ -35,6 +35,20 @@ const httpAgent = new http.Agent({
 const apiInstance: ApiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
 const apiKey = process.env.BREVO_API_KEY;
 
+// Validate environment variables
+if (!apiKey) {
+  console.error("❌ BREVO_API_KEY environment variable is not set!");
+  console.error("This will prevent all emails from being sent.");
+  console.error(
+    "Please set BREVO_API_KEY in your Vercel environment variables."
+  );
+}
+
+if (!process.env.SENDER_EMAIL) {
+  console.error("❌ SENDER_EMAIL environment variable is not set!");
+  console.error("Defaulting to alerts@drivefitt.club");
+}
+
 // Set the API key for authentication
 apiInstance.setApiKey(
   SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey,
@@ -333,6 +347,31 @@ export async function sendMembershipSuccessEmail(
   },
   invoiceBuffer: Buffer
 ) {
+  // Validate required environment variables
+  if (!process.env.BREVO_API_KEY) {
+    const error = "BREVO_API_KEY not set - cannot send email";
+    console.error("❌", error);
+    throw new Error(error);
+  }
+
+  if (!process.env.SENDER_EMAIL) {
+    console.warn("⚠️ SENDER_EMAIL not set - using default");
+  }
+
+  console.log(
+    "📧 Attempting to send membership success email to:",
+    userData.email
+  );
+  console.log("📋 Email details:", {
+    userName: userData.name,
+    userEmail: userData.email,
+    userPhone: userData.phone,
+    membershipId: membershipData.id,
+    orderId: membershipData.orderId,
+    paymentId: membershipData.paymentId,
+    invoiceNumber: membershipData.invoiceNumber,
+  });
+
   const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
 
   // Get first name from full name
@@ -414,13 +453,38 @@ export async function sendMembershipSuccessEmail(
   ];
 
   try {
+    console.log("🚀 Sending email via Brevo API...");
     const response = await retryApiCall(() =>
       apiInstance.sendTransacEmail(sendSmtpEmail)
     );
-    console.log("Membership success email sent successfully");
+    console.log(
+      "✅ Membership success email sent successfully to:",
+      userData.email
+    );
+    console.log("📨 Brevo API response received successfully");
     return response;
   } catch (error) {
-    console.error("Error sending membership success email via Brevo:", error);
+    console.error(
+      "❌ Error sending membership success email via Brevo:",
+      error
+    );
+
+    // Log detailed error information for debugging
+    if (error instanceof Error) {
+      console.error("Error details:", {
+        name: error.name,
+        message: error.message,
+        stack: error.stack,
+      });
+    }
+
+    // Log environment variable status
+    console.error("Environment check:", {
+      BREVO_API_KEY: process.env.BREVO_API_KEY ? "✓ Set" : "✗ Not Set",
+      SENDER_EMAIL: process.env.SENDER_EMAIL ? "✓ Set" : "✗ Not Set",
+      NODE_ENV: process.env.NODE_ENV,
+    });
+
     throw error;
   }
 }

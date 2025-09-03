@@ -19,18 +19,32 @@ import { sendMembershipSuccessEmail } from "@/utils/brevo";
 
 export async function POST(request: NextRequest) {
   try {
+    console.log("🚀 Payment verification API called");
+    console.log(
+      "📋 Request headers:",
+      Object.fromEntries(request.headers.entries())
+    );
+
     const { orderId, paymentId, signature, userDetails } = await request.json();
 
     if (!orderId || !paymentId || !signature || !userDetails) {
+      console.error("❌ Missing required parameters:", {
+        orderId,
+        paymentId,
+        signature: !!signature,
+        userDetails: !!userDetails,
+      });
       return NextResponse.json(
         { error: "Missing required parameters" },
         { status: 400 }
       );
     }
 
-    console.log("Payment verification request received:", {
+    console.log("✅ Payment verification request received:", {
       orderId,
       paymentId,
+      hasSignature: !!signature,
+      hasUserDetails: !!userDetails,
     });
 
     // Verify signature first
@@ -210,6 +224,8 @@ export async function POST(request: NextRequest) {
 
         // Generate and send invoice email asynchronously
         try {
+          console.log("📧 Starting invoice generation and email process...");
+
           // Get user details for invoice
           const userQuery = `
             SELECT first_name, last_name, email, phone
@@ -228,6 +244,14 @@ export async function POST(request: NextRequest) {
 
           const user = userResult?.[0];
           if (user) {
+            console.log("👤 User details retrieved:", {
+              userId: order.user_id,
+              firstName: user.first_name,
+              lastName: user.last_name,
+              email: user.email,
+              phone: user.phone,
+            });
+
             // Generate invoice data
             const invoiceData = {
               invoiceNumber: membership.invoice_number || `INV-${Date.now()}`,
@@ -243,13 +267,29 @@ export async function POST(request: NextRequest) {
               orderId: orderId,
             };
 
+            console.log("📄 Invoice data prepared:", {
+              invoiceNumber: invoiceData.invoiceNumber,
+              customerName: invoiceData.customerName,
+              customerEmail: invoiceData.customerEmail,
+              amount: invoiceData.amount,
+              membershipType: invoiceData.membershipType,
+            });
+
             // Generate invoice PDF
+            console.log("🔄 Generating invoice PDF...");
             const invoiceBuffer = generateInvoiceBuffer(invoiceData);
+            console.log(
+              "✅ Invoice PDF generated successfully, size:",
+              invoiceBuffer.length,
+              "bytes"
+            );
 
             // Send email with invoice attachment asynchronously
             if (membershipData) {
+              console.log("📤 Scheduling email sending...");
               setImmediate(async () => {
                 try {
+                  console.log("🚀 Executing email sending...");
                   await sendMembershipSuccessEmail(
                     {
                       name: invoiceData.customerName,
@@ -260,20 +300,43 @@ export async function POST(request: NextRequest) {
                     invoiceBuffer
                   );
                   console.log(
-                    "Invoice email sent successfully for user:",
+                    "✅ Invoice email sent successfully for user:",
                     user.email
                   );
                 } catch (emailError) {
-                  console.error("Failed to send invoice email:", emailError);
+                  console.error("❌ Failed to send invoice email:", emailError);
+                  console.error("Email error details:", {
+                    userEmail: user.email,
+                    userName: invoiceData.customerName,
+                    error:
+                      emailError instanceof Error
+                        ? emailError.message
+                        : String(emailError),
+                  });
                 }
               });
+            } else {
+              console.warn("⚠️ membershipData is null, skipping email sending");
             }
+          } else {
+            console.error(
+              "❌ User not found for invoice generation, user_id:",
+              order.user_id
+            );
           }
         } catch (invoiceError) {
           console.error(
-            "Failed to generate invoice or send email:",
+            "❌ Failed to generate invoice or send email:",
             invoiceError
           );
+          console.error("Invoice error details:", {
+            userId: order.user_id,
+            orderId: order.id,
+            error:
+              invoiceError instanceof Error
+                ? invoiceError.message
+                : String(invoiceError),
+          });
           // Don't fail the payment verification if invoice generation fails
         }
       }
