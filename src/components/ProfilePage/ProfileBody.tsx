@@ -145,13 +145,8 @@ const ProfileBody = ({ data, isMobile }: ProfileBodyProps) => {
   };
 
   const handleAction = (actionType: string) => {
-    console.log(`${actionType} clicked`);
-
     if (actionType === "viewPlan") {
       // Redirect to membership page
-      router.push("/membership");
-    } else if (actionType === "renewPlan") {
-      // Redirect to membership page for renewal
       router.push("/membership");
     }
   };
@@ -294,7 +289,7 @@ const ProfileBody = ({ data, isMobile }: ProfileBodyProps) => {
                 onValidate={(value) => validateField("dateOfBirth", value)}
               />
 
-              <div className="flex flex-col">
+              <div className="flex flex-col md:!mt-[50px]">
                 <span className="font-light text-xs leading-4 mb-1 text-[#8A8A8A]">
                   Plan expires
                 </span>
@@ -305,7 +300,7 @@ const ProfileBody = ({ data, isMobile }: ProfileBodyProps) => {
                       ).toLocaleDateString()
                     : "No active plan"}
                 </span>
-                {renderMobileActionButton(actions.renewPlan, "renewPlan")}
+                {/* Renew plan functionality removed - not available in actions */}
               </div>
 
               <div className="flex flex-col">
@@ -429,7 +424,7 @@ const ProfileBody = ({ data, isMobile }: ProfileBodyProps) => {
                       ).toLocaleDateString()
                     : "No active plan"}
                 </span>
-                {renderActionButton(actions.renewPlan, "renewPlan")}
+                {/* Renew plan functionality removed - not available in actions */}
               </div>
             </div>
           </div>

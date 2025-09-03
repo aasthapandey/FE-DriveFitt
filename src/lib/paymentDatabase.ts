@@ -332,7 +332,7 @@ export const generateInvoiceNumber = (): string => {
   const random = Math.floor(Math.random() * 10000)
     .toString()
     .padStart(4, "0");
-  return `INV-${year}${month}${day}-${random}`;
+  return `DF${year}${month}${day}${random}`;
 };
 
 // Helper function to calculate expiry date (1 year from now)

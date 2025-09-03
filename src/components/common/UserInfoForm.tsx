@@ -77,13 +77,6 @@ const UserInfoForm = ({
     return "";
   };
 
-  const validateBirthday = (value: string) => {
-    if (!value.trim()) {
-      return "Birthday is required";
-    }
-    return "";
-  };
-
   const validateGender = (value: string) => {
     if (!value.trim()) {
       return "Gender is required";
@@ -122,11 +115,6 @@ const UserInfoForm = ({
           ...prev,
           email: validateEmail(value),
         }));
-      } else if (name === "birthday") {
-        setErrors((prev) => ({
-          ...prev,
-          birthday: validateBirthday(value),
-        }));
       }
     }
   };
@@ -150,18 +138,17 @@ const UserInfoForm = ({
     const nameError = validateName(formData.name);
     const phoneError = validatePhone(formData.phone);
     const emailError = validateEmail(formData.email);
-    const birthdayError = validateBirthday(formData.birthday);
     const genderError = validateGender(formData.gender);
 
     setErrors({
       name: nameError,
       phone: phoneError,
       email: emailError,
-      birthday: birthdayError,
+      birthday: "",
       gender: genderError,
     });
 
-    if (nameError || phoneError || emailError || birthdayError || genderError) {
+    if (nameError || phoneError || emailError || genderError) {
       setMessageState({
         type: "validation",
         text: "Please fill in all required fields before submitting.",
@@ -342,16 +329,12 @@ const UserInfoForm = ({
                   >
                     When&apos;s your birthday?
                   </label>
-                  <div
-                    className={`bg-[#FFFFFF] border rounded-lg flex items-center transition-colors overflow-hidden ${
-                      errors.birthday ? "border-red-500" : "border-[#333333]"
-                    } focus-within:border-[2px] focus-within:border-[#00DBDC]`}
-                  >
+                  <div className="bg-[#FFFFFF] border border-[#333333] rounded-lg flex items-center transition-colors overflow-hidden focus-within:border-[2px] focus-within:border-[#00DBDC] relative">
                     <Image
-                      src="/images/hourglass-icon.svg"
+                      src="/images/calendar-event.svg"
                       alt="Calendar"
-                      width={16}
-                      height={16}
+                      width={20}
+                      height={20}
                       className="ml-4 flex-shrink-0"
                     />
                     <input
@@ -361,13 +344,6 @@ const UserInfoForm = ({
                       value={formData.birthday}
                       onChange={handleChange}
                       className="bg-transparent flex-1 py-1.5 md:py-2 px-4 text-[#0D0D0D] outline-none min-w-0"
-                    />
-                    <Image
-                      src="/images/accordian-down-arrow.svg"
-                      alt="Dropdown"
-                      width={16}
-                      height={16}
-                      className="mr-4 flex-shrink-0"
                     />
                   </div>
                 </div>
