@@ -1,5 +1,7 @@
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
+import fs from "fs";
+import path from "path";
 
 // Extend jsPDF interface to include our custom property
 interface ExtendedJsPDF extends jsPDF {
@@ -28,23 +30,43 @@ export function generateInvoicePDF(data: InvoiceData): ExtendedJsPDF {
     creator: "Drive FITT System",
   });
 
-  // Company Information (Top Left)
-  doc.setFontSize(20);
-  doc.setFont("helvetica", "bold");
-  doc.text("Drive FITT", 20, 30);
+  // Company Logo (Top Left)
+  try {
+    // Read the logo image file and convert to base64
+    const logoPath = path.join(
+      process.cwd(),
+      "public",
+      "images",
+      "logo-invoice.jpg"
+    );
+    const logoBuffer = fs.readFileSync(logoPath);
+    const logoBase64 = logoBuffer.toString("base64");
+    const logoDataUrl = `data:image/jpeg;base64,${logoBase64}`;
 
+    // Add the logo image
+    doc.addImage(logoDataUrl, "JPEG", 20, 23, 40, 5); // x, y, width, height
+    console.log("✅ Logo image loaded successfully");
+  } catch (error) {
+    console.warn("Could not load logo image, falling back to text:", error);
+    // Fallback to text if image fails to load
+    doc.setFontSize(20);
+    doc.setFont("helvetica", "bold");
+    doc.text("Drive FITT", 20, 30);
+  }
+
+  // Company Information (below logo)
   doc.setFontSize(9);
   doc.setFont("helvetica", "normal");
-  doc.text("NM/Block-2/R2 LG", 20, 40);
-  doc.text("11-18,46-57,UG 06-17,46-57", 20, 44);
-  doc.text("M3M 65th Avenue Sector-65", 20, 48);
-  doc.text("Gurgaon Haryana - 122022", 20, 52);
+  doc.text("NM/Block-2/R2 LG", 20, 35);
+  doc.text("11-18,46-57,UG 06-17,46-57", 20, 39);
+  doc.text("M3M 65th Avenue Sector-65", 20, 43);
+  doc.text("Gurgaon Haryana - 122022", 20, 47);
   // Add 2 rows gap below Gurgaon Haryana
-  doc.text("", 20, 56);
-  doc.text("", 20, 60);
-  doc.text("GSTIN: 06AACCZ3846N1ZS", 20, 64);
-  doc.text("Phone: 9871836565", 20, 68);
-  doc.text("Email: info@drivefitt.club", 20, 72);
+  doc.text("", 20, 51);
+  doc.text("", 20, 55);
+  doc.text("GSTIN: 06AACCZ3846N1ZS", 20, 59);
+  doc.text("Phone: 9871836565", 20, 63);
+  doc.text("Email: info@drivefitt.club", 20, 67);
 
   // Invoice Header (Top Right)
   doc.setFontSize(16);
