@@ -539,7 +539,7 @@ const PhoneNumberModal = ({
           if (loginResult.type === "auth/loginUser/fulfilled") {
             // Check if user has complete profile data
             const hasCompleteProfile =
-              user.name && user.email && user.phone && user.dateOfBirth;
+              user.name && user.email && user.phone;
 
             console.log("PhoneNumberModal: User data after login:", {
               id: user.id,

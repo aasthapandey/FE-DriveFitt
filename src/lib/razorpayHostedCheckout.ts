@@ -98,7 +98,7 @@ export class RazorpayHostedCheckout {
       console.log("✅ Razorpay is available, creating checkout instance...");
 
       const a = {
-        key: "rzp_live_RBcCfbzN35eWx4",
+        key: process.env.RAZORPAY_KEY_ID!,
         amount: options.amount,
         currency: options.currency,
         name: options.name,

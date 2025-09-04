@@ -59,7 +59,7 @@ export default function PaymentModal({
     });
 
     const hasCompleteProfile =
-      user?.name && user?.email && user?.phone && user?.dateOfBirth;
+      user?.name && user?.email && user?.phone;
 
     console.log("PaymentModal: Profile completeness check", {
       hasCompleteProfile,

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import ScrollAnimation from "@/components/common/ScrollAnimation";
 import PaymentModal from "./PaymentModal";
+import PaymentResultModal, { PaymentResultType } from "./PaymentResultModal";
 import PhoneNumberModal from "./Modal/PhoneNumberModal";
 import UserInfoModal from "./Modal/UserInfoModal";
 import { useAuth } from "@/hooks/useAuth";
@@ -30,6 +31,14 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
   const [activePlanIndex, setActivePlanIndex] = useState(0);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState<PricingPlan | null>(null);
+  const [showPaymentResultModal, setShowPaymentResultModal] = useState(false);
+  const [paymentResultType, setPaymentResultType] =
+    useState<PaymentResultType>("success");
+  const [paymentResultData, setPaymentResultData] = useState<{
+    transactionId: string;
+    planName?: string;
+    discountAmount?: number;
+  } | null>(null);
   const [showPhoneModal, setShowPhoneModal] = useState(false);
   const [showUserInfoModal, setShowUserInfoModal] = useState(false);
   const [tempPhoneNumber, setTempPhoneNumber] = useState<string>("");
@@ -126,7 +135,7 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
 
     // Step 2: Check if user has complete profile (name, email, phone, dateOfBirth)
     const hasCompleteProfile =
-      user?.name && user?.email && user?.phone && user?.dateOfBirth;
+      user?.name && user?.email && user?.phone;
     if (!hasCompleteProfile) {
       console.log(
         "PricingPlans: User profile incomplete, opening user info modal"
@@ -135,7 +144,6 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
         hasName: !!user?.name,
         hasEmail: !!user?.email,
         hasPhone: !!user?.phone,
-        hasDateOfBirth: !!user?.dateOfBirth,
         userData: user,
       });
       setShowUserInfoModal(true);
@@ -205,7 +213,7 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
           membershipInfo: membershipData,
         });
 
-        console.log("✅ Redux state updated, redirecting to profile page...");
+        console.log("✅ Redux state updated, showing success modal...");
       } else {
         // Fallback: Fetch fresh user data if membership data not available
         console.log(
@@ -214,27 +222,54 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
         await fetchProfile();
       }
 
-      // Close modals
+      // Close payment modal
       setShowPaymentModal(false);
-      setSelectedPlan(null);
 
-      // Redirect to profile page where updated membership data will be visible
-      router.push("/profile");
+      // Show success modal with payment details
+      setPaymentResultType("success");
+      setPaymentResultData({
+        transactionId: paymentId,
+        planName: selectedPlan?.title,
+        discountAmount: selectedPlan?.originalPrice
+          ? parseInt(selectedPlan.originalPrice.replace(/[^\d]/g, ""))
+          : undefined,
+      });
+      setShowPaymentResultModal(true);
+
+      // Clear selected plan
+      setSelectedPlan(null);
     } catch (error) {
       console.error("❌ Error handling payment success:", error);
 
-      // Even if updating fails, still redirect to profile page
+      // Even if updating fails, still show success modal
       setShowPaymentModal(false);
+      setPaymentResultType("success");
+      setPaymentResultData({
+        transactionId: paymentId,
+        planName: selectedPlan?.title,
+        discountAmount: selectedPlan?.originalPrice
+          ? parseInt(selectedPlan.originalPrice.replace(/[^\d]/g, ""))
+          : undefined,
+      });
+      setShowPaymentResultModal(true);
       setSelectedPlan(null);
-      router.push("/profile");
     }
   };
 
   const handlePaymentError = (error: string) => {
     console.error("Payment failed:", error);
-    // You can add additional error handling here
-    // For example, show an error message to the user
+
+    // Close payment modal
     setShowPaymentModal(false);
+
+    // Show failure modal
+    setPaymentResultType("failure");
+    setPaymentResultData({
+      transactionId: "N/A", // We don't have a transaction ID for failed payments
+    });
+    setShowPaymentResultModal(true);
+
+    // Clear selected plan
     setSelectedPlan(null);
   };
 
@@ -244,6 +279,26 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
 
   const handleUserInfoModalClose = () => {
     setShowUserInfoModal(false);
+  };
+
+  const handlePaymentResultModalClose = () => {
+    setShowPaymentResultModal(false);
+    setPaymentResultData(null);
+  };
+
+  const handleRetryPayment = () => {
+    setShowPaymentResultModal(false);
+    setPaymentResultData(null);
+    // Reopen payment modal for retry
+    if (selectedPlan) {
+      setShowPaymentModal(true);
+    }
+  };
+
+  const handleGoHome = () => {
+    setShowPaymentResultModal(false);
+    setPaymentResultData(null);
+    router.push("/");
   };
 
   const handlePhoneModalSuccess = (
@@ -602,6 +657,20 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
         onParentClose={handleUserInfoModalClose}
         onSuccess={handleUserInfoModalSuccess}
       />
+
+      {/* Payment Result Modal */}
+      {paymentResultData && (
+        <PaymentResultModal
+          isOpen={showPaymentResultModal}
+          onClose={handlePaymentResultModalClose}
+          type={paymentResultType}
+          transactionId={paymentResultData.transactionId}
+          planName={paymentResultData.planName}
+          discountAmount={paymentResultData.discountAmount}
+          onRetryPayment={handleRetryPayment}
+          onGoHome={handleGoHome}
+        />
+      )}
     </section>
   );
 };
