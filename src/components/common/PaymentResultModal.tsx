@@ -16,7 +16,7 @@ interface PaymentResultModalProps {
 
 export default function PaymentResultModal({
   isOpen,
-  onClose,
+  onClose: _onClose,
   type,
   transactionId,
   planName,
