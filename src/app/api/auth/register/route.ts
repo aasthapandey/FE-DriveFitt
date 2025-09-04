@@ -9,7 +9,7 @@ export async function POST(request: NextRequest) {
     const { name, email, phone, dateOfBirth, gender } = body;
 
     // Validate inputs
-    if (!name || !email || !phone || !dateOfBirth || !gender) {
+    if (!name || !email || !phone || !gender) {
       return NextResponse.json<AuthResponse>(
         {
           success: false,
