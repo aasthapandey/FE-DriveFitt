@@ -134,8 +134,7 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
     }
 
     // Step 2: Check if user has complete profile (name, email, phone, dateOfBirth)
-    const hasCompleteProfile =
-      user?.name && user?.email && user?.phone;
+    const hasCompleteProfile = user?.name && user?.email && user?.phone;
     if (!hasCompleteProfile) {
       console.log(
         "PricingPlans: User profile incomplete, opening user info modal"
@@ -265,12 +264,14 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
     // Show failure modal
     setPaymentResultType("failure");
     setPaymentResultData({
-      transactionId: "N/A", // We don't have a transaction ID for failed payments
+      transactionId: error.includes("cancelled")
+        ? "Payment Cancelled"
+        : "Payment Failed",
     });
     setShowPaymentResultModal(true);
 
-    // Clear selected plan
-    setSelectedPlan(null);
+    // Don't clear selectedPlan here - keep it for retry functionality
+    // setSelectedPlan(null);
   };
 
   const handlePhoneModalClose = () => {
@@ -284,20 +285,26 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
   const handlePaymentResultModalClose = () => {
     setShowPaymentResultModal(false);
     setPaymentResultData(null);
+    setSelectedPlan(null); // Clear selected plan when modal is closed
   };
 
   const handleRetryPayment = () => {
+    console.log("Retry payment clicked, selectedPlan:", selectedPlan);
     setShowPaymentResultModal(false);
     setPaymentResultData(null);
     // Reopen payment modal for retry
     if (selectedPlan) {
+      console.log("Reopening payment modal for retry");
       setShowPaymentModal(true);
+    } else {
+      console.error("No selected plan available for retry");
     }
   };
 
   const handleGoHome = () => {
     setShowPaymentResultModal(false);
     setPaymentResultData(null);
+    setSelectedPlan(null); // Clear selected plan when going home
     router.push("/");
   };
 

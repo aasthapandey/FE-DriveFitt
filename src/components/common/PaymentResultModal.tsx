@@ -80,8 +80,10 @@ export default function PaymentResultModal({
         {/* Payment Details Container */}
         <div className="w-full border border-[#333333] rounded-lg p-3 md:p-4 flex flex-col gap-2 md:gap-2.5">
           <div className="text-white text-xs md:text-sm">
-            <span className="text-white">•</span> Transaction ID:{" "}
-            {transactionId}
+            <span className="text-white">•</span>{" "}
+            {transactionId.includes("Payment")
+              ? transactionId
+              : `Transaction ID: ${transactionId}`}
           </div>
           {isSuccess && planName && discountAmount && (
             <div className="text-white text-xs md:text-sm">
