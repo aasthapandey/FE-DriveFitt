@@ -3,7 +3,9 @@ import { generateInvoicePDF, InvoiceData } from "@/utils/invoiceGenerator";
 import fs from "fs";
 import path from "path";
 
-export async function GET(_request: NextRequest) {
+export async function GET(request: NextRequest) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const _ = request; // Suppress unused variable warning
   console.log("🧪 Test Invoice API endpoint called");
 
   try {

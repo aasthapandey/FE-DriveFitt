@@ -16,7 +16,7 @@ interface PaymentResultModalProps {
 
 export default function PaymentResultModal({
   isOpen,
-  onClose: _onClose,
+  onClose,
   type,
   transactionId,
   planName,
@@ -24,6 +24,8 @@ export default function PaymentResultModal({
   onRetryPayment,
   onGoHome,
 }: PaymentResultModalProps) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const _ = onClose; // Suppress unused variable warning
   if (!isOpen) return null;
 
   const isSuccess = type === "success";
