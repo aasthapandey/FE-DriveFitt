@@ -177,6 +177,45 @@ const OTPStep = ({
     setFocusedIndex(null);
   };
 
+  const handleKeyDown = (
+    e: React.KeyboardEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    const input = e.target as HTMLInputElement;
+
+    if (e.key === "Backspace") {
+      e.preventDefault();
+
+      if (input.value) {
+        // If current input has value, clear it
+        onOTPChange(index, "");
+      } else if (index > 0) {
+        // If current input is empty, move to previous input and clear it
+        const prevInput = document.querySelector(
+          `input[data-index="${index - 1}"]`
+        ) as HTMLInputElement;
+        if (prevInput) {
+          onOTPChange(index - 1, "");
+          prevInput.focus();
+        }
+      }
+    } else if (e.key === "ArrowLeft" && index > 0) {
+      e.preventDefault();
+      const prevInput = document.querySelector(
+        `input[data-index="${index - 1}"]`
+      ) as HTMLInputElement;
+      if (prevInput) prevInput.focus();
+    } else if (e.key === "ArrowRight" && index < 3) {
+      e.preventDefault();
+      const nextInput = document.querySelector(
+        `input[data-index="${index + 1}"]`
+      ) as HTMLInputElement;
+      if (nextInput) nextInput.focus();
+    } else if (e.key === "ArrowUp" || e.key === "ArrowDown") {
+      e.preventDefault(); // Prevent default arrow key behavior
+    }
+  };
+
   return (
     <>
       {/* Title */}
@@ -192,7 +231,7 @@ const OTPStep = ({
           We&apos;ve sent a whatsapp message
         </p>
         <p className="text-[#8A8A8A] font-light text-[20px] leading-[28px] tracking-[0%]">
-        with a code to your phone
+          with a code to your phone
         </p>
         <div className="flex items-center justify-center gap-2 flex-wrap">
           <span className="text-white font-light text-[20px] leading-[28px] tracking-[0%] break-all">
@@ -216,6 +255,7 @@ const OTPStep = ({
             type="text"
             value={value}
             onChange={(e) => onOTPChange(index, e.target.value)}
+            onKeyDown={(e) => handleKeyDown(e, index)}
             onFocus={() => handleInputFocus(index)}
             onBlur={handleInputBlur}
             data-index={index}
@@ -290,6 +330,8 @@ const PhoneNumberModal = ({
   const [error, setError] = useState("");
   const [isUserInfoModalOpen, setIsUserInfoModalOpen] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
+  const handleVerifyRef = useRef<() => Promise<void>>();
+  const hasAutoSubmittedRef = useRef(false);
   const { login } = useAuth();
   const router = useRouter();
 
@@ -340,6 +382,8 @@ const PhoneNumberModal = ({
       setIsFocused(false);
       setOtpValues(["", "", "", ""]);
       setTimeLeft(59);
+      setError(""); // Clear error when modal is closed
+      hasAutoSubmittedRef.current = false; // Reset auto-submit flag
     }
   }, [isOpen]);
 
@@ -448,6 +492,15 @@ const PhoneNumberModal = ({
       newOtpValues[index] = value;
       setOtpValues(newOtpValues);
 
+      // Reset auto-submit flag only if we're going from 4 digits to less than 4 digits
+      // This allows auto-submit to work when completing the 4th digit
+      const wasComplete = otpValues.every((val) => val !== "");
+      const isComplete = newOtpValues.every((val) => val !== "");
+
+      if (wasComplete && !isComplete) {
+        hasAutoSubmittedRef.current = false;
+      }
+
       // Auto-focus next input
       if (value && index < 3) {
         const nextInput = document.querySelector(
@@ -538,6 +591,7 @@ const PhoneNumberModal = ({
           // Don't close the modal yet - let UserInfoModal handle the flow
         } else {
           setError(response.message || "Invalid OTP");
+          // Don't reset flag on error - only reset when user changes OTP values
         }
       } catch (error: unknown) {
         setError(
@@ -545,11 +599,36 @@ const PhoneNumberModal = ({
             ? error.message
             : "Server Down, Please try again later."
         );
+        // Don't reset flag on error - only reset when user changes OTP values
       } finally {
         setIsLoading(false);
       }
     }
   }, [otpValues, phoneNumber, onClose, login, onSuccess, router]);
+
+  // Store handleVerify in ref to avoid circular dependency
+  useEffect(() => {
+    handleVerifyRef.current = handleVerify;
+  }, [handleVerify]);
+
+  // Auto-submit OTP when all 4 digits are entered (only once)
+  useEffect(() => {
+    if (
+      modalState === "otp" &&
+      otpValues.every((val) => val !== "") &&
+      !isLoading &&
+      !hasAutoSubmittedRef.current
+    ) {
+      hasAutoSubmittedRef.current = true; // Mark as auto-submitted to prevent repeated calls
+      const timer = setTimeout(() => {
+        // Use ref to call handleVerify without circular dependency
+        if (handleVerifyRef.current) {
+          handleVerifyRef.current();
+        }
+      }, 100); // Small delay to ensure state is updated
+      return () => clearTimeout(timer);
+    }
+  }, [otpValues, modalState, isLoading]);
 
   const handleChangePhone = useCallback(() => {
     setModalState("phone");
@@ -566,6 +645,7 @@ const PhoneNumberModal = ({
       if (response.success) {
         setTimeLeft(59);
         setOtpValues(["", "", "", ""]);
+        hasAutoSubmittedRef.current = false; // Reset auto-submit flag when resending OTP
       } else {
         setError(response.message || "Failed to resend OTP");
       }
