@@ -65,13 +65,14 @@ export function generateInvoicePDF(data: InvoiceData): ExtendedJsPDF {
   doc.text("", 20, 51);
   doc.text("", 20, 55);
   doc.text("GSTIN: 06AACCZ3846N1ZS", 20, 59);
+  doc.text("CIN: U93110DL2024FTC429911", 20, 59);
   doc.text("Phone: 9871836565", 20, 63);
   doc.text("Email: info@drivefitt.club", 20, 67);
 
   // Invoice Header (Top Right)
   doc.setFontSize(16);
   doc.setFont("helvetica", "bold");
-  doc.text("TAX INVOICE", 140, 30);
+  doc.text("RECEIPT VOUCHER", 140, 30);
 
   doc.setFontSize(9);
   doc.setFont("helvetica", "normal");
@@ -92,7 +93,7 @@ export function generateInvoicePDF(data: InvoiceData): ExtendedJsPDF {
 
   // Table data
   const tableData = [
-    ["Pre-booking Spot at Drive FITT Sports Club", "1", "846.61", "846.61"],
+    ["Pre-booking advance with respect to membership at Drive FITT Club", "1", "846.61", "846.61"],
     ["", "", "", ""], // Empty row for spacing
     ["Subtotal (before GST)", "", "", subtotal.toFixed(2)],
     ["GST @18% (IGST/CGST+SGST)", "", "", gstAmount.toFixed(2)],
