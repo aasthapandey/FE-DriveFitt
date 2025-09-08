@@ -8,7 +8,8 @@ import {
   ProfileUpdateResponse,
 } from "@/types/auth";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
+// For Next.js API routes, we use relative URLs since frontend and backend are on the same domain
+const API_BASE_URL = "";
 
 class AuthService {
   private async makeRequest<T>(

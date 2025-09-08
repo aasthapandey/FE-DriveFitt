@@ -9,16 +9,19 @@ interface PaymentModalProps {
   onClose: () => void;
   membershipType: number;
   amount: number;
-  onSuccess?: (paymentId: string, membershipData?: {
-    id: number;
-    membershipType: number;
-    status: "active" | "expired" | "cancelled" | "suspended";
-    startDate: string;
-    expiresAt: string;
-    invoiceNumber?: string;
-    orderId: number;
-    paymentId: number;
-  } | null) => void;
+  onSuccess?: (
+    paymentId: string,
+    membershipData?: {
+      id: number;
+      membershipType: number;
+      status: "active" | "expired" | "cancelled" | "suspended";
+      startDate: string;
+      expiresAt: string;
+      invoiceNumber?: string;
+      orderId: number;
+      paymentId: number;
+    } | null
+  ) => void;
   onError?: (error: string) => void;
 }
 
@@ -56,7 +59,7 @@ export default function PaymentModal({
     });
 
     const hasCompleteProfile =
-      user?.name && user?.email && user?.phone && user?.dateOfBirth;
+      user?.name && user?.email && user?.phone;
 
     console.log("PaymentModal: Profile completeness check", {
       hasCompleteProfile,

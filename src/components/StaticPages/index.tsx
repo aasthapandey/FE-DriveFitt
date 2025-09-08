@@ -417,7 +417,7 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
                     backgroundPosition: "top center",
                     backgroundSize: isMobile ? "100% auto" : "cover",
                     backgroundRepeat: "no-repeat",
-                    minHeight: isMobile ? "400px" : "600px",
+                    minHeight: isMobile ? "400px" : "641px",
                   }}
                 >
                   <div className="pt-[84px] md:pt-[140px]">{component}</div>

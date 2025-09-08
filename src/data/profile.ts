@@ -31,10 +31,6 @@ export const profileData: ProfilePageData = {
       enabled: true,
       isButton: true,
     },
-    renewPlan: {
-      text: "Renew",
-      enabled: false,
-    },
   },
   footerSection: {
     logo: "https://da8nru77lsio9.cloudfront.net/images/logo.svg",

@@ -20,50 +20,103 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Deployment Issues & Troubleshooting
+## 🚀 Deployment Issues & Troubleshooting
 
-### Email Service (Brevo) Connection Issues
+### 📧 Invoice Email Issues on Vercel
 
-If you're experiencing `ECONNRESET` or socket timeout errors in production:
+If you're not receiving invoice emails after payment on Vercel:
 
-1. **Environment Variables**: Ensure all required environment variables are set:
+1. **Check Environment Variables** in Vercel Dashboard:
 
-   ```
-   BREVO_API_KEY=your_brevo_api_key
-   SENDER_EMAIL=alerts@drivefitt.club
-   NOTIFICATION_EMAIL=your_notification_email
-   FRANCHISE_NOTIFICATION_EMAIL=your_franchise_email
-   ```
+   - Go to Settings → Environment Variables
+   - Ensure `BREVO_API_KEY` is set correctly
+   - Verify `SENDER_EMAIL` is configured
 
-2. **Timeout Configuration**: The application now includes:
-
-   - HTTP agent configuration with proper timeouts (30s)
-   - Retry logic for failed requests (3 retries)
-   - Request-level timeouts (25s) to prevent hanging
-
-3. **Monitoring**: Add these logs to monitor email performance:
+2. **Test Services Endpoint**:
 
    ```bash
-   # Check for email errors
-   grep "Error sending.*email" logs
-
-   # Check for retry attempts
-   grep "Retrying API call" logs
-
-   # Check for timeout errors
-   grep "Email sending timeout" logs
+   # Visit this URL after deployment to test all services:
+   https://your-domain.vercel.app/api/test-services
    ```
 
-4. **Network Configuration**: For hosting platforms:
-   - Ensure outbound HTTPS connections are allowed
-   - Check if your hosting provider has specific timeout limits
-   - Consider increasing function timeout limits if available
+3. **Check Vercel Function Logs**:
+   - Go to Vercel Dashboard → Functions
+   - Click on `/api/payments/verify`
+   - Check "Logs" tab for detailed execution logs
 
-### Common Production Issues
+### 🔍 Common Issues & Solutions
 
-1. **Database Connection**: Ensure MySQL connection pooling is properly configured
-2. **Static Assets**: Verify all images and assets are properly optimized
-3. **Environment Parity**: Keep development and production environments synchronized
+#### Issue 1: Environment Variables Not Set
+
+```bash
+# Look for these errors in logs:
+❌ BREVO_API_KEY environment variable is not set!
+❌ SENDER_EMAIL environment variable is not set!
+```
+
+**Solution**: Add missing variables in Vercel Dashboard
+
+#### Issue 2: Database Connection Failed
+
+```bash
+# Look for:
+❌ Database connection error details
+❌ Query failed, retrying...
+```
+
+**Solution**: Verify database credentials and network access
+
+#### Issue 3: Email Service Failed
+
+```bash
+# Look for:
+❌ Error sending membership success email via Brevo
+❌ BREVO_API_KEY not set - cannot send email
+```
+
+**Solution**: Check Brevo API key and sender email configuration
+
+### 📊 Monitoring & Debugging
+
+1. **Real-time Logs**: Look for emoji indicators in Vercel logs:
+
+   - 🚀 = Function started
+   - ✅ = Success
+   - ❌ = Error
+   - 📧 = Email process
+   - 👤 = User data
+
+2. **Service Testing**: Use `/api/test-services` endpoint to verify:
+   - Environment variables
+   - Database connection
+   - Brevo API functionality
+   - PDF generation
+
+### 🛠️ Quick Fixes
+
+1. **Redeploy with Environment Variables**:
+
+   ```bash
+   # After adding env vars in Vercel Dashboard
+   git push origin main
+   # Vercel will auto-deploy
+   ```
+
+2. **Check Function Timeouts**:
+
+   - Payment verification: 60s (configured in vercel.json)
+   - Other functions: 30s
+
+3. **Verify Brevo API Key**:
+   - Check Brevo dashboard for API usage
+   - Ensure sender email domain is verified
+
+### 📚 Detailed Documentation
+
+For comprehensive troubleshooting, see:
+
+- [VERCEL_DEPLOYMENT_GUIDE.md](./VERCEL_DEPLOYMENT_GUIDE.md) - Complete deployment guide
+- [RAZORPAY_INTEGRATION.md](./RAZORPAY_INTEGRATION.md) - Payment integration details
 
 ## Learn More
 
