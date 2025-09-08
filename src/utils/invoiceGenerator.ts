@@ -31,6 +31,11 @@ export function generateInvoicePDF(data: InvoiceData): ExtendedJsPDF {
   });
 
   // Company Logo (Top Left)
+  // Define logo placement constants so we can position text reliably even if image fails
+  const logoX = 20;
+  const logoY = 23;
+  const logoW = 40;
+  const logoH = 15;
   try {
     // Read the logo image file and convert to base64
     const logoPath = path.join(
@@ -43,8 +48,8 @@ export function generateInvoicePDF(data: InvoiceData): ExtendedJsPDF {
     const logoBase64 = logoBuffer.toString("base64");
     const logoDataUrl = `data:image/jpeg;base64,${logoBase64}`;
 
-    // Add the logo image
-    doc.addImage(logoDataUrl, "JPEG", 20, 23, 40, 15); // x, y, width, height
+    // Add the logo image (fixed size)
+    doc.addImage(logoDataUrl, "JPEG", logoX, logoY, logoW, logoH); // x, y, width, height
     console.log("✅ Logo image loaded successfully");
   } catch (error) {
     console.warn("Could not load logo image, falling back to text:", error);
@@ -56,44 +61,54 @@ export function generateInvoicePDF(data: InvoiceData): ExtendedJsPDF {
 
   // Additional company information block (below logo)
   // 24-7 Cricket Group India Private Limited
+  const headerStartY = logoY + logoH + 10; // start below the logo
   doc.setFontSize(10);
   doc.setFont("helvetica", "bold");
-  doc.text("", 20, 66);
-  doc.text("", 20, 66);
-  doc.text("24-7 Cricket Group India Private Limited", 20, 30);
+  doc.text("24-7 Cricket Group India Private Limited", 20, headerStartY);
   doc.setFont("helvetica", "normal");
   doc.setFontSize(9);
-  doc.text("Registered Address: 5th Floor,", 20, 34);
-  doc.text("DLF Centre, Savitri Cinema Complex,", 20, 38);
-  doc.text("Greater Kailash-2, New Delhi - 110048", 20, 42);
-  doc.text("", 20, 66);
+  doc.text("Registered Address: 5th Floor,", 20, headerStartY + 4);
+  doc.text("DLF Centre, Savitri Cinema Complex,", 20, headerStartY + 8);
+  doc.text("Greater Kailash-2, New Delhi - 110048", 20, headerStartY + 12);
   // Company Information (existing block) shifted down to avoid overlap
   doc.setFontSize(9);
   doc.setFont("helvetica", "normal");
-  doc.text("NM/Block-2/R2 LG", 20, 50);
-  doc.text("11-18,46-57,UG 06-17,46-57", 20, 54);
-  doc.text("M3M 65th Avenue Sector-65", 20, 58);
-  doc.text("Gurgaon Haryana - 122022", 20, 62);
-  // Add small gap below Gurgaon Haryana
-  doc.text("", 20, 66);
-  doc.text("GSTIN: 06AACCZ3846N1ZS", 20, 70);
-  doc.text("CIN: U93110DL2024FTC429911", 20, 74);
-  doc.text("Phone: 9871836565", 20, 78);
-  doc.text("Email: info@drivefitt.club", 20, 82);
+  const companyBlockStartY = headerStartY + 20;
+  doc.text("NM/Block-2/R2 LG", 20, companyBlockStartY);
+  doc.text("11-18,46-57,UG 06-17,46-57", 20, companyBlockStartY + 4);
+  doc.text("M3M 65th Avenue Sector-65", 20, companyBlockStartY + 8);
+  doc.text("Gurgaon Haryana - 122022", 20, companyBlockStartY + 12);
+  // IDs block
+  const idsStartY = companyBlockStartY + 20;
+  doc.text("GSTIN: 06AACCZ3846N1ZS", 20, idsStartY);
+  doc.text("CIN: U93110DL2024FTC429911", 20, idsStartY + 4);
+  doc.text("Phone: 9871836565", 20, idsStartY + 8);
+  doc.text("Email: info@drivefitt.club", 20, idsStartY + 12);
 
   // Invoice Header (Top Right)
-  doc.setFontSize(16);
+  // Right-aligned voucher block
+  const pageWidth = (doc as any).internal.pageSize.getWidth();
+  const rightMargin = 20;
+  const rightX = pageWidth - rightMargin;
+
+  doc.setFontSize(10);
   doc.setFont("helvetica", "bold");
-  doc.text("RECEIPT VOUCHER", 140, 30);
+  doc.text("RECEIPT VOUCHER", rightX, idsStartY - 3, { align: "right" });
 
   doc.setFontSize(9);
   doc.setFont("helvetica", "normal");
-  doc.text(`Invoice Number: ${data.invoiceNumber}`, 140, 40);
-  doc.text(`Date: ${data.invoiceDate}`, 140, 44);
-  doc.text(`Customer Name: ${data.customerName}`, 140, 48);
+  doc.text(`Invoice Number: ${data.invoiceNumber}`, rightX, idsStartY + 3, {
+    align: "right",
+  });
+  doc.text(`Date: ${data.invoiceDate}`, rightX, idsStartY + 7, {
+    align: "right",
+  });
+  doc.text(`Customer Name: ${data.customerName}`, rightX, idsStartY + 11, {
+    align: "right",
+  });
 
   // Itemized Details Table
-  const tableY = 95;
+  const tableY = idsStartY + 25;
 
   // Table headers
   const headers = [["Description", "Quantity", "Rate (Rs.)", "Amount (Rs.)"]];
@@ -111,7 +126,6 @@ export function generateInvoicePDF(data: InvoiceData): ExtendedJsPDF {
       "846.61",
       "846.61",
     ],
-    ["", "", "", ""], // Empty row for spacing
     ["Subtotal (before GST)", "", "", subtotal.toFixed(2)],
     ["GST @18% (IGST/CGST+SGST)", "", "", gstAmount.toFixed(2)],
     ["Total Amount (Rs.)", "", "", totalAmount.toFixed(2)],
@@ -178,12 +192,12 @@ export function generateInvoicePDF(data: InvoiceData): ExtendedJsPDF {
   );
 
   // Footer note (as requested)
-  doc.setFont("helvetica", "bold");
+  doc.setFont("helvetica", "normal");
   doc.setFontSize(9);
   doc.text(
     "*This invoice is computer-generated; no signature is required.",
     20,
-    amountWordsY + 44
+    amountWordsY + 84
   );
 
   return doc;
