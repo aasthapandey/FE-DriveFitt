@@ -37,14 +37,14 @@ export function generateInvoicePDF(data: InvoiceData): ExtendedJsPDF {
       process.cwd(),
       "public",
       "images",
-      "logo-invoice.jpg"
+      "logo-invoice2.jpg"
     );
     const logoBuffer = fs.readFileSync(logoPath);
     const logoBase64 = logoBuffer.toString("base64");
     const logoDataUrl = `data:image/jpeg;base64,${logoBase64}`;
 
     // Add the logo image
-    doc.addImage(logoDataUrl, "JPEG", 20, 23, 40, 5); // x, y, width, height
+    doc.addImage(logoDataUrl, "JPEG", 20, 23, 40, 15); // x, y, width, height
     console.log("✅ Logo image loaded successfully");
   } catch (error) {
     console.warn("Could not load logo image, falling back to text:", error);
@@ -54,20 +54,32 @@ export function generateInvoicePDF(data: InvoiceData): ExtendedJsPDF {
     doc.text("Drive FITT", 20, 30);
   }
 
-  // Company Information (below logo)
+  // Additional company information block (below logo)
+  // 24-7 Cricket Group India Private Limited
+  doc.setFontSize(10);
+  doc.setFont("helvetica", "bold");
+  doc.text("", 20, 66);
+  doc.text("", 20, 66);
+  doc.text("24-7 Cricket Group India Private Limited", 20, 30);
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(9);
+  doc.text("Registered Address: 5th Floor,", 20, 34);
+  doc.text("DLF Centre, Savitri Cinema Complex,", 20, 38);
+  doc.text("Greater Kailash-2, New Delhi - 110048", 20, 42);
+  doc.text("", 20, 66);
+  // Company Information (existing block) shifted down to avoid overlap
   doc.setFontSize(9);
   doc.setFont("helvetica", "normal");
-  doc.text("NM/Block-2/R2 LG", 20, 35);
-  doc.text("11-18,46-57,UG 06-17,46-57", 20, 39);
-  doc.text("M3M 65th Avenue Sector-65", 20, 43);
-  doc.text("Gurgaon Haryana - 122022", 20, 47);
-  // Add 2 rows gap below Gurgaon Haryana
-  doc.text("", 20, 51);
-  doc.text("", 20, 55);
-  doc.text("GSTIN: 06AACCZ3846N1ZS", 20, 59);
-  doc.text("CIN: U93110DL2024FTC429911", 20, 59);
-  doc.text("Phone: 9871836565", 20, 63);
-  doc.text("Email: info@drivefitt.club", 20, 67);
+  doc.text("NM/Block-2/R2 LG", 20, 50);
+  doc.text("11-18,46-57,UG 06-17,46-57", 20, 54);
+  doc.text("M3M 65th Avenue Sector-65", 20, 58);
+  doc.text("Gurgaon Haryana - 122022", 20, 62);
+  // Add small gap below Gurgaon Haryana
+  doc.text("", 20, 66);
+  doc.text("GSTIN: 06AACCZ3846N1ZS", 20, 70);
+  doc.text("CIN: U93110DL2024FTC429911", 20, 74);
+  doc.text("Phone: 9871836565", 20, 78);
+  doc.text("Email: info@drivefitt.club", 20, 82);
 
   // Invoice Header (Top Right)
   doc.setFontSize(16);
@@ -81,7 +93,7 @@ export function generateInvoicePDF(data: InvoiceData): ExtendedJsPDF {
   doc.text(`Customer Name: ${data.customerName}`, 140, 48);
 
   // Itemized Details Table
-  const tableY = 90;
+  const tableY = 95;
 
   // Table headers
   const headers = [["Description", "Quantity", "Rate (Rs.)", "Amount (Rs.)"]];
@@ -93,7 +105,12 @@ export function generateInvoicePDF(data: InvoiceData): ExtendedJsPDF {
 
   // Table data
   const tableData = [
-    ["Pre-booking advance with respect to membership at Drive FITT Club", "1", "846.61", "846.61"],
+    [
+      "Pre-booking advance with respect to membership at Drive FITT Club",
+      "1",
+      "846.61",
+      "846.61",
+    ],
     ["", "", "", ""], // Empty row for spacing
     ["Subtotal (before GST)", "", "", subtotal.toFixed(2)],
     ["GST @18% (IGST/CGST+SGST)", "", "", gstAmount.toFixed(2)],
@@ -158,6 +175,15 @@ export function generateInvoicePDF(data: InvoiceData): ExtendedJsPDF {
     "successful pre-booking of your spot at Drive FITT Sports Club.",
     20,
     amountWordsY + 30
+  );
+
+  // Footer note (as requested)
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(9);
+  doc.text(
+    "*This invoice is computer-generated; no signature is required.",
+    20,
+    amountWordsY + 44
   );
 
   return doc;
