@@ -16,8 +16,9 @@ export enum LoginModalType {
 }
 
 export interface Hero {
-  titleWords: TitleWord[];
-  description: string;
+  title?: string;
+  titleWords?: TitleWord[];
+  description?: string;
   desktopImage: string;
   originalDesktopImage?: string;
   mobileImage: string;
@@ -406,6 +407,7 @@ export interface StaticPageData {
   banner3JoinUsSection?: GallerySectionProps;
   pricingPlansSection?: PricingPlansSection;
   includedPlansSection?: IncludedPlansSection;
+  jobSearchSection?: JobSearchSection;
 }
 
 export interface ContactUsPageData {
@@ -539,4 +541,21 @@ export interface IncludedPlansSection {
   title: string;
   items: string[];
   className?: string;
+}
+
+export interface Job {
+  id: number;
+  title: string;
+  location: string;
+  jobType: string;
+  description: string;
+  requirements: string[];
+  responsibilities: string[];
+}
+
+export interface JobSearchSection {
+  jobs: Job[];
+  jobCategories: string[];
+  jobTypes: string[];
+  jobLocations: string[];
 }
