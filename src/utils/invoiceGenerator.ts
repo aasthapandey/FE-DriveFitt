@@ -87,7 +87,9 @@ export function generateInvoicePDF(data: InvoiceData): ExtendedJsPDF {
 
   // Invoice Header (Top Right)
   // Right-aligned voucher block
-  const pageWidth = (doc as any).internal.pageSize.getWidth();
+  const pageWidth = (
+    doc as unknown as { internal: { pageSize: { getWidth: () => number } } }
+  ).internal.pageSize.getWidth();
   const rightMargin = 20;
   const rightX = pageWidth - rightMargin;
 
