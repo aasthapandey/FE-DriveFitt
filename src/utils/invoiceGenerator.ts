@@ -35,7 +35,7 @@ export function generateInvoicePDF(data: InvoiceData): ExtendedJsPDF {
   const logoX = 20;
   const logoY = 23;
   const logoW = 40;
-  const logoH = 15;
+  const logoH = 12;
   try {
     // Read the logo image file and convert to base64
     const logoPath = path.join(
