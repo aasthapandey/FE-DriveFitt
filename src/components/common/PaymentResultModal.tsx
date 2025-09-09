@@ -75,7 +75,7 @@ export default function PaymentResultModal({
         {/* Sub-heading */}
         <p className="text-white text-center font-inter font-light text-sm md:text-base leading-5 md:leading-6">
           {isSuccess
-            ? "Welcome to DriveFitt – Your membership is now active."
+            ? "Welcome to Drive FITT - Your membership is now active. Voucher Receipt will be sent on your email."
             : "Unfortunately, your payment could not be processed."}
         </p>
 
