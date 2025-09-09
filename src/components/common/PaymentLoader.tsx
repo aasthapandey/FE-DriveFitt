@@ -37,7 +37,7 @@ export default function PaymentLoader({
           <div className="text-center">
             <h3 className="text-lg font-semibold text-white mb-2">{message}</h3>
             <p className="text-sm text-white/70">
-              Please don't close this window
+              Please don&apos;t close this window
             </p>
           </div>
         </div>
