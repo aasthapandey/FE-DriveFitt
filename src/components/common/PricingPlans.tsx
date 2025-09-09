@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import ScrollAnimation from "@/components/common/ScrollAnimation";
 import PaymentModal from "./PaymentModal";
 import PaymentResultModal, { PaymentResultType } from "./PaymentResultModal";
+import PaymentLoader from "./PaymentLoader";
 import PhoneNumberModal from "./Modal/PhoneNumberModal";
 import UserInfoModal from "./Modal/UserInfoModal";
 import { useAuth } from "@/hooks/useAuth";
@@ -43,6 +44,7 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
   const [showUserInfoModal, setShowUserInfoModal] = useState(false);
   const [tempPhoneNumber, setTempPhoneNumber] = useState<string>("");
   const [waitingForUserData, setWaitingForUserData] = useState(false);
+  const [isPaymentProcessing, setIsPaymentProcessing] = useState(false);
 
   const { isAuthenticated, user } = useSelector(
     (state: RootState) => state.auth
@@ -201,6 +203,10 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
       membershipData
     );
 
+    // Show loader while processing
+    setIsPaymentProcessing(true);
+    setShowPaymentModal(false);
+
     try {
       if (membershipData) {
         // ✅ OPTIMIZATION: Update Redux state directly with membership data
@@ -221,10 +227,8 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
         await fetchProfile();
       }
 
-      // Close payment modal
-      setShowPaymentModal(false);
-
-      // Show success modal with payment details
+      // Hide loader and show success modal
+      setIsPaymentProcessing(false);
       setPaymentResultType("success");
       setPaymentResultData({
         transactionId: paymentId,
@@ -240,8 +244,8 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
     } catch (error) {
       console.error("❌ Error handling payment success:", error);
 
-      // Even if updating fails, still show success modal
-      setShowPaymentModal(false);
+      // Hide loader and still show success modal even if there's an error updating state
+      setIsPaymentProcessing(false);
       setPaymentResultType("success");
       setPaymentResultData({
         transactionId: paymentId,
@@ -258,7 +262,8 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
   const handlePaymentError = (error: string) => {
     console.error("Payment failed:", error);
 
-    // Close payment modal
+    // Hide loader and close payment modal
+    setIsPaymentProcessing(false);
     setShowPaymentModal(false);
 
     // Show failure modal
@@ -618,18 +623,18 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
 
                   {plan.seatsLeft && (
                     <div className="flex items-center gap-2">
-                    <Image
-                      src="/images/plans/clock.svg"
-                      alt="Clock"
-                      width={20}
-                      height={20}
-                      className="w-4 md:w-5 h-4 md:h-5"
-                    />
-                    <span className="text-sm md:text-base font-light leading-4 md:leading-5 tracking-[0px] text-center text-[#0BFFB6]">
-                      {plan.seatsLeft}
-                    </span>
-                  </div>
-                )}
+                      <Image
+                        src="/images/plans/clock.svg"
+                        alt="Clock"
+                        width={20}
+                        height={20}
+                        className="w-4 md:w-5 h-4 md:h-5"
+                      />
+                      <span className="text-sm md:text-base font-light leading-4 md:leading-5 tracking-[0px] text-center text-[#0BFFB6]">
+                        {plan.seatsLeft}
+                      </span>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -680,6 +685,11 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
           onGoHome={handleGoHome}
         />
       )}
+
+      <PaymentLoader
+        isVisible={isPaymentProcessing}
+        message="Processing your payment..."
+      />
     </section>
   );
 };
