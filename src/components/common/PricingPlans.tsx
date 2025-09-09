@@ -544,7 +544,7 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
         {plans.map((plan, index) => (
           <ScrollAnimation key={index} delay={0.2 + index * 0.1} direction="up">
             <div
-              className="w-full lg:w-[580px] h-auto min-h-[400px] md:min-h-[500px] lg:h-[554px] rounded-[20px] md:rounded-[30px] lg:rounded-[40px] p-[2px]"
+              className="w-full lg:w-[580px] h-auto min-h-[400px] rounded-[20px] md:rounded-[30px] lg:rounded-[40px] p-[2px]"
               style={{
                 background:
                   "linear-gradient(180deg, #333333 29.36%, #00DBDC 120.13%)",
@@ -616,7 +616,8 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
                     </span>
                   </button>
 
-                  <div className="flex items-center gap-2">
+                  {plan.seatsLeft && (
+                    <div className="flex items-center gap-2">
                     <Image
                       src="/images/plans/clock.svg"
                       alt="Clock"
@@ -628,6 +629,7 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
                       {plan.seatsLeft}
                     </span>
                   </div>
+                )}
                 </div>
               </div>
             </div>
