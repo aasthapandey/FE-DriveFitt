@@ -129,7 +129,7 @@ const SignatureClassesSection = ({
               ))}
             </div>
           ) : (
-            <div className="flex flex-col gap-10 w-full">
+            <div className="flex flex-col gap-10 w-full pb-20">
               <div className="relative w-full">
                 <div
                   className="flex gap-10 transition-transform duration-500 ease-in-out"
