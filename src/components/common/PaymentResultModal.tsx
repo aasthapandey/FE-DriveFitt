@@ -43,7 +43,13 @@ export default function PaymentResultModal({
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+    <div
+      className="fixed inset-0 flex items-center justify-center z-50 p-4"
+      style={{
+        backgroundColor: "rgba(0, 0, 0, 0.8)",
+        backdropFilter: "blur(4px)",
+      }}
+    >
       <div
         className="bg-black rounded-[40px] p-6 md:p-10 flex flex-col items-center gap-6 md:gap-10 relative w-full max-w-[541px] mx-4"
         style={{

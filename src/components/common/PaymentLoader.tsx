@@ -12,7 +12,13 @@ export default function PaymentLoader({
   if (!isVisible) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4">
+    <div
+      className="fixed inset-0 flex items-center justify-center z-50 p-4"
+      style={{
+        backgroundColor: "rgba(0, 0, 0, 0.8)",
+        backdropFilter: "blur(4px)",
+      }}
+    >
       <div
         className="bg-[#0D0D0D] rounded-[40px] p-8 max-w-sm w-full shadow-xl"
         style={{

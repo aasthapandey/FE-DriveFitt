@@ -6,6 +6,7 @@ import ScrollAnimation from "@/components/common/ScrollAnimation";
 import PaymentModal from "./PaymentModal";
 import PaymentResultModal, { PaymentResultType } from "./PaymentResultModal";
 import PaymentLoader from "./PaymentLoader";
+import MembershipAlertModal from "./MembershipAlertModal";
 import PhoneNumberModal from "./Modal/PhoneNumberModal";
 import UserInfoModal from "./Modal/UserInfoModal";
 import { useAuth } from "@/hooks/useAuth";
@@ -45,6 +46,8 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
   const [tempPhoneNumber, setTempPhoneNumber] = useState<string>("");
   const [waitingForUserData, setWaitingForUserData] = useState(false);
   const [isPaymentProcessing, setIsPaymentProcessing] = useState(false);
+  const [showMembershipAlertModal, setShowMembershipAlertModal] =
+    useState(false);
 
   const { isAuthenticated, user } = useSelector(
     (state: RootState) => state.auth
@@ -159,9 +162,7 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
           hasMembership: boolean;
         };
         if (membershipData.hasMembership) {
-          alert(
-            "You already have an active membership! Please check your profile."
-          );
+          setShowMembershipAlertModal(true);
           return;
         }
       }
@@ -311,6 +312,14 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
     setPaymentResultData(null);
     setSelectedPlan(null); // Clear selected plan when going home
     router.push("/");
+  };
+
+  const handleMembershipAlertModalClose = () => {
+    setShowMembershipAlertModal(false);
+  };
+
+  const handleGoToProfile = () => {
+    router.push("/profile");
   };
 
   const handlePhoneModalSuccess = (
@@ -689,6 +698,14 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
       <PaymentLoader
         isVisible={isPaymentProcessing}
         message="Processing your payment..."
+      />
+
+      {/* Membership Alert Modal */}
+      <MembershipAlertModal
+        isOpen={showMembershipAlertModal}
+        onClose={handleMembershipAlertModalClose}
+        onGoToProfile={handleGoToProfile}
+        onGoHome={handleGoHome}
       />
     </section>
   );
