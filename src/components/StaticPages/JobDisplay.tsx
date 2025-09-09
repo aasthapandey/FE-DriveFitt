@@ -14,7 +14,7 @@ const JobDisplay = ({ job, isMobile, isFirst, isLast }: JobDisplayProps) => {
   const router = useRouter();
 
   const handleViewDetails = () => {
-    router.push(`/career-details?id=${job.id}`);
+    router.push(`/job-detail/${job.id}`);
   };
 
   return (

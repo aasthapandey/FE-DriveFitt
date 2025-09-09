@@ -40,6 +40,7 @@ import {
   PricingPlansSection,
   IncludedPlansSection,
   JobSearchSection as JobSearchSectionType,
+  JobDetailSection as JobDetailSectionType,
 } from "@/types/staticPages";
 import CardSection4 from "@/components/StaticPages/CardSection4";
 import CardSection5 from "@/components/StaticPages/CardSection5";
@@ -82,6 +83,7 @@ import SignatureClassesSection from "./SignatureClassesSection";
 import PricingPlans from "@/components/common/PricingPlans";
 import IncludedPlans from "@/components/common/IncludedPlans";
 import JobSearchSection from "./JobSearchSection";
+import JobDetailSection from "./JobDetailSection";
 
 interface StaticPageProps {
   data: StaticPageData;
@@ -119,6 +121,7 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
       | SignatureClassesSectionType
       | PricingPlansSection
       | JobSearchSectionType
+      | JobDetailSectionType
   ) => {
     switch (key) {
       case "hero":
@@ -364,6 +367,13 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
         return (
           <JobSearchSection
             data={value as JobSearchSectionType}
+            isMobile={isMobile}
+          />
+        );
+      case "jobDetailSection":
+        return (
+          <JobDetailSection
+            data={value as JobDetailSectionType}
             isMobile={isMobile}
           />
         );

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { JobSearchSection as JobSearchSectionType } from "@/types/staticPages";
 import JobDisplay from "./JobDisplay";
 
@@ -15,12 +15,15 @@ const JobSearchSection = ({ data, isMobile }: JobSearchSectionProps) => {
     useState("All job categories");
   const [selectedType, setSelectedType] = useState("All job types");
   const [selectedLocation, setSelectedLocation] = useState("All job location");
+  const [currentPage, setCurrentPage] = useState(1);
 
   const filteredJobs = data.jobs.filter((job) => {
     const matchesSearch = job.title
       .toLowerCase()
       .includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory === "All job categories" || true; // For now, all jobs match
+    const matchesCategory =
+      selectedCategory === "All job categories" ||
+      job.jobCategory === selectedCategory;
     const matchesType =
       selectedType === "All job types" || job.jobType === selectedType;
     const matchesLocation =
@@ -30,12 +33,22 @@ const JobSearchSection = ({ data, isMobile }: JobSearchSectionProps) => {
     return matchesSearch && matchesCategory && matchesType && matchesLocation;
   });
 
+  const jobsPerPage = 10;
+  const totalPages = Math.ceil(filteredJobs.length / jobsPerPage) || 1;
+  const startIndex = (currentPage - 1) * jobsPerPage;
+  const endIndex = startIndex + jobsPerPage;
+  const paginatedJobs = filteredJobs.slice(startIndex, endIndex);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm, selectedCategory, selectedType, selectedLocation]);
+
   return (
-    <div className="w-full flex justify-center px-6 mt-[-200px] md:mt-[-320px] md:px-[120px]">
+    <div className="w-full flex justify-center px-6 mt-[-180px] md:mt-[-320px] md:px-[120px]">
       <div
         className={`${
-          isMobile ? "h-[785px]" : "h-[1388px]"
-        } w-full rounded-[40px] border-2 border-[#333333] bg-gradient-to-b from-[#1E1E1E] to-[#141414]`}
+          isMobile ? "" : ""
+        } h-fit w-full rounded-[40px] border-2 border-[#333333] bg-gradient-to-b from-[#1E1E1E] to-[#141414]`}
       >
         {/* Job Search Bar */}
         <div
@@ -168,17 +181,75 @@ const JobSearchSection = ({ data, isMobile }: JobSearchSectionProps) => {
 
         {/* Job Component List */}
         <div className="px-6 md:px-10 pb-6 md:pb-10">
-          <div className="space-y-0">
-            {filteredJobs.map((job, index) => (
-              <JobDisplay
-                key={job.id}
-                job={job}
-                isMobile={isMobile}
-                isFirst={index === 0}
-                isLast={(index + 1) % 10 === 0}
-              />
-            ))}
-          </div>
+          {paginatedJobs.length > 0 ? (
+            <div className="space-y-0">
+              {paginatedJobs.map((job, index) => (
+                <JobDisplay
+                  key={job.id}
+                  job={job}
+                  isMobile={isMobile}
+                  isFirst={index === 0}
+                  isLast={index === paginatedJobs.length - 1}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="flex flex-col items-center justify-center py-12 md:py-16">
+              <div className="text-center">
+                <h3 className="text-xl md:text-2xl font-medium text-white mb-2">
+                  No Jobs Found
+                </h3>
+                <p className="text-sm md:text-base text-[#8A8A8A]">
+                  Try adjusting your search criteria or filters
+                </p>
+              </div>
+            </div>
+          )}
+          {totalPages > 1 && (
+            <div className="flex justify-center items-center gap-2 md:gap-3 mt-6">
+              <button
+                onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                disabled={currentPage === 1}
+                className={`min-w-9 h-9 md:min-w-10 md:h-10 px-3 rounded-lg border transition-all duration-200 ${
+                  currentPage === 1
+                    ? "bg-[#0D0D0D] text-[#8A8A8A] border-[#333333] cursor-not-allowed"
+                    : "bg-[#0D0D0D] text-white border-[#333333] hover:border-[#00DBDC]"
+                }`}
+              >
+                Prev
+              </button>
+
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                (page) => (
+                  <button
+                    key={page}
+                    onClick={() => setCurrentPage(page)}
+                    className={`min-w-9 h-9 md:min-w-10 md:h-10 px-3 rounded-lg border transition-all duration-200 ${
+                      currentPage === page
+                        ? "bg-[#00DBDC] text-[#0D0D0D] border-transparent"
+                        : "bg-[#0D0D0D] text-white border-[#333333] hover:border-[#00DBDC]"
+                    }`}
+                  >
+                    {page}
+                  </button>
+                )
+              )}
+
+              <button
+                onClick={() =>
+                  setCurrentPage((p) => Math.min(totalPages, p + 1))
+                }
+                disabled={currentPage === totalPages}
+                className={`min-w-9 h-9 md:min-w-10 md:h-10 px-3 rounded-lg border transition-all duration-200 ${
+                  currentPage === totalPages
+                    ? "bg-[#0D0D0D] text-[#8A8A8A] border-[#333333] cursor-not-allowed"
+                    : "bg-[#0D0D0D] text-white border-[#333333] hover:border-[#00DBDC]"
+                }`}
+              >
+                Next
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>

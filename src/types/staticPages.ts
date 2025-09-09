@@ -408,6 +408,7 @@ export interface StaticPageData {
   pricingPlansSection?: PricingPlansSection;
   includedPlansSection?: IncludedPlansSection;
   jobSearchSection?: JobSearchSection;
+  jobDetailSection?: JobDetailSection;
 }
 
 export interface ContactUsPageData {
@@ -544,6 +545,7 @@ export interface Job {
   title: string;
   location: string;
   jobType: string;
+  jobCategory: string;
   description: string;
   requirements: string[];
   responsibilities: string[];
@@ -554,4 +556,23 @@ export interface JobSearchSection {
   jobCategories: string[];
   jobTypes: string[];
   jobLocations: string[];
+}
+
+export interface JobDetailItem {
+  title: string;
+  description: string;
+  list: string[];
+}
+
+export interface JobDetailResponse {
+  id: string;
+  title: string;
+  location: string;
+  jobType: string;
+  jobCategory: string;
+  details: JobDetailItem[];
+}
+
+export interface JobDetailSection {
+  job: JobDetailResponse;
 }
