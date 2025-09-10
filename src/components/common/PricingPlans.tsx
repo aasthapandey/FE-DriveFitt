@@ -508,25 +508,27 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
                     </ScrollAnimation>
 
                     {/* Seats Left */}
-                    <ScrollAnimation
-                      key={`seats-${activePlanIndex}`}
-                      delay={0.5}
-                      direction="up"
-                      distance={15}
-                    >
-                      <div className="flex items-center gap-2 mb-[16px]">
-                        <Image
-                          src="/images/plans/clock.svg"
-                          alt="Clock"
-                          width={20}
-                          height={20}
-                          className="w-5 h-5"
-                        />
-                        <span className="text-sm font-light leading-5 tracking-[0px] text-center text-[#0BFFB6]">
-                          {plans[activePlanIndex].seatsLeft}
-                        </span>
-                      </div>
-                    </ScrollAnimation>
+                    {plans[activePlanIndex].seatsLeft && (
+                      <ScrollAnimation
+                        key={`seats-${activePlanIndex}`}
+                        delay={0.5}
+                        direction="up"
+                        distance={15}
+                      >
+                        <div className="flex items-center gap-2 mb-[16px]">
+                          <Image
+                            src="/images/plans/clock.svg"
+                            alt="Clock"
+                            width={20}
+                            height={20}
+                            className="w-5 h-5"
+                          />
+                          <span className="text-sm font-light leading-5 tracking-[0px] text-center text-[#0BFFB6]">
+                            {plans[activePlanIndex].seatsLeft}
+                          </span>
+                        </div>
+                      </ScrollAnimation>
+                    )}
                   </div>
                 </div>
               </div>
