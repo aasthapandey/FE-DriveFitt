@@ -10,7 +10,8 @@ export const plansData: StaticPageData = {
   aboutUsHeroSection: {
     title: "Plans & Pricing",
     subTitle: "",
-    description: "For our Flagship club - M3M 65th Avenue, Golf Course Extension Road, Gurugram",
+    description:
+      "For our Flagship club - M3M 65th Avenue, Golf Course Extension Road, Gurugram",
     roiTag: "",
     roiIcon: "https://da8nru77lsio9.cloudfront.net/images/roi-icon.svg",
     desktopImage: "https://da8nru77lsio9.cloudfront.net/images/plans/hero.svg",
@@ -22,7 +23,7 @@ export const plansData: StaticPageData = {
     title: "Train. Play. Recover. Your way.",
     description:
       "Enjoy unlimited club access, group classes*, a complimentary fitness assessment + 2 Personal Training sessions and more.",
-    class: "-mt-[195px] md:-mt-[300px]",
+    class: "-mt-[160px] md:-mt-[300px]",
     titleClass:
       "font-semibold text-2xl leading-7 tracking-[-1px] text-center px-[34px] md:font-semibold md:text-[40px] md:leading-[56px] md:tracking-[-2px] md:text-center",
     descriptionClass:
