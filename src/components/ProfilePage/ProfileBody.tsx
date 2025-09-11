@@ -314,15 +314,34 @@ const ProfileBody = ({ data, isMobile }: ProfileBodyProps) => {
 
               <div className="flex flex-col md:mt-[50px]">
                 <span className="font-light text-xs leading-4 mb-1 text-[#8A8A8A]">
-                  Plan expires
+                  {user?.memberships && user.memberships.length > 1
+                    ? "Plans expire"
+                    : "Plan expires"}
                 </span>
-                <span className="font-normal text-xl leading-7 mb-2 text-white">
-                  {user?.membershipInfo?.expiresAt
-                    ? new Date(
+                <div className="flex flex-col gap-1">
+                  {user?.memberships && user.memberships.length > 0 ? (
+                    user.memberships.map((membership) => (
+                      <div key={membership.id} className="flex flex-col">
+                        <span className="font-normal text-sm leading-5 text-[#CCCCCC]">
+                          {getPlanName(membership.membershipType)}
+                        </span>
+                        <span className="font-normal text-xl leading-7 text-white">
+                          {new Date(membership.expiresAt).toLocaleDateString()}
+                        </span>
+                      </div>
+                    ))
+                  ) : user?.membershipInfo?.expiresAt ? (
+                    <span className="font-normal text-xl leading-7 text-white">
+                      {new Date(
                         user.membershipInfo.expiresAt
-                      ).toLocaleDateString()
-                    : "No active plan"}
-                </span>
+                      ).toLocaleDateString()}
+                    </span>
+                  ) : (
+                    <span className="font-normal text-xl leading-7 text-white">
+                      No active plan
+                    </span>
+                  )}
+                </div>
                 {/* Renew plan functionality removed - not available in actions */}
               </div>
 
@@ -464,15 +483,34 @@ const ProfileBody = ({ data, isMobile }: ProfileBodyProps) => {
 
               <div className="flex flex-col md:!mt-[50px]">
                 <span className="font-light text-base leading-5 mb-2 text-[#8A8A8A]">
-                  Plan expires
+                  {user?.memberships && user.memberships.length > 1
+                    ? "Plans expire"
+                    : "Plan expires"}
                 </span>
-                <span className="font-normal text-2xl leading-7 mb-5 text-white">
-                  {user?.membershipInfo?.expiresAt
-                    ? new Date(
+                <div className="flex flex-col gap-3">
+                  {user?.memberships && user.memberships.length > 0 ? (
+                    user.memberships.map((membership) => (
+                      <div key={membership.id} className="flex flex-col">
+                        <span className="font-normal text-base leading-5 text-[#CCCCCC]">
+                          {getPlanName(membership.membershipType)}
+                        </span>
+                        <span className="font-normal text-2xl leading-7 text-white">
+                          {new Date(membership.expiresAt).toLocaleDateString()}
+                        </span>
+                      </div>
+                    ))
+                  ) : user?.membershipInfo?.expiresAt ? (
+                    <span className="font-normal text-2xl leading-7 text-white">
+                      {new Date(
                         user.membershipInfo.expiresAt
-                      ).toLocaleDateString()
-                    : "No active plan"}
-                </span>
+                      ).toLocaleDateString()}
+                    </span>
+                  ) : (
+                    <span className="font-normal text-2xl leading-7 text-white">
+                      No active plan
+                    </span>
+                  )}
+                </div>
                 {/* Renew plan functionality removed - not available in actions */}
               </div>
             </div>
