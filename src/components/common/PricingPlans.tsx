@@ -47,7 +47,6 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
   const [waitingForUserData, setWaitingForUserData] = useState(false);
   const [isPaymentProcessing, setIsPaymentProcessing] = useState(false);
   const [userMembershipTypes, setUserMembershipTypes] = useState<number[]>([]);
-  const [membershipLoading, setMembershipLoading] = useState(false);
 
   const { isAuthenticated, user } = useSelector(
     (state: RootState) => state.auth
@@ -59,7 +58,6 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
   useEffect(() => {
     if (isAuthenticated && user?.id) {
       const fetchUserMembership = async () => {
-        setMembershipLoading(true);
         try {
           const membershipResult = await checkUserMembership(user.id);
           if (membershipResult.type === "auth/checkMembership/fulfilled") {
@@ -93,8 +91,6 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
         } catch (error) {
           console.error("Error fetching user membership:", error);
           setUserMembershipTypes([]);
-        } finally {
-          setMembershipLoading(false);
         }
       };
 
@@ -368,11 +364,7 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
     router.push("/");
   };
 
-  // Removed handleMembershipAlertModalClose - no longer needed
 
-  const handleGoToProfile = () => {
-    router.push("/profile");
-  };
 
   const handlePhoneModalSuccess = (
     phoneNumber: string,

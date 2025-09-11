@@ -353,7 +353,7 @@ const ProfileBody = ({ data, isMobile }: ProfileBodyProps) => {
                 </span>
                 <div className="flex flex-col gap-1">
                   {user?.memberships && user.memberships.length > 0 ? (
-                    user.memberships.map((membership, index) => (
+                    user.memberships.map((membership) => (
                       <span
                         key={membership.id}
                         className="font-normal text-xl leading-7 text-white"
