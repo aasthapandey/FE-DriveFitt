@@ -1,34 +1,15 @@
 "use client";
 
-import AdminHeader from "@/components/AdminPortal/AdminHeader";
-import { AdminUser } from "@/types/adminPortal";
-
-// Mock user data - in real implementation, this would come from authentication
-const mockUser: AdminUser = {
-  name: "Admin",
-  email: "admin@drivefitt.com",
-};
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function FormSubmissionPage() {
-  return (
-    <div className="min-h-screen bg-[#0D0D0D]">
-      <AdminHeader
-        title="Form Submission"
-        user={mockUser}
-        showSearchButton={false}
-        showAddButton={false}
-      />
+  const router = useRouter();
 
-      <div className="p-10">
-        <div className="bg-[#1D1D1D] rounded-2xl p-8 text-center">
-          <h2 className="text-2xl font-semibold text-white mb-4">
-            Form Submissions
-          </h2>
-          <p className="text-[#8A8A8A] text-lg">
-            Form submission management will be implemented here
-          </p>
-        </div>
-      </div>
-    </div>
-  );
+  useEffect(() => {
+    // Redirect to general-queries as default
+    router.push("/admin-portal/form-submission/general-queries");
+  }, [router]);
+
+  return null;
 }

@@ -20,6 +20,7 @@ export interface AdminNavItem {
   label: string;
   path: string;
   icon?: string;
+  subItems?: AdminNavItem[];
 }
 
 export interface AdminPortalState {

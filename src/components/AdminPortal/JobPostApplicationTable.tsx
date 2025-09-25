@@ -1,0 +1,530 @@
+"use client";
+
+import React, { useState } from "react";
+import Image from "next/image";
+
+type ToggleOption = "job-posts" | "application";
+
+interface JobPostApplicationTableProps {
+  selectedToggle: ToggleOption;
+  onEditJobPost?: (index: number, jobData: JobPostData) => void;
+}
+
+interface ApplicationData {
+  candidatesName: string;
+  emailAddress: string;
+  phoneNumber: string;
+  workExperience: string;
+  expectedSalary: string;
+  appliedFor: string;
+  resumeStatus: "In Review" | "Shortlisted" | "New";
+}
+
+interface JobPostData {
+  jobTitle: string;
+  department: string;
+  location: string;
+  status: "Active" | "Closed";
+}
+
+const mockApplicationData: ApplicationData[] = [
+  {
+    candidatesName: "Sahil kapoor",
+    emailAddress: "sahilkapoor@gmail.com",
+    phoneNumber: "989 989 9898",
+    workExperience: "5 years",
+    expectedSalary: "5 LPA",
+    appliedFor: "Cricket coach",
+    resumeStatus: "In Review",
+  },
+  {
+    candidatesName: "Sahil kapoor",
+    emailAddress: "sahilkapoor@gmail.com",
+    phoneNumber: "989 989 9898",
+    workExperience: "5 years",
+    expectedSalary: "5 LPA",
+    appliedFor: "Cricket coach",
+    resumeStatus: "Shortlisted",
+  },
+  {
+    candidatesName: "Sahil kapoor",
+    emailAddress: "sahilkapoor@gmail.com",
+    phoneNumber: "989 989 9898",
+    workExperience: "5 years",
+    expectedSalary: "5 LPA",
+    appliedFor: "Cricket coach",
+    resumeStatus: "New",
+  },
+  {
+    candidatesName: "Sahil kapoor",
+    emailAddress: "sahilkapoor@gmail.com",
+    phoneNumber: "989 989 9898",
+    workExperience: "5 years",
+    expectedSalary: "5 LPA",
+    appliedFor: "Cricket coach",
+    resumeStatus: "Shortlisted",
+  },
+  {
+    candidatesName: "Sahil kapoor",
+    emailAddress: "sahilkapoor@gmail.com",
+    phoneNumber: "989 989 9898",
+    workExperience: "5 years",
+    expectedSalary: "5 LPA",
+    appliedFor: "Cricket coach",
+    resumeStatus: "Shortlisted",
+  },
+  {
+    candidatesName: "Sahil kapoor",
+    emailAddress: "sahilkapoor@gmail.com",
+    phoneNumber: "989 989 9898",
+    workExperience: "5 years",
+    expectedSalary: "5 LPA",
+    appliedFor: "Cricket coach",
+    resumeStatus: "Shortlisted",
+  },
+  {
+    candidatesName: "Sahil kapoor",
+    emailAddress: "sahilkapoor@gmail.com",
+    phoneNumber: "989 989 9898",
+    workExperience: "5 years",
+    expectedSalary: "5 LPA",
+    appliedFor: "Cricket coach",
+    resumeStatus: "Shortlisted",
+  },
+];
+
+const mockJobPostData: JobPostData[] = [
+  {
+    jobTitle: "Trainer",
+    department: "Cricket",
+    location: "Sector 10, Dwarka, New Delhi",
+    status: "Active",
+  },
+  {
+    jobTitle: "Trainer",
+    department: "Cricket",
+    location: "Sector 10, Dwarka, New Delhi",
+    status: "Active",
+  },
+  {
+    jobTitle: "Trainer",
+    department: "Cricket",
+    location: "Sector 10, Dwarka, New Delhi",
+    status: "Active",
+  },
+  {
+    jobTitle: "Trainer",
+    department: "Cricket",
+    location: "Sector 10, Dwarka, New Delhi",
+    status: "Closed",
+  },
+  {
+    jobTitle: "Trainer",
+    department: "Cricket",
+    location: "Sector 10, Dwarka, New Delhi",
+    status: "Active",
+  },
+  {
+    jobTitle: "Trainer",
+    department: "Cricket",
+    location: "Sector 10, Dwarka, New Delhi",
+    status: "Active",
+  },
+  {
+    jobTitle: "Trainer",
+    department: "Cricket",
+    location: "Sector 10, Dwarka, New Delhi",
+    status: "Active",
+  },
+];
+
+const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
+  selectedToggle,
+  onEditJobPost,
+}) => {
+  const [dropdownOpen, setDropdownOpen] = useState<number | null>(null);
+  const [jobPostStatuses, setJobPostStatuses] = useState<
+    ("Active" | "Closed")[]
+  >(mockJobPostData.map((item) => item.status));
+  const [applicationStatuses, setApplicationStatuses] = useState<
+    ("In Review" | "Shortlisted" | "New")[]
+  >(mockApplicationData.map((item) => item.resumeStatus));
+
+  const handleJobPostStatusChange = (
+    index: number,
+    newStatus: "Active" | "Closed"
+  ) => {
+    const updatedStatuses = [...jobPostStatuses];
+    updatedStatuses[index] = newStatus;
+    setJobPostStatuses(updatedStatuses);
+    setDropdownOpen(null);
+  };
+
+  const handleApplicationStatusChange = (
+    index: number,
+    newStatus: "In Review" | "Shortlisted" | "New"
+  ) => {
+    const updatedStatuses = [...applicationStatuses];
+    updatedStatuses[index] = newStatus;
+    setApplicationStatuses(updatedStatuses);
+    setDropdownOpen(null);
+  };
+
+  const handleEdit = (index: number) => {
+    const jobData = mockJobPostData[index];
+    onEditJobPost?.(index, jobData);
+    setDropdownOpen(null);
+  };
+
+  const handleDelete = (index: number) => {
+    console.log(`Deleting item ${index}`);
+    setDropdownOpen(null);
+  };
+
+  const toggleDropdown = (index: number) => {
+    setDropdownOpen(dropdownOpen === index ? null : index);
+  };
+
+  const renderApplicationHeaders = () => (
+    <div
+      className="bg-[#333333] border border-[#333333] flex items-center text-[#8A8A8A] w-full"
+      style={{
+        height: "48px",
+        paddingTop: "16px",
+        paddingRight: "40px",
+        paddingBottom: "16px",
+        paddingLeft: "40px",
+        gap: "24px",
+        borderTopLeftRadius: "16px",
+        borderTopRightRadius: "16px",
+        fontFamily: "Inter",
+        fontWeight: 500,
+        fontSize: "12px",
+        lineHeight: "16px",
+      }}
+    >
+      <div className="flex-1 text-center">Candidates name</div>
+      <div className="flex-1 text-center">Email address</div>
+      <div className="flex-1 text-center">Phone number</div>
+      <div className="flex-1 text-center">Work Experience</div>
+      <div className="flex-1 text-center">Expected Salary</div>
+      <div className="flex-1 text-center">Applied for</div>
+      <div className="flex-1 text-center">Resume status</div>
+      <div className="w-20">Action</div>
+    </div>
+  );
+
+  const renderJobPostHeaders = () => (
+    <div
+      className="bg-[#333333] border border-[#333333] flex items-center text-[#8A8A8A] w-full"
+      style={{
+        height: "48px",
+        paddingTop: "16px",
+        paddingRight: "40px",
+        paddingBottom: "16px",
+        paddingLeft: "40px",
+        gap: "24px",
+        borderTopLeftRadius: "16px",
+        borderTopRightRadius: "16px",
+        fontFamily: "Inter",
+        fontWeight: 500,
+        fontSize: "12px",
+        lineHeight: "16px",
+      }}
+    >
+      <div className="flex-1">Job title</div>
+      <div className="flex-1">Department</div>
+      <div className="flex-1">Location</div>
+      <div className="flex-1 text-center">Status</div>
+      <div className="w-20">Action</div>
+    </div>
+  );
+
+  const renderApplicationRows = () =>
+    mockApplicationData.map((item, index) => (
+      <div
+        key={index}
+        className="bg-[#1D1D1D] border-r border-b border-l border-[#333333] flex items-center text-white relative w-full"
+        style={{
+          height: "56px",
+          paddingTop: "16px",
+          paddingRight: "40px",
+          paddingBottom: "16px",
+          paddingLeft: "40px",
+          gap: "24px",
+          fontSize: "14px",
+        }}
+      >
+        <div className="flex-1 flex justify-center">{item.candidatesName}</div>
+        <div className="flex-1 flex justify-center">{item.emailAddress}</div>
+        <div className="flex-1 flex justify-center">{item.phoneNumber}</div>
+        <div className="flex-1 flex justify-center">{item.workExperience}</div>
+        <div className="flex-1 flex justify-center">{item.expectedSalary}</div>
+        <div className="flex-1 flex justify-center">{item.appliedFor}</div>
+        <div className="flex-1 flex justify-center">
+          <div className="relative">
+            <button
+              type="button"
+              onClick={(e: React.MouseEvent) => {
+                e.preventDefault();
+                toggleDropdown(index);
+              }}
+              className="bg-[#333333] border border-[#333333] rounded flex items-center justify-between transition-colors"
+              style={{
+                width: "85px",
+                height: "24px",
+                paddingTop: "4px",
+                paddingRight: "10px",
+                paddingBottom: "4px",
+                paddingLeft: "10px",
+                gap: "4px",
+              }}
+            >
+              <span
+                className={`text-center ${
+                  applicationStatuses[index] === "In Review"
+                    ? "text-[#BFBFBF]"
+                    : applicationStatuses[index] === "Shortlisted"
+                    ? "text-[#0BFFB6]"
+                    : "text-[#00DBDC]"
+                }`}
+                style={{
+                  fontFamily: "Inter",
+                  fontWeight: 300,
+                  fontSize: "12px",
+                  lineHeight: "16px",
+                  letterSpacing: "0%",
+                }}
+              >
+                {applicationStatuses[index]}
+              </span>
+              <svg
+                width="8"
+                height="6"
+                viewBox="0 0 8 6"
+                fill="none"
+                className={`${
+                  applicationStatuses[index] === "In Review"
+                    ? "text-[#BFBFBF]"
+                    : applicationStatuses[index] === "Shortlisted"
+                    ? "text-[#0BFFB6]"
+                    : "text-[#00DBDC]"
+                } transform transition-transform duration-200 ${
+                  dropdownOpen === index ? "rotate-180" : ""
+                }`}
+              >
+                <path
+                  d="M1 1L4 4L7 1"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+            {dropdownOpen === index && (
+              <div className="absolute top-full left-0 mt-1 bg-[#1D1D1D] border border-[#333333] rounded shadow-lg z-10">
+                <button
+                  type="button"
+                  onClick={() =>
+                    handleApplicationStatusChange(index, "In Review")
+                  }
+                  className="block w-full text-left px-3 py-2 text-sm text-white hover:bg-[#333333]"
+                >
+                  In Review
+                </button>
+                <button
+                  type="button"
+                  onClick={() =>
+                    handleApplicationStatusChange(index, "Shortlisted")
+                  }
+                  className="block w-full text-left px-3 py-2 text-sm text-white hover:bg-[#333333]"
+                >
+                  Shortlisted
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleApplicationStatusChange(index, "New")}
+                  className="block w-full text-left px-3 py-2 text-sm text-white hover:bg-[#333333]"
+                >
+                  New
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+        <div className="w-20">
+          <div className="relative">
+            <button
+              type="button"
+              onClick={() => toggleDropdown(index + 1000)}
+              className="w-8 h-8 flex items-center justify-center hover:bg-[#333333] rounded"
+            >
+              <Image
+                src="/images/careers/dots-vertical.svg"
+                alt="Actions"
+                width={16}
+                height={16}
+              />
+            </button>
+            {dropdownOpen === index + 1000 && (
+              <div className="absolute top-full right-0 mt-1 bg-[#1D1D1D] border border-[#333333] rounded shadow-lg z-10">
+                <button
+                  type="button"
+                  onClick={() => handleDelete(index)}
+                  className="block w-full text-left px-3 py-2 text-sm text-red-400 hover:bg-[#333333]"
+                >
+                  Delete
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    ));
+
+  const renderJobPostRows = () =>
+    mockJobPostData.map((item, index) => (
+      <div
+        key={index}
+        className="bg-[#1D1D1D] border-r border-b border-l border-[#333333] flex items-center text-white relative w-full"
+        style={{
+          height: "56px",
+          paddingTop: "16px",
+          paddingRight: "40px",
+          paddingBottom: "16px",
+          paddingLeft: "40px",
+          gap: "24px",
+          fontSize: "14px",
+        }}
+      >
+        <div className="flex-1">{item.jobTitle}</div>
+        <div className="flex-1">{item.department}</div>
+        <div className="flex-1">{item.location}</div>
+        <div className="flex-1 flex justify-center">
+          <div className="relative">
+            <button
+              type="button"
+              onClick={() => toggleDropdown(index + 2000)}
+              className="bg-[#333333] border border-[#333333] rounded flex items-center justify-center gap-1 transition-colors"
+              style={{
+                width: "85px",
+                height: "24px",
+                paddingTop: "4px",
+                paddingRight: "10px",
+                paddingBottom: "4px",
+                paddingLeft: "10px",
+                gap: "4px",
+              }}
+            >
+              <span
+                className={`text-center ${
+                  jobPostStatuses[index] === "Active"
+                    ? "text-[#00DBDC]"
+                    : "text-[#BFBFBF]"
+                }`}
+                style={{
+                  fontFamily: "Inter",
+                  fontWeight: 300,
+                  fontSize: "12px",
+                  lineHeight: "16px",
+                  letterSpacing: "0%",
+                }}
+              >
+                {jobPostStatuses[index]}
+              </span>
+              <svg
+                width="8"
+                height="6"
+                viewBox="0 0 8 6"
+                fill="none"
+                className={`${
+                  jobPostStatuses[index] === "Active"
+                    ? "text-[#00DBDC]"
+                    : "text-[#BFBFBF]"
+                } transform transition-transform duration-200 ${
+                  dropdownOpen === index + 2000 ? "rotate-180" : ""
+                }`}
+              >
+                <path
+                  d="M1 1L4 4L7 1"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+            {dropdownOpen === index + 2000 && (
+              <div className="absolute top-full left-0 mt-1 bg-[#1D1D1D] border border-[#333333] rounded shadow-lg z-10">
+                <button
+                  type="button"
+                  onClick={() =>
+                    handleJobPostStatusChange(
+                      index,
+                      jobPostStatuses[index] === "Active" ? "Closed" : "Active"
+                    )
+                  }
+                  className="block w-full text-left px-3 py-2 text-sm text-white hover:bg-[#333333]"
+                >
+                  {jobPostStatuses[index] === "Active" ? "Closed" : "Active"}
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+        <div className="w-20">
+          <div className="relative">
+            <button
+              type="button"
+              onClick={() => toggleDropdown(index + 3000)}
+              className="w-8 h-8 flex items-center justify-center hover:bg-[#333333] rounded"
+            >
+              <Image
+                src="/images/careers/dots-vertical.svg"
+                alt="Actions"
+                width={16}
+                height={16}
+              />
+            </button>
+            {dropdownOpen === index + 3000 && (
+              <div className="absolute top-full right-0 mt-1 bg-[#1D1D1D] border border-[#333333] rounded shadow-lg z-10">
+                <button
+                  type="button"
+                  onClick={() => handleEdit(index)}
+                  className="block w-full text-left px-3 py-2 text-sm text-white hover:bg-[#333333]"
+                >
+                  Edit
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleDelete(index)}
+                  className="block w-full text-left px-3 py-2 text-sm text-red-400 hover:bg-[#333333]"
+                >
+                  Delete
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    ));
+
+  return (
+    <div className="w-full">
+      {selectedToggle === "application" ? (
+        <div className="w-full">
+          {renderApplicationHeaders()}
+          {renderApplicationRows()}
+        </div>
+      ) : (
+        <div className="w-full">
+          {renderJobPostHeaders()}
+          {renderJobPostRows()}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default JobPostApplicationTable;

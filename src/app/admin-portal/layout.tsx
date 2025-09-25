@@ -21,7 +21,24 @@ const adminNavItems: AdminNavItem[] = [
   {
     id: "form-submission",
     label: "Form Submission",
-    path: "/admin-portal/form-submission",
+    path: "/admin-portal/form-submission/general-queries",
+    subItems: [
+      {
+        id: "general-queries",
+        label: "General Queries",
+        path: "/admin-portal/form-submission/general-queries",
+      },
+      {
+        id: "franchise-applications",
+        label: "Franchise Applications",
+        path: "/admin-portal/form-submission/franchise-applications",
+      },
+      {
+        id: "lead-submissions",
+        label: "Lead Submissions",
+        path: "/admin-portal/form-submission/lead-submissions",
+      },
+    ],
   },
 ];
 
@@ -37,24 +54,44 @@ export default function AdminPortalLayout({
   // Extract selected option from pathname
   useEffect(() => {
     const pathSegments = pathname.split("/");
-    const currentOption = pathSegments[pathSegments.length - 1];
 
-    if (
-      currentOption &&
-      adminNavItems.some((item) => item.id === currentOption)
-    ) {
-      setSelectedOption(currentOption);
-    } else if (pathname === "/admin-portal") {
-      // Redirect to dashboard if on base admin-portal path
-      router.push("/admin-portal/dashboard");
+    // Handle form-submission sub-pages
+    if (pathname.includes("/form-submission/")) {
+      setSelectedOption("form-submission");
+    } else {
+      const currentOption = pathSegments[pathSegments.length - 1];
+
+      if (
+        currentOption &&
+        adminNavItems.some((item) => item.id === currentOption)
+      ) {
+        setSelectedOption(currentOption);
+      } else if (pathname === "/admin-portal") {
+        // Redirect to dashboard if on base admin-portal path
+        router.push("/admin-portal/dashboard");
+      }
     }
   }, [pathname, router]);
 
   const handleOptionSelect = (option: string) => {
     setSelectedOption(option);
+
+    // Check if it's a main nav item
     const navItem = adminNavItems.find((item) => item.id === option);
     if (navItem) {
       router.push(navItem.path);
+      return;
+    }
+
+    // Check if it's a sub-item
+    for (const mainItem of adminNavItems) {
+      if (mainItem.subItems) {
+        const subItem = mainItem.subItems.find((sub) => sub.id === option);
+        if (subItem) {
+          router.push(subItem.path);
+          return;
+        }
+      }
     }
   };
 

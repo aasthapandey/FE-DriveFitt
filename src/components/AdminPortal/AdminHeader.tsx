@@ -65,7 +65,7 @@ const AdminHeader = ({
   }, [showSearchInput]);
 
   return (
-    <div className="h-fit bg-[#0D0D0D] mt-10 px-10 flex items-start justify-between">
+    <div className="h-fit bg-[#0D0D0D] mb-5 mt-10 px-10 flex items-start justify-between">
       {/* Title */}
       <h1 className="font-normal text-[28px] leading-8 tracking-[0%] text-white">
         {title}
@@ -122,16 +122,21 @@ const AdminHeader = ({
             onClick={onAdd || (() => {})}
             className="w-9 h-9 bg-[#1D1D1D] border border-[#333333] rounded-lg p-2 flex items-center justify-center hover:bg-[#333333] transition-colors duration-200"
           >
-            <span className="text-white text-lg font-medium leading-none">
-              +
-            </span>
+            <Image
+              src="/images/careers/plus.svg"
+              alt="Search"
+              width={20}
+              height={20}
+            />
           </button>
         )}
 
         {/* Publish Button */}
-        <button className="bg-[#00DBDC] text-[#0D0D0D] px-6 py-2 rounded-lg font-medium text-sm hover:bg-[#00C5C8] transition-colors duration-200">
-          Publish
-        </button>
+        {title === "Blogs" && (
+          <button className="bg-[#00DBDC] text-[#0D0D0D] px-6 py-2 rounded-lg font-medium text-sm hover:bg-[#00C5C8] transition-colors duration-200">
+            Publish
+          </button>
+        )}
 
         {/* User Profile */}
         <div className="relative">

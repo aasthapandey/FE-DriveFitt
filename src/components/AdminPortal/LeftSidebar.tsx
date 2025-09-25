@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { LeftSidebarProps } from "@/types/adminPortal";
 
 const LeftSidebar = ({
@@ -9,6 +10,7 @@ const LeftSidebar = ({
   onOptionSelect,
   navItems,
 }: LeftSidebarProps) => {
+  const pathname = usePathname();
   const getIconForOption = (optionId: string) => {
     switch (optionId) {
       case "dashboard":
@@ -144,30 +146,70 @@ const LeftSidebar = ({
       <div className="space-y-1">
         {navItems.map((item) => {
           const isSelected = selectedOption === item.id;
+          const isFormSubmission = item.id === "form-submission";
+          const isFormSubmissionSubPage =
+            pathname.includes("/form-submission/");
+          const showSubItems =
+            isFormSubmission && (isSelected || isFormSubmissionSubPage);
+
+          // For form-submission, check if any sub-page is active
+          const isFormSubmissionActive =
+            isFormSubmission && (isSelected || isFormSubmissionSubPage);
+
           return (
-            <button
-              key={item.id}
-              type="button"
-              onClick={() => onOptionSelect?.(item.id)}
-              className={`w-full h-[52px] px-6 py-4 flex items-center gap-4 transition-all duration-200 ${
-                isSelected ? "bg-[#00DBDC]" : "hover:bg-[#333333]"
-              }`}
-            >
-              <div
-                className={`${
-                  isSelected ? "text-[#0D0D0D]" : "text-[#BFBFBF]"
+            <div key={item.id}>
+              <button
+                type="button"
+                onClick={() => onOptionSelect?.(item.id)}
+                className={`w-full h-[52px] px-6 py-4 flex items-center gap-4 transition-all duration-200 ${
+                  isFormSubmissionActive ? "bg-[#00DBDC]" : "hover:bg-[#333333]"
                 }`}
               >
-                {getIconForOption(item.id)}
-              </div>
-              <span
-                className={`font-medium text-sm leading-5 tracking-[0%] ${
-                  isSelected ? "text-[#0D0D0D]" : "text-[#BFBFBF]"
-                }`}
-              >
-                {item.label}
-              </span>
-            </button>
+                <div
+                  className={`${
+                    isFormSubmissionActive ? "text-[#0D0D0D]" : "text-[#BFBFBF]"
+                  }`}
+                >
+                  {getIconForOption(item.id)}
+                </div>
+                <span
+                  className={`font-medium text-sm leading-5 tracking-[0%] ${
+                    isFormSubmissionActive ? "text-[#0D0D0D]" : "text-[#BFBFBF]"
+                  }`}
+                >
+                  {item.label}
+                </span>
+              </button>
+
+              {/* Sub Items */}
+              {showSubItems && item.subItems && (
+                <div className="ml-4 mt-1 space-y-1">
+                  {item.subItems.map((subItem) => {
+                    const isSubSelected = pathname === subItem.path;
+                    return (
+                      <button
+                        key={subItem.id}
+                        type="button"
+                        onClick={() => onOptionSelect?.(subItem.id)}
+                        className={`w-full h-[40px] px-4 py-2 flex items-center gap-3 transition-all duration-200 rounded-lg ${
+                          isSubSelected
+                            ? "bg-[#333333] text-[#00DBDC]"
+                            : "text-[#BFBFBF] hover:bg-[#333333] hover:text-white"
+                        }`}
+                      >
+                        <span
+                          className={`text-sm leading-5 ${
+                            isSubSelected ? "font-medium" : "font-normal"
+                          }`}
+                        >
+                          {subItem.label}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
           );
         })}
       </div>
