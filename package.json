@@ -30,6 +30,7 @@
     "react-dom": "^18",
     "react-redux": "^9.2.0",
     "react-slick": "^0.30.3",
+    "recharts": "^3.2.1",
     "sass": "^1.90.0",
     "simple-git": "^3.28.0",
     "slick-carousel": "^1.8.1",
