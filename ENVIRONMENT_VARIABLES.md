@@ -64,3 +64,4 @@ DB_NAME=your_database_name
 
 - Invoices are uploaded to S3 with path: `invoices/{receipt_number}.pdf`
 - CDN URL format: `{AWS_CLOUDFRONT_URL}/invoices/{receipt_number}.pdf`
+
