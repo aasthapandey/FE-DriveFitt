@@ -1,10 +1,10 @@
-import { CardSection } from "@/types/franchisePage";
+import { FranchiseCardSection } from "@/types/franchisePage";
 import TitleDescription from "@/components/common/TitleDescription";
 import OpportunityCard from "@/components/FranchisePage/OpportunityCard";
 import ScrollAnimation from "@/components/common/ScrollAnimation";
 
 interface OpportunitySectionProps {
-  data: CardSection;
+  data: FranchiseCardSection;
   isMobile?: boolean;
 }
 

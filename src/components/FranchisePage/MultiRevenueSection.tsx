@@ -1,15 +1,16 @@
-import { CardSection } from "@/types/franchisePage";
+import { FranchiseCardSection } from "@/types/franchisePage";
 import TitleDescription from "@/components/common/TitleDescription";
 import MultiRevenueCard from "@/components/FranchisePage/MultiRevenueCard";
 import ScrollAnimation from "@/components/common/ScrollAnimation";
 
-interface MultiRevenueSectionProps {
-  data: CardSection;
+export interface MultiRevenueSectionProps {
+  data: FranchiseCardSection;
   isMobile?: boolean;
 }
 
 const MultiRevenueSection = ({ data }: MultiRevenueSectionProps) => {
-  const { title, description, cardList } = data;
+  const { title, description, cardList, cardTitleClass, cardDescriptionClass } =
+    data;
   return (
     <section className="md:px-[120px] px-6 flex flex-col gap-5">
       <ScrollAnimation delay={0.2} direction="up">
@@ -23,7 +24,11 @@ const MultiRevenueSection = ({ data }: MultiRevenueSectionProps) => {
               delay={0.3 + index * 0.1}
               direction="up"
             >
-              <MultiRevenueCard card={card} />
+              <MultiRevenueCard
+                card={card}
+                cardTitleClass={cardTitleClass}
+                cardDescriptionClass={cardDescriptionClass}
+              />
             </ScrollAnimation>
           ))}
         </div>

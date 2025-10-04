@@ -15,8 +15,7 @@ export const recoveryData: StaticPageData = {
       "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/hero.svg",
     mobileImage:
       "https://da8nru77lsio9.cloudfront.net/images/recovery-compressed/mobile-hero.svg",
-    btnPrimaryText: "Join the Waitlist",
-    btnSecondaryText: "Join Online",
+    btnPrimaryText: "Join Now",
   },
   cardSection5: {
     title: "Not Just Rest. Recovery Tech.",
@@ -197,7 +196,7 @@ export const recoveryData: StaticPageData = {
       {
         title: "Quick links",
         links: [
-          { title: "About us", link: "/coming-soon" },
+          { title: "About us", link: "/about-us" },
           { title: "Blogs", link: "/coming-soon" },
           { title: "Career", link: "/coming-soon" },
           { title: "Partner with us", link: "/franchise" },
@@ -210,9 +209,9 @@ export const recoveryData: StaticPageData = {
           { title: "Fitness", link: "/fitness" },
           { title: "Recovery", link: "/recovery" },
           { title: "Running", link: "/running" },
-          { title: "Group Classes", link: "/coming-soon" },
-          { title: "Pilates", link: "/coming-soon" },
-          { title: "Personal Training", link: "/coming-soon" },
+          { title: "Group Classes", link: "/group-classes" },
+          { title: "Pilates", link: "/pilates" },
+          { title: "Personal Training", link: "/personal-training" },
         ],
       },
       {

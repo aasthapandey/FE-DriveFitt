@@ -12,11 +12,13 @@ export interface FranchiseHero {
 }
 
 export interface BannerSection {
+  title1?: string;
   title: string;
   subTitle: string;
   description1: string;
   description2: string;
   description3: string;
+  className?: string;
 }
 
 export interface Card {
@@ -24,15 +26,21 @@ export interface Card {
   title: string;
   description?: string | string[];
   subTitle?: string;
+  tooltipImage?: string;
+  tooltipImageMobile?: string;
+  backgroundImage?: string;
 }
 
-export interface CardSection {
+export interface FranchiseCardSection {
   title: string;
   description: string;
+  backgroundImage?: string;
   cardList: Card[];
+  cardTitleClass?: string;
+  cardDescriptionClass?: string;
 }
 
-export interface ImageCardSection extends CardSection {
+export interface ImageCardSection extends FranchiseCardSection {
   imageMobile: string;
   imageDesktop: string;
 }
@@ -40,6 +48,11 @@ export interface ImageCardSection extends CardSection {
 export interface Banner2SectionType {
   title: string;
   description: string;
+  class?: string;
+  titleClass?: string;
+  descriptionClass?: string;
+  subClass?: string;
+  imageClass?: string;
 }
 
 export interface FranchisePageData {
@@ -50,12 +63,29 @@ export interface FranchisePageData {
   navbar: NavbarProps;
   hero: FranchiseHero;
   banner1Section: BannerSection;
-  multiRevenueSection: CardSection;
-  opportunitySection: CardSection;
+  multiRevenueSection: FranchiseCardSection;
+  opportunitySection: FranchiseCardSection;
   whatYouReceiveSection: ImageCardSection;
-  whatLookingForSection: CardSection;
+  whatLookingForSection: FranchiseCardSection;
   banner2Section: Banner2SectionType;
-  nextStepSection: CardSection;
+  nextStepSection: FranchiseCardSection;
   footerInfoSection: FooterInfoProps;
   footerSection: FooterProps;
+}
+
+export interface CardType {
+  title?: string;
+  description?: string;
+  backgroundImage?: string;
+  link?: string;
+  className?: string;
+  iconImage?: string;
+  redirectionIcon?: string;
+}
+
+export interface CardSection {
+  title?: string;
+  description?: string;
+  isMobile?: boolean;
+  cardSection: CardType[];
 }

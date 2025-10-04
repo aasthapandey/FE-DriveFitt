@@ -4,10 +4,14 @@ import { cricketData } from "@/data/cricket";
 import { fitnessData } from "@/data/fitness";
 import { recoveryData } from "@/data/recovery";
 import { runningData } from "@/data/running";
+import { pilatesData } from "@/data/pilates";
 import { StaticPageData } from "@/types/staticPages";
 import StaticPage from "@/components/StaticPages";
 import { headers } from "next/headers";
 import { isMobileDevice } from "@/utils/deviceDetection";
+import { personalTrainingData } from "@/data/personal-training";
+import { groupClassesData } from "@/data/group-classes";
+import { plansData } from "@/data/plans";
 
 type PageParams = {
   params: {
@@ -20,6 +24,10 @@ const pageData: { [key: string]: StaticPageData } = {
   fitness: fitnessData,
   recovery: recoveryData,
   running: runningData,
+  pilates: pilatesData,
+  "personal-training": personalTrainingData,
+  "group-classes": groupClassesData,
+  plans: plansData,
 };
 
 export async function generateMetadata({
@@ -31,7 +39,7 @@ export async function generateMetadata({
   if (!data) {
     return {
       title: "Page Not Found | DriveFITT Premium Club",
-      description: "The page you're looking for doesn't exist.",
+      description: "The page you&apos;re looking for doesn&apos;t exist.",
     };
   }
 

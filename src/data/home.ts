@@ -40,8 +40,7 @@ export const homeData: StaticPageData = {
       "https://da8nru77lsio9.cloudfront.net/images/homec/mobile-hero.webp",
     originalMobileImage:
       "https://da8nru77lsio9.cloudfront.net/images/hero/home-mobile-original.svg",
-    btnPrimaryText: "Join the Waitlist",
-    btnSecondaryText: "Join the Waitlist",
+    btnPrimaryText: "Join Now",
   },
   countdownSection: {
     title: "Your Premium Sports Club. Opening Soon at ",
@@ -60,7 +59,7 @@ export const homeData: StaticPageData = {
   carouselBanner: [
     {
       title: "Experience Premium Club. Launching in GURUGRAM",
-      countdownEnd: "2025-11-15",
+      countdownEnd: "2025-12-15",
       backgroundImage:
         "https://da8nru77lsio9.cloudfront.net/images/carouselBanner/banner-1.svg",
     },
@@ -123,7 +122,7 @@ export const homeData: StaticPageData = {
           "Our expert-led group sessions fuel your energy and connect you with a community that shares your drive.",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/homec/card3-1.webp",
-        link: "/coming-soon",
+        link: "/group-classes",
         redirectionIcon: "/images/redirection.svg",
       },
       {
@@ -132,7 +131,7 @@ export const homeData: StaticPageData = {
           "Low-impact, high-control pilates workouts designed to improve flexibility, posture, and core strength in a group setting.",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/homec/card3-2.webp",
-        link: "/coming-soon",
+        link: "/pilates",
         redirectionIcon: "/images/redirection.svg",
       },
       {
@@ -141,7 +140,7 @@ export const homeData: StaticPageData = {
           "Customized 1-on-1 coaching tailored to your body, goals, sport-specific performance—and complete recovery needs.",
         backgroundImage:
           "https://da8nru77lsio9.cloudfront.net/images/homec/card3-3.webp",
-        link: "/coming-soon",
+        link: "/personal-training",
         redirectionIcon: "/images/redirection.svg",
       },
     ],
@@ -324,7 +323,7 @@ export const homeData: StaticPageData = {
         links: [
           {
             title: "About Us",
-            link: "/coming-soon",
+            link: "/about-us",
           },
           {
             title: "Blogs",
@@ -361,15 +360,15 @@ export const homeData: StaticPageData = {
           },
           {
             title: "Group Classes",
-            link: "/coming-soon",
+            link: "/group-classes",
           },
           {
             title: "Pilates",
-            link: "/coming-soon",
+            link: "/pilates",
           },
           {
             title: "Personal Training",
-            link: "/coming-soon",
+            link: "/personal-training",
           },
         ],
       },

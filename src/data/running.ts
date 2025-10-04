@@ -19,8 +19,7 @@ export const runningData: StaticPageData = {
       "https://da8nru77lsio9.cloudfront.net/images/running-compressed/hero.webp",
     mobileImage:
       "https://da8nru77lsio9.cloudfront.net/images/running-compressed/mobile-hero.webp",
-    btnPrimaryText: "Join the Waitlist",
-    btnSecondaryText: "Join Online",
+    btnPrimaryText: "Join Now",
   },
   cardSection5: {
     title: "Why You'll Love It Here",
@@ -234,7 +233,7 @@ export const runningData: StaticPageData = {
       {
         title: "Quick links",
         links: [
-          { title: "About us", link: "/coming-soon" },
+          { title: "About us", link: "/about-us" },
           { title: "Blogs", link: "/coming-soon" },
           { title: "Career", link: "/coming-soon" },
           { title: "Partner with us", link: "/franchise" },
@@ -247,9 +246,9 @@ export const runningData: StaticPageData = {
           { title: "Fitness", link: "/fitness" },
           { title: "Recovery", link: "/recovery" },
           { title: "Running", link: "/running" },
-          { title: "Group Classes", link: "/coming-soon" },
-          { title: "Pilates", link: "/coming-soon" },
-          { title: "Personal Training", link: "/coming-soon" },
+          { title: "Group Classes", link: "/group-classes" },
+          { title: "Pilates", link: "/pilates" },
+          { title: "Personal Training", link: "/personal-training" },
         ],
       },
       {

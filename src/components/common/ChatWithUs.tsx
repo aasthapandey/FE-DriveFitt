@@ -92,7 +92,7 @@ const ChatWithUs = ({
         <ScrollAnimation
           delay={0.5}
           direction="left"
-          className={`${!isMobile ? "mt-auto" : "mt-6 md:mt-10"}`}
+          className={`mt-6 md:mt-10`}
         >
           <div className="flex gap-6 pt-6 md:pt-10 border-t border-[#333333]">
             {socialLinkList.map((link) => (

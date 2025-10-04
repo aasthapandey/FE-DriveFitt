@@ -22,7 +22,7 @@ export const error404Data: StaticPageData = {
       {
         title: "Quick Links",
         links: [
-          { title: "About Us", link: "/coming-soon" },
+          { title: "About us", link: "/about-us" },
           { title: "Blogs", link: "/coming-soon" },
           { title: "Career", link: "/coming-soon" },
           { title: "Partner With Us", link: "/franchise" },
@@ -35,9 +35,9 @@ export const error404Data: StaticPageData = {
           { title: "Fitness", link: "/fitness" },
           { title: "Recovery", link: "/recovery" },
           { title: "Running", link: "/running" },
-          { title: "Group Classes", link: "/coming-soon" },
-          { title: "Pilates", link: "/coming-soon" },
-          { title: "Personal Training", link: "/coming-soon" },
+          { title: "Group Classes", link: "/group-classes" },
+          { title: "Pilates", link: "/pilates" },
+          { title: "Personal Training", link: "/personal-training" },
         ],
       },
       {

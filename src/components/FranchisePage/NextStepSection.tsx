@@ -1,15 +1,16 @@
-import { CardSection } from "@/types/franchisePage";
+import { FranchiseCardSection } from "@/types/franchisePage";
 import TitleDescription from "@/components/common/TitleDescription";
 import Image from "next/image";
 import ScrollAnimation from "@/components/common/ScrollAnimation";
 
 interface NextStepSectionProps {
-  data: CardSection;
+  data: FranchiseCardSection;
   isMobile?: boolean;
 }
 
 const NextStepSection = ({ data }: NextStepSectionProps) => {
-  const { title, description, cardList } = data;
+  const { title, description, cardList, cardTitleClass, cardDescriptionClass } =
+    data;
   return (
     <section className="md:px-[120px] px-6 flex flex-col gap-5">
       <ScrollAnimation delay={0.2} direction="up">
@@ -41,7 +42,7 @@ const NextStepSection = ({ data }: NextStepSectionProps) => {
                 direction="right"
               >
                 <div
-                  className="rounded-[20px] items-start md:items-center md:rounded-[40px] border border-[#333333] p-6 md:p-10 flex gap-4 md:gap-10"
+                  className="rounded-[20px] items-center md:rounded-[40px] border border-[#333333] p-6 md:p-10 flex gap-4 md:gap-10"
                   style={{
                     background:
                       "linear-gradient(180deg, #111111 0.77%, #141414 100%)",
@@ -55,12 +56,24 @@ const NextStepSection = ({ data }: NextStepSectionProps) => {
                     className="size-[56px] md:size-[76px]"
                   />
                   <div className="flex flex-col gap-2 md:gap-4 tracking-[-1px]">
-                    <h3 className="font-semibold text-xl md:text-[32px] leading-6 md:leading-10">
+                    <h3
+                      className={`${
+                        cardTitleClass ||
+                        "font-semibold text-xl md:text-[28px] leading-6 md:leading-10"
+                      }`}
+                    >
                       {card.title}
                     </h3>
-                    <p className="text-[#8A8A8A] font-light md:font-normal text-xs md:text-base leading-4 md:leading-5 tracking-[0%]">
-                      {card.description}
-                    </p>
+                    {card.description && (
+                      <p
+                        className={`${
+                          cardDescriptionClass ||
+                          "text-[#8A8A8A] font-light md:font-normal text-xs md:text-base leading-4 md:leading-5 tracking-[0%]"
+                        }`}
+                      >
+                        {card.description}
+                      </p>
+                    )}
                   </div>
                 </div>
               </ScrollAnimation>

@@ -8,10 +8,11 @@ export const navbarData: NavbarProps = {
     { title: "Fitness", href: "/fitness" },
     { title: "Recovery", href: "/recovery" },
     { title: "Running", href: "/running" },
+    { title: "Membership", href: "/membership" },
     { title: "Franchise", href: "/franchise" },
   ],
   signInButton: {
-    text: "Join the Waitlist",
+    text: "Sign in",
   },
-  loginModalType: LoginModalType.EMAIL,
+  loginModalType: LoginModalType.PHONE,
 };

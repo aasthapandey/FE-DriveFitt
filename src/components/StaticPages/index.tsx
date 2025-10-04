@@ -2,6 +2,11 @@ import Navbar from "@/components/common/Navbar";
 import { navbarData } from "@/data/navbar";
 import HeroSection from "@/components/StaticPages/HeroSection";
 import {
+  BannerSection,
+  FranchiseCardSection,
+  FranchiseHero,
+} from "@/types/franchisePage";
+import {
   StaticPageData,
   Hero,
   CardSection,
@@ -25,6 +30,15 @@ import {
   RecoveryBannerProps,
   NotJustClubSectionProps,
   EcosystemGifSectionProps,
+  MeetYourCoachesSectionProps,
+  ChooseYourPathSectionProps,
+  PhotoCircleSectionProps,
+  Banner2SectionType,
+  Banner2WithImageProps,
+  CardsParallaxProps,
+  SignatureClassesSection as SignatureClassesSectionType,
+  PricingPlansSection,
+  IncludedPlansSection,
 } from "@/types/staticPages";
 import CardSection4 from "@/components/StaticPages/CardSection4";
 import CardSection5 from "@/components/StaticPages/CardSection5";
@@ -48,6 +62,24 @@ import JoinNow from "@/components/common/JoinNow";
 import RecoveryBanner from "@/components/StaticPages/RecoveryBanner";
 import NotJustClubSection from "./NotJustClubSection";
 import EcosystemGifSection from "./EcosystemGifSection";
+import MeetYourCoachesSection from "./MeetYourCoachesSection";
+import ChooseYourPathSection from "./ChooseYourPathSection";
+import MultiRevenueSection from "../FranchisePage/MultiRevenueSection";
+import PhotoCircleSection from "./PhotoCircleSection";
+import Banner1Section from "../FranchisePage/Banner1Section";
+import Banner2Section from "../FranchisePage/Banner2Section";
+import Banner2WithImage from "./Banner2WithImage";
+import FranchiseHeroSection from "../FranchisePage/FranchiseHeroSection";
+import AboutUsHeroSection from "./AboutUsHeroSection";
+import VisionarySection from "./VisionariesSection";
+import BannerCTA from "./BannerCTA";
+import BannerCTA2 from "./BannerCTA2";
+import NextStepSection from "../FranchisePage/NextStepSection";
+import CardsParallax from "./CardsParallax";
+import Banner3JoinUs from "./Banner3JoinUs";
+import SignatureClassesSection from "./SignatureClassesSection";
+import PricingPlans from "@/components/common/PricingPlans";
+import IncludedPlans from "@/components/common/IncludedPlans";
 
 interface StaticPageProps {
   data: StaticPageData;
@@ -81,6 +113,9 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
       | RecoveryBannerProps
       | NotJustClubSectionProps
       | EcosystemGifSectionProps
+      | CardsParallaxProps
+      | SignatureClassesSectionType
+      | PricingPlansSection
   ) => {
     switch (key) {
       case "hero":
@@ -88,6 +123,21 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
           <HeroSection
             data={value as Hero}
             pageName={pageName}
+            isMobile={isMobile}
+          />
+        );
+      case "franchiseHeroSection":
+        return (
+          <FranchiseHeroSection
+            data={value as FranchiseHero}
+            pageName={pageName}
+            isMobile={isMobile}
+          />
+        );
+      case "aboutUsHeroSection":
+        return (
+          <AboutUsHeroSection
+            data={value as FranchiseHero}
             isMobile={isMobile}
           />
         );
@@ -192,6 +242,121 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
             description={(value as EcosystemGifSectionProps).description}
           />
         );
+      case "meetYourCoachesSection":
+        return (
+          <MeetYourCoachesSection
+            title={(value as MeetYourCoachesSectionProps).title}
+            coaches={(value as MeetYourCoachesSectionProps).coaches}
+            seeMoreText={(value as MeetYourCoachesSectionProps).seeMoreText}
+            isMobile={isMobile}
+          />
+        );
+      case "chooseYourPathSection":
+        return (
+          <ChooseYourPathSection
+            title={(value as ChooseYourPathSectionProps).title}
+            packages={(value as ChooseYourPathSectionProps).packages}
+            buttonText={(value as ChooseYourPathSectionProps).buttonText}
+            isMobile={isMobile}
+          />
+        );
+      case "multiRevenueSection":
+        return (
+          <MultiRevenueSection
+            data={value as FranchiseCardSection}
+            isMobile={isMobile}
+          />
+        );
+      case "photoCircleSection":
+        return (
+          <PhotoCircleSection
+            data={value as PhotoCircleSectionProps}
+            isMobile={isMobile}
+          />
+        );
+      case "pricingPlansSection":
+        return (
+          <PricingPlans
+            plans={(value as PricingPlansSection).plans}
+            isMobile={isMobile}
+          />
+        );
+      case "includedPlansSection":
+        return (
+          <IncludedPlans
+            data={value as IncludedPlansSection}
+            isMobile={isMobile}
+          />
+        );
+
+      case "banner1Section":
+        return (
+          <Banner1Section data={value as BannerSection} isMobile={isMobile} />
+        );
+      case "banner2Section":
+        return (
+          <Banner2Section
+            data={value as Banner2SectionType}
+            isMobile={isMobile}
+          />
+        );
+      case "banner2WithImageSection":
+        return (
+          <Banner2WithImage
+            title={(value as Banner2WithImageProps).title}
+            description={(value as Banner2WithImageProps).description}
+            image={(value as Banner2WithImageProps).image}
+            backgroundImage={(value as Banner2WithImageProps).backgroundImage}
+            mobileBackgroundImage={
+              (value as Banner2WithImageProps).mobileBackgroundImage
+            }
+            isMobile={isMobile}
+            className={(value as Banner2WithImageProps).className}
+          />
+        );
+      case "banner3JoinUsSection":
+        return (
+          <Banner3JoinUs
+            data={value as GallerySectionProps}
+            isMobile={isMobile}
+          />
+        );
+      case "visionariesSection":
+        return (
+          <VisionarySection
+            data={value as FranchiseCardSection}
+            isMobile={isMobile}
+          />
+        );
+      case "bannerCTASection":
+        return (
+          <BannerCTA data={value as GallerySectionProps} isMobile={isMobile} />
+        );
+      case "bannerCTASection2":
+        return (
+          <BannerCTA2 data={value as GallerySectionProps} isMobile={isMobile} />
+        );
+      case "nextStepSection":
+        return (
+          <NextStepSection
+            data={value as FranchiseCardSection}
+            isMobile={isMobile}
+          />
+        );
+      case "cardsParallaxSection":
+        return (
+          <CardsParallax
+            data={value as CardsParallaxProps}
+            isMobile={isMobile}
+          />
+        );
+      case "signatureClassesSection":
+        return (
+          <SignatureClassesSection
+            data={value as SignatureClassesSectionType}
+            isMobile={isMobile}
+          />
+        );
       default:
         return null;
     }
@@ -209,7 +374,7 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
               return (
                 <div
                   key={key}
-                  className="w-full bg-center bg-no-repeat h-full md:mb-[-60px] -mt-[60px] md:-mt-[105px]"
+                  className="w-screen bg-center bg-no-repeat h-full md:mb-[-60px] -mt-[60px] md:-mt-[105px] relative left-1/2 right-1/2 -mx-[50vw]"
                   style={{
                     background: `url(${
                       isMobile
@@ -217,8 +382,34 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
                         : (value as Hero).desktopImage
                     })`,
                     backgroundPosition: "top center",
-                    backgroundSize: "100% auto",
+                    backgroundSize: isMobile ? "100% auto" : "100% auto",
                     backgroundRepeat: "no-repeat",
+                    minHeight: isMobile ? "auto" : "100vh",
+                    backgroundAttachment: "scroll",
+                  }}
+                >
+                  <div className="pt-[84px] md:pt-[140px]">{component}</div>
+                </div>
+              );
+            }
+            if (
+              key === "franchiseHeroSection" ||
+              key === "aboutUsHeroSection"
+            ) {
+              return (
+                <div
+                  key={key}
+                  className="w-full bg-center bg-no-repeat md:mb-[-60px] -mt-[60px] md:-mt-[105px]"
+                  style={{
+                    background: `url(${
+                      isMobile
+                        ? (value as FranchiseHero).mobileImage
+                        : (value as FranchiseHero).desktopImage
+                    })`,
+                    backgroundPosition: "top center",
+                    backgroundSize: isMobile ? "100% auto" : "cover",
+                    backgroundRepeat: "no-repeat",
+                    minHeight: isMobile ? "400px" : "641px",
                   }}
                 >
                   <div className="pt-[84px] md:pt-[140px]">{component}</div>
@@ -240,6 +431,20 @@ const StaticPage = ({ data, pageName, isMobile }: StaticPageProps) => {
               );
             }
             if (key === "policySection") {
+              return (
+                <div key={key} className="w-full">
+                  {component}
+                </div>
+              );
+            }
+            if (key === "photoCircleSection") {
+              return (
+                <div key={key} className="relative">
+                  {component}
+                </div>
+              );
+            }
+            if (key === "pricingPlansSection") {
               return (
                 <div key={key} className="w-full">
                   {component}

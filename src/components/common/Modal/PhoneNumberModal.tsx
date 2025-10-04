@@ -2,6 +2,11 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { authAPI } from "@/services/authAPI";
+import { OTPPurpose } from "@/types/auth";
+import { useAuth } from "@/hooks/useAuth";
+import { UserInfoModal } from "./";
 
 type ModalState = "phone" | "otp";
 
@@ -9,6 +14,16 @@ interface PhoneNumberModalProps {
   isOpen: boolean;
   onClose: () => void;
   isMobile?: boolean;
+  onSuccess?: (
+    phoneNumber: string,
+    userData?: {
+      id: number;
+      name: string;
+      email: string;
+      phone: string;
+      dateOfBirth?: string;
+    }
+  ) => void; // Optional callback for successful authentication with user data
 }
 
 interface PhoneStepProps {
@@ -19,6 +34,8 @@ interface PhoneStepProps {
   onBlur: () => void;
   onContinue: () => void;
   isMobile?: boolean;
+  isLoading?: boolean;
+  error?: string;
 }
 
 interface OTPStepProps {
@@ -30,6 +47,8 @@ interface OTPStepProps {
   timeLeft: number;
   onResendOTP: () => void;
   isMobile?: boolean;
+  isLoading?: boolean;
+  error?: string;
 }
 
 // Phone Number Step Component
@@ -41,6 +60,8 @@ const PhoneStep = ({
   onBlur,
   onContinue,
   isMobile,
+  isLoading,
+  error,
 }: PhoneStepProps) => (
   <>
     {/* Logo */}
@@ -72,17 +93,24 @@ const PhoneStep = ({
       />
     </div>
 
+    {/* Error Message */}
+    {error && (
+      <div className="w-full mb-4 text-center">
+        <p className="text-red-400 text-sm font-medium">{error}</p>
+      </div>
+    )}
+
     {/* Continue Button */}
     <button
       onClick={onContinue}
-      disabled={phoneNumber.length !== 10}
+      disabled={phoneNumber.length !== 10 || isLoading}
       className={`w-full bg-[#00DBDC] border border-transparent rounded-lg py-3 md:py-3 text-[#0D0D0D] font-medium text-base md:text-lg mb-6 md:mb-[48px] ${
         isMobile
           ? ""
           : "hover:bg-transparent hover:border-[#00DBDC] hover:text-[#00DBDC]"
       } transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-[#00DBDC] disabled:hover:text-[#0D0D0D] disabled:hover:border-transparent`}
     >
-      Continue
+      {isLoading ? "Sending..." : "Continue"}
     </button>
 
     {/* Terms and Privacy */}
@@ -121,6 +149,8 @@ const OTPStep = ({
   timeLeft,
   onResendOTP,
   isMobile,
+  isLoading,
+  error,
 }: OTPStepProps) => {
   const firstInputRef = useRef<HTMLInputElement>(null);
   const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
@@ -147,6 +177,45 @@ const OTPStep = ({
     setFocusedIndex(null);
   };
 
+  const handleKeyDown = (
+    e: React.KeyboardEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    const input = e.target as HTMLInputElement;
+
+    if (e.key === "Backspace") {
+      e.preventDefault();
+
+      if (input.value) {
+        // If current input has value, clear it
+        onOTPChange(index, "");
+      } else if (index > 0) {
+        // If current input is empty, move to previous input and clear it
+        const prevInput = document.querySelector(
+          `input[data-index="${index - 1}"]`
+        ) as HTMLInputElement;
+        if (prevInput) {
+          onOTPChange(index - 1, "");
+          prevInput.focus();
+        }
+      }
+    } else if (e.key === "ArrowLeft" && index > 0) {
+      e.preventDefault();
+      const prevInput = document.querySelector(
+        `input[data-index="${index - 1}"]`
+      ) as HTMLInputElement;
+      if (prevInput) prevInput.focus();
+    } else if (e.key === "ArrowRight" && index < 3) {
+      e.preventDefault();
+      const nextInput = document.querySelector(
+        `input[data-index="${index + 1}"]`
+      ) as HTMLInputElement;
+      if (nextInput) nextInput.focus();
+    } else if (e.key === "ArrowUp" || e.key === "ArrowDown") {
+      e.preventDefault(); // Prevent default arrow key behavior
+    }
+  };
+
   return (
     <>
       {/* Title */}
@@ -159,10 +228,10 @@ const OTPStep = ({
       {/* Description */}
       <div className="mb-8 md:mb-10 text-center">
         <p className="text-[#8A8A8A] font-light text-[20px] leading-[28px] tracking-[0%]">
-          We&apos;ve sent an SMS with an
+          We&apos;ve sent a whatsapp message
         </p>
         <p className="text-[#8A8A8A] font-light text-[20px] leading-[28px] tracking-[0%]">
-          activation code to your phone
+          with a code to your phone
         </p>
         <div className="flex items-center justify-center gap-2 flex-wrap">
           <span className="text-white font-light text-[20px] leading-[28px] tracking-[0%] break-all">
@@ -186,6 +255,7 @@ const OTPStep = ({
             type="text"
             value={value}
             onChange={(e) => onOTPChange(index, e.target.value)}
+            onKeyDown={(e) => handleKeyDown(e, index)}
             onFocus={() => handleInputFocus(index)}
             onBlur={handleInputBlur}
             data-index={index}
@@ -199,17 +269,24 @@ const OTPStep = ({
         ))}
       </div>
 
+      {/* Error Message */}
+      {error && (
+        <div className="w-full mb-4 text-center">
+          <p className="text-red-400 text-sm font-medium">{error}</p>
+        </div>
+      )}
+
       {/* Verify Button */}
       <button
         onClick={onVerify}
-        disabled={otpValues.some((val) => val === "")}
+        disabled={otpValues.some((val) => val === "") || isLoading}
         className={`w-full bg-[#00DBDC] border border-transparent rounded-lg py-3 md:py-3 text-[#0D0D0D] font-medium text-base md:text-lg mb-6 md:mb-8 ${
           isMobile
             ? ""
             : "hover:bg-transparent hover:border-[#00DBDC] hover:text-[#00DBDC]"
         } transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-[#00DBDC] disabled:hover:text-[#0D0D0D] disabled:hover:border-transparent`}
       >
-        Verify
+        {isLoading ? "Verifying..." : "Verify"}
       </button>
 
       {/* Resend OTP */}
@@ -224,9 +301,12 @@ const OTPStep = ({
         ) : (
           <button
             onClick={onResendOTP}
-            className="text-[#00DBDC] font-medium text-base leading-[20px] tracking-[-0.02em]"
+            disabled={isLoading}
+            className={`text-[#00DBDC] font-medium text-base leading-[20px] tracking-[-0.02em] ${
+              isLoading ? "opacity-50 cursor-not-allowed" : ""
+            }`}
           >
-            Resend
+            {isLoading ? "Sending..." : "Resend"}
           </button>
         )}
       </div>
@@ -238,6 +318,7 @@ const PhoneNumberModal = ({
   isOpen,
   onClose,
   isMobile,
+  onSuccess,
 }: PhoneNumberModalProps) => {
   const [modalState, setModalState] = useState<ModalState>("phone");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -245,7 +326,14 @@ const PhoneNumberModal = ({
   const [otpValues, setOtpValues] = useState<string[]>(["", "", "", ""]);
   const [timeLeft, setTimeLeft] = useState(59);
   const [isMounted, setIsMounted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [isUserInfoModalOpen, setIsUserInfoModalOpen] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
+  const handleVerifyRef = useRef<() => Promise<void>>();
+  const hasAutoSubmittedRef = useRef(false);
+  const { login } = useAuth();
+  const router = useRouter();
 
   // Check if component is mounted (client-side)
   useEffect(() => {
@@ -294,6 +382,8 @@ const PhoneNumberModal = ({
       setIsFocused(false);
       setOtpValues(["", "", "", ""]);
       setTimeLeft(59);
+      setError(""); // Clear error when modal is closed
+      hasAutoSubmittedRef.current = false; // Reset auto-submit flag
     }
   }, [isOpen]);
 
@@ -315,13 +405,84 @@ const PhoneNumberModal = ({
     []
   );
 
-  const handleContinue = useCallback(() => {
+  const sendOTPAndUpdateDBAsync = useCallback(
+    async (phone: string, purpose: OTPPurpose, otp: string) => {
+      try {
+        // Step 2: Send SMS with the generated OTP via Edge Runtime
+        const smsResponse = await fetch("/api/auth/send-otp", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            phone,
+            purpose,
+            otp,
+          }),
+        });
+
+        const smsResult = await smsResponse.json();
+
+        // Step 3: Update vendor response in database
+        await fetch("/api/auth/otp-db-operations", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            operation: "update_vendor_response",
+            phone,
+            purpose,
+            vendorResponse: {
+              success: smsResult.success,
+              response: smsResult.message || "OTP sent successfully",
+            },
+          }),
+        });
+
+        console.log("Background OTP operations completed:", {
+          success: smsResult.success,
+        });
+      } catch (error) {
+        console.error("Error in background OTP operations:", error);
+        // Don't show error to user since this runs in background
+      }
+    },
+    []
+  );
+
+  const handleContinue = useCallback(async () => {
     if (phoneNumber.length === 10) {
-      setModalState("otp");
-      // Here you would typically send OTP request
-      console.log("Sending OTP to:", phoneNumber);
+      setIsLoading(true);
+      setError("");
+
+      try {
+        // Step 1: Generate OTP and store in database
+        const dbResponse = await fetch("/api/auth/otp-db-operations", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            operation: "generate_and_store",
+            phone: phoneNumber,
+            purpose: OTPPurpose.LOGIN,
+          }),
+        });
+
+        const dbResult = await dbResponse.json();
+        if (!dbResult.success) {
+          setError("Failed to generate OTP");
+          return;
+        }
+
+        // Show OTP screen immediately after successful database operation
+        setModalState("otp");
+
+        // Step 2 & 3: Run SMS sending and DB update in background (don't wait)
+        sendOTPAndUpdateDBAsync(phoneNumber, OTPPurpose.LOGIN, dbResult.otp);
+      } catch (error) {
+        console.error("Error in OTP flow:", error);
+        setError("Network error. Please try again.");
+      } finally {
+        setIsLoading(false);
+      }
     }
-  }, [phoneNumber]);
+  }, [phoneNumber, sendOTPAndUpdateDBAsync]);
 
   const handleOTPChange = useCallback(
     (index: number, value: string) => {
@@ -330,6 +491,15 @@ const PhoneNumberModal = ({
       const newOtpValues = [...otpValues];
       newOtpValues[index] = value;
       setOtpValues(newOtpValues);
+
+      // Reset auto-submit flag only if we're going from 4 digits to less than 4 digits
+      // This allows auto-submit to work when completing the 4th digit
+      const wasComplete = otpValues.every((val) => val !== "");
+      const isComplete = newOtpValues.every((val) => val !== "");
+
+      if (wasComplete && !isComplete) {
+        hasAutoSubmittedRef.current = false;
+      }
 
       // Auto-focus next input
       if (value && index < 3) {
@@ -342,27 +512,148 @@ const PhoneNumberModal = ({
     [otpValues]
   );
 
-  const handleVerify = useCallback(() => {
+  const handleVerify = useCallback(async () => {
     const otp = otpValues.join("");
 
-    // Validate that all 4 digits are entered
     if (otp.length === 4 && otpValues.every((val) => val !== "")) {
-      console.log("Verifying OTP:", otp, "for phone:", phoneNumber);
-      // Handle OTP verification logic here
-      // Close the modal after successful validation
-      onClose();
+      setIsLoading(true);
+      setError("");
+
+      try {
+        const response = await authAPI.verifyOTP(
+          phoneNumber,
+          otp,
+          OTPPurpose.LOGIN
+        );
+
+        if (response.success && response.data) {
+          // User exists, store user data and token in Redux
+          const user = response.data.user;
+          const token = response.data.token;
+
+          // Store user data in Redux
+          console.log("PhoneNumberModal: Attempting to login user:", user);
+          const loginResult = await login({ user, token });
+          console.log("PhoneNumberModal: Login result:", loginResult);
+
+          if (loginResult.type === "auth/loginUser/fulfilled") {
+            // Check if user has complete profile data
+            const hasCompleteProfile =
+              user.name && user.email && user.phone;
+
+            console.log("PhoneNumberModal: User data after login:", {
+              id: user.id,
+              name: user.name,
+              email: user.email,
+              phone: user.phone,
+              dateOfBirth: user.dateOfBirth,
+              hasCompleteProfile,
+            });
+
+            if (!hasCompleteProfile) {
+              // User exists but profile is incomplete, open UserInfoModal
+              console.log(
+                "PhoneNumberModal: User profile incomplete, opening UserInfoModal"
+              );
+              setIsUserInfoModalOpen(true);
+              return;
+            }
+
+            // If onSuccess callback is provided, use it instead of redirecting
+            if (onSuccess) {
+              onSuccess(phoneNumber, user);
+              onClose();
+              return;
+            }
+
+            // Default behavior: Use membership data from OTP verification response
+            if (user.hasMembership) {
+              // User has membership, redirect to profile
+              console.log(
+                "PhoneNumberModal: User has membership, redirecting to profile"
+              );
+              onClose();
+              router.push("/profile");
+            } else {
+              // User doesn't have membership, redirect to membership page
+              console.log(
+                "PhoneNumberModal: User has no membership, redirecting to membership page"
+              );
+              onClose();
+              router.push("/membership");
+            }
+          } else {
+            setError("Login failed. Please try again.");
+          }
+        } else if (response.success && !response.data) {
+          // User doesn't exist, open UserInfoModal for registration
+          setIsUserInfoModalOpen(true);
+          // Don't close the modal yet - let UserInfoModal handle the flow
+        } else {
+          setError(response.message || "Invalid OTP");
+          // Don't reset flag on error - only reset when user changes OTP values
+        }
+      } catch (error: unknown) {
+        setError(
+          error instanceof Error
+            ? error.message
+            : "Server Down, Please try again later."
+        );
+        // Don't reset flag on error - only reset when user changes OTP values
+      } finally {
+        setIsLoading(false);
+      }
     }
-  }, [otpValues, phoneNumber, onClose]);
+  }, [otpValues, phoneNumber, onClose, login, onSuccess, router]);
+
+  // Store handleVerify in ref to avoid circular dependency
+  useEffect(() => {
+    handleVerifyRef.current = handleVerify;
+  }, [handleVerify]);
+
+  // Auto-submit OTP when all 4 digits are entered (only once)
+  useEffect(() => {
+    if (
+      modalState === "otp" &&
+      otpValues.every((val) => val !== "") &&
+      !isLoading &&
+      !hasAutoSubmittedRef.current
+    ) {
+      hasAutoSubmittedRef.current = true; // Mark as auto-submitted to prevent repeated calls
+      const timer = setTimeout(() => {
+        // Use ref to call handleVerify without circular dependency
+        if (handleVerifyRef.current) {
+          handleVerifyRef.current();
+        }
+      }, 100); // Small delay to ensure state is updated
+      return () => clearTimeout(timer);
+    }
+  }, [otpValues, modalState, isLoading]);
 
   const handleChangePhone = useCallback(() => {
     setModalState("phone");
     setTimeLeft(59); // Reset timer when going back to phone input
   }, []);
 
-  const handleResendOTP = useCallback(() => {
-    setTimeLeft(59);
-    setOtpValues(["", "", "", ""]);
-    console.log("Resending OTP to:", phoneNumber);
+  const handleResendOTP = useCallback(async () => {
+    setIsLoading(true);
+    setError("");
+
+    try {
+      const response = await authAPI.sendOTP(phoneNumber, OTPPurpose.LOGIN);
+
+      if (response.success) {
+        setTimeLeft(59);
+        setOtpValues(["", "", "", ""]);
+        hasAutoSubmittedRef.current = false; // Reset auto-submit flag when resending OTP
+      } else {
+        setError(response.message || "Failed to resend OTP");
+      }
+    } catch {
+      setError("Network error. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
   }, [phoneNumber]);
 
   if (!isOpen || !isMounted) return null;
@@ -426,6 +717,8 @@ const PhoneNumberModal = ({
                 onBlur={() => setIsFocused(false)}
                 onContinue={handleContinue}
                 isMobile={isMobile}
+                isLoading={isLoading}
+                error={error}
               />
             ) : (
               <OTPStep
@@ -437,6 +730,8 @@ const PhoneNumberModal = ({
                 timeLeft={timeLeft}
                 onResendOTP={handleResendOTP}
                 isMobile={isMobile}
+                isLoading={isLoading}
+                error={error}
               />
             )}
           </div>
@@ -445,7 +740,20 @@ const PhoneNumberModal = ({
     </div>
   );
 
-  return createPortal(modalContent, document.body);
+  return (
+    <>
+      {!isUserInfoModalOpen && createPortal(modalContent, document.body)}
+      <UserInfoModal
+        isOpen={isUserInfoModalOpen}
+        onClose={() => {
+          setIsUserInfoModalOpen(false);
+        }}
+        isMobile={isMobile}
+        phoneNumber={phoneNumber}
+        onParentClose={onClose}
+      />
+    </>
+  );
 };
 
 export default PhoneNumberModal;

@@ -6,6 +6,8 @@ import GoogleAnalyticsTracker from "@/components/common/GoogleAnalyticsTracker";
 import SpeedInsightsComponent from "@/components/common/SpeedInsights";
 import WebVitals from "@/components/common/WebVitals";
 import WebAnalytics from "@/components/common/WebAnalytics";
+import { ReduxProvider } from "@/components/common/ReduxProvider";
+import RazorpayScript from "@/components/common/RazorpayScript";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -33,12 +35,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} bg-black text-white`}>
-        <GoogleAnalytics />
-        <GoogleAnalyticsTracker />
-        <SpeedInsightsComponent />
-        <WebVitals />
-        <WebAnalytics />
-        <div className="max-w-[1980px] mx-auto bg-[#0E1119]">{children}</div>
+        <ReduxProvider>
+          <GoogleAnalytics />
+          <GoogleAnalyticsTracker />
+          <SpeedInsightsComponent />
+          <WebVitals />
+          <WebAnalytics />
+          <RazorpayScript />
+          <div className="max-w-[1980px] mx-auto bg-[#0E1119]">{children}</div>
+        </ReduxProvider>
       </body>
     </html>
   );

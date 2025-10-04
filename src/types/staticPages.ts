@@ -1,3 +1,9 @@
+import {
+  FranchiseCardSection,
+  FranchiseHero,
+  BannerSection,
+} from "@/types/franchisePage";
+
 export interface TitleWord {
   text: string;
   color?: string;
@@ -47,6 +53,19 @@ export interface StaticCardType extends CardType {
   modalImage: string;
 }
 
+export interface CardParallaxProps {
+  title?: string;
+  description?: string;
+  src: string;
+  backgroundImage?: string;
+  url: string;
+  mobileUrl?: string;
+  color: string;
+}
+
+export interface CardsParallaxProps {
+  cardSection: CardParallaxProps[];
+}
 export interface StaticCardProps {
   title?: string;
   description?: string;
@@ -73,7 +92,15 @@ export interface GallerySectionProps {
   title: string;
   description: string;
   btnLabel: string;
-  imageList: number[];
+  imageList?: number[];
+  desktopImage?: string;
+  mobileImage?: string;
+  addGradient?: boolean;
+  mobileImageUp?: boolean;
+  imageClass?: string;
+  specialBackgroundClass?: string;
+  showStrip?: boolean;
+  parentClass?: string;
 }
 
 export interface SportsClubSectionProps {
@@ -306,6 +333,30 @@ export interface EcosystemGifSectionProps {
   description: string;
 }
 
+export interface PhotoCircleSectionProps {
+  title: string;
+  description: string;
+  image1: string;
+  image2: string;
+}
+
+export interface Banner2SectionType {
+  title: string;
+  description: string;
+  class?: string;
+  titleClass?: string;
+  descriptionClass?: string;
+  subClass?: string;
+}
+
+export interface Banner2WithImageProps {
+  title: string;
+  description: string;
+  image: string;
+  backgroundImage: string;
+  mobileBackgroundImage?: string;
+  className?: string;
+}
 export interface StaticPageData {
   title: string;
   description: string;
@@ -313,6 +364,8 @@ export interface StaticPageData {
   seoDescription: string;
   navbar?: NavbarProps;
   hero?: Hero;
+  franchiseHeroSection?: FranchiseHero;
+  aboutUsHeroSection?: FranchiseHero;
   countdownSection?: CountdownSection;
   comingSoonSection?: ComingSoonSection;
   error404Section?: Error404Section;
@@ -337,6 +390,22 @@ export interface StaticPageData {
   scrollingCardSection?: ScrollingCardSection;
   notJustClubSection?: NotJustClubSectionProps;
   ecosystemGifSection?: EcosystemGifSectionProps;
+  meetYourCoachesSection?: MeetYourCoachesSectionProps;
+  chooseYourPathSection?: ChooseYourPathSectionProps;
+  multiRevenueSection?: FranchiseCardSection;
+  photoCircleSection?: PhotoCircleSectionProps;
+  banner1Section?: BannerSection;
+  banner2Section?: Banner2SectionType;
+  banner2WithImageSection?: Banner2WithImageProps;
+  nextStepSection?: FranchiseCardSection;
+  visionariesSection?: FranchiseCardSection;
+  bannerCTASection?: GallerySectionProps;
+  bannerCTASection2?: GallerySectionProps;
+  signatureClassesSection?: SignatureClassesSection;
+  cardsParallaxSection?: CardsParallaxProps;
+  banner3JoinUsSection?: GallerySectionProps;
+  pricingPlansSection?: PricingPlansSection;
+  includedPlansSection?: IncludedPlansSection;
 }
 
 export interface ContactUsPageData {
@@ -349,6 +418,41 @@ export interface ContactUsPageData {
   footerInfoSection?: ContactUsFooterInfoProps;
   footerSection?: FooterProps;
   appDownloadSection?: AppDownloadProps;
+}
+
+export interface ProfilePageData {
+  title: string;
+  seoTitle: string;
+  seoDescription: string;
+  userInfo: {
+    name: string;
+    email: string;
+    phone: string;
+    dateOfBirth: string;
+    activePlan: string;
+    planExpires: string;
+  };
+  actions: {
+    changeName: {
+      text: string;
+      enabled: boolean;
+    };
+    changeEmail: {
+      text: string;
+      enabled: boolean;
+    };
+    changeBirthday: {
+      text: string;
+      enabled: boolean;
+    };
+    viewPlan: {
+      text: string;
+      enabled: boolean;
+      isButton: boolean;
+    };
+  };
+  footerInfoSection?: FooterInfoProps;
+  footerSection?: FooterProps;
 }
 
 export interface NavLink {
@@ -374,4 +478,62 @@ export interface FlipCardProps {
   value: number;
   label: string;
   isMobile?: boolean;
+}
+
+export interface Coach {
+  id: string;
+  name: string;
+  description: string;
+  image: string;
+}
+
+export interface MeetYourCoachesSectionProps {
+  title: string;
+  coaches: Coach[];
+  seeMoreText?: string;
+}
+
+export interface Package {
+  name: string;
+  sessions: string;
+  includes: string;
+}
+
+export interface ChooseYourPathSectionProps {
+  title: string;
+  packages: Package[];
+  buttonText?: string;
+}
+
+export interface SignatureClassCard {
+  title: string;
+  description: string;
+  backgroundImage: string;
+}
+
+export interface SignatureClassesSection {
+  title: string;
+  cardList: SignatureClassCard[];
+  cardList2: SignatureClassCard[];
+}
+
+export interface PricingPlan {
+  title: string;
+  subtitle?: string;
+  discountedPrice: string;
+  originalPrice: string;
+  discountPercentage: string;
+  buttonText: string;
+  seatsLeft: string;
+  limitedOfferCountText?: string; // e.g., "100 members" or "100 families"
+}
+
+export interface PricingPlansSection {
+  plans: PricingPlan[];
+}
+
+export interface IncludedPlansSection {
+  title: string;
+  items: string[];
+  className?: string;
 }

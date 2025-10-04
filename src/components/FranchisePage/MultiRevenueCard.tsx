@@ -1,7 +1,15 @@
 import { Card } from "@/types/franchisePage";
 import Image from "next/image";
 
-const MultiRevenueCard = ({ card }: { card: Card }) => {
+const MultiRevenueCard = ({
+  card,
+  cardTitleClass,
+  cardDescriptionClass,
+}: {
+  card: Card;
+  cardTitleClass?: string;
+  cardDescriptionClass?: string;
+}) => {
   const { icon, title, description } = card;
   return (
     <div
@@ -25,10 +33,20 @@ const MultiRevenueCard = ({ card }: { card: Card }) => {
             className="mb-0 md:mb-3 md:size-[100px] size-[60px]"
           />
           <div className="flex flex-col gap-2 md:gap-4 text-start md:text-center">
-            <h3 className="text-base md:leading-5 md:text-2xl leading-7 tracking-[-1px] font-semibold">
+            <h3
+              className={`${
+                cardTitleClass ||
+                "text-base md:leading-5 md:text-2xl leading-7 tracking-[-1px] font-semibold"
+              }`}
+            >
               {title}
             </h3>
-            <p className="text-sm leading-5 tracking-[-2%] font-light">
+            <p
+              className={`${
+                cardDescriptionClass ||
+                "text-sm leading-5 tracking-[-2%] font-light"
+              }`}
+            >
               {description}
             </p>
           </div>

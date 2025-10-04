@@ -21,12 +21,14 @@ export const franchiseData: FranchisePageData = {
     btnPrimaryText: "Start Your Journey Now",
   },
   banner1Section: {
-    title: "Drive FITT?",
+    title: "Why",
+    title1: "Drive FITT?",
     subTitle: "Be The First To Disrupt",
     description1: "As category creators in",
     description2: "Cricket + Fitness + Recovery",
     description3:
       "we've built India's only 360° sports and fitness performance ecosystem under one roof. Now, we're expanding — and looking for passionate partners to lead the way.",
+    className: " mt-12",
   },
   multiRevenueSection: {
     title: "Multi-Revenue, All-In-One Model",
@@ -219,8 +221,7 @@ export const franchiseData: FranchisePageData = {
       },
       {
         title: "Visit Us",
-        description:
-          "Discover the best of what we offer at our Flagship Club",
+        description: "Discover the best of what we offer at our Flagship Club",
         email: "M3M 65th Avenue, Sector 65, Gurugram, Haryana 122022",
         image: "https://da8nru77lsio9.cloudfront.net/images/VisitUs.svg",
       },
@@ -288,7 +289,7 @@ export const franchiseData: FranchisePageData = {
       {
         title: "Quick links",
         links: [
-          { title: "About us", link: "/coming-soon" },
+          { title: "About us", link: "/about-us" },
           { title: "Our services", link: "/coming-soon" },
           { title: "Blogs", link: "/coming-soon" },
           { title: "Career", link: "/coming-soon" },
@@ -302,9 +303,9 @@ export const franchiseData: FranchisePageData = {
           { title: "Fitness", link: "/fitness" },
           { title: "Recovery", link: "/recovery" },
           { title: "Running", link: "/running" },
-          { title: "Group Classes", link: "/coming-soon" },
-          { title: "Pilates", link: "/coming-soon" },
-          { title: "Personal Training", link: "/coming-soon" },
+          { title: "Group Classes", link: "/group-classes" },
+          { title: "Pilates", link: "/pilates" },
+          { title: "Personal Training", link: "/personal-training" },
         ],
       },
       {

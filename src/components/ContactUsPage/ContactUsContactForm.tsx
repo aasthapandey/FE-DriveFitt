@@ -343,7 +343,7 @@ const ContactUsContactForm = ({
                       key={option.key}
                       type="button"
                       onClick={() => handleInterestChange(option.key)}
-                      className={`pl-2 py-2 md:px-4 md:py-1 rounded-lg text-sm font-normal tracking-[0%] transition-all flex items-center justify-between duration-200 ${
+                      className={`group pl-2 py-2 md:px-4 md:py-2 rounded-lg text-sm font-normal tracking-[0%] transition-all flex items-center justify-between duration-200 ${
                         interests[option.key as keyof typeof interests]
                           ? "bg-[#00DBDC1A] text-[#00DBDC]"
                           : "bg-[#1D1D1D] text-[#8A8A8A] md:hover:bg-[#00DBDC1A] md:hover:text-[#00DBDC]"
@@ -358,7 +358,22 @@ const ContactUsContactForm = ({
                         alt="redirectionBtn"
                         width={16}
                         height={16}
-                        className="flex-shrink-0"
+                        className={`flex-shrink-0 transition-all duration-200 ${
+                          interests[option.key as keyof typeof interests]
+                            ? ""
+                            : "group-hover:hidden"
+                        }`}
+                      />
+                      <Image
+                        src="/images/enabled-check-tick.svg"
+                        alt="redirectionBtn"
+                        width={16}
+                        height={16}
+                        className={`flex-shrink-0 transition-all duration-200 ${
+                          interests[option.key as keyof typeof interests]
+                            ? "hidden"
+                            : "hidden group-hover:block"
+                        }`}
                       />
                       <span className="text-left leading-tight flex-1 pl-[4px] whitespace-nowrap ">
                         {option.label}
@@ -394,13 +409,15 @@ const ContactUsContactForm = ({
                       fields.preferredLocation?.placeholder ||
                       "Select Location"}
                   </span>
-                  <img
+                  <Image
                     src={
                       isLocationOpen
                         ? "/images/accordian-up-arrow.svg"
                         : "/images/accordian-down-arrow.svg"
                     }
                     alt="toggle"
+                    width={16}
+                    height={16}
                     className="w-4 h-4"
                   />
                 </button>
@@ -468,7 +485,7 @@ const ContactUsContactForm = ({
               {messageState.type && (
                 <div className="flex justify-center md:-mb-[24px]">
                   <div className="flex items-center gap-2">
-                    <img
+                    <Image
                       src={
                         messageState.type === "success" ||
                         messageState.type === "error"
@@ -478,6 +495,8 @@ const ContactUsContactForm = ({
                       alt={
                         messageState.type === "success" ? "Success" : "Error"
                       }
+                      width={28}
+                      height={28}
                       className="w-7 h-7 flex-shrink-0 mt-0"
                     />
                     <p
