@@ -144,7 +144,7 @@ class RazorpayApiClient {
     });
 
     const requestData = {
-      amount: 100,
+      amount: amount,
       currency: orderData.currency || "INR",
       receipt: orderData.receipt || `receipt_${Date.now()}`,
       notes: orderData.notes || {},
