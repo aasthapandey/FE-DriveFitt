@@ -610,7 +610,7 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
             isOpen={showPaymentModal}
             onClose={handlePaymentClose}
             membershipType={getMembershipType(selectedPlan.title)}
-            amount={1} // Testing amount for production
+            amount={999} // Lock-in price for pre-booking advance
             onSuccess={handlePaymentSuccess}
             onError={handlePaymentError}
           />
@@ -749,7 +749,7 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
           isOpen={showPaymentModal}
           onClose={handlePaymentClose}
           membershipType={getMembershipType(selectedPlan.title)}
-          amount={1} // Testing amount for production
+          amount={999} // Lock-in price for pre-booking advance
           onSuccess={handlePaymentSuccess}
           onError={handlePaymentError}
         />
