@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState, MouseEvent, KeyboardEvent } from "react";
+import { uploadAPI } from "@/services/uploadAPI";
+import { applicationAPI } from "@/services/applicationAPI";
 import ScrollAnimation from "@/components/common/ScrollAnimation";
 
 interface ApplyNowFormProps {
@@ -17,7 +19,10 @@ const ApplyNowForm: React.FC<ApplyNowFormProps> = ({ jobId, isMobile }) => {
     experience: "",
     salary: "",
     resume: null as File | null,
+    resumeUrl: "",
   });
+  const [submitting, setSubmitting] = useState(false);
+  const [uploading, setUploading] = useState(false);
 
   console.log("isMobile: ", isMobile);
 
@@ -26,16 +31,55 @@ const ApplyNowForm: React.FC<ApplyNowFormProps> = ({ jobId, isMobile }) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      setFormData((prev) => ({ ...prev, resume: e.target.files![0] }));
+      const file = e.target.files[0];
+      setFormData((prev) => ({ ...prev, resume: file }));
+      try {
+        setUploading(true);
+        const presign = await uploadAPI.getPresignURL(
+          "resume",
+          file.name,
+          file.type || "application/octet-stream"
+        );
+        await uploadAPI.putFileToS3(presign.uploadUrl, file);
+        setFormData((prev) => ({ ...prev, resumeUrl: presign.cdnUrl }));
+      } catch (_) {
+        setFormData((prev) => ({ ...prev, resume: null, resumeUrl: "" }));
+      } finally {
+        setUploading(false);
+      }
     }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    console.log("Form submitted:", formData);
+    if (!formData.resumeUrl) return;
+    setSubmitting(true);
+    try {
+      await applicationAPI.create({
+        candidate_name: formData.fullName,
+        email: formData.email,
+        phone: formData.phone,
+        job_id: Number(jobId),
+        current_location: formData.location,
+        work_exprience: formData.experience,
+        expected_salary: formData.salary,
+        resume: formData.resumeUrl,
+      });
+      setFormData({
+        fullName: "",
+        email: "",
+        phone: "",
+        location: "",
+        experience: "",
+        salary: "",
+        resume: null,
+        resumeUrl: "",
+      });
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -172,8 +216,13 @@ const ApplyNowForm: React.FC<ApplyNowFormProps> = ({ jobId, isMobile }) => {
             <button
               type="submit"
               className="bg-[#00DBDC] text-black px-8 py-2.5 rounded-lg hover:bg-transparent hover:text-[#00DBDC] hover:border-[#00DBDC] border border-transparent transition-all duration-200"
+              disabled={submitting || uploading || !formData.resumeUrl}
             >
-              Submit
+              {submitting
+                ? "Submitting..."
+                : uploading
+                ? "Uploading..."
+                : "Submit"}
             </button>
           </div>
         </form>

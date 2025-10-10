@@ -2,68 +2,12 @@ import { Metadata } from "next";
 import { headers } from "next/headers";
 import { isMobileDevice } from "@/utils/deviceDetection";
 import StaticPages from "@/components/StaticPages";
-import { JobDetailResponse } from "@/types/staticPages";
+import { JobPosting, JobType } from "@/types/database";
+import { jobAPI } from "@/services/jobAPI";
 
-// Dummy API response - in real implementation, this would be fetched from an API
-const getJobDetails = async (id: string): Promise<JobDetailResponse> => {
-  // Simulate API call delay
-  await new Promise((resolve) => setTimeout(resolve, 100));
-
-  return {
-    id: id,
-    title: "Key Accounts Manager",
-    location: "Dwarka sector 10, New delhi",
-    jobType: "Fulltime",
-    jobCategory: "Sales",
-    details: [
-      {
-        title: "About Drivefitt",
-        description:
-          "Drive FITT is redefining India's fitness landscape by blending the nation's passion for cricket with world-class training, recovery, and performance facilities.",
-        list: [],
-      },
-      {
-        title: "Job Description",
-        description:
-          "You will be part of the expansion team at Drivefitt. Drivefitt has been the fastest growing fitness chain in the country, and has launched 10+ centers since inception. We are seeking an experienced Account Manager to join our team in Delhi, responsible for managing our franchise partners and driving business growth.",
-        list: [],
-      },
-      {
-        title: "Role",
-        description: "",
-        list: [
-          "Franchise Partner Management: Develop and maintain strong relationships with franchise partners, ensuring timely communication, issue resolution, and conflict management.",
-          "Business Growth: Collaborate with franchise partners to drive revenue growth, increase membership sales, and enhance customer retention.",
-          "Performance Monitoring: Track and analyze key performance indicators (KPIs) such as membership sales, revenue growth, customer satisfaction, and partner engagement.",
-          "Partner Support: Provide ongoing support and guidance to franchise partners, ensuring they have the necessary tools, training, and resources to succeed.",
-          "Account Management: Manage franchise agreements, ensuring compliance with contractual terms, renewal negotiations, and dispute resolution.",
-          "Market Intelligence: Gather market insights, competitor analysis, and customer feedback to inform business decisions and drive growth.",
-          "Reporting and Analytics: Prepare and present regular reports to senior management, highlighting partner performance, market trends, and business opportunities.",
-        ],
-      },
-      {
-        title: "Skills and Qualifications:",
-        description: "",
-        list: [
-          "Bachelor's/Masters degree in Business Administration, Marketing, or a related field.",
-          "3+ years of experience in account management, sales, or business development, preferably in the fitness or hospitality industry.",
-          "Excellent communication, interpersonal, and problem-solving skills. Ability to work independently, prioritize tasks, and manage multiple stakeholders.",
-          "Proficient in data analysis, reporting, and presentation software (e.g., Excel, PowerPoint, Google Docs).",
-          "Fluency in English and local languages (Hindi).",
-        ],
-      },
-      {
-        title: "Location",
-        description: "New Delhi",
-        list: [],
-      },
-      {
-        title: "Years Of Exp",
-        description: "3 to 5 Years",
-        list: [],
-      },
-    ],
-  };
+const fetchJob = async (id: string): Promise<JobPosting> => {
+  const job = await jobAPI.getById(Number(id));
+  return job;
 };
 
 export async function generateMetadata({
@@ -71,11 +15,13 @@ export async function generateMetadata({
 }: {
   params: { id: string };
 }): Promise<Metadata> {
-  const jobDetails = await getJobDetails(params.id);
+  const job = await fetchJob(params.id);
 
   return {
-    title: `${jobDetails.title} | Drive FITT Premium Club`,
-    description: `Apply for ${jobDetails.title} position at Drive FITT - ${jobDetails.location}`,
+    title: `${job.title} | Drive FITT Premium Club`,
+    description: `Apply for ${job.title} position at Drive FITT - ${
+      job.location?.full_location ?? ""
+    }`,
   };
 }
 
@@ -88,7 +34,7 @@ export default async function JobDetailPage({
   const userAgent = headersList.get("user-agent") || "";
   const isMobile = userAgent ? isMobileDevice(userAgent) : false;
 
-  const jobDetails = await getJobDetails(params.id);
+  const jobDetails = await fetchJob(params.id);
 
   const pageData = {
     title: `${jobDetails.title} | Drive FITT Premium Club`,
@@ -98,8 +44,13 @@ export default async function JobDetailPage({
     aboutUsHeroSection: {
       title: jobDetails.title,
       subTitle: "",
-      description: jobDetails.location,
-      jobType: jobDetails.jobType,
+      description: jobDetails.location?.full_location ?? "",
+      jobType:
+        jobDetails.job_type === JobType.FULL_TIME
+          ? "Fulltime"
+          : jobDetails.job_type === JobType.PART_TIME
+          ? "Part-time"
+          : "Contractor",
       isJobDetail: true,
       roiTag: "",
       roiIcon: "",
@@ -111,7 +62,45 @@ export default async function JobDetailPage({
       btnPrimaryLink: `/job-detail/${params.id}/apply-now`,
     },
     jobDetailSection: {
-      job: jobDetails,
+      job: {
+        id: String(jobDetails.id),
+        title: jobDetails.title,
+        location: jobDetails.location?.full_location ?? "",
+        jobType:
+          jobDetails.job_type === JobType.FULL_TIME
+            ? "Fulltime"
+            : jobDetails.job_type === JobType.PART_TIME
+            ? "Part-time"
+            : "Contractor",
+        jobCategory: jobDetails.department?.name || "General",
+        details: [
+          {
+            title: "Job Description",
+            description: jobDetails.job_description || "",
+            list: [],
+          },
+          {
+            title: "Role",
+            description: "",
+            list: jobDetails.role || [],
+          },
+          {
+            title: "Skills and Qualifications:",
+            description: "",
+            list: jobDetails.qualifications || [],
+          },
+          {
+            title: "Location",
+            description: jobDetails.location?.full_location || "",
+            list: [],
+          },
+          {
+            title: "Years Of Exp",
+            description: jobDetails.years_of_experience || "",
+            list: [],
+          },
+        ],
+      },
     },
     footerSection: {
       logo: "https://da8nru77lsio9.cloudfront.net/images/logo.svg",

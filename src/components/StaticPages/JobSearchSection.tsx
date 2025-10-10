@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { JobSearchSection as JobSearchSectionType } from "@/types/staticPages";
+import { jobAPI } from "@/services/jobAPI";
+import { JobPosting, JobType } from "@/types/database";
 import JobDisplay from "./JobDisplay";
 
 interface JobSearchSectionProps {
@@ -16,8 +18,79 @@ const JobSearchSection = ({ data, isMobile }: JobSearchSectionProps) => {
   const [selectedType, setSelectedType] = useState("All job types");
   const [selectedLocation, setSelectedLocation] = useState("All job location");
   const [currentPage, setCurrentPage] = useState(1);
+  const [jobs, setJobs] = useState<
+    {
+      id: number;
+      title: string;
+      location: string;
+      jobType: string;
+      jobCategory: string;
+    }[]
+  >([]);
+  const [jobCategories, setJobCategories] = useState<string[]>(
+    data.jobCategories || ["All job categories"]
+  );
+  const [jobTypes, setJobTypes] = useState<string[]>(
+    data.jobTypes || ["All job types"]
+  );
+  const [jobLocations, setJobLocations] = useState<string[]>(
+    data.jobLocations || ["All job location"]
+  );
 
-  const filteredJobs = data.jobs.filter((job) => {
+  useEffect(() => {
+    (async () => {
+      try {
+        const [postingList, meta] = await Promise.all([
+          jobAPI.list({ status: 1, is_visible: true }),
+          jobAPI.getDepartmentsLocations(),
+        ]);
+
+        const typeLabel = (t: JobType) =>
+          t === JobType.FULL_TIME
+            ? "Fulltime"
+            : t === JobType.PART_TIME
+            ? "Part-time"
+            : "Contractor";
+
+        const mapped = postingList.map((jp: JobPosting) => ({
+          id: jp.id,
+          title: jp.title,
+          location: jp.location?.full_location || "",
+          jobType: typeLabel(jp.job_type),
+          jobCategory: jp.department?.name || "General",
+        }));
+        setJobs(mapped);
+
+        const categories = [
+          "All job categories",
+          ...Array.from(new Set(mapped.map((m) => m.jobCategory))).sort(),
+        ];
+        const types = [
+          "All job types",
+          ...Array.from(new Set(mapped.map((m) => m.jobType))).sort(),
+        ];
+        const locations = [
+          "All job location",
+          ...Array.from(new Set(mapped.map((m) => m.location))).sort(),
+        ];
+        setJobCategories(categories);
+        setJobTypes(types);
+        setJobLocations(locations);
+      } catch (_) {
+        setJobs(
+          (data.jobs || []).map((j) => ({
+            id: j.id,
+            title: j.title,
+            location: j.location,
+            jobType: j.jobType,
+            jobCategory: j.jobCategory || "General",
+          }))
+        );
+      }
+    })();
+  }, [data.jobs, data.jobCategories, data.jobLocations, data.jobTypes]);
+
+  const filteredJobs = jobs.filter((job) => {
     const matchesSearch = job.title
       .toLowerCase()
       .includes(searchTerm.toLowerCase());
@@ -87,7 +160,7 @@ const JobSearchSection = ({ data, isMobile }: JobSearchSectionProps) => {
                   : "h-[44px] pl-4 pr-10 leading-[44px]"
               } w-full bg-[#0D0D0D] border border-[#333333] rounded-lg text-white focus:outline-none focus:border-[#00DBDC] appearance-none`}
             >
-              {data.jobCategories.map((category) => (
+              {jobCategories.map((category) => (
                 <option
                   key={category}
                   value={category}
@@ -121,7 +194,7 @@ const JobSearchSection = ({ data, isMobile }: JobSearchSectionProps) => {
                   : "h-[44px] pl-4 pr-10 leading-[44px]"
               } w-full bg-[#0D0D0D] border border-[#333333] rounded-lg text-white focus:outline-none focus:border-[#00DBDC] appearance-none`}
             >
-              {data.jobTypes.map((type) => (
+              {jobTypes.map((type) => (
                 <option
                   key={type}
                   value={type}
@@ -155,7 +228,7 @@ const JobSearchSection = ({ data, isMobile }: JobSearchSectionProps) => {
                   : "h-[44px] pl-4 pr-10 leading-[44px]"
               } w-full bg-[#0D0D0D] border border-[#333333] rounded-lg text-white focus:outline-none focus:border-[#00DBDC] appearance-none`}
             >
-              {data.jobLocations.map((location) => (
+              {jobLocations.map((location) => (
                 <option
                   key={location}
                   value={location}

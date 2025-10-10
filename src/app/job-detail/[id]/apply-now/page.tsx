@@ -1,30 +1,13 @@
 import { headers } from "next/headers";
 import { isMobileDevice } from "@/utils/deviceDetection";
 import StaticPages from "@/components/StaticPages";
-import { JobDetailResponse } from "@/types/staticPages";
 import { Metadata } from "next";
+import { JobPosting, JobType } from "@/types/database";
+import { jobAPI } from "@/services/jobAPI";
 
-// Reuse the getJobDetails function from job detail page
-const getJobDetails = async (id: string): Promise<JobDetailResponse> => {
-  // Simulate API call delay
-  await new Promise((resolve) => setTimeout(resolve, 100));
-
-  return {
-    id: id,
-    title: "Key Accounts Manager",
-    location: "Dwarka sector 10, New delhi",
-    jobType: "Full time",
-    jobCategory: "Sales",
-    details: [
-      {
-        title: "About Drivefitt",
-        description:
-          "Drive FITT is redefining India's fitness landscape by blending the nation's passion for cricket with world-class training, recovery, and performance facilities.",
-        list: [],
-      },
-      // ... other details
-    ],
-  };
+const fetchJob = async (id: string): Promise<JobPosting> => {
+  const job = await jobAPI.getById(Number(id));
+  return job;
 };
 
 export async function generateMetadata({
@@ -32,11 +15,13 @@ export async function generateMetadata({
 }: {
   params: { id: string };
 }): Promise<Metadata> {
-  const jobDetails = await getJobDetails(params.id);
+  const jobDetails = await fetchJob(params.id);
 
   return {
     title: `Apply for ${jobDetails.title} | Drive FITT Premium Club`,
-    description: `Apply for ${jobDetails.title} position at Drive FITT - ${jobDetails.location}`,
+    description: `Apply for ${jobDetails.title} position at Drive FITT - ${
+      jobDetails.location?.full_location ?? ""
+    }`,
   };
 }
 
@@ -45,18 +30,25 @@ export default async function ApplyNowPage({
 }: {
   params: { id: string };
 }) {
-  const jobDetails = await getJobDetails(params.id);
+  const jobDetails = await fetchJob(params.id);
 
   const pageData = {
     title: `Apply for ${jobDetails.title} | Drive FITT Premium Club`,
     description: `Apply for ${jobDetails.title} position at Drive FITT`,
     seoTitle: `Apply for ${jobDetails.title} | Drive FITT Premium Club`,
-    seoDescription: `Apply for ${jobDetails.title} position at Drive FITT - ${jobDetails.location}`,
+    seoDescription: `Apply for ${jobDetails.title} position at Drive FITT - ${
+      jobDetails.location?.full_location ?? ""
+    }`,
     aboutUsHeroSection: {
       title: "Apply For This Job",
       subTitle: jobDetails.title,
-      description: jobDetails.location,
-      jobType: jobDetails.jobType,
+      description: jobDetails.location?.full_location ?? "",
+      jobType:
+        jobDetails.job_type === JobType.FULL_TIME
+          ? "Fulltime"
+          : jobDetails.job_type === JobType.PART_TIME
+          ? "Part-time"
+          : "Contractor",
       isJobDetail: true,
       showBackButton: true,
       roiTag: "",

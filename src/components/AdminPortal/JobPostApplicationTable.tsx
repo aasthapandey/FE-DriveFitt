@@ -7,10 +7,25 @@ type ToggleOption = "job-posts" | "application";
 
 interface JobPostApplicationTableProps {
   selectedToggle: ToggleOption;
+  jobPosts?: JobPostData[];
+  applications?: ApplicationData[];
   onEditJobPost?: (index: number, jobData: JobPostData) => void;
+  onDeleteJobPost?: (index: number, jobData: JobPostData) => void;
+  onChangeJobPostStatus?: (
+    index: number,
+    jobData: JobPostData,
+    newStatus: "Active" | "Closed"
+  ) => void;
+  onChangeApplicationStatus?: (
+    index: number,
+    application: ApplicationData,
+    newStatus: "In Review" | "Shortlisted" | "New"
+  ) => void;
+  onDownloadResume?: (index: number, application: ApplicationData) => void;
 }
 
 interface ApplicationData {
+  id: number;
   candidatesName: string;
   emailAddress: string;
   phoneNumber: string;
@@ -18,137 +33,38 @@ interface ApplicationData {
   expectedSalary: string;
   appliedFor: string;
   resumeStatus: "In Review" | "Shortlisted" | "New";
+  resumeUrl?: string;
 }
 
 interface JobPostData {
+  id: number;
   jobTitle: string;
   department: string;
   location: string;
   status: "Active" | "Closed";
 }
 
-const mockApplicationData: ApplicationData[] = [
-  {
-    candidatesName: "Sahil kapoor",
-    emailAddress: "sahilkapoor@gmail.com",
-    phoneNumber: "989 989 9898",
-    workExperience: "5 years",
-    expectedSalary: "5 LPA",
-    appliedFor: "Cricket coach",
-    resumeStatus: "In Review",
-  },
-  {
-    candidatesName: "Sahil kapoor",
-    emailAddress: "sahilkapoor@gmail.com",
-    phoneNumber: "989 989 9898",
-    workExperience: "5 years",
-    expectedSalary: "5 LPA",
-    appliedFor: "Cricket coach",
-    resumeStatus: "Shortlisted",
-  },
-  {
-    candidatesName: "Sahil kapoor",
-    emailAddress: "sahilkapoor@gmail.com",
-    phoneNumber: "989 989 9898",
-    workExperience: "5 years",
-    expectedSalary: "5 LPA",
-    appliedFor: "Cricket coach",
-    resumeStatus: "New",
-  },
-  {
-    candidatesName: "Sahil kapoor",
-    emailAddress: "sahilkapoor@gmail.com",
-    phoneNumber: "989 989 9898",
-    workExperience: "5 years",
-    expectedSalary: "5 LPA",
-    appliedFor: "Cricket coach",
-    resumeStatus: "Shortlisted",
-  },
-  {
-    candidatesName: "Sahil kapoor",
-    emailAddress: "sahilkapoor@gmail.com",
-    phoneNumber: "989 989 9898",
-    workExperience: "5 years",
-    expectedSalary: "5 LPA",
-    appliedFor: "Cricket coach",
-    resumeStatus: "Shortlisted",
-  },
-  {
-    candidatesName: "Sahil kapoor",
-    emailAddress: "sahilkapoor@gmail.com",
-    phoneNumber: "989 989 9898",
-    workExperience: "5 years",
-    expectedSalary: "5 LPA",
-    appliedFor: "Cricket coach",
-    resumeStatus: "Shortlisted",
-  },
-  {
-    candidatesName: "Sahil kapoor",
-    emailAddress: "sahilkapoor@gmail.com",
-    phoneNumber: "989 989 9898",
-    workExperience: "5 years",
-    expectedSalary: "5 LPA",
-    appliedFor: "Cricket coach",
-    resumeStatus: "Shortlisted",
-  },
-];
+const mockApplicationData: ApplicationData[] = [];
 
-const mockJobPostData: JobPostData[] = [
-  {
-    jobTitle: "Trainer",
-    department: "Cricket",
-    location: "Sector 10, Dwarka, New Delhi",
-    status: "Active",
-  },
-  {
-    jobTitle: "Trainer",
-    department: "Cricket",
-    location: "Sector 10, Dwarka, New Delhi",
-    status: "Active",
-  },
-  {
-    jobTitle: "Trainer",
-    department: "Cricket",
-    location: "Sector 10, Dwarka, New Delhi",
-    status: "Active",
-  },
-  {
-    jobTitle: "Trainer",
-    department: "Cricket",
-    location: "Sector 10, Dwarka, New Delhi",
-    status: "Closed",
-  },
-  {
-    jobTitle: "Trainer",
-    department: "Cricket",
-    location: "Sector 10, Dwarka, New Delhi",
-    status: "Active",
-  },
-  {
-    jobTitle: "Trainer",
-    department: "Cricket",
-    location: "Sector 10, Dwarka, New Delhi",
-    status: "Active",
-  },
-  {
-    jobTitle: "Trainer",
-    department: "Cricket",
-    location: "Sector 10, Dwarka, New Delhi",
-    status: "Active",
-  },
-];
+const mockJobPostData: JobPostData[] = [];
 
 const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
   selectedToggle,
+  jobPosts = mockJobPostData,
+  applications = mockApplicationData,
   onEditJobPost,
+  onDeleteJobPost,
+  onChangeJobPostStatus,
+  onChangeApplicationStatus,
+  onDownloadResume,
 }) => {
   const [dropdownOpen, setDropdownOpen] = useState<number | null>(null);
   const [jobPostStatuses, setJobPostStatuses] = useState<
     ("Active" | "Closed")[]
-  >(mockJobPostData.map((item) => item.status));
+  >(jobPosts.map((item) => item.status));
   const [applicationStatuses, setApplicationStatuses] = useState<
     ("In Review" | "Shortlisted" | "New")[]
-  >(mockApplicationData.map((item) => item.resumeStatus));
+  >(applications.map((item) => item.resumeStatus));
 
   const handleJobPostStatusChange = (
     index: number,
@@ -158,6 +74,7 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
     updatedStatuses[index] = newStatus;
     setJobPostStatuses(updatedStatuses);
     setDropdownOpen(null);
+    onChangeJobPostStatus?.(index, jobPosts[index], newStatus);
   };
 
   const handleApplicationStatusChange = (
@@ -168,16 +85,17 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
     updatedStatuses[index] = newStatus;
     setApplicationStatuses(updatedStatuses);
     setDropdownOpen(null);
+    onChangeApplicationStatus?.(index, applications[index], newStatus);
   };
 
   const handleEdit = (index: number) => {
-    const jobData = mockJobPostData[index];
+    const jobData = jobPosts[index];
     onEditJobPost?.(index, jobData);
     setDropdownOpen(null);
   };
 
   const handleDelete = (index: number) => {
-    console.log(`Deleting item ${index}`);
+    onDeleteJobPost?.(index, jobPosts[index]);
     setDropdownOpen(null);
   };
 
@@ -241,7 +159,7 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
   );
 
   const renderApplicationRows = () =>
-    mockApplicationData.map((item, index) => (
+    applications.map((item, index) => (
       <div
         key={index}
         className="bg-[#1D1D1D] border-r border-b border-l border-[#333333] flex items-center text-white relative w-full"
@@ -369,6 +287,15 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
             </button>
             {dropdownOpen === index + 1000 && (
               <div className="absolute top-full right-0 mt-1 bg-[#1D1D1D] border border-[#333333] rounded shadow-lg z-10">
+                {item.resumeUrl && (
+                  <button
+                    type="button"
+                    onClick={() => onDownloadResume?.(index, item)}
+                    className="block w-full text-left px-3 py-2 text-sm text-white hover:bg-[#333333]"
+                  >
+                    Download Resume
+                  </button>
+                )}
                 <button
                   type="button"
                   onClick={() => handleDelete(index)}
@@ -384,7 +311,7 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
     ));
 
   const renderJobPostRows = () =>
-    mockJobPostData.map((item, index) => (
+    jobPosts.map((item, index) => (
       <div
         key={index}
         className="bg-[#1D1D1D] border-r border-b border-l border-[#333333] flex items-center text-white relative w-full"

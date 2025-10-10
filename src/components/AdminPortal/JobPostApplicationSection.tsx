@@ -1,9 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import JobPostApplicationTable from "./JobPostApplicationTable";
 import AddJobPostModal from "./AddJobPostModal";
+import { jobAPI } from "@/services/jobAPI";
+import { applicationAPI } from "@/services/applicationAPI";
+import { ApplicationStatus, JobStatus, JobType } from "@/types/database";
 
 type ToggleOption = "job-posts" | "application";
 
@@ -14,10 +17,72 @@ const JobPostApplicationSection: React.FC = () => {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [editJobData, setEditJobData] = useState<any>(null);
   const [isEditMode, setIsEditMode] = useState(false);
+  const [jobPosts, setJobPosts] = useState<
+    {
+      id: number;
+      jobTitle: string;
+      department: string;
+      location: string;
+      status: "Active" | "Closed";
+    }[]
+  >([]);
+  const [applications, setApplications] = useState<
+    {
+      id: number;
+      candidatesName: string;
+      emailAddress: string;
+      phoneNumber: string;
+      workExperience: string;
+      expectedSalary: string;
+      appliedFor: string;
+      resumeStatus: "In Review" | "Shortlisted" | "New";
+      resumeUrl?: string;
+    }[]
+  >([]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const [jobs, apps] = await Promise.all([
+          jobAPI.list(),
+          applicationAPI.list(),
+        ]);
+
+        const jobMapped = jobs.map((j) => ({
+          id: j.id,
+          jobTitle: j.title,
+          department: j.department?.name || "",
+          location: j.location?.full_location || "",
+          status: j.status === JobStatus.ACTIVE ? "Active" : "Closed",
+        }));
+        setJobPosts(jobMapped);
+
+        const appMapped = apps.map((a) => ({
+          id: a.id,
+          candidatesName: a.candidate_name,
+          emailAddress: a.email,
+          phoneNumber: a.phone || "",
+          workExperience: a.work_exprience || "",
+          expectedSalary: a.expected_salary || "",
+          appliedFor: a.job?.title || "",
+          resumeStatus:
+            a.status === ApplicationStatus.SHORTLISTED
+              ? "Shortlisted"
+              : a.status === ApplicationStatus.IN_REVIEW
+              ? "In Review"
+              : "New",
+          resumeUrl: a.resume,
+        }));
+        setApplications(appMapped);
+      } catch (_) {
+        setJobPosts([]);
+        setApplications([]);
+      }
+    })();
+  }, []);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Search query:", searchQuery);
   };
 
   const handleAddNew = () => {
@@ -46,18 +111,84 @@ const JobPostApplicationSection: React.FC = () => {
     setEditJobData(null);
   };
 
-  const handleJobPostSubmit = (jobPost: any) => {
-    if (isEditMode) {
-      console.log("Job post updated:", jobPost);
-      // Here you would typically make an API call to update the job post
+  const handleJobPostSubmit = async (jobPost: any) => {
+    if (isEditMode && jobPost?.id) {
+      await jobAPI.update(jobPost.id, {
+        title: jobPost.jobTitle,
+        job_description: jobPost.jobDescription,
+      } as any);
     } else {
-      console.log("New job post created:", jobPost);
-      // Here you would typically make an API call to save the job post
+      await jobAPI.create({
+        title: jobPost.jobTitle,
+        department_id: jobPost.department_id,
+        location_id: jobPost.location_id,
+        job_type: JobType.FULL_TIME,
+        job_description: jobPost.jobDescription,
+        is_visible: true,
+      } as any);
     }
+    setIsAddModalOpen(false);
+    const refreshed = await jobAPI.list();
+    setJobPosts(
+      refreshed.map((j) => ({
+        id: j.id,
+        jobTitle: j.title,
+        department: j.department?.name || "",
+        location: j.location?.full_location || "",
+        status: j.status === JobStatus.ACTIVE ? "Active" : "Closed",
+      }))
+    );
   };
 
-  const handleFilter = () => {
-    console.log("Filter clicked");
+  const handleFilter = () => {};
+
+  const filteredJobPosts = useMemo(() => {
+    const q = searchQuery.toLowerCase();
+    return jobPosts.filter(
+      (j) =>
+        j.jobTitle.toLowerCase().includes(q) ||
+        j.department.toLowerCase().includes(q)
+    );
+  }, [jobPosts, searchQuery]);
+
+  const filteredApplications = useMemo(() => {
+    const q = searchQuery.toLowerCase();
+    return applications.filter(
+      (a) =>
+        a.candidatesName.toLowerCase().includes(q) ||
+        a.appliedFor.toLowerCase().includes(q)
+    );
+  }, [applications, searchQuery]);
+
+  const handleChangeJobPostStatus = async (
+    index: number,
+    jobData: { id: number },
+    newStatus: "Active" | "Closed"
+  ) => {
+    await jobAPI.setStatus(
+      jobData.id,
+      newStatus === "Active" ? JobStatus.ACTIVE : JobStatus.CLOSED
+    );
+  };
+
+  const handleChangeApplicationStatus = async (
+    index: number,
+    application: { id: number },
+    newStatus: "In Review" | "Shortlisted" | "New"
+  ) => {
+    const statusMap: Record<string, ApplicationStatus> = {
+      "In Review": ApplicationStatus.IN_REVIEW,
+      Shortlisted: ApplicationStatus.SHORTLISTED,
+      New: ApplicationStatus.NEW,
+    };
+    await applicationAPI.setStatus(application.id, statusMap[newStatus]);
+  };
+
+  const handleDownloadResume = (
+    _index: number,
+    application: { resumeUrl?: string }
+  ) => {
+    if (application.resumeUrl) window.open(application.resumeUrl, "_blank");
   };
 
   return (
@@ -174,7 +305,13 @@ const JobPostApplicationSection: React.FC = () => {
       <div className="pb-6">
         <JobPostApplicationTable
           selectedToggle={selectedToggle}
+          jobPosts={filteredJobPosts}
+          applications={filteredApplications}
           onEditJobPost={handleEditJobPost}
+          onDeleteJobPost={() => {}}
+          onChangeJobPostStatus={handleChangeJobPostStatus}
+          onChangeApplicationStatus={handleChangeApplicationStatus}
+          onDownloadResume={handleDownloadResume}
         />
       </div>
 
