@@ -317,7 +317,6 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
             paddingBottom: "16px",
             paddingLeft: "40px",
             background: "#333333",
-            fontFamily: "Inter",
             fontWeight: 500,
             fontSize: "12px",
             lineHeight: "16px",
@@ -374,7 +373,6 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
                   <span
                     className={`text-center ${getStatusColor(item.status)}`}
                     style={{
-                      fontFamily: "Inter",
                       fontWeight: 300,
                       fontSize: "12px",
                       lineHeight: "16px",
@@ -488,7 +486,6 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
             paddingBottom: "16px",
             paddingLeft: "40px",
             background: "#333333",
-            fontFamily: "Inter",
             fontWeight: 500,
             fontSize: "12px",
             lineHeight: "16px",
@@ -548,7 +545,6 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
                   <span
                     className={`text-center ${getStatusColor(item.status)}`}
                     style={{
-                      fontFamily: "Inter",
                       fontWeight: 300,
                       fontSize: "12px",
                       lineHeight: "16px",
@@ -642,7 +638,6 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
             paddingBottom: "16px",
             paddingLeft: "40px",
             background: "#333333",
-            fontFamily: "Inter",
             fontWeight: 500,
             fontSize: "12px",
             lineHeight: "16px",
@@ -702,7 +697,6 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
                   <span
                     className={`text-center ${getStatusColor(item.status)}`}
                     style={{
-                      fontFamily: "Inter",
                       fontWeight: 300,
                       fontSize: "12px",
                       lineHeight: "16px",

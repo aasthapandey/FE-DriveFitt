@@ -37,7 +37,6 @@ const DashboardGraph: React.FC<DashboardGraphProps> = ({
           <h3
             className="text-[#BFBFBF] mb-2"
             style={{
-              fontFamily: "Inter",
               fontWeight: 400,
               fontSize: "14px",
               lineHeight: "16px",
@@ -48,7 +47,6 @@ const DashboardGraph: React.FC<DashboardGraphProps> = ({
           <span
             className="text-[#BFBFBF]"
             style={{
-              fontFamily: "Inter",
               fontWeight: 300,
               fontSize: "40px",
               lineHeight: "100%",
@@ -63,7 +61,6 @@ const DashboardGraph: React.FC<DashboardGraphProps> = ({
             onChange={(e) => onTimeRangeChange?.(e.target.value)}
             className="appearance-none bg-[#0D0D0D] text-[#BFBFBF] rounded-lg pl-4 pr-8 py-2 border border-[#2D2D2D] focus:outline-none"
             style={{
-              fontFamily: "Inter",
               fontSize: "14px",
               lineHeight: "20px",
             }}

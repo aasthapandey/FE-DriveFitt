@@ -1,6 +1,16 @@
 import { Application, ApplicationStatus } from "@/types/database";
 
-const BASE = "/api";
+// Get the base URL for API requests
+// In server-side rendering, we need an absolute URL
+// In client-side, we can use relative URLs
+const getBaseUrl = () => {
+  if (typeof window === "undefined") {
+    // Server-side: use absolute URL
+    return process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+  }
+  // Client-side: use relative URL
+  return "";
+};
 
 export const applicationAPI = {
   async list(params?: {
@@ -10,9 +20,12 @@ export const applicationAPI = {
     const qs = new URLSearchParams();
     if (params?.status !== undefined) qs.set("status", String(params.status));
     if (params?.job_id !== undefined) qs.set("job_id", String(params.job_id));
-    const res = await fetch(`${BASE}/applications?${qs.toString()}`, {
-      cache: "no-store",
-    });
+    const res = await fetch(
+      `${getBaseUrl()}/api/applications?${qs.toString()}`,
+      {
+        cache: "no-store",
+      }
+    );
     const json = await res.json();
     if (!res.ok || !json?.status)
       throw new Error(json?.error || "Fetch failed");
@@ -40,7 +53,7 @@ export const applicationAPI = {
     if (form.expected_salary) fd.set("expected_salary", form.expected_salary);
     if (form.resume) fd.set("resume", form.resume);
 
-    const res = await fetch(`${BASE}/applications`, {
+    const res = await fetch(`${getBaseUrl()}/api/applications`, {
       method: "POST",
       body: fd,
     });
@@ -51,7 +64,7 @@ export const applicationAPI = {
   },
 
   async setStatus(id: number, status: ApplicationStatus) {
-    const res = await fetch(`${BASE}/applications/${id}/status`, {
+    const res = await fetch(`${getBaseUrl()}/api/applications/${id}/status`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status }),

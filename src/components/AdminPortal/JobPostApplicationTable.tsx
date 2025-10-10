@@ -57,6 +57,7 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
   onEditJobPost,
   onDeleteJobPost,
   onChangeJobPostStatus,
+  onToggleVisibility,
   onChangeApplicationStatus,
   onDownloadResume,
 }) => {
@@ -134,7 +135,6 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
         gap: "24px",
         borderTopLeftRadius: "16px",
         borderTopRightRadius: "16px",
-        fontFamily: "Inter",
         fontWeight: 500,
         fontSize: "12px",
         lineHeight: "16px",
@@ -163,7 +163,6 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
         gap: "24px",
         borderTopLeftRadius: "16px",
         borderTopRightRadius: "16px",
-        fontFamily: "Inter",
         fontWeight: 500,
         fontSize: "12px",
         lineHeight: "16px",
@@ -226,7 +225,6 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
                     : "text-[#00DBDC]"
                 }`}
                 style={{
-                  fontFamily: "Inter",
                   fontWeight: 300,
                   fontSize: "12px",
                   lineHeight: "16px",
@@ -260,7 +258,10 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
               </svg>
             </button>
             {dropdownOpen === index && (
-              <div className="absolute top-full left-0 mt-1 bg-[#1D1D1D] border border-[#333333] rounded shadow-lg z-10">
+              <div
+                className="absolute top-full left-0 mt-1 bg-[#1D1D1D] border border-[#333333] rounded shadow-lg z-10"
+                style={{ width: "85px" }}
+              >
                 <button
                   type="button"
                   onClick={() =>
@@ -388,9 +389,7 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
                 height="6"
                 viewBox="0 0 8 6"
                 fill="none"
-                className={`${
-                  "text-[#BFBFBF]"
-                } transform transition-transform duration-200 ${
+                className={`${"text-[#BFBFBF]"} transform transition-transform duration-200 ${
                   dropdownOpen === index + 2000 ? "rotate-180" : ""
                 }`}
               >
@@ -407,6 +406,7 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
               <div
                 className="absolute top-full left-0 mt-1 bg-[#1D1D1D] border border-[#333333] rounded shadow-lg z-10"
                 data-menu-root
+                style={{ width: "85px" }}
               >
                 <button
                   type="button"
@@ -419,13 +419,6 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
                   className="block w-full text-left px-3 py-2 text-sm text-white hover:bg-[#333333]"
                 >
                   {jobPostStatuses[index] === "Active" ? "Closed" : "Active"}
-                </button>
-                <button
-                  type="button"
-                  onClick={() => onToggleVisibility?.(index, jobPosts[index])}
-                  className="block w-full text-left px-3 py-2 text-sm text-white hover:bg-[#333333]"
-                >
-                  {jobPosts[index].isVisible ? "Hide" : "Show"}
                 </button>
               </div>
             )}
@@ -462,6 +455,13 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
                 </button>
                 <button
                   type="button"
+                  onClick={() => onToggleVisibility?.(index, jobPosts[index])}
+                  className="block w-full text-left px-3 py-2 text-sm text-white hover:bg-[#333333]"
+                >
+                  {jobPosts[index].isVisible ? "Hide" : "Show"}
+                </button>
+                <button
+                  type="button"
                   onClick={() => handleDelete(index)}
                   className="block w-full text-left px-3 py-2 text-sm text-red-400 hover:bg-[#333333]"
                 >
@@ -477,12 +477,12 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
   return (
     <div className="w-full">
       {selectedToggle === "application" ? (
-        <div className="w-full">
+        <div className="w-full max-h-96 overflow-y-auto">
           {renderApplicationHeaders()}
           {renderApplicationRows()}
         </div>
       ) : (
-        <div className="w-full">
+        <div className="w-full max-h-96 overflow-y-auto">
           {renderJobPostHeaders()}
           {renderJobPostRows()}
         </div>

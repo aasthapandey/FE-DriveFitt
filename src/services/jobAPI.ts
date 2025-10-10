@@ -1,6 +1,16 @@
 import { JobPosting } from "@/types/database";
 
-const BASE = "/api";
+// Get the base URL for API requests
+// In server-side rendering, we need an absolute URL
+// In client-side, we can use relative URLs
+const getBaseUrl = () => {
+  if (typeof window === "undefined") {
+    // Server-side: use absolute URL
+    return process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+  }
+  // Client-side: use relative URL
+  return "";
+};
 
 export const jobAPI = {
   async list(params?: {
@@ -17,9 +27,12 @@ export const jobAPI = {
       qs.set("department_id", String(params.department_id));
     if (params?.location_id !== undefined)
       qs.set("location_id", String(params.location_id));
-    const res = await fetch(`${BASE}/job-postings?${qs.toString()}`, {
-      cache: "no-store",
-    });
+    const res = await fetch(
+      `${getBaseUrl()}/api/job-postings?${qs.toString()}`,
+      {
+        cache: "no-store",
+      }
+    );
     const json = await res.json();
     if (!res.ok || !json?.status)
       throw new Error(json?.error || "Fetch failed");
@@ -27,16 +40,17 @@ export const jobAPI = {
   },
 
   async getById(id: number): Promise<JobPosting> {
-    const res = await fetch(`${BASE}/job-postings/${id}`, {
+    const res = await fetch(`${getBaseUrl()}/api/job-postings/${id}`, {
       cache: "no-store",
     });
     const json = await res.json();
-    if (!res.ok || !json) throw new Error(json?.error || "Fetch failed");
-    return json as JobPosting;
+    if (!res.ok || !json?.status)
+      throw new Error(json?.error || "Fetch failed");
+    return json.data as JobPosting;
   },
 
   async create(payload: Partial<JobPosting>) {
-    const res = await fetch(`${BASE}/job-postings`, {
+    const res = await fetch(`${getBaseUrl()}/api/job-postings`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
@@ -48,7 +62,7 @@ export const jobAPI = {
   },
 
   async update(id: number, payload: Partial<JobPosting>) {
-    const res = await fetch(`${BASE}/job-postings/${id}`, {
+    const res = await fetch(`${getBaseUrl()}/api/job-postings/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
@@ -60,7 +74,7 @@ export const jobAPI = {
   },
 
   async setStatus(id: number, status: number) {
-    const res = await fetch(`${BASE}/job-postings/${id}/status`, {
+    const res = await fetch(`${getBaseUrl()}/api/job-postings/${id}/status`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status }),
@@ -72,11 +86,14 @@ export const jobAPI = {
   },
 
   async setVisibility(id: number, is_visible: boolean) {
-    const res = await fetch(`${BASE}/job-postings/${id}/visibility`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ is_visible }),
-    });
+    const res = await fetch(
+      `${getBaseUrl()}/api/job-postings/${id}/visibility`,
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ is_visible }),
+      }
+    );
     const json = await res.json();
     if (!res.ok || !json?.status)
       throw new Error(json?.error || "Visibility failed");
@@ -87,7 +104,7 @@ export const jobAPI = {
     departments: any[];
     locations: any[];
   }> {
-    const res = await fetch(`${BASE}/departments-locations`, {
+    const res = await fetch(`${getBaseUrl()}/api/departments-locations`, {
       cache: "no-store",
     });
     const json = await res.json();

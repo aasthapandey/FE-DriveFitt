@@ -24,7 +24,6 @@ const StatsCard: React.FC<StatsCardProps> = ({ title, value, subtitle }) => {
       <h3
         className="text-[#BFBFBF]"
         style={{
-          fontFamily: "Inter",
           fontWeight: 400,
           fontSize: "14px",
           lineHeight: "16px",
@@ -37,7 +36,6 @@ const StatsCard: React.FC<StatsCardProps> = ({ title, value, subtitle }) => {
         <span
           className="text-[#BFBFBF]"
           style={{
-            fontFamily: "Inter",
             fontWeight: 300,
             fontSize: "40px",
             lineHeight: "100%",
@@ -49,7 +47,6 @@ const StatsCard: React.FC<StatsCardProps> = ({ title, value, subtitle }) => {
         <span
           className="text-[#8A8A8A]"
           style={{
-            fontFamily: "Inter",
             fontWeight: 400,
             fontSize: "12px",
             lineHeight: "16px",

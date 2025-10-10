@@ -262,7 +262,6 @@ const JobPostApplicationSection: React.FC = () => {
             style={{
               width: "90px",
               height: "28px",
-              fontFamily: "Inter",
               fontWeight: selectedToggle === "job-posts" ? 500 : 400,
               fontSize: "14px",
               lineHeight: "20px",
@@ -281,7 +280,6 @@ const JobPostApplicationSection: React.FC = () => {
             style={{
               width: "90px",
               height: "28px",
-              fontFamily: "Inter",
               fontWeight: selectedToggle === "application" ? 500 : 400,
               fontSize: "14px",
               lineHeight: "20px",

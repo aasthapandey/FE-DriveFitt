@@ -23,7 +23,6 @@ const CareerSection: React.FC<CareerSectionProps> = ({ title, quantity }) => {
       <h3
         className="text-[#BFBFBF]"
         style={{
-          fontFamily: "Inter",
           fontWeight: 400,
           fontSize: "14px",
           lineHeight: "16px",
@@ -35,7 +34,6 @@ const CareerSection: React.FC<CareerSectionProps> = ({ title, quantity }) => {
       <span
         className="text-[#BFBFBF]"
         style={{
-          fontFamily: "Inter",
           fontWeight: 300,
           fontSize: "40px",
           lineHeight: "100%",
