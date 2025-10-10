@@ -41,6 +41,11 @@ const JobPostApplicationSection: React.FC = () => {
     }[]
   >([]);
 
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(10);
+  const [totalItems, setTotalItems] = useState(0);
+
   const toStatus = (s: number | JobStatus): "Active" | "Closed" | "Deleted" =>
     s === JobStatus.ACTIVE
       ? "Active"
@@ -87,15 +92,61 @@ const JobPostApplicationSection: React.FC = () => {
           resumeUrl: a.resume,
         }));
         setApplications(appMapped);
+
+        // Set total items for pagination
+        setTotalItems(
+          selectedToggle === "job-posts" ? jobs.length : apps.length
+        );
       } catch (_) {
         setJobPosts([]);
         setApplications([]);
+        setTotalItems(0);
       }
     })();
-  }, []);
+  }, [selectedToggle]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
+    setCurrentPage(1); // Reset to first page when searching
+  };
+
+  // Pagination calculations
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+  // Filter data based on search query
+  const filteredJobPosts = useMemo(() => {
+    if (!searchQuery) return jobPosts;
+    return jobPosts.filter(
+      (job) =>
+        job.jobTitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        job.department.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        job.location.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  }, [jobPosts, searchQuery]);
+
+  const filteredApplications = useMemo(() => {
+    if (!searchQuery) return applications;
+    return applications.filter(
+      (app) =>
+        app.candidatesName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        app.emailAddress.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        app.appliedFor.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  }, [applications, searchQuery]);
+
+  // Update total items when filtered data changes
+  useEffect(() => {
+    const newTotal =
+      selectedToggle === "job-posts"
+        ? filteredJobPosts.length
+        : filteredApplications.length;
+    setTotalItems(newTotal);
+    setCurrentPage(1); // Reset to first page when data changes
+  }, [selectedToggle, filteredJobPosts, filteredApplications]);
+
+  // Pagination handlers
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
   };
 
   const handleAddNew = () => {
@@ -170,24 +221,6 @@ const JobPostApplicationSection: React.FC = () => {
   };
 
   const handleFilter = () => {};
-
-  const filteredJobPosts = useMemo(() => {
-    const q = searchQuery.toLowerCase();
-    return jobPosts.filter(
-      (j) =>
-        j.jobTitle.toLowerCase().includes(q) ||
-        j.department.toLowerCase().includes(q)
-    );
-  }, [jobPosts, searchQuery]);
-
-  const filteredApplications = useMemo(() => {
-    const q = searchQuery.toLowerCase();
-    return applications.filter(
-      (a) =>
-        a.candidatesName.toLowerCase().includes(q) ||
-        a.appliedFor.toLowerCase().includes(q)
-    );
-  }, [applications, searchQuery]);
 
   const handleChangeJobPostStatus = async (
     index: number,
@@ -358,6 +391,11 @@ const JobPostApplicationSection: React.FC = () => {
           onChangeApplicationStatus={handleChangeApplicationStatus}
           onDownloadResume={handleDownloadResume}
           onToggleVisibility={handleToggleVisibility}
+          currentPage={currentPage}
+          totalPages={totalPages}
+          totalItems={totalItems}
+          itemsPerPage={itemsPerPage}
+          onPageChange={handlePageChange}
         />
       </div>
 

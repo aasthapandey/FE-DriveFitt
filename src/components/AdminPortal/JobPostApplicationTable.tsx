@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import Pagination from "../common/Pagination";
 
 type ToggleOption = "job-posts" | "application";
 
@@ -23,6 +24,12 @@ interface JobPostApplicationTableProps {
     newStatus: "In Review" | "Shortlisted" | "New"
   ) => void;
   onDownloadResume?: (index: number, application: ApplicationData) => void;
+  // Pagination props
+  currentPage?: number;
+  totalPages?: number;
+  totalItems?: number;
+  itemsPerPage?: number;
+  onPageChange?: (page: number) => void;
 }
 
 interface ApplicationData {
@@ -60,6 +67,11 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
   onToggleVisibility,
   onChangeApplicationStatus,
   onDownloadResume,
+  currentPage = 1,
+  totalPages = 1,
+  totalItems = 0,
+  itemsPerPage = 10,
+  onPageChange,
 }) => {
   const [dropdownOpen, setDropdownOpen] = useState<number | null>(null);
   const [jobPostStatuses, setJobPostStatuses] = useState<
@@ -125,7 +137,7 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
 
   const renderApplicationHeaders = () => (
     <div
-      className="bg-[#333333] border border-[#333333] flex items-center text-[#8A8A8A] w-full"
+      className="bg-[#333333] flex items-center text-[#8A8A8A] w-full sticky top-0 z-10"
       style={{
         height: "48px",
         paddingTop: "16px",
@@ -133,8 +145,6 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
         paddingBottom: "16px",
         paddingLeft: "40px",
         gap: "24px",
-        borderTopLeftRadius: "16px",
-        borderTopRightRadius: "16px",
         fontWeight: 500,
         fontSize: "12px",
         lineHeight: "16px",
@@ -153,7 +163,7 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
 
   const renderJobPostHeaders = () => (
     <div
-      className="bg-[#333333] border border-[#333333] flex items-center text-[#8A8A8A] w-full"
+      className="bg-[#333333] flex items-center text-[#8A8A8A] w-full sticky top-0 z-10"
       style={{
         height: "48px",
         paddingTop: "16px",
@@ -161,8 +171,6 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
         paddingBottom: "16px",
         paddingLeft: "40px",
         gap: "24px",
-        borderTopLeftRadius: "16px",
-        borderTopRightRadius: "16px",
         fontWeight: 500,
         fontSize: "12px",
         lineHeight: "16px",
@@ -475,16 +483,46 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
     ));
 
   return (
-    <div className="w-full">
+    <div className="w-full pb-6">
       {selectedToggle === "application" ? (
-        <div className="w-full max-h-96 overflow-y-auto">
-          {renderApplicationHeaders()}
-          {renderApplicationRows()}
+        <div className="w-full">
+          <div className="border border-[#333333] rounded-t-2xl overflow-hidden">
+            <div className="max-h-96 overflow-y-auto">
+              {renderApplicationHeaders()}
+              <div className="pb-4">{renderApplicationRows()}</div>
+            </div>
+          </div>
+          {onPageChange && (
+            <div className="mt-4 px-4">
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                totalItems={totalItems}
+                itemsPerPage={itemsPerPage}
+                onPageChange={onPageChange}
+              />
+            </div>
+          )}
         </div>
       ) : (
-        <div className="w-full max-h-96 overflow-y-auto">
-          {renderJobPostHeaders()}
-          {renderJobPostRows()}
+        <div className="w-full">
+          <div className="border border-[#333333] rounded-2xl overflow-hidden">
+            <div className="max-h-96 overflow-y-auto">
+              {renderJobPostHeaders()}
+              <div className="">{renderJobPostRows()}</div>
+            </div>
+          </div>
+          {onPageChange && (
+            <div className="mt-4 px-4">
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                totalItems={totalItems}
+                itemsPerPage={itemsPerPage}
+                onPageChange={onPageChange}
+              />
+            </div>
+          )}
         </div>
       )}
     </div>
