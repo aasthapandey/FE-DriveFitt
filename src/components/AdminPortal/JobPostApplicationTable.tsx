@@ -357,8 +357,7 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
               }}
               className="bg-[#333333] border border-[#333333] rounded flex items-center justify-center gap-1 transition-colors"
               style={{
-                width: "120px",
-                minWidth: "120px",
+                width: "85px",
                 height: "24px",
                 paddingTop: "4px",
                 paddingRight: "10px",
@@ -376,7 +375,6 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
                     : "text-[#FF6B6B]"
                 }`}
                 style={{
-                  fontFamily: "Inter",
                   fontWeight: 300,
                   fontSize: "12px",
                   lineHeight: "16px",
@@ -391,11 +389,7 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
                 viewBox="0 0 8 6"
                 fill="none"
                 className={`${
-                  jobPostStatuses[index] === "Active"
-                    ? "text-[#00DBDC]"
-                    : jobPostStatuses[index] === "Closed"
-                    ? "text-[#BFBFBF]"
-                    : "text-[#FF6B6B]"
+                  "text-[#BFBFBF]"
                 } transform transition-transform duration-200 ${
                   dropdownOpen === index + 2000 ? "rotate-180" : ""
                 }`}

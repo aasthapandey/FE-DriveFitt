@@ -221,7 +221,6 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
           <h2
             className="text-white"
             style={{
-              fontFamily: "Inter",
               fontWeight: 400,
               fontSize: "24px",
               lineHeight: "32px",
@@ -242,7 +241,7 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
                 <label
                   className="text-[#BFBFBF]"
                   style={{
-                    fontFamily: "Inter",
+    
                     fontWeight: 400,
                     fontSize: "12px",
                     lineHeight: "16px",
@@ -266,7 +265,7 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
                     paddingLeft: "20px",
                     fontSize: "14px",
                     lineHeight: "20px",
-                    fontFamily: "Inter",
+    
                     fontWeight: 400,
                   }}
                   placeholder="Boxing Workouts vs. Other Cardio Exercises"
@@ -279,7 +278,7 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
                   <label
                     className="text-[#BFBFBF]"
                     style={{
-                      fontFamily: "Inter",
+      
                       fontWeight: 400,
                       fontSize: "12px",
                       lineHeight: "16px",
@@ -310,7 +309,7 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
                       paddingLeft: "20px",
                       fontSize: "14px",
                       lineHeight: "20px",
-                      fontFamily: "Inter",
+      
                       fontWeight: 400,
                       color: formData.departmentId ? "#FFFFFF" : "#BFBFBF",
                       backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23BFBFBF' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
@@ -334,7 +333,7 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
                   <label
                     className="text-[#BFBFBF]"
                     style={{
-                      fontFamily: "Inter",
+      
                       fontWeight: 400,
                       fontSize: "12px",
                       lineHeight: "16px",
@@ -365,7 +364,7 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
                       paddingLeft: "20px",
                       fontSize: "14px",
                       lineHeight: "20px",
-                      fontFamily: "Inter",
+      
                       fontWeight: 400,
                       color: formData.locationId ? "#FFFFFF" : "#BFBFBF",
                       backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23BFBFBF' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
@@ -392,7 +391,7 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
                   <label
                     className="text-[#BFBFBF]"
                     style={{
-                      fontFamily: "Inter",
+      
                       fontWeight: 400,
                       fontSize: "12px",
                       lineHeight: "16px",
@@ -416,7 +415,7 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
                       paddingLeft: "20px",
                       fontSize: "14px",
                       lineHeight: "20px",
-                      fontFamily: "Inter",
+      
                       fontWeight: 400,
                       color: formData.jobType ? "#FFFFFF" : "#BFBFBF",
                       backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23BFBFBF' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
@@ -440,7 +439,7 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
                   <label
                     className="text-[#BFBFBF]"
                     style={{
-                      fontFamily: "Inter",
+      
                       fontWeight: 400,
                       fontSize: "12px",
                       lineHeight: "16px",
@@ -465,7 +464,7 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
                         paddingLeft: "52px",
                         fontSize: "14px",
                         lineHeight: "20px",
-                        fontFamily: "Inter",
+        
                         fontWeight: 400,
                         colorScheme: "dark",
                         color: "#FFFFFF",
@@ -488,7 +487,7 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
                 <label
                   className="text-[#BFBFBF]"
                   style={{
-                    fontFamily: "Inter",
+    
                     fontWeight: 400,
                     fontSize: "12px",
                     lineHeight: "16px",
@@ -507,7 +506,7 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
                     padding: "12px 20px",
                     fontSize: "14px",
                     lineHeight: "20px",
-                    fontFamily: "Inter",
+    
                     fontWeight: 400,
                   }}
                   placeholder="e.g. React, TypeScript, CSS"
@@ -519,7 +518,7 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
                 <label
                   className="text-[#BFBFBF]"
                   style={{
-                    fontFamily: "Inter",
+    
                     fontWeight: 400,
                     fontSize: "12px",
                     lineHeight: "16px",
@@ -592,7 +591,7 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
                 <label
                   className="text-[#BFBFBF]"
                   style={{
-                    fontFamily: "Inter",
+    
                     fontWeight: 400,
                     fontSize: "12px",
                     lineHeight: "16px",
@@ -665,7 +664,7 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
                 <label
                   className="text-[#BFBFBF]"
                   style={{
-                    fontFamily: "Inter",
+    
                     fontWeight: 400,
                     fontSize: "12px",
                     lineHeight: "16px",
@@ -694,7 +693,7 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
               <label
                 className="text-[#BFBFBF]"
                 style={{
-                  fontFamily: "Inter",
+  
                   fontWeight: 400,
                   fontSize: "12px",
                   lineHeight: "16px",
@@ -716,7 +715,7 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
                   paddingLeft: "20px",
                   fontSize: "14px",
                   lineHeight: "20px",
-                  fontFamily: "Inter",
+  
                   fontWeight: 400,
                 }}
                 placeholder="In recent years, boxing workouts have become increasingly popular among people who are looking for an effective way to get in shape."
@@ -735,7 +734,7 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
                   paddingRight: "16px",
                   paddingBottom: "8px",
                   paddingLeft: "16px",
-                  fontFamily: "Inter",
+  
                   fontWeight: 500,
                   fontSize: "14px",
                   lineHeight: "20px",
