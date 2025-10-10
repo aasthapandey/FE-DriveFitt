@@ -2,6 +2,8 @@ import * as SibApiV3Sdk from "@getbrevo/brevo";
 import { ContactUsFormData, FranchiseFormData } from "@/types/database";
 import https from "https";
 import http from "http";
+import fs from "fs";
+import path from "path";
 
 // Define types for API instance
 type ApiInstance = SibApiV3Sdk.TransactionalEmailsApi & {
@@ -127,7 +129,7 @@ export async function sendContactFormEmail(formData: ContactUsFormData) {
   const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
 
   // Configure email parameters
-  sendSmtpEmail.subject = "New Contact Us Form Submission - By Tech Katalyst";
+  sendSmtpEmail.subject = "New Contact Us Form Submission";
   sendSmtpEmail.htmlContent = `
     <html>
       <body>
@@ -187,7 +189,7 @@ export async function sendFranchiseFormEmail(formData: FranchiseFormData) {
   const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
 
   // Configure email parameters
-  sendSmtpEmail.subject = "New Franchise Enquiry Form - By Tech Katalyst";
+  sendSmtpEmail.subject = "New Franchise Enquiry Form";
   sendSmtpEmail.htmlContent = `
     <html>
       <body>
@@ -270,7 +272,7 @@ export async function sendLeadGenFormEmail(formData: LeadGenFormData) {
 
   // Configure email parameters
   sendSmtpEmail.subject =
-    "New Lead Generation Form Submission - By Tech Katalyst";
+    "New Lead Generation Form Submission";
   sendSmtpEmail.htmlContent = `
     <html>
       <body>
@@ -409,7 +411,10 @@ export async function sendMembershipSuccessEmail(
               ✅ You'll enjoy all included benefits once your membership is fully active
             </p>
             <p style="margin: 10px 0; font-size: 16px;">
-              ⏳ Complete your balance payment within 90 days or before the club opens, whichever is earlier, to keep this price effective
+              ✅ You will be contacted about your onboarding day 14 days prior to club opening
+            </p>
+            <p style="margin: 10px 0; font-size: 16px;">
+              ⏳ Complete your balance payment by 29th Dec 2025 to keep this price effective
             </p>
           </div>
           
@@ -418,7 +423,7 @@ export async function sendMembershipSuccessEmail(
           </p>
           
           <p style="font-size: 16px; margin-bottom: 20px;">
-            We can't wait to see you <strong>Drive. Strive. Thrive.</strong> with us at the club! 🏏✨
+            We can't wait to see you <strong>Drive. Strive. Thrive. Revive</strong> with us at the club! 🏏✨
           </p>
           
           <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
@@ -448,8 +453,19 @@ export async function sendMembershipSuccessEmail(
     }
   ).attachment = [
     {
-      name: `Invoice-${membershipData.invoiceNumber || "DriveFITT"}.pdf`,
+      name: `receipt voucher ${
+        membershipData.invoiceNumber || "DriveFITT"
+      }.pdf`,
       content: invoiceBuffer.toString("base64"),
+      type: "application/pdf",
+    },
+    {
+      name: "Terms and Conditions.pdf",
+      content: fs
+        .readFileSync(
+          path.join(process.cwd(), "public", "Terms and Conditions.pdf")
+        )
+        .toString("base64"),
       type: "application/pdf",
     },
   ];

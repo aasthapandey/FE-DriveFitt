@@ -16,6 +16,8 @@ import { executeQuery } from "@/lib/database";
 import { razorpayApiClient } from "@/lib/razorpayApiClient";
 import { generateInvoiceBuffer } from "@/utils/invoiceGenerator";
 import { sendMembershipSuccessEmail } from "@/utils/brevo";
+import { s3Service } from "@/lib/s3Service";
+import { whatsappService } from "@/lib/whatsappService";
 
 export async function POST(request: NextRequest) {
   try {
@@ -286,39 +288,86 @@ export async function POST(request: NextRequest) {
               "bytes"
             );
 
-            // Send email with invoice attachment synchronously (removed setImmediate)
-            if (membershipData) {
-              console.log(
-                "📤 Sending email immediately (removed setImmediate wrapper)..."
+            // Upload invoice to S3
+            let invoiceUrl: string | undefined;
+            try {
+              console.log("☁️ Uploading invoice to S3...");
+              const s3Result = await s3Service.uploadInvoice(
+                invoiceBuffer,
+                invoiceData.invoiceNumber
               );
-              try {
-                console.log("🚀 Executing email sending...");
-                await sendMembershipSuccessEmail(
-                  {
-                    name: invoiceData.customerName,
-                    email: invoiceData.customerEmail,
-                    phone: user.phone,
-                  },
-                  membershipData!,
-                  invoiceBuffer
-                );
+
+              if (s3Result.success && s3Result.url) {
+                invoiceUrl = s3Result.url;
                 console.log(
-                  "✅ Invoice email sent successfully for user:",
-                  user.email
+                  "✅ Invoice uploaded to S3 successfully:",
+                  invoiceUrl
                 );
-              } catch (emailError) {
-                console.error("❌ Failed to send invoice email:", emailError);
-                console.error("Email error details:", {
-                  userEmail: user.email,
-                  userName: invoiceData.customerName,
-                  error:
-                    emailError instanceof Error
-                      ? emailError.message
-                      : String(emailError),
-                });
+              } else {
+                console.error("❌ S3 upload failed:", s3Result.error);
               }
-            } else {
-              console.warn("⚠️ membershipData is null, skipping email sending");
+            } catch (s3Error) {
+              console.error("❌ S3 upload error:", s3Error);
+            }
+
+            // Send membership success email with invoice
+            try {
+              console.log("📧 Sending membership success email...");
+              await sendMembershipSuccessEmail(
+                {
+                  name: invoiceData.customerName,
+                  email: invoiceData.customerEmail,
+                  phone: invoiceData.customerPhone,
+                },
+                {
+                  id: membership.id,
+                  membershipType: membership.membership_type,
+                  status: membership.status,
+                  startDate: membership.start_date,
+                  expiresAt: membership.end_date,
+                  invoiceNumber: invoiceData.invoiceNumber,
+                  orderId: membership.order_id,
+                  paymentId: membership.payment_id,
+                },
+                invoiceBuffer
+              );
+              console.log("✅ Membership success email sent successfully");
+            } catch (emailError) {
+              console.error(
+                "❌ Failed to send membership success email:",
+                emailError
+              );
+              // Don't fail the payment verification if email sending fails
+            }
+
+            // Send WhatsApp message with invoice document
+            try {
+              console.log("📱 Sending WhatsApp invoice document...");
+
+              // Use invoice URL if available, otherwise use a fallback URL
+              const finalInvoiceUrl =
+                invoiceUrl ||
+                "https://da8nru77lsio9.cloudfront.net/invoices/test-invoice-2025-09-10T14-52-28-810Z.pdf";
+
+              const whatsappResult = await whatsappService.sendInvoiceDocument({
+                customerName: invoiceData.customerName,
+                customerPhone: invoiceData.customerPhone,
+                invoiceUrl: finalInvoiceUrl,
+                receiptNumber: invoiceData.invoiceNumber,
+                membershipType: invoiceData.membershipType,
+                balancePaymentDate: "29th Dec 2025", // You can make this dynamic
+              });
+
+              if (whatsappResult.success) {
+                console.log("✅ WhatsApp invoice document sent successfully");
+              } else {
+                console.error(
+                  "❌ WhatsApp sending failed:",
+                  whatsappResult.error
+                );
+              }
+            } catch (whatsappError) {
+              console.error("❌ WhatsApp service error:", whatsappError);
             }
           } else {
             console.error(

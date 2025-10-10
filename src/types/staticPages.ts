@@ -172,9 +172,28 @@ export interface CardsParallaxProps {
   cards: any[];
 }
 
+export interface SignatureClassCard {
+  title: string;
+  description: string;
+  backgroundImage: string;
+}
+
 export interface SignatureClassesSection {
   title: string;
   classes: any[];
+  cardList: SignatureClassCard[];
+  cardList2: SignatureClassCard[];
+}
+
+export interface PricingPlan {
+  title: string;
+  subtitle?: string;
+  discountedPrice: string;
+  originalPrice: string;
+  discountPercentage: string;
+  buttonText: string;
+  seatsLeft: string;
+  limitedOfferCountText?: string; // e.g., "100 members" or "100 families"
 }
 
 export interface PricingPlansSection {
