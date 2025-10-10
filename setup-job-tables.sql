@@ -20,8 +20,8 @@ CREATE TABLE IF NOT EXISTS location (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Create job_postings table
-CREATE TABLE IF NOT EXISTS job_postings (
+-- Create job_postings table -- Reviewed
+CREATE TABLE IF NOT EXISTS job_postings ( 
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     department_id INT NOT NULL,
@@ -49,7 +49,10 @@ CREATE TABLE IF NOT EXISTS applications(
     phone VARCHAR(20),
     job_id INT NOT NULL,
     status TINYINT NOT NULL DEFAULT 0,
-    resume LONGBLOB,
+    current_location VARCHAR(255),
+    work_exprience VARCHAR(255),
+    expected_salary VARCHAR(255),
+    resume VARCHAR(255),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (job_id) REFERENCES job_postings(id)
