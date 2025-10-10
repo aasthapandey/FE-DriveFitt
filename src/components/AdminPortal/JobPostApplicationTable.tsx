@@ -16,6 +16,7 @@ interface JobPostApplicationTableProps {
     jobData: JobPostData,
     newStatus: "Active" | "Closed"
   ) => void;
+  onToggleVisibility?: (index: number, jobData: JobPostData) => void;
   onChangeApplicationStatus?: (
     index: number,
     application: ApplicationData,
@@ -41,7 +42,8 @@ interface JobPostData {
   jobTitle: string;
   department: string;
   location: string;
-  status: "Active" | "Closed";
+  status: "Active" | "Closed" | "Deleted";
+  isVisible: boolean;
 }
 
 const mockApplicationData: ApplicationData[] = [];
@@ -60,11 +62,19 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
 }) => {
   const [dropdownOpen, setDropdownOpen] = useState<number | null>(null);
   const [jobPostStatuses, setJobPostStatuses] = useState<
-    ("Active" | "Closed")[]
+    ("Active" | "Closed" | "Deleted")[]
   >(jobPosts.map((item) => item.status));
   const [applicationStatuses, setApplicationStatuses] = useState<
     ("In Review" | "Shortlisted" | "New")[]
   >(applications.map((item) => item.resumeStatus));
+
+  // keep local mirrors in sync with incoming props
+  React.useEffect(() => {
+    setJobPostStatuses(jobPosts.map((item) => item.status));
+  }, [jobPosts]);
+  React.useEffect(() => {
+    setApplicationStatuses(applications.map((item) => item.resumeStatus));
+  }, [applications]);
 
   const handleJobPostStatusChange = (
     index: number,
@@ -102,6 +112,15 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
   const toggleDropdown = (index: number) => {
     setDropdownOpen(dropdownOpen === index ? null : index);
   };
+
+  React.useEffect(() => {
+    const onClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (!target.closest?.("[data-menu-root]")) setDropdownOpen(null);
+    };
+    window.addEventListener("click", onClick);
+    return () => window.removeEventListener("click", onClick);
+  }, []);
 
   const renderApplicationHeaders = () => (
     <div
@@ -329,13 +348,17 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
         <div className="flex-1">{item.department}</div>
         <div className="flex-1">{item.location}</div>
         <div className="flex-1 flex justify-center">
-          <div className="relative">
+          <div className="relative" data-menu-root>
             <button
               type="button"
-              onClick={() => toggleDropdown(index + 2000)}
+              onClick={(e) => {
+                e.stopPropagation();
+                toggleDropdown(index + 2000);
+              }}
               className="bg-[#333333] border border-[#333333] rounded flex items-center justify-center gap-1 transition-colors"
               style={{
-                width: "85px",
+                width: "120px",
+                minWidth: "120px",
                 height: "24px",
                 paddingTop: "4px",
                 paddingRight: "10px",
@@ -348,7 +371,9 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
                 className={`text-center ${
                   jobPostStatuses[index] === "Active"
                     ? "text-[#00DBDC]"
-                    : "text-[#BFBFBF]"
+                    : jobPostStatuses[index] === "Closed"
+                    ? "text-[#BFBFBF]"
+                    : "text-[#FF6B6B]"
                 }`}
                 style={{
                   fontFamily: "Inter",
@@ -368,7 +393,9 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
                 className={`${
                   jobPostStatuses[index] === "Active"
                     ? "text-[#00DBDC]"
-                    : "text-[#BFBFBF]"
+                    : jobPostStatuses[index] === "Closed"
+                    ? "text-[#BFBFBF]"
+                    : "text-[#FF6B6B]"
                 } transform transition-transform duration-200 ${
                   dropdownOpen === index + 2000 ? "rotate-180" : ""
                 }`}
@@ -383,7 +410,10 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
               </svg>
             </button>
             {dropdownOpen === index + 2000 && (
-              <div className="absolute top-full left-0 mt-1 bg-[#1D1D1D] border border-[#333333] rounded shadow-lg z-10">
+              <div
+                className="absolute top-full left-0 mt-1 bg-[#1D1D1D] border border-[#333333] rounded shadow-lg z-10"
+                data-menu-root
+              >
                 <button
                   type="button"
                   onClick={() =>
@@ -396,15 +426,25 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
                 >
                   {jobPostStatuses[index] === "Active" ? "Closed" : "Active"}
                 </button>
+                <button
+                  type="button"
+                  onClick={() => onToggleVisibility?.(index, jobPosts[index])}
+                  className="block w-full text-left px-3 py-2 text-sm text-white hover:bg-[#333333]"
+                >
+                  {jobPosts[index].isVisible ? "Hide" : "Show"}
+                </button>
               </div>
             )}
           </div>
         </div>
         <div className="w-20">
-          <div className="relative">
+          <div className="relative" data-menu-root>
             <button
               type="button"
-              onClick={() => toggleDropdown(index + 3000)}
+              onClick={(e) => {
+                e.stopPropagation();
+                toggleDropdown(index + 3000);
+              }}
               className="w-8 h-8 flex items-center justify-center hover:bg-[#333333] rounded"
             >
               <Image
@@ -415,7 +455,10 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
               />
             </button>
             {dropdownOpen === index + 3000 && (
-              <div className="absolute top-full right-0 mt-1 bg-[#1D1D1D] border border-[#333333] rounded shadow-lg z-10">
+              <div
+                className="absolute top-full right-0 mt-1 bg-[#1D1D1D] border border-[#333333] rounded shadow-lg z-10"
+                data-menu-root
+              >
                 <button
                   type="button"
                   onClick={() => handleEdit(index)}

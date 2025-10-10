@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import { jobAPI } from "@/services/jobAPI";
 
 interface AddJobPostModalProps {
   isOpen: boolean;
@@ -13,11 +14,15 @@ interface AddJobPostModalProps {
 
 interface JobPostFormData {
   jobTitle: string;
-  department: string;
-  location: string;
+  departmentId: number | "";
+  locationId: number | "";
   jobType: string;
   applicationDeadline: string;
   jobDescription: string;
+  skillsRequired: string;
+  roleItems: string[];
+  qualifications: string[];
+  yearsOfExperience: string;
 }
 
 const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
@@ -29,35 +34,68 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
 }) => {
   const [formData, setFormData] = useState<JobPostFormData>({
     jobTitle: "",
-    department: "",
-    location: "",
+    departmentId: "",
+    locationId: "",
     jobType: "",
     applicationDeadline: "",
     jobDescription: "",
+    skillsRequired: "",
+    roleItems: [],
+    qualifications: [],
+    yearsOfExperience: "",
   });
+
+  const [departments, setDepartments] = useState<
+    { id: number; name: string }[]
+  >([]);
+  const [locations, setLocations] = useState<
+    { id: number; full_location: string }[]
+  >([]);
 
   // Update form data when editData changes
   useEffect(() => {
     if (editData && isEdit) {
       setFormData({
         jobTitle: editData.jobTitle || "",
-        department: editData.department || "",
-        location: editData.location || "",
+        departmentId: (editData as any).departmentId || "",
+        locationId: (editData as any).locationId || "",
         jobType: editData.jobType || "",
         applicationDeadline: editData.applicationDeadline || "",
         jobDescription: editData.jobDescription || "",
+        skillsRequired: (editData as any).skillsRequired || "",
+        roleItems: (editData as any).roleItems || [],
+        qualifications: (editData as any).qualifications || [],
+        yearsOfExperience: (editData as any).yearsOfExperience || "",
       });
     } else if (!isEdit) {
       setFormData({
         jobTitle: "",
-        department: "",
-        location: "",
+        departmentId: "",
+        locationId: "",
         jobType: "",
         applicationDeadline: "",
         jobDescription: "",
+        skillsRequired: "",
+        roleItems: [],
+        qualifications: [],
+        yearsOfExperience: "",
       });
     }
   }, [editData, isEdit, isOpen]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const meta = await jobAPI.getDepartmentsLocations();
+        setDepartments(meta.departments || []);
+        setLocations(meta.locations || []);
+      } catch (e) {
+        console.error("Error fetching departments and locations:", e);
+        setDepartments([]);
+        setLocations([]);
+      }
+    })();
+  }, []);
 
   const handleInputChange = (
     e: React.ChangeEvent<
@@ -78,13 +116,66 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
     if (!isEdit) {
       setFormData({
         jobTitle: "",
-        department: "",
-        location: "",
+        departmentId: "",
+        locationId: "",
         jobType: "",
         applicationDeadline: "",
         jobDescription: "",
+        skillsRequired: "",
+        roleItems: [],
+        qualifications: [],
+        yearsOfExperience: "",
       });
     }
+  };
+
+  const [roleInput, setRoleInput] = useState("");
+  const [qualificationInput, setQualificationInput] = useState("");
+
+  const addRole = () => {
+    const v = roleInput.trim();
+    if (!v) return;
+    setFormData((p) => ({ ...p, roleItems: [...p.roleItems, v] }));
+    setRoleInput("");
+  };
+  const removeRole = (idx: number) => {
+    setFormData((p) => ({
+      ...p,
+      roleItems: p.roleItems.filter((_, i) => i !== idx),
+    }));
+  };
+  const moveRole = (idx: number, dir: -1 | 1) => {
+    setFormData((p) => {
+      const next = [...p.roleItems];
+      const ni = idx + dir;
+      if (ni < 0 || ni >= next.length) return p;
+      const [it] = next.splice(idx, 1);
+      next.splice(ni, 0, it);
+      return { ...p, roleItems: next };
+    });
+  };
+
+  const addQualification = () => {
+    const v = qualificationInput.trim();
+    if (!v) return;
+    setFormData((p) => ({ ...p, qualifications: [...p.qualifications, v] }));
+    setQualificationInput("");
+  };
+  const removeQualification = (idx: number) => {
+    setFormData((p) => ({
+      ...p,
+      qualifications: p.qualifications.filter((_, i) => i !== idx),
+    }));
+  };
+  const moveQualification = (idx: number, dir: -1 | 1) => {
+    setFormData((p) => {
+      const next = [...p.qualifications];
+      const ni = idx + dir;
+      if (ni < 0 || ni >= next.length) return p;
+      const [it] = next.splice(idx, 1);
+      next.splice(ni, 0, it);
+      return { ...p, qualifications: next };
+    });
   };
 
   if (!isOpen) return null;
@@ -142,7 +233,7 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
         </div>
 
         {/* Form Container */}
-        <div className="flex-1 flex flex-col py-6 px-10">
+        <div className="flex-1 flex flex-col py-6 px-10 overflow-y-auto">
           <form onSubmit={handleSubmit} className="flex-1 flex flex-col">
             {/* Form Fields Container */}
             <div className="space-y-5">
@@ -198,9 +289,16 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
                     Department/Category
                   </label>
                   <select
-                    name="department"
-                    value={formData.department}
-                    onChange={handleInputChange}
+                    name="departmentId"
+                    value={String(formData.departmentId)}
+                    onChange={(e) =>
+                      setFormData((p) => ({
+                        ...p,
+                        departmentId: e.target.value
+                          ? Number(e.target.value)
+                          : "",
+                      }))
+                    }
                     required
                     className="bg-[#282828] border-0 rounded-lg outline-none appearance-none"
                     style={{
@@ -214,7 +312,7 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
                       lineHeight: "20px",
                       fontFamily: "Inter",
                       fontWeight: 400,
-                      color: formData.department ? "#FFFFFF" : "#BFBFBF",
+                      color: formData.departmentId ? "#FFFFFF" : "#BFBFBF",
                       backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23BFBFBF' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
                       backgroundPosition: "right 20px center",
                       backgroundRepeat: "no-repeat",
@@ -224,13 +322,11 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
                     <option value="" style={{ color: "#BFBFBF" }}>
                       Select department
                     </option>
-                    <option value="Cricket">Cricket</option>
-                    <option value="Fitness">Fitness</option>
-                    <option value="Pilates">Pilates</option>
-                    <option value="Recovery">Recovery</option>
-                    <option value="Running">Running</option>
-                    <option value="Admin">Admin</option>
-                    <option value="Management">Management</option>
+                    {departments.map((d) => (
+                      <option key={d.id} value={d.id} className="bg-[#282828]">
+                        {d.name}
+                      </option>
+                    ))}
                   </select>
                 </div>
 
@@ -248,9 +344,16 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
                     Location
                   </label>
                   <select
-                    name="location"
-                    value={formData.location}
-                    onChange={handleInputChange}
+                    name="locationId"
+                    value={String(formData.locationId)}
+                    onChange={(e) =>
+                      setFormData((p) => ({
+                        ...p,
+                        locationId: e.target.value
+                          ? Number(e.target.value)
+                          : "",
+                      }))
+                    }
                     required
                     className="bg-[#282828] border-0 rounded-lg outline-none appearance-none"
                     style={{
@@ -264,7 +367,7 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
                       lineHeight: "20px",
                       fontFamily: "Inter",
                       fontWeight: 400,
-                      color: formData.location ? "#FFFFFF" : "#BFBFBF",
+                      color: formData.locationId ? "#FFFFFF" : "#BFBFBF",
                       backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23BFBFBF' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
                       backgroundPosition: "right 20px center",
                       backgroundRepeat: "no-repeat",
@@ -274,13 +377,11 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
                     <option value="" style={{ color: "#BFBFBF" }}>
                       Select location
                     </option>
-                    <option value="Sector 10, Dwarka, New Delhi">
-                      Sector 10, Dwarka, New Delhi
-                    </option>
-                    <option value="Gurgaon">Gurgaon</option>
-                    <option value="Noida">Noida</option>
-                    <option value="Mumbai">Mumbai</option>
-                    <option value="Bangalore">Bangalore</option>
+                    {locations.map((l) => (
+                      <option key={l.id} value={l.id} className="bg-[#282828]">
+                        {l.full_location}
+                      </option>
+                    ))}
                   </select>
                 </div>
               </div>
@@ -355,7 +456,7 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
                       value={formData.applicationDeadline}
                       onChange={handleInputChange}
                       required
-                      className="bg-[#282828] border-0 rounded-lg outline-none w-full cursor-pointer"
+                      className="bg-[#282828] border-0 rounded-lg outline-none w-full"
                       style={{
                         height: "44px",
                         paddingTop: "12px",
@@ -367,10 +468,9 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
                         fontFamily: "Inter",
                         fontWeight: 400,
                         colorScheme: "dark",
-                        color: formData.applicationDeadline
-                          ? "#FFFFFF"
-                          : "transparent",
+                        color: "#FFFFFF",
                       }}
+                      placeholder="YYYY-MM-DD"
                     />
                     <Image
                       src="/images/careers/calendar-01.svg"
@@ -379,34 +479,213 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
                       height={16}
                       className="absolute left-5 top-1/2 transform -translate-y-1/2 pointer-events-none z-10"
                     />
-                    <div
-                      className="absolute right-5 top-1/2 transform -translate-y-1/2 pointer-events-none z-10"
-                      style={{
-                        width: "16px",
-                        height: "16px",
-                        backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23BFBFBF' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
-                        backgroundSize: "contain",
-                        backgroundRepeat: "no-repeat",
-                        backgroundPosition: "center",
-                      }}
-                    />
-                    {!formData.applicationDeadline && (
-                      <div
-                        className="absolute left-12 top-1/2 transform -translate-y-1/2 pointer-events-none z-20 bg-[#282828]"
-                        style={{
-                          fontSize: "14px",
-                          lineHeight: "20px",
-                          fontFamily: "Inter",
-                          fontWeight: 400,
-                          color: "#BFBFBF",
-                          paddingRight: "10px",
-                        }}
-                      >
-                        Select application deadline
-                      </div>
-                    )}
                   </div>
                 </div>
+              </div>
+
+              {/* Skills Required */}
+              <div className="flex flex-col" style={{ gap: "8px" }}>
+                <label
+                  className="text-[#BFBFBF]"
+                  style={{
+                    fontFamily: "Inter",
+                    fontWeight: 400,
+                    fontSize: "12px",
+                    lineHeight: "16px",
+                  }}
+                >
+                  Skills required
+                </label>
+                <input
+                  type="text"
+                  name="skillsRequired"
+                  value={formData.skillsRequired}
+                  onChange={handleInputChange}
+                  className="bg-[#282828] text-white border-0 rounded-lg w-full outline-none"
+                  style={{
+                    height: "44px",
+                    padding: "12px 20px",
+                    fontSize: "14px",
+                    lineHeight: "20px",
+                    fontFamily: "Inter",
+                    fontWeight: 400,
+                  }}
+                  placeholder="e.g. React, TypeScript, CSS"
+                />
+              </div>
+
+              {/* Role - multi items */}
+              <div className="flex flex-col" style={{ gap: "8px" }}>
+                <label
+                  className="text-[#BFBFBF]"
+                  style={{
+                    fontFamily: "Inter",
+                    fontWeight: 400,
+                    fontSize: "12px",
+                    lineHeight: "16px",
+                  }}
+                >
+                  Role
+                </label>
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={roleInput}
+                    onChange={(e) => setRoleInput(e.target.value)}
+                    className="bg-[#282828] text-white border-0 rounded-lg flex-1 outline-none"
+                    style={{
+                      height: "44px",
+                      padding: "12px 20px",
+                      fontSize: "14px",
+                    }}
+                    placeholder="Add role item"
+                  />
+                  <button
+                    type="button"
+                    onClick={addRole}
+                    className="bg-[#00DBDC] text-[#0D0D0D] rounded px-3"
+                    style={{ height: "44px" }}
+                  >
+                    Add
+                  </button>
+                </div>
+                {formData.roleItems.length > 0 && (
+                  <div className="flex flex-col gap-2">
+                    {formData.roleItems.map((item, idx) => (
+                      <div
+                        key={idx}
+                        className="flex items-center justify-between bg-[#282828] rounded px-3"
+                        style={{ height: "40px" }}
+                      >
+                        <span className="text-white text-sm">{item}</span>
+                        <div className="flex items-center gap-2">
+                          <button
+                            type="button"
+                            onClick={() => moveRole(idx, -1)}
+                            className="text-[#BFBFBF] text-sm"
+                          >
+                            ↑
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => moveRole(idx, 1)}
+                            className="text-[#BFBFBF] text-sm"
+                          >
+                            ↓
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => removeRole(idx)}
+                            className="text-red-400 text-sm"
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Skills and Qualifications - multi items */}
+              <div className="flex flex-col" style={{ gap: "8px" }}>
+                <label
+                  className="text-[#BFBFBF]"
+                  style={{
+                    fontFamily: "Inter",
+                    fontWeight: 400,
+                    fontSize: "12px",
+                    lineHeight: "16px",
+                  }}
+                >
+                  Skills and Qualifications
+                </label>
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={qualificationInput}
+                    onChange={(e) => setQualificationInput(e.target.value)}
+                    className="bg-[#282828] text-white border-0 rounded-lg flex-1 outline-none"
+                    style={{
+                      height: "44px",
+                      padding: "12px 20px",
+                      fontSize: "14px",
+                    }}
+                    placeholder="Add skill/qualification"
+                  />
+                  <button
+                    type="button"
+                    onClick={addQualification}
+                    className="bg-[#00DBDC] text-[#0D0D0D] rounded px-3"
+                    style={{ height: "44px" }}
+                  >
+                    Add
+                  </button>
+                </div>
+                {formData.qualifications.length > 0 && (
+                  <div className="flex flex-col gap-2">
+                    {formData.qualifications.map((item, idx) => (
+                      <div
+                        key={idx}
+                        className="flex items-center justify-between bg-[#282828] rounded px-3"
+                        style={{ height: "40px" }}
+                      >
+                        <span className="text-white text-sm">{item}</span>
+                        <div className="flex items-center gap-2">
+                          <button
+                            type="button"
+                            onClick={() => moveQualification(idx, -1)}
+                            className="text-[#BFBFBF] text-sm"
+                          >
+                            ↑
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => moveQualification(idx, 1)}
+                            className="text-[#BFBFBF] text-sm"
+                          >
+                            ↓
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => removeQualification(idx)}
+                            className="text-red-400 text-sm"
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Years of experience */}
+              <div className="flex flex-col" style={{ gap: "8px" }}>
+                <label
+                  className="text-[#BFBFBF]"
+                  style={{
+                    fontFamily: "Inter",
+                    fontWeight: 400,
+                    fontSize: "12px",
+                    lineHeight: "16px",
+                  }}
+                >
+                  Years of experience
+                </label>
+                <input
+                  type="text"
+                  name="yearsOfExperience"
+                  value={formData.yearsOfExperience}
+                  onChange={handleInputChange}
+                  className="bg-[#282828] text-white border-0 rounded-lg w-full outline-none"
+                  style={{
+                    height: "44px",
+                    padding: "12px 20px",
+                    fontSize: "14px",
+                  }}
+                  placeholder="e.g. 2-4"
+                />
               </div>
             </div>
 

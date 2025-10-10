@@ -23,7 +23,8 @@ const JobPostApplicationSection: React.FC = () => {
       jobTitle: string;
       department: string;
       location: string;
-      status: "Active" | "Closed";
+      status: "Active" | "Closed" | "Deleted";
+      isVisible: boolean;
     }[]
   >([]);
   const [applications, setApplications] = useState<
@@ -40,6 +41,22 @@ const JobPostApplicationSection: React.FC = () => {
     }[]
   >([]);
 
+  const toStatus = (s: number | JobStatus): "Active" | "Closed" | "Deleted" =>
+    s === JobStatus.ACTIVE
+      ? "Active"
+      : s === JobStatus.CLOSED
+      ? "Closed"
+      : "Deleted";
+
+  const toApplicationLabel = (
+    s: number | ApplicationStatus
+  ): "In Review" | "Shortlisted" | "New" =>
+    s === ApplicationStatus.SHORTLISTED
+      ? "Shortlisted"
+      : s === ApplicationStatus.IN_REVIEW
+      ? "In Review"
+      : "New";
+
   useEffect(() => {
     (async () => {
       try {
@@ -53,7 +70,8 @@ const JobPostApplicationSection: React.FC = () => {
           jobTitle: j.title,
           department: j.department?.name || "",
           location: j.location?.full_location || "",
-          status: j.status === JobStatus.ACTIVE ? "Active" : "Closed",
+          status: toStatus(j.status as number),
+          isVisible: !!j.is_visible,
         }));
         setJobPosts(jobMapped);
 
@@ -65,12 +83,7 @@ const JobPostApplicationSection: React.FC = () => {
           workExperience: a.work_exprience || "",
           expectedSalary: a.expected_salary || "",
           appliedFor: a.job?.title || "",
-          resumeStatus:
-            a.status === ApplicationStatus.SHORTLISTED
-              ? "Shortlisted"
-              : a.status === ApplicationStatus.IN_REVIEW
-              ? "In Review"
-              : "New",
+          resumeStatus: toApplicationLabel(a.status),
           resumeUrl: a.resume,
         }));
         setApplications(appMapped);
@@ -93,12 +106,16 @@ const JobPostApplicationSection: React.FC = () => {
 
   const handleEditJobPost = (index: number, jobData: any) => {
     const mappedData = {
-      jobTitle: jobData.jobTitle,
-      department: jobData.department,
-      location: jobData.location,
-      jobType: "Full-time", // Default since this field might not exist in mockData
-      applicationDeadline: "", // Default since this field might not exist in mockData
-      jobDescription: "Job description placeholder", // Default since this field might not exist in mockData
+      jobTitle: jobData.jobTitle || "",
+      departmentId: "",
+      locationId: "",
+      jobType: "Full-time",
+      applicationDeadline: "",
+      jobDescription: "",
+      skillsRequired: "",
+      roleItems: [],
+      qualifications: [],
+      yearsOfExperience: "",
     };
     setEditJobData(mappedData);
     setIsEditMode(true);
@@ -112,20 +129,31 @@ const JobPostApplicationSection: React.FC = () => {
   };
 
   const handleJobPostSubmit = async (jobPost: any) => {
+    const mapJobType = (jt: string): JobType => {
+      const v = (jt || "").toLowerCase();
+      if (v.includes("part")) return JobType.PART_TIME;
+      if (v.includes("contract")) return JobType.CONTRACTOR;
+      return JobType.FULL_TIME;
+    };
+
+    const payload = {
+      title: jobPost.jobTitle,
+      department_id: Number(jobPost.departmentId),
+      location_id: Number(jobPost.locationId),
+      job_type: mapJobType(jobPost.jobType),
+      application_deadline: jobPost.applicationDeadline || undefined,
+      job_description: jobPost.jobDescription || undefined,
+      skills_required: jobPost.skillsRequired || undefined,
+      role: jobPost.roleItems || [],
+      qualifications: jobPost.qualifications || [],
+      years_of_experience: jobPost.yearsOfExperience || undefined,
+      is_visible: true,
+    } as any;
+
     if (isEditMode && jobPost?.id) {
-      await jobAPI.update(jobPost.id, {
-        title: jobPost.jobTitle,
-        job_description: jobPost.jobDescription,
-      } as any);
+      await jobAPI.update(jobPost.id, payload);
     } else {
-      await jobAPI.create({
-        title: jobPost.jobTitle,
-        department_id: jobPost.department_id,
-        location_id: jobPost.location_id,
-        job_type: JobType.FULL_TIME,
-        job_description: jobPost.jobDescription,
-        is_visible: true,
-      } as any);
+      await jobAPI.create(payload);
     }
     setIsAddModalOpen(false);
     const refreshed = await jobAPI.list();
@@ -135,7 +163,8 @@ const JobPostApplicationSection: React.FC = () => {
         jobTitle: j.title,
         department: j.department?.name || "",
         location: j.location?.full_location || "",
-        status: j.status === JobStatus.ACTIVE ? "Active" : "Closed",
+        status: toStatus(j.status),
+        isVisible: !!j.is_visible,
       }))
     );
   };
@@ -168,6 +197,24 @@ const JobPostApplicationSection: React.FC = () => {
     await jobAPI.setStatus(
       jobData.id,
       newStatus === "Active" ? JobStatus.ACTIVE : JobStatus.CLOSED
+    );
+  };
+
+  const handleToggleVisibility = async (
+    _index: number,
+    jobData: { id: number; isVisible: boolean }
+  ) => {
+    await jobAPI.setVisibility(jobData.id, !jobData.isVisible);
+    const refreshed = await jobAPI.list();
+    setJobPosts(
+      refreshed.map((j) => ({
+        id: j.id,
+        jobTitle: j.title,
+        department: j.department?.name || "",
+        location: j.location?.full_location || "",
+        status: toStatus(j.status),
+        isVisible: !!j.is_visible,
+      }))
     );
   };
 
@@ -312,6 +359,7 @@ const JobPostApplicationSection: React.FC = () => {
           onChangeJobPostStatus={handleChangeJobPostStatus}
           onChangeApplicationStatus={handleChangeApplicationStatus}
           onDownloadResume={handleDownloadResume}
+          onToggleVisibility={handleToggleVisibility}
         />
       </div>
 

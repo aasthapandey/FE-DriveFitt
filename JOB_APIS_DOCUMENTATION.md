@@ -202,7 +202,6 @@ Upload flow:
 ### JobStatus
 
 - `ACTIVE = 1`
-- `INACTIVE = 0`
 - `CLOSED = 2`
 - `DELETED = 3`
 

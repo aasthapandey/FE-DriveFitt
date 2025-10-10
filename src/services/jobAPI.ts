@@ -91,7 +91,8 @@ export const jobAPI = {
       cache: "no-store",
     });
     const json = await res.json();
-    if (!res.ok || !json) throw new Error(json?.error || "Fetch failed");
-    return json as { departments: any[]; locations: any[] };
+    if (!res.ok || !json?.status)
+      throw new Error(json?.error || "Fetch failed");
+    return json.data as { departments: any[]; locations: any[] };
   },
 };
