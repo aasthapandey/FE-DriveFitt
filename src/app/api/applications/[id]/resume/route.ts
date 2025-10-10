@@ -39,17 +39,9 @@ export async function GET(
       );
     }
 
-    const resumeBuffer = application.resume as Buffer;
-    const candidateName = application.candidate_name.replace(/\s+/g, "_");
-
-    return new NextResponse(resumeBuffer, {
-      status: 200,
-      headers: {
-        "Content-Type": "application/pdf",
-        "Content-Disposition": `attachment; filename="${candidateName}_resume.pdf"`,
-        "Content-Length": resumeBuffer.length.toString(),
-      },
-    });
+    // resume is now stored as a URL/path string; redirect to it
+    const resumeUrl = application.resume as string;
+    return NextResponse.redirect(resumeUrl, 302);
   } catch (error) {
     console.error("Error fetching application resume:", error);
     return NextResponse.json(

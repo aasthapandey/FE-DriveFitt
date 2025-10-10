@@ -33,6 +33,10 @@ export async function GET(request: NextRequest) {
         a.phone,
         a.job_id,
         a.status,
+        a.current_location,
+        a.work_exprience,
+        a.expected_salary,
+        a.resume,
         a.created_at,
         a.updated_at,
         jp.title as job_title,
@@ -54,6 +58,10 @@ export async function GET(request: NextRequest) {
       phone: row.phone,
       job_id: row.job_id,
       status: row.status as ApplicationStatus,
+      current_location: row.current_location ?? undefined,
+      work_exprience: row.work_exprience ?? undefined,
+      expected_salary: row.expected_salary ?? undefined,
+      resume: row.resume ?? undefined,
       created_at: new Date(row.created_at),
       updated_at: new Date(row.updated_at),
       job: {
@@ -96,7 +104,10 @@ export async function POST(request: NextRequest) {
     const email = formData.get("email") as string;
     const phone = formData.get("phone") as string;
     const job_id = formData.get("job_id") as string;
-    const resume = formData.get("resume") as File;
+    const current_location = formData.get("current_location") as string;
+    const work_exprience = formData.get("work_exprience") as string;
+    const expected_salary = formData.get("expected_salary") as string;
+    const resume = formData.get("resume") as string; // URL or path string
 
     if (!candidate_name || !email || !job_id) {
       return NextResponse.json(
@@ -110,18 +121,24 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Invalid job_id" }, { status: 400 });
     }
 
-    let resumeBuffer: Buffer | null = null;
-    if (resume && resume.size > 0) {
-      const arrayBuffer = await resume.arrayBuffer();
-      resumeBuffer = Buffer.from(arrayBuffer);
-    }
-
     const query = `
-      INSERT INTO applications (candidate_name, email, phone, job_id, resume)
-      VALUES (?, ?, ?, ?, ?)
+      INSERT INTO applications (
+        candidate_name, email, phone, job_id, status,
+        current_location, work_exprience, expected_salary, resume
+      )
+      VALUES (?, ?, ?, ?, 0, ?, ?, ?, ?)
     `;
 
-    const params = [candidate_name, email, phone || null, jobId, resumeBuffer];
+    const params = [
+      candidate_name,
+      email,
+      phone || null,
+      jobId,
+      current_location || null,
+      work_exprience || null,
+      expected_salary || null,
+      resume || null,
+    ];
 
     const result = await executeQuery<{ insertId: number }>(query, params);
 

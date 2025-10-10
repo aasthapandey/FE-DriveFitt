@@ -116,7 +116,10 @@ export interface Application {
   phone?: string;
   job_id: number;
   status: ApplicationStatus;
-  resume?: Buffer;
+  current_location?: string;
+  work_exprience?: string;
+  expected_salary?: string;
+  resume?: string;
   created_at: Date;
   updated_at: Date;
   job?: {
@@ -148,7 +151,10 @@ export interface ApplicationFormData {
   email: string;
   phone?: string;
   job_id: number;
-  resume?: File;
+  current_location?: string;
+  work_exprience?: string;
+  expected_salary?: string;
+  resume?: string;
 }
 
 export interface JobPostingUpdateData {
@@ -171,4 +177,8 @@ export interface ApplicationUpdateData {
   email?: string;
   phone?: string;
   status?: ApplicationStatus;
+  current_location?: string;
+  work_exprience?: string;
+  expected_salary?: string;
+  resume?: string;
 }
