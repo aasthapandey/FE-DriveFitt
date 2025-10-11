@@ -5,9 +5,14 @@ import React from "react";
 interface CareerSectionProps {
   title: string;
   quantity: number;
+  loading?: boolean;
 }
 
-const CareerSection: React.FC<CareerSectionProps> = ({ title, quantity }) => {
+const CareerSection: React.FC<CareerSectionProps> = ({
+  title,
+  quantity,
+  loading = false,
+}) => {
   return (
     <div
       className="bg-[#1D1D1D] rounded-2xl flex flex-col justify-center"
@@ -40,7 +45,7 @@ const CareerSection: React.FC<CareerSectionProps> = ({ title, quantity }) => {
           letterSpacing: "0%",
         }}
       >
-        {quantity}
+        {loading ? "..." : quantity}
       </span>
     </div>
   );

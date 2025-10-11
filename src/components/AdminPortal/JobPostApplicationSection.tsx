@@ -10,7 +10,13 @@ import { ApplicationStatus, JobStatus, JobType } from "@/types/database";
 
 type ToggleOption = "job-posts" | "application";
 
-const JobPostApplicationSection: React.FC = () => {
+interface JobPostApplicationSectionProps {
+  onDataChange?: () => void;
+}
+
+const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
+  onDataChange,
+}) => {
   const [selectedToggle, setSelectedToggle] =
     useState<ToggleOption>("job-posts");
   const [searchQuery, setSearchQuery] = useState("");
@@ -231,6 +237,8 @@ const JobPostApplicationSection: React.FC = () => {
         isVisible: !!j.is_visible,
       }))
     );
+    // Refresh metrics when job is created/updated
+    onDataChange?.();
   };
 
   const handleFilter = () => {};
@@ -244,6 +252,8 @@ const JobPostApplicationSection: React.FC = () => {
       jobData.id,
       newStatus === "Active" ? JobStatus.ACTIVE : JobStatus.CLOSED
     );
+    // Refresh metrics when job status changes
+    onDataChange?.();
   };
 
   const handleToggleVisibility = async (
@@ -262,6 +272,8 @@ const JobPostApplicationSection: React.FC = () => {
         isVisible: !!j.is_visible,
       }))
     );
+    // Refresh metrics when visibility changes
+    onDataChange?.();
   };
 
   const handleChangeApplicationStatus = async (
@@ -275,6 +287,8 @@ const JobPostApplicationSection: React.FC = () => {
       New: ApplicationStatus.NEW,
     };
     await applicationAPI.setStatus(application.id, statusMap[newStatus]);
+    // Refresh metrics when application status changes
+    onDataChange?.();
   };
 
   const handleDownloadResume = (
