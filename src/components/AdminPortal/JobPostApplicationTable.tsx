@@ -267,8 +267,14 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
             </button>
             {dropdownOpen === index && (
               <div
-                className="absolute top-full left-0 mt-1 bg-[#1D1D1D] border border-[#333333] rounded shadow-lg z-10"
-                style={{ width: "85px" }}
+                className="absolute left-0 bg-[#1D1D1D] border border-[#333333] rounded shadow-lg z-10"
+                style={{
+                  width: "85px",
+                  // Position above for last 2 items, below for others
+                  ...(index >= applications.length - 2
+                    ? { bottom: "100%", marginBottom: "4px" }
+                    : { top: "100%", marginTop: "4px" }),
+                }}
               >
                 <button
                   type="button"
@@ -314,7 +320,15 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
               />
             </button>
             {dropdownOpen === index + 1000 && (
-              <div className="absolute top-full right-0 mt-1 bg-[#1D1D1D] border border-[#333333] rounded shadow-lg z-10">
+              <div
+                className="absolute right-0 bg-[#1D1D1D] border border-[#333333] rounded shadow-lg z-10"
+                style={{
+                  // Position above for last 2 items, below for others
+                  ...(index >= applications.length - 2
+                    ? { bottom: "100%", marginBottom: "4px" }
+                    : { top: "100%", marginTop: "4px" }),
+                }}
+              >
                 {item.resumeUrl && (
                   <button
                     type="button"
@@ -412,9 +426,15 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
             </button>
             {dropdownOpen === index + 2000 && (
               <div
-                className="absolute top-full left-0 mt-1 bg-[#1D1D1D] border border-[#333333] rounded shadow-lg z-10"
+                className="absolute left-0 bg-[#1D1D1D] border border-[#333333] rounded shadow-lg z-10"
                 data-menu-root
-                style={{ width: "85px" }}
+                style={{
+                  width: "85px",
+                  // Position above for last 2 items, below for others
+                  ...(index >= jobPosts.length - 2
+                    ? { bottom: "100%", marginBottom: "4px" }
+                    : { top: "100%", marginTop: "4px" }),
+                }}
               >
                 <button
                   type="button"
@@ -452,7 +472,13 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
             </button>
             {dropdownOpen === index + 3000 && (
               <div
-                className="absolute top-full right-0 mt-1 bg-[#1D1D1D] border border-[#333333] rounded shadow-lg z-10"
+                className="absolute right-0 bg-[#1D1D1D] border border-[#333333] rounded shadow-lg z-10"
+                style={{
+                  // Position above for last 2 items, below for others
+                  ...(index >= jobPosts.length - 2
+                    ? { bottom: "100%", marginBottom: "4px" }
+                    : { top: "100%", marginTop: "4px" }),
+                }}
                 data-menu-root
               >
                 <button

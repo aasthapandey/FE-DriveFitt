@@ -292,7 +292,7 @@ const JobPostApplicationSection: React.FC = () => {
         <div
           className="bg-[#1D1D1D] rounded-lg flex p-[6px]"
           style={{
-            width: "202px",
+            width: "220px",
             height: "40px",
             gap: "13px",
           }}
@@ -313,7 +313,7 @@ const JobPostApplicationSection: React.FC = () => {
               lineHeight: "20px",
             }}
           >
-            Job posts
+            Job Posts
           </button>
           <button
             type="button"
@@ -324,14 +324,14 @@ const JobPostApplicationSection: React.FC = () => {
                 : "text-[#8A8A8A]"
             }`}
             style={{
-              width: "90px",
+              width: "103px",
               height: "28px",
               fontWeight: selectedToggle === "application" ? 500 : 400,
               fontSize: "14px",
               lineHeight: "20px",
             }}
           >
-            Application
+            Applications
           </button>
         </div>
 
