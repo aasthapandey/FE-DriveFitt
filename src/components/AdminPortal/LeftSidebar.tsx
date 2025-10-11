@@ -161,20 +161,20 @@ const LeftSidebar = ({
               <button
                 type="button"
                 onClick={() => onOptionSelect?.(item.id)}
-                className={`w-full h-[52px] px-6 py-4 flex items-center gap-4 transition-all duration-200 ${
-                  isFormSubmissionActive ? "bg-[#00DBDC]" : "hover:bg-[#333333]"
+                className={`w-full h-[52px] px-6 py-4 flex items-center gap-4 transition-all duration-200 rounded-lg ${
+                  isSelected ? "bg-[#00DBDC]" : "hover:bg-[#333333]"
                 }`}
               >
                 <div
                   className={`${
-                    isFormSubmissionActive ? "text-[#0D0D0D]" : "text-[#BFBFBF]"
+                    isSelected ? "text-[#0D0D0D]" : "text-[#BFBFBF]"
                   }`}
                 >
                   {getIconForOption(item.id)}
                 </div>
                 <span
                   className={`font-medium text-sm leading-5 tracking-[0%] ${
-                    isFormSubmissionActive ? "text-[#0D0D0D]" : "text-[#BFBFBF]"
+                    isSelected ? "text-[#0D0D0D]" : "text-[#BFBFBF]"
                   }`}
                 >
                   {item.label}

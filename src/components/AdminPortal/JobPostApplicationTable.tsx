@@ -3,9 +3,11 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Pagination from "../common/Pagination";
+import ColumnFilter from "./ColumnFilter";
 import {
   JOB_STATUS_COLORS,
   APPLICATION_STATUS_COLORS,
+  JOB_STATUS,
 } from "@/constants/database";
 
 type ToggleOption = "job-posts" | "application";
@@ -34,6 +36,15 @@ interface JobPostApplicationTableProps {
   totalItems?: number;
   itemsPerPage?: number;
   onPageChange?: (page: number) => void;
+  // Filter props
+  departments?: Array<{ id: number; name: string }>;
+  locations?: Array<{ id: number; full_location: string }>;
+  onDepartmentFilter?: (selectedIds: number[]) => void;
+  onLocationFilter?: (selectedIds: number[]) => void;
+  onStatusFilter?: (selectedStatuses: number[]) => void;
+  selectedDepartments?: number[];
+  selectedLocations?: number[];
+  selectedStatuses?: number[];
 }
 
 interface ApplicationData {
@@ -76,6 +87,15 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
   totalItems = 0,
   itemsPerPage = 10,
   onPageChange,
+  // Filter props
+  departments,
+  locations,
+  onDepartmentFilter,
+  onLocationFilter,
+  onStatusFilter,
+  selectedDepartments,
+  selectedLocations,
+  selectedStatuses,
 }) => {
   const [dropdownOpen, setDropdownOpen] = useState<number | null>(null);
   const [jobPostStatuses, setJobPostStatuses] = useState<
@@ -181,9 +201,61 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
       }}
     >
       <div className="flex-1">Job title</div>
-      <div className="flex-1">Department</div>
-      <div className="flex-1">Location</div>
-      <div className="flex-1 text-center">Status</div>
+      <div className="flex-1 flex items-center gap-2">
+        <span>Department</span>
+        <ColumnFilter
+          options={
+            departments?.map((d) => ({
+              id: d.id,
+              label: d.name,
+              value: d.id,
+            })) || []
+          }
+          selectedValues={selectedDepartments || []}
+          onFilterChange={(values) => onDepartmentFilter?.(values as number[])}
+          placeholder="Filter by Department"
+        />
+      </div>
+      <div className="flex-1 flex items-center gap-2">
+        <span>Location</span>
+        <ColumnFilter
+          options={
+            locations?.map((l) => ({
+              id: l.id,
+              label: l.full_location,
+              value: l.id,
+            })) || []
+          }
+          selectedValues={selectedLocations || []}
+          onFilterChange={(values) => onLocationFilter?.(values as number[])}
+          placeholder="Filter by Location"
+        />
+      </div>
+      <div className="flex-1 flex items-center justify-center gap-2">
+        <span>Status</span>
+        <ColumnFilter
+          options={[
+            {
+              id: JOB_STATUS.ACTIVE,
+              label: "Active",
+              value: JOB_STATUS.ACTIVE,
+            },
+            {
+              id: JOB_STATUS.CLOSED,
+              label: "Closed",
+              value: JOB_STATUS.CLOSED,
+            },
+            {
+              id: JOB_STATUS.DELETED,
+              label: "Deleted",
+              value: JOB_STATUS.DELETED,
+            },
+          ]}
+          selectedValues={selectedStatuses || []}
+          onFilterChange={(values) => onStatusFilter?.(values as number[])}
+          placeholder="Filter by Status"
+        />
+      </div>
       <div className="w-20">Action</div>
     </div>
   );

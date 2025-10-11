@@ -32,6 +32,17 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [editJobData, setEditJobData] = useState<any>(null);
   const [isEditMode, setIsEditMode] = useState(false);
+
+  // Filter states
+  const [selectedDepartments, setSelectedDepartments] = useState<number[]>([]);
+  const [selectedLocations, setSelectedLocations] = useState<number[]>([]);
+  const [selectedStatuses, setSelectedStatuses] = useState<number[]>([]);
+  const [departments, setDepartments] = useState<
+    Array<{ id: number; name: string }>
+  >([]);
+  const [locations, setLocations] = useState<
+    Array<{ id: number; full_location: string }>
+  >([]);
   const [jobPosts, setJobPosts] = useState<
     {
       id: number;
@@ -80,9 +91,10 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
   useEffect(() => {
     (async () => {
       try {
-        const [jobs, apps] = await Promise.all([
+        const [jobs, apps, deptLocData] = await Promise.all([
           jobAPI.list({ admin: true }), // Get all job postings (both visible and hidden) for admin
           applicationAPI.list(),
+          jobAPI.getDepartmentsLocations(),
         ]);
 
         const jobMapped = jobs.map((j) => ({
@@ -112,6 +124,10 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
         setTotalItems(
           selectedToggle === "job-posts" ? jobs.length : apps.length
         );
+
+        // Set departments and locations for filters
+        setDepartments(deptLocData.departments);
+        setLocations(deptLocData.locations);
       } catch (_) {
         setJobPosts([]);
         setApplications([]);
@@ -125,19 +141,87 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
     setCurrentPage(1); // Reset to first page when searching
   };
 
+  // Clear search when switching tabs
+  const handleToggleChange = (toggle: ToggleOption) => {
+    setSelectedToggle(toggle);
+    setSearchQuery(""); // Clear search when switching tabs
+    setCurrentPage(1); // Reset to first page
+  };
+
+  // Filter handlers
+  const handleDepartmentFilter = (selectedIds: number[]) => {
+    setSelectedDepartments(selectedIds);
+    setCurrentPage(1); // Reset to first page when filtering
+  };
+
+  const handleLocationFilter = (selectedIds: number[]) => {
+    setSelectedLocations(selectedIds);
+    setCurrentPage(1); // Reset to first page when filtering
+  };
+
+  const handleStatusFilter = (selectedStatuses: number[]) => {
+    setSelectedStatuses(selectedStatuses);
+    setCurrentPage(1); // Reset to first page when filtering
+  };
+
+  const handleSearchChange = (query: string) => {
+    setSearchQuery(query);
+    setCurrentPage(1); // Reset to first page when searching
+  };
+
   // Pagination calculations
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-  // Filter data based on search query
+  // Filter data based on search query and filters
   const filteredJobPosts = useMemo(() => {
-    if (!searchQuery) return jobPosts;
-    return jobPosts.filter(
-      (job) =>
-        job.jobTitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        job.department.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        job.location.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  }, [jobPosts, searchQuery]);
+    let filtered = jobPosts;
+
+    // Apply search filter (only on job title for job posts)
+    if (searchQuery) {
+      filtered = filtered.filter((job) =>
+        job.jobTitle.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+
+    // Apply department filter
+    if (selectedDepartments.length > 0) {
+      filtered = filtered.filter((job) => {
+        const jobDept = departments.find((d) => d.name === job.department);
+        return jobDept && selectedDepartments.includes(jobDept.id);
+      });
+    }
+
+    // Apply location filter
+    if (selectedLocations.length > 0) {
+      filtered = filtered.filter((job) => {
+        const jobLoc = locations.find((l) => l.full_location === job.location);
+        return jobLoc && selectedLocations.includes(jobLoc.id);
+      });
+    }
+
+    // Apply status filter
+    if (selectedStatuses.length > 0) {
+      filtered = filtered.filter((job) => {
+        const statusMap = {
+          Active: JOB_STATUS.ACTIVE,
+          Closed: JOB_STATUS.CLOSED,
+          Deleted: JOB_STATUS.DELETED,
+        };
+        const jobStatusValue = statusMap[job.status];
+        return selectedStatuses.includes(jobStatusValue);
+      });
+    }
+
+    return filtered;
+  }, [
+    jobPosts,
+    searchQuery,
+    selectedDepartments,
+    selectedLocations,
+    selectedStatuses,
+    departments,
+    locations,
+  ]);
 
   const filteredApplications = useMemo(() => {
     if (!searchQuery) return applications;
@@ -250,8 +334,6 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
     onDataChange?.();
   };
 
-  const handleFilter = () => {};
-
   const handleChangeJobPostStatus = async (
     index: number,
     jobData: { id: number },
@@ -354,7 +436,7 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
         >
           <button
             type="button"
-            onClick={() => setSelectedToggle("job-posts")}
+            onClick={() => handleToggleChange("job-posts")}
             className={`rounded-md px-3 py-1 text-sm transition-all duration-200 ${
               selectedToggle === "job-posts"
                 ? "bg-[#00DBDC] text-[#0D0D0D]"
@@ -372,7 +454,7 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
           </button>
           <button
             type="button"
-            onClick={() => setSelectedToggle("application")}
+            onClick={() => handleToggleChange("application")}
             className={`rounded-md px-3 py-1 text-sm transition-all duration-200 ${
               selectedToggle === "application"
                 ? "bg-[#00DBDC] text-[#0D0D0D]"
@@ -398,7 +480,11 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search"
+              placeholder={
+                selectedToggle === "job-posts"
+                  ? "Search job titles..."
+                  : "Search applications..."
+              }
               className="bg-[#0D0D0D] border border-[#333333] rounded-lg pl-10 pr-4 py-2 text-white placeholder-[#8A8A8A] focus:outline-none focus:border-[#00DBDC] transition-colors duration-200"
               style={{ width: "240px", height: "40px" }}
             />
@@ -410,22 +496,6 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
               className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#8A8A8A]"
             />
           </div>
-
-          {/* Filter Button */}
-          <button
-            type="button"
-            onClick={handleFilter}
-            className="bg-[#0D0D0D] border border-[#333333] rounded-lg flex items-center justify-center gap-2 hover:bg-[#333333] transition-colors duration-200 px-4"
-            style={{ height: "40px" }}
-          >
-            <Image
-              src="/images/careers/filter.svg"
-              alt="Filter"
-              width={16}
-              height={16}
-            />
-            <span className="text-[#BFBFBF] text-sm font-normal">Filter</span>
-          </button>
 
           {/* Add New Post Button */}
           <button
@@ -464,6 +534,15 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
           totalItems={totalItems}
           itemsPerPage={itemsPerPage}
           onPageChange={handlePageChange}
+          // Filter props
+          departments={departments}
+          locations={locations}
+          onDepartmentFilter={handleDepartmentFilter}
+          onLocationFilter={handleLocationFilter}
+          onStatusFilter={handleStatusFilter}
+          selectedDepartments={selectedDepartments}
+          selectedLocations={selectedLocations}
+          selectedStatuses={selectedStatuses}
         />
       </div>
 
