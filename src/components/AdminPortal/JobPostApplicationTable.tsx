@@ -3,6 +3,10 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Pagination from "../common/Pagination";
+import {
+  JOB_STATUS_COLORS,
+  APPLICATION_STATUS_COLORS,
+} from "@/constants/database";
 
 type ToggleOption = "job-posts" | "application";
 
@@ -225,14 +229,14 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
               }}
             >
               <span
-                className={`text-center ${
-                  applicationStatuses[index] === "In Review"
-                    ? "text-[#BFBFBF]"
-                    : applicationStatuses[index] === "Shortlisted"
-                    ? "text-[#0BFFB6]"
-                    : "text-[#00DBDC]"
-                }`}
+                className={`text-center`}
                 style={{
+                  color:
+                    applicationStatuses[index] === "In Review"
+                      ? APPLICATION_STATUS_COLORS[2] // IN_REVIEW
+                      : applicationStatuses[index] === "Shortlisted"
+                      ? APPLICATION_STATUS_COLORS[1] // SHORTLISTED
+                      : APPLICATION_STATUS_COLORS[0], // NEW
                   fontWeight: 300,
                   fontSize: "12px",
                   lineHeight: "16px",
@@ -390,14 +394,14 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
               }}
             >
               <span
-                className={`text-center ${
-                  jobPostStatuses[index] === "Active"
-                    ? "text-[#00DBDC]"
-                    : jobPostStatuses[index] === "Closed"
-                    ? "text-[#BFBFBF]"
-                    : "text-[#FF6B6B]"
-                }`}
+                className={`text-center`}
                 style={{
+                  color:
+                    jobPostStatuses[index] === "Active"
+                      ? JOB_STATUS_COLORS[1] // ACTIVE
+                      : jobPostStatuses[index] === "Closed"
+                      ? JOB_STATUS_COLORS[2] // CLOSED
+                      : JOB_STATUS_COLORS[3], // DELETED
                   fontWeight: 300,
                   fontSize: "12px",
                   lineHeight: "16px",

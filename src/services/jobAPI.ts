@@ -115,4 +115,14 @@ export const jobAPI = {
       throw new Error(json?.error || "Fetch failed");
     return json.data as { departments: any[]; locations: any[] };
   },
+
+  async delete(id: number) {
+    const res = await fetch(`${getBaseUrl()}/api/job-postings/${id}`, {
+      method: "DELETE",
+    });
+    const json = await res.json();
+    if (!res.ok || !json?.status)
+      throw new Error(json?.error || "Delete failed");
+    return json.data;
+  },
 };

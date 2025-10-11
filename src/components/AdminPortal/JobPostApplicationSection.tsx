@@ -6,7 +6,16 @@ import JobPostApplicationTable from "./JobPostApplicationTable";
 import AddJobPostModal from "./AddJobPostModal";
 import { jobAPI } from "@/services/jobAPI";
 import { applicationAPI } from "@/services/applicationAPI";
-import { ApplicationStatus, JobStatus, JobType } from "@/types/database";
+import {
+  JOB_STATUS,
+  APPLICATION_STATUS,
+  JOB_TYPE,
+  JOB_STATUS_LABELS,
+  APPLICATION_STATUS_LABELS,
+  JobStatus,
+  ApplicationStatus,
+  JobType,
+} from "@/constants/database";
 
 type ToggleOption = "job-posts" | "application";
 
@@ -53,20 +62,20 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
   const [totalItems, setTotalItems] = useState(0);
 
   const toStatus = (s: number | JobStatus): "Active" | "Closed" | "Deleted" =>
-    s === JobStatus.ACTIVE
-      ? "Active"
-      : s === JobStatus.CLOSED
-      ? "Closed"
-      : "Deleted";
+    s === JOB_STATUS.ACTIVE
+      ? JOB_STATUS_LABELS[JOB_STATUS.ACTIVE]
+      : s === JOB_STATUS.CLOSED
+      ? JOB_STATUS_LABELS[JOB_STATUS.CLOSED]
+      : JOB_STATUS_LABELS[JOB_STATUS.DELETED];
 
   const toApplicationLabel = (
     s: number | ApplicationStatus
   ): "In Review" | "Shortlisted" | "New" =>
-    s === ApplicationStatus.SHORTLISTED
-      ? "Shortlisted"
-      : s === ApplicationStatus.IN_REVIEW
-      ? "In Review"
-      : "New";
+    s === APPLICATION_STATUS.SHORTLISTED
+      ? APPLICATION_STATUS_LABELS[APPLICATION_STATUS.SHORTLISTED]
+      : s === APPLICATION_STATUS.IN_REVIEW
+      ? APPLICATION_STATUS_LABELS[APPLICATION_STATUS.IN_REVIEW]
+      : APPLICATION_STATUS_LABELS[APPLICATION_STATUS.NEW];
 
   useEffect(() => {
     (async () => {
@@ -201,9 +210,9 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
   const handleJobPostSubmit = async (jobPost: any) => {
     const mapJobType = (jt: string): JobType => {
       const v = (jt || "").toLowerCase();
-      if (v.includes("part")) return JobType.PART_TIME;
-      if (v.includes("contract")) return JobType.CONTRACTOR;
-      return JobType.FULL_TIME;
+      if (v.includes("part")) return JOB_TYPE.PART_TIME;
+      if (v.includes("contract")) return JOB_TYPE.CONTRACTOR;
+      return JOB_TYPE.FULL_TIME;
     };
 
     const payload = {
@@ -250,7 +259,7 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
   ) => {
     await jobAPI.setStatus(
       jobData.id,
-      newStatus === "Active" ? JobStatus.ACTIVE : JobStatus.CLOSED
+      newStatus === "Active" ? JOB_STATUS.ACTIVE : JOB_STATUS.CLOSED
     );
     // Refresh metrics when job status changes
     onDataChange?.();
@@ -282,9 +291,9 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
     newStatus: "In Review" | "Shortlisted" | "New"
   ) => {
     const statusMap: Record<string, ApplicationStatus> = {
-      "In Review": ApplicationStatus.IN_REVIEW,
-      Shortlisted: ApplicationStatus.SHORTLISTED,
-      New: ApplicationStatus.NEW,
+      "In Review": APPLICATION_STATUS.IN_REVIEW,
+      Shortlisted: APPLICATION_STATUS.SHORTLISTED,
+      New: APPLICATION_STATUS.NEW,
     };
     await applicationAPI.setStatus(application.id, statusMap[newStatus]);
     // Refresh metrics when application status changes
@@ -296,6 +305,38 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
     application: { resumeUrl?: string }
   ) => {
     if (application.resumeUrl) window.open(application.resumeUrl, "_blank");
+  };
+
+  const handleDeleteJobPost = async (
+    _index: number,
+    jobData: { id: number; jobTitle: string }
+  ) => {
+    if (
+      window.confirm(
+        `Are you sure you want to delete "${jobData.jobTitle}"? This will mark it as deleted but preserve the data.`
+      )
+    ) {
+      try {
+        await jobAPI.delete(jobData.id);
+        // Refresh the job posts list
+        const refreshed = await jobAPI.list({ admin: true });
+        setJobPosts(
+          refreshed.map((j) => ({
+            id: j.id,
+            jobTitle: j.title,
+            department: j.department?.name || "",
+            location: j.location?.full_location || "",
+            status: toStatus(j.status),
+            isVisible: !!j.is_visible,
+          }))
+        );
+        // Refresh metrics when job is deleted
+        onDataChange?.();
+      } catch (error) {
+        console.error("Failed to delete job posting:", error);
+        alert("Failed to delete job posting. Please try again.");
+      }
+    }
   };
 
   return (
@@ -413,7 +454,7 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
           jobPosts={paginatedJobPosts}
           applications={paginatedApplications}
           onEditJobPost={handleEditJobPost}
-          onDeleteJobPost={() => {}}
+          onDeleteJobPost={handleDeleteJobPost}
           onChangeJobPostStatus={handleChangeJobPostStatus}
           onChangeApplicationStatus={handleChangeApplicationStatus}
           onDownloadResume={handleDownloadResume}

@@ -1,3 +1,11 @@
+import {
+  JobStatus,
+  ApplicationStatus,
+  JobType,
+  DepartmentStatus,
+  LocationStatus,
+} from "@/constants/database";
+
 export interface ContactUs {
   id: number;
   first_name: string;
@@ -51,25 +59,7 @@ export interface FranchiseFormData {
   why_franchise?: string;
 }
 
-export enum JobType {
-  FULL_TIME = 1,
-  PART_TIME = 2,
-  CONTRACTOR = 3,
-}
-
-export enum JobStatus {
-  ACTIVE = 1,
-  INACTIVE = 0,
-  CLOSED = 2,
-  DELETED = 3,
-}
-
-export enum ApplicationStatus {
-  NEW = 0,
-  IN_REVIEW = 1,
-  REJECTED = 2,
-  SHORTLISTED = 3,
-}
+// Enums moved to constants/database.ts for better maintainability
 
 export interface Department {
   id: number;

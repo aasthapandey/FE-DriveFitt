@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { executeQuery } from "@/lib/database";
+import { JOB_STATUS, APPLICATION_STATUS } from "@/constants/database";
 
 export async function GET() {
   try {
@@ -12,7 +13,8 @@ export async function GET() {
     ] = await Promise.all([
       // Open positions: Active job postings that are visible
       executeQuery<{ count: number }[]>(
-        `SELECT COUNT(*) as count FROM job_postings WHERE status = 1 AND is_visible = 1`
+        `SELECT COUNT(*) as count FROM job_postings WHERE status = ? AND is_visible = 1`,
+        [JOB_STATUS.ACTIVE]
       ),
 
       // Total applications: All applications
@@ -25,9 +27,10 @@ export async function GET() {
         `SELECT COUNT(*) as count FROM applications WHERE DATE(created_at) = CURDATE()`
       ),
 
-      // Shortlisted candidates: Applications with status = 1 (SHORTLISTED)
+      // Shortlisted candidates: Applications with status = SHORTLISTED
       executeQuery<{ count: number }[]>(
-        `SELECT COUNT(*) as count FROM applications WHERE status = 1`
+        `SELECT COUNT(*) as count FROM applications WHERE status = ?`,
+        [APPLICATION_STATUS.SHORTLISTED]
       ),
     ]);
 

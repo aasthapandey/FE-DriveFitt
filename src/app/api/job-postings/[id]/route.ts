@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { executeQuery } from "@/lib/database";
-import { JobPosting, JobStatus, JobPostingUpdateData } from "@/types/database";
+import { JobPosting, JobPostingUpdateData } from "@/types/database";
+import { JOB_STATUS, JobStatus } from "@/constants/database";
 
 export async function GET(
   request: NextRequest,
@@ -67,8 +68,16 @@ export async function GET(
         : undefined,
       job_description: row.job_description,
       skills_required: row.skills_required,
-      role: row.role ? (typeof row.role === 'string' ? JSON.parse(row.role) : row.role) : [],
-      qualifications: row.qualifications ? (typeof row.qualifications === 'string' ? JSON.parse(row.qualifications) : row.qualifications) : [],
+      role: row.role
+        ? typeof row.role === "string"
+          ? JSON.parse(row.role)
+          : row.role
+        : [],
+      qualifications: row.qualifications
+        ? typeof row.qualifications === "string"
+          ? JSON.parse(row.qualifications)
+          : row.qualifications
+        : [],
       status: row.status as JobStatus,
       years_of_experience: row.years_of_experience,
       is_visible: Boolean(row.is_visible),
@@ -106,10 +115,10 @@ export async function GET(
   } catch (error) {
     console.error("Error fetching job posting:", error);
     return NextResponse.json(
-      { 
+      {
         status: false,
         data: null,
-        error: "Internal server error" 
+        error: "Internal server error",
       },
       { status: 500 }
     );
@@ -221,10 +230,58 @@ export async function PUT(
   } catch (error) {
     console.error("Error updating job posting:", error);
     return NextResponse.json(
-      { 
+      {
         status: false,
         data: null,
-        error: "Internal server error" 
+        error: "Internal server error",
+      },
+      { status: 500 }
+    );
+  }
+}
+
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  try {
+    const jobId = parseInt(params.id);
+
+    if (isNaN(jobId)) {
+      return NextResponse.json({ error: "Invalid job ID" }, { status: 400 });
+    }
+
+    // Check if job posting exists
+    const checkQuery = `SELECT id FROM job_postings WHERE id = ?`;
+    const existingJob = await executeQuery<any[]>(checkQuery, [jobId]);
+
+    if (existingJob.length === 0) {
+      return NextResponse.json(
+        { error: "Job posting not found" },
+        { status: 404 }
+      );
+    }
+
+    // Soft delete: Update status to DELETED
+    const updateQuery = `UPDATE job_postings SET status = ? WHERE id = ?`;
+    await executeQuery(updateQuery, [JOB_STATUS.DELETED, jobId]);
+
+    return NextResponse.json(
+      {
+        status: true,
+        data: {
+          message: "Job posting deleted successfully",
+        },
+      },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Error deleting job posting:", error);
+    return NextResponse.json(
+      {
+        status: false,
+        data: null,
+        error: "Internal server error",
       },
       { status: 500 }
     );
