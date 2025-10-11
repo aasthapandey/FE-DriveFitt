@@ -37,5 +37,3 @@ async function testPaymentWhatsApp() {
 }
 
 testPaymentWhatsApp().catch(console.error);
-
-

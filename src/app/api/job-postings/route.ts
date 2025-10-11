@@ -9,18 +9,32 @@ export async function GET(request: NextRequest) {
     const isVisible = searchParams.get("is_visible");
     const departmentId = searchParams.get("department_id");
     const locationId = searchParams.get("location_id");
+    const admin = searchParams.get("admin");
 
-    let whereConditions = ["jp.is_visible = 1"];
+    let whereConditions: string[] = [];
     let queryParams: any[] = [];
+
+    // For admin access, don't filter by is_visible unless explicitly requested
+    // For public access, only show visible job postings
+    if (admin === "true") {
+      // Admin portal: only filter by is_visible if explicitly provided
+      if (isVisible !== null) {
+        whereConditions.push("jp.is_visible = ?");
+        queryParams.push(isVisible === "true" ? 1 : 0);
+      }
+    } else {
+      // Public access: only show visible job postings
+      if (isVisible !== null) {
+        whereConditions.push("jp.is_visible = ?");
+        queryParams.push(isVisible === "true" ? 1 : 0);
+      } else {
+        whereConditions.push("jp.is_visible = 1");
+      }
+    }
 
     if (status !== null) {
       whereConditions.push("jp.status = ?");
       queryParams.push(parseInt(status));
-    }
-
-    if (isVisible !== null) {
-      whereConditions.push("jp.is_visible = ?");
-      queryParams.push(isVisible === "true" ? 1 : 0);
     }
 
     if (departmentId) {
@@ -32,6 +46,11 @@ export async function GET(request: NextRequest) {
       whereConditions.push("jp.location_id = ?");
       queryParams.push(parseInt(locationId));
     }
+
+    const whereClause =
+      whereConditions.length > 0
+        ? `WHERE ${whereConditions.join(" AND ")}`
+        : "";
 
     const query = `
       SELECT 
@@ -63,7 +82,7 @@ export async function GET(request: NextRequest) {
       FROM job_postings jp
       LEFT JOIN departments d ON jp.department_id = d.id
       LEFT JOIN location l ON jp.location_id = l.id
-      WHERE ${whereConditions.join(" AND ")}
+      ${whereClause}
       ORDER BY jp.created_at DESC
     `;
 
@@ -80,8 +99,16 @@ export async function GET(request: NextRequest) {
         : undefined,
       job_description: row.job_description,
       skills_required: row.skills_required,
-      role: row.role ? (typeof row.role === 'string' ? JSON.parse(row.role) : row.role) : [],
-      qualifications: row.qualifications ? (typeof row.qualifications === 'string' ? JSON.parse(row.qualifications) : row.qualifications) : [],
+      role: row.role
+        ? typeof row.role === "string"
+          ? JSON.parse(row.role)
+          : row.role
+        : [],
+      qualifications: row.qualifications
+        ? typeof row.qualifications === "string"
+          ? JSON.parse(row.qualifications)
+          : row.qualifications
+        : [],
       status: row.status as JobStatus,
       years_of_experience: row.years_of_experience,
       is_visible: Boolean(row.is_visible),
@@ -119,10 +146,10 @@ export async function GET(request: NextRequest) {
   } catch (error) {
     console.error("Error fetching job postings:", error);
     return NextResponse.json(
-      { 
+      {
         status: false,
         data: null,
-        error: "Internal server error" 
+        error: "Internal server error",
       },
       { status: 500 }
     );
@@ -193,10 +220,10 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error("Error creating job posting:", error);
     return NextResponse.json(
-      { 
+      {
         status: false,
         data: null,
-        error: "Internal server error" 
+        error: "Internal server error",
       },
       { status: 500 }
     );

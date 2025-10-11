@@ -18,6 +18,7 @@ export const jobAPI = {
     is_visible?: boolean;
     department_id?: number;
     location_id?: number;
+    admin?: boolean;
   }): Promise<JobPosting[]> {
     const qs = new URLSearchParams();
     if (params?.status !== undefined) qs.set("status", String(params.status));
@@ -27,6 +28,8 @@ export const jobAPI = {
       qs.set("department_id", String(params.department_id));
     if (params?.location_id !== undefined)
       qs.set("location_id", String(params.location_id));
+    if (params?.admin !== undefined)
+      qs.set("admin", params.admin ? "true" : "false");
     const res = await fetch(
       `${getBaseUrl()}/api/job-postings?${qs.toString()}`,
       {

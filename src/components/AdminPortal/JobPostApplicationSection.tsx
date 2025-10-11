@@ -43,7 +43,7 @@ const JobPostApplicationSection: React.FC = () => {
 
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(10);
+  const [itemsPerPage] = useState(5);
   const [totalItems, setTotalItems] = useState(0);
 
   const toStatus = (s: number | JobStatus): "Active" | "Closed" | "Deleted" =>
@@ -66,7 +66,7 @@ const JobPostApplicationSection: React.FC = () => {
     (async () => {
       try {
         const [jobs, apps] = await Promise.all([
-          jobAPI.list(),
+          jobAPI.list({ admin: true }), // Get all job postings (both visible and hidden) for admin
           applicationAPI.list(),
         ]);
 
@@ -149,6 +149,19 @@ const JobPostApplicationSection: React.FC = () => {
     setCurrentPage(page);
   };
 
+  // Paginated data
+  const paginatedJobPosts = useMemo(() => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    return filteredJobPosts.slice(startIndex, endIndex);
+  }, [filteredJobPosts, currentPage, itemsPerPage]);
+
+  const paginatedApplications = useMemo(() => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    return filteredApplications.slice(startIndex, endIndex);
+  }, [filteredApplications, currentPage, itemsPerPage]);
+
   const handleAddNew = () => {
     setIsEditMode(false);
     setEditJobData(null);
@@ -207,7 +220,7 @@ const JobPostApplicationSection: React.FC = () => {
       await jobAPI.create(payload);
     }
     setIsAddModalOpen(false);
-    const refreshed = await jobAPI.list();
+    const refreshed = await jobAPI.list({ admin: true }); // Get all job postings for admin
     setJobPosts(
       refreshed.map((j) => ({
         id: j.id,
@@ -238,7 +251,7 @@ const JobPostApplicationSection: React.FC = () => {
     jobData: { id: number; isVisible: boolean }
   ) => {
     await jobAPI.setVisibility(jobData.id, !jobData.isVisible);
-    const refreshed = await jobAPI.list();
+    const refreshed = await jobAPI.list({ admin: true }); // Get all job postings for admin
     setJobPosts(
       refreshed.map((j) => ({
         id: j.id,
@@ -383,8 +396,8 @@ const JobPostApplicationSection: React.FC = () => {
       <div className="pb-6">
         <JobPostApplicationTable
           selectedToggle={selectedToggle}
-          jobPosts={filteredJobPosts}
-          applications={filteredApplications}
+          jobPosts={paginatedJobPosts}
+          applications={paginatedApplications}
           onEditJobPost={handleEditJobPost}
           onDeleteJobPost={() => {}}
           onChangeJobPostStatus={handleChangeJobPostStatus}

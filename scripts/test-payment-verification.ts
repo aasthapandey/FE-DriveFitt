@@ -40,5 +40,3 @@ async function testPaymentVerification() {
 }
 
 testPaymentVerification().catch(console.error);
-
-

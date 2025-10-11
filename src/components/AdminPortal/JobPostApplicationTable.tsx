@@ -418,12 +418,13 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
               >
                 <button
                   type="button"
-                  onClick={() =>
+                  onClick={() => {
                     handleJobPostStatusChange(
                       index,
                       jobPostStatuses[index] === "Active" ? "Closed" : "Active"
-                    )
-                  }
+                    );
+                    setDropdownOpen(null);
+                  }}
                   className="block w-full text-left px-3 py-2 text-sm text-white hover:bg-[#333333]"
                 >
                   {jobPostStatuses[index] === "Active" ? "Closed" : "Active"}
@@ -456,21 +457,30 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
               >
                 <button
                   type="button"
-                  onClick={() => handleEdit(index)}
+                  onClick={() => {
+                    handleEdit(index);
+                    setDropdownOpen(null);
+                  }}
                   className="block w-full text-left px-3 py-2 text-sm text-white hover:bg-[#333333]"
                 >
                   Edit
                 </button>
                 <button
                   type="button"
-                  onClick={() => onToggleVisibility?.(index, jobPosts[index])}
+                  onClick={() => {
+                    onToggleVisibility?.(index, jobPosts[index]);
+                    setDropdownOpen(null);
+                  }}
                   className="block w-full text-left px-3 py-2 text-sm text-white hover:bg-[#333333]"
                 >
                   {jobPosts[index].isVisible ? "Hide" : "Show"}
                 </button>
                 <button
                   type="button"
-                  onClick={() => handleDelete(index)}
+                  onClick={() => {
+                    handleDelete(index);
+                    setDropdownOpen(null);
+                  }}
                   className="block w-full text-left px-3 py-2 text-sm text-red-400 hover:bg-[#333333]"
                 >
                   Delete
