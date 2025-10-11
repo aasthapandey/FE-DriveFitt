@@ -53,6 +53,9 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
       isVisible: boolean;
     }[]
   >([]);
+
+  // Store complete job data for editing without additional API calls
+  const [completeJobData, setCompleteJobData] = useState<any[]>([]);
   const [applications, setApplications] = useState<
     {
       id: number;
@@ -62,7 +65,7 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
       workExperience: string;
       expectedSalary: string;
       appliedFor: string;
-      resumeStatus: "In Review" | "Shortlisted" | "New";
+      resumeStatus: "In Review" | "Shortlisted" | "New" | "Rejected";
       resumeUrl?: string;
     }[]
   >([]);
@@ -81,11 +84,13 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
 
   const toApplicationLabel = (
     s: number | ApplicationStatus
-  ): "In Review" | "Shortlisted" | "New" =>
+  ): "In Review" | "Shortlisted" | "New" | "Rejected" =>
     s === APPLICATION_STATUS.SHORTLISTED
       ? APPLICATION_STATUS_LABELS[APPLICATION_STATUS.SHORTLISTED]
       : s === APPLICATION_STATUS.IN_REVIEW
       ? APPLICATION_STATUS_LABELS[APPLICATION_STATUS.IN_REVIEW]
+      : s === APPLICATION_STATUS.REJECTED
+      ? APPLICATION_STATUS_LABELS[APPLICATION_STATUS.REJECTED]
       : APPLICATION_STATUS_LABELS[APPLICATION_STATUS.NEW];
 
   useEffect(() => {
@@ -96,6 +101,9 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
           applicationAPI.list(),
           jobAPI.getDepartmentsLocations(),
         ]);
+
+        // Store complete job data for editing
+        setCompleteJobData(jobs);
 
         const jobMapped = jobs.map((j) => ({
           id: j.id,
@@ -268,18 +276,38 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
   };
 
   const handleEditJobPost = (index: number, jobData: any) => {
+    // Find the complete job data from stored data (no API call needed)
+    const fullJobData = completeJobData.find((job) => job.id === jobData.id);
+
+    if (!fullJobData) {
+      console.error("Job data not found for editing");
+      alert("Job data not found. Please refresh the page and try again.");
+      return;
+    }
+
+    // Map the complete job data to the form structure
     const mappedData = {
-      jobTitle: jobData.jobTitle || "",
-      departmentId: "",
-      locationId: "",
-      jobType: "Full-time",
-      applicationDeadline: "",
-      jobDescription: "",
-      skillsRequired: "",
-      roleItems: [],
-      qualifications: [],
-      yearsOfExperience: "",
+      id: fullJobData.id,
+      jobTitle: fullJobData.title || "",
+      departmentId: fullJobData.department_id || "",
+      locationId: fullJobData.location_id || "",
+      jobType:
+        fullJobData.job_type === JOB_TYPE.FULL_TIME
+          ? "Full-time"
+          : fullJobData.job_type === JOB_TYPE.PART_TIME
+          ? "Part-time"
+          : "Contractor",
+      applicationDeadline: fullJobData.application_deadline
+        ? new Date(fullJobData.application_deadline).toISOString().split("T")[0]
+        : "",
+      jobDescription: fullJobData.job_description || "",
+      skillsRequired: fullJobData.skills_required || "",
+      roleItems: fullJobData.role || [],
+      qualifications: fullJobData.qualifications || [],
+      yearsOfExperience: fullJobData.years_of_experience || "",
+      isVisible: fullJobData.is_visible || false,
     };
+
     setEditJobData(mappedData);
     setIsEditMode(true);
     setIsAddModalOpen(true);
@@ -320,6 +348,8 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
     }
     setIsAddModalOpen(false);
     const refreshed = await jobAPI.list({ admin: true }); // Get all job postings for admin
+    // Update complete job data
+    setCompleteJobData(refreshed);
     setJobPosts(
       refreshed.map((j) => ({
         id: j.id,
@@ -343,7 +373,19 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
       jobData.id,
       newStatus === "Active" ? JOB_STATUS.ACTIVE : JOB_STATUS.CLOSED
     );
-    // Refresh metrics when job status changes
+    // Refresh job data and metrics when job status changes
+    const refreshed = await jobAPI.list({ admin: true });
+    setCompleteJobData(refreshed);
+    setJobPosts(
+      refreshed.map((j) => ({
+        id: j.id,
+        jobTitle: j.title,
+        department: j.department?.name || "",
+        location: j.location?.full_location || "",
+        status: toStatus(j.status),
+        isVisible: !!j.is_visible,
+      }))
+    );
     onDataChange?.();
   };
 
@@ -353,6 +395,8 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
   ) => {
     await jobAPI.setVisibility(jobData.id, !jobData.isVisible);
     const refreshed = await jobAPI.list({ admin: true }); // Get all job postings for admin
+    // Update complete job data
+    setCompleteJobData(refreshed);
     setJobPosts(
       refreshed.map((j) => ({
         id: j.id,
@@ -370,12 +414,13 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
   const handleChangeApplicationStatus = async (
     index: number,
     application: { id: number },
-    newStatus: "In Review" | "Shortlisted" | "New"
+    newStatus: "In Review" | "Shortlisted" | "New" | "Rejected"
   ) => {
     const statusMap: Record<string, ApplicationStatus> = {
       "In Review": APPLICATION_STATUS.IN_REVIEW,
       Shortlisted: APPLICATION_STATUS.SHORTLISTED,
       New: APPLICATION_STATUS.NEW,
+      Rejected: APPLICATION_STATUS.REJECTED,
     };
     await applicationAPI.setStatus(application.id, statusMap[newStatus]);
     // Refresh metrics when application status changes
@@ -384,9 +429,18 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
 
   const handleDownloadResume = (
     _index: number,
-    application: { resumeUrl?: string }
+    application: { resumeUrl?: string; candidatesName: string }
   ) => {
-    if (application.resumeUrl) window.open(application.resumeUrl, "_blank");
+    if (application.resumeUrl) {
+      // Create a temporary anchor element to trigger download
+      const link = document.createElement("a");
+      link.href = application.resumeUrl;
+      link.download = `${application.candidatesName}_resume.pdf`;
+      link.target = "_blank";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
   };
 
   const handleDeleteJobPost = async (
@@ -402,6 +456,7 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
         await jobAPI.delete(jobData.id);
         // Refresh the job posts list
         const refreshed = await jobAPI.list({ admin: true });
+        setCompleteJobData(refreshed);
         setJobPosts(
           refreshed.map((j) => ({
             id: j.id,

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { executeQuery } from "@/lib/database";
-import { ApplicationStatus } from "@/types/database";
+import { APPLICATION_STATUS } from "@/constants/database";
 
 export async function PUT(
   request: NextRequest,
@@ -21,12 +21,12 @@ export async function PUT(
 
     if (
       status === undefined ||
-      !Object.values(ApplicationStatus).includes(status)
+      !Object.values(APPLICATION_STATUS).includes(status)
     ) {
       return NextResponse.json(
         {
           error:
-            "Invalid status. Must be one of: 0 (new), 1 (in review), 2 (rejected), 3 (shortlisted)",
+            "Invalid status. Must be one of: 0 (new), 1 (shortlisted), 2 (in review), 3 (rejected)",
         },
         { status: 400 }
       );

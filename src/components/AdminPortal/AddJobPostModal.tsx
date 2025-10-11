@@ -13,6 +13,7 @@ interface AddJobPostModalProps {
 }
 
 interface JobPostFormData {
+  id?: number;
   jobTitle: string;
   departmentId: number | "";
   locationId: number | "";
@@ -23,6 +24,7 @@ interface JobPostFormData {
   roleItems: string[];
   qualifications: string[];
   yearsOfExperience: string;
+  isVisible?: boolean;
 }
 
 const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
@@ -33,6 +35,7 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
   isEdit = false,
 }) => {
   const [formData, setFormData] = useState<JobPostFormData>({
+    id: undefined,
     jobTitle: "",
     departmentId: "",
     locationId: "",
@@ -43,6 +46,7 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
     roleItems: [],
     qualifications: [],
     yearsOfExperience: "",
+    isVisible: true,
   });
 
   const [departments, setDepartments] = useState<
@@ -56,19 +60,22 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
   useEffect(() => {
     if (editData && isEdit) {
       setFormData({
+        id: editData.id,
         jobTitle: editData.jobTitle || "",
-        departmentId: (editData as any).departmentId || "",
-        locationId: (editData as any).locationId || "",
+        departmentId: editData.departmentId || "",
+        locationId: editData.locationId || "",
         jobType: editData.jobType || "",
         applicationDeadline: editData.applicationDeadline || "",
         jobDescription: editData.jobDescription || "",
-        skillsRequired: (editData as any).skillsRequired || "",
-        roleItems: (editData as any).roleItems || [],
-        qualifications: (editData as any).qualifications || [],
-        yearsOfExperience: (editData as any).yearsOfExperience || "",
+        skillsRequired: editData.skillsRequired || "",
+        roleItems: editData.roleItems || [],
+        qualifications: editData.qualifications || [],
+        yearsOfExperience: editData.yearsOfExperience || "",
+        isVisible: editData.isVisible !== undefined ? editData.isVisible : true,
       });
     } else if (!isEdit) {
       setFormData({
+        id: undefined,
         jobTitle: "",
         departmentId: "",
         locationId: "",
@@ -79,6 +86,7 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
         roleItems: [],
         qualifications: [],
         yearsOfExperience: "",
+        isVisible: true,
       });
     }
   }, [editData, isEdit, isOpen]);
@@ -227,7 +235,7 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
               letterSpacing: "0%",
             }}
           >
-            Create new post
+            {isEdit ? "Edit job post" : "Create new post"}
           </h2>
         </div>
 
@@ -241,7 +249,6 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
                 <label
                   className="text-[#BFBFBF]"
                   style={{
-    
                     fontWeight: 400,
                     fontSize: "12px",
                     lineHeight: "16px",
@@ -265,7 +272,7 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
                     paddingLeft: "20px",
                     fontSize: "14px",
                     lineHeight: "20px",
-    
+
                     fontWeight: 400,
                   }}
                   placeholder="Boxing Workouts vs. Other Cardio Exercises"
@@ -278,7 +285,6 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
                   <label
                     className="text-[#BFBFBF]"
                     style={{
-      
                       fontWeight: 400,
                       fontSize: "12px",
                       lineHeight: "16px",
@@ -309,7 +315,7 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
                       paddingLeft: "20px",
                       fontSize: "14px",
                       lineHeight: "20px",
-      
+
                       fontWeight: 400,
                       color: formData.departmentId ? "#FFFFFF" : "#BFBFBF",
                       backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23BFBFBF' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
@@ -333,7 +339,6 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
                   <label
                     className="text-[#BFBFBF]"
                     style={{
-      
                       fontWeight: 400,
                       fontSize: "12px",
                       lineHeight: "16px",
@@ -364,7 +369,7 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
                       paddingLeft: "20px",
                       fontSize: "14px",
                       lineHeight: "20px",
-      
+
                       fontWeight: 400,
                       color: formData.locationId ? "#FFFFFF" : "#BFBFBF",
                       backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23BFBFBF' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
@@ -391,7 +396,6 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
                   <label
                     className="text-[#BFBFBF]"
                     style={{
-      
                       fontWeight: 400,
                       fontSize: "12px",
                       lineHeight: "16px",
@@ -415,7 +419,7 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
                       paddingLeft: "20px",
                       fontSize: "14px",
                       lineHeight: "20px",
-      
+
                       fontWeight: 400,
                       color: formData.jobType ? "#FFFFFF" : "#BFBFBF",
                       backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23BFBFBF' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
@@ -439,7 +443,6 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
                   <label
                     className="text-[#BFBFBF]"
                     style={{
-      
                       fontWeight: 400,
                       fontSize: "12px",
                       lineHeight: "16px",
@@ -464,7 +467,7 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
                         paddingLeft: "52px",
                         fontSize: "14px",
                         lineHeight: "20px",
-        
+
                         fontWeight: 400,
                         colorScheme: "dark",
                         color: "#FFFFFF",
@@ -482,12 +485,44 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
                 </div>
               </div>
 
+              {/* Job Description - Takes remaining height */}
+              <div className="flex flex-col flex-1 mt-5" style={{ gap: "8px" }}>
+                <label
+                  className="text-[#BFBFBF]"
+                  style={{
+                    fontWeight: 400,
+                    fontSize: "12px",
+                    lineHeight: "16px",
+                    letterSpacing: "0%",
+                  }}
+                >
+                  Job description
+                </label>
+                <textarea
+                  name="jobDescription"
+                  value={formData.jobDescription}
+                  onChange={handleInputChange}
+                  required
+                  className="bg-[#282828] text-white w-full border-0 rounded-lg outline-none resize-none flex-1"
+                  style={{
+                    paddingTop: "12px",
+                    paddingRight: "20px",
+                    paddingBottom: "12px",
+                    paddingLeft: "20px",
+                    fontSize: "14px",
+                    lineHeight: "20px",
+
+                    fontWeight: 400,
+                  }}
+                  placeholder="In recent years, boxing workouts have become increasingly popular among people who are looking for an effective way to get in shape."
+                />
+              </div>
+
               {/* Skills Required */}
               <div className="flex flex-col" style={{ gap: "8px" }}>
                 <label
                   className="text-[#BFBFBF]"
                   style={{
-    
                     fontWeight: 400,
                     fontSize: "12px",
                     lineHeight: "16px",
@@ -506,7 +541,7 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
                     padding: "12px 20px",
                     fontSize: "14px",
                     lineHeight: "20px",
-    
+
                     fontWeight: 400,
                   }}
                   placeholder="e.g. React, TypeScript, CSS"
@@ -518,7 +553,6 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
                 <label
                   className="text-[#BFBFBF]"
                   style={{
-    
                     fontWeight: 400,
                     fontSize: "12px",
                     lineHeight: "16px",
@@ -591,7 +625,6 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
                 <label
                   className="text-[#BFBFBF]"
                   style={{
-    
                     fontWeight: 400,
                     fontSize: "12px",
                     lineHeight: "16px",
@@ -664,7 +697,6 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
                 <label
                   className="text-[#BFBFBF]"
                   style={{
-    
                     fontWeight: 400,
                     fontSize: "12px",
                     lineHeight: "16px",
@@ -688,40 +720,6 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
               </div>
             </div>
 
-            {/* Job Description - Takes remaining height */}
-            <div className="flex flex-col flex-1 mt-5" style={{ gap: "8px" }}>
-              <label
-                className="text-[#BFBFBF]"
-                style={{
-  
-                  fontWeight: 400,
-                  fontSize: "12px",
-                  lineHeight: "16px",
-                  letterSpacing: "0%",
-                }}
-              >
-                Job description
-              </label>
-              <textarea
-                name="jobDescription"
-                value={formData.jobDescription}
-                onChange={handleInputChange}
-                required
-                className="bg-[#282828] text-white w-full border-0 rounded-lg outline-none resize-none flex-1"
-                style={{
-                  paddingTop: "12px",
-                  paddingRight: "20px",
-                  paddingBottom: "12px",
-                  paddingLeft: "20px",
-                  fontSize: "14px",
-                  lineHeight: "20px",
-  
-                  fontWeight: 400,
-                }}
-                placeholder="In recent years, boxing workouts have become increasingly popular among people who are looking for an effective way to get in shape."
-              />
-            </div>
-
             {/* Submit Button - Bottom Right */}
             <div className="flex justify-end pt-6">
               <button
@@ -734,7 +732,7 @@ const AddJobPostModal: React.FC<AddJobPostModalProps> = ({
                   paddingRight: "16px",
                   paddingBottom: "8px",
                   paddingLeft: "16px",
-  
+
                   fontWeight: 500,
                   fontSize: "14px",
                   lineHeight: "20px",

@@ -9,6 +9,7 @@ export const APPLICATION_STATUS = {
   NEW: 0,
   SHORTLISTED: 1,
   IN_REVIEW: 2,
+  REJECTED: 3,
 } as const;
 
 export const JOB_TYPE = {
@@ -38,6 +39,7 @@ export const APPLICATION_STATUS_LABELS = {
   [APPLICATION_STATUS.NEW]: "New",
   [APPLICATION_STATUS.SHORTLISTED]: "Shortlisted",
   [APPLICATION_STATUS.IN_REVIEW]: "In Review",
+  [APPLICATION_STATUS.REJECTED]: "Rejected",
 } as const;
 
 export const JOB_TYPE_LABELS = {
@@ -57,6 +59,7 @@ export const APPLICATION_STATUS_COLORS = {
   [APPLICATION_STATUS.NEW]: "#00DBDC",
   [APPLICATION_STATUS.SHORTLISTED]: "#0BFFB6",
   [APPLICATION_STATUS.IN_REVIEW]: "#BFBFBF",
+  [APPLICATION_STATUS.REJECTED]: "#FF6B6B",
 } as const;
 
 // Type definitions for better type safety

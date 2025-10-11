@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { JobDetailSection as JobDetailSectionType } from "@/types/staticPages";
 
 interface JobDetailSectionProps {
@@ -8,9 +9,10 @@ interface JobDetailSectionProps {
 }
 
 const JobDetailSection = ({ data, isMobile }: JobDetailSectionProps) => {
+  const router = useRouter();
+
   const handleApplyNow = () => {
-    // Handle apply now functionality
-    console.log("Apply now clicked for job:", data.job.id);
+    router.push(`/job-detail/${data.job.id}/apply-now`);
   };
 
   return (
@@ -18,7 +20,7 @@ const JobDetailSection = ({ data, isMobile }: JobDetailSectionProps) => {
       {/* Apply Now Button at the top */}
       <button
         onClick={handleApplyNow}
-        className="bg-[#00DBDC] font-medium text-[#0D0D0D] border border-transparent hover:bg-transparent hover:border-[#00DBDC] hover:text-[#00DBDC] transition-all duration-200 shadow-[0px_9px_12px_0px_rgba(0,219,220,0.2)] px-7 py-2.5 text-base leading-5 rounded-lg"
+        className="bg-[#00DBDC] font-medium text-[#0D0D0D] border border-transparent shadow-[0px_9px_12px_0px_rgba(0,219,220,0.2)] px-7 py-2.5 text-base leading-5 rounded-lg"
       >
         Apply now
       </button>
@@ -98,7 +100,7 @@ const JobDetailSection = ({ data, isMobile }: JobDetailSectionProps) => {
             <div className="flex justify-end">
               <button
                 onClick={handleApplyNow}
-                className="bg-[#00DBDC] font-medium text-[#0D0D0D] w-full md:w-fit border border-transparent hover:bg-transparent hover:border-[#00DBDC] hover:text-[#00DBDC] transition-all duration-200 shadow-[0px_9px_12px_0px_rgba(0,219,220,0.2)] px-7 py-2.5 text-base leading-5 rounded-lg"
+                className="bg-[#00DBDC] font-medium text-[#0D0D0D] w-full md:w-fit border border-transparent shadow-[0px_9px_12px_0px_rgba(0,219,220,0.2)] px-7 py-2.5 text-base leading-5 rounded-lg"
               >
                 Apply now
               </button>

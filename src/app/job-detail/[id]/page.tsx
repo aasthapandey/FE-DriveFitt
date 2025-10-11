@@ -1,13 +1,20 @@
 import { Metadata } from "next";
 import { headers } from "next/headers";
+import { notFound } from "next/navigation";
 import { isMobileDevice } from "@/utils/deviceDetection";
 import StaticPages from "@/components/StaticPages";
-import { JobPosting, JobType } from "@/types/database";
+import { JobPosting } from "@/types/database";
+import { JobType, JOB_TYPE } from "@/constants/database";
 import { jobAPI } from "@/services/jobAPI";
 
 const fetchJob = async (id: string): Promise<JobPosting> => {
-  const job = await jobAPI.getById(Number(id));
-  return job;
+  try {
+    const job = await jobAPI.getById(Number(id));
+    return job;
+  } catch (error) {
+    // If job not found or not accessible, trigger the not-found page
+    notFound();
+  }
 };
 
 export async function generateMetadata({
@@ -15,14 +22,21 @@ export async function generateMetadata({
 }: {
   params: { id: string };
 }): Promise<Metadata> {
-  const job = await fetchJob(params.id);
-
-  return {
-    title: `${job.title} | Drive FITT Premium Club`,
-    description: `Apply for ${job.title} position at Drive FITT - ${
-      job.location?.full_location ?? ""
-    }`,
-  };
+  try {
+    const job = await fetchJob(params.id);
+    return {
+      title: `${job.title} | Drive FITT Premium Club`,
+      description: `Apply for ${job.title} position at Drive FITT - ${
+        job.location?.full_location ?? ""
+      }`,
+    };
+  } catch {
+    // If job not found, return default metadata
+    return {
+      title: "Job Not Found | Drive FITT Premium Club",
+      description: "The requested job posting could not be found.",
+    };
+  }
 }
 
 export default async function JobDetailPage({
@@ -46,9 +60,9 @@ export default async function JobDetailPage({
       subTitle: "",
       description: jobDetails.location?.full_location ?? "",
       jobType:
-        jobDetails.job_type === JobType.FULL_TIME
+        jobDetails.job_type === JOB_TYPE.FULL_TIME
           ? "Fulltime"
-          : jobDetails.job_type === JobType.PART_TIME
+          : jobDetails.job_type === JOB_TYPE.PART_TIME
           ? "Part-time"
           : "Contractor",
       isJobDetail: true,
@@ -67,9 +81,9 @@ export default async function JobDetailPage({
         title: jobDetails.title,
         location: jobDetails.location?.full_location ?? "",
         jobType:
-          jobDetails.job_type === JobType.FULL_TIME
+          jobDetails.job_type === JOB_TYPE.FULL_TIME
             ? "Fulltime"
-            : jobDetails.job_type === JobType.PART_TIME
+            : jobDetails.job_type === JOB_TYPE.PART_TIME
             ? "Part-time"
             : "Contractor",
         jobCategory: jobDetails.department?.name || "General",

@@ -44,10 +44,10 @@ export async function GET(
       FROM job_postings jp
       LEFT JOIN departments d ON jp.department_id = d.id
       LEFT JOIN location l ON jp.location_id = l.id
-      WHERE jp.id = ?
+      WHERE jp.id = ? AND jp.status = ? AND jp.is_visible = 1
     `;
 
-    const result = await executeQuery<any[]>(query, [jobId]);
+    const result = await executeQuery<any[]>(query, [jobId, JOB_STATUS.ACTIVE]);
 
     if (result.length === 0) {
       return NextResponse.json(

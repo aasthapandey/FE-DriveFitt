@@ -7,7 +7,9 @@ import ColumnFilter from "./ColumnFilter";
 import {
   JOB_STATUS_COLORS,
   APPLICATION_STATUS_COLORS,
+  APPLICATION_STATUS_LABELS,
   JOB_STATUS,
+  APPLICATION_STATUS,
 } from "@/constants/database";
 
 type ToggleOption = "job-posts" | "application";
@@ -27,7 +29,7 @@ interface JobPostApplicationTableProps {
   onChangeApplicationStatus?: (
     index: number,
     application: ApplicationData,
-    newStatus: "In Review" | "Shortlisted" | "New"
+    newStatus: "In Review" | "Shortlisted" | "New" | "Rejected"
   ) => void;
   onDownloadResume?: (index: number, application: ApplicationData) => void;
   // Pagination props
@@ -55,7 +57,7 @@ interface ApplicationData {
   workExperience: string;
   expectedSalary: string;
   appliedFor: string;
-  resumeStatus: "In Review" | "Shortlisted" | "New";
+  resumeStatus: "In Review" | "Shortlisted" | "New" | "Rejected";
   resumeUrl?: string;
 }
 
@@ -102,7 +104,7 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
     ("Active" | "Closed" | "Deleted")[]
   >(jobPosts.map((item) => item.status));
   const [applicationStatuses, setApplicationStatuses] = useState<
-    ("In Review" | "Shortlisted" | "New")[]
+    ("In Review" | "Shortlisted" | "New" | "Rejected")[]
   >(applications.map((item) => item.resumeStatus));
 
   // keep local mirrors in sync with incoming props
@@ -126,12 +128,11 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
 
   const handleApplicationStatusChange = (
     index: number,
-    newStatus: "In Review" | "Shortlisted" | "New"
+    newStatus: "In Review" | "Shortlisted" | "New" | "Rejected"
   ) => {
     const updatedStatuses = [...applicationStatuses];
     updatedStatuses[index] = newStatus;
     setApplicationStatuses(updatedStatuses);
-    setDropdownOpen(null);
     onChangeApplicationStatus?.(index, applications[index], newStatus);
   };
 
@@ -282,12 +283,12 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
         <div className="flex-1 flex justify-center">{item.expectedSalary}</div>
         <div className="flex-1 flex justify-center">{item.appliedFor}</div>
         <div className="flex-1 flex justify-center">
-          <div className="relative">
+          <div className="relative" data-menu-root>
             <button
               type="button"
               onClick={(e: React.MouseEvent) => {
-                e.preventDefault();
-                toggleDropdown(index);
+                e.stopPropagation();
+                toggleDropdown(index + 1000);
               }}
               className="bg-[#333333] border border-[#333333] rounded flex items-center justify-between transition-colors"
               style={{
@@ -304,11 +305,15 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
                 className={`text-center`}
                 style={{
                   color:
-                    applicationStatuses[index] === "In Review"
-                      ? APPLICATION_STATUS_COLORS[2] // IN_REVIEW
+                    applicationStatuses[index] === "New"
+                      ? APPLICATION_STATUS_COLORS[APPLICATION_STATUS.NEW]
                       : applicationStatuses[index] === "Shortlisted"
-                      ? APPLICATION_STATUS_COLORS[1] // SHORTLISTED
-                      : APPLICATION_STATUS_COLORS[0], // NEW
+                      ? APPLICATION_STATUS_COLORS[
+                          APPLICATION_STATUS.SHORTLISTED
+                        ]
+                      : applicationStatuses[index] === "In Review"
+                      ? APPLICATION_STATUS_COLORS[APPLICATION_STATUS.IN_REVIEW]
+                      : APPLICATION_STATUS_COLORS[APPLICATION_STATUS.REJECTED], // REJECTED
                   fontWeight: 300,
                   fontSize: "12px",
                   lineHeight: "16px",
@@ -323,13 +328,15 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
                 viewBox="0 0 8 6"
                 fill="none"
                 className={`${
-                  applicationStatuses[index] === "In Review"
-                    ? "text-[#BFBFBF]"
+                  applicationStatuses[index] === "New"
+                    ? "text-[#00DBDC]"
                     : applicationStatuses[index] === "Shortlisted"
                     ? "text-[#0BFFB6]"
-                    : "text-[#00DBDC]"
+                    : applicationStatuses[index] === "In Review"
+                    ? "text-[#BFBFBF]"
+                    : "text-[#FF6B6B]" // REJECTED
                 } transform transition-transform duration-200 ${
-                  dropdownOpen === index ? "rotate-180" : ""
+                  dropdownOpen === index + 1000 ? "rotate-180" : ""
                 }`}
               >
                 <path
@@ -341,9 +348,10 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
                 />
               </svg>
             </button>
-            {dropdownOpen === index && (
+            {dropdownOpen === index + 1000 && (
               <div
-                className="absolute left-0 bg-[#1D1D1D] border border-[#333333] rounded shadow-lg z-10"
+                className="absolute left-0 bg-[#1D1D1D] border border-[#333333] rounded shadow-lg z-20"
+                data-menu-root
                 style={{
                   width: "85px",
                   // Position above for last 2 items, below for others
@@ -354,38 +362,56 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
               >
                 <button
                   type="button"
-                  onClick={() =>
-                    handleApplicationStatusChange(index, "In Review")
-                  }
+                  onClick={() => {
+                    handleApplicationStatusChange(index, "New");
+                    setDropdownOpen(null);
+                  }}
                   className="block w-full text-left px-3 py-2 text-sm text-white hover:bg-[#333333]"
                 >
-                  In Review
+                  New
                 </button>
                 <button
                   type="button"
-                  onClick={() =>
-                    handleApplicationStatusChange(index, "Shortlisted")
-                  }
+                  onClick={() => {
+                    handleApplicationStatusChange(index, "Shortlisted");
+                    setDropdownOpen(null);
+                  }}
                   className="block w-full text-left px-3 py-2 text-sm text-white hover:bg-[#333333]"
                 >
                   Shortlisted
                 </button>
                 <button
                   type="button"
-                  onClick={() => handleApplicationStatusChange(index, "New")}
+                  onClick={() => {
+                    handleApplicationStatusChange(index, "In Review");
+                    setDropdownOpen(null);
+                  }}
                   className="block w-full text-left px-3 py-2 text-sm text-white hover:bg-[#333333]"
                 >
-                  New
+                  In Review
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    handleApplicationStatusChange(index, "Rejected");
+                    setDropdownOpen(null);
+                  }}
+                  className="block w-full text-left px-3 py-2 text-sm text-white hover:bg-[#333333]"
+                >
+                  Rejected
                 </button>
               </div>
             )}
           </div>
         </div>
         <div className="w-20">
-          <div className="relative">
+          <div className="relative" data-menu-root>
             <button
               type="button"
-              onClick={() => toggleDropdown(index + 1000)}
+              onClick={(e: React.MouseEvent) => {
+                e.stopPropagation();
+                toggleDropdown(index + 2000);
+              }}
               className="w-8 h-8 flex items-center justify-center hover:bg-[#333333] rounded"
             >
               <Image
@@ -395,9 +421,10 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
                 height={16}
               />
             </button>
-            {dropdownOpen === index + 1000 && (
+            {dropdownOpen === index + 2000 && (
               <div
-                className="absolute right-0 bg-[#1D1D1D] border border-[#333333] rounded shadow-lg z-10"
+                className="absolute right-0 bg-[#1D1D1D] border border-[#333333] rounded shadow-lg z-20"
+                data-menu-root
                 style={{
                   // Position above for last 2 items, below for others
                   ...(index >= applications.length - 2
@@ -408,19 +435,15 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
                 {item.resumeUrl && (
                   <button
                     type="button"
-                    onClick={() => onDownloadResume?.(index, item)}
+                    onClick={() => {
+                      onDownloadResume?.(index, item);
+                      setDropdownOpen(null);
+                    }}
                     className="block w-full text-left px-3 py-2 text-sm text-white hover:bg-[#333333]"
                   >
                     Download Resume
                   </button>
                 )}
-                <button
-                  type="button"
-                  onClick={() => handleDelete(index)}
-                  className="block w-full text-left px-3 py-2 text-sm text-red-400 hover:bg-[#333333]"
-                >
-                  Delete
-                </button>
               </div>
             )}
           </div>

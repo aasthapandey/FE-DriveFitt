@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import { JobSearchSection as JobSearchSectionType } from "@/types/staticPages";
 import { jobAPI } from "@/services/jobAPI";
-import { JobPosting, JobType } from "@/types/database";
+import { JobPosting } from "@/types/database";
+import { JobType, JOB_TYPE } from "@/constants/database";
 import JobDisplay from "./JobDisplay";
 
 interface JobSearchSectionProps {
@@ -27,15 +28,13 @@ const JobSearchSection = ({ data, isMobile }: JobSearchSectionProps) => {
       jobCategory: string;
     }[]
   >([]);
-  const [jobCategories, setJobCategories] = useState<string[]>(
-    data.jobCategories || ["All job categories"]
-  );
-  const [jobTypes, setJobTypes] = useState<string[]>(
-    data.jobTypes || ["All job types"]
-  );
-  const [jobLocations, setJobLocations] = useState<string[]>(
-    data.jobLocations || ["All job location"]
-  );
+  const [jobCategories, setJobCategories] = useState<string[]>([
+    "All job categories",
+  ]);
+  const [jobTypes, setJobTypes] = useState<string[]>(["All job types"]);
+  const [jobLocations, setJobLocations] = useState<string[]>([
+    "All job location",
+  ]);
 
   useEffect(() => {
     (async () => {
@@ -46,9 +45,9 @@ const JobSearchSection = ({ data, isMobile }: JobSearchSectionProps) => {
         ]);
 
         const typeLabel = (t: JobType) =>
-          t === JobType.FULL_TIME
+          t === JOB_TYPE.FULL_TIME
             ? "Fulltime"
-            : t === JobType.PART_TIME
+            : t === JOB_TYPE.PART_TIME
             ? "Part-time"
             : "Contractor";
 
@@ -76,19 +75,13 @@ const JobSearchSection = ({ data, isMobile }: JobSearchSectionProps) => {
         setJobCategories(categories);
         setJobTypes(types);
         setJobLocations(locations);
-      } catch (_) {
-        setJobs(
-          (data.jobs || []).map((j) => ({
-            id: j.id,
-            title: j.title,
-            location: j.location,
-            jobType: j.jobType,
-            jobCategory: j.jobCategory || "General",
-          }))
-        );
+      } catch (error) {
+        console.error("Failed to fetch job data:", error);
+        // No fallback - let the user know there's an issue
+        setJobs([]);
       }
     })();
-  }, [data.jobs, data.jobCategories, data.jobLocations, data.jobTypes]);
+  }, []);
 
   const filteredJobs = jobs.filter((job) => {
     const matchesSearch = job.title
