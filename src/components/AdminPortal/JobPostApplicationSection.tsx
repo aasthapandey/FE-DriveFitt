@@ -15,6 +15,14 @@ import {
   JobStatus,
   ApplicationStatus,
   JobType,
+  JobStatusString,
+  ApplicationStatusString,
+  JOB_STATUS_ACTIVE,
+  JOB_STATUS_CLOSED,
+  APPLICATION_STATUS_NEW,
+  APPLICATION_STATUS_SHORTLISTED,
+  APPLICATION_STATUS_IN_REVIEW,
+  APPLICATION_STATUS_REJECTED,
 } from "@/constants/database";
 
 type ToggleOption = "job-posts" | "application";
@@ -49,7 +57,7 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
       jobTitle: string;
       department: string;
       location: string;
-      status: "Active" | "Closed" | "Deleted";
+      status: JobStatusString;
       isVisible: boolean;
     }[]
   >([]);
@@ -65,7 +73,7 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
       workExperience: string;
       expectedSalary: string;
       appliedFor: string;
-      resumeStatus: "In Review" | "Shortlisted" | "New" | "Rejected";
+      resumeStatus: ApplicationStatusString;
       resumeUrl?: string;
     }[]
   >([]);
@@ -75,7 +83,7 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
   const [itemsPerPage] = useState(5);
   const [totalItems, setTotalItems] = useState(0);
 
-  const toStatus = (s: number | JobStatus): "Active" | "Closed" | "Deleted" =>
+  const toStatus = (s: number | JobStatus): JobStatusString =>
     s === JOB_STATUS.ACTIVE
       ? JOB_STATUS_LABELS[JOB_STATUS.ACTIVE]
       : s === JOB_STATUS.CLOSED
@@ -84,7 +92,7 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
 
   const toApplicationLabel = (
     s: number | ApplicationStatus
-  ): "In Review" | "Shortlisted" | "New" | "Rejected" =>
+  ): ApplicationStatusString =>
     s === APPLICATION_STATUS.SHORTLISTED
       ? APPLICATION_STATUS_LABELS[APPLICATION_STATUS.SHORTLISTED]
       : s === APPLICATION_STATUS.IN_REVIEW
@@ -367,11 +375,11 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
   const handleChangeJobPostStatus = async (
     index: number,
     jobData: { id: number },
-    newStatus: "Active" | "Closed"
+    newStatus: JobStatusString
   ) => {
     await jobAPI.setStatus(
       jobData.id,
-      newStatus === "Active" ? JOB_STATUS.ACTIVE : JOB_STATUS.CLOSED
+      newStatus === JOB_STATUS_ACTIVE ? JOB_STATUS.ACTIVE : JOB_STATUS.CLOSED
     );
     // Refresh job data and metrics when job status changes
     const refreshed = await jobAPI.list({ admin: true });
@@ -414,13 +422,13 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
   const handleChangeApplicationStatus = async (
     index: number,
     application: { id: number },
-    newStatus: "In Review" | "Shortlisted" | "New" | "Rejected"
+    newStatus: ApplicationStatusString
   ) => {
     const statusMap: Record<string, ApplicationStatus> = {
-      "In Review": APPLICATION_STATUS.IN_REVIEW,
-      Shortlisted: APPLICATION_STATUS.SHORTLISTED,
-      New: APPLICATION_STATUS.NEW,
-      Rejected: APPLICATION_STATUS.REJECTED,
+      [APPLICATION_STATUS_IN_REVIEW]: APPLICATION_STATUS.IN_REVIEW,
+      [APPLICATION_STATUS_SHORTLISTED]: APPLICATION_STATUS.SHORTLISTED,
+      [APPLICATION_STATUS_NEW]: APPLICATION_STATUS.NEW,
+      [APPLICATION_STATUS_REJECTED]: APPLICATION_STATUS.REJECTED,
     };
     await applicationAPI.setStatus(application.id, statusMap[newStatus]);
     // Refresh metrics when application status changes

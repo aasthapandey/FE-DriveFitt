@@ -28,18 +28,28 @@ export const LOCATION_STATUS = {
   INACTIVE: 0,
 } as const;
 
+// Individual string constants for each status
+export const JOB_STATUS_ACTIVE = "Active" as const;
+export const JOB_STATUS_CLOSED = "Closed" as const;
+export const JOB_STATUS_DELETED = "Deleted" as const;
+
+export const APPLICATION_STATUS_NEW = "New" as const;
+export const APPLICATION_STATUS_SHORTLISTED = "Shortlisted" as const;
+export const APPLICATION_STATUS_IN_REVIEW = "In Review" as const;
+export const APPLICATION_STATUS_REJECTED = "Rejected" as const;
+
 // Status labels for UI display
 export const JOB_STATUS_LABELS = {
-  [JOB_STATUS.ACTIVE]: "Active",
-  [JOB_STATUS.CLOSED]: "Closed",
-  [JOB_STATUS.DELETED]: "Deleted",
+  [JOB_STATUS.ACTIVE]: JOB_STATUS_ACTIVE,
+  [JOB_STATUS.CLOSED]: JOB_STATUS_CLOSED,
+  [JOB_STATUS.DELETED]: JOB_STATUS_DELETED,
 } as const;
 
 export const APPLICATION_STATUS_LABELS = {
-  [APPLICATION_STATUS.NEW]: "New",
-  [APPLICATION_STATUS.SHORTLISTED]: "Shortlisted",
-  [APPLICATION_STATUS.IN_REVIEW]: "In Review",
-  [APPLICATION_STATUS.REJECTED]: "Rejected",
+  [APPLICATION_STATUS.NEW]: APPLICATION_STATUS_NEW,
+  [APPLICATION_STATUS.SHORTLISTED]: APPLICATION_STATUS_SHORTLISTED,
+  [APPLICATION_STATUS.IN_REVIEW]: APPLICATION_STATUS_IN_REVIEW,
+  [APPLICATION_STATUS.REJECTED]: APPLICATION_STATUS_REJECTED,
 } as const;
 
 export const JOB_TYPE_LABELS = {
@@ -71,3 +81,14 @@ export type DepartmentStatus =
   (typeof DEPARTMENT_STATUS)[keyof typeof DEPARTMENT_STATUS];
 export type LocationStatus =
   (typeof LOCATION_STATUS)[keyof typeof LOCATION_STATUS];
+
+// String type definitions for UI components
+export type JobStatusString =
+  | typeof JOB_STATUS_ACTIVE
+  | typeof JOB_STATUS_CLOSED
+  | typeof JOB_STATUS_DELETED;
+export type ApplicationStatusString =
+  | typeof APPLICATION_STATUS_NEW
+  | typeof APPLICATION_STATUS_SHORTLISTED
+  | typeof APPLICATION_STATUS_IN_REVIEW
+  | typeof APPLICATION_STATUS_REJECTED;

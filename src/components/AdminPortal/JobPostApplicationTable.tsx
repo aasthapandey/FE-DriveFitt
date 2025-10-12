@@ -10,6 +10,15 @@ import {
   APPLICATION_STATUS_LABELS,
   JOB_STATUS,
   APPLICATION_STATUS,
+  JobStatusString,
+  ApplicationStatusString,
+  JOB_STATUS_ACTIVE,
+  JOB_STATUS_CLOSED,
+  JOB_STATUS_DELETED,
+  APPLICATION_STATUS_NEW,
+  APPLICATION_STATUS_SHORTLISTED,
+  APPLICATION_STATUS_IN_REVIEW,
+  APPLICATION_STATUS_REJECTED,
 } from "@/constants/database";
 
 type ToggleOption = "job-posts" | "application";
@@ -23,13 +32,13 @@ interface JobPostApplicationTableProps {
   onChangeJobPostStatus?: (
     index: number,
     jobData: JobPostData,
-    newStatus: "Active" | "Closed"
+    newStatus: JobStatusString
   ) => void;
   onToggleVisibility?: (index: number, jobData: JobPostData) => void;
   onChangeApplicationStatus?: (
     index: number,
     application: ApplicationData,
-    newStatus: "In Review" | "Shortlisted" | "New" | "Rejected"
+    newStatus: ApplicationStatusString
   ) => void;
   onDownloadResume?: (index: number, application: ApplicationData) => void;
   // Pagination props
@@ -57,7 +66,7 @@ interface ApplicationData {
   workExperience: string;
   expectedSalary: string;
   appliedFor: string;
-  resumeStatus: "In Review" | "Shortlisted" | "New" | "Rejected";
+  resumeStatus: ApplicationStatusString;
   resumeUrl?: string;
 }
 
@@ -66,7 +75,7 @@ interface JobPostData {
   jobTitle: string;
   department: string;
   location: string;
-  status: "Active" | "Closed" | "Deleted";
+  status: JobStatusString;
   isVisible: boolean;
 }
 
@@ -100,11 +109,11 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
   selectedStatuses,
 }) => {
   const [dropdownOpen, setDropdownOpen] = useState<number | null>(null);
-  const [jobPostStatuses, setJobPostStatuses] = useState<
-    ("Active" | "Closed" | "Deleted")[]
-  >(jobPosts.map((item) => item.status));
+  const [jobPostStatuses, setJobPostStatuses] = useState<JobStatusString[]>(
+    jobPosts.map((item) => item.status)
+  );
   const [applicationStatuses, setApplicationStatuses] = useState<
-    ("In Review" | "Shortlisted" | "New" | "Rejected")[]
+    ApplicationStatusString[]
   >(applications.map((item) => item.resumeStatus));
 
   // keep local mirrors in sync with incoming props
@@ -117,7 +126,7 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
 
   const handleJobPostStatusChange = (
     index: number,
-    newStatus: "Active" | "Closed"
+    newStatus: JobStatusString
   ) => {
     const updatedStatuses = [...jobPostStatuses];
     updatedStatuses[index] = newStatus;
@@ -128,7 +137,7 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
 
   const handleApplicationStatusChange = (
     index: number,
-    newStatus: "In Review" | "Shortlisted" | "New" | "Rejected"
+    newStatus: ApplicationStatusString
   ) => {
     const updatedStatuses = [...applicationStatuses];
     updatedStatuses[index] = newStatus;
@@ -181,8 +190,8 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
       <div className="flex-1 text-center">Work Experience</div>
       <div className="flex-1 text-center">Expected Salary</div>
       <div className="flex-1 text-center">Applied for</div>
-      <div className="flex-1 text-center">Resume status</div>
-      <div className="w-20">Action</div>
+      <div className="flex-1 text-center">Status</div>
+      <div className="w-15">Action</div>
     </div>
   );
 
@@ -238,17 +247,17 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
           options={[
             {
               id: JOB_STATUS.ACTIVE,
-              label: "Active",
+              label: JOB_STATUS_ACTIVE,
               value: JOB_STATUS.ACTIVE,
             },
             {
               id: JOB_STATUS.CLOSED,
-              label: "Closed",
+              label: JOB_STATUS_CLOSED,
               value: JOB_STATUS.CLOSED,
             },
             {
               id: JOB_STATUS.DELETED,
-              label: "Deleted",
+              label: JOB_STATUS_DELETED,
               value: JOB_STATUS.DELETED,
             },
           ]}
@@ -305,13 +314,15 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
                 className={`text-center`}
                 style={{
                   color:
-                    applicationStatuses[index] === "New"
+                    applicationStatuses[index] === APPLICATION_STATUS_NEW
                       ? APPLICATION_STATUS_COLORS[APPLICATION_STATUS.NEW]
-                      : applicationStatuses[index] === "Shortlisted"
+                      : applicationStatuses[index] ===
+                        APPLICATION_STATUS_SHORTLISTED
                       ? APPLICATION_STATUS_COLORS[
                           APPLICATION_STATUS.SHORTLISTED
                         ]
-                      : applicationStatuses[index] === "In Review"
+                      : applicationStatuses[index] ===
+                        APPLICATION_STATUS_IN_REVIEW
                       ? APPLICATION_STATUS_COLORS[APPLICATION_STATUS.IN_REVIEW]
                       : APPLICATION_STATUS_COLORS[APPLICATION_STATUS.REJECTED], // REJECTED
                   fontWeight: 300,
@@ -328,11 +339,13 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
                 viewBox="0 0 8 6"
                 fill="none"
                 className={`${
-                  applicationStatuses[index] === "New"
+                  applicationStatuses[index] === APPLICATION_STATUS_NEW
                     ? "text-[#00DBDC]"
-                    : applicationStatuses[index] === "Shortlisted"
+                    : applicationStatuses[index] ===
+                      APPLICATION_STATUS_SHORTLISTED
                     ? "text-[#0BFFB6]"
-                    : applicationStatuses[index] === "In Review"
+                    : applicationStatuses[index] ===
+                      APPLICATION_STATUS_IN_REVIEW
                     ? "text-[#BFBFBF]"
                     : "text-[#FF6B6B]" // REJECTED
                 } transform transition-transform duration-200 ${
@@ -360,46 +373,68 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
                     : { top: "100%", marginTop: "4px" }),
                 }}
               >
-                <button
-                  type="button"
-                  onClick={() => {
-                    handleApplicationStatusChange(index, "New");
-                    setDropdownOpen(null);
-                  }}
-                  className="block w-full text-left px-3 py-2 text-sm text-white hover:bg-[#333333]"
-                >
-                  New
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    handleApplicationStatusChange(index, "Shortlisted");
-                    setDropdownOpen(null);
-                  }}
-                  className="block w-full text-left px-3 py-2 text-sm text-white hover:bg-[#333333]"
-                >
-                  Shortlisted
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    handleApplicationStatusChange(index, "In Review");
-                    setDropdownOpen(null);
-                  }}
-                  className="block w-full text-left px-3 py-2 text-sm text-white hover:bg-[#333333]"
-                >
-                  In Review
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    handleApplicationStatusChange(index, "Rejected");
-                    setDropdownOpen(null);
-                  }}
-                  className="block w-full text-left px-3 py-2 text-sm text-white hover:bg-[#333333]"
-                >
-                  Rejected
-                </button>
+                {applicationStatuses[index] !== APPLICATION_STATUS_NEW && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      handleApplicationStatusChange(
+                        index,
+                        APPLICATION_STATUS_NEW
+                      );
+                      setDropdownOpen(null);
+                    }}
+                    className="block w-full text-left px-3 py-2 text-xs text-white hover:bg-[#333333]"
+                  >
+                    {APPLICATION_STATUS_NEW}
+                  </button>
+                )}
+                {applicationStatuses[index] !==
+                  APPLICATION_STATUS_SHORTLISTED && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      handleApplicationStatusChange(
+                        index,
+                        APPLICATION_STATUS_SHORTLISTED
+                      );
+                      setDropdownOpen(null);
+                    }}
+                    className="block w-full text-left px-3 py-2 text-xs text-white hover:bg-[#333333]"
+                  >
+                    {APPLICATION_STATUS_SHORTLISTED}
+                  </button>
+                )}
+                {applicationStatuses[index] !==
+                  APPLICATION_STATUS_IN_REVIEW && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      handleApplicationStatusChange(
+                        index,
+                        APPLICATION_STATUS_IN_REVIEW
+                      );
+                      setDropdownOpen(null);
+                    }}
+                    className="block w-full text-left px-3 py-2 text-xs text-white hover:bg-[#333333]"
+                  >
+                    {APPLICATION_STATUS_IN_REVIEW}
+                  </button>
+                )}
+                {applicationStatuses[index] !== APPLICATION_STATUS_REJECTED && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      handleApplicationStatusChange(
+                        index,
+                        APPLICATION_STATUS_REJECTED
+                      );
+                      setDropdownOpen(null);
+                    }}
+                    className="block w-full text-left px-3 py-2 text-xs text-white hover:bg-[#333333]"
+                  >
+                    {APPLICATION_STATUS_REJECTED}
+                  </button>
+                )}
               </div>
             )}
           </div>
@@ -439,7 +474,7 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
                       onDownloadResume?.(index, item);
                       setDropdownOpen(null);
                     }}
-                    className="block w-full text-left px-3 py-2 text-sm text-white hover:bg-[#333333]"
+                    className="block w-full text-left px-3 py-2 text-xs text-white hover:bg-[#333333]"
                   >
                     Download Resume
                   </button>
@@ -492,9 +527,9 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
                 className={`text-center`}
                 style={{
                   color:
-                    jobPostStatuses[index] === "Active"
+                    jobPostStatuses[index] === JOB_STATUS_ACTIVE
                       ? JOB_STATUS_COLORS[1] // ACTIVE
-                      : jobPostStatuses[index] === "Closed"
+                      : jobPostStatuses[index] === JOB_STATUS_CLOSED
                       ? JOB_STATUS_COLORS[2] // CLOSED
                       : JOB_STATUS_COLORS[3], // DELETED
                   fontWeight: 300,
@@ -540,13 +575,17 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
                   onClick={() => {
                     handleJobPostStatusChange(
                       index,
-                      jobPostStatuses[index] === "Active" ? "Closed" : "Active"
+                      jobPostStatuses[index] === JOB_STATUS_ACTIVE
+                        ? JOB_STATUS_CLOSED
+                        : JOB_STATUS_ACTIVE
                     );
                     setDropdownOpen(null);
                   }}
-                  className="block w-full text-left px-3 py-2 text-sm text-white hover:bg-[#333333]"
+                  className="block w-full text-left px-3 py-2 text-xs text-white hover:bg-[#333333]"
                 >
-                  {jobPostStatuses[index] === "Active" ? "Closed" : "Active"}
+                  {jobPostStatuses[index] === JOB_STATUS_ACTIVE
+                    ? JOB_STATUS_CLOSED
+                    : JOB_STATUS_ACTIVE}
                 </button>
               </div>
             )}
@@ -586,7 +625,7 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
                     handleEdit(index);
                     setDropdownOpen(null);
                   }}
-                  className="block w-full text-left px-3 py-2 text-sm text-white hover:bg-[#333333]"
+                  className="block w-full text-left px-3 py-2 text-xs text-white hover:bg-[#333333]"
                 >
                   Edit
                 </button>
@@ -596,7 +635,7 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
                     onToggleVisibility?.(index, jobPosts[index]);
                     setDropdownOpen(null);
                   }}
-                  className="block w-full text-left px-3 py-2 text-sm text-white hover:bg-[#333333]"
+                  className="block w-full text-left px-3 py-2 text-xs text-white hover:bg-[#333333]"
                 >
                   {jobPosts[index].isVisible ? "Hide" : "Show"}
                 </button>
@@ -606,7 +645,7 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
                     handleDelete(index);
                     setDropdownOpen(null);
                   }}
-                  className="block w-full text-left px-3 py-2 text-sm text-red-400 hover:bg-[#333333]"
+                  className="block w-full text-left px-3 py-2 text-xs text-red-400 hover:bg-[#333333]"
                 >
                   Delete
                 </button>
