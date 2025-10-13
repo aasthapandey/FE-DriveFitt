@@ -184,14 +184,14 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
         lineHeight: "16px",
       }}
     >
-      <div className="flex-1 text-center">Candidates name</div>
-      <div className="flex-1 text-center">Email address</div>
-      <div className="flex-1 text-center">Phone number</div>
-      <div className="flex-1 text-center">Work Experience</div>
-      <div className="flex-1 text-center">Expected Salary</div>
-      <div className="flex-1 text-center">Applied for</div>
-      <div className="flex-1 text-center">Status</div>
-      <div className="w-15">Action</div>
+      <div className="flex-1">Candidates name</div>
+      <div className="flex-1 ">Email address</div>
+      <div className="flex-1 pl-[65px]">Phone number</div>
+      <div className="flex-1">Work Experience</div>
+      <div className="flex-1">Expected Salary</div>
+      <div className="flex-1">Applied for</div>
+      <div className="flex-1 flex justify-center">Status</div>
+      <div className="w-15 flex justify-center">Action</div>
     </div>
   );
 
@@ -266,7 +266,7 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
           placeholder="Filter by Status"
         />
       </div>
-      <div className="w-20">Action</div>
+      <div className="w-15 flex justify-center">Action</div>
     </div>
   );
 
@@ -285,12 +285,12 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
           fontSize: "14px",
         }}
       >
-        <div className="flex-1 flex justify-center">{item.candidatesName}</div>
-        <div className="flex-1 flex justify-center">{item.emailAddress}</div>
-        <div className="flex-1 flex justify-center">{item.phoneNumber}</div>
-        <div className="flex-1 flex justify-center">{item.workExperience}</div>
-        <div className="flex-1 flex justify-center">{item.expectedSalary}</div>
-        <div className="flex-1 flex justify-center">{item.appliedFor}</div>
+        <div className="flex-1">{item.candidatesName}</div>
+        <div className="flex-1">{item.emailAddress}</div>
+        <div className="flex-1">{item.phoneNumber}</div>
+        <div className="flex-1">{item.workExperience}</div>
+        <div className="flex-1">{item.expectedSalary}</div>
+        <div className="flex-1">{item.appliedFor}</div>
         <div className="flex-1 flex justify-center">
           <div className="relative" data-menu-root>
             <button
@@ -439,7 +439,7 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
             )}
           </div>
         </div>
-        <div className="w-20">
+        <div className="w-15 flex justify-center">
           <div className="relative" data-menu-root>
             <button
               type="button"
@@ -591,7 +591,7 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
             )}
           </div>
         </div>
-        <div className="w-20">
+        <div className="w-15 flex justify-center">
           <div className="relative" data-menu-root>
             <button
               type="button"
