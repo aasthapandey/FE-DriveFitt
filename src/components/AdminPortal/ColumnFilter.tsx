@@ -14,6 +14,10 @@ interface ColumnFilterProps {
   onFilterChange: (selectedValues: (string | number)[]) => void;
   placeholder?: string;
   className?: string;
+  // Optional search mode: show an input and only display options when user types
+  searchable?: boolean;
+  searchPlaceholder?: string;
+  searchMinChars?: number;
 }
 
 const ColumnFilter: React.FC<ColumnFilterProps> = ({
@@ -22,9 +26,13 @@ const ColumnFilter: React.FC<ColumnFilterProps> = ({
   onFilterChange,
   placeholder = "Filter",
   className = "",
+  searchable = false,
+  searchPlaceholder = "Search...",
+  searchMinChars = 2,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const filterRef = useRef<HTMLDivElement>(null);
+  const [query, setQuery] = useState("");
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -63,7 +71,7 @@ const ColumnFilter: React.FC<ColumnFilterProps> = ({
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-1 px-2 py-1 rounded border border-[#333333] bg-[#1D1D1D] hover:bg-[#333333] transition-colors"
+        className="flex items-center gap-1 px-2 py-1 rounded border border-[#333333] bg-[#333333] hover:bg-[#1D1D1D] transition-colors"
         title={
           selectedCount > 0 ? `${selectedCount} filter(s) applied` : placeholder
         }
@@ -91,17 +99,28 @@ const ColumnFilter: React.FC<ColumnFilterProps> = ({
 
       {/* Dropdown */}
       {isOpen && (
-        <div className="absolute top-full left-0 mt-1 bg-[#1D1D1D] border border-[#333333] rounded-lg shadow-lg z-50 min-w-[200px] max-h-[300px] overflow-y-auto">
-          {/* Header */}
+        <div className="absolute top-full left-0 mt-1 bg-[#1D1D1D] border border-[#333333] rounded-lg shadow-lg z-50 min-w-[220px] max-h-[320px] overflow-hidden">
+          {/* Header / Search */}
           <div className="px-3 py-2 border-b border-[#333333] flex items-center justify-between">
-            <span className="text-sm font-medium text-white">
-              {placeholder}
-            </span>
+            {searchable ? (
+              <input
+                type="text"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder={searchPlaceholder}
+                className="w-full bg-[#0D0D0D] border border-[#333333] rounded px-2 py-1 text-xs text-white placeholder-[#8A8A8A] focus:outline-none focus:border-[#00DBDC]"
+                autoFocus
+              />
+            ) : (
+              <span className="text-xs font-normal text-white">
+                {placeholder}
+              </span>
+            )}
             {selectedCount > 0 && (
               <button
                 type="button"
                 onClick={handleClearAll}
-                className="text-xs text-[#00DBDC] hover:text-[#00DBDC]/80"
+                className="ml-2 text-[11px] text-[#00DBDC] hover:text-[#00DBDC]/80"
               >
                 Clear All
               </button>
@@ -109,13 +128,36 @@ const ColumnFilter: React.FC<ColumnFilterProps> = ({
           </div>
 
           {/* Options */}
-          <div className="py-1">
-            {options.length === 0 ? (
-              <div className="px-3 py-2 text-sm text-[#BFBFBF]">
-                No options available
-              </div>
-            ) : (
-              options.map((option) => {
+          <div className="max-h-[260px] overflow-y-auto py-1">
+            {(() => {
+              const trimmed = query.trim();
+              const shouldFilter =
+                searchable && trimmed.length >= searchMinChars;
+              const displayOptions = shouldFilter
+                ? options.filter((o) =>
+                    o.label.toLowerCase().includes(trimmed.toLowerCase())
+                  )
+                : searchable
+                ? []
+                : options;
+
+              if (searchable && trimmed.length < searchMinChars) {
+                return (
+                  <div className="px-3 py-2 text-[11px] text-[#BFBFBF]">
+                    Type at least {searchMinChars} characters to search
+                  </div>
+                );
+              }
+
+              if (displayOptions.length === 0) {
+                return (
+                  <div className="px-3 py-2 text-[11px] text-[#BFBFBF]">
+                    No options found
+                  </div>
+                );
+              }
+
+              return displayOptions.map((option) => {
                 const isSelected = selectedValues.includes(option.value);
                 return (
                   <label
@@ -128,11 +170,13 @@ const ColumnFilter: React.FC<ColumnFilterProps> = ({
                       onChange={() => handleOptionToggle(option.value)}
                       className="w-4 h-4 rounded border border-[#333333] bg-[#1D1D1D] text-[#00DBDC] focus:ring-[#00DBDC] focus:ring-1"
                     />
-                    <span className="text-sm text-white">{option.label}</span>
+                    <span className="text-xs font-normal text-white">
+                      {option.label}
+                    </span>
                   </label>
                 );
-              })
-            )}
+              });
+            })()}
           </div>
         </div>
       )}

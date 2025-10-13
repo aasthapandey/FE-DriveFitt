@@ -56,6 +56,12 @@ interface JobPostApplicationTableProps {
   selectedDepartments?: number[];
   selectedLocations?: number[];
   selectedStatuses?: number[];
+  // Applications tab specific filters
+  jobs?: Array<{ id: number; title: string }>;
+  selectedAppliedJobs?: number[];
+  onAppliedJobsFilter?: (selectedIds: number[]) => void;
+  selectedApplicationStatuses?: number[];
+  onApplicationStatusFilter?: (selectedIds: number[]) => void;
 }
 
 interface ApplicationData {
@@ -107,6 +113,11 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
   selectedDepartments,
   selectedLocations,
   selectedStatuses,
+  jobs,
+  selectedAppliedJobs,
+  onAppliedJobsFilter,
+  selectedApplicationStatuses,
+  onApplicationStatusFilter,
 }) => {
   const [dropdownOpen, setDropdownOpen] = useState<number | null>(null);
   const [jobPostStatuses, setJobPostStatuses] = useState<JobStatusString[]>(
@@ -189,8 +200,52 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
       <div className="flex-1 pl-[65px]">Phone number</div>
       <div className="flex-1">Work Experience</div>
       <div className="flex-1">Expected Salary</div>
-      <div className="flex-1">Applied for</div>
-      <div className="flex-1 flex justify-center">Status</div>
+      <div className="flex-1 flex items-center gap-2">
+        <span>Applied for</span>
+        <ColumnFilter
+          options={
+            jobs?.map((j) => ({ id: j.id, label: j.title, value: j.id })) || []
+          }
+          selectedValues={selectedAppliedJobs || []}
+          onFilterChange={(values) => onAppliedJobsFilter?.(values as number[])}
+          placeholder="Search jobs"
+          searchable
+          searchPlaceholder="Search jobs..."
+          searchMinChars={2}
+        />
+      </div>
+      <div className="flex-1 flex items-center justify-center gap-2">
+        <span>Status</span>
+        <ColumnFilter
+          options={[
+            {
+              id: APPLICATION_STATUS.NEW,
+              label: APPLICATION_STATUS_LABELS[APPLICATION_STATUS.NEW],
+              value: APPLICATION_STATUS.NEW,
+            },
+            {
+              id: APPLICATION_STATUS.SHORTLISTED,
+              label: APPLICATION_STATUS_LABELS[APPLICATION_STATUS.SHORTLISTED],
+              value: APPLICATION_STATUS.SHORTLISTED,
+            },
+            {
+              id: APPLICATION_STATUS.IN_REVIEW,
+              label: APPLICATION_STATUS_LABELS[APPLICATION_STATUS.IN_REVIEW],
+              value: APPLICATION_STATUS.IN_REVIEW,
+            },
+            {
+              id: APPLICATION_STATUS.REJECTED,
+              label: APPLICATION_STATUS_LABELS[APPLICATION_STATUS.REJECTED],
+              value: APPLICATION_STATUS.REJECTED,
+            },
+          ]}
+          selectedValues={selectedApplicationStatuses || []}
+          onFilterChange={(values) =>
+            onApplicationStatusFilter?.(values as number[])
+          }
+          placeholder="Filter by Status"
+        />
+      </div>
       <div className="w-15 flex justify-center">Action</div>
     </div>
   );
@@ -660,10 +715,10 @@ const JobPostApplicationTable: React.FC<JobPostApplicationTableProps> = ({
     <div className="w-full pb-6">
       {selectedToggle === "application" ? (
         <div className="w-full">
-          <div className="border border-[#333333] rounded-t-2xl overflow-hidden">
+          <div className="border border-[#333333] rounded-2xl overflow-hidden">
             <div className="max-h-96 overflow-y-auto">
               {renderApplicationHeaders()}
-              <div className="pb-4">{renderApplicationRows()}</div>
+              <div className="pb-0">{renderApplicationRows()}</div>
             </div>
           </div>
           {onPageChange && (

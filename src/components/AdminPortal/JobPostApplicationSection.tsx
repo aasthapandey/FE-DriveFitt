@@ -45,12 +45,17 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
   const [selectedDepartments, setSelectedDepartments] = useState<number[]>([]);
   const [selectedLocations, setSelectedLocations] = useState<number[]>([]);
   const [selectedStatuses, setSelectedStatuses] = useState<number[]>([]);
+  // Applications tab: status filter
+  const [selectedApplicationStatuses, setSelectedApplicationStatuses] =
+    useState<number[]>([]);
   const [departments, setDepartments] = useState<
     Array<{ id: number; name: string }>
   >([]);
   const [locations, setLocations] = useState<
     Array<{ id: number; full_location: string }>
   >([]);
+  // Applications tab: filter by job (Applied for)
+  const [appliedJobIds, setAppliedJobIds] = useState<number[]>([]);
   const [jobPosts, setJobPosts] = useState<
     {
       id: number;
@@ -73,6 +78,7 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
       workExperience: string;
       expectedSalary: string;
       appliedFor: string;
+      jobId?: number;
       resumeStatus: ApplicationStatusString;
       resumeUrl?: string;
     }[]
@@ -131,6 +137,7 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
           workExperience: a.work_exprience || "",
           expectedSalary: a.expected_salary || "",
           appliedFor: a.job?.title || "",
+          jobId: a.job_id,
           resumeStatus: toApplicationLabel(a.status),
           resumeUrl: a.resume,
         }));
@@ -178,6 +185,18 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
   const handleStatusFilter = (selectedStatuses: number[]) => {
     setSelectedStatuses(selectedStatuses);
     setCurrentPage(1); // Reset to first page when filtering
+  };
+
+  // Applications tab: applied jobs filter
+  const handleAppliedJobsFilter = (selectedIds: number[]) => {
+    setAppliedJobIds(selectedIds);
+    setCurrentPage(1);
+  };
+
+  // Applications tab: status filter handler
+  const handleApplicationStatusFilter = (selectedIds: number[]) => {
+    setSelectedApplicationStatuses(selectedIds);
+    setCurrentPage(1);
   };
 
   const handleSearchChange = (query: string) => {
@@ -240,14 +259,39 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
   ]);
 
   const filteredApplications = useMemo(() => {
-    if (!searchQuery) return applications;
-    return applications.filter(
-      (app) =>
-        app.candidatesName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        app.emailAddress.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        app.appliedFor.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  }, [applications, searchQuery]);
+    let filtered = applications;
+
+    // Applicant-name-only search
+    if (searchQuery) {
+      const q = searchQuery.toLowerCase();
+      filtered = filtered.filter((app) =>
+        (app.candidatesName || "").toLowerCase().includes(q)
+      );
+    }
+
+    // Applied for filter (by job id)
+    if (appliedJobIds.length > 0) {
+      filtered = filtered.filter(
+        (app) =>
+          app.jobId !== undefined && appliedJobIds.includes(Number(app.jobId))
+      );
+    }
+
+    // Status filter (by numeric enum values)
+    if (selectedApplicationStatuses.length > 0) {
+      filtered = filtered.filter((app) =>
+        selectedApplicationStatuses.some((statusNum) => {
+          const label =
+            APPLICATION_STATUS_LABELS[
+              statusNum as keyof typeof APPLICATION_STATUS_LABELS
+            ];
+          return label === app.resumeStatus;
+        })
+      );
+    }
+
+    return filtered;
+  }, [applications, searchQuery, appliedJobIds, selectedApplicationStatuses]);
 
   // Update total items when filtered data changes
   useEffect(() => {
@@ -546,7 +590,7 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
               placeholder={
                 selectedToggle === "job-posts"
                   ? "Search job titles..."
-                  : "Search applications..."
+                  : "Search candidate..."
               }
               className="bg-[#0D0D0D] border border-[#333333] rounded-lg pl-10 pr-4 py-2 text-white placeholder-[#8A8A8A] focus:outline-none focus:border-[#00DBDC] transition-colors duration-200"
               style={{ width: "240px", height: "40px" }}
@@ -606,6 +650,15 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
           selectedDepartments={selectedDepartments}
           selectedLocations={selectedLocations}
           selectedStatuses={selectedStatuses}
+          // Applications tab specific filters
+          jobs={
+            completeJobData?.map((j: any) => ({ id: j.id, title: j.title })) ||
+            []
+          }
+          selectedAppliedJobs={appliedJobIds}
+          onAppliedJobsFilter={handleAppliedJobsFilter}
+          selectedApplicationStatuses={selectedApplicationStatuses}
+          onApplicationStatusFilter={handleApplicationStatusFilter}
         />
       </div>
 
