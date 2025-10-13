@@ -65,7 +65,7 @@ const AdminHeader = ({
   }, [showSearchInput]);
 
   return (
-    <div className="h-fit bg-[#0D0D0D] mb-5 mt-10 px-10 flex items-start justify-between">
+    <div className="h-fit bg-[#0D0D0D] mb-6 mt-10 px-10 flex items-start justify-between">
       {/* Title */}
       <h1 className="font-normal text-[28px] leading-8 tracking-[0%] text-white">
         {title}
@@ -73,45 +73,24 @@ const AdminHeader = ({
 
       {/* Right Section */}
       <div className="flex items-center gap-3">
-        {/* Search Button */}
+        {/* Search Input */}
         {showSearchButton && (
           <div className="relative" ref={searchRef}>
-            <button
-              type="button"
-              onClick={handleSearchClick}
-              className="w-9 h-9 bg-[#1D1D1D] border border-[#333333] rounded-lg p-2 flex items-center justify-center hover:bg-[#333333] transition-colors duration-200"
-            >
-              <Image
-                src="/images/careers/career-search.svg"
-                alt="Search"
-                width={20}
-                height={20}
-              />
-            </button>
-
-            {/* Search Input */}
-            {showSearchInput && (
-              <div className="absolute top-12 right-0 w-80 bg-[#1D1D1D] border border-[#333333] rounded-lg shadow-lg z-50">
-                <form onSubmit={handleSearchSubmit} className="p-4">
-                  <div className="flex items-center gap-3">
-                    <input
-                      type="text"
-                      value={searchQuery}
-                      onChange={handleSearchInputChange}
-                      placeholder="Search blogs..."
-                      className="flex-1 bg-[#0D0D0D] border border-[#333333] rounded-lg px-3 py-2 text-white placeholder-[#8A8A8A] focus:outline-none focus:border-[#00DBDC] transition-colors duration-200"
-                      autoFocus
-                    />
-                    <button
-                      type="submit"
-                      className="px-4 py-2 bg-[#00DBDC] text-[#0D0D0D] rounded-lg font-medium hover:bg-[#00c5c6] transition-colors duration-200"
-                    >
-                      Search
-                    </button>
-                  </div>
-                </form>
-              </div>
-            )}
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={handleSearchInputChange}
+              placeholder="Search blog titles..."
+              className="bg-[#0D0D0D] border border-[#333333] rounded-lg pl-10 pr-4 py-2 text-white placeholder-[#8A8A8A] focus:outline-none focus:border-[#00DBDC] transition-colors duration-200"
+              style={{ width: "240px", height: "40px" }}
+            />
+            <Image
+              src="/images/careers/career-search.svg"
+              alt="Search"
+              width={16}
+              height={16}
+              className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#8A8A8A]"
+            />
           </div>
         )}
 
@@ -128,13 +107,6 @@ const AdminHeader = ({
               width={20}
               height={20}
             />
-          </button>
-        )}
-
-        {/* Publish Button */}
-        {title === "Blogs" && (
-          <button className="bg-[#00DBDC] text-[#0D0D0D] px-6 py-2 rounded-lg font-medium text-sm hover:bg-[#00C5C8] transition-colors duration-200">
-            Publish
           </button>
         )}
 

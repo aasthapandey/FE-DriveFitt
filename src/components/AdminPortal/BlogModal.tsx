@@ -136,12 +136,21 @@ const BlogModal = ({ isOpen, onClose, onSave, blog, mode }: BlogModalProps) => {
               <button
                 onClick={() => setShowDropdown(!showDropdown)}
                 className="w-8 h-8 bg-[#282828] rounded-lg p-1.5 flex items-center justify-center hover:bg-[#333333] transition-colors"
+                style={{
+                  width: "32px",
+                  height: "32px",
+                  gap: "10px",
+                  borderRadius: "8px",
+                  padding: "6px",
+                  backgroundColor: "#282828",
+                }}
               >
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                  <circle cx="10" cy="3" r="1.5" fill="white" />
-                  <circle cx="10" cy="10" r="1.5" fill="white" />
-                  <circle cx="10" cy="17" r="1.5" fill="white" />
-                </svg>
+                <Image
+                  src="/images/dots.png"
+                  alt="Menu"
+                  width={20}
+                  height={20}
+                />
               </button>
               {showDropdown && (
                 <div className="absolute top-10 right-0 w-32 bg-[#1D1D1D] border border-[#333333] rounded-lg shadow-lg z-50">
@@ -158,15 +167,23 @@ const BlogModal = ({ isOpen, onClose, onSave, blog, mode }: BlogModalProps) => {
             {/* Preview Button */}
             <button
               onClick={handlePreview}
-              className="w-8 h-8 bg-[#282828] rounded-md px-3 py-2.5 flex items-center justify-center hover:bg-[#333333] transition-colors"
+              className="w-8 h-8 bg-[#282828] rounded-md flex items-center justify-center hover:bg-[#333333] transition-colors"
+              style={{
+                width: "32px",
+                height: "32px",
+                borderRadius: "6px",
+                paddingTop: "10px",
+                paddingRight: "10px",
+                paddingBottom: "10px",
+                paddingLeft: "12px",
+              }}
             >
-              <svg width="10" height="12" viewBox="0 0 10 12" fill="none">
-                <path
-                  d="M0 2C0 0.895431 0.895431 0 2 0H8C9.10457 0 10 0.895431 10 2V10C10 11.1046 9.10457 12 8 12H2C0.895431 12 0 11.1046 0 10V2Z"
-                  fill="white"
-                />
-                <path d="M2.5 3V9L7.5 6L2.5 3Z" fill="#282828" />
-              </svg>
+              <Image
+                src="/images/play-preview.svg"
+                alt="Preview"
+                width={10}
+                height={12}
+              />
             </button>
 
             {/* Save Button */}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { BlogsTableProps, BlogEntry } from "@/types/adminPortal";
 
@@ -21,8 +21,18 @@ const BlogsTable = ({ blogs, onEdit, onDelete }: BlogsTableProps) => {
     onDelete(blogId);
   };
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const onClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (!target.closest?.("[data-menu-root]")) setActiveDropdown(null);
+    };
+    window.addEventListener("click", onClick);
+    return () => window.removeEventListener("click", onClick);
+  }, []);
+
   return (
-    <div className="h-full p-10">
+    <div className="h-full px-10">
       <div className="bg-[#1D1D1D] rounded-2xl overflow-hidden border border-[#333333] h-full flex flex-col">
         {/* Table Header */}
         <div className="bg-[#333333] border border-[#333333] rounded-t-2xl px-10 py-4 flex items-center gap-6">
@@ -73,7 +83,7 @@ const BlogsTable = ({ blogs, onEdit, onDelete }: BlogsTableProps) => {
           {blogs.map((blog, index) => (
             <div
               key={blog.id}
-              className={`px-10 py-6 flex items-center gap-6 hover:bg-[#262626] transition-colors duration-200 ${
+              className={`px-10 py-2 flex items-center gap-6 hover:bg-[#262626] transition-colors duration-200 ${
                 index === blogs.length - 1 ? "rounded-b-2xl" : ""
               }`}
             >
@@ -133,37 +143,67 @@ const BlogsTable = ({ blogs, onEdit, onDelete }: BlogsTableProps) => {
               </div>
 
               {/* Actions */}
-              <div className="w-12 relative">
-                <button
-                  onClick={() => toggleDropdown(blog.id)}
-                  className="p-1 hover:bg-[#333333] rounded transition-colors duration-200"
-                >
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <circle cx="8" cy="2" r="1.5" fill="white" />
-                    <circle cx="8" cy="8" r="1.5" fill="white" />
-                    <circle cx="8" cy="14" r="1.5" fill="white" />
-                  </svg>
-                </button>
-
-                {/* Dropdown Menu */}
-                {activeDropdown === blog.id && (
-                  <div className="absolute right-0 top-full mt-1 w-32 bg-[#1D1D1D] border border-[#333333] rounded-lg shadow-lg z-50">
-                    <div className="p-1">
+              <div className="w-12 flex justify-center">
+                <div className="relative" data-menu-root>
+                  <button
+                    type="button"
+                    onClick={(e: React.MouseEvent) => {
+                      e.stopPropagation();
+                      toggleDropdown(blog.id);
+                    }}
+                    className="w-8 h-8 flex items-center justify-center hover:bg-[#333333] rounded"
+                  >
+                    <Image
+                      src="/images/careers/dots-vertical.svg"
+                      alt="Actions"
+                      width={16}
+                      height={16}
+                    />
+                  </button>
+                  {activeDropdown === blog.id && (
+                    <div
+                      className="absolute right-0 bg-[#1D1D1D] border border-[#333333] rounded shadow-lg z-50"
+                      data-menu-root
+                      style={{
+                        // Position above for last 2 items, below for others
+                        ...(index >= blogs.length - 2
+                          ? { bottom: "100%", marginBottom: "4px" }
+                          : { top: "100%", marginTop: "4px" }),
+                      }}
+                    >
                       <button
-                        onClick={() => handleEdit(blog)}
-                        className="w-full text-left px-3 py-2 text-sm text-white hover:bg-[#333333] rounded"
+                        type="button"
+                        onClick={() => {
+                          // handleMarkAsFeatured(blog.id);
+                          setActiveDropdown(null);
+                        }}
+                        className="block w-full text-left px-3 py-2 text-xs text-white hover:bg-[#333333]"
+                      >
+                        Mark as featured
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          handleEdit(blog);
+                          setActiveDropdown(null);
+                        }}
+                        className="block w-full text-left px-3 py-2 text-xs text-white hover:bg-[#333333]"
                       >
                         Edit
                       </button>
                       <button
-                        onClick={() => handleDelete(blog.id)}
-                        className="w-full text-left px-3 py-2 text-sm text-red-400 hover:bg-[#333333] rounded"
+                        type="button"
+                        onClick={() => {
+                          handleDelete(blog.id);
+                          setActiveDropdown(null);
+                        }}
+                        className="block w-full text-left px-3 py-2 text-xs text-red-400 hover:bg-[#333333]"
                       >
                         Delete
                       </button>
                     </div>
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
             </div>
           ))}
