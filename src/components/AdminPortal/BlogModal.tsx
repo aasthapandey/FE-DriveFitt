@@ -30,6 +30,8 @@ const BlogModal = ({ isOpen, onClose, onSave, blog, mode }: BlogModalProps) => {
   >(undefined);
   const [newCategoryHeading, setNewCategoryHeading] = useState("");
   const [uploadingImage, setUploadingImage] = useState(false);
+  const [selectedTag, setSelectedTag] = useState("p");
+  const textareaRef = React.useRef<HTMLTextAreaElement>(null);
 
   // Generate slug from title
   const generateSlug = (title: string) => {
@@ -134,6 +136,55 @@ const BlogModal = ({ isOpen, onClose, onSave, blog, mode }: BlogModalProps) => {
     } catch (_e) {
       // noop UI
     }
+  };
+
+  // Rich text editor functions
+  const insertTextAtCursor = (beforeText: string, afterText: string = "") => {
+    const textarea = textareaRef.current;
+    if (!textarea) return;
+
+    const content = formData.content || "";
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const selectedText = content.substring(start, end);
+    const newText = beforeText + selectedText + afterText;
+
+    const newContent =
+      content.substring(0, start) + newText + content.substring(end);
+
+    setFormData((prev) => ({ ...prev, content: newContent }));
+
+    // Set cursor position after the inserted text
+    setTimeout(() => {
+      textarea.focus();
+      textarea.setSelectionRange(
+        start + beforeText.length,
+        start + beforeText.length + selectedText.length
+      );
+    }, 0);
+  };
+
+  const wrapWithTag = (tag: string) => {
+    insertTextAtCursor(`<${tag}>`, `</${tag}>`);
+  };
+
+  const handleBold = () => insertTextAtCursor("**", "**");
+  const handleItalic = () => insertTextAtCursor("*", "*");
+  const handleQuote = () => insertTextAtCursor("> ", "");
+  const handleBulletList = () => insertTextAtCursor("- ", "");
+  const handleNumberedList = () => insertTextAtCursor("1. ", "");
+
+  const handleUrlEmbed = () => {
+    const url = prompt("Enter URL:");
+    if (url) {
+      const linkText = prompt("Enter link text (optional):") || url;
+      insertTextAtCursor(`[${linkText}](${url})`, "");
+    }
+  };
+
+  const applyHtmlTag = () => {
+    if (selectedTag === "p") return;
+    wrapWithTag(selectedTag);
   };
 
   const handleDelete = () => {
@@ -474,65 +525,164 @@ const BlogModal = ({ isOpen, onClose, onSave, blog, mode }: BlogModalProps) => {
             <label className="block text-xs font-normal leading-4 text-[#BFBFBF]">
               Content
             </label>
-            {/* WYSIWYG Editor */}
-            <div className="w-full bg-[#282828] rounded-lg p-4">
-              <div className="flex items-center gap-2 mb-4 border-b border-[#333333] pb-2">
-                <select className="bg-[#333333] text-white text-sm rounded px-2 py-1">
-                  <option>Paragraph</option>
-                </select>
-                <div className="flex gap-1">
-                  <button
-                    type="button"
-                    className="p-1 hover:bg-[#333333] rounded text-white"
-                  >
-                    🔗
-                  </button>
-                  <button
-                    type="button"
-                    className="p-1 hover:bg-[#333333] rounded text-white font-bold"
-                  >
-                    B
-                  </button>
-                  <button
-                    type="button"
-                    className="p-1 hover:bg-[#333333] rounded text-white italic"
-                  >
-                    I
-                  </button>
-                  <button
-                    type="button"
-                    className="p-1 hover:bg-[#333333] rounded text-white"
-                  >
-                    ❝❞
-                  </button>
-                  <button
-                    type="button"
-                    className="p-1 hover:bg-[#333333] rounded text-white"
-                  >
-                    {"<>"}
-                  </button>
-                  <button
-                    type="button"
-                    className="p-1 hover:bg-[#333333] rounded text-white"
-                  >
-                    •
-                  </button>
-                  <button
-                    type="button"
-                    className="p-1 hover:bg-[#333333] rounded text-white"
-                  >
-                    1.
-                  </button>
+            {/* Rich Text Editor */}
+            <div className="w-full bg-[#282828] rounded-lg overflow-hidden">
+              {/* Editor Toolbar */}
+              <div className="bg-[#1E1E1E] px-4 py-3 border-b border-[#333333]">
+                <div className="flex items-center gap-4">
+                  {/* HTML Tag Selector */}
+                  <div className="flex items-center gap-2">
+                    <select
+                      value={selectedTag}
+                      onChange={(e) => setSelectedTag(e.target.value)}
+                      className="bg-[#333333] text-white text-sm rounded-md px-3 py-1.5 border border-[#444444] focus:outline-none focus:border-[#00DBDC] min-w-[100px]"
+                    >
+                      <option value="p">Paragraph</option>
+                      <option value="h1">Heading 1</option>
+                      <option value="h2">Heading 2</option>
+                      <option value="h3">Heading 3</option>
+                      <option value="h4">Heading 4</option>
+                      <option value="h5">Heading 5</option>
+                      <option value="h6">Heading 6</option>
+                      <option value="blockquote">Blockquote</option>
+                      <option value="code">Code Block</option>
+                    </select>
+                    {selectedTag !== "p" && (
+                      <button
+                        type="button"
+                        onClick={applyHtmlTag}
+                        className="bg-[#00DBDC] text-[#0D0D0D] px-2 py-1 rounded text-xs font-medium hover:bg-[#00c5c6] transition-colors"
+                      >
+                        Apply
+                      </button>
+                    )}
+                  </div>
+
+                  {/* Divider */}
+                  <div className="w-px h-6 bg-[#444444]"></div>
+
+                  {/* Formatting Buttons */}
+                  <div className="flex items-center gap-1">
+                    <button
+                      type="button"
+                      onClick={handleUrlEmbed}
+                      className="p-2 hover:bg-[#333333] rounded-md text-white transition-colors flex items-center justify-center w-8 h-8"
+                      title="Insert Link"
+                    >
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                      >
+                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+                      </svg>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={handleBold}
+                      className="p-2 hover:bg-[#333333] rounded-md text-white font-bold transition-colors flex items-center justify-center w-8 h-8"
+                      title="Bold"
+                    >
+                      B
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={handleItalic}
+                      className="p-2 hover:bg-[#333333] rounded-md text-white italic transition-colors flex items-center justify-center w-8 h-8"
+                      title="Italic"
+                    >
+                      I
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={handleQuote}
+                      className="p-2 hover:bg-[#333333] rounded-md text-white transition-colors flex items-center justify-center w-8 h-8"
+                      title="Quote"
+                    >
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                      >
+                        <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z" />
+                        <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z" />
+                      </svg>
+                    </button>
+
+                    {/* Divider */}
+                    <div className="w-px h-6 bg-[#444444] mx-1"></div>
+
+                    <button
+                      type="button"
+                      onClick={handleBulletList}
+                      className="p-2 hover:bg-[#333333] rounded-md text-white transition-colors flex items-center justify-center w-8 h-8"
+                      title="Bullet List"
+                    >
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                      >
+                        <line x1="8" y1="6" x2="21" y2="6" />
+                        <line x1="8" y1="12" x2="21" y2="12" />
+                        <line x1="8" y1="18" x2="21" y2="18" />
+                        <line x1="3" y1="6" x2="3.01" y2="6" />
+                        <line x1="3" y1="12" x2="3.01" y2="12" />
+                        <line x1="3" y1="18" x2="3.01" y2="18" />
+                      </svg>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={handleNumberedList}
+                      className="p-2 hover:bg-[#333333] rounded-md text-white transition-colors flex items-center justify-center w-8 h-8"
+                      title="Numbered List"
+                    >
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                      >
+                        <line x1="10" y1="6" x2="21" y2="6" />
+                        <line x1="10" y1="12" x2="21" y2="12" />
+                        <line x1="10" y1="18" x2="21" y2="18" />
+                        <path d="M4 6h1v4" />
+                        <path d="M4 10h2" />
+                        <path d="M6 18H4c0-1 2-2 2-3s-1-1.5-2-1" />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
               </div>
-              <textarea
-                name="content"
-                value={formData.content}
-                onChange={handleInputChange}
-                rows={12}
-                className="w-full bg-transparent text-white placeholder-[#8A8A8A] resize-none focus:outline-none"
-                placeholder="Start writing your blog content..."
-              />
+
+              {/* Text Area */}
+              <div className="p-4">
+                <textarea
+                  ref={textareaRef}
+                  name="content"
+                  value={formData.content}
+                  onChange={handleInputChange}
+                  rows={12}
+                  className="w-full bg-transparent text-white placeholder-[#8A8A8A] resize-none focus:outline-none leading-relaxed"
+                  placeholder="Start writing your blog content..."
+                />
+              </div>
             </div>
           </div>
 
