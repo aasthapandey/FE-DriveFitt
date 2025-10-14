@@ -128,7 +128,7 @@ const BlogModal = ({ isOpen, onClose, onSave, blog, mode }: BlogModalProps) => {
         description: blog.description,
         slug: blog.slug,
         image: blog.image,
-        content: "",
+        content: blog.content || "",
       });
       setDate(normalizeToDDMMYYYY(blog.date));
       setSelectedCategoryId(

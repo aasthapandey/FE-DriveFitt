@@ -2,9 +2,51 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { BlogsTableProps, BlogEntry } from "@/types/adminPortal";
+import { BlogsTableProps, BlogEntry, BlogCategory } from "@/types/adminPortal";
+import { BlogStatus } from "@/constants/enums";
+import ColumnFilter from "./ColumnFilter";
 
-const BlogsTable = ({ blogs, onEdit, onDelete }: BlogsTableProps) => {
+// Utility function to format timestamp to DD/MM/YY HH:MM
+const formatDateTime = (timestamp: string): string => {
+  try {
+    const date = new Date(timestamp);
+    const day = date.getDate().toString().padStart(2, "0");
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const year = date.getFullYear().toString().slice(-2);
+    const hours = date.getHours().toString().padStart(2, "0");
+    const minutes = date.getMinutes().toString().padStart(2, "0");
+
+    return `${day}/${month}/${year} ${hours}:${minutes}`;
+  } catch (error) {
+    return timestamp; // Return original if parsing fails
+  }
+};
+
+// Utility function to get status label
+const getStatusLabel = (status: number): string => {
+  switch (status) {
+    case BlogStatus.DRAFT:
+      return "Draft";
+    case BlogStatus.PUBLISHED:
+      return "Published";
+    case BlogStatus.DELETED:
+      return "Deleted";
+    default:
+      return "Unknown";
+  }
+};
+
+const BlogsTable = ({
+  blogs,
+  categories,
+  onEdit,
+  onDelete,
+  onMarkAsFeatured,
+  selectedCategories = [],
+  onCategoryFilter,
+  selectedStatuses = [],
+  onStatusFilter,
+}: BlogsTableProps) => {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
   const toggleDropdown = (blogId: string) => {
@@ -19,6 +61,11 @@ const BlogsTable = ({ blogs, onEdit, onDelete }: BlogsTableProps) => {
   const handleDelete = (blogId: string) => {
     setActiveDropdown(null);
     onDelete(blogId);
+  };
+
+  const handleMarkAsFeatured = (blogId: string) => {
+    setActiveDropdown(null);
+    onMarkAsFeatured?.(blogId);
   };
 
   // Close dropdown when clicking outside
@@ -36,20 +83,29 @@ const BlogsTable = ({ blogs, onEdit, onDelete }: BlogsTableProps) => {
       <div className="bg-[#1D1D1D] rounded-2xl overflow-hidden border border-[#333333] h-full flex flex-col">
         {/* Table Header */}
         <div className="bg-[#333333] border border-[#333333] rounded-t-2xl px-10 py-4 flex items-center gap-6">
-          <div className="flex-1 min-w-0">
+          <div className="flex-[2] min-w-0">
             <span className="font-medium text-xs leading-4 tracking-[0%] text-[#8A8A8A]">
               Title
             </span>
           </div>
-          <div className="flex-1 min-w-0">
+          <div className="w-32 flex items-center gap-2">
             <span className="font-medium text-xs leading-4 tracking-[0%] text-[#8A8A8A]">
-              Description
+              Category
             </span>
-          </div>
-          <div className="w-32">
-            <span className="font-medium text-xs leading-4 tracking-[0%] text-[#8A8A8A]">
-              Slug
-            </span>
+            {onCategoryFilter && (
+              <ColumnFilter
+                options={categories.map((cat) => ({
+                  id: cat.id,
+                  label: cat.heading,
+                  value: cat.id,
+                }))}
+                selectedValues={selectedCategories}
+                onFilterChange={(values) =>
+                  onCategoryFilter(values as number[])
+                }
+                placeholder="Filter categories"
+              />
+            )}
           </div>
           <div className="w-24">
             <span className="font-medium text-xs leading-4 tracking-[0%] text-[#8A8A8A]">
@@ -61,14 +117,38 @@ const BlogsTable = ({ blogs, onEdit, onDelete }: BlogsTableProps) => {
               Image
             </span>
           </div>
-          <div className="w-24">
+          <div className="w-24 flex items-center gap-2">
             <span className="font-medium text-xs leading-4 tracking-[0%] text-[#8A8A8A]">
-              Created
+              Status
             </span>
+            {onStatusFilter && (
+              <ColumnFilter
+                options={[
+                  {
+                    id: BlogStatus.DRAFT,
+                    label: "Draft",
+                    value: BlogStatus.DRAFT,
+                  },
+                  {
+                    id: BlogStatus.PUBLISHED,
+                    label: "Published",
+                    value: BlogStatus.PUBLISHED,
+                  },
+                  {
+                    id: BlogStatus.DELETED,
+                    label: "Deleted",
+                    value: BlogStatus.DELETED,
+                  },
+                ]}
+                selectedValues={selectedStatuses}
+                onFilterChange={(values) => onStatusFilter(values as number[])}
+                placeholder="Filter status"
+              />
+            )}
           </div>
           <div className="w-24">
             <span className="font-medium text-xs leading-4 tracking-[0%] text-[#8A8A8A]">
-              Edited
+              Last Edited
             </span>
           </div>
           <div className="w-12">
@@ -88,23 +168,16 @@ const BlogsTable = ({ blogs, onEdit, onDelete }: BlogsTableProps) => {
               }`}
             >
               {/* Title */}
-              <div className="flex-1 min-w-0">
+              <div className="flex-[2] min-w-0">
                 <p className="font-light text-sm leading-5 tracking-[0%] text-white truncate">
                   {blog.title}
                 </p>
               </div>
 
-              {/* Description */}
-              <div className="flex-1 min-w-0">
-                <p className="font-light text-sm leading-5 tracking-[0%] text-white truncate">
-                  {blog.description}
-                </p>
-              </div>
-
-              {/* Slug */}
+              {/* Category */}
               <div className="w-32">
                 <p className="font-light text-sm leading-5 tracking-[0%] text-white truncate">
-                  {blog.slug}
+                  {blog.categoryHeading || "Unassigned"}
                 </p>
               </div>
 
@@ -128,17 +201,17 @@ const BlogsTable = ({ blogs, onEdit, onDelete }: BlogsTableProps) => {
                 </div>
               </div>
 
-              {/* Created */}
+              {/* Status */}
               <div className="w-24">
                 <p className="font-light text-sm leading-5 tracking-[0%] text-white">
-                  {blog.created}
+                  {getStatusLabel(blog.status || BlogStatus.DRAFT)}
                 </p>
               </div>
 
               {/* Edited */}
               <div className="w-24">
                 <p className="font-light text-sm leading-5 tracking-[0%] text-white">
-                  {blog.edited}
+                  {formatDateTime(blog.edited)}
                 </p>
               </div>
 
@@ -173,13 +246,12 @@ const BlogsTable = ({ blogs, onEdit, onDelete }: BlogsTableProps) => {
                     >
                       <button
                         type="button"
-                        onClick={() => {
-                          // handleMarkAsFeatured(blog.id);
-                          setActiveDropdown(null);
-                        }}
+                        onClick={() => handleMarkAsFeatured(blog.id)}
                         className="block w-full text-left px-3 py-2 text-xs text-white hover:bg-[#333333]"
                       >
-                        Mark as featured
+                        {blog.isFeatured
+                          ? "Remove from featured"
+                          : "Mark as featured"}
                       </button>
                       <button
                         type="button"

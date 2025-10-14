@@ -4,8 +4,14 @@ import { useEffect, useState } from "react";
 import AdminHeader from "@/components/AdminPortal/AdminHeader";
 import BlogsTable from "@/components/AdminPortal/BlogsTable";
 import BlogModal from "@/components/AdminPortal/BlogModal";
-import { AdminUser, BlogEntry, BlogFormData } from "@/types/adminPortal";
+import {
+  AdminUser,
+  BlogEntry,
+  BlogFormData,
+  BlogCategory,
+} from "@/types/adminPortal";
 import { blogAPI } from "@/services/blogAPI";
+import { blogCategoryAPI } from "@/services/blogCategoryAPI";
 import { BlogStatus } from "@/constants/enums";
 
 // Mock user data - in real implementation, this would come from authentication
@@ -19,6 +25,9 @@ const mockBlogs: BlogEntry[] = [];
 export default function BlogsPage() {
   const [allBlogs, setAllBlogs] = useState<BlogEntry[]>(mockBlogs);
   const [filteredBlogs, setFilteredBlogs] = useState<BlogEntry[]>(mockBlogs);
+  const [categories, setCategories] = useState<BlogCategory[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
+  const [selectedStatuses, setSelectedStatuses] = useState<number[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMode, setModalMode] = useState<"create" | "edit">("create");
   const [selectedBlog, setSelectedBlog] = useState<BlogEntry | undefined>(
@@ -30,9 +39,13 @@ export default function BlogsPage() {
     (async () => {
       setLoading(true);
       try {
-        const list = await blogAPI.list();
-        setAllBlogs(list);
-        setFilteredBlogs(list);
+        const [blogsList, categoriesList] = await Promise.all([
+          blogAPI.list(),
+          blogCategoryAPI.list(),
+        ]);
+        setAllBlogs(blogsList);
+        setFilteredBlogs(blogsList);
+        setCategories(categoriesList);
       } finally {
         setLoading(false);
       }
@@ -40,16 +53,51 @@ export default function BlogsPage() {
   }, []);
 
   const handleSearch = (query: string) => {
-    if (query.trim() === "") {
-      // If search query is empty, show all blogs
-      setFilteredBlogs(allBlogs);
-    } else {
-      // Filter blogs based on title (case-insensitive)
-      const filtered = allBlogs.filter((blog) =>
-        blog.title.toLowerCase().includes(query.toLowerCase())
+    applyFilters(query, selectedCategories, selectedStatuses);
+  };
+
+  const handleCategoryFilter = (categoryIds: number[]) => {
+    setSelectedCategories(categoryIds);
+    applyFilters("", categoryIds, selectedStatuses);
+  };
+
+  const handleStatusFilter = (statusIds: number[]) => {
+    setSelectedStatuses(statusIds);
+    applyFilters("", selectedCategories, statusIds);
+  };
+
+  const applyFilters = (
+    searchQuery: string,
+    categoryIds: number[],
+    statusIds: number[]
+  ) => {
+    let filtered = allBlogs;
+
+    // Apply search filter
+    if (searchQuery.trim() !== "") {
+      filtered = filtered.filter((blog) =>
+        blog.title.toLowerCase().includes(searchQuery.toLowerCase())
       );
-      setFilteredBlogs(filtered);
     }
+
+    // Apply category filter
+    if (categoryIds.length > 0) {
+      filtered = filtered.filter((blog) => {
+        if (!blog.categoryId || blog.categoryId === 0) {
+          return false; // Exclude unassigned blogs when filtering by categories
+        }
+        return categoryIds.includes(blog.categoryId);
+      });
+    }
+
+    // Apply status filter
+    if (statusIds.length > 0) {
+      filtered = filtered.filter((blog) => {
+        return statusIds.includes(blog.status || BlogStatus.DRAFT);
+      });
+    }
+
+    setFilteredBlogs(filtered);
   };
 
   const handleAddBlog = () => {
@@ -70,6 +118,24 @@ export default function BlogsPage() {
     const updated = allBlogs.filter((b) => String(b.id) !== String(blogId));
     setAllBlogs(updated);
     setFilteredBlogs(updated);
+  };
+
+  const handleMarkAsFeatured = async (blogId: string) => {
+    try {
+      const updatedBlog = await blogAPI.toggleFeatured(blogId);
+
+      // Update the blog in both allBlogs and filteredBlogs
+      const updateBlogInList = (blogList: BlogEntry[]) =>
+        blogList.map((b) =>
+          String(b.id) === String(blogId) ? updatedBlog : b
+        );
+
+      setAllBlogs(updateBlogInList);
+      setFilteredBlogs(updateBlogInList);
+    } catch (error) {
+      console.error("Failed to toggle featured status:", error);
+      alert("Failed to update featured status. Please try again.");
+    }
   };
 
   const handleSaveBlog = async (blogData: BlogFormData) => {
@@ -102,8 +168,14 @@ export default function BlogsPage() {
       <div className="flex-1 overflow-hidden">
         <BlogsTable
           blogs={filteredBlogs}
+          categories={categories}
           onEdit={handleEditBlog}
           onDelete={handleDeleteBlog}
+          onMarkAsFeatured={handleMarkAsFeatured}
+          selectedCategories={selectedCategories}
+          onCategoryFilter={handleCategoryFilter}
+          selectedStatuses={selectedStatuses}
+          onStatusFilter={handleStatusFilter}
         />
       </div>
 

@@ -5,7 +5,24 @@ import { BlogStatus } from "@/constants/enums";
 export async function GET() {
   try {
     const rows = await executeQuery<any[]>(
-      `SELECT id, title, description, slug, date, image_url AS image, category_id, is_featured, status, created_at, updated_at FROM blogs WHERE status <> ? ORDER BY id DESC`,
+      `SELECT 
+        b.id, 
+        b.title, 
+        b.description, 
+        b.slug, 
+        b.date, 
+        b.image_url AS image, 
+        b.html,
+        b.category_id, 
+        b.is_featured, 
+        b.status, 
+        b.created_at, 
+        b.updated_at,
+        bc.heading AS category_heading
+      FROM blogs b 
+      LEFT JOIN blog_category bc ON b.category_id = bc.id 
+      WHERE b.status <> ? 
+      ORDER BY b.id DESC`,
       [BlogStatus.DELETED]
     );
     return NextResponse.json({ status: true, data: rows });

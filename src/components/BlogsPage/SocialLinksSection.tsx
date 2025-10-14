@@ -18,7 +18,7 @@ const SocialLinksSection = ({
   socialLinks,
 }: SocialLinksSectionProps) => {
   return (
-    <div className={`w-full ${isMobile ? "px-6 mt-12" : "px-[120px] mt-20"}`}>
+    <div className={`w-full ${isMobile ? "px-6 my-12" : "px-[120px] my-20"}`}>
       <div
         className={`w-full border border-[#333333] rounded-[40px] flex flex-col items-center justify-center ${
           isMobile ? "py-[55px] gap-4" : "py-[60px] gap-12"

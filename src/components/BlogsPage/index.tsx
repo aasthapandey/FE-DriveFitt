@@ -129,7 +129,7 @@ const BlogsPage = ({ isMobile }: BlogsPageProps) => {
           blogs.find((blog: any) => blog.is_featured) || blogs[0];
         if (featured) {
           const featuredCategory = categories.find(
-            (cat: BlogCategory) => cat.id === featured.category_id
+            (cat: BlogCategory) => cat.id === featured.categoryId
           );
           setFeaturedBlog({
             ...featured,
@@ -142,7 +142,7 @@ const BlogsPage = ({ isMobile }: BlogsPageProps) => {
 
         categories.forEach((category: BlogCategory) => {
           const categoryBlogs = blogs
-            .filter((blog: any) => blog.category_id === category.id)
+            .filter((blog: any) => blog.categoryId === category.id)
             .map((blog: any) => ({
               ...blog,
               categoryHeading: category.heading,
@@ -158,7 +158,7 @@ const BlogsPage = ({ isMobile }: BlogsPageProps) => {
 
         // Add uncategorized blogs if any
         const uncategorizedBlogs = blogs
-          .filter((blog: any) => !blog.category_id || blog.category_id === 0)
+          .filter((blog: any) => !blog.categoryId || blog.categoryId === 0)
           .map((blog: any) => ({
             ...blog,
             categoryHeading: "Trending topics",

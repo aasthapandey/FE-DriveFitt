@@ -14,7 +14,19 @@ export const blogAPI = {
     if (!res.ok || json?.status === false) {
       throw new Error(json?.error || "Failed to fetch blogs");
     }
-    return (json.data || json) as BlogEntry[];
+    const blogs = json.data || json;
+    // Transform snake_case to camelCase
+    return blogs.map((blog: any) => ({
+      ...blog,
+      categoryId: blog.category_id,
+      categoryHeading: blog.category_heading,
+      content: blog.html,
+      status: blog.status,
+      isFeatured: blog.is_featured === 1,
+      image: blog.image_url || blog.image,
+      created: blog.created_at,
+      edited: blog.updated_at,
+    }));
   },
 
   async create(payload: BlogFormData): Promise<BlogEntry> {
@@ -27,7 +39,18 @@ export const blogAPI = {
     if (!res.ok || json?.status === false) {
       throw new Error(json?.error || "Failed to create blog");
     }
-    return (json.data || json) as BlogEntry;
+    const blog = json.data || json;
+    return {
+      ...blog,
+      categoryId: blog.category_id,
+      categoryHeading: blog.category_heading,
+      content: blog.html,
+      status: blog.status,
+      isFeatured: blog.is_featured === 1,
+      image: blog.image_url || blog.image,
+      created: blog.created_at,
+      edited: blog.updated_at,
+    };
   },
 
   async update(
@@ -43,7 +66,18 @@ export const blogAPI = {
     if (!res.ok || json?.status === false) {
       throw new Error(json?.error || "Failed to update blog");
     }
-    return (json.data || json) as BlogEntry;
+    const blog = json.data || json;
+    return {
+      ...blog,
+      categoryId: blog.category_id,
+      categoryHeading: blog.category_heading,
+      content: blog.html,
+      status: blog.status,
+      isFeatured: blog.is_featured === 1,
+      image: blog.image_url || blog.image,
+      created: blog.created_at,
+      edited: blog.updated_at,
+    };
   },
 
   async remove(id: number | string): Promise<{ success: boolean }> {
@@ -55,5 +89,27 @@ export const blogAPI = {
       throw new Error(json?.error || "Failed to delete blog");
     }
     return { success: true };
+  },
+
+  async toggleFeatured(id: number | string): Promise<BlogEntry> {
+    const res = await fetch(`${getBaseUrl()}/api/blogs/${id}/featured`, {
+      method: "PATCH",
+    });
+    const json = await res.json();
+    if (!res.ok || json?.status === false) {
+      throw new Error(json?.error || "Failed to toggle featured status");
+    }
+    const blog = json.data || json;
+    return {
+      ...blog,
+      categoryId: blog.category_id,
+      categoryHeading: blog.category_heading,
+      content: blog.html,
+      status: blog.status,
+      isFeatured: blog.is_featured === 1,
+      image: blog.image_url || blog.image,
+      created: blog.created_at,
+      edited: blog.updated_at,
+    };
   },
 };

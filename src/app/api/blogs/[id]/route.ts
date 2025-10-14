@@ -8,7 +8,23 @@ export async function GET(
 ) {
   try {
     const [row]: any[] = await executeQuery<any[]>(
-      `SELECT id, title, description, slug, date, image_url AS image, category_id, is_featured, status, created_at, updated_at FROM blogs WHERE id = ?`,
+      `SELECT 
+        b.id, 
+        b.title, 
+        b.description, 
+        b.slug, 
+        b.date, 
+        b.image_url AS image, 
+        b.html,
+        b.category_id, 
+        b.is_featured, 
+        b.status, 
+        b.created_at, 
+        b.updated_at,
+        bc.heading AS category_heading
+      FROM blogs b 
+      LEFT JOIN blog_category bc ON b.category_id = bc.id 
+      WHERE b.id = ?`,
       [params.id]
     );
     if (!row)
