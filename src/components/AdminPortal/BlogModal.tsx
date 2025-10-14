@@ -2,7 +2,13 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { BlogModalProps, BlogFormData } from "@/types/adminPortal";
+import {
+  BlogModalProps,
+  BlogFormData,
+  BlogCategory,
+} from "@/types/adminPortal";
+import { blogCategoryAPI } from "@/services/blogCategoryAPI";
+import { uploadAPI } from "@/services/uploadAPI";
 
 const BlogModal = ({ isOpen, onClose, onSave, blog, mode }: BlogModalProps) => {
   const [formData, setFormData] = useState<BlogFormData>({
@@ -15,6 +21,15 @@ const BlogModal = ({ isOpen, onClose, onSave, blog, mode }: BlogModalProps) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [saveButtonText, setSaveButtonText] = useState("Save");
   const [date, setDate] = useState("");
+  const [categories, setCategories] = useState<BlogCategory[]>([]);
+  const [categoryMode, setCategoryMode] = useState<
+    "none" | "select" | "create"
+  >("none");
+  const [selectedCategoryId, setSelectedCategoryId] = useState<
+    number | undefined
+  >(undefined);
+  const [newCategoryHeading, setNewCategoryHeading] = useState("");
+  const [uploadingImage, setUploadingImage] = useState(false);
 
   // Generate slug from title
   const generateSlug = (title: string) => {
@@ -25,6 +40,14 @@ const BlogModal = ({ isOpen, onClose, onSave, blog, mode }: BlogModalProps) => {
   };
 
   useEffect(() => {
+    // load categories when modal opens
+    if (isOpen) {
+      blogCategoryAPI
+        .list()
+        .then((list) => setCategories(list))
+        .catch(() => setCategories([]));
+    }
+
     if (blog) {
       setFormData({
         title: blog.title,
@@ -34,6 +57,12 @@ const BlogModal = ({ isOpen, onClose, onSave, blog, mode }: BlogModalProps) => {
         content: "",
       });
       setDate(blog.date);
+      setSelectedCategoryId(
+        blog.categoryId && blog.categoryId > 0 ? blog.categoryId : undefined
+      );
+      setCategoryMode(
+        blog.categoryId && blog.categoryId > 0 ? "select" : "none"
+      );
     } else {
       setFormData({
         title: "",
@@ -49,6 +78,9 @@ const BlogModal = ({ isOpen, onClose, onSave, blog, mode }: BlogModalProps) => {
         year: "numeric",
       });
       setDate(currentDate);
+      setSelectedCategoryId(undefined);
+      setCategoryMode("none");
+      setNewCategoryHeading("");
     }
     setSaveButtonText("Save");
     setShowDropdown(false);
@@ -72,8 +104,10 @@ const BlogModal = ({ isOpen, onClose, onSave, blog, mode }: BlogModalProps) => {
 
   const handleSave = () => {
     setSaveButtonText("Saved");
-    // Add isPublished: 0 for save
-    onSave({ ...formData, isPublished: 0 });
+    // compute categoryId based on mode
+    const categoryId =
+      categoryMode === "select" ? selectedCategoryId : undefined;
+    onSave({ ...formData, isPublished: 0, categoryId });
     setTimeout(() => {
       setSaveButtonText("Save");
       onClose();
@@ -81,9 +115,25 @@ const BlogModal = ({ isOpen, onClose, onSave, blog, mode }: BlogModalProps) => {
   };
 
   const handlePublish = () => {
-    // Add isPublished: 1 for publish
-    onSave({ ...formData, isPublished: 1 });
+    const categoryId =
+      categoryMode === "select" ? selectedCategoryId : undefined;
+    onSave({ ...formData, isPublished: 1, categoryId });
     onClose();
+  };
+
+  const handleCreateCategory = async () => {
+    if (!newCategoryHeading.trim()) return;
+    try {
+      const created = await blogCategoryAPI.create({
+        heading: newCategoryHeading.trim(),
+      });
+      setCategories((prev) => [created, ...prev]);
+      setSelectedCategoryId(created.id);
+      setCategoryMode("select");
+      setNewCategoryHeading("");
+    } catch (_e) {
+      // noop UI
+    }
   };
 
   const handleDelete = () => {
@@ -299,12 +349,123 @@ const BlogModal = ({ isOpen, onClose, onSave, blog, mode }: BlogModalProps) => {
                 className="flex-1 h-10 bg-[#282828] rounded-lg px-5 py-3 text-white placeholder-[#BFBFBF] text-sm leading-4 focus:outline-none focus:border-[#00DBDC] focus:border"
                 placeholder="Enter image URL"
               />
-              <button
-                type="button"
-                className="text-[#00DBDC] text-sm hover:text-[#00c5c6] transition-colors"
-              >
-                Add image
-              </button>
+              <div className="relative">
+                <input
+                  id="blog-image-input"
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={async (e) => {
+                    const inputEl = e.currentTarget as HTMLInputElement;
+                    if (!inputEl.files || !inputEl.files[0]) return;
+                    const file = inputEl.files[0];
+                    try {
+                      setUploadingImage(true);
+                      const presign = await uploadAPI.getPresignURL(
+                        "blog-image",
+                        file.name,
+                        file.type || "application/octet-stream"
+                      );
+                      await uploadAPI.putFileToS3(presign.uploadUrl, file);
+                      setFormData((prev) => ({
+                        ...prev,
+                        image: presign.cdnUrl,
+                      }));
+                    } finally {
+                      setUploadingImage(false);
+                      inputEl.value = "";
+                    }
+                  }}
+                />
+                <label
+                  htmlFor="blog-image-input"
+                  className="text-[#00DBDC] text-sm cursor-pointer"
+                >
+                  {uploadingImage ? "Uploading..." : "Add image"}
+                </label>
+              </div>
+            </div>
+          </div>
+
+          {/* Category */}
+          <div className="space-y-4">
+            <label className="block text-xs font-normal leading-4 text-[#BFBFBF]">
+              Category (optional)
+            </label>
+            <div className="flex flex-col gap-3">
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={() => setCategoryMode("none")}
+                  className={`px-3 py-1 rounded text-xs ${
+                    categoryMode === "none"
+                      ? "bg-[#00DBDC] text-[#0D0D0D]"
+                      : "bg-[#282828] text-white"
+                  }`}
+                >
+                  Unassigned
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setCategoryMode("select")}
+                  className={`px-3 py-1 rounded text-xs ${
+                    categoryMode === "select"
+                      ? "bg-[#00DBDC] text-[#0D0D0D]"
+                      : "bg-[#282828] text-white"
+                  }`}
+                >
+                  Select existing
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setCategoryMode("create")}
+                  className={`px-3 py-1 rounded text-xs ${
+                    categoryMode === "create"
+                      ? "bg-[#00DBDC] text-[#0D0D0D]"
+                      : "bg-[#282828] text-white"
+                  }`}
+                >
+                  Create new
+                </button>
+              </div>
+
+              {categoryMode === "select" && (
+                <select
+                  value={selectedCategoryId ?? ""}
+                  onChange={(e) =>
+                    setSelectedCategoryId(
+                      e.target.value ? Number(e.target.value) : undefined
+                    )
+                  }
+                  className="w-full h-10 bg-[#282828] rounded-lg px-5 py-3 text-white text-sm focus:outline-none focus:border-[#00DBDC] focus:border"
+                >
+                  <option value="">Select a category</option>
+                  {categories.map((c) => (
+                    <option key={c.id} value={c.id}>
+                      {c.heading}
+                    </option>
+                  ))}
+                </select>
+              )}
+
+              {categoryMode === "create" && (
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={newCategoryHeading}
+                    onChange={(e) => setNewCategoryHeading(e.target.value)}
+                    className="flex-1 h-10 bg-[#282828] rounded-lg px-5 py-3 text-white placeholder-[#BFBFBF] text-sm leading-4 focus:outline-none focus:border-[#00DBDC] focus:border"
+                    placeholder="Category heading"
+                  />
+                  <button
+                    type="button"
+                    onClick={handleCreateCategory}
+                    className="px-4 rounded bg-[#00DBDC] text-[#0D0D0D] text-sm"
+                  >
+                    Add
+                  </button>
+                </div>
+              )}
             </div>
           </div>
 

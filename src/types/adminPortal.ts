@@ -11,6 +11,8 @@ export interface BlogEntry {
   slug: string;
   date: string;
   image: string;
+  categoryId?: number; // 0 or undefined means unassigned
+  categoryHeading?: string; // denormalized helper for UI listing
   created: string;
   edited: string;
 }
@@ -35,6 +37,16 @@ export interface BlogFormData {
   image: string;
   content?: string;
   isPublished?: number;
+  // category handling
+  categoryId?: number; // send 0 or omit to keep unassigned
+}
+
+export interface BlogCategory {
+  id: number;
+  heading: string;
+  status: string; // keep string to align with DB schema provided
+  created_at?: string;
+  updated_at?: string;
 }
 
 export interface AdminHeaderProps {

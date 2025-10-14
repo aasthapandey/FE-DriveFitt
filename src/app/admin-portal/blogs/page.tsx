@@ -1,10 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AdminHeader from "@/components/AdminPortal/AdminHeader";
 import BlogsTable from "@/components/AdminPortal/BlogsTable";
 import BlogModal from "@/components/AdminPortal/BlogModal";
 import { AdminUser, BlogEntry, BlogFormData } from "@/types/adminPortal";
+import { blogAPI } from "@/services/blogAPI";
+import { BlogStatus } from "@/constants/enums";
 
 // Mock user data - in real implementation, this would come from authentication
 const mockUser: AdminUser = {
@@ -12,112 +14,7 @@ const mockUser: AdminUser = {
   email: "admin@drivefitt.com",
 };
 
-// Mock blogs data - in real implementation, this would come from an API
-const mockBlogs: BlogEntry[] = [
-  {
-    id: "1",
-    title: "Boxing Workouts vs. Other Cardio Options",
-    description:
-      "A comprehensive comparison of boxing workouts with other cardiovascular exercises",
-    slug: "boxing-workouts-vs-other-cardio-options",
-    date: "2/4/25",
-    image: "https://da8nru77lsio9.cloudfront.net/images/homec/card1.webp",
-    created: "2/4/25",
-    edited: "2/4/25",
-  },
-  {
-    id: "2",
-    title: "Cricket Training Fundamentals",
-    description:
-      "Essential techniques and drills for cricket players of all levels",
-    slug: "cricket-training-fundamentals",
-    date: "2/3/25",
-    image: "https://da8nru77lsio9.cloudfront.net/images/homec/card1.webp",
-    created: "2/3/25",
-    edited: "2/3/25",
-  },
-  {
-    id: "3",
-    title: "Fitness Recovery Methods",
-    description: "Best practices for post-workout recovery and muscle repair",
-    slug: "fitness-recovery-methods",
-    date: "2/2/25",
-    image: "https://da8nru77lsio9.cloudfront.net/images/homec/card1.webp",
-    created: "2/2/25",
-    edited: "2/2/25",
-  },
-  {
-    id: "4",
-    title: "Nutrition for Athletes",
-    description:
-      "Complete guide to sports nutrition and performance optimization",
-    slug: "nutrition-for-athletes",
-    date: "2/1/25",
-    image: "https://da8nru77lsio9.cloudfront.net/images/homec/card1.webp",
-    created: "2/1/25",
-    edited: "2/1/25",
-  },
-  {
-    id: "5",
-    title: "Boxing Techniques for Beginners",
-    description: "Step-by-step guide to learning basic boxing techniques",
-    slug: "boxing-techniques-for-beginners",
-    date: "1/31/25",
-    image: "https://da8nru77lsio9.cloudfront.net/images/homec/card1.webp",
-    created: "1/31/25",
-    edited: "1/31/25",
-  },
-  {
-    id: "6",
-    title: "Cricket Mental Game",
-    description: "Developing mental toughness and focus for cricket players",
-    slug: "cricket-mental-game",
-    date: "1/30/25",
-    image: "https://da8nru77lsio9.cloudfront.net/images/homec/card1.webp",
-    created: "1/30/25",
-    edited: "1/30/25",
-  },
-  {
-    id: "7",
-    title: "Fitness Equipment Guide",
-    description: "Choosing the right equipment for your fitness journey",
-    slug: "fitness-equipment-guide",
-    date: "1/29/25",
-    image: "https://da8nru77lsio9.cloudfront.net/images/homec/card1.webp",
-    created: "1/29/25",
-    edited: "1/29/25",
-  },
-  {
-    id: "8",
-    title: "Boxing Safety Tips",
-    description: "Essential safety guidelines for boxing training",
-    slug: "boxing-safety-tips",
-    date: "1/28/25",
-    image: "https://da8nru77lsio9.cloudfront.net/images/homec/card1.webp",
-    created: "1/28/25",
-    edited: "1/28/25",
-  },
-  {
-    id: "9",
-    title: "Cricket Fitness Training",
-    description: "Specialized fitness programs for cricket players",
-    slug: "cricket-fitness-training",
-    date: "1/27/25",
-    image: "https://da8nru77lsio9.cloudfront.net/images/homec/card1.webp",
-    created: "1/27/25",
-    edited: "1/27/25",
-  },
-  {
-    id: "10",
-    title: "Fitness Motivation Tips",
-    description: "Staying motivated and consistent with your fitness routine",
-    slug: "fitness-motivation-tips",
-    date: "1/26/25",
-    image: "https://da8nru77lsio9.cloudfront.net/images/homec/card1.webp",
-    created: "1/26/25",
-    edited: "1/26/25",
-  },
-];
+const mockBlogs: BlogEntry[] = [];
 
 export default function BlogsPage() {
   const [allBlogs, setAllBlogs] = useState<BlogEntry[]>(mockBlogs);
@@ -127,6 +24,20 @@ export default function BlogsPage() {
   const [selectedBlog, setSelectedBlog] = useState<BlogEntry | undefined>(
     undefined
   );
+  const [loading, setLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    (async () => {
+      setLoading(true);
+      try {
+        const list = await blogAPI.list();
+        setAllBlogs(list);
+        setFilteredBlogs(list);
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, []);
 
   const handleSearch = (query: string) => {
     if (query.trim() === "") {
@@ -153,40 +64,27 @@ export default function BlogsPage() {
     setIsModalOpen(true);
   };
 
-  const handleDeleteBlog = (blogId: string) => {
-    if (confirm("Are you sure you want to delete this blog?")) {
-      const updatedAllBlogs = allBlogs.filter((blog) => blog.id !== blogId);
-      setAllBlogs(updatedAllBlogs);
-      setFilteredBlogs(updatedAllBlogs);
-    }
+  const handleDeleteBlog = async (blogId: string) => {
+    if (!confirm("Are you sure you want to delete this blog?")) return;
+    await blogAPI.remove(blogId);
+    const updated = allBlogs.filter((b) => String(b.id) !== String(blogId));
+    setAllBlogs(updated);
+    setFilteredBlogs(updated);
   };
 
-  const handleSaveBlog = (blogData: BlogFormData) => {
-    const currentDate = new Date().toLocaleDateString("en-US", {
-      month: "numeric",
-      day: "numeric",
-      year: "2-digit",
-    });
-
+  const handleSaveBlog = async (blogData: BlogFormData) => {
     if (modalMode === "create") {
-      const newBlog: BlogEntry = {
-        id: Date.now().toString(),
-        ...blogData,
-        date: currentDate,
-        created: currentDate,
-        edited: currentDate,
-      };
-      const updatedAllBlogs = [newBlog, ...allBlogs];
-      setAllBlogs(updatedAllBlogs);
-      setFilteredBlogs(updatedAllBlogs);
+      const created = await blogAPI.create(blogData);
+      const updated = [created, ...allBlogs];
+      setAllBlogs(updated);
+      setFilteredBlogs(updated);
     } else if (modalMode === "edit" && selectedBlog) {
-      const updatedAllBlogs = allBlogs.map((blog) =>
-        blog.id === selectedBlog.id
-          ? { ...blog, ...blogData, edited: currentDate }
-          : blog
+      const updatedItem = await blogAPI.update(selectedBlog.id, blogData);
+      const updated = allBlogs.map((b) =>
+        String(b.id) === String(selectedBlog.id) ? updatedItem : b
       );
-      setAllBlogs(updatedAllBlogs);
-      setFilteredBlogs(updatedAllBlogs);
+      setAllBlogs(updated);
+      setFilteredBlogs(updated);
     }
   };
 

@@ -1,6 +1,6 @@
 export const uploadAPI = {
   async getPresignURL(
-    type: "resume",
+    type: "resume" | "blog-image",
     filename: string,
     contentType: string
   ): Promise<{ uploadUrl: string; cdnUrl: string; key: string }> {
