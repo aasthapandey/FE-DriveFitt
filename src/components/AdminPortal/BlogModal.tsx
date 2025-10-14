@@ -32,6 +32,78 @@ const BlogModal = ({ isOpen, onClose, onSave, blog, mode }: BlogModalProps) => {
   const [uploadingImage, setUploadingImage] = useState(false);
   const [selectedTag, setSelectedTag] = useState("p");
   const textareaRef = React.useRef<HTMLTextAreaElement>(null);
+  const hiddenDateRef = React.useRef<HTMLInputElement>(null);
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+  const [calendarBase, setCalendarBase] = useState<Date>(new Date());
+
+  const normalizeToDDMMYYYY = (val: string): string => {
+    if (!val) return "";
+    // If already YYYY-MM-DD, convert to DD/MM/YYYY
+    if (/^\d{4}-\d{2}-\d{2}$/.test(val)) {
+      const [y, m, d] = val.split("-");
+      return `${d}/${m}/${y}`;
+    }
+    const parts = val.split("/");
+    if (parts.length !== 3) return val;
+    let [a, b, y] = parts;
+    // If clearly MM/DD/YYYY (second part > 12)
+    if (Number(b) > 12 && Number(a) <= 12) {
+      return `${b.padStart(2, "0")}/${a.padStart(2, "0")}/${y.padStart(
+        4,
+        "0"
+      )}`;
+    }
+    return `${a.padStart(2, "0")}/${b.padStart(2, "0")}/${y.padStart(4, "0")}`;
+  };
+
+  const toPickerValue = (dateStr: string): string => {
+    // accepts DD/MM/YYYY or MM/DD/YYYY or YYYY-MM-DD and returns YYYY-MM-DD
+    if (!dateStr) return "";
+    if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) return dateStr;
+    const ddmmyyyy = normalizeToDDMMYYYY(dateStr);
+    const [dd, mm, yyyy] = ddmmyyyy.split("/");
+    if (!dd || !mm || !yyyy) return "";
+    return `${yyyy.padStart(4, "0")}-${mm.padStart(2, "0")}-${dd.padStart(
+      2,
+      "0"
+    )}`;
+  };
+
+  const fromPickerValue = (yyyyMMdd: string): string => {
+    // converts YYYY-MM-DD to DD/MM/YYYY
+    if (!yyyyMMdd) return "";
+    const [yyyy, mm, dd] = yyyyMMdd.split("-");
+    if (!yyyy || !mm || !dd) return "";
+    return `${dd}/${mm}/${yyyy}`;
+  };
+
+  const openDatePicker = () => {
+    // Open custom calendar popover under the icon
+    const parsed = toPickerValue(date);
+    setCalendarBase(parsed ? new Date(parsed) : new Date());
+    setIsCalendarOpen(true);
+  };
+
+  const endOfMonth = (d: Date) =>
+    new Date(d.getFullYear(), d.getMonth() + 1, 0);
+  const startOfMonth = (d: Date) => new Date(d.getFullYear(), d.getMonth(), 1);
+  const addMonths = (d: Date, m: number) =>
+    new Date(d.getFullYear(), d.getMonth() + m, 1);
+  const formatLabel = (d: Date) =>
+    d.toLocaleString(undefined, { month: "long", year: "numeric" });
+
+  const selectCalendarDate = (day: number) => {
+    const dt = new Date(
+      calendarBase.getFullYear(),
+      calendarBase.getMonth(),
+      day
+    );
+    const mm = String(dt.getMonth() + 1).padStart(2, "0");
+    const dd = String(dt.getDate()).padStart(2, "0");
+    const yyyy = String(dt.getFullYear());
+    setDate(`${dd}/${mm}/${yyyy}`);
+    setIsCalendarOpen(false);
+  };
 
   // Generate slug from title
   const generateSlug = (title: string) => {
@@ -58,7 +130,7 @@ const BlogModal = ({ isOpen, onClose, onSave, blog, mode }: BlogModalProps) => {
         image: blog.image,
         content: "",
       });
-      setDate(blog.date);
+      setDate(normalizeToDDMMYYYY(blog.date));
       setSelectedCategoryId(
         blog.categoryId && blog.categoryId > 0 ? blog.categoryId : undefined
       );
@@ -73,13 +145,12 @@ const BlogModal = ({ isOpen, onClose, onSave, blog, mode }: BlogModalProps) => {
         image: "",
         content: "",
       });
-      // Set current date
-      const currentDate = new Date().toLocaleDateString("en-US", {
-        month: "2-digit",
-        day: "2-digit",
-        year: "numeric",
-      });
-      setDate(currentDate);
+      // Set current date in DD/MM/YYYY
+      const now = new Date();
+      const dd = String(now.getDate()).padStart(2, "0");
+      const mm = String(now.getMonth() + 1).padStart(2, "0");
+      const yyyy = String(now.getFullYear());
+      setDate(`${dd}/${mm}/${yyyy}`);
       setSelectedCategoryId(undefined);
       setCategoryMode("none");
       setNewCategoryHeading("");
@@ -364,13 +435,125 @@ const BlogModal = ({ isOpen, onClose, onSave, blog, mode }: BlogModalProps) => {
             <label className="block text-xs font-normal leading-4 text-[#BFBFBF]">
               Date
             </label>
-            <input
-              type="text"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-              className="w-full h-10 bg-[#282828] rounded-lg px-5 py-3 text-white placeholder-[#BFBFBF] text-sm leading-4 focus:outline-none focus:border-[#00DBDC] focus:border"
-              placeholder="02/04/2025"
-            />
+            <div className="relative">
+              <input
+                type="text"
+                value={date}
+                onChange={(e) => setDate(normalizeToDDMMYYYY(e.target.value))}
+                className="w-full h-10 bg-[#282828] rounded-lg pl-5 pr-10 py-3 text-white placeholder-[#BFBFBF] text-sm leading-4 focus:outline-none focus:border-[#00DBDC] focus:border"
+                placeholder="DD/MM/YYYY"
+              />
+              <button
+                type="button"
+                onClick={openDatePicker}
+                className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 rounded hover:bg-[#333333]"
+                aria-label="Open calendar"
+              >
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  className="text-white"
+                >
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="16" y1="2" x2="16" y2="6"></line>
+                  <line x1="8" y1="2" x2="8" y2="6"></line>
+                  <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+              </button>
+              {isCalendarOpen && (
+                <div className="absolute right-0 mt-2 z-50 bg-[#1E1E1E] border border-[#333333] rounded-lg shadow-lg p-3 w-64">
+                  <div className="flex items-center justify-between mb-2">
+                    <button
+                      type="button"
+                      className="px-2 py-1 rounded hover:bg-[#333333]"
+                      onClick={() =>
+                        setCalendarBase(addMonths(calendarBase, -1))
+                      }
+                      aria-label="Previous month"
+                    >
+                      ‹
+                    </button>
+                    <div className="text-sm text-white">
+                      {formatLabel(calendarBase)}
+                    </div>
+                    <button
+                      type="button"
+                      className="px-2 py-1 rounded hover:bg-[#333333]"
+                      onClick={() =>
+                        setCalendarBase(addMonths(calendarBase, 1))
+                      }
+                      aria-label="Next month"
+                    >
+                      ›
+                    </button>
+                  </div>
+                  <div className="grid grid-cols-7 gap-1 text-center text-xs text-[#BFBFBF] mb-1">
+                    {["S", "M", "T", "W", "T", "F", "S"].map((d) => (
+                      <div key={d}>{d}</div>
+                    ))}
+                  </div>
+                  <div className="grid grid-cols-7 gap-1">
+                    {(() => {
+                      const start = startOfMonth(calendarBase);
+                      const end = endOfMonth(calendarBase);
+                      const firstDayIndex = new Date(
+                        start.getFullYear(),
+                        start.getMonth(),
+                        1
+                      ).getDay();
+                      const daysInMonth = end.getDate();
+                      const cells = [] as JSX.Element[];
+                      for (let i = 0; i < firstDayIndex; i++) {
+                        cells.push(<div key={`empty-${i}`} className="h-7" />);
+                      }
+                      for (let d = 1; d <= daysInMonth; d++) {
+                        cells.push(
+                          <button
+                            key={`d-${d}`}
+                            type="button"
+                            onClick={() => selectCalendarDate(d)}
+                            className="h-7 w-7 text-xs rounded hover:bg-[#333333] text-white"
+                          >
+                            {d}
+                          </button>
+                        );
+                      }
+                      return cells;
+                    })()}
+                  </div>
+                  <div className="flex justify-between mt-2 text-xs">
+                    <button
+                      type="button"
+                      className="px-2 py-1 rounded hover:bg-[#333333] text-[#BFBFBF]"
+                      onClick={() => {
+                        setDate("");
+                        setIsCalendarOpen(false);
+                      }}
+                    >
+                      Clear
+                    </button>
+                    <button
+                      type="button"
+                      className="px-2 py-1 rounded hover:bg-[#333333] text-[#BFBFBF]"
+                      onClick={() => {
+                        const now = new Date();
+                        const mm = String(now.getMonth() + 1).padStart(2, "0");
+                        const dd = String(now.getDate()).padStart(2, "0");
+                        const yyyy = String(now.getFullYear());
+                        setDate(`${dd}/${mm}/${yyyy}`);
+                        setIsCalendarOpen(false);
+                      }}
+                    >
+                      Today
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Image */}
@@ -378,28 +561,28 @@ const BlogModal = ({ isOpen, onClose, onSave, blog, mode }: BlogModalProps) => {
             <label className="block text-xs font-normal leading-4 text-[#BFBFBF]">
               Image
             </label>
-            <div className="flex items-center gap-4">
-              <div className="w-16 h-16 bg-[#333333] rounded-lg flex items-center justify-center overflow-hidden">
-                {formData.image ? (
-                  <Image
-                    src={formData.image}
-                    alt="Blog image"
-                    width={64}
-                    height={64}
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  <span className="text-[#8A8A8A] text-xs">No image</span>
+            <div className="flex items-center justify-between h-[58px] w-full bg-[#282828] rounded-lg px-5 py-3">
+              <div className="flex items-center gap-3 flex-1 min-w-0">
+                {formData.image && (
+                  <div className="w-8 h-8 rounded overflow-hidden flex-shrink-0">
+                    <Image
+                      src={formData.image}
+                      alt="Blog image"
+                      width={32}
+                      height={32}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                 )}
+                <input
+                  type="text"
+                  name="image"
+                  value={formData.image}
+                  onChange={handleInputChange}
+                  className="bg-transparent text-white placeholder-[#BFBFBF] text-sm leading-4 focus:outline-none w-full min-w-0"
+                  placeholder="Enter image URL"
+                />
               </div>
-              <input
-                type="text"
-                name="image"
-                value={formData.image}
-                onChange={handleInputChange}
-                className="flex-1 h-10 bg-[#282828] rounded-lg px-5 py-3 text-white placeholder-[#BFBFBF] text-sm leading-4 focus:outline-none focus:border-[#00DBDC] focus:border"
-                placeholder="Enter image URL"
-              />
               <div className="relative">
                 <input
                   id="blog-image-input"
@@ -430,9 +613,13 @@ const BlogModal = ({ isOpen, onClose, onSave, blog, mode }: BlogModalProps) => {
                 />
                 <label
                   htmlFor="blog-image-input"
-                  className="text-[#00DBDC] text-sm cursor-pointer"
+                  className="text-[#00DBDC] text-sm cursor-pointer whitespace-nowrap pl-4"
                 >
-                  {uploadingImage ? "Uploading..." : "Add image"}
+                  {uploadingImage
+                    ? "Uploading..."
+                    : formData.image
+                    ? "Change"
+                    : "Add image"}
                 </label>
               </div>
             </div>
@@ -684,19 +871,6 @@ const BlogModal = ({ isOpen, onClose, onSave, blog, mode }: BlogModalProps) => {
                 />
               </div>
             </div>
-          </div>
-
-          {/* Save Blog Button */}
-          <div className="flex justify-end pt-4">
-            <button
-              type="button"
-              onClick={handleSave}
-              className="w-[98px] h-9 bg-[#00DBDC] rounded px-4 py-2 flex items-center justify-center hover:bg-[#00c5c6] transition-colors"
-            >
-              <span className="text-[#0D0D0D] text-sm font-medium leading-5">
-                Save blog
-              </span>
-            </button>
           </div>
         </div>
       </div>
