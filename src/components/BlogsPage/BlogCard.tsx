@@ -70,16 +70,12 @@ const BlogCard = ({ blog, isMobile }: BlogCardProps) => {
           {/* Content */}
           <div className="flex-1 min-w-0">
             {/* Title */}
-            <h3
-              className="text-white font-medium text-[14px] leading-[20px] tracking-[0%] mb-2 line-clamp-2"
-            >
+            <h3 className="text-white font-medium text-[14px] leading-[20px] tracking-[0%] mb-2 line-clamp-2">
               {blog.title}
             </h3>
 
             {/* Date and Reading Time */}
-            <div
-              className="text-[#8A8A8A] font-medium text-[14px] leading-[20px] tracking-[0%]"
-            >
+            <div className="text-[#8A8A8A] font-medium text-[14px] leading-[20px] tracking-[0%]">
               {formattedDate} · {readingTime}
             </div>
           </div>
@@ -105,16 +101,12 @@ const BlogCard = ({ blog, isMobile }: BlogCardProps) => {
         {/* Content */}
         <div>
           {/* Title */}
-          <h3
-            className="text-white font-semibold text-[20px] leading-[28px] tracking-[0%] mb-4 line-clamp-2"
-          >
+          <h3 className="text-white font-semibold text-[20px] leading-[28px] tracking-[0%] mb-4 line-clamp-2">
             {blog.title}
           </h3>
 
           {/* Date and Reading Time */}
-          <div
-            className="text-[#8A8A8A] font-normal text-[14px] leading-[20px] tracking-[0%]"
-          >
+          <div className="text-[#8A8A8A] font-normal text-[14px] leading-[20px] tracking-[0%]">
             {formattedDate} · {readingTime}
           </div>
         </div>

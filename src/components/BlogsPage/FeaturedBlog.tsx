@@ -61,7 +61,9 @@ const FeaturedBlog = ({ blog, isMobile }: FeaturedBlogProps) => {
     <div className={`relative w-full ${isMobile ? "" : "px-[120px]"}`}>
       <Link href={`/blogs/${blog.slug}`} className="block">
         <div className="relative w-full overflow-hidden rounded-lg">
-          <div className={`relative ${isMobile ? "h-[300px]" : "h-[600px] pt-20"}`}>
+          <div
+            className={`relative ${isMobile ? "h-[300px]" : "h-[600px] pt-20"}`}
+          >
             <Image
               src={blog.image}
               alt={blog.title}

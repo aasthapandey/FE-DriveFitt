@@ -9,6 +9,7 @@ import {
 } from "@/types/adminPortal";
 import { blogCategoryAPI } from "@/services/blogCategoryAPI";
 import { uploadAPI } from "@/services/uploadAPI";
+import { generateSlug, validateSlug, sanitizeSlug } from "@/utils/slugUtils";
 
 const BlogModal = ({ isOpen, onClose, onSave, blog, mode }: BlogModalProps) => {
   const [formData, setFormData] = useState<BlogFormData>({
@@ -105,13 +106,8 @@ const BlogModal = ({ isOpen, onClose, onSave, blog, mode }: BlogModalProps) => {
     setIsCalendarOpen(false);
   };
 
-  // Generate slug from title
-  const generateSlug = (title: string) => {
-    return title
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/(^-|-$)/g, "");
-  };
+  // Add slug validation state
+  const [slugError, setSlugError] = useState("");
 
   useEffect(() => {
     // load categories when modal opens
@@ -169,6 +165,21 @@ const BlogModal = ({ isOpen, onClose, onSave, blog, mode }: BlogModalProps) => {
       // Auto-generate slug when title changes
       if (name === "title") {
         newData.slug = generateSlug(value);
+        setSlugError(""); // Clear slug error when title changes
+      }
+
+      // Validate and sanitize slug when manually edited
+      if (name === "slug") {
+        const sanitizedSlug = sanitizeSlug(value);
+        newData.slug = sanitizedSlug;
+
+        if (sanitizedSlug && !validateSlug(sanitizedSlug)) {
+          setSlugError(
+            "Slug can only contain lowercase letters, numbers, and hyphens"
+          );
+        } else {
+          setSlugError("");
+        }
       }
 
       return newData;
@@ -176,6 +187,12 @@ const BlogModal = ({ isOpen, onClose, onSave, blog, mode }: BlogModalProps) => {
   };
 
   const handleSave = () => {
+    // Validate slug before saving
+    if (!validateSlug(formData.slug)) {
+      setSlugError("Please enter a valid slug");
+      return;
+    }
+
     setSaveButtonText("Saved");
     // compute categoryId based on mode
     const categoryId =
@@ -188,6 +205,12 @@ const BlogModal = ({ isOpen, onClose, onSave, blog, mode }: BlogModalProps) => {
   };
 
   const handlePublish = () => {
+    // Validate slug before publishing
+    if (!validateSlug(formData.slug)) {
+      setSlugError("Please enter a valid slug");
+      return;
+    }
+
     const categoryId =
       categoryMode === "select" ? selectedCategoryId : undefined;
     onSave({ ...formData, isPublished: 1, categoryId });
@@ -424,10 +447,15 @@ const BlogModal = ({ isOpen, onClose, onSave, blog, mode }: BlogModalProps) => {
               name="slug"
               value={formData.slug}
               onChange={handleInputChange}
-              className="w-full h-10 bg-[#282828] rounded-lg px-5 py-3 text-white placeholder-[#BFBFBF] text-sm leading-4 focus:outline-none focus:border-[#00DBDC] focus:border"
+              className={`w-full h-10 bg-[#282828] rounded-lg px-5 py-3 text-white placeholder-[#BFBFBF] text-sm leading-4 focus:outline-none focus:border ${
+                slugError ? "border-red-500" : "focus:border-[#00DBDC]"
+              } focus:border`}
               placeholder="blog-slug"
               required
             />
+            {slugError && (
+              <p className="text-red-500 text-xs mt-1">{slugError}</p>
+            )}
           </div>
 
           {/* Date */}
