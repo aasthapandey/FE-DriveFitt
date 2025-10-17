@@ -1,5 +1,6 @@
 import { RazorpayHostedCheckout } from "./razorpayHostedCheckout";
 import { RazorpayRedirect } from "./razorpayRedirect";
+import { MembershipStatus } from "@/types/auth";
 
 export interface PaymentOptions {
   amount: number;
@@ -21,7 +22,7 @@ export interface PaymentResponse {
   membershipData?: {
     id: number;
     membershipType: number;
-    status: "active" | "expired" | "cancelled" | "suspended";
+    status: number; // Using integer status
     startDate: string;
     expiresAt: string;
     invoiceNumber?: string;
@@ -111,7 +112,7 @@ export class PaymentService {
     membershipData?: {
       id: number;
       membershipType: number;
-      status: "active" | "expired" | "cancelled" | "suspended";
+      status: number; // Using integer status
       startDate: string;
       expiresAt: string;
       invoiceNumber?: string;

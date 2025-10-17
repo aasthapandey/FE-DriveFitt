@@ -12,6 +12,7 @@ import UserInfoModal from "./Modal/UserInfoModal";
 import { useAuth } from "@/hooks/useAuth";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
+import { MembershipStatus } from "@/types/auth";
 
 interface PricingPlan {
   title: string;
@@ -269,7 +270,7 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
     membershipData?: {
       id: number;
       membershipType: number;
-      status: "active" | "expired" | "cancelled" | "suspended";
+      status: number; // Using integer status
       startDate: string;
       expiresAt: string;
       invoiceNumber?: string;
