@@ -1,6 +1,5 @@
 import { RazorpayHostedCheckout } from "./razorpayHostedCheckout";
 import { RazorpayRedirect } from "./razorpayRedirect";
-import { MembershipStatus } from "@/types/auth";
 
 export interface PaymentOptions {
   amount: number;

@@ -325,7 +325,6 @@ const PhoneNumberModal = ({
   const [isFocused, setIsFocused] = useState(false);
   const [otpValues, setOtpValues] = useState<string[]>(["", "", "", ""]);
   const [timeLeft, setTimeLeft] = useState(59);
-  const [isMounted, setIsMounted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [isUserInfoModalOpen, setIsUserInfoModalOpen] = useState(false);
@@ -334,11 +333,6 @@ const PhoneNumberModal = ({
   const hasAutoSubmittedRef = useRef(false);
   const { login } = useAuth();
   const router = useRouter();
-
-  // Check if component is mounted (client-side)
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   // Debug: Log when isOpen prop changes
   // useEffect(() => {
