@@ -79,7 +79,7 @@ export async function GET(request: NextRequest) {
       FROM memberships m
       INNER JOIN orders o ON m.order_id = o.id
       WHERE m.user_id = ? 
-        AND m.status = 'active' 
+        AND m.status = 1 
         AND m.end_date > NOW()
       ORDER BY m.created_at DESC
     `;
@@ -91,7 +91,7 @@ export async function GET(request: NextRequest) {
         order_id: number;
         payment_id: number;
         membership_type: number;
-        status: string;
+        status: number; // Changed from string to number
         start_date: string;
         end_date: string;
         invoice_number: string;
@@ -114,11 +114,7 @@ export async function GET(request: NextRequest) {
         ? {
             id: latestMembership.id,
             membershipType: latestMembership.membership_type,
-            status: latestMembership.status as
-              | "active"
-              | "expired"
-              | "cancelled"
-              | "suspended",
+            status: latestMembership.status, // Keep as integer from database
             startDate: latestMembership.start_date,
             expiresAt: latestMembership.end_date,
             invoiceNumber: latestMembership.invoice_number,
@@ -130,11 +126,7 @@ export async function GET(request: NextRequest) {
       memberships: memberships.map((membership) => ({
         id: membership.id,
         membershipType: membership.membership_type,
-        status: membership.status as
-          | "active"
-          | "expired"
-          | "cancelled"
-          | "suspended",
+        status: membership.status, // Keep as integer from database
         startDate: membership.start_date,
         expiresAt: membership.end_date,
         invoiceNumber: membership.invoice_number,
