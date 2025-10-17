@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { executeQuery } from "@/lib/database";
 import { jwtService } from "@/lib/jwtService";
-import { User } from "@/types/auth";
+import { User, MembershipStatus } from "@/types/auth";
 
 export async function GET(request: NextRequest) {
   try {
@@ -79,7 +79,7 @@ export async function GET(request: NextRequest) {
       FROM memberships m
       INNER JOIN orders o ON m.order_id = o.id
       WHERE m.user_id = ? 
-        AND m.status = 1 
+        AND m.status = 'active' 
         AND m.end_date > NOW()
       ORDER BY m.created_at DESC
     `;
@@ -91,7 +91,7 @@ export async function GET(request: NextRequest) {
         order_id: number;
         payment_id: number;
         membership_type: number;
-        status: number; // Changed from string to number
+        status: string; // Changed back to string since DB uses 'active'
         start_date: string;
         end_date: string;
         invoice_number: string;
@@ -114,7 +114,7 @@ export async function GET(request: NextRequest) {
         ? {
             id: latestMembership.id,
             membershipType: latestMembership.membership_type,
-            status: latestMembership.status, // Keep as integer from database
+            status: MembershipStatus.ACTIVE, // Convert 'active' string to integer
             startDate: latestMembership.start_date,
             expiresAt: latestMembership.end_date,
             invoiceNumber: latestMembership.invoice_number,
@@ -126,7 +126,7 @@ export async function GET(request: NextRequest) {
       memberships: memberships.map((membership) => ({
         id: membership.id,
         membershipType: membership.membership_type,
-        status: membership.status, // Keep as integer from database
+        status: MembershipStatus.ACTIVE, // Convert 'active' string to integer
         startDate: membership.start_date,
         expiresAt: membership.end_date,
         invoiceNumber: membership.invoice_number,

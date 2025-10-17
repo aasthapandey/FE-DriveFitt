@@ -138,11 +138,22 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
           hasPhone: !!user?.phone,
           hasDateOfBirth: !!user?.dateOfBirth,
           userData: user,
+          userMemberships: user?.memberships,
+          userMembershipsType: typeof user?.memberships,
+          userMembershipsArray: Array.isArray(user?.memberships),
         }
       );
 
       if (hasCompleteProfile) {
         // Step 1: Check if user already has active membership of same type (before opening payment modal)
+        console.log("🔍 USEEFFECT DEBUG - Checking duplicate membership:", {
+          selectedPlan: selectedPlan?.title,
+          userMemberships: user?.memberships,
+          userMembershipsCount: user?.memberships?.length || 0,
+          userMembershipsExists: !!user?.memberships,
+          conditionMet: !!(selectedPlan && user?.memberships),
+        });
+
         if (selectedPlan && user?.memberships) {
           const planMembershipType = getMembershipType(selectedPlan.title);
           const hasExistingActivePlan = hasActiveMembershipOfType(
@@ -150,18 +161,27 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
             user.memberships
           );
 
+          console.log("🔍 USEEFFECT DUPLICATE CHECK:", {
+            planMembershipType,
+            hasExistingActivePlan,
+            memberships: user.memberships.map((m) => ({
+              type: m.membershipType,
+              status: m.status,
+              matches:
+                m.membershipType === planMembershipType &&
+                m.status === MembershipStatus.ACTIVE,
+            })),
+          });
+
           if (hasExistingActivePlan) {
             console.log(
-              "PricingPlans: User already has active membership of type:",
+              "🚫 PricingPlans: User already has active membership of type:",
               planMembershipType,
               "in useEffect. Staying on membership page."
             );
             // Clear selected plan and stay on membership page
             setWaitingForUserData(false);
             setSelectedPlan(null);
-            alert(
-              `You already have an active ${selectedPlan.title}. Please check your profile for membership details.`
-            );
             return;
           }
         }
@@ -292,9 +312,6 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
           "Blocking payment"
         );
         // Don't proceed to payment - user already has this type of membership
-        alert(
-          `You already have an active ${plan.title}. Please check your profile for membership details.`
-        );
         return;
       }
     }
@@ -478,22 +495,39 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
     // Step 1: Check if user already has active membership of same type
     if (selectedPlan && userToCheck?.memberships) {
       const planMembershipType = getMembershipType(selectedPlan.title);
+
+      console.log("🔍 DUPLICATE VALIDATION DEBUG:", {
+        selectedPlan: selectedPlan.title,
+        planMembershipType,
+        userMemberships: userToCheck.memberships,
+        userMembershipsCount: userToCheck.memberships.length,
+      });
+
       const hasExistingActivePlan = hasActiveMembershipOfType(
         planMembershipType,
         userToCheck.memberships
       );
 
+      console.log("🔍 DUPLICATE CHECK RESULT:", {
+        hasExistingActivePlan,
+        planMembershipType,
+        memberships: userToCheck.memberships.map((m) => ({
+          type: m.membershipType,
+          status: m.status,
+          matches:
+            m.membershipType === planMembershipType &&
+            m.status === MembershipStatus.ACTIVE,
+        })),
+      });
+
       if (hasExistingActivePlan) {
         console.log(
-          "PricingPlans: User already has active membership of type:",
+          "🚫 PricingPlans: User already has active membership of type:",
           planMembershipType,
           "after OTP verification. Staying on membership page."
         );
         // Clear selected plan and stay on membership page
         setSelectedPlan(null);
-        alert(
-          `You already have an active ${selectedPlan.title}. Please check your profile for membership details.`
-        );
         return;
       }
     }
@@ -550,16 +584,13 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
 
           if (hasExistingActivePlan) {
             console.log(
-              "PricingPlans: User already has active membership of type:",
+              "🚫 PricingPlans: User already has active membership of type:",
               planMembershipType,
               "after profile completion. Staying on membership page."
             );
             // Clear selected plan and stay on membership page
             setWaitingForUserData(false);
             setSelectedPlan(null);
-            alert(
-              `You already have an active ${selectedPlan.title}. Please check your profile for membership details.`
-            );
             return;
           }
         }

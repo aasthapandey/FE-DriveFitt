@@ -570,13 +570,34 @@ const PhoneNumberModal = ({
             }
 
             // If onSuccess callback is provided, use it instead of redirecting
+            console.log("🔍 PHONE MODAL DEBUG - onSuccess prop:", !!onSuccess);
+            console.log(
+              "🔍 PHONE MODAL DEBUG - user.hasMembership:",
+              user.hasMembership
+            );
+            console.log(
+              "🔍 PHONE MODAL DEBUG - user.memberships:",
+              user?.memberships
+            );
             if (onSuccess) {
+              console.log(
+                "🔍 PHONE MODAL DEBUG - Calling onSuccess with user data:",
+                {
+                  phoneNumber,
+                  userData: user,
+                  userMemberships: user?.memberships,
+                  userMembershipsCount: user?.memberships?.length || 0,
+                }
+              );
               onSuccess(phoneNumber, user);
               onClose();
               return;
             }
 
             // Default behavior: Use membership data from OTP verification response
+            console.log(
+              "🔍 PHONE MODAL DEBUG - No onSuccess callback, using default behavior"
+            );
             if (user.hasMembership) {
               // User has membership, redirect to profile
               console.log(

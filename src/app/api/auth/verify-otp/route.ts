@@ -109,6 +109,8 @@ export async function POST(request: NextRequest) {
           m.payment_id
         FROM memberships m
         WHERE m.user_id = ?
+          AND m.status = 'active'
+          AND m.end_date > NOW()
         ORDER BY m.created_at DESC
       `;
 
@@ -116,7 +118,7 @@ export async function POST(request: NextRequest) {
         Array<{
           id: number;
           membership_type: number;
-          status: number;
+          status: string; // Keep as string since DB returns 'active'
           start_date: string;
           end_date: string;
           order_id: number;
@@ -124,33 +126,39 @@ export async function POST(request: NextRequest) {
         }>
       >(membershipQuery, [user.id]);
 
-      console.log("user data:", user);
-      console.log("membership data:", membershipResult);
-
-      // User exists, generate JWT token and return user data with membership info
-      const fullName =
-        `${user.first_name || ""} ${user.last_name || ""}`.trim() || "User";
-
       // Process memberships array
       const memberships = membershipResult.map((membership) => ({
         id: membership.id,
         membershipType: membership.membership_type,
-        status: membership.status, // Keep as integer
+        status: MembershipStatus.ACTIVE, // Convert 'active' string to integer 1
         startDate: membership.start_date,
         expiresAt: membership.end_date,
         orderId: membership.order_id,
         paymentId: membership.payment_id,
       }));
 
-      // Check if user has any active membership (status = 1 for active)
-      const activeMemberships = memberships.filter(
-        (m) => m.status === MembershipStatus.ACTIVE
-      );
+      // Check if user has any active membership (all returned memberships are active since we filtered by status = 'active')
+      const activeMemberships = memberships; // All are active
       const hasMembership = activeMemberships.length > 0;
+
+      console.log("🔍 VERIFY-OTP DEBUG - User data:", user);
+      console.log(
+        "🔍 VERIFY-OTP DEBUG - Raw membership data:",
+        membershipResult
+      );
+      console.log("🔍 VERIFY-OTP DEBUG - Processed memberships:", memberships);
+      console.log(
+        "🔍 VERIFY-OTP DEBUG - Active memberships:",
+        activeMemberships
+      );
 
       // For backward compatibility, use the most recent active membership as membershipInfo
       const membershipInfo =
         activeMemberships.length > 0 ? activeMemberships[0] : undefined;
+
+      // Generate full name
+      const fullName =
+        `${user.first_name || ""} ${user.last_name || ""}`.trim() || "User";
 
       // Generate JWT token
       const token = jwtService.generateToken({

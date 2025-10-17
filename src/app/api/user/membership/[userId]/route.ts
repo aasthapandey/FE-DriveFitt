@@ -33,7 +33,7 @@ export async function GET(
       FROM memberships m
       INNER JOIN orders o ON m.order_id = o.id
       WHERE m.user_id = ? 
-        AND m.status = 1 
+        AND m.status = 'active' 
         AND m.end_date > NOW()
       ORDER BY m.created_at DESC
     `;
@@ -45,7 +45,7 @@ export async function GET(
         order_id: number;
         payment_id: number;
         membership_type: number;
-        status: number; // Changed from string to number
+        status: string; // Changed back to string since DB uses 'active'
         start_date: string;
         end_date: string;
         invoice_number: string;
