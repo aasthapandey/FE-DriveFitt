@@ -139,6 +139,12 @@ export default function BlogsPage() {
   };
 
   const handleSaveBlog = async (blogData: BlogFormData) => {
+    // Check if this is a delete action
+    if ((blogData as any)._action === "delete") {
+      await handleDeleteBlog((blogData as any).id);
+      return;
+    }
+
     if (modalMode === "create") {
       const created = await blogAPI.create(blogData);
       const updated = [created, ...allBlogs];

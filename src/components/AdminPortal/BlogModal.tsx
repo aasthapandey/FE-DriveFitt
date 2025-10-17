@@ -283,15 +283,24 @@ const BlogModal = ({ isOpen, onClose, onSave, blog, mode }: BlogModalProps) => {
 
   const handleDelete = () => {
     if (blog && confirm("Are you sure you want to delete this blog?")) {
-      // Handle delete logic here - you may need to pass a delete handler
+      // Call the delete handler passed from parent
+      if (onSave) {
+        // Pass a special delete signal
+        onSave({ ...formData, _action: "delete", id: blog.id });
+      }
       setShowDropdown(false);
       onClose();
     }
   };
 
   const handlePreview = () => {
-    // Handle preview logic here
-    console.log("Preview blog:", formData);
+    // Generate preview URL and open in new tab
+    if (formData.slug) {
+      const previewUrl = `${window.location.origin}/blogs/${formData.slug}`;
+      window.open(previewUrl, "_blank");
+    } else {
+      alert("Please enter a slug to preview the blog");
+    }
   };
 
   if (!isOpen) return null;
