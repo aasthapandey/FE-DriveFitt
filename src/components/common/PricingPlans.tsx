@@ -101,6 +101,14 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
     }
   }, [isAuthenticated, user?.id, checkUserMembership]);
 
+  // Debug: Monitor showPhoneModal state changes
+  // useEffect(() => {
+  //   console.log(
+  //     "PricingPlans: showPhoneModal state changed to:",
+  //     showPhoneModal
+  //   );
+  // }, [showPhoneModal]);
+
   // Watch for user data changes and open payment modal when ready
   useEffect(() => {
     console.log("PricingPlans: useEffect triggered", {
@@ -202,7 +210,30 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
     // Step 1: Check if user is authenticated
     if (!isAuthenticated) {
       console.log("PricingPlans: User not authenticated, opening phone modal");
-      setShowPhoneModal(true);
+      console.log(
+        "PricingPlans: Before setShowPhoneModal(true), current state:",
+        {
+          showPhoneModal,
+          showPaymentModal,
+          showUserInfoModal,
+          selectedPlan: !!selectedPlan,
+        }
+      );
+
+      // Force a clean state before opening phone modal
+      setShowPaymentModal(false);
+      setShowUserInfoModal(false);
+
+      // Use callback pattern to ensure state updates
+      setShowPhoneModal((prev) => {
+        console.log(
+          "PricingPlans: setShowPhoneModal callback, prev:",
+          prev,
+          "setting to: true"
+        );
+        return true;
+      });
+
       return;
     }
 
@@ -379,11 +410,9 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
 
     // Use user data from callback instead of Redux state to avoid timing issues
     const userToCheck = userData || user;
+    // Align profile completeness check with desktop flow: only name, email, phone are mandatory
     const hasCompleteProfile =
-      userToCheck?.name &&
-      userToCheck?.email &&
-      userToCheck?.phone &&
-      userToCheck?.dateOfBirth;
+      userToCheck?.name && userToCheck?.email && userToCheck?.phone;
 
     console.log("PricingPlans: Profile completeness check with user data:", {
       userData: userData,
@@ -420,7 +449,7 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
       console.log(
         "PricingPlans: Checking if we can proceed immediately after UserInfoModal success"
       );
-      if (user && user.name && user.email && user.phone && user.dateOfBirth) {
+      if (user && user.name && user.email && user.phone) {
         console.log(
           "PricingPlans: User data already complete, opening payment modal immediately"
         );
@@ -605,7 +634,7 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
         </div>
 
         {/* Payment Modal */}
-        {selectedPlan && (
+        {selectedPlan && showPaymentModal && (
           <PaymentModal
             isOpen={showPaymentModal}
             onClose={handlePaymentClose}
@@ -615,6 +644,14 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
             onError={handlePaymentError}
           />
         )}
+
+        <PhoneNumberModal
+          key={`mobile-phone-modal-${showPhoneModal}`}
+          isOpen={showPhoneModal}
+          onClose={handlePhoneModalClose}
+          isMobile={true}
+          onSuccess={handlePhoneModalSuccess}
+        />
       </section>
     );
   }
@@ -744,7 +781,7 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
       </div>
 
       {/* Payment Modal */}
-      {selectedPlan && (
+      {selectedPlan && showPaymentModal && (
         <PaymentModal
           isOpen={showPaymentModal}
           onClose={handlePaymentClose}
@@ -755,8 +792,8 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
         />
       )}
 
-      {/* Phone Number Modal */}
       <PhoneNumberModal
+        key={`phone-modal-${showPhoneModal}`}
         isOpen={showPhoneModal}
         onClose={handlePhoneModalClose}
         isMobile={isMobile}

@@ -340,6 +340,16 @@ const PhoneNumberModal = ({
     setIsMounted(true);
   }, []);
 
+  // Debug: Log when isOpen prop changes
+  // useEffect(() => {
+  //   console.log("PhoneNumberModal: isOpen prop changed:", {
+  //     isOpen,
+  //     isMounted,
+  //     modalState,
+  //     phoneNumber,
+  //   });
+  // }, [isOpen, isMounted, modalState, phoneNumber]);
+
   // Handle click outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -352,12 +362,19 @@ const PhoneNumberModal = ({
     };
 
     if (isOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
+      // Defer listener registration to next tick to avoid closing immediately
+      // from the same click that opened the modal (especially on mobile)
+      const timer = setTimeout(() => {
+        document.addEventListener("click", handleClickOutside);
+      }, 0);
+
+      return () => {
+        clearTimeout(timer);
+        document.removeEventListener("click", handleClickOutside);
+      };
     }
 
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => undefined;
   }, [isOpen, onClose]);
 
   // Disable/enable body scroll when modal opens/closes
@@ -538,8 +555,7 @@ const PhoneNumberModal = ({
 
           if (loginResult.type === "auth/loginUser/fulfilled") {
             // Check if user has complete profile data
-            const hasCompleteProfile =
-              user.name && user.email && user.phone;
+            const hasCompleteProfile = user.name && user.email && user.phone;
 
             console.log("PhoneNumberModal: User data after login:", {
               id: user.id,
@@ -656,7 +672,21 @@ const PhoneNumberModal = ({
     }
   }, [phoneNumber]);
 
-  if (!isOpen || !isMounted) return null;
+  if (!isOpen) {
+    // console.log("PhoneNumberModal: Not rendering because:", {
+    //   isOpen,
+    //   isMounted,
+    //   reason: "isOpen is false",
+    // });
+    return null;
+  }
+
+  // console.log("PhoneNumberModal: Rendering modal content");
+
+  // Add a simple test div to verify the modal can render
+  // if (process.env.NODE_ENV === "development") {
+  //   console.log("PhoneNumberModal: About to render with createPortal");
+  // }
 
   const modalContent = (
     <div
