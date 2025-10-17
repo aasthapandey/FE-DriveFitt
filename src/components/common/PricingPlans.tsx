@@ -142,7 +142,33 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
       );
 
       if (hasCompleteProfile) {
-        console.log("PricingPlans: Profile complete, opening payment modal");
+        // Step 1: Check if user already has active membership of same type (before opening payment modal)
+        if (selectedPlan && user?.memberships) {
+          const planMembershipType = getMembershipType(selectedPlan.title);
+          const hasExistingActivePlan = hasActiveMembershipOfType(
+            planMembershipType,
+            user.memberships
+          );
+
+          if (hasExistingActivePlan) {
+            console.log(
+              "PricingPlans: User already has active membership of type:",
+              planMembershipType,
+              "in useEffect. Staying on membership page."
+            );
+            // Clear selected plan and stay on membership page
+            setWaitingForUserData(false);
+            setSelectedPlan(null);
+            alert(
+              `You already have an active ${selectedPlan.title}. Please check your profile for membership details.`
+            );
+            return;
+          }
+        }
+
+        console.log(
+          "PricingPlans: Profile complete and no duplicate membership, opening payment modal"
+        );
         setWaitingForUserData(false);
         setShowPaymentModal(true);
       } else {
@@ -166,6 +192,19 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
     if (title.includes("Individual")) return 1;
     if (title.includes("Family")) return 2;
     return 1; // default to Individual
+  };
+
+  // Helper function to check if user has active membership of specific type
+  const hasActiveMembershipOfType = (
+    membershipType: number,
+    userMemberships?: Array<{ membershipType: number; status: number }>
+  ): boolean => {
+    if (!userMemberships) return false;
+    return userMemberships.some(
+      (membership) =>
+        membership.membershipType === membershipType &&
+        membership.status === MembershipStatus.ACTIVE
+    );
   };
 
   // Helper function to get button text and state for a plan
@@ -238,7 +277,29 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
       return;
     }
 
-    // Step 2: Check if user has complete profile (name, email, phone, dateOfBirth)
+    // Step 2: Check if user already has active membership of same type
+    if (isAuthenticated && user?.memberships) {
+      const planMembershipType = getMembershipType(plan.title);
+      const hasExistingActivePlan = hasActiveMembershipOfType(
+        planMembershipType,
+        user.memberships
+      );
+
+      if (hasExistingActivePlan) {
+        console.log(
+          "PricingPlans: User already has active membership of type:",
+          planMembershipType,
+          "Blocking payment"
+        );
+        // Don't proceed to payment - user already has this type of membership
+        alert(
+          `You already have an active ${plan.title}. Please check your profile for membership details.`
+        );
+        return;
+      }
+    }
+
+    // Step 3: Check if user has complete profile (name, email, phone)
     const hasCompleteProfile = user?.name && user?.email && user?.phone;
     if (!hasCompleteProfile) {
       console.log(
@@ -400,10 +461,12 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
   const handlePhoneModalSuccess = (
     phoneNumber: string,
     userData?: {
+      id?: number;
       name?: string;
       email?: string;
       phone?: string;
       dateOfBirth?: string;
+      memberships?: Array<{ membershipType: number; status: number }>;
     }
   ) => {
     setTempPhoneNumber(phoneNumber);
@@ -411,6 +474,31 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
 
     // Use user data from callback instead of Redux state to avoid timing issues
     const userToCheck = userData || user;
+
+    // Step 1: Check if user already has active membership of same type
+    if (selectedPlan && userToCheck?.memberships) {
+      const planMembershipType = getMembershipType(selectedPlan.title);
+      const hasExistingActivePlan = hasActiveMembershipOfType(
+        planMembershipType,
+        userToCheck.memberships
+      );
+
+      if (hasExistingActivePlan) {
+        console.log(
+          "PricingPlans: User already has active membership of type:",
+          planMembershipType,
+          "after OTP verification. Staying on membership page."
+        );
+        // Clear selected plan and stay on membership page
+        setSelectedPlan(null);
+        alert(
+          `You already have an active ${selectedPlan.title}. Please check your profile for membership details.`
+        );
+        return;
+      }
+    }
+
+    // Step 2: Check profile completeness
     // Align profile completeness check with desktop flow: only name, email, phone are mandatory
     const hasCompleteProfile =
       userToCheck?.name && userToCheck?.email && userToCheck?.phone;
@@ -450,9 +538,34 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
       console.log(
         "PricingPlans: Checking if we can proceed immediately after UserInfoModal success"
       );
+
       if (user && user.name && user.email && user.phone) {
+        // Step 1: Check if user already has active membership of same type (before opening payment modal)
+        if (selectedPlan && user?.memberships) {
+          const planMembershipType = getMembershipType(selectedPlan.title);
+          const hasExistingActivePlan = hasActiveMembershipOfType(
+            planMembershipType,
+            user.memberships
+          );
+
+          if (hasExistingActivePlan) {
+            console.log(
+              "PricingPlans: User already has active membership of type:",
+              planMembershipType,
+              "after profile completion. Staying on membership page."
+            );
+            // Clear selected plan and stay on membership page
+            setWaitingForUserData(false);
+            setSelectedPlan(null);
+            alert(
+              `You already have an active ${selectedPlan.title}. Please check your profile for membership details.`
+            );
+            return;
+          }
+        }
+
         console.log(
-          "PricingPlans: User data already complete, opening payment modal immediately"
+          "PricingPlans: User data complete and no duplicate membership, opening payment modal"
         );
         setWaitingForUserData(false);
         setShowPaymentModal(true);
