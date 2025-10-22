@@ -43,6 +43,9 @@ export interface BlogFormData {
   isFeatured?: boolean; // Whether this blog should be featured
   // category handling
   categoryId?: number; // send 0 or omit to keep unassigned
+  // special actions
+  _action?: string; // for delete action
+  id?: number; // for delete action
 }
 
 export interface BlogCategory {

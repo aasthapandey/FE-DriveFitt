@@ -286,7 +286,7 @@ const BlogModal = ({ isOpen, onClose, onSave, blog, mode }: BlogModalProps) => {
       // Call the delete handler passed from parent
       if (onSave) {
         // Pass a special delete signal
-        onSave({ ...formData, _action: "delete", id: blog.id });
+        onSave({ ...formData, _action: "delete", id: Number(blog.id) });
       }
       setShowDropdown(false);
       onClose();
