@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import Image from "next/image";
 import Pagination from "../common/Pagination";
 import DateRangeFilter from "./DateRangeFilter";
@@ -63,6 +63,12 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
   const [actionDropdownOpen, setActionDropdownOpen] = useState<number | null>(
     null
   );
+  const statusButtonRefs = useRef<{ [key: number]: HTMLButtonElement | null }>(
+    {}
+  );
+  const actionButtonRefs = useRef<{ [key: number]: HTMLButtonElement | null }>(
+    {}
+  );
 
   const fetchData = useCallback(async () => {
     setLoading(true);
@@ -124,7 +130,11 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
-      if (!target.closest(".relative")) {
+      if (
+        !target.closest(".relative") &&
+        !target.closest("[id^='status-dropdown-']") &&
+        !target.closest("[id^='action-dropdown-']")
+      ) {
         setStatusDropdownOpen(null);
         setActionDropdownOpen(null);
       }
@@ -137,6 +147,45 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
       };
     }
   }, [statusDropdownOpen, actionDropdownOpen]);
+
+  useEffect(() => {
+    if (statusDropdownOpen !== null) {
+      const button = statusButtonRefs.current[statusDropdownOpen];
+      const dropdown = document.getElementById(
+        `status-dropdown-${statusDropdownOpen}`
+      );
+      if (button && dropdown) {
+        const rect = button.getBoundingClientRect();
+        const shouldOpenAbove =
+          statusDropdownOpen >= data.length - 3 || data.length <= 4;
+        if (shouldOpenAbove) {
+          dropdown.style.top = `${rect.top - dropdown.offsetHeight - 4}px`;
+        } else {
+          dropdown.style.top = `${rect.bottom + 4}px`;
+        }
+        dropdown.style.left = `${rect.left}px`;
+      }
+    }
+  }, [statusDropdownOpen, data.length]);
+
+  useEffect(() => {
+    if (actionDropdownOpen !== null) {
+      const button = actionButtonRefs.current[actionDropdownOpen];
+      const dropdown = document.getElementById(
+        `action-dropdown-${actionDropdownOpen}`
+      );
+      if (button && dropdown) {
+        const rect = button.getBoundingClientRect();
+        const shouldOpenAbove = actionDropdownOpen >= data.length - 1;
+        if (shouldOpenAbove) {
+          dropdown.style.top = `${rect.top - dropdown.offsetHeight - 4}px`;
+        } else {
+          dropdown.style.top = `${rect.bottom + 4}px`;
+        }
+        dropdown.style.right = `${window.innerWidth - rect.right}px`;
+      }
+    }
+  }, [actionDropdownOpen, data.length]);
 
   const handleStatusChange = async (id: number, newStatus: number) => {
     try {
@@ -296,6 +345,7 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
           borderCollapse: "separate",
           borderSpacing: 0,
           tableLayout: "auto",
+          overflow: "visible",
         }}
       >
         <thead style={{ position: "sticky", top: 0, zIndex: 10 }}>
@@ -338,6 +388,9 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
                 <div className="relative flex justify-center">
                   <button
                     type="button"
+                    ref={(el) => {
+                      statusButtonRefs.current[index] = el;
+                    }}
                     onClick={(e) => {
                       e.stopPropagation();
                       toggleStatusDropdown(index);
@@ -386,12 +439,11 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
                   </button>
                   {statusDropdownOpen === index && (
                     <div
-                      className="absolute left-0 bg-[#1D1D1D] border border-[#333333] rounded shadow-lg z-20"
+                      id={`status-dropdown-${index}`}
+                      className="fixed bg-[#1D1D1D] border border-[#333333] rounded shadow-lg"
                       style={{
                         width: "85px",
-                        ...(index >= data.length - 2
-                          ? { bottom: "100%", marginBottom: "4px" }
-                          : { top: "100%", marginTop: "4px" }),
+                        zIndex: 99999,
                       }}
                     >
                       {getStatusOptions().map((option) => (
@@ -415,6 +467,9 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
                 <div className="relative">
                   <button
                     type="button"
+                    ref={(el) => {
+                      actionButtonRefs.current[index] = el;
+                    }}
                     onClick={(e) => {
                       e.stopPropagation();
                       toggleActionDropdown(index);
@@ -430,12 +485,11 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
                   </button>
                   {actionDropdownOpen === index && (
                     <div
-                      className="absolute right-0 bg-[#1D1D1D] border border-[#333333] rounded shadow-lg z-10"
+                      id={`action-dropdown-${index}`}
+                      className="fixed bg-[#1D1D1D] border border-[#333333] rounded shadow-lg"
                       style={{
                         minWidth: "120px",
-                        ...(index >= data.length - 2
-                          ? { bottom: "100%", marginBottom: "4px" }
-                          : { top: "100%", marginTop: "4px" }),
+                        zIndex: 99999,
                       }}
                     >
                       <button
@@ -467,6 +521,7 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
           borderCollapse: "separate",
           borderSpacing: 0,
           tableLayout: "auto",
+          overflow: "visible",
         }}
       >
         <thead style={{ position: "sticky", top: 0, zIndex: 10 }}>
@@ -498,6 +553,9 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
                 <div className="relative flex justify-center">
                   <button
                     type="button"
+                    ref={(el) => {
+                      statusButtonRefs.current[index] = el;
+                    }}
                     onClick={(e) => {
                       e.stopPropagation();
                       toggleStatusDropdown(index);
@@ -546,12 +604,11 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
                   </button>
                   {statusDropdownOpen === index && (
                     <div
-                      className="absolute left-0 bg-[#1D1D1D] border border-[#333333] rounded shadow-lg z-20"
+                      id={`status-dropdown-${index}`}
+                      className="fixed bg-[#1D1D1D] border border-[#333333] rounded shadow-lg"
                       style={{
                         width: "85px",
-                        ...(index >= data.length - 2
-                          ? { bottom: "100%", marginBottom: "4px" }
-                          : { top: "100%", marginTop: "4px" }),
+                        zIndex: 99999,
                       }}
                     >
                       {getStatusOptions().map((option) => (
@@ -575,6 +632,9 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
                 <div className="relative">
                   <button
                     type="button"
+                    ref={(el) => {
+                      actionButtonRefs.current[index] = el;
+                    }}
                     onClick={(e) => {
                       e.stopPropagation();
                       toggleActionDropdown(index);
@@ -590,12 +650,11 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
                   </button>
                   {actionDropdownOpen === index && (
                     <div
-                      className="absolute right-0 bg-[#1D1D1D] border border-[#333333] rounded shadow-lg z-10"
+                      id={`action-dropdown-${index}`}
+                      className="fixed bg-[#1D1D1D] border border-[#333333] rounded shadow-lg"
                       style={{
                         minWidth: "120px",
-                        ...(index >= data.length - 2
-                          ? { bottom: "100%", marginBottom: "4px" }
-                          : { top: "100%", marginTop: "4px" }),
+                        zIndex: 99999,
                       }}
                     >
                       <button
@@ -627,6 +686,7 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
           borderCollapse: "separate",
           borderSpacing: 0,
           tableLayout: "auto",
+          overflow: "visible",
         }}
       >
         <thead style={{ position: "sticky", top: 0, zIndex: 10 }}>
@@ -771,11 +831,11 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
                     </button>
                     {actionDropdownOpen === index && (
                       <div
-                        className="absolute right-0 bg-[#1D1D1D] border border-[#333333] rounded shadow-lg z-10"
+                        id={`action-dropdown-${index}`}
+                        className="fixed bg-[#1D1D1D] border border-[#333333] rounded shadow-lg"
                         style={{
-                          top: "100%",
-                          marginTop: "4px",
                           minWidth: "120px",
+                          zIndex: 99999,
                         }}
                       >
                         <button
@@ -868,7 +928,7 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
       <div
         className={`border border-[#333333] ${
           showHeader ? "border-t-0 rounded-b-2xl" : "rounded-2xl"
-        } overflow-hidden`}
+        }`}
         style={{ width: "1100px" }}
       >
         {loading && (
@@ -889,7 +949,9 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
           </div>
         )}
 
-        {!loading && !error && data.length > 0 && <div>{renderTable()}</div>}
+        {!loading && !error && data.length > 0 && (
+          <div style={{ overflow: "visible" }}>{renderTable()}</div>
+        )}
 
         <div
           className="bg-[#333333] px-6 py-4 border-t border-[#333333]"
@@ -913,7 +975,7 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
 const headerCellStyle: React.CSSProperties = {
   paddingTop: "16px",
   paddingBottom: "16px",
-  paddingLeft: "40px",
+  paddingLeft: "24px",
   paddingRight: "24px",
   textAlign: "left",
   fontSize: "14px",
@@ -930,6 +992,7 @@ const cellStyle: React.CSSProperties = {
   fontSize: "14px",
   color: "#FFFFFF",
   borderBottom: "1px solid #333333",
+  overflow: "visible",
 };
 
 const statusButtonStyle: React.CSSProperties = {
