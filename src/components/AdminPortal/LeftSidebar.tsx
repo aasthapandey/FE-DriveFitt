@@ -124,6 +124,52 @@ const LeftSidebar = ({
             />
           </svg>
         );
+      case "users":
+        return (
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path
+              d="M10 10C12.7614 10 15 7.76142 15 5C15 2.23858 12.7614 0 10 0C7.23858 0 5 2.23858 5 5C5 7.76142 7.23858 10 10 10Z"
+              stroke="currentColor"
+              strokeWidth="2"
+              fill="none"
+            />
+            <path
+              d="M10 12C5.58172 12 2 14.6863 2 18V20H18V18C18 14.6863 14.4183 12 10 12Z"
+              stroke="currentColor"
+              strokeWidth="2"
+              fill="none"
+            />
+          </svg>
+        );
+      case "payments":
+        return (
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path
+              d="M1 5C1 4.44772 1.44772 4 2 4H18C18.5523 4 19 4.44772 19 5V15C19 15.5523 18.5523 16 18 16H2C1.44772 16 1 15.5523 1 15V5Z"
+              stroke="currentColor"
+              strokeWidth="2"
+              fill="none"
+            />
+            <path
+              d="M1 8H19"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+            <path
+              d="M5 12H8"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+            <path
+              d="M12 12H15"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+          </svg>
+        );
       default:
         return null;
     }

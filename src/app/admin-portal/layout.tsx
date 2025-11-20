@@ -10,15 +10,12 @@ import { AdminAuthProvider, useAdminAuth } from "@/contexts/AdminAuthContext";
 const adminNavItems: AdminNavItem[] = [
   { id: "dashboard", label: "Dashboard", path: "/admin-portal/dashboard" },
   { id: "blogs", label: "Blogs", path: "/admin-portal/blogs" },
+  { id: "users", label: "Users", path: "/admin-portal/users" },
+  { id: "payments", label: "Payments", path: "/admin-portal/payments" },
   {
     id: "career-management",
     label: "Career Management",
     path: "/admin-portal/career-management",
-  },
-  {
-    id: "web-analytics",
-    label: "Web Analytics",
-    path: "/admin-portal/web-analytics",
   },
   {
     id: "form-submission",
