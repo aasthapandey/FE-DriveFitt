@@ -102,10 +102,13 @@ const DateRangeFilter: React.FC<DateRangeFilterProps> = ({
                   />
                   <button
                     type="button"
-                    onClick={() =>
-                      startDateInputRef.current?.showPicker?.() ||
-                      startDateInputRef.current?.click()
-                    }
+                    onClick={() => {
+                      if (startDateInputRef.current?.showPicker) {
+                        startDateInputRef.current.showPicker();
+                      } else {
+                        startDateInputRef.current?.click();
+                      }
+                    }}
                     className="absolute right-2 top-1/2 transform -translate-y-1/2 text-[#BFBFBF] hover:text-white transition-colors cursor-pointer"
                   >
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -156,10 +159,13 @@ const DateRangeFilter: React.FC<DateRangeFilterProps> = ({
                   />
                   <button
                     type="button"
-                    onClick={() =>
-                      endDateInputRef.current?.showPicker?.() ||
-                      endDateInputRef.current?.click()
-                    }
+                    onClick={() => {
+                      if (endDateInputRef.current?.showPicker) {
+                        endDateInputRef.current.showPicker();
+                      } else {
+                        endDateInputRef.current?.click();
+                      }
+                    }}
                     className="absolute right-2 top-1/2 transform -translate-y-1/2 text-[#BFBFBF] hover:text-white transition-colors cursor-pointer"
                   >
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
