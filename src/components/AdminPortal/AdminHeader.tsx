@@ -8,7 +8,6 @@ import { useAdminAuth } from "@/contexts/AdminAuthContext";
 
 const AdminHeader = ({
   title,
-  user,
   onSearch,
   onAdd,
   showSearchButton = false,
@@ -18,7 +17,7 @@ const AdminHeader = ({
   const [showSearchInput, setShowSearchInput] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const searchRef = useRef<HTMLDivElement>(null);
-  const { logout } = useAdminAuth();
+  const { adminUser, logout } = useAdminAuth();
 
   const handleSearchClick = () => {
     setShowSearchInput(!showSearchInput);
@@ -65,6 +64,10 @@ const AdminHeader = ({
       document.removeEventListener("keydown", handleEscapeKey);
     };
   }, [showSearchInput]);
+
+  if (!adminUser) {
+    return null;
+  }
 
   return (
     <div className="h-fit bg-[#0D0D0D] mb-6 mt-10 px-10 flex items-start justify-between">
@@ -149,10 +152,12 @@ const AdminHeader = ({
           >
             <div className="w-8 h-8 bg-[#00DBDC] rounded-full flex items-center justify-center">
               <span className="text-[#0D0D0D] font-medium text-sm">
-                {user.name.charAt(0).toUpperCase()}
+                {adminUser.name.charAt(0).toUpperCase()}
               </span>
             </div>
-            <span className="text-white font-medium text-sm">{user.name}</span>
+            <span className="text-white font-medium text-sm">
+              {adminUser.name}
+            </span>
             <svg
               width="12"
               height="8"
@@ -176,8 +181,10 @@ const AdminHeader = ({
           {showUserDropdown && (
             <div className="absolute right-0 top-full mt-2 w-48 bg-[#1D1D1D] border border-[#333333] rounded-lg shadow-lg z-50">
               <div className="p-3 border-b border-[#333333]">
-                <p className="text-white font-medium text-sm">{user.name}</p>
-                <p className="text-[#8A8A8A] text-xs">{user.email}</p>
+                <p className="text-white font-medium text-sm">
+                  {adminUser.name}
+                </p>
+                <p className="text-[#8A8A8A] text-xs">{adminUser.email}</p>
               </div>
               <div className="p-1">
                 <button className="w-full text-left px-3 py-2 text-sm text-white hover:bg-[#333333] rounded">

@@ -58,7 +58,6 @@ export interface BlogCategory {
 
 export interface AdminHeaderProps {
   title: string;
-  user: AdminUser;
   onSearch?: (query: string) => void;
   onAdd?: () => void;
   showSearchButton?: boolean;
