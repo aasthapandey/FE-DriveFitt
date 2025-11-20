@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { formatDateForAPI } from "@/utils/dateFilters";
 
 interface DateRangeFilterProps {
@@ -15,6 +15,8 @@ const DateRangeFilter: React.FC<DateRangeFilterProps> = ({
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const startDateInputRef = useRef<HTMLInputElement>(null);
+  const endDateInputRef = useRef<HTMLInputElement>(null);
 
   const handleApply = () => {
     if (startDate && endDate) {
@@ -90,24 +92,108 @@ const DateRangeFilter: React.FC<DateRangeFilterProps> = ({
                 <label className="block text-[#BFBFBF] text-xs mb-1">
                   Start Date
                 </label>
-                <input
-                  type="date"
-                  value={startDate}
-                  onChange={(e) => setStartDate(e.target.value)}
-                  className="w-full px-3 py-2 bg-[#0D0D0D] border border-[#333333] rounded text-white text-sm focus:outline-none focus:border-[#00DBDC]"
-                />
+                <div className="relative">
+                  <input
+                    ref={startDateInputRef}
+                    type="date"
+                    value={startDate}
+                    onChange={(e) => setStartDate(e.target.value)}
+                    className="w-full px-3 py-2 pr-10 bg-[#0D0D0D] border border-[#333333] rounded text-white text-sm focus:outline-none focus:border-[#00DBDC]"
+                  />
+                  <button
+                    type="button"
+                    onClick={() =>
+                      startDateInputRef.current?.showPicker?.() ||
+                      startDateInputRef.current?.click()
+                    }
+                    className="absolute right-2 top-1/2 transform -translate-y-1/2 text-[#BFBFBF] hover:text-white transition-colors cursor-pointer"
+                  >
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                      <path
+                        d="M12.6667 2.66675H3.33333C2.59695 2.66675 2 3.2637 2 4.00008V13.3334C2 14.0698 2.59695 14.6667 3.33333 14.6667H12.6667C13.403 14.6667 14 14.0698 14 13.3334V4.00008C14 3.2637 13.403 2.66675 12.6667 2.66675Z"
+                        stroke="currentColor"
+                        strokeWidth="1.33333"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M10.6667 1.33325V3.99992"
+                        stroke="currentColor"
+                        strokeWidth="1.33333"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M5.33333 1.33325V3.99992"
+                        stroke="currentColor"
+                        strokeWidth="1.33333"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M2 6.66675H14"
+                        stroke="currentColor"
+                        strokeWidth="1.33333"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </button>
+                </div>
               </div>
 
               <div>
                 <label className="block text-[#BFBFBF] text-xs mb-1">
                   End Date
                 </label>
-                <input
-                  type="date"
-                  value={endDate}
-                  onChange={(e) => setEndDate(e.target.value)}
-                  className="w-full px-3 py-2 bg-[#0D0D0D] border border-[#333333] rounded text-white text-sm focus:outline-none focus:border-[#00DBDC]"
-                />
+                <div className="relative">
+                  <input
+                    ref={endDateInputRef}
+                    type="date"
+                    value={endDate}
+                    onChange={(e) => setEndDate(e.target.value)}
+                    className="w-full px-3 py-2 pr-10 bg-[#0D0D0D] border border-[#333333] rounded text-white text-sm focus:outline-none focus:border-[#00DBDC]"
+                  />
+                  <button
+                    type="button"
+                    onClick={() =>
+                      endDateInputRef.current?.showPicker?.() ||
+                      endDateInputRef.current?.click()
+                    }
+                    className="absolute right-2 top-1/2 transform -translate-y-1/2 text-[#BFBFBF] hover:text-white transition-colors cursor-pointer"
+                  >
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                      <path
+                        d="M12.6667 2.66675H3.33333C2.59695 2.66675 2 3.2637 2 4.00008V13.3334C2 14.0698 2.59695 14.6667 3.33333 14.6667H12.6667C13.403 14.6667 14 14.0698 14 13.3334V4.00008C14 3.2637 13.403 2.66675 12.6667 2.66675Z"
+                        stroke="currentColor"
+                        strokeWidth="1.33333"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M10.6667 1.33325V3.99992"
+                        stroke="currentColor"
+                        strokeWidth="1.33333"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M5.33333 1.33325V3.99992"
+                        stroke="currentColor"
+                        strokeWidth="1.33333"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M2 6.66675H14"
+                        stroke="currentColor"
+                        strokeWidth="1.33333"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
