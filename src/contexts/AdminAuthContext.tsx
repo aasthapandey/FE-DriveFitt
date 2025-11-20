@@ -163,7 +163,7 @@ export const AdminAuthProvider: React.FC<{ children: React.ReactNode }> = ({
           setIsLoading(false);
           return { success: false, error: errorMessage };
         }
-      } catch (error) {
+      } catch {
         const errorMessage = "Network error. Please try again.";
         setError(errorMessage);
         setIsLoading(false);
@@ -249,7 +249,7 @@ export const AdminAuthProvider: React.FC<{ children: React.ReactNode }> = ({
   // Initialize auth on mount
   useEffect(() => {
     checkAuth();
-  }, []);
+  }, [checkAuth]);
 
   // Clear error after some time
   useEffect(() => {

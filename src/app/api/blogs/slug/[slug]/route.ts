@@ -2,12 +2,28 @@ import { NextRequest, NextResponse } from "next/server";
 import { executeQuery } from "@/lib/database";
 import { BlogStatus } from "@/constants/enums";
 
+interface BlogRow {
+  id: number;
+  title: string;
+  description: string;
+  slug: string;
+  date: string;
+  image: string;
+  html: string;
+  category_id: number;
+  is_featured: number;
+  status: number;
+  created_at: string;
+  updated_at: string;
+  category_heading: string | null;
+}
+
 export async function GET(
   _request: NextRequest,
   { params }: { params: { slug: string } }
 ) {
   try {
-    const [row]: any[] = await executeQuery<any[]>(
+    const result = await executeQuery<BlogRow[]>(
       `SELECT 
         b.id, 
         b.title, 
@@ -27,6 +43,8 @@ export async function GET(
       WHERE b.slug = ? AND b.status = ?`,
       [params.slug, BlogStatus.PUBLISHED]
     );
+
+    const row = result[0];
 
     if (!row) {
       return NextResponse.json(

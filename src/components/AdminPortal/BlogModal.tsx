@@ -11,7 +11,7 @@ import { blogCategoryAPI } from "@/services/blogCategoryAPI";
 import { uploadAPI } from "@/services/uploadAPI";
 import { generateSlug, validateSlug, sanitizeSlug } from "@/utils/slugUtils";
 
-const BlogModal = ({ isOpen, onClose, onSave, blog, mode }: BlogModalProps) => {
+const BlogModal = ({ isOpen, onClose, onSave, blog }: BlogModalProps) => {
   const [formData, setFormData] = useState<BlogFormData>({
     title: "",
     description: "",
@@ -33,7 +33,6 @@ const BlogModal = ({ isOpen, onClose, onSave, blog, mode }: BlogModalProps) => {
   const [uploadingImage, setUploadingImage] = useState(false);
   const [selectedTag, setSelectedTag] = useState("p");
   const textareaRef = React.useRef<HTMLTextAreaElement>(null);
-  const hiddenDateRef = React.useRef<HTMLInputElement>(null);
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const [calendarBase, setCalendarBase] = useState<Date>(new Date());
 
@@ -46,7 +45,7 @@ const BlogModal = ({ isOpen, onClose, onSave, blog, mode }: BlogModalProps) => {
     }
     const parts = val.split("/");
     if (parts.length !== 3) return val;
-    let [a, b, y] = parts;
+    const [a, b, y] = parts;
     // If clearly MM/DD/YYYY (second part > 12)
     if (Number(b) > 12 && Number(a) <= 12) {
       return `${b.padStart(2, "0")}/${a.padStart(2, "0")}/${y.padStart(
@@ -68,14 +67,6 @@ const BlogModal = ({ isOpen, onClose, onSave, blog, mode }: BlogModalProps) => {
       2,
       "0"
     )}`;
-  };
-
-  const fromPickerValue = (yyyyMMdd: string): string => {
-    // converts YYYY-MM-DD to DD/MM/YYYY
-    if (!yyyyMMdd) return "";
-    const [yyyy, mm, dd] = yyyyMMdd.split("-");
-    if (!yyyy || !mm || !dd) return "";
-    return `${dd}/${mm}/${yyyy}`;
   };
 
   const openDatePicker = () => {
@@ -227,7 +218,7 @@ const BlogModal = ({ isOpen, onClose, onSave, blog, mode }: BlogModalProps) => {
       setSelectedCategoryId(created.id);
       setCategoryMode("select");
       setNewCategoryHeading("");
-    } catch (_e) {
+    } catch {
       // noop UI
     }
   };

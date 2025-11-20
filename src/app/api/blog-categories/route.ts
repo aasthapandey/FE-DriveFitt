@@ -1,13 +1,21 @@
 import { NextRequest, NextResponse } from "next/server";
 import { executeQuery } from "@/lib/database";
 
+interface BlogCategoryRow {
+  id: number;
+  heading: string;
+  status: string;
+  created_at: string;
+  updated_at: string;
+}
+
 export async function GET() {
   try {
-    const rows = await executeQuery<any[]>(
+    const rows = await executeQuery<BlogCategoryRow[]>(
       `SELECT id, heading, status, created_at, updated_at FROM blog_category ORDER BY id DESC`
     );
     return NextResponse.json({ status: true, data: rows });
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { status: false, error: "Failed to fetch" },
       { status: 500 }
@@ -26,17 +34,28 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
-    const result: any = await executeQuery(
+    interface InsertResult {
+      insertId: number;
+    }
+
+    const result = await executeQuery<InsertResult>(
       `INSERT INTO blog_category (heading, status) VALUES (?, ?)`,
       [heading, status]
     );
     const insertedId = result?.insertId;
-    const [row]: any[] = await executeQuery<any[]>(
+    if (!insertedId) {
+      return NextResponse.json(
+        { status: false, error: "Failed to create category" },
+        { status: 500 }
+      );
+    }
+    const rows = await executeQuery<BlogCategoryRow[]>(
       `SELECT id, heading, status, created_at, updated_at FROM blog_category WHERE id = ?`,
       [insertedId]
     );
+    const row = rows[0];
     return NextResponse.json({ status: true, data: row }, { status: 201 });
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { status: false, error: "Failed to create" },
       { status: 500 }

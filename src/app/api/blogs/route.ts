@@ -2,9 +2,25 @@ import { NextRequest, NextResponse } from "next/server";
 import { executeQuery } from "@/lib/database";
 import { BlogStatus } from "@/constants/enums";
 
+interface BlogRow {
+  id: number;
+  title: string;
+  description: string;
+  slug: string;
+  date: string;
+  image: string;
+  html: string;
+  category_id: number;
+  is_featured: number;
+  status: number;
+  created_at: string;
+  updated_at: string;
+  category_heading: string | null;
+}
+
 export async function GET() {
   try {
-    const rows = await executeQuery<any[]>(
+    const rows = await executeQuery<BlogRow[]>(
       `SELECT 
         b.id, 
         b.title, 
@@ -26,7 +42,7 @@ export async function GET() {
       [BlogStatus.DELETED]
     );
     return NextResponse.json({ status: true, data: rows });
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { status: false, error: "Failed to fetch" },
       { status: 500 }
@@ -56,9 +72,13 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    interface InsertResult {
+      insertId: number;
+    }
+
     const status = isPublished ? BlogStatus.PUBLISHED : BlogStatus.DRAFT;
     const category_id = categoryId ?? 0;
-    const result: any = await executeQuery(
+    const result = await executeQuery<InsertResult>(
       `INSERT INTO blogs (title, description, slug, date, image_url, html, category_id, is_featured, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         title,
@@ -74,12 +94,19 @@ export async function POST(request: NextRequest) {
     );
 
     const insertedId = result?.insertId;
-    const [row]: any[] = await executeQuery<any[]>(
+    if (!insertedId) {
+      return NextResponse.json(
+        { status: false, error: "Failed to create blog" },
+        { status: 500 }
+      );
+    }
+    const rows = await executeQuery<BlogRow[]>(
       `SELECT id, title, description, slug, date, image_url AS image, category_id, is_featured, status, created_at, updated_at FROM blogs WHERE id = ?`,
       [insertedId]
     );
+    const row = rows[0];
     return NextResponse.json({ status: true, data: row }, { status: 201 });
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { status: false, error: "Failed to create" },
       { status: 500 }

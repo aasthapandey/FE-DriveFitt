@@ -19,7 +19,6 @@ import {
   JobStatusString,
   ApplicationStatusString,
   JOB_STATUS_ACTIVE,
-  JOB_STATUS_CLOSED,
   APPLICATION_STATUS_NEW,
   APPLICATION_STATUS_SHORTLISTED,
   APPLICATION_STATUS_IN_REVIEW,
@@ -167,18 +166,13 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
         // Set departments and locations for filters
         setDepartments(deptLocData.departments);
         setLocations(deptLocData.locations);
-      } catch (_) {
+      } catch {
         setJobPosts([]);
         setApplications([]);
         setTotalItems(0);
       }
     })();
   }, [selectedToggle]);
-
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    setCurrentPage(1); // Reset to first page when searching
-  };
 
   // Clear search when switching tabs
   const handleToggleChange = (toggle: ToggleOption) => {
@@ -213,11 +207,6 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
   const handleApplicationStatusFilter = (selectedIds: number[]) => {
     setSelectedApplicationStatuses(selectedIds);
     setCurrentPage(1);
-  };
-
-  const handleSearchChange = (query: string) => {
-    setSearchQuery(query);
-    setCurrentPage(1); // Reset to first page when searching
   };
 
   // Pagination calculations

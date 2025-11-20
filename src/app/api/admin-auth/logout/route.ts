@@ -1,13 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(request: NextRequest) {
+export async function POST() {
   try {
     // For JWT-based auth, logout is primarily handled on the client side
     // by removing the token from localStorage. This endpoint can be used
     // for additional cleanup if needed (like blacklisting tokens).
-
-    const body = await request.json();
-    const { token } = body;
 
     // Optional: Add token to blacklist table for enhanced security
     // For now, we'll just return success as client-side token removal

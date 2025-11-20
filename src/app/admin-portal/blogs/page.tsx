@@ -23,20 +23,10 @@ export default function BlogsPage() {
   const [selectedBlog, setSelectedBlog] = useState<BlogEntry | undefined>(
     undefined
   );
-  const [loading, setLoading] = useState<boolean>(false);
   const { adminUser } = useAdminAuth();
-
-  if (!adminUser) {
-    return (
-      <div className="min-h-screen bg-[#0D0D0D] flex items-center justify-center">
-        <div className="text-white">Loading...</div>
-      </div>
-    );
-  }
 
   useEffect(() => {
     (async () => {
-      setLoading(true);
       try {
         const [blogsList, categoriesList] = await Promise.all([
           blogAPI.list(),
@@ -45,11 +35,19 @@ export default function BlogsPage() {
         setAllBlogs(blogsList);
         setFilteredBlogs(blogsList);
         setCategories(categoriesList);
-      } finally {
-        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching blogs:", error);
       }
     })();
   }, []);
+
+  if (!adminUser) {
+    return (
+      <div className="min-h-screen bg-[#0D0D0D] flex items-center justify-center">
+        <div className="text-white">Loading...</div>
+      </div>
+    );
+  }
 
   const handleSearch = (query: string) => {
     applyFilters(query, selectedCategories, selectedStatuses);
@@ -137,10 +135,16 @@ export default function BlogsPage() {
     }
   };
 
+  interface ExtendedBlogFormData extends BlogFormData {
+    _action?: string;
+    id?: string;
+  }
+
   const handleSaveBlog = async (blogData: BlogFormData) => {
     // Check if this is a delete action
-    if ((blogData as any)._action === "delete") {
-      await handleDeleteBlog((blogData as any).id);
+    const extendedData = blogData as ExtendedBlogFormData;
+    if (extendedData._action === "delete" && extendedData.id) {
+      await handleDeleteBlog(extendedData.id);
       return;
     }
 

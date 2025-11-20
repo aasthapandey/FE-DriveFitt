@@ -210,10 +210,6 @@ const LeftSidebar = ({
           const showSubItems =
             isFormSubmission && (isSelected || isFormSubmissionSubPage);
 
-          // For form-submission, check if any sub-page is active
-          const isFormSubmissionActive =
-            isFormSubmission && (isSelected || isFormSubmissionSubPage);
-
           return (
             <div key={item.id}>
               <button

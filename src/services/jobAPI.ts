@@ -104,8 +104,22 @@ export const jobAPI = {
   },
 
   async getDepartmentsLocations(): Promise<{
-    departments: any[];
-    locations: any[];
+    departments: Array<{
+      id: number;
+      name: string;
+      title: string;
+      status: number;
+      created_at: string;
+      updated_at: string;
+    }>;
+    locations: Array<{
+      id: number;
+      full_location: string;
+      city: string;
+      status: number;
+      created_at: string;
+      updated_at: string;
+    }>;
   }> {
     const res = await fetch(`${getBaseUrl()}/api/departments-locations`, {
       cache: "no-store",
@@ -113,7 +127,7 @@ export const jobAPI = {
     const json = await res.json();
     if (!res.ok || !json?.status)
       throw new Error(json?.error || "Fetch failed");
-    return json.data as { departments: any[]; locations: any[] };
+    return json.data;
   },
 
   async delete(id: number) {

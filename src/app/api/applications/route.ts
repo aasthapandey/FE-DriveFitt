@@ -1,10 +1,25 @@
 import { NextRequest, NextResponse } from "next/server";
 import { executeQuery } from "@/lib/database";
-import {
-  Application,
-  ApplicationStatus,
-  ApplicationFormData,
-} from "@/types/database";
+import { Application } from "@/types/database";
+import { ApplicationStatus } from "@/constants/database";
+
+interface ApplicationRow {
+  id: number;
+  candidate_name: string;
+  email: string;
+  phone: string;
+  job_id: number;
+  status: number;
+  current_location: string | null;
+  work_exprience: string | null;
+  expected_salary: string | null;
+  resume: string | null;
+  created_at: string;
+  updated_at: string;
+  job_title: string | null;
+  dept_id: number | null;
+  dept_name: string | null;
+}
 
 export async function GET(request: NextRequest) {
   try {
@@ -12,8 +27,8 @@ export async function GET(request: NextRequest) {
     const status = searchParams.get("status");
     const jobId = searchParams.get("job_id");
 
-    let whereConditions = ["1=1"];
-    let queryParams: any[] = [];
+    const whereConditions = ["1=1"];
+    const queryParams: (string | number)[] = [];
 
     if (status !== null) {
       whereConditions.push("a.status = ?");
@@ -49,7 +64,7 @@ export async function GET(request: NextRequest) {
       ORDER BY a.created_at DESC
     `;
 
-    const result = await executeQuery<any[]>(query, queryParams);
+    const result = await executeQuery<ApplicationRow[]>(query, queryParams);
 
     const applications: Application[] = result.map((row) => ({
       id: row.id,
@@ -64,16 +79,19 @@ export async function GET(request: NextRequest) {
       resume: row.resume ?? undefined,
       created_at: new Date(row.created_at),
       updated_at: new Date(row.updated_at),
-      job: {
-        id: row.job_id,
-        title: row.job_title,
-        department: row.dept_id
-          ? {
-              id: row.dept_id,
-              name: row.dept_name,
-            }
-          : undefined,
-      },
+      job: row.job_title
+        ? {
+            id: row.job_id,
+            title: row.job_title,
+            department:
+              row.dept_id && row.dept_name
+                ? {
+                    id: row.dept_id,
+                    name: row.dept_name,
+                  }
+                : undefined,
+          }
+        : undefined,
     }));
 
     return NextResponse.json(
@@ -83,8 +101,8 @@ export async function GET(request: NextRequest) {
       },
       { status: 200 }
     );
-  } catch (error) {
-    console.error("Error fetching applications:", error);
+  } catch {
+    console.error("Error fetching applications");
     return NextResponse.json(
       {
         status: false,
@@ -152,8 +170,8 @@ export async function POST(request: NextRequest) {
       },
       { status: 201 }
     );
-  } catch (error) {
-    console.error("Error creating application:", error);
+  } catch {
+    console.error("Error creating application");
     return NextResponse.json(
       {
         status: false,

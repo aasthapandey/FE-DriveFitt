@@ -1,10 +1,4 @@
-import {
-  JobStatus,
-  ApplicationStatus,
-  JobType,
-  DepartmentStatus,
-  LocationStatus,
-} from "@/constants/database";
+import { JobStatus, ApplicationStatus, JobType } from "@/constants/database";
 
 export interface ContactUs {
   id: number;

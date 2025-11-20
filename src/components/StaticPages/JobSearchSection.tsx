@@ -12,7 +12,7 @@ interface JobSearchSectionProps {
   isMobile?: boolean;
 }
 
-const JobSearchSection = ({ data, isMobile }: JobSearchSectionProps) => {
+const JobSearchSection = ({ isMobile }: JobSearchSectionProps) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] =
     useState("All job categories");
@@ -39,10 +39,7 @@ const JobSearchSection = ({ data, isMobile }: JobSearchSectionProps) => {
   useEffect(() => {
     (async () => {
       try {
-        const [postingList, meta] = await Promise.all([
-          jobAPI.list({ status: 1, is_visible: true }),
-          jobAPI.getDepartmentsLocations(),
-        ]);
+        const postingList = await jobAPI.list({ status: 1, is_visible: true });
 
         const typeLabel = (t: JobType) =>
           t === JOB_TYPE.FULL_TIME

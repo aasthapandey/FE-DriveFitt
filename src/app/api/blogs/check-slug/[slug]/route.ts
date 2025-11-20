@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { executeQuery } from "@/lib/database";
 
+interface SlugCheckResult {
+  count: number;
+}
+
 export async function GET(
   request: NextRequest,
   { params }: { params: { slug: string } }
@@ -10,16 +14,17 @@ export async function GET(
     const excludeId = searchParams.get("exclude");
 
     let query = "SELECT COUNT(*) as count FROM blogs WHERE slug = ?";
-    const queryParams: any[] = [params.slug];
+    const queryParams: (string | number)[] = [params.slug];
 
     // Exclude a specific blog ID if provided (for updates)
     if (excludeId) {
       query += " AND id != ?";
-      queryParams.push(excludeId);
+      queryParams.push(parseInt(excludeId));
     }
 
-    const [result]: any[] = await executeQuery<any[]>(query, queryParams);
-    const isUnique = result.count === 0;
+    const result = await executeQuery<SlugCheckResult[]>(query, queryParams);
+    const firstResult = result[0];
+    const isUnique = firstResult?.count === 0;
 
     return NextResponse.json({
       status: true,

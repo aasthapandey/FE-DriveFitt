@@ -11,8 +11,8 @@ export async function GET(request: NextRequest) {
     const startDate = searchParams.get("startDate");
     const endDate = searchParams.get("endDate");
 
-    let whereConditions: string[] = ["status != 6"];
-    let queryParams: (string | number)[] = [];
+    const whereConditions: string[] = ["status != 6"];
+    const queryParams: (string | number)[] = [];
 
     if (search) {
       whereConditions.push(

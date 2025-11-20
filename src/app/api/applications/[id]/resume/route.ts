@@ -1,6 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { executeQuery } from "@/lib/database";
 
+interface ApplicationResumeRow {
+  resume: string | null;
+  candidate_name: string;
+}
+
 export async function GET(
   request: NextRequest,
   { params }: { params: { id: string } }
@@ -21,7 +26,9 @@ export async function GET(
       WHERE id = ?
     `;
 
-    const result = await executeQuery<any[]>(query, [applicationId]);
+    const result = await executeQuery<ApplicationResumeRow[]>(query, [
+      applicationId,
+    ]);
 
     if (result.length === 0) {
       return NextResponse.json(

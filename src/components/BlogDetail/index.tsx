@@ -11,8 +11,24 @@ import YouMightAlsoLike from "./YouMightAlsoLike";
 import { BlogEntry } from "@/types/adminPortal";
 import { LoginModalType } from "@/types/staticPages";
 
+interface RawBlogData {
+  id: number;
+  title: string;
+  description: string;
+  slug: string;
+  date: string;
+  image: string;
+  html: string;
+  category_id: number;
+  is_featured: number;
+  status: number;
+  created_at: string;
+  updated_at: string;
+  category_heading?: string | null;
+}
+
 interface BlogDetailProps {
-  blog: any; // Raw blog data from API
+  blog: RawBlogData;
   isMobile: boolean;
 }
 
@@ -179,7 +195,7 @@ const BlogDetailContent = ({ blog: rawBlog, isMobile }: BlogDetailProps) => {
           );
           if (relatedResponse.ok) {
             const { data } = await relatedResponse.json();
-            const transformedRelated = data.map((b: any) => ({
+            const transformedRelated = data.map((b: RawBlogData) => ({
               id: b.id,
               title: b.title,
               description: b.description,
@@ -206,7 +222,7 @@ const BlogDetailContent = ({ blog: rawBlog, isMobile }: BlogDetailProps) => {
         );
         if (otherResponse.ok) {
           const { data } = await otherResponse.json();
-          const transformedOther = data.map((b: any) => ({
+          const transformedOther = data.map((b: RawBlogData) => ({
             id: b.id,
             title: b.title,
             description: b.description,

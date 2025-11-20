@@ -1,4 +1,7 @@
-export function convertToCSV(data: any[], headers: string[]): string {
+export function convertToCSV(
+  data: Record<string, string | number>[],
+  headers: string[]
+): string {
   const csvRows = [];
 
   csvRows.push(headers.join(","));

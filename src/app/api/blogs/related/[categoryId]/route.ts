@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { executeQuery } from "@/lib/database";
-import { BlogStatus } from "@/constants/enums";
 
 export async function GET(
   request: NextRequest,
@@ -31,26 +30,43 @@ export async function GET(
       FROM blogs 
       WHERE category_id = ? AND status = 1
     `;
-    let queryParams: any[] = [categoryIdInt];
+    const queryParams: (string | number)[] = [categoryIdInt];
 
     if (excludeIdInt) {
       query += " AND id != ?";
       queryParams.push(excludeIdInt);
     }
 
+    interface BlogRow {
+      id: number;
+      title: string;
+      description: string;
+      slug: string;
+      date: string;
+      image: string;
+      category_id: number;
+      is_featured: number;
+      status: number;
+      created_at: string;
+      updated_at: string;
+      category_heading: string;
+    }
+
     // Don't use parameterized LIMIT - it causes MySQL driver issues
     query += ` ORDER BY created_at DESC LIMIT ${limit}`;
 
-    const rows = await executeQuery<any[]>(query, queryParams);
+    const rows = await executeQuery<BlogRow[]>(query, queryParams);
 
     return NextResponse.json({ status: true, data: rows });
   } catch (error) {
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error";
     console.error("Error fetching related blogs:", error);
     return NextResponse.json(
       {
         status: false,
         error: "Failed to fetch related blogs",
-        details: error.message,
+        details: errorMessage,
       },
       { status: 500 }
     );

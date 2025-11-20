@@ -27,7 +27,7 @@ export interface Hero {
 export interface CardSection {
   title: string;
   description: string;
-  cards: any[];
+  cards: unknown[];
 }
 
 export interface CarouselBanner {
@@ -39,7 +39,7 @@ export interface CarouselBanner {
 export interface StaticCardProps {
   title: string;
   description: string;
-  cards: any[];
+  cards: unknown[];
 }
 
 export interface InnovationCommunitySectionProps {
@@ -73,11 +73,21 @@ export interface FooterInfoProps {
   description: string;
 }
 
+export interface FooterSection {
+  title: string;
+  links: Array<{ title: string; link: string }>;
+}
+
+export interface SocialLink {
+  image: string;
+  link: string;
+}
+
 export interface FooterProps {
   logo: string;
   description: string;
-  sections: any[];
-  socialLinks: any[];
+  sections: FooterSection[];
+  socialLinks: SocialLink[];
   copyright: string;
 }
 
@@ -86,14 +96,19 @@ export interface EvolutionSectionProps {
   description: string;
 }
 
+export interface FAQ {
+  question: string;
+  answer: string;
+}
+
 export interface FaqSectionProps {
   title: string;
-  faqs: any[];
+  faqs: FAQ[];
 }
 
 export interface ScrollingCardSection {
   title: string;
-  cards: any[];
+  cards: unknown[];
 }
 
 export interface CountdownSection {
@@ -136,15 +151,28 @@ export interface EcosystemGifSectionProps {
   description: string;
 }
 
+export interface Coach {
+  name: string;
+  image: string;
+  role?: string;
+  [key: string]: unknown;
+}
+
 export interface MeetYourCoachesSectionProps {
   title: string;
-  coaches: any[];
+  coaches: Coach[];
   seeMoreText: string;
+}
+
+export interface Package {
+  title: string;
+  description?: string;
+  [key: string]: unknown;
 }
 
 export interface ChooseYourPathSectionProps {
   title: string;
-  packages: any[];
+  packages: Package[];
   buttonText: string;
 }
 
@@ -169,7 +197,7 @@ export interface Banner2WithImageProps {
 
 export interface CardsParallaxProps {
   title: string;
-  cards: any[];
+  cards: unknown[];
 }
 
 export interface SignatureClassCard {
@@ -180,7 +208,7 @@ export interface SignatureClassCard {
 
 export interface SignatureClassesSection {
   title: string;
-  classes: any[];
+  classes: unknown[];
   cardList: SignatureClassCard[];
   cardList2: SignatureClassCard[];
 }
@@ -197,7 +225,7 @@ export interface PricingPlan {
 }
 
 export interface PricingPlansSection {
-  plans: any[];
+  plans: PricingPlan[];
 }
 
 export interface IncludedPlansSection {
@@ -206,13 +234,27 @@ export interface IncludedPlansSection {
   className?: string;
 }
 
+export interface Job {
+  id: number;
+  title: string;
+  location?: string;
+  [key: string]: unknown;
+}
+
 export interface JobSearchSection {
   title: string;
-  jobs: any[];
+  jobs: Job[];
+}
+
+export interface JobDetail {
+  id: number;
+  title: string;
+  location?: string;
+  [key: string]: unknown;
 }
 
 export interface JobDetailSection {
-  job: any;
+  job: JobDetail;
 }
 
 export interface ApplyNowFormSection {
@@ -225,8 +267,8 @@ export interface StaticPageData {
   seoTitle?: string;
   seoDescription?: string;
   hero?: Hero;
-  franchiseHeroSection?: any;
-  aboutUsHeroSection?: any;
+  franchiseHeroSection?: Hero;
+  aboutUsHeroSection?: Hero;
   cardSection4?: CardSection;
   cardSection3?: CardSection;
   cardSection5?: CardSection;

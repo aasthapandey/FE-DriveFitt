@@ -14,9 +14,22 @@ export const blogAPI = {
     if (!res.ok || json?.status === false) {
       throw new Error(json?.error || "Failed to fetch blogs");
     }
+    interface BlogFromAPI {
+      category_id?: number;
+      category_heading?: string | null;
+      html?: string;
+      status?: number;
+      is_featured?: number;
+      image_url?: string;
+      image?: string;
+      created_at?: string;
+      updated_at?: string;
+      [key: string]: unknown;
+    }
+
     const blogs = json.data || json;
     // Transform snake_case to camelCase
-    return blogs.map((blog: any) => ({
+    return blogs.map((blog: BlogFromAPI) => ({
       ...blog,
       categoryId: blog.category_id,
       categoryHeading: blog.category_heading,

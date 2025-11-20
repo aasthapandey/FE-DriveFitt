@@ -2,7 +2,25 @@ import { NextRequest, NextResponse } from "next/server";
 import { executeQuery } from "@/lib/database";
 import { Department, Location } from "@/types/database";
 
-export async function GET(request: NextRequest) {
+interface DepartmentRow {
+  id: number;
+  name: string;
+  title: string;
+  status: number;
+  created_at: string;
+  updated_at: string;
+}
+
+interface LocationRow {
+  id: number;
+  full_location: string;
+  city: string;
+  status: number;
+  created_at: string;
+  updated_at: string;
+}
+
+export async function GET() {
   try {
     const departmentsQuery = `
       SELECT id, name, title, status, created_at, updated_at
@@ -19,8 +37,8 @@ export async function GET(request: NextRequest) {
     `;
 
     const [departmentsResult, locationsResult] = await Promise.all([
-      executeQuery<any[]>(departmentsQuery),
-      executeQuery<any[]>(locationsQuery),
+      executeQuery<DepartmentRow[]>(departmentsQuery),
+      executeQuery<LocationRow[]>(locationsQuery),
     ]);
 
     const departments: Department[] = departmentsResult.map((row) => ({
@@ -54,10 +72,10 @@ export async function GET(request: NextRequest) {
   } catch (error) {
     console.error("Error fetching departments and locations:", error);
     return NextResponse.json(
-      { 
+      {
         status: false,
         data: null,
-        error: "Internal server error" 
+        error: "Internal server error",
       },
       { status: 500 }
     );

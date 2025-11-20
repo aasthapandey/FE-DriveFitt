@@ -4,14 +4,14 @@ import { notFound } from "next/navigation";
 import { isMobileDevice } from "@/utils/deviceDetection";
 import StaticPages from "@/components/StaticPages";
 import { JobPosting } from "@/types/database";
-import { JobType, JOB_TYPE } from "@/constants/database";
+import { JOB_TYPE } from "@/constants/database";
 import { jobAPI } from "@/services/jobAPI";
 
 const fetchJob = async (id: string): Promise<JobPosting> => {
   try {
     const job = await jobAPI.getById(Number(id));
     return job;
-  } catch (error) {
+  } catch {
     // If job not found or not accessible, trigger the not-found page
     notFound();
   }

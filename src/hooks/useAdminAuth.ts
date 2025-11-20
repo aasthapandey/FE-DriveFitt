@@ -249,7 +249,7 @@ export const useAdminAuth = () => {
   // Check auth on mount only once
   useEffect(() => {
     checkAuth();
-  }, []); // Remove checkAuth dependency to prevent re-runs
+  }, [checkAuth]);
 
   // Clear error after some time
   useEffect(() => {
