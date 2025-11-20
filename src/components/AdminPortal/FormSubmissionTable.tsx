@@ -360,154 +360,176 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
           </tr>
         </thead>
         <tbody>
-          {data.map((item: any, index) => (
-            <tr key={item.id} style={{ background: "#1D1D1D" }}>
-              <td style={cellStyle}>
-                {item.first_name} {item.last_name}
-              </td>
-              <td style={cellStyle}>{item.email}</td>
-              <td style={cellStyle}>{item.phone || "-"}</td>
-              <td
-                style={{
+          {data.map((item: any, index) => {
+            const isLastRow = index === data.length - 1;
+            const lastRowCellStyle = isLastRow
+              ? {
                   ...cellStyle,
-                  minWidth: "200px",
-                  maxWidth: "400px",
-                  wordWrap: "break-word",
-                  wordBreak: "break-word",
-                  overflowWrap: "break-word",
-                  whiteSpace: "normal",
-                  lineHeight: "1.5",
-                }}
-              >
-                {item.message}
-              </td>
-              <td style={cellStyle}>
-                {formatDateTimeForDisplay(item.created_at)}
-              </td>
-              <td style={cellStyle}>
-                <div className="relative flex justify-center">
-                  <button
-                    type="button"
-                    ref={(el) => {
-                      statusButtonRefs.current[index] = el;
-                    }}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      toggleStatusDropdown(index);
-                    }}
-                    className="bg-[#333333] border border-[#333333] rounded flex items-center justify-between transition-colors"
-                    style={{
-                      width: "85px",
-                      height: "24px",
-                      paddingTop: "4px",
-                      paddingRight: "10px",
-                      paddingBottom: "4px",
-                      paddingLeft: "10px",
-                      gap: "4px",
-                    }}
-                  >
-                    <span
-                      className="text-center"
-                      style={{
-                        color: getStatusColor(item.status),
-                        fontWeight: 300,
-                        fontSize: "12px",
-                        lineHeight: "16px",
-                        letterSpacing: "0%",
+                  borderBottom: "none",
+                }
+              : cellStyle;
+            const firstCellStyle = isLastRow
+              ? {
+                  ...lastRowCellStyle,
+                  borderBottomLeftRadius: "16px",
+                }
+              : lastRowCellStyle;
+            const lastCellStyle = isLastRow
+              ? {
+                  ...lastRowCellStyle,
+                  borderBottomRightRadius: "16px",
+                }
+              : lastRowCellStyle;
+
+            return (
+              <tr key={item.id} style={{ background: "#1D1D1D" }}>
+                <td style={firstCellStyle}>
+                  {item.first_name} {item.last_name}
+                </td>
+                <td style={lastRowCellStyle}>{item.email}</td>
+                <td style={lastRowCellStyle}>{item.phone || "-"}</td>
+                <td
+                  style={{
+                    ...lastRowCellStyle,
+                    minWidth: "200px",
+                    maxWidth: "400px",
+                    wordWrap: "break-word",
+                    wordBreak: "break-word",
+                    overflowWrap: "break-word",
+                    whiteSpace: "normal",
+                    lineHeight: "1.5",
+                  }}
+                >
+                  {item.message}
+                </td>
+                <td style={lastRowCellStyle}>
+                  {formatDateTimeForDisplay(item.created_at)}
+                </td>
+                <td style={lastRowCellStyle}>
+                  <div className="relative flex justify-center">
+                    <button
+                      type="button"
+                      ref={(el) => {
+                        statusButtonRefs.current[index] = el;
                       }}
-                    >
-                      {getStatusLabel(item.status)}
-                    </span>
-                    <svg
-                      width="8"
-                      height="6"
-                      viewBox="0 0 8 6"
-                      fill="none"
-                      className={`transform transition-transform duration-200 ${
-                        statusDropdownOpen === index ? "rotate-180" : ""
-                      }`}
-                      style={{ color: getStatusColor(item.status) }}
-                    >
-                      <path
-                        d="M1 1L4 4L7 1"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </button>
-                  {statusDropdownOpen === index && (
-                    <div
-                      id={`status-dropdown-${index}`}
-                      className="fixed bg-[#1D1D1D] border border-[#333333] rounded shadow-lg"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toggleStatusDropdown(index);
+                      }}
+                      className="bg-[#333333] border border-[#333333] rounded flex items-center justify-between transition-colors"
                       style={{
                         width: "85px",
-                        zIndex: 99999,
+                        height: "24px",
+                        paddingTop: "4px",
+                        paddingRight: "10px",
+                        paddingBottom: "4px",
+                        paddingLeft: "10px",
+                        gap: "4px",
                       }}
                     >
-                      {getStatusOptions().map((option) => (
+                      <span
+                        className="text-center"
+                        style={{
+                          color: getStatusColor(item.status),
+                          fontWeight: 300,
+                          fontSize: "12px",
+                          lineHeight: "16px",
+                          letterSpacing: "0%",
+                        }}
+                      >
+                        {getStatusLabel(item.status)}
+                      </span>
+                      <svg
+                        width="8"
+                        height="6"
+                        viewBox="0 0 8 6"
+                        fill="none"
+                        className={`transform transition-transform duration-200 ${
+                          statusDropdownOpen === index ? "rotate-180" : ""
+                        }`}
+                        style={{ color: getStatusColor(item.status) }}
+                      >
+                        <path
+                          d="M1 1L4 4L7 1"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </button>
+                    {statusDropdownOpen === index && (
+                      <div
+                        id={`status-dropdown-${index}`}
+                        className="fixed bg-[#1D1D1D] border border-[#333333] rounded shadow-lg"
+                        style={{
+                          width: "85px",
+                          zIndex: 99999,
+                        }}
+                      >
+                        {getStatusOptions().map((option) => (
+                          <button
+                            key={option.value}
+                            type="button"
+                            onClick={() => {
+                              handleStatusChange(item.id, option.value);
+                              setStatusDropdownOpen(null);
+                            }}
+                            className="block w-full text-left px-3 py-2 text-xs text-white hover:bg-[#333333]"
+                          >
+                            {option.label}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </td>
+                <td style={{ ...lastCellStyle, textAlign: "center" }}>
+                  <div className="relative">
+                    <button
+                      type="button"
+                      ref={(el) => {
+                        actionButtonRefs.current[index] = el;
+                      }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toggleActionDropdown(index);
+                      }}
+                      className="w-8 h-8 flex items-center justify-center hover:bg-[#333333] rounded"
+                    >
+                      <Image
+                        src="/images/careers/dots-vertical.svg"
+                        alt="Actions"
+                        width={16}
+                        height={16}
+                      />
+                    </button>
+                    {actionDropdownOpen === index && (
+                      <div
+                        id={`action-dropdown-${index}`}
+                        className="fixed bg-[#1D1D1D] border border-[#333333] rounded shadow-lg"
+                        style={{
+                          minWidth: "120px",
+                          zIndex: 99999,
+                        }}
+                      >
                         <button
-                          key={option.value}
                           type="button"
                           onClick={() => {
-                            handleStatusChange(item.id, option.value);
-                            setStatusDropdownOpen(null);
+                            handleDelete(item.id);
+                            setActionDropdownOpen(null);
                           }}
-                          className="block w-full text-left px-3 py-2 text-xs text-white hover:bg-[#333333]"
+                          className="block w-full text-left px-3 py-2 text-sm text-red-400 hover:bg-[#333333]"
                         >
-                          {option.label}
+                          Delete
                         </button>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </td>
-              <td style={{ ...cellStyle, textAlign: "center" }}>
-                <div className="relative">
-                  <button
-                    type="button"
-                    ref={(el) => {
-                      actionButtonRefs.current[index] = el;
-                    }}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      toggleActionDropdown(index);
-                    }}
-                    className="w-8 h-8 flex items-center justify-center hover:bg-[#333333] rounded"
-                  >
-                    <Image
-                      src="/images/careers/dots-vertical.svg"
-                      alt="Actions"
-                      width={16}
-                      height={16}
-                    />
-                  </button>
-                  {actionDropdownOpen === index && (
-                    <div
-                      id={`action-dropdown-${index}`}
-                      className="fixed bg-[#1D1D1D] border border-[#333333] rounded shadow-lg"
-                      style={{
-                        minWidth: "120px",
-                        zIndex: 99999,
-                      }}
-                    >
-                      <button
-                        type="button"
-                        onClick={() => {
-                          handleDelete(item.id);
-                          setActionDropdownOpen(null);
-                        }}
-                        className="block w-full text-left px-3 py-2 text-sm text-red-400 hover:bg-[#333333]"
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  )}
-                </div>
-              </td>
-            </tr>
-          ))}
+                      </div>
+                    )}
+                  </div>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     );
@@ -537,142 +559,166 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
           </tr>
         </thead>
         <tbody>
-          {data.map((item: any, index) => (
-            <tr key={item.id} style={{ background: "#1D1D1D" }}>
-              <td style={cellStyle}>
-                {item.contact_person || item.business_name}
-              </td>
-              <td style={cellStyle}>{item.email}</td>
-              <td style={cellStyle}>{item.phone || "-"}</td>
-              <td style={cellStyle}>{item.city || "-"}</td>
-              <td style={cellStyle}>₹{item.investment_capacity || "0"}</td>
-              <td style={cellStyle}>
-                {formatDateTimeForDisplay(item.created_at)}
-              </td>
-              <td style={cellStyle}>
-                <div className="relative flex justify-center">
-                  <button
-                    type="button"
-                    ref={(el) => {
-                      statusButtonRefs.current[index] = el;
-                    }}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      toggleStatusDropdown(index);
-                    }}
-                    className="bg-[#333333] border border-[#333333] rounded flex items-center justify-between transition-colors"
-                    style={{
-                      width: "85px",
-                      height: "24px",
-                      paddingTop: "4px",
-                      paddingRight: "10px",
-                      paddingBottom: "4px",
-                      paddingLeft: "10px",
-                      gap: "4px",
-                    }}
-                  >
-                    <span
-                      className="text-center"
-                      style={{
-                        color: getStatusColor(item.status),
-                        fontWeight: 300,
-                        fontSize: "12px",
-                        lineHeight: "16px",
-                        letterSpacing: "0%",
+          {data.map((item: any, index) => {
+            const isLastRow = index === data.length - 1;
+            const lastRowCellStyle = isLastRow
+              ? {
+                  ...cellStyle,
+                  borderBottom: "none",
+                }
+              : cellStyle;
+            const firstCellStyle = isLastRow
+              ? {
+                  ...lastRowCellStyle,
+                  borderBottomLeftRadius: "16px",
+                }
+              : lastRowCellStyle;
+            const lastCellStyle = isLastRow
+              ? {
+                  ...lastRowCellStyle,
+                  borderBottomRightRadius: "16px",
+                }
+              : lastRowCellStyle;
+
+            return (
+              <tr key={item.id} style={{ background: "#1D1D1D" }}>
+                <td style={firstCellStyle}>
+                  {item.contact_person || item.business_name}
+                </td>
+                <td style={lastRowCellStyle}>{item.email}</td>
+                <td style={lastRowCellStyle}>{item.phone || "-"}</td>
+                <td style={lastRowCellStyle}>{item.city || "-"}</td>
+                <td style={lastRowCellStyle}>
+                  ₹{item.investment_capacity || "0"}
+                </td>
+                <td style={lastRowCellStyle}>
+                  {formatDateTimeForDisplay(item.created_at)}
+                </td>
+                <td style={lastRowCellStyle}>
+                  <div className="relative flex justify-center">
+                    <button
+                      type="button"
+                      ref={(el) => {
+                        statusButtonRefs.current[index] = el;
                       }}
-                    >
-                      {getStatusLabel(item.status)}
-                    </span>
-                    <svg
-                      width="8"
-                      height="6"
-                      viewBox="0 0 8 6"
-                      fill="none"
-                      className={`transform transition-transform duration-200 ${
-                        statusDropdownOpen === index ? "rotate-180" : ""
-                      }`}
-                      style={{ color: getStatusColor(item.status) }}
-                    >
-                      <path
-                        d="M1 1L4 4L7 1"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </button>
-                  {statusDropdownOpen === index && (
-                    <div
-                      id={`status-dropdown-${index}`}
-                      className="fixed bg-[#1D1D1D] border border-[#333333] rounded shadow-lg"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toggleStatusDropdown(index);
+                      }}
+                      className="bg-[#333333] border border-[#333333] rounded flex items-center justify-between transition-colors"
                       style={{
                         width: "85px",
-                        zIndex: 99999,
+                        height: "24px",
+                        paddingTop: "4px",
+                        paddingRight: "10px",
+                        paddingBottom: "4px",
+                        paddingLeft: "10px",
+                        gap: "4px",
                       }}
                     >
-                      {getStatusOptions().map((option) => (
+                      <span
+                        className="text-center"
+                        style={{
+                          color: getStatusColor(item.status),
+                          fontWeight: 300,
+                          fontSize: "12px",
+                          lineHeight: "16px",
+                          letterSpacing: "0%",
+                        }}
+                      >
+                        {getStatusLabel(item.status)}
+                      </span>
+                      <svg
+                        width="8"
+                        height="6"
+                        viewBox="0 0 8 6"
+                        fill="none"
+                        className={`transform transition-transform duration-200 ${
+                          statusDropdownOpen === index ? "rotate-180" : ""
+                        }`}
+                        style={{ color: getStatusColor(item.status) }}
+                      >
+                        <path
+                          d="M1 1L4 4L7 1"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </button>
+                    {statusDropdownOpen === index && (
+                      <div
+                        id={`status-dropdown-${index}`}
+                        className="fixed bg-[#1D1D1D] border border-[#333333] rounded shadow-lg"
+                        style={{
+                          width: "85px",
+                          zIndex: 99999,
+                        }}
+                      >
+                        {getStatusOptions().map((option) => (
+                          <button
+                            key={option.value}
+                            type="button"
+                            onClick={() => {
+                              handleStatusChange(item.id, option.value);
+                              setStatusDropdownOpen(null);
+                            }}
+                            className="block w-full text-left px-3 py-2 text-xs text-white hover:bg-[#333333]"
+                          >
+                            {option.label}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </td>
+                <td style={{ ...lastCellStyle, textAlign: "center" }}>
+                  <div className="relative">
+                    <button
+                      type="button"
+                      ref={(el) => {
+                        actionButtonRefs.current[index] = el;
+                      }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toggleActionDropdown(index);
+                      }}
+                      className="w-8 h-8 flex items-center justify-center hover:bg-[#333333] rounded"
+                    >
+                      <Image
+                        src="/images/careers/dots-vertical.svg"
+                        alt="Actions"
+                        width={16}
+                        height={16}
+                      />
+                    </button>
+                    {actionDropdownOpen === index && (
+                      <div
+                        id={`action-dropdown-${index}`}
+                        className="fixed bg-[#1D1D1D] border border-[#333333] rounded shadow-lg"
+                        style={{
+                          minWidth: "120px",
+                          zIndex: 99999,
+                        }}
+                      >
                         <button
-                          key={option.value}
                           type="button"
                           onClick={() => {
-                            handleStatusChange(item.id, option.value);
-                            setStatusDropdownOpen(null);
+                            handleDelete(item.id);
+                            setActionDropdownOpen(null);
                           }}
-                          className="block w-full text-left px-3 py-2 text-xs text-white hover:bg-[#333333]"
+                          className="block w-full text-left px-3 py-2 text-sm text-red-400 hover:bg-[#333333]"
                         >
-                          {option.label}
+                          Delete
                         </button>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </td>
-              <td style={{ ...cellStyle, textAlign: "center" }}>
-                <div className="relative">
-                  <button
-                    type="button"
-                    ref={(el) => {
-                      actionButtonRefs.current[index] = el;
-                    }}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      toggleActionDropdown(index);
-                    }}
-                    className="w-8 h-8 flex items-center justify-center hover:bg-[#333333] rounded"
-                  >
-                    <Image
-                      src="/images/careers/dots-vertical.svg"
-                      alt="Actions"
-                      width={16}
-                      height={16}
-                    />
-                  </button>
-                  {actionDropdownOpen === index && (
-                    <div
-                      id={`action-dropdown-${index}`}
-                      className="fixed bg-[#1D1D1D] border border-[#333333] rounded shadow-lg"
-                      style={{
-                        minWidth: "120px",
-                        zIndex: 99999,
-                      }}
-                    >
-                      <button
-                        type="button"
-                        onClick={() => {
-                          handleDelete(item.id);
-                          setActionDropdownOpen(null);
-                        }}
-                        className="block w-full text-left px-3 py-2 text-sm text-red-400 hover:bg-[#333333]"
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  )}
-                </div>
-              </td>
-            </tr>
-          ))}
+                      </div>
+                    )}
+                  </div>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     );
@@ -713,14 +759,34 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
             if (item.physiotherapy) interests.push("Physiotherapy");
             if (item.group_classes) interests.push("Group Classes");
 
+            const isLastRow = index === data.length - 1;
+            const lastRowCellStyle = isLastRow
+              ? {
+                  ...cellStyle,
+                  borderBottom: "none",
+                }
+              : cellStyle;
+            const firstCellStyle = isLastRow
+              ? {
+                  ...lastRowCellStyle,
+                  borderBottomLeftRadius: "16px",
+                }
+              : lastRowCellStyle;
+            const lastCellStyle = isLastRow
+              ? {
+                  ...lastRowCellStyle,
+                  borderBottomRightRadius: "16px",
+                }
+              : lastRowCellStyle;
+
             return (
               <tr key={item.id} style={{ background: "#1D1D1D" }}>
-                <td style={cellStyle}>{item.name}</td>
-                <td style={cellStyle}>{item.phone}</td>
-                <td style={cellStyle}>{interests.join(", ") || "-"}</td>
+                <td style={firstCellStyle}>{item.name}</td>
+                <td style={lastRowCellStyle}>{item.phone}</td>
+                <td style={lastRowCellStyle}>{interests.join(", ") || "-"}</td>
                 <td
                   style={{
-                    ...cellStyle,
+                    ...lastRowCellStyle,
                     minWidth: "150px",
                     maxWidth: "350px",
                     wordWrap: "break-word",
@@ -732,8 +798,10 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
                 >
                   {item.message || "-"}
                 </td>
-                <td style={cellStyle}>{item.preferred_location || "-"}</td>
-                <td style={cellStyle}>
+                <td style={lastRowCellStyle}>
+                  {item.preferred_location || "-"}
+                </td>
+                <td style={lastRowCellStyle}>
                   {formatDateTimeForDisplay(item.created_at)}
                 </td>
                 <td style={cellStyle}>
@@ -812,7 +880,7 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
                     )}
                   </div>
                 </td>
-                <td style={{ ...cellStyle, textAlign: "center" }}>
+                <td style={{ ...lastCellStyle, textAlign: "center" }}>
                   <div className="relative">
                     <button
                       type="button"
