@@ -50,14 +50,19 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [totalItems, setTotalItems] = useState(0);
-  const [itemsPerPage] = useState(10);
+  const [itemsPerPage] = useState(4);
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<number | null>(null);
   const [dateRange, setDateRange] = useState<{
     start: string;
     end: string;
   } | null>(null);
-  const [dropdownOpen, setDropdownOpen] = useState<number | null>(null);
+  const [statusDropdownOpen, setStatusDropdownOpen] = useState<number | null>(
+    null
+  );
+  const [actionDropdownOpen, setActionDropdownOpen] = useState<number | null>(
+    null
+  );
 
   const fetchData = useCallback(async () => {
     setLoading(true);
@@ -116,6 +121,23 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
     fetchData();
   }, [fetchData]);
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (!target.closest(".relative")) {
+        setStatusDropdownOpen(null);
+        setActionDropdownOpen(null);
+      }
+    };
+
+    if (statusDropdownOpen !== null || actionDropdownOpen !== null) {
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }
+  }, [statusDropdownOpen, actionDropdownOpen]);
+
   const handleStatusChange = async (id: number, newStatus: number) => {
     try {
       if (sectionType === "general-queries") {
@@ -126,7 +148,7 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
         await formSubmissionAPI.updateLeadGenerationStatus(id, newStatus);
       }
       await fetchData();
-      setDropdownOpen(null);
+      setStatusDropdownOpen(null);
     } catch (err: any) {
       setError(err.message || "Failed to update status");
     }
@@ -150,7 +172,7 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
         await formSubmissionAPI.deleteLeadGeneration(id);
       }
       await fetchData();
-      setDropdownOpen(null);
+      setActionDropdownOpen(null);
     } catch (err: any) {
       setError(err.message || "Failed to delete record");
     }
@@ -173,8 +195,14 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
     }
   };
 
-  const toggleDropdown = (index: number) => {
-    setDropdownOpen(dropdownOpen === index ? null : index);
+  const toggleStatusDropdown = (index: number) => {
+    setStatusDropdownOpen(statusDropdownOpen === index ? null : index);
+    setActionDropdownOpen(null);
+  };
+
+  const toggleActionDropdown = (index: number) => {
+    setActionDropdownOpen(actionDropdownOpen === index ? null : index);
+    setStatusDropdownOpen(null);
   };
 
   const handlePageChange = (page: number) => {
@@ -187,14 +215,18 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
         .filter(([key]) => key !== "DELETED")
         .map(([key, value]) => ({
           value,
-          label: CONTACT_STATUS_LABELS[value as keyof typeof CONTACT_STATUS_LABELS],
+          label:
+            CONTACT_STATUS_LABELS[value as keyof typeof CONTACT_STATUS_LABELS],
         }));
     } else if (sectionType === "franchise-applications") {
       return Object.entries(FRANCHISE_STATUS)
         .filter(([key]) => key !== "DELETED")
         .map(([key, value]) => ({
           value,
-          label: FRANCHISE_STATUS_LABELS[value as keyof typeof FRANCHISE_STATUS_LABELS],
+          label:
+            FRANCHISE_STATUS_LABELS[
+              value as keyof typeof FRANCHISE_STATUS_LABELS
+            ],
         }));
     } else {
       return Object.entries(LEAD_STATUS)
@@ -208,21 +240,41 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
 
   const getStatusLabel = (status: number) => {
     if (sectionType === "general-queries") {
-      return CONTACT_STATUS_LABELS[status as keyof typeof CONTACT_STATUS_LABELS] || "Unknown";
+      return (
+        CONTACT_STATUS_LABELS[status as keyof typeof CONTACT_STATUS_LABELS] ||
+        "Unknown"
+      );
     } else if (sectionType === "franchise-applications") {
-      return FRANCHISE_STATUS_LABELS[status as keyof typeof FRANCHISE_STATUS_LABELS] || "Unknown";
+      return (
+        FRANCHISE_STATUS_LABELS[
+          status as keyof typeof FRANCHISE_STATUS_LABELS
+        ] || "Unknown"
+      );
     } else {
-      return LEAD_STATUS_LABELS[status as keyof typeof LEAD_STATUS_LABELS] || "Unknown";
+      return (
+        LEAD_STATUS_LABELS[status as keyof typeof LEAD_STATUS_LABELS] ||
+        "Unknown"
+      );
     }
   };
 
   const getStatusColor = (status: number) => {
     if (sectionType === "general-queries") {
-      return CONTACT_STATUS_COLORS[status as keyof typeof CONTACT_STATUS_COLORS] || "#808080";
+      return (
+        CONTACT_STATUS_COLORS[status as keyof typeof CONTACT_STATUS_COLORS] ||
+        "#808080"
+      );
     } else if (sectionType === "franchise-applications") {
-      return FRANCHISE_STATUS_COLORS[status as keyof typeof FRANCHISE_STATUS_COLORS] || "#808080";
+      return (
+        FRANCHISE_STATUS_COLORS[
+          status as keyof typeof FRANCHISE_STATUS_COLORS
+        ] || "#808080"
+      );
     } else {
-      return LEAD_STATUS_COLORS[status as keyof typeof LEAD_STATUS_COLORS] || "#808080";
+      return (
+        LEAD_STATUS_COLORS[status as keyof typeof LEAD_STATUS_COLORS] ||
+        "#808080"
+      );
     }
   };
 
@@ -238,8 +290,14 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
 
   const renderGeneralQueriesTable = () => {
     return (
-      <table style={{ width: "1100px", borderCollapse: "separate", borderSpacing: 0 }}>
-        <thead>
+      <table
+        style={{
+          width: "1100px",
+          borderCollapse: "separate",
+          borderSpacing: 0,
+        }}
+      >
+        <thead style={{ position: "sticky", top: 0, zIndex: 10 }}>
           <tr style={{ background: "#1D1D1D" }}>
             <th style={headerCellStyle}>Name</th>
             <th style={headerCellStyle}>Email Address</th>
@@ -253,17 +311,29 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
         <tbody>
           {data.map((item: any, index) => (
             <tr key={item.id} style={{ background: "#1D1D1D" }}>
-              <td style={cellStyle}>{item.first_name} {item.last_name}</td>
+              <td style={cellStyle}>
+                {item.first_name} {item.last_name}
+              </td>
               <td style={cellStyle}>{item.email}</td>
               <td style={cellStyle}>{item.phone || "-"}</td>
-              <td style={{ ...cellStyle, maxWidth: "200px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+              <td
+                style={{
+                  ...cellStyle,
+                  maxWidth: "200px",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  whiteSpace: "nowrap",
+                }}
+              >
                 {item.message}
               </td>
-              <td style={cellStyle}>{formatDateTimeForDisplay(item.created_at)}</td>
+              <td style={cellStyle}>
+                {formatDateTimeForDisplay(item.created_at)}
+              </td>
               <td style={cellStyle}>
                 <div className="relative">
                   <button
-                    onClick={() => toggleDropdown(index)}
+                    onClick={() => toggleStatusDropdown(index)}
                     style={{
                       ...statusButtonStyle,
                       borderColor: getStatusColor(item.status),
@@ -282,12 +352,14 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
                       />
                     </svg>
                   </button>
-                  {dropdownOpen === index && (
+                  {statusDropdownOpen === index && (
                     <div style={dropdownStyle}>
                       {getStatusOptions().map((option) => (
                         <button
                           key={option.value}
-                          onClick={() => handleStatusChange(item.id, option.value)}
+                          onClick={() =>
+                            handleStatusChange(item.id, option.value)
+                          }
                           style={dropdownItemStyle}
                         >
                           {option.label}
@@ -298,17 +370,44 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
                 </div>
               </td>
               <td style={{ ...cellStyle, textAlign: "center" }}>
-                <button
-                  onClick={() => handleDelete(item.id)}
-                  style={deleteButtonStyle}
-                >
-                  <Image
-                    src="/images/careers/delete.svg"
-                    alt="Delete"
-                    width={16}
-                    height={16}
-                  />
-                </button>
+                <div className="relative">
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleActionDropdown(index);
+                    }}
+                    className="w-8 h-8 flex items-center justify-center hover:bg-[#333333] rounded"
+                  >
+                    <Image
+                      src="/images/careers/dots-vertical.svg"
+                      alt="Actions"
+                      width={16}
+                      height={16}
+                    />
+                  </button>
+                  {actionDropdownOpen === index && (
+                    <div
+                      className="absolute right-0 bg-[#1D1D1D] border border-[#333333] rounded shadow-lg z-10"
+                      style={{
+                        top: "100%",
+                        marginTop: "4px",
+                        minWidth: "120px",
+                      }}
+                    >
+                      <button
+                        type="button"
+                        onClick={() => {
+                          handleDelete(item.id);
+                          setActionDropdownOpen(null);
+                        }}
+                        className="block w-full text-left px-3 py-2 text-sm text-red-400 hover:bg-[#333333]"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  )}
+                </div>
               </td>
             </tr>
           ))}
@@ -319,8 +418,14 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
 
   const renderFranchiseApplicationsTable = () => {
     return (
-      <table style={{ width: "1100px", borderCollapse: "separate", borderSpacing: 0 }}>
-        <thead>
+      <table
+        style={{
+          width: "1100px",
+          borderCollapse: "separate",
+          borderSpacing: 0,
+        }}
+      >
+        <thead style={{ position: "sticky", top: 0, zIndex: 10 }}>
           <tr style={{ background: "#1D1D1D" }}>
             <th style={headerCellStyle}>Name</th>
             <th style={headerCellStyle}>Email Address</th>
@@ -335,16 +440,20 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
         <tbody>
           {data.map((item: any, index) => (
             <tr key={item.id} style={{ background: "#1D1D1D" }}>
-              <td style={cellStyle}>{item.contact_person || item.business_name}</td>
+              <td style={cellStyle}>
+                {item.contact_person || item.business_name}
+              </td>
               <td style={cellStyle}>{item.email}</td>
               <td style={cellStyle}>{item.phone || "-"}</td>
               <td style={cellStyle}>{item.city || "-"}</td>
               <td style={cellStyle}>₹{item.investment_capacity || "0"}</td>
-              <td style={cellStyle}>{formatDateTimeForDisplay(item.created_at)}</td>
+              <td style={cellStyle}>
+                {formatDateTimeForDisplay(item.created_at)}
+              </td>
               <td style={cellStyle}>
                 <div className="relative">
                   <button
-                    onClick={() => toggleDropdown(index)}
+                    onClick={() => toggleStatusDropdown(index)}
                     style={{
                       ...statusButtonStyle,
                       borderColor: getStatusColor(item.status),
@@ -363,12 +472,14 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
                       />
                     </svg>
                   </button>
-                  {dropdownOpen === index && (
+                  {statusDropdownOpen === index && (
                     <div style={dropdownStyle}>
                       {getStatusOptions().map((option) => (
                         <button
                           key={option.value}
-                          onClick={() => handleStatusChange(item.id, option.value)}
+                          onClick={() =>
+                            handleStatusChange(item.id, option.value)
+                          }
                           style={dropdownItemStyle}
                         >
                           {option.label}
@@ -379,17 +490,44 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
                 </div>
               </td>
               <td style={{ ...cellStyle, textAlign: "center" }}>
-                <button
-                  onClick={() => handleDelete(item.id)}
-                  style={deleteButtonStyle}
-                >
-                  <Image
-                    src="/images/careers/delete.svg"
-                    alt="Delete"
-                    width={16}
-                    height={16}
-                  />
-                </button>
+                <div className="relative">
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleActionDropdown(index);
+                    }}
+                    className="w-8 h-8 flex items-center justify-center hover:bg-[#333333] rounded"
+                  >
+                    <Image
+                      src="/images/careers/dots-vertical.svg"
+                      alt="Actions"
+                      width={16}
+                      height={16}
+                    />
+                  </button>
+                  {actionDropdownOpen === index && (
+                    <div
+                      className="absolute right-0 bg-[#1D1D1D] border border-[#333333] rounded shadow-lg z-10"
+                      style={{
+                        top: "100%",
+                        marginTop: "4px",
+                        minWidth: "120px",
+                      }}
+                    >
+                      <button
+                        type="button"
+                        onClick={() => {
+                          handleDelete(item.id);
+                          setActionDropdownOpen(null);
+                        }}
+                        className="block w-full text-left px-3 py-2 text-sm text-red-400 hover:bg-[#333333]"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  )}
+                </div>
               </td>
             </tr>
           ))}
@@ -400,8 +538,14 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
 
   const renderLeadSubmissionsTable = () => {
     return (
-      <table style={{ width: "1100px", borderCollapse: "separate", borderSpacing: 0 }}>
-        <thead>
+      <table
+        style={{
+          width: "1100px",
+          borderCollapse: "separate",
+          borderSpacing: 0,
+        }}
+      >
+        <thead style={{ position: "sticky", top: 0, zIndex: 10 }}>
           <tr style={{ background: "#1D1D1D" }}>
             <th style={headerCellStyle}>Name</th>
             <th style={headerCellStyle}>Phone Number</th>
@@ -430,15 +574,25 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
                 <td style={cellStyle}>{item.name}</td>
                 <td style={cellStyle}>{item.phone}</td>
                 <td style={cellStyle}>{interests.join(", ") || "-"}</td>
-                <td style={{ ...cellStyle, maxWidth: "150px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                <td
+                  style={{
+                    ...cellStyle,
+                    maxWidth: "150px",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    whiteSpace: "nowrap",
+                  }}
+                >
                   {item.message || "-"}
                 </td>
                 <td style={cellStyle}>{item.preferred_location || "-"}</td>
-                <td style={cellStyle}>{formatDateTimeForDisplay(item.created_at)}</td>
+                <td style={cellStyle}>
+                  {formatDateTimeForDisplay(item.created_at)}
+                </td>
                 <td style={cellStyle}>
                   <div className="relative">
                     <button
-                      onClick={() => toggleDropdown(index)}
+                      onClick={() => toggleStatusDropdown(index)}
                       style={{
                         ...statusButtonStyle,
                         borderColor: getStatusColor(item.status),
@@ -457,12 +611,14 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
                         />
                       </svg>
                     </button>
-                    {dropdownOpen === index && (
+                    {statusDropdownOpen === index && (
                       <div style={dropdownStyle}>
                         {getStatusOptions().map((option) => (
                           <button
                             key={option.value}
-                            onClick={() => handleStatusChange(item.id, option.value)}
+                            onClick={() =>
+                              handleStatusChange(item.id, option.value)
+                            }
                             style={dropdownItemStyle}
                           >
                             {option.label}
@@ -473,17 +629,44 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
                   </div>
                 </td>
                 <td style={{ ...cellStyle, textAlign: "center" }}>
-                  <button
-                    onClick={() => handleDelete(item.id)}
-                    style={deleteButtonStyle}
-                  >
-                    <Image
-                      src="/images/careers/delete.svg"
-                      alt="Delete"
-                      width={16}
-                      height={16}
-                    />
-                  </button>
+                  <div className="relative">
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toggleActionDropdown(index);
+                      }}
+                      className="w-8 h-8 flex items-center justify-center hover:bg-[#333333] rounded"
+                    >
+                      <Image
+                        src="/images/careers/dots-vertical.svg"
+                        alt="Actions"
+                        width={16}
+                        height={16}
+                      />
+                    </button>
+                    {actionDropdownOpen === index && (
+                      <div
+                        className="absolute right-0 bg-[#1D1D1D] border border-[#333333] rounded shadow-lg z-10"
+                        style={{
+                          top: "100%",
+                          marginTop: "4px",
+                          minWidth: "120px",
+                        }}
+                      >
+                        <button
+                          type="button"
+                          onClick={() => {
+                            handleDelete(item.id);
+                            setActionDropdownOpen(null);
+                          }}
+                          className="block w-full text-left px-3 py-2 text-sm text-red-400 hover:bg-[#333333]"
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 </td>
               </tr>
             );
@@ -558,7 +741,12 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
         </div>
       )}
 
-      <div style={{ width: "1100px", overflow: "hidden" }}>
+      <div
+        className={`border border-[#333333] ${
+          showHeader ? "border-t-0 rounded-b-2xl" : "rounded-2xl"
+        } overflow-hidden`}
+        style={{ width: "1100px" }}
+      >
         {loading && (
           <div className="flex items-center justify-center py-20 bg-[#1D1D1D]">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#00DBDC]"></div>
@@ -577,14 +765,19 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
           </div>
         )}
 
-        {!loading && !error && data.length > 0 && <div>{renderTable()}</div>}
+        {!loading && !error && data.length > 0 && (
+          <div
+            className="overflow-x-auto"
+            style={{ maxHeight: "calc(100vh - 400px)" }}
+          >
+            {renderTable()}
+          </div>
+        )}
 
         <div
-          className="bg-[#333333] px-6 py-4"
+          className="bg-[#333333] px-6 py-4 border-t border-[#333333]"
           style={{
-            width: "1100px",
-            borderBottomLeftRadius: "16px",
-            borderBottomRightRadius: "16px",
+            width: "100%",
           }}
         >
           <Pagination
@@ -665,4 +858,3 @@ const deleteButtonStyle: React.CSSProperties = {
 };
 
 export default FormSubmissionTable;
-
