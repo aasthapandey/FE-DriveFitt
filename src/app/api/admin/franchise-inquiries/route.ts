@@ -17,7 +17,7 @@ export async function GET(request: NextRequest) {
     const offset = (page - 1) * limit;
 
     let whereConditions: string[] = ["status != 6"];
-    let queryParams: any[] = [];
+    let queryParams: (string | number)[] = [];
 
     if (search) {
       whereConditions.push(

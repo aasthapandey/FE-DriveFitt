@@ -108,8 +108,10 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
         setTotalPages(response.pagination.totalPages);
         setTotalItems(response.pagination.totalItems);
       }
-    } catch (err: any) {
-      setError(err.message || "Failed to fetch data");
+    } catch (err: unknown) {
+      const errorMessage =
+        err instanceof Error ? err.message : "Failed to fetch data";
+      setError(errorMessage);
       console.error("Error fetching data:", err);
     } finally {
       setLoading(false);
@@ -198,8 +200,10 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
       }
       await fetchData();
       setStatusDropdownOpen(null);
-    } catch (err: any) {
-      setError(err.message || "Failed to update status");
+    } catch (err: unknown) {
+      const errorMessage =
+        err instanceof Error ? err.message : "Failed to update status";
+      setError(errorMessage);
     }
   };
 
@@ -222,8 +226,10 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
       }
       await fetchData();
       setActionDropdownOpen(null);
-    } catch (err: any) {
-      setError(err.message || "Failed to delete record");
+    } catch (err: unknown) {
+      const errorMessage =
+        err instanceof Error ? err.message : "Failed to delete record";
+      setError(errorMessage);
     }
   };
 
@@ -360,7 +366,8 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
           </tr>
         </thead>
         <tbody>
-          {data.map((item: any, index) => {
+          {data.map((item, index) => {
+            const contactItem = item as ContactUsRecord;
             const isLastRow = index === data.length - 1;
             const lastRowCellStyle = isLastRow
               ? {
@@ -384,10 +391,10 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
             return (
               <tr key={item.id} style={{ background: "#1D1D1D" }}>
                 <td style={firstCellStyle}>
-                  {item.first_name} {item.last_name}
+                  {contactItem.first_name} {contactItem.last_name}
                 </td>
-                <td style={lastRowCellStyle}>{item.email}</td>
-                <td style={lastRowCellStyle}>{item.phone || "-"}</td>
+                <td style={lastRowCellStyle}>{contactItem.email}</td>
+                <td style={lastRowCellStyle}>{contactItem.phone || "-"}</td>
                 <td
                   style={{
                     ...lastRowCellStyle,
@@ -400,10 +407,10 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
                     lineHeight: "1.5",
                   }}
                 >
-                  {item.message}
+                  {contactItem.message}
                 </td>
                 <td style={lastRowCellStyle}>
-                  {formatDateTimeForDisplay(item.created_at)}
+                  {formatDateTimeForDisplay(contactItem.created_at)}
                 </td>
                 <td style={lastRowCellStyle}>
                   <div className="relative flex justify-center">
@@ -559,7 +566,8 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
           </tr>
         </thead>
         <tbody>
-          {data.map((item: any, index) => {
+          {data.map((item, index) => {
+            const franchiseItem = item as FranchiseInquiryRecord;
             const isLastRow = index === data.length - 1;
             const lastRowCellStyle = isLastRow
               ? {
@@ -583,16 +591,16 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
             return (
               <tr key={item.id} style={{ background: "#1D1D1D" }}>
                 <td style={firstCellStyle}>
-                  {item.contact_person || item.business_name}
+                  {franchiseItem.contact_person || franchiseItem.business_name}
                 </td>
-                <td style={lastRowCellStyle}>{item.email}</td>
-                <td style={lastRowCellStyle}>{item.phone || "-"}</td>
-                <td style={lastRowCellStyle}>{item.city || "-"}</td>
+                <td style={lastRowCellStyle}>{franchiseItem.email}</td>
+                <td style={lastRowCellStyle}>{franchiseItem.phone || "-"}</td>
+                <td style={lastRowCellStyle}>{franchiseItem.city || "-"}</td>
                 <td style={lastRowCellStyle}>
-                  ₹{item.investment_capacity || "0"}
+                  ₹{franchiseItem.investment_capacity || "0"}
                 </td>
                 <td style={lastRowCellStyle}>
-                  {formatDateTimeForDisplay(item.created_at)}
+                  {formatDateTimeForDisplay(franchiseItem.created_at)}
                 </td>
                 <td style={lastRowCellStyle}>
                   <div className="relative flex justify-center">
@@ -748,16 +756,17 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
           </tr>
         </thead>
         <tbody>
-          {data.map((item: any, index) => {
+          {data.map((item, index) => {
+            const leadItem = item as LeadGenerationRecord;
             const interests = [];
-            if (item.fitness) interests.push("Fitness");
-            if (item.cricket) interests.push("Cricket");
-            if (item.recovery) interests.push("Recovery");
-            if (item.running) interests.push("Running");
-            if (item.pilates) interests.push("Pilates");
-            if (item.personal_training) interests.push("Personal Training");
-            if (item.physiotherapy) interests.push("Physiotherapy");
-            if (item.group_classes) interests.push("Group Classes");
+            if (leadItem.fitness) interests.push("Fitness");
+            if (leadItem.cricket) interests.push("Cricket");
+            if (leadItem.recovery) interests.push("Recovery");
+            if (leadItem.running) interests.push("Running");
+            if (leadItem.pilates) interests.push("Pilates");
+            if (leadItem.personal_training) interests.push("Personal Training");
+            if (leadItem.physiotherapy) interests.push("Physiotherapy");
+            if (leadItem.group_classes) interests.push("Group Classes");
 
             const isLastRow = index === data.length - 1;
             const lastRowCellStyle = isLastRow
@@ -781,8 +790,8 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
 
             return (
               <tr key={item.id} style={{ background: "#1D1D1D" }}>
-                <td style={firstCellStyle}>{item.name}</td>
-                <td style={lastRowCellStyle}>{item.phone}</td>
+                <td style={firstCellStyle}>{leadItem.name}</td>
+                <td style={lastRowCellStyle}>{leadItem.phone}</td>
                 <td style={lastRowCellStyle}>{interests.join(", ") || "-"}</td>
                 <td
                   style={{
@@ -796,13 +805,13 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
                     lineHeight: "1.5",
                   }}
                 >
-                  {item.message || "-"}
+                  {leadItem.message || "-"}
                 </td>
                 <td style={lastRowCellStyle}>
-                  {item.preferred_location || "-"}
+                  {leadItem.preferred_location || "-"}
                 </td>
                 <td style={lastRowCellStyle}>
-                  {formatDateTimeForDisplay(item.created_at)}
+                  {formatDateTimeForDisplay(leadItem.created_at)}
                 </td>
                 <td style={cellStyle}>
                   <div className="relative flex justify-center">

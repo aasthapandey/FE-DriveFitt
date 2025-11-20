@@ -6,6 +6,7 @@ import JobPostApplicationTable from "./JobPostApplicationTable";
 import AddJobPostModal from "./AddJobPostModal";
 import { jobAPI } from "@/services/jobAPI";
 import { applicationAPI } from "@/services/applicationAPI";
+import { JobPosting } from "@/types/database";
 import {
   JOB_STATUS,
   APPLICATION_STATUS,
@@ -37,8 +38,23 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
   const [selectedToggle, setSelectedToggle] =
     useState<ToggleOption>("job-posts");
   const [searchQuery, setSearchQuery] = useState("");
+  interface JobPostFormData {
+    id?: number;
+    jobTitle: string;
+    departmentId: number | "";
+    locationId: number | "";
+    jobType: string;
+    applicationDeadline: string;
+    jobDescription: string;
+    skillsRequired: string;
+    roleItems: string[];
+    qualifications: string[];
+    yearsOfExperience: string;
+    isVisible?: boolean;
+  }
+
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-  const [editJobData, setEditJobData] = useState<any>(null);
+  const [editJobData, setEditJobData] = useState<JobPostFormData | null>(null);
   const [isEditMode, setIsEditMode] = useState(false);
 
   // Filter states
@@ -68,7 +84,7 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
   >([]);
 
   // Store complete job data for editing without additional API calls
-  const [completeJobData, setCompleteJobData] = useState<any[]>([]);
+  const [completeJobData, setCompleteJobData] = useState<JobPosting[]>([]);
   const [applications, setApplications] = useState<
     {
       id: number;
@@ -327,7 +343,16 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
     setIsAddModalOpen(true);
   };
 
-  const handleEditJobPost = (index: number, jobData: any) => {
+  interface JobPostData {
+    id: number;
+    jobTitle: string;
+    department: string;
+    location: string;
+    status: string;
+    isVisible: boolean;
+  }
+
+  const handleEditJobPost = (index: number, jobData: JobPostData) => {
     // Find the complete job data from stored data (no API call needed)
     const fullJobData = completeJobData.find((job) => job.id === jobData.id);
 
@@ -371,7 +396,7 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
     setEditJobData(null);
   };
 
-  const handleJobPostSubmit = async (jobPost: any) => {
+  const handleJobPostSubmit = async (jobPost: JobPostFormData) => {
     const mapJobType = (jt: string): JobType => {
       const v = (jt || "").toLowerCase();
       if (v.includes("part")) return JOB_TYPE.PART_TIME;
@@ -391,7 +416,7 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
       qualifications: jobPost.qualifications || [],
       years_of_experience: jobPost.yearsOfExperience || undefined,
       is_visible: true,
-    } as any;
+    };
 
     if (isEditMode && jobPost?.id) {
       await jobAPI.update(jobPost.id, payload);
@@ -652,8 +677,10 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
           selectedStatuses={selectedStatuses}
           // Applications tab specific filters
           jobs={
-            completeJobData?.map((j: any) => ({ id: j.id, title: j.title })) ||
-            []
+            completeJobData?.map((j: JobPosting) => ({
+              id: j.id,
+              title: j.title,
+            })) || []
           }
           selectedAppliedJobs={appliedJobIds}
           onAppliedJobsFilter={handleAppliedJobsFilter}

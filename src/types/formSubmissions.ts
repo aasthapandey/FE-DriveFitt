@@ -83,7 +83,7 @@ export interface StatusUpdateRequest {
 export interface StatusUpdateResponse {
   status: boolean;
   message: string;
-  data?: any;
+  data?: unknown;
 }
 
 export interface DeleteResponse {

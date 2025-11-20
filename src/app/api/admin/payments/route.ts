@@ -49,8 +49,8 @@ export async function GET(request: NextRequest) {
     }
 
     if (status && status !== "all") {
-      query += ` AND o.status = '${status}'`;
-      countQuery += ` AND o.status = '${status}'`;
+      query += ` AND o.status = ?`;
+      countQuery += ` AND o.status = ?`;
       queryParams.push(status);
     }
 
@@ -58,8 +58,11 @@ export async function GET(request: NextRequest) {
 
     const payments = await executeQuery<Payment[]>(query, queryParams);
     // Adjust queryParams for count query (exclude LIMIT and OFFSET, but include status if present)
-    const searchPattern = `%${search}%`;
-    const countQueryParams = search ? [searchPattern, searchPattern] : [];
+    const countQueryParams: (string | number)[] = [];
+    if (search) {
+      const searchPattern = `%${search}%`;
+      countQueryParams.push(searchPattern, searchPattern);
+    }
     if (status && status !== "all") {
       countQueryParams.push(status);
     }

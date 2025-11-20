@@ -13,10 +13,15 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
+interface GraphDataPoint {
+  date: string;
+  value: number;
+}
+
 interface DashboardGraphProps {
   title: string;
   value: string | number;
-  data: any[];
+  data: GraphDataPoint[];
   type: "line" | "bar";
   timeRange: string;
   onTimeRangeChange?: (range: string) => void;

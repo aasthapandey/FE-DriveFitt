@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
     const startDateStr = startDate.toISOString().split("T")[0];
 
     let query = "";
-    let params: any[] = [];
+    let params: (string | number)[] = [];
 
     if (type === "subscription") {
       query = `
@@ -92,10 +92,12 @@ export async function GET(request: NextRequest) {
         total: total,
       },
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Error fetching dashboard graph data:", error);
+    const errorMessage =
+      error instanceof Error ? error.message : "Internal server error";
     return NextResponse.json(
-      { status: false, error: error.message || "Internal server error" },
+      { status: false, error: errorMessage },
       { status: 500 }
     );
   }

@@ -66,10 +66,12 @@ export async function GET(request: NextRequest) {
         formSubmitted: formResult?.total || 0,
       },
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Error fetching dashboard stats:", error);
+    const errorMessage =
+      error instanceof Error ? error.message : "Internal server error";
     return NextResponse.json(
-      { status: false, error: error.message || "Internal server error" },
+      { status: false, error: errorMessage },
       { status: 500 }
     );
   }

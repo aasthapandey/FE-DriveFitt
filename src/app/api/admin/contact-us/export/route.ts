@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
     const endDate = searchParams.get("endDate");
 
     let whereConditions: string[] = [];
-    let queryParams: any[] = [];
+    let queryParams: (string | number)[] = [];
 
     if (search) {
       whereConditions.push(
