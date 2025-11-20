@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import { AdminHeaderProps } from "@/types/adminPortal";
+import { useAdminAuth } from "@/contexts/AdminAuthContext";
 
 const AdminHeader = ({
   title,
@@ -17,6 +18,7 @@ const AdminHeader = ({
   const [showSearchInput, setShowSearchInput] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const searchRef = useRef<HTMLDivElement>(null);
+  const { logout } = useAdminAuth();
 
   const handleSearchClick = () => {
     setShowSearchInput(!showSearchInput);
@@ -185,7 +187,10 @@ const AdminHeader = ({
                   Account Settings
                 </button>
                 <hr className="border-[#333333] my-1" />
-                <button className="w-full text-left px-3 py-2 text-sm text-red-400 hover:bg-[#333333] rounded">
+                <button
+                  onClick={logout}
+                  className="w-full text-left px-3 py-2 text-sm text-red-400 hover:bg-[#333333] rounded"
+                >
                   Sign Out
                 </button>
               </div>

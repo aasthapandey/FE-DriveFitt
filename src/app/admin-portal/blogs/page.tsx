@@ -4,21 +4,11 @@ import { useEffect, useState } from "react";
 import AdminHeader from "@/components/AdminPortal/AdminHeader";
 import BlogsTable from "@/components/AdminPortal/BlogsTable";
 import BlogModal from "@/components/AdminPortal/BlogModal";
-import {
-  AdminUser,
-  BlogEntry,
-  BlogFormData,
-  BlogCategory,
-} from "@/types/adminPortal";
+import { BlogEntry, BlogFormData, BlogCategory } from "@/types/adminPortal";
 import { blogAPI } from "@/services/blogAPI";
 import { blogCategoryAPI } from "@/services/blogCategoryAPI";
 import { BlogStatus } from "@/constants/enums";
-
-// Mock user data - in real implementation, this would come from authentication
-const mockUser: AdminUser = {
-  name: "Admin",
-  email: "admin@drivefitt.com",
-};
+import { useAdminAuth } from "@/contexts/AdminAuthContext";
 
 const mockBlogs: BlogEntry[] = [];
 
@@ -34,6 +24,15 @@ export default function BlogsPage() {
     undefined
   );
   const [loading, setLoading] = useState<boolean>(false);
+  const { adminUser } = useAdminAuth();
+
+  if (!adminUser) {
+    return (
+      <div className="min-h-screen bg-[#0D0D0D] flex items-center justify-center">
+        <div className="text-white">Loading...</div>
+      </div>
+    );
+  }
 
   useEffect(() => {
     (async () => {
@@ -164,7 +163,7 @@ export default function BlogsPage() {
     <div className="h-full bg-[#0D0D0D] flex flex-col">
       <AdminHeader
         title="Blogs"
-        user={mockUser}
+        user={adminUser}
         onSearch={handleSearch}
         onAdd={handleAddBlog}
         showSearchButton={true}

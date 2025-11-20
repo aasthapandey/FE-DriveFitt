@@ -4,13 +4,7 @@ import { useState } from "react";
 import AdminHeader from "@/components/AdminPortal/AdminHeader";
 import StatsCard from "@/components/AdminPortal/StatsCard";
 import DashboardGraph from "@/components/AdminPortal/DashboardGraph";
-import { AdminUser } from "@/types/adminPortal";
-
-// Mock user data - in real implementation, this would come from authentication
-const mockUser: AdminUser = {
-  name: "Admin",
-  email: "admin@drivefitt.com",
-};
+import { useAdminAuth } from "@/contexts/AdminAuthContext";
 
 // Mock data for graphs
 const generateMockData = (days: number) => {
@@ -32,15 +26,24 @@ const generateMockData = (days: number) => {
 export default function DashboardPage() {
   const [subscriptionTimeRange, setSubscriptionTimeRange] = useState("30");
   const [formsTimeRange, setFormsTimeRange] = useState("30");
+  const { adminUser } = useAdminAuth();
 
   const subscriptionData = generateMockData(Number(subscriptionTimeRange));
   const formsData = generateMockData(Number(formsTimeRange));
+
+  if (!adminUser) {
+    return (
+      <div className="min-h-screen bg-[#0D0D0D] flex items-center justify-center">
+        <div className="text-white">Loading...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#0D0D0D]">
       <AdminHeader
         title="Dashboard"
-        user={mockUser}
+        user={adminUser}
         showSearchButton={false}
         showAddButton={false}
       />
