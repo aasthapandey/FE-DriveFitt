@@ -135,16 +135,10 @@ export default function BlogsPage() {
     }
   };
 
-  interface ExtendedBlogFormData extends BlogFormData {
-    _action?: string;
-    id?: string;
-  }
-
   const handleSaveBlog = async (blogData: BlogFormData) => {
     // Check if this is a delete action
-    const extendedData = blogData as ExtendedBlogFormData;
-    if (extendedData._action === "delete" && extendedData.id) {
-      await handleDeleteBlog(extendedData.id);
+    if (blogData._action === "delete" && blogData.id !== undefined) {
+      await handleDeleteBlog(String(blogData.id));
       return;
     }
 
