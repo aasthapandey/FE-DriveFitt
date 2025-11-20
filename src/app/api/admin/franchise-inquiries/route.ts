@@ -84,7 +84,10 @@ export async function GET(request: NextRequest) {
       LIMIT ${limit} OFFSET ${offset}
     `;
 
-    const data = await executeQuery<FranchiseInquiryRecord[]>(dataQuery, queryParams);
+    const data = await executeQuery<FranchiseInquiryRecord[]>(
+      dataQuery,
+      queryParams
+    );
 
     const totalPages = Math.ceil(totalItems / limit);
 

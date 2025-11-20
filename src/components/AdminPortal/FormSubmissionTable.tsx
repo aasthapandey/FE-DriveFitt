@@ -295,6 +295,7 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
           width: "1100px",
           borderCollapse: "separate",
           borderSpacing: 0,
+          tableLayout: "auto",
         }}
       >
         <thead style={{ position: "sticky", top: 0, zIndex: 10 }}>
@@ -319,10 +320,13 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
               <td
                 style={{
                   ...cellStyle,
-                  maxWidth: "200px",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                  whiteSpace: "nowrap",
+                  minWidth: "200px",
+                  maxWidth: "400px",
+                  wordWrap: "break-word",
+                  wordBreak: "break-word",
+                  overflowWrap: "break-word",
+                  whiteSpace: "normal",
+                  lineHeight: "1.5",
                 }}
               >
                 {item.message}
@@ -423,6 +427,7 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
           width: "1100px",
           borderCollapse: "separate",
           borderSpacing: 0,
+          tableLayout: "auto",
         }}
       >
         <thead style={{ position: "sticky", top: 0, zIndex: 10 }}>
@@ -543,6 +548,7 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
           width: "1100px",
           borderCollapse: "separate",
           borderSpacing: 0,
+          tableLayout: "auto",
         }}
       >
         <thead style={{ position: "sticky", top: 0, zIndex: 10 }}>
@@ -577,10 +583,13 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
                 <td
                   style={{
                     ...cellStyle,
-                    maxWidth: "150px",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    whiteSpace: "nowrap",
+                    minWidth: "150px",
+                    maxWidth: "350px",
+                    wordWrap: "break-word",
+                    wordBreak: "break-word",
+                    overflowWrap: "break-word",
+                    whiteSpace: "normal",
+                    lineHeight: "1.5",
                   }}
                 >
                   {item.message || "-"}
@@ -768,7 +777,7 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
         {!loading && !error && data.length > 0 && (
           <div
             className="overflow-x-auto"
-            style={{ maxHeight: "calc(100vh - 400px)" }}
+            style={{ maxHeight: "calc(200vh - 400px)" }}
           >
             {renderTable()}
           </div>
@@ -794,7 +803,10 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
 };
 
 const headerCellStyle: React.CSSProperties = {
-  padding: "16px",
+  paddingTop: "16px",
+  paddingBottom: "16px",
+  paddingLeft: "40px",
+  paddingRight: "24px",
   textAlign: "left",
   fontSize: "14px",
   fontWeight: 500,
@@ -803,7 +815,10 @@ const headerCellStyle: React.CSSProperties = {
 };
 
 const cellStyle: React.CSSProperties = {
-  padding: "16px",
+  paddingTop: "16px",
+  paddingBottom: "16px",
+  paddingLeft: "24px",
+  paddingRight: "24px",
   fontSize: "14px",
   color: "#FFFFFF",
   borderBottom: "1px solid #333333",

@@ -80,7 +80,10 @@ export async function GET(request: NextRequest) {
       LIMIT ${limit} OFFSET ${offset}
     `;
 
-    const data = await executeQuery<LeadGenerationRecord[]>(dataQuery, queryParams);
+    const data = await executeQuery<LeadGenerationRecord[]>(
+      dataQuery,
+      queryParams
+    );
 
     const totalPages = Math.ceil(totalItems / limit);
 
