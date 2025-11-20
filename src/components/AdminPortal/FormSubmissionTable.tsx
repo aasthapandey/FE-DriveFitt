@@ -335,21 +335,49 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
                 {formatDateTimeForDisplay(item.created_at)}
               </td>
               <td style={cellStyle}>
-                <div className="relative">
+                <div className="relative flex justify-center">
                   <button
-                    onClick={() => toggleStatusDropdown(index)}
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleStatusDropdown(index);
+                    }}
+                    className="bg-[#333333] border border-[#333333] rounded flex items-center justify-between transition-colors"
                     style={{
-                      ...statusButtonStyle,
-                      borderColor: getStatusColor(item.status),
+                      width: "85px",
+                      height: "24px",
+                      paddingTop: "4px",
+                      paddingRight: "10px",
+                      paddingBottom: "4px",
+                      paddingLeft: "10px",
+                      gap: "4px",
                     }}
                   >
-                    <span style={{ color: getStatusColor(item.status) }}>
+                    <span
+                      className="text-center"
+                      style={{
+                        color: getStatusColor(item.status),
+                        fontWeight: 300,
+                        fontSize: "12px",
+                        lineHeight: "16px",
+                        letterSpacing: "0%",
+                      }}
+                    >
                       {getStatusLabel(item.status)}
                     </span>
-                    <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
+                    <svg
+                      width="8"
+                      height="6"
+                      viewBox="0 0 8 6"
+                      fill="none"
+                      className={`transform transition-transform duration-200 ${
+                        statusDropdownOpen === index ? "rotate-180" : ""
+                      }`}
+                      style={{ color: getStatusColor(item.status) }}
+                    >
                       <path
-                        d="M1 1L6 6L11 1"
-                        stroke={getStatusColor(item.status)}
+                        d="M1 1L4 4L7 1"
+                        stroke="currentColor"
                         strokeWidth="1.5"
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -357,14 +385,24 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
                     </svg>
                   </button>
                   {statusDropdownOpen === index && (
-                    <div style={dropdownStyle}>
+                    <div
+                      className="absolute left-0 bg-[#1D1D1D] border border-[#333333] rounded shadow-lg z-20"
+                      style={{
+                        width: "85px",
+                        ...(index >= data.length - 2
+                          ? { bottom: "100%", marginBottom: "4px" }
+                          : { top: "100%", marginTop: "4px" }),
+                      }}
+                    >
                       {getStatusOptions().map((option) => (
                         <button
                           key={option.value}
-                          onClick={() =>
-                            handleStatusChange(item.id, option.value)
-                          }
-                          style={dropdownItemStyle}
+                          type="button"
+                          onClick={() => {
+                            handleStatusChange(item.id, option.value);
+                            setStatusDropdownOpen(null);
+                          }}
+                          className="block w-full text-left px-3 py-2 text-xs text-white hover:bg-[#333333]"
                         >
                           {option.label}
                         </button>
@@ -394,9 +432,10 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
                     <div
                       className="absolute right-0 bg-[#1D1D1D] border border-[#333333] rounded shadow-lg z-10"
                       style={{
-                        top: "100%",
-                        marginTop: "4px",
                         minWidth: "120px",
+                        ...(index >= data.length - 2
+                          ? { bottom: "100%", marginBottom: "4px" }
+                          : { top: "100%", marginTop: "4px" }),
                       }}
                     >
                       <button
@@ -456,21 +495,49 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
                 {formatDateTimeForDisplay(item.created_at)}
               </td>
               <td style={cellStyle}>
-                <div className="relative">
+                <div className="relative flex justify-center">
                   <button
-                    onClick={() => toggleStatusDropdown(index)}
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleStatusDropdown(index);
+                    }}
+                    className="bg-[#333333] border border-[#333333] rounded flex items-center justify-between transition-colors"
                     style={{
-                      ...statusButtonStyle,
-                      borderColor: getStatusColor(item.status),
+                      width: "85px",
+                      height: "24px",
+                      paddingTop: "4px",
+                      paddingRight: "10px",
+                      paddingBottom: "4px",
+                      paddingLeft: "10px",
+                      gap: "4px",
                     }}
                   >
-                    <span style={{ color: getStatusColor(item.status) }}>
+                    <span
+                      className="text-center"
+                      style={{
+                        color: getStatusColor(item.status),
+                        fontWeight: 300,
+                        fontSize: "12px",
+                        lineHeight: "16px",
+                        letterSpacing: "0%",
+                      }}
+                    >
                       {getStatusLabel(item.status)}
                     </span>
-                    <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
+                    <svg
+                      width="8"
+                      height="6"
+                      viewBox="0 0 8 6"
+                      fill="none"
+                      className={`transform transition-transform duration-200 ${
+                        statusDropdownOpen === index ? "rotate-180" : ""
+                      }`}
+                      style={{ color: getStatusColor(item.status) }}
+                    >
                       <path
-                        d="M1 1L6 6L11 1"
-                        stroke={getStatusColor(item.status)}
+                        d="M1 1L4 4L7 1"
+                        stroke="currentColor"
                         strokeWidth="1.5"
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -478,14 +545,24 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
                     </svg>
                   </button>
                   {statusDropdownOpen === index && (
-                    <div style={dropdownStyle}>
+                    <div
+                      className="absolute left-0 bg-[#1D1D1D] border border-[#333333] rounded shadow-lg z-20"
+                      style={{
+                        width: "85px",
+                        ...(index >= data.length - 2
+                          ? { bottom: "100%", marginBottom: "4px" }
+                          : { top: "100%", marginTop: "4px" }),
+                      }}
+                    >
                       {getStatusOptions().map((option) => (
                         <button
                           key={option.value}
-                          onClick={() =>
-                            handleStatusChange(item.id, option.value)
-                          }
-                          style={dropdownItemStyle}
+                          type="button"
+                          onClick={() => {
+                            handleStatusChange(item.id, option.value);
+                            setStatusDropdownOpen(null);
+                          }}
+                          className="block w-full text-left px-3 py-2 text-xs text-white hover:bg-[#333333]"
                         >
                           {option.label}
                         </button>
@@ -515,9 +592,10 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
                     <div
                       className="absolute right-0 bg-[#1D1D1D] border border-[#333333] rounded shadow-lg z-10"
                       style={{
-                        top: "100%",
-                        marginTop: "4px",
                         minWidth: "120px",
+                        ...(index >= data.length - 2
+                          ? { bottom: "100%", marginBottom: "4px" }
+                          : { top: "100%", marginTop: "4px" }),
                       }}
                     >
                       <button
@@ -599,21 +677,49 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
                   {formatDateTimeForDisplay(item.created_at)}
                 </td>
                 <td style={cellStyle}>
-                  <div className="relative">
+                  <div className="relative flex justify-center">
                     <button
-                      onClick={() => toggleStatusDropdown(index)}
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toggleStatusDropdown(index);
+                      }}
+                      className="bg-[#333333] border border-[#333333] rounded flex items-center justify-between transition-colors"
                       style={{
-                        ...statusButtonStyle,
-                        borderColor: getStatusColor(item.status),
+                        width: "85px",
+                        height: "24px",
+                        paddingTop: "4px",
+                        paddingRight: "10px",
+                        paddingBottom: "4px",
+                        paddingLeft: "10px",
+                        gap: "4px",
                       }}
                     >
-                      <span style={{ color: getStatusColor(item.status) }}>
+                      <span
+                        className="text-center"
+                        style={{
+                          color: getStatusColor(item.status),
+                          fontWeight: 300,
+                          fontSize: "12px",
+                          lineHeight: "16px",
+                          letterSpacing: "0%",
+                        }}
+                      >
                         {getStatusLabel(item.status)}
                       </span>
-                      <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
+                      <svg
+                        width="8"
+                        height="6"
+                        viewBox="0 0 8 6"
+                        fill="none"
+                        className={`transform transition-transform duration-200 ${
+                          statusDropdownOpen === index ? "rotate-180" : ""
+                        }`}
+                        style={{ color: getStatusColor(item.status) }}
+                      >
                         <path
-                          d="M1 1L6 6L11 1"
-                          stroke={getStatusColor(item.status)}
+                          d="M1 1L4 4L7 1"
+                          stroke="currentColor"
                           strokeWidth="1.5"
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -621,14 +727,23 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
                       </svg>
                     </button>
                     {statusDropdownOpen === index && (
-                      <div style={dropdownStyle}>
+                      <div
+                        className="absolute left-0 bg-[#1D1D1D] border border-[#333333] rounded shadow-lg z-20"
+                        style={{
+                          width: "85px",
+                          top: "100%",
+                          marginTop: "4px",
+                        }}
+                      >
                         {getStatusOptions().map((option) => (
                           <button
                             key={option.value}
-                            onClick={() =>
-                              handleStatusChange(item.id, option.value)
-                            }
-                            style={dropdownItemStyle}
+                            type="button"
+                            onClick={() => {
+                              handleStatusChange(item.id, option.value);
+                              setStatusDropdownOpen(null);
+                            }}
+                            className="block w-full text-left px-3 py-2 text-xs text-white hover:bg-[#333333]"
                           >
                             {option.label}
                           </button>
@@ -774,14 +889,7 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
           </div>
         )}
 
-        {!loading && !error && data.length > 0 && (
-          <div
-            className="overflow-x-auto"
-            style={{ maxHeight: "calc(200vh - 400px)" }}
-          >
-            {renderTable()}
-          </div>
-        )}
+        {!loading && !error && data.length > 0 && <div>{renderTable()}</div>}
 
         <div
           className="bg-[#333333] px-6 py-4 border-t border-[#333333]"
