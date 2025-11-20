@@ -2,12 +2,28 @@ import { NextRequest, NextResponse } from "next/server";
 import { executeQuery } from "@/lib/database";
 import { BlogStatus } from "@/constants/enums";
 
+interface BlogRow {
+  id: number;
+  title: string;
+  description: string;
+  slug: string;
+  date: string;
+  image: string;
+  html: string;
+  category_id: number;
+  is_featured: number;
+  status: number;
+  created_at: string;
+  updated_at: string;
+  category_heading: string | null;
+}
+
 export async function GET(
   _request: NextRequest,
   { params }: { params: { id: string } }
 ) {
   try {
-    const [row]: any[] = await executeQuery<any[]>(
+    const result = await executeQuery<BlogRow[]>(
       `SELECT 
         b.id, 
         b.title, 
@@ -27,13 +43,14 @@ export async function GET(
       WHERE b.id = ?`,
       [params.id]
     );
+    const row = result[0];
     if (!row)
       return NextResponse.json(
         { status: false, error: "Not found" },
         { status: 404 }
       );
     return NextResponse.json({ status: true, data: row });
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { status: false, error: "Failed to fetch" },
       { status: 500 }
@@ -48,7 +65,7 @@ export async function PUT(
   try {
     const body = await request.json();
     const fields: string[] = [];
-    const values: any[] = [];
+    const values: (string | number | null)[] = [];
 
     const map: Record<string, string> = {
       title: "title",
@@ -84,12 +101,27 @@ export async function PUT(
       values
     );
 
-    const [row]: any[] = await executeQuery<any[]>(
+    interface BlogUpdateRow {
+      id: number;
+      title: string;
+      description: string;
+      slug: string;
+      date: string;
+      image: string;
+      category_id: number;
+      is_featured: number;
+      status: number;
+      created_at: string;
+      updated_at: string;
+    }
+
+    const result = await executeQuery<BlogUpdateRow[]>(
       `SELECT id, title, description, slug, date, image_url AS image, category_id, is_featured, status, created_at, updated_at FROM blogs WHERE id = ?`,
       [params.id]
     );
+    const row = result[0];
     return NextResponse.json({ status: true, data: row });
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { status: false, error: "Failed to update" },
       { status: 500 }
@@ -107,7 +139,7 @@ export async function DELETE(
       [BlogStatus.DELETED, params.id]
     );
     return NextResponse.json({ status: true });
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { status: false, error: "Failed to delete" },
       { status: 500 }

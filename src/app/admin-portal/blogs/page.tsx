@@ -167,7 +167,6 @@ export default function BlogsPage() {
     <div className="h-full bg-[#0D0D0D] flex flex-col">
       <AdminHeader
         title="Blogs"
-        user={adminUser}
         onSearch={handleSearch}
         onAdd={handleAddBlog}
         showSearchButton={true}

@@ -1,6 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
 import { executeQuery } from "@/lib/database";
 
+interface BlogRow {
+  id: number;
+  title: string;
+  description: string;
+  slug: string;
+  date: string;
+  image: string;
+  html: string;
+  category_id: number;
+  is_featured: number;
+  status: number;
+  created_at: string;
+  updated_at: string;
+  category_heading: string | null;
+}
+
 export async function PATCH(
   _request: NextRequest,
   { params }: { params: { id: string } }
@@ -17,7 +33,7 @@ export async function PATCH(
     ]);
 
     // Return the updated blog
-    const [row]: any[] = await executeQuery<any[]>(
+    const result = await executeQuery<BlogRow[]>(
       `SELECT 
         b.id, 
         b.title, 
@@ -37,6 +53,8 @@ export async function PATCH(
       WHERE b.id = ?`,
       [params.id]
     );
+
+    const row = result[0];
 
     if (!row) {
       return NextResponse.json(

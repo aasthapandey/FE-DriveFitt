@@ -18,7 +18,6 @@ export default function WebAnalyticsPage() {
     <div className="min-h-screen bg-[#0D0D0D]">
       <AdminHeader
         title="Web Analytics"
-        user={adminUser}
         showSearchButton={false}
         showAddButton={false}
       />
