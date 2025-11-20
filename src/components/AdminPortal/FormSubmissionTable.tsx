@@ -50,7 +50,7 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [totalItems, setTotalItems] = useState(0);
-  const [itemsPerPage] = useState(4);
+  const itemsPerPage = sectionType === "lead-submissions" ? 3 : 4;
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<number | null>(null);
   const [dateRange, setDateRange] = useState<{

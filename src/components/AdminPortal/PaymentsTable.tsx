@@ -66,6 +66,11 @@ const PaymentsTable: React.FC<PaymentsTableProps> = ({ title }) => {
     }
   }, [currentPage, itemsPerPage, searchQuery, statusFilter]);
 
+  // Reset to page 1 when search query changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery]);
+
   useEffect(() => {
     fetchData();
   }, [fetchData]);
