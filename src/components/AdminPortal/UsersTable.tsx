@@ -50,8 +50,10 @@ const UsersTable: React.FC<UsersTableProps> = ({ title }) => {
       } else {
         setError(result.error || "Failed to fetch users");
       }
-    } catch (err: any) {
-      setError(err.message || "Failed to fetch users");
+    } catch (err: unknown) {
+      const errorMessage =
+        err instanceof Error ? err.message : "Failed to fetch users";
+      setError(errorMessage);
       console.error("Error fetching users:", err);
     } finally {
       setLoading(false);
@@ -61,6 +63,11 @@ const UsersTable: React.FC<UsersTableProps> = ({ title }) => {
   useEffect(() => {
     fetchData();
   }, [fetchData]);
+
+  // Reset to page 1 when search query changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);

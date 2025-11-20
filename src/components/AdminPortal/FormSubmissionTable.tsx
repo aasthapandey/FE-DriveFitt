@@ -954,7 +954,7 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
         )}
 
         <div
-          className="bg-[#333333] px-6 py-4 border-t border-[#333333]"
+          className="bg-[#333333] px-6 py-4 border-t border-[#333333] rounded-b-2xl"
           style={{
             width: "100%",
           }}

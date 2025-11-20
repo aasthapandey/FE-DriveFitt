@@ -58,8 +58,10 @@ const PaymentsTable: React.FC<PaymentsTableProps> = ({ title }) => {
       } else {
         setError(result.error || "Failed to fetch payments");
       }
-    } catch (err: any) {
-      setError(err.message || "Failed to fetch payments");
+    } catch (err: unknown) {
+      const errorMessage =
+        err instanceof Error ? err.message : "Failed to fetch payments";
+      setError(errorMessage);
       console.error("Error fetching payments:", err);
     } finally {
       setLoading(false);
@@ -74,6 +76,24 @@ const PaymentsTable: React.FC<PaymentsTableProps> = ({ title }) => {
   useEffect(() => {
     fetchData();
   }, [fetchData]);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (!target.closest(".status-dropdown")) {
+        setDropdownOpen(false);
+      }
+    };
+
+    if (dropdownOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [dropdownOpen]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -115,7 +135,7 @@ const PaymentsTable: React.FC<PaymentsTableProps> = ({ title }) => {
           </div>
 
           {/* Status Filter */}
-          <div className="relative">
+          <div className="relative status-dropdown">
             <button
               onClick={() => setDropdownOpen(!dropdownOpen)}
               className="bg-[#0D0D0D] border border-[#333333] rounded-lg px-4 py-2 text-[#BFBFBF] flex items-center gap-2 hover:bg-[#333333] transition-colors duration-200 h-[40px]"

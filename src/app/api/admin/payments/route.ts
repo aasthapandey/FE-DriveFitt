@@ -1,6 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import { executeQuery } from "@/lib/database";
 
+interface Payment {
+  id: number;
+  razorpay_order_id: string;
+  amount: number;
+  status: string;
+  created_at: string;
+  user_name: string;
+}
+
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
@@ -42,14 +51,22 @@ export async function GET(request: NextRequest) {
     if (status && status !== "all") {
       query += ` AND o.status = '${status}'`;
       countQuery += ` AND o.status = '${status}'`;
+      queryParams.push(status);
     }
 
     query += ` ORDER BY o.created_at DESC LIMIT ${limit} OFFSET ${offset}`;
 
-    const payments = await executeQuery<any[]>(query, queryParams);
+    const payments = await executeQuery<Payment[]>(query, queryParams);
+    // Adjust queryParams for count query (exclude LIMIT and OFFSET, but include status if present)
+    const searchPattern = `%${search}%`;
+    const countQueryParams = search ? [searchPattern, searchPattern] : [];
+    if (status && status !== "all") {
+      countQueryParams.push(status);
+    }
+
     const totalResults = await executeQuery<{ total: number }[]>(
       countQuery,
-      queryParams.slice(0, queryParams.length - 2)
+      countQueryParams
     );
 
     const total = totalResults[0].total;
@@ -65,10 +82,12 @@ export async function GET(request: NextRequest) {
         totalPages,
       },
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Error fetching payments:", error);
+    const errorMessage =
+      error instanceof Error ? error.message : "Internal server error";
     return NextResponse.json(
-      { status: false, error: error.message || "Internal server error" },
+      { status: false, error: errorMessage },
       { status: 500 }
     );
   }

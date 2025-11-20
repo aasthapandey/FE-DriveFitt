@@ -1,6 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import { executeQuery } from "@/lib/database";
 
+interface User {
+  id: number;
+  phone: string;
+  email: string;
+  first_name: string;
+  last_name: string;
+  date_of_birth: string;
+  gender: string;
+  created_at: string;
+}
+
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
@@ -36,7 +47,7 @@ export async function GET(request: NextRequest) {
 
     query += ` ORDER BY created_at DESC LIMIT ${limit} OFFSET ${offset}`;
 
-    const users = await executeQuery<any[]>(query, queryParams);
+    const users = await executeQuery<User[]>(query, queryParams);
     const totalResults = await executeQuery<{ total: number }[]>(
       countQuery,
       queryParams.slice(0, queryParams.length - 2)
@@ -55,10 +66,12 @@ export async function GET(request: NextRequest) {
         totalPages,
       },
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Error fetching users:", error);
+    const errorMessage =
+      error instanceof Error ? error.message : "Internal server error";
     return NextResponse.json(
-      { status: false, error: error.message || "Internal server error" },
+      { status: false, error: errorMessage },
       { status: 500 }
     );
   }
