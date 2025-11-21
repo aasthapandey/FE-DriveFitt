@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { executeQuery } from "@/lib/database";
 import { JobPosting, JobPostingUpdateData } from "@/types/database";
-import { JOB_STATUS, JobStatus } from "@/constants/database";
+import { JOB_STATUS, JobStatus, JobType } from "@/constants/database";
 
 interface JobPostingRow {
   id: number;
