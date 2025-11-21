@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { executeQuery } from "@/lib/database";
-import { JobPosting, JobStatus } from "@/types/database";
+import { JobPosting } from "@/types/database";
+import { JobStatus, JobType } from "@/constants/database";
 
 interface JobPostingRow {
   id: number;
@@ -121,7 +122,7 @@ export async function GET(request: NextRequest) {
       title: row.title,
       department_id: row.dept_id,
       location_id: row.loc_id,
-      job_type: row.job_type,
+      job_type: parseInt(row.job_type) as JobType,
       application_deadline: row.application_deadline
         ? new Date(row.application_deadline)
         : undefined,

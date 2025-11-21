@@ -93,7 +93,7 @@ export async function GET(
       title: row.title,
       department_id: row.dept_id,
       location_id: row.loc_id,
-      job_type: row.job_type as JobType,
+      job_type: parseInt(row.job_type) as JobType,
       application_deadline: row.application_deadline
         ? new Date(row.application_deadline)
         : undefined,
