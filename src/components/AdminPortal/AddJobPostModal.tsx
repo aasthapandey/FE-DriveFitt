@@ -15,8 +15,8 @@ interface AddJobPostModalProps {
 interface JobPostFormData {
   id?: number;
   jobTitle: string;
-  departmentId: number | "";
-  locationId: number | "";
+  departmentId: number | string | "";
+  locationId: number | string | "";
   jobType: string;
   applicationDeadline: string;
   jobDescription: string;

@@ -40,8 +40,8 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
   interface JobPostFormData {
     id?: number;
     jobTitle: string;
-    departmentId: number | "";
-    locationId: number | "";
+    departmentId: number | string | "";
+    locationId: number | string | "";
     jobType: string;
     applicationDeadline: string;
     jobDescription: string;
@@ -398,7 +398,9 @@ const JobPostApplicationSection: React.FC<JobPostApplicationSectionProps> = ({
       department_id: Number(jobPost.departmentId),
       location_id: Number(jobPost.locationId),
       job_type: mapJobType(jobPost.jobType),
-      application_deadline: jobPost.applicationDeadline || undefined,
+      application_deadline: jobPost.applicationDeadline
+        ? new Date(jobPost.applicationDeadline)
+        : undefined,
       job_description: jobPost.jobDescription || undefined,
       skills_required: jobPost.skillsRequired || undefined,
       role: jobPost.roleItems || [],

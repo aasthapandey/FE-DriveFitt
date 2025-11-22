@@ -16,13 +16,12 @@ export interface NavbarProps {
 }
 
 export interface Hero {
-  title?: string;
-  description?: string;
-  desktopImage?: string;
-  mobileImage?: string;
+  title: string;
+  description: string;
+  desktopImage: string;
+  mobileImage: string;
   btnPrimaryText?: string;
   btnPrimaryLink?: string;
-  [key: string]: unknown; // Allow any additional properties
 }
 
 export interface CardSection {
@@ -236,7 +235,7 @@ export interface IncludedPlansSection {
 }
 
 export interface Job {
-  id: number | string;
+  id: number;
   title: string;
   location?: string;
   [key: string]: unknown;
@@ -248,7 +247,7 @@ export interface JobSearchSection {
 }
 
 export interface JobDetail {
-  id: number | string;
+  id: number;
   title: string;
   location?: string;
   [key: string]: unknown;
@@ -259,106 +258,7 @@ export interface JobDetailSection {
 }
 
 export interface ApplyNowFormSection {
-  jobId: string | number;
-}
-
-export interface ProfilePageData {
-  title?: string;
-  description?: string;
-  seoTitle?: string;
-  seoDescription?: string;
-  [key: string]: unknown;
-}
-
-export interface ContactFormProps {
-  [key: string]: unknown;
-}
-
-export interface ContactUsContactFormProps {
-  [key: string]: unknown;
-}
-
-export interface FooterInfoItem {
-  [key: string]: unknown;
-}
-
-export interface SocialLinks {
-  [key: string]: unknown;
-}
-
-export interface StaticCardType {
-  [key: string]: unknown;
-}
-
-export interface CardType {
-  [key: string]: unknown;
-}
-
-export interface NotJustClubItem {
-  [key: string]: unknown;
-}
-
-export interface EvolutionItem {
-  [key: string]: unknown;
-}
-
-export interface CountdownProps {
-  [key: string]: unknown;
-}
-
-export interface FlipCardProps {
-  [key: string]: unknown;
-}
-
-export interface InfoSection {
-  [key: string]: unknown;
-}
-
-export interface MemberItem {
-  [key: string]: unknown;
-}
-
-export interface ContactUsPageData {
-  title?: string;
-  description?: string;
-  seoTitle?: string;
-  seoDescription?: string;
-  navbar?: unknown;
-  hero?: {
-    titleWords: Array<{ text: string; color: string }>;
-    description: string;
-    desktopImage: string;
-    mobileImage: string;
-  };
-  footerInfoSection?: {
-    footerInfoList: Array<{
-      title: string;
-      description: string;
-      email: string;
-      image: string;
-    }>;
-    socialLinkList: Array<{
-      image: string;
-      link: string;
-    }>;
-    contactFormSection: {
-      title: string;
-      description: string;
-      submitButtonText: string;
-      fields: {
-        name: { label: string; placeholder: string };
-        phone: { label: string; placeholder: string };
-        interests: { label: string };
-        preferredLocation: {
-          label: string;
-          placeholder: string;
-          options: string[];
-        };
-        message: { label: string; placeholder: string };
-      };
-    };
-  };
-  footerSection?: FooterProps;
+  jobId: string;
 }
 
 export interface StaticPageData {
@@ -368,7 +268,7 @@ export interface StaticPageData {
   seoDescription?: string;
   hero?: Hero;
   franchiseHeroSection?: Hero;
-  aboutUsHeroSection?: Hero | unknown;
+  aboutUsHeroSection?: Hero;
   cardSection4?: CardSection;
   cardSection3?: CardSection;
   cardSection5?: CardSection;
@@ -403,5 +303,4 @@ export interface StaticPageData {
   jobSearchSection?: JobSearchSection;
   jobDetailSection?: JobDetailSection;
   applyNowForm?: ApplyNowFormSection;
-  [key: string]: unknown; // Allow any additional properties
 }
