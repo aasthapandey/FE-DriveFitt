@@ -16,12 +16,13 @@ export interface NavbarProps {
 }
 
 export interface Hero {
-  title: string;
-  description: string;
-  desktopImage: string;
-  mobileImage: string;
+  title?: string;
+  description?: string;
+  desktopImage?: string;
+  mobileImage?: string;
   btnPrimaryText?: string;
   btnPrimaryLink?: string;
+  [key: string]: unknown; // Allow any additional properties
 }
 
 export interface CardSection {
@@ -235,7 +236,7 @@ export interface IncludedPlansSection {
 }
 
 export interface Job {
-  id: number;
+  id: number | string;
   title: string;
   location?: string;
   [key: string]: unknown;
@@ -247,7 +248,7 @@ export interface JobSearchSection {
 }
 
 export interface JobDetail {
-  id: number;
+  id: number | string;
   title: string;
   location?: string;
   [key: string]: unknown;
@@ -258,7 +259,7 @@ export interface JobDetailSection {
 }
 
 export interface ApplyNowFormSection {
-  jobId: string;
+  jobId: string | number;
 }
 
 export interface ProfilePageData {
@@ -367,7 +368,7 @@ export interface StaticPageData {
   seoDescription?: string;
   hero?: Hero;
   franchiseHeroSection?: Hero;
-  aboutUsHeroSection?: Hero;
+  aboutUsHeroSection?: Hero | unknown;
   cardSection4?: CardSection;
   cardSection3?: CardSection;
   cardSection5?: CardSection;
@@ -402,4 +403,5 @@ export interface StaticPageData {
   jobSearchSection?: JobSearchSection;
   jobDetailSection?: JobDetailSection;
   applyNowForm?: ApplyNowFormSection;
+  [key: string]: unknown; // Allow any additional properties
 }

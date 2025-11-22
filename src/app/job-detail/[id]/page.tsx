@@ -77,7 +77,7 @@ export default async function JobDetailPage({
     },
     jobDetailSection: {
       job: {
-        id: String(jobDetails.id),
+        id: jobDetails.id,
         title: jobDetails.title,
         location: jobDetails.location?.full_location ?? "",
         jobType:
