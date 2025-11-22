@@ -14,8 +14,7 @@ export const groupClassesData: StaticPageData = {
     description: "",
     desktopImage:
       "https://da8nru77lsio9.cloudfront.net/images/group-classes-c/hero.webp",
-    mobileImage:
-      "/images/group-classes/hero-mobile.jpg",
+    mobileImage: "/images/group-classes/hero-mobile.jpg",
     btnPrimaryText: "Book a free trial",
   },
   banner2Section: {

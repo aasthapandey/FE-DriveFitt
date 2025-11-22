@@ -56,6 +56,9 @@ export interface GallerySectionProps {
 export interface SportsClubSectionProps {
   title: string;
   description: string;
+  image: string;
+  mobileImage?: string;
+  btnLabel: string;
 }
 
 export interface MemberSectionProps {
@@ -66,6 +69,10 @@ export interface MemberSectionProps {
 export interface AppDownloadProps {
   title: string;
   description: string;
+  googlePlayImg: string;
+  appStoreImg: string;
+  mobileImage: string;
+  desktopImage: string;
 }
 
 export interface FooterInfoProps {
@@ -259,6 +266,72 @@ export interface JobDetailSection {
 
 export interface ApplyNowFormSection {
   jobId: string;
+}
+
+// Contact Us Page specific interfaces
+export interface ContactFormField {
+  label: string;
+  placeholder?: string;
+  options?: string[];
+}
+
+export interface ContactFormSection {
+  title: string;
+  description: string;
+  submitButtonText: string;
+  fields: {
+    firstName: ContactFormField;
+    lastName: ContactFormField;
+    email: ContactFormField;
+    phone: ContactFormField;
+    message: ContactFormField;
+  };
+}
+
+export interface FooterInfoItem {
+  title: string;
+  description: string;
+  email: string;
+  image: string;
+}
+
+export interface ContactUsHero {
+  titleWords: Array<{ text: string; color: string }>;
+  description: string;
+  desktopImage: string;
+  mobileImage: string;
+}
+
+export interface ContactUsFooterInfoSection {
+  footerInfoList: FooterInfoItem[];
+  socialLinkList: SocialLink[];
+  contactFormSection: ContactFormSection;
+}
+
+export interface ContactUsPageData {
+  title: string;
+  description: string;
+  seoTitle: string;
+  seoDescription: string;
+  navbar: unknown; // NavbarProps - using unknown to avoid circular dependencies
+  hero: ContactUsHero;
+  footerInfoSection: ContactUsFooterInfoSection;
+  footerSection: FooterProps;
+}
+
+export interface ProfilePageData {
+  title: string;
+  seoTitle: string;
+  seoDescription: string;
+  userInfo: {
+    name: string;
+    email: string;
+    phone: string;
+    dateOfBirth: string;
+    activePlan: string;
+    planExpires: string;
+  };
+  [key: string]: unknown; // Allow additional properties
 }
 
 export interface StaticPageData {

@@ -168,7 +168,7 @@ const BlogDetailContent = ({ blog: rawBlog, isMobile }: BlogDetailProps) => {
 
   // Transform raw blog data to BlogEntry format
   const blog: BlogEntry = {
-    id: rawBlog.id,
+    id: rawBlog.id.toString(),
     title: rawBlog.title,
     description: rawBlog.description,
     slug: rawBlog.slug,

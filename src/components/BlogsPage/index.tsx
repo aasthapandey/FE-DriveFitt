@@ -124,15 +124,9 @@ const BlogsPage = ({ isMobile }: BlogsPageProps) => {
           blogCategoryAPI.list(),
         ]);
 
-        interface BlogFromAPI {
-          is_featured?: number;
-          categoryId?: number;
-          [key: string]: unknown;
-        }
-
         // Find featured blog (assuming first published blog or one marked as featured)
         const featured =
-          blogs.find((blog: BlogFromAPI) => blog.is_featured) || blogs[0];
+          blogs.find((blog: BlogEntry) => blog.isFeatured) || blogs[0];
         if (featured) {
           const featuredCategory = categories.find(
             (cat: BlogCategory) => cat.id === featured.categoryId
@@ -148,8 +142,8 @@ const BlogsPage = ({ isMobile }: BlogsPageProps) => {
 
         categories.forEach((category: BlogCategory) => {
           const categoryBlogs = blogs
-            .filter((blog: BlogFromAPI) => blog.categoryId === category.id)
-            .map((blog: BlogFromAPI) => ({
+            .filter((blog: BlogEntry) => blog.categoryId === category.id)
+            .map((blog: BlogEntry) => ({
               ...blog,
               categoryHeading: category.heading,
             }));
@@ -165,9 +159,9 @@ const BlogsPage = ({ isMobile }: BlogsPageProps) => {
         // Add uncategorized blogs if any
         const uncategorizedBlogs = blogs
           .filter(
-            (blog: BlogFromAPI) => !blog.categoryId || blog.categoryId === 0
+            (blog: BlogEntry) => !blog.categoryId || blog.categoryId === 0
           )
-          .map((blog: BlogFromAPI) => ({
+          .map((blog: BlogEntry) => ({
             ...blog,
             categoryHeading: "Trending topics",
           }));

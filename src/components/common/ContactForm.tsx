@@ -1,5 +1,5 @@
 "use client";
-import { ContactFormProps } from "@/types/staticPages";
+import { ContactFormSection } from "@/types/staticPages";
 import { useState } from "react";
 import ScrollAnimation from "@/components/common/ScrollAnimation";
 import Image from "next/image";
@@ -8,7 +8,7 @@ const ContactForm = ({
   data,
   isMobile,
 }: {
-  data: ContactFormProps;
+  data: ContactFormSection;
   isMobile?: boolean;
 }) => {
   const { title, description, submitButtonText, fields } = data;
