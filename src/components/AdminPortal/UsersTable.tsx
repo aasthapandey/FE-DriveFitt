@@ -132,7 +132,7 @@ const UsersTable: React.FC<UsersTableProps> = ({ title }) => {
               }}
             >
               <thead style={{ position: "sticky", top: 0, zIndex: 10 }}>
-                <tr style={{ background: "#1D1D1D" }}>
+                <tr style={{ background: "#333333" }}>
                   <th style={headerCellStyle}>Name</th>
                   <th style={headerCellStyle}>Phone</th>
                   <th style={headerCellStyle}>Email</th>
