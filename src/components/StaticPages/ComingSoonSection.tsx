@@ -27,15 +27,17 @@ const ComingSoonSection = ({ data }: ComingSoonSectionProps) => {
           direction="up"
           className="flex flex-col items-center justify-center"
         >
-          <div className="mb-8 w-[80px] h-[80px] md:mb-[48px] md:w-[120px] md:h-[120px]">
-            <Image
-              src={illustration}
-              alt="Coming Soon Illustration"
-              className="opacity-60 w-full h-full"
-              width={120}
-              height={120}
-            />
-          </div>
+          {illustration && (
+            <div className="mb-8 w-[80px] h-[80px] md:mb-[48px] md:w-[120px] md:h-[120px]">
+              <Image
+                src={illustration}
+                alt="Coming Soon Illustration"
+                className="opacity-60 w-full h-full"
+                width={120}
+                height={120}
+              />
+            </div>
+          )}
           <h1 className="text-white text-[32px] font-semibold leading-[40px] tracking-[-1px] mb-4 md:text-[48px] md:font-bold md:leading-[60px] md:tracking-[-2px] md:mb-[24px] md:w-[497px] md:h-[120px]">
             {title}
           </h1>

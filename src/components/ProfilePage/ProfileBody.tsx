@@ -371,7 +371,8 @@ const ProfileBody = ({ data, isMobile }: ProfileBodyProps) => {
                     </span>
                   )}
                 </div>
-                {renderMobileActionButton(actions.viewPlan, "viewPlan")}
+                {actions.viewPlan &&
+                  renderMobileActionButton(actions.viewPlan, "viewPlan")}
               </div>
             </div>
           </div>
@@ -450,7 +451,8 @@ const ProfileBody = ({ data, isMobile }: ProfileBodyProps) => {
                     </span>
                   )}
                 </div>
-                {renderActionButton(actions.viewPlan, "viewPlan")}
+                {actions.viewPlan &&
+                  renderActionButton(actions.viewPlan, "viewPlan")}
               </div>
             </div>
 

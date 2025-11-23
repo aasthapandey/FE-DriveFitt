@@ -249,6 +249,7 @@ export const useAdminAuth = () => {
   // Check auth on mount only once
   useEffect(() => {
     checkAuth();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Remove checkAuth dependency to prevent re-runs
 
   // Clear error after some time

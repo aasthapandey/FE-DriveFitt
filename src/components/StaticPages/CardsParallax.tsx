@@ -14,7 +14,8 @@ const CardsParallax = ({
   data: CardsParallaxProps;
   isMobile?: boolean;
 }) => {
-  const { cardSection } = data;
+  const { cards, cardSection } = data;
+  const cardList = cards || cardSection || [];
   const container = useRef(null);
 
   const { scrollYProgress } = useScroll({
@@ -38,8 +39,8 @@ const CardsParallax = ({
   }, []);
   return (
     <div ref={container} className={styles.main}>
-      {cardSection.map((card, i) => {
-        const targetScale = 1 - (cardSection.length - i) * 0.05;
+      {cardList.map((card, i) => {
+        const targetScale = 1 - (cardList.length - i) * 0.05;
 
         return (
           <CardParallax

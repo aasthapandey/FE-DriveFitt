@@ -6,6 +6,14 @@ import {
   LocationStatus,
 } from "@/constants/database";
 
+export type {
+  ApplicationStatus,
+  JobStatus,
+  JobType,
+  DepartmentStatus,
+  LocationStatus,
+};
+
 export interface ContactUs {
   id: number;
   first_name: string;

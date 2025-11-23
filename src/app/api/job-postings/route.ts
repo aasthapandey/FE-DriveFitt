@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { executeQuery } from "@/lib/database";
-import { JobPosting, JobStatus } from "@/types/database";
+import { JobPosting } from "@/types/database";
+import { JobStatus } from "@/constants/database";
 
 export async function GET(request: NextRequest) {
   try {
@@ -11,8 +12,8 @@ export async function GET(request: NextRequest) {
     const locationId = searchParams.get("location_id");
     const admin = searchParams.get("admin");
 
-    let whereConditions: string[] = [];
-    let queryParams: any[] = [];
+    const whereConditions: string[] = [];
+    const queryParams: any[] = [];
 
     // For admin access, don't filter by is_visible unless explicitly requested
     // For public access, only show visible job postings

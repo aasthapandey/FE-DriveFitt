@@ -89,20 +89,22 @@ const ListItem = ({ item, position, className = "" }: ListItemProps) => {
       layout
       style={{ willChange: "transform, opacity, filter" }}
     >
-      <Image
-        src={item.icon}
-        alt={item.description}
-        width={60}
-        height={60}
-        className="size-10 md:size-[60px]"
-        priority
-        style={{
-          willChange: "transform",
-          backfaceVisibility: "hidden",
-          perspective: 1000,
-        }}
-        unoptimized
-      />
+      {item.icon && (
+        <Image
+          src={item.icon}
+          alt={item.description}
+          width={60}
+          height={60}
+          className="size-10 md:size-[60px]"
+          priority
+          style={{
+            willChange: "transform",
+            backfaceVisibility: "hidden",
+            perspective: 1000,
+          }}
+          unoptimized
+        />
+      )}
       <motion.span
         className="text-5xl font-semibold leading-[56px] tracking-[-2px] text-[#91FFFF]"
         layout
@@ -128,6 +130,7 @@ const NotJustClubSection = ({
   const [key, setKey] = useState(0);
 
   useEffect(() => {
+    if (!list) return;
     const interval = setInterval(() => {
       setActiveIndex((prev) => {
         if (prev >= list.length - 1) {
@@ -139,9 +142,10 @@ const NotJustClubSection = ({
     }, 1200); // Reduced from 1500ms to 1200ms for faster cycling
 
     return () => clearInterval(interval);
-  }, [list.length]);
+  }, [list]);
 
   useEffect(() => {
+    if (!list) return;
     const items = [];
     for (let i = -1; i <= 1; i++) {
       const index = (activeIndex + i + list.length) % list.length;

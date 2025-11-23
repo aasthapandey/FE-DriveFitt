@@ -52,7 +52,7 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
   const [totalItems, setTotalItems] = useState(0);
   const itemsPerPage = sectionType === "lead-submissions" ? 3 : 4;
   const [searchQuery, setSearchQuery] = useState("");
-  const [statusFilter, setStatusFilter] = useState<number | null>(null);
+  const [statusFilter, _setStatusFilter] = useState<number | null>(null);
   const [dateRange, setDateRange] = useState<{
     start: string;
     end: string;
@@ -261,16 +261,16 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
   const getStatusOptions = () => {
     if (sectionType === "general-queries") {
       return Object.entries(CONTACT_STATUS)
-        .filter(([key]) => key !== "DELETED")
-        .map(([key, value]) => ({
+        .filter(([_key]) => _key !== "DELETED")
+        .map(([_key, value]) => ({
           value,
           label:
             CONTACT_STATUS_LABELS[value as keyof typeof CONTACT_STATUS_LABELS],
         }));
     } else if (sectionType === "franchise-applications") {
       return Object.entries(FRANCHISE_STATUS)
-        .filter(([key]) => key !== "DELETED")
-        .map(([key, value]) => ({
+        .filter(([_key]) => _key !== "DELETED")
+        .map(([_key, value]) => ({
           value,
           label:
             FRANCHISE_STATUS_LABELS[
@@ -279,8 +279,8 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
         }));
     } else {
       return Object.entries(LEAD_STATUS)
-        .filter(([key]) => key !== "DELETED")
-        .map(([key, value]) => ({
+        .filter(([_key]) => _key !== "DELETED")
+        .map(([_key, value]) => ({
           value,
           label: LEAD_STATUS_LABELS[value as keyof typeof LEAD_STATUS_LABELS],
         }));
@@ -1061,54 +1061,6 @@ const cellStyle: React.CSSProperties = {
   color: "#FFFFFF",
   borderBottom: "1px solid #333333",
   overflow: "visible",
-};
-
-const statusButtonStyle: React.CSSProperties = {
-  display: "flex",
-  alignItems: "center",
-  gap: "8px",
-  padding: "6px 12px",
-  background: "transparent",
-  border: "1px solid",
-  borderRadius: "6px",
-  cursor: "pointer",
-  fontSize: "14px",
-};
-
-const dropdownStyle: React.CSSProperties = {
-  position: "absolute",
-  top: "100%",
-  left: 0,
-  marginTop: "4px",
-  background: "#1D1D1D",
-  border: "1px solid #333333",
-  borderRadius: "8px",
-  minWidth: "150px",
-  zIndex: 10,
-  boxShadow: "0 4px 6px rgba(0, 0, 0, 0.3)",
-};
-
-const dropdownItemStyle: React.CSSProperties = {
-  display: "block",
-  width: "100%",
-  padding: "8px 12px",
-  textAlign: "left",
-  background: "transparent",
-  border: "none",
-  color: "#FFFFFF",
-  fontSize: "14px",
-  cursor: "pointer",
-  transition: "background 0.2s",
-};
-
-const deleteButtonStyle: React.CSSProperties = {
-  background: "transparent",
-  border: "none",
-  cursor: "pointer",
-  padding: "4px",
-  display: "inline-flex",
-  alignItems: "center",
-  justifyContent: "center",
 };
 
 export default FormSubmissionTable;

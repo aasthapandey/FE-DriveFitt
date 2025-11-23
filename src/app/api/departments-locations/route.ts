@@ -1,8 +1,8 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { executeQuery } from "@/lib/database";
 import { Department, Location } from "@/types/database";
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     const departmentsQuery = `
       SELECT id, name, title, status, created_at, updated_at
@@ -54,10 +54,10 @@ export async function GET(request: NextRequest) {
   } catch (error) {
     console.error("Error fetching departments and locations:", error);
     return NextResponse.json(
-      { 
+      {
         status: false,
         data: null,
-        error: "Internal server error" 
+        error: "Internal server error",
       },
       { status: 500 }
     );

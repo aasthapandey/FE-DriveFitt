@@ -16,10 +16,13 @@ export interface NavbarProps {
 }
 
 export interface Hero {
-  title: string;
+  title?: string;
+  titleWords?: Array<{ text: string; color: string; isItalic?: boolean }>;
   description: string;
   desktopImage: string;
+  originalDesktopImage?: string;
   mobileImage: string;
+  originalMobileImage?: string;
   btnPrimaryText?: string;
   btnPrimaryLink?: string;
 }
@@ -27,7 +30,8 @@ export interface Hero {
 export interface CardSection {
   title: string;
   description: string;
-  cards: any[];
+  cards?: any[];
+  cardSection?: any[];
 }
 
 export interface CarouselBanner {
@@ -39,80 +43,242 @@ export interface CarouselBanner {
 export interface StaticCardProps {
   title: string;
   description: string;
-  cards: any[];
+  cards?: any[];
+  cardSection?: any[];
 }
 
 export interface InnovationCommunitySectionProps {
   title: string;
   description: string;
+  infoSection?: InfoSection[];
 }
 
 export interface GallerySectionProps {
   title: string;
   description: string;
-  images: string[];
+  images?: string[];
+  imageList?: (string | number)[];
+  btnLabel?: string;
+  desktopImage?: string;
+  mobileImage?: string;
+  addGradient?: boolean;
+  mobileImageUp?: string;
+  imageClass?: string;
+  specialBackgroundClass?: string;
+  showStrip?: boolean;
+  parentClass?: string;
 }
 
 export interface SportsClubSectionProps {
   title: string;
   description: string;
+  image: string;
+  mobileImage?: string;
+  btnLabel: string;
+}
+
+export interface MemberItem {
+  title: string;
+  description: string;
+  backgroundImage: string;
 }
 
 export interface MemberSectionProps {
   title: string;
   description: string;
+  memberList?: MemberItem[];
 }
 
 export interface AppDownloadProps {
   title: string;
   description: string;
+  googlePlayImg: string;
+  appStoreImg: string;
+  mobileImage: string;
+  desktopImage: string;
+}
+
+export interface FooterInfoItem {
+  title: string;
+  description: string;
+  email: string;
+  image: string;
+}
+
+export interface FooterSection {
+  title: string;
+  links: Array<{ title: string; link: string }>;
+}
+
+export interface SocialLink {
+  image: string;
+  link: string;
+}
+
+export interface ContactFormField {
+  label: string;
+  placeholder?: string;
+  options?: string[];
+}
+
+export interface ContactFormProps {
+  title: string;
+  description: string;
+  submitButtonText: string;
+  fields: {
+    firstName: ContactFormField;
+    lastName: ContactFormField;
+    email: ContactFormField;
+    phone: ContactFormField;
+    message: ContactFormField;
+  };
+}
+
+export interface ContactUsContactFormProps {
+  title: string;
+  description: string;
+  submitButtonText: string;
+  fields: {
+    name: ContactFormField;
+    phone: ContactFormField;
+    interests: ContactFormField;
+    preferredLocation: ContactFormField;
+    message: ContactFormField;
+  };
+}
+
+export interface ContactUsFooterInfoProps {
+  footerInfoList: FooterInfoItem[];
+  socialLinkList: SocialLink[];
+  contactFormSection: any;
+}
+
+export interface CardType {
+  title: string;
+  description: string;
+  backgroundImage: string;
+  link?: string;
+  redirectionIcon?: string;
+  iconImage?: string;
+  modalImage?: string;
+  [key: string]: unknown;
 }
 
 export interface FooterInfoProps {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
+  footerInfoList: FooterInfoItem[];
+  socialLinkList: SocialLink[];
+  contactFormSection?: any;
 }
 
 export interface FooterProps {
   logo: string;
   description: string;
-  sections: any[];
-  socialLinks: any[];
+  sections: FooterSection[];
+  socialLinks: SocialLink[];
   copyright: string;
 }
 
+export interface EvolutionItem {
+  title: string;
+  description: string;
+  backgroundImage: string;
+}
+
 export interface EvolutionSectionProps {
+  title: string;
+  evolutionList: EvolutionItem[];
+}
+
+export interface FlipCardProps {
+  value: string;
+  label: string;
+  isMobile?: boolean;
+}
+
+export interface InfoSection {
+  title: string;
+  list: Array<{
+    description: string;
+    image: string;
+  }>;
+}
+
+export interface FAQ {
   title: string;
   description: string;
 }
 
 export interface FaqSectionProps {
   title: string;
-  faqs: any[];
+  description: string;
+  faqList: FAQ[];
 }
 
 export interface ScrollingCardSection {
   title: string;
-  cards: any[];
+  description?: string;
+  iconImage?: string;
+  cardSection?: any[];
+  cards?: any[];
 }
 
 export interface CountdownSection {
   title: string;
-  endDate: string;
+  date: string;
+  bgImage: string;
+  mobileBgImage?: string;
+  location?: string;
+  openingText?: string;
+  labels?: {
+    days: string;
+    hours: string;
+    minutes: string;
+    seconds: string;
+  };
+}
+
+export interface CountdownData {
+  title: string;
+  date: string;
+  bgImage: string;
+  mobileBgImage?: string;
+  location?: string;
+  openingText?: string;
+  labels?: {
+    days: string;
+    hours: string;
+    minutes: string;
+    seconds: string;
+  };
+}
+
+export interface CountdownProps {
+  countdownData: CountdownData;
+  isMobile?: boolean;
 }
 
 export interface ComingSoonSection {
   title: string;
   description: string;
+  iconImage?: string;
+  btnPrimaryText?: string;
+  btnSecondaryText?: string;
+  btnPrimaryLink?: string;
+  btnSecondaryLink?: string;
 }
 
 export interface Error404Section {
   title: string;
   description: string;
+  iconImage?: string;
+  btnText?: string;
+  btnLink?: string;
 }
 
 export interface PolicySection {
-  title: string;
+  title?: string;
   htmlContent: string;
 }
 
@@ -124,11 +290,23 @@ export interface JoinNowSectionProps {
 export interface RecoveryBannerProps {
   title: string;
   description: string;
+  image?: string;
+  mobileImage?: string;
+}
+
+export interface NotJustClubItem {
+  title: string;
+  description: string;
+  icon?: string;
+  image?: string;
 }
 
 export interface NotJustClubSectionProps {
   title: string;
   description: string;
+  bgImg?: string;
+  list?: NotJustClubItem[];
+  items?: NotJustClubItem[];
 }
 
 export interface EcosystemGifSectionProps {
@@ -151,11 +329,17 @@ export interface ChooseYourPathSectionProps {
 export interface PhotoCircleSectionProps {
   title: string;
   description: string;
+  image1?: string;
+  image2?: string;
 }
 
 export interface Banner2SectionType {
   title: string;
   description: string;
+  titleClass?: string;
+  class?: string;
+  subClass?: string;
+  descriptionClass?: string;
 }
 
 export interface Banner2WithImageProps {
@@ -168,8 +352,9 @@ export interface Banner2WithImageProps {
 }
 
 export interface CardsParallaxProps {
-  title: string;
-  cards: any[];
+  title?: string;
+  cards?: any[];
+  cardSection?: any[];
 }
 
 export interface SignatureClassCard {
@@ -180,7 +365,7 @@ export interface SignatureClassCard {
 
 export interface SignatureClassesSection {
   title: string;
-  classes: any[];
+  classes?: any[];
   cardList: SignatureClassCard[];
   cardList2: SignatureClassCard[];
 }
@@ -206,9 +391,20 @@ export interface IncludedPlansSection {
   className?: string;
 }
 
-export interface JobSearchSection {
+export interface Job {
+  id: number;
   title: string;
-  jobs: any[];
+  location: string;
+  jobType: string;
+  jobCategory: string;
+}
+
+export interface JobSearchSection {
+  title?: string;
+  jobs: Job[];
+  jobCategories?: any[];
+  jobTypes?: any[];
+  jobLocations?: any[];
 }
 
 export interface JobDetailSection {
@@ -219,11 +415,66 @@ export interface ApplyNowFormSection {
   jobId: string;
 }
 
+export interface ContactUsPageData {
+  title: string;
+  description: string;
+  seoTitle: string;
+  seoDescription: string;
+  navbar: NavbarProps;
+  appDownloadSection?: AppDownloadProps;
+  hero: {
+    titleWords: Array<{ text: string; color: string; isItalic?: boolean }>;
+    description: string;
+    desktopImage: string;
+    mobileImage: string;
+  };
+  footerInfoSection: {
+    footerInfoList: Array<{
+      title: string;
+      description: string;
+      email: string;
+      image: string;
+    }>;
+    socialLinkList: Array<{
+      image: string;
+      link: string;
+    }>;
+    contactFormSection?: any;
+  };
+  footerSection: FooterProps;
+}
+
+export interface ProfilePageData {
+  title: string;
+  seoTitle: string;
+  seoDescription: string;
+  userInfo: {
+    name: string;
+    email: string;
+    phone: string;
+    dateOfBirth: string;
+    activePlan: string;
+    planExpires: string;
+  };
+  actions: {
+    viewPlan: {
+      isButton?: boolean;
+      text: string;
+      enabled?: boolean;
+    };
+    [key: string]: unknown;
+  };
+  footerInfoSection?: FooterInfoProps;
+  footerSection?: FooterProps;
+  [key: string]: unknown;
+}
+
 export interface StaticPageData {
   title?: string;
   description?: string;
   seoTitle?: string;
   seoDescription?: string;
+  navbar?: NavbarProps;
   hero?: Hero;
   franchiseHeroSection?: any;
   aboutUsHeroSection?: any;
@@ -237,6 +488,9 @@ export interface StaticPageData {
   faqSection?: FaqSectionProps;
   sportsClubSection?: SportsClubSectionProps;
   bannerSection?: SportsClubSectionProps;
+  banner1Section?: any;
+  visionariesSection?: any;
+  banner3JoinUsSection?: any;
   memberSection?: MemberSectionProps;
   appDownloadSection?: AppDownloadProps;
   footerInfoSection?: FooterInfoProps;
@@ -244,6 +498,7 @@ export interface StaticPageData {
   scrollingCardSection?: ScrollingCardSection;
   comingSoonSection?: ComingSoonSection;
   error404Section?: Error404Section;
+  countdownSection?: CountdownSection;
   policySection?: PolicySection;
   joinNowSection?: JoinNowSectionProps;
   recoveryBannerSection?: RecoveryBannerProps;
@@ -254,6 +509,8 @@ export interface StaticPageData {
   photoCircleSection?: PhotoCircleSectionProps;
   banner2Section?: Banner2SectionType;
   banner2WithImageSection?: Banner2WithImageProps;
+  bannerCTASection2?: any;
+  bannerCTASection?: any;
   cardsParallaxSection?: CardsParallaxProps;
   signatureClassesSection?: SignatureClassesSection;
   pricingPlansSection?: PricingPlansSection;
@@ -261,4 +518,41 @@ export interface StaticPageData {
   jobSearchSection?: JobSearchSection;
   jobDetailSection?: JobDetailSection;
   applyNowForm?: ApplyNowFormSection;
+  carouselBanner?: Array<{
+    title: string;
+    countdownEnd: string;
+    backgroundImage: string;
+  }>;
+  nextStepSection?: {
+    title: string;
+    description: string;
+    cardList: Array<{
+      icon?: string;
+      title: string;
+      description?: string | string[];
+      subTitle?: string;
+      tooltipImage?: string;
+      tooltipImageMobile?: string;
+      backgroundImage?: string;
+    }>;
+    cardTitleClass?: string;
+    cardDescriptionClass?: string;
+    backgroundImage?: string;
+  };
+  multiRevenueSection?: {
+    title: string;
+    description: string;
+    cardList: Array<{
+      icon?: string;
+      title: string;
+      description?: string | string[];
+      subTitle?: string;
+      tooltipImage?: string;
+      tooltipImageMobile?: string;
+      backgroundImage?: string;
+    }>;
+    cardTitleClass?: string;
+    cardDescriptionClass?: string;
+    backgroundImage?: string;
+  };
 }

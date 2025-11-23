@@ -52,7 +52,7 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
   const [totalItems, setTotalItems] = useState(0);
   const [itemsPerPage] = useState(10);
   const [searchQuery, setSearchQuery] = useState("");
-  const [statusFilter, setStatusFilter] = useState<number | null>(null);
+  const [statusFilter] = useState<number | null>(null);
   const [dateRange, setDateRange] = useState<{
     start: string;
     end: string;
@@ -184,16 +184,16 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
   const getStatusOptions = () => {
     if (sectionType === "general-queries") {
       return Object.entries(CONTACT_STATUS)
-        .filter(([key]) => key !== "DELETED")
-        .map(([key, value]) => ({
+        .filter(([_key]) => _key !== "DELETED")
+        .map(([_key, value]) => ({
           value,
           label:
             CONTACT_STATUS_LABELS[value as keyof typeof CONTACT_STATUS_LABELS],
         }));
     } else if (sectionType === "franchise-applications") {
       return Object.entries(FRANCHISE_STATUS)
-        .filter(([key]) => key !== "DELETED")
-        .map(([key, value]) => ({
+        .filter(([_key]) => _key !== "DELETED")
+        .map(([_key, value]) => ({
           value,
           label:
             FRANCHISE_STATUS_LABELS[
@@ -202,8 +202,8 @@ const FormSubmissionTable: React.FC<FormSubmissionTableProps> = ({
         }));
     } else {
       return Object.entries(LEAD_STATUS)
-        .filter(([key]) => key !== "DELETED")
-        .map(([key, value]) => ({
+        .filter(([_key]) => _key !== "DELETED")
+        .map(([_key, value]) => ({
           value,
           label: LEAD_STATUS_LABELS[value as keyof typeof LEAD_STATUS_LABELS],
         }));

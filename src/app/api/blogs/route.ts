@@ -26,7 +26,7 @@ export async function GET() {
       [BlogStatus.DELETED]
     );
     return NextResponse.json({ status: true, data: rows });
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { status: false, error: "Failed to fetch" },
       { status: 500 }
@@ -79,7 +79,7 @@ export async function POST(request: NextRequest) {
       [insertedId]
     );
     return NextResponse.json({ status: true, data: row }, { status: 201 });
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { status: false, error: "Failed to create" },
       { status: 500 }

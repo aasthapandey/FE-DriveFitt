@@ -6,8 +6,8 @@ export async function POST(request: NextRequest) {
     // by removing the token from localStorage. This endpoint can be used
     // for additional cleanup if needed (like blacklisting tokens).
 
-    const body = await request.json();
-    const { token } = body;
+    await request.json();
+    // Token extraction removed as it's not used
 
     // Optional: Add token to blacklist table for enhanced security
     // For now, we'll just return success as client-side token removal

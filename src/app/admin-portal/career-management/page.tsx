@@ -24,14 +24,6 @@ export default function CareerManagementPage() {
   const [loading, setLoading] = useState(true);
   const { adminUser } = useAdminAuth();
 
-  if (!adminUser) {
-    return (
-      <div className="min-h-screen bg-[#0D0D0D] flex items-center justify-center">
-        <div className="text-white">Loading...</div>
-      </div>
-    );
-  }
-
   const fetchMetrics = async () => {
     try {
       setLoading(true);
@@ -48,6 +40,14 @@ export default function CareerManagementPage() {
   useEffect(() => {
     fetchMetrics();
   }, []);
+
+  if (!adminUser) {
+    return (
+      <div className="min-h-screen bg-[#0D0D0D] flex items-center justify-center">
+        <div className="text-white">Loading...</div>
+      </div>
+    );
+  }
 
   const CareerApplicationList = [
     {

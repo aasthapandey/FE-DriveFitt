@@ -1,10 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { executeQuery } from "@/lib/database";
-import {
-  Application,
-  ApplicationStatus,
-  ApplicationFormData,
-} from "@/types/database";
+import { Application } from "@/types/database";
+import { ApplicationStatus } from "@/constants/database";
 
 export async function GET(request: NextRequest) {
   try {
@@ -12,8 +9,8 @@ export async function GET(request: NextRequest) {
     const status = searchParams.get("status");
     const jobId = searchParams.get("job_id");
 
-    let whereConditions = ["1=1"];
-    let queryParams: any[] = [];
+    const whereConditions = ["1=1"];
+    const queryParams: any[] = [];
 
     if (status !== null) {
       whereConditions.push("a.status = ?");

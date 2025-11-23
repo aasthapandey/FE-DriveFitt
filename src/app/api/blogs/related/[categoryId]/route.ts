@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { executeQuery } from "@/lib/database";
-import { BlogStatus } from "@/constants/enums";
+// BlogStatus import removed as it's unused
 
 export async function GET(
   request: NextRequest,
@@ -31,7 +31,7 @@ export async function GET(
       FROM blogs 
       WHERE category_id = ? AND status = 1
     `;
-    let queryParams: any[] = [categoryIdInt];
+    const queryParams: unknown[] = [categoryIdInt];
 
     if (excludeIdInt) {
       query += " AND id != ?";
@@ -50,7 +50,7 @@ export async function GET(
       {
         status: false,
         error: "Failed to fetch related blogs",
-        details: error.message,
+        details: error instanceof Error ? error.message : "Unknown error",
       },
       { status: 500 }
     );

@@ -234,8 +234,8 @@ export const AdminAuthProvider: React.FC<{ children: React.ReactNode }> = ({
         setIsAuthenticated(false);
         setError("Session expired. Please login again.");
       }
-    } catch (error) {
-      console.error("Auth check error:", error);
+    } catch {
+      console.error("Auth check error");
       if (!storedUser) {
         removeToken();
         setAdminUser(null);
@@ -249,6 +249,7 @@ export const AdminAuthProvider: React.FC<{ children: React.ReactNode }> = ({
   // Initialize auth on mount
   useEffect(() => {
     checkAuth();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Clear error after some time

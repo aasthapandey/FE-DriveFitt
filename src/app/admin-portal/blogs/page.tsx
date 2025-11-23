@@ -23,16 +23,8 @@ export default function BlogsPage() {
   const [selectedBlog, setSelectedBlog] = useState<BlogEntry | undefined>(
     undefined
   );
-  const [loading, setLoading] = useState<boolean>(false);
+  const [_loading, setLoading] = useState<boolean>(false);
   const { adminUser } = useAdminAuth();
-
-  if (!adminUser) {
-    return (
-      <div className="min-h-screen bg-[#0D0D0D] flex items-center justify-center">
-        <div className="text-white">Loading...</div>
-      </div>
-    );
-  }
 
   useEffect(() => {
     (async () => {
@@ -50,6 +42,14 @@ export default function BlogsPage() {
       }
     })();
   }, []);
+
+  if (!adminUser) {
+    return (
+      <div className="min-h-screen bg-[#0D0D0D] flex items-center justify-center">
+        <div className="text-white">Loading...</div>
+      </div>
+    );
+  }
 
   const handleSearch = (query: string) => {
     applyFilters(query, selectedCategories, selectedStatuses);

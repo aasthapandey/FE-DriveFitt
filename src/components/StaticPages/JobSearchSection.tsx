@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { JobSearchSection as JobSearchSectionType } from "@/types/staticPages";
 import { jobAPI } from "@/services/jobAPI";
@@ -39,7 +40,7 @@ const JobSearchSection = ({ data, isMobile }: JobSearchSectionProps) => {
   useEffect(() => {
     (async () => {
       try {
-        const [postingList, meta] = await Promise.all([
+        const [postingList] = await Promise.all([
           jobAPI.list({ status: 1, is_visible: true }),
           jobAPI.getDepartmentsLocations(),
         ]);
@@ -135,9 +136,11 @@ const JobSearchSection = ({ data, isMobile }: JobSearchSectionProps) => {
                   : "h-[44px] pl-10 pr-4 py-3"
               } w-full bg-[#0D0D0D] border border-[#333333] rounded-lg text-white placeholder-[#FFFFFF] focus:outline-none focus:border-[#00DBDC]`}
             />
-            <img
+            <Image
               src="/images/careers/career-search.svg"
               alt="Search"
+              width={16}
+              height={16}
               className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4"
             />
           </div>
