@@ -14,8 +14,7 @@ export const groupClassesData: StaticPageData = {
     description: "",
     desktopImage:
       "https://da8nru77lsio9.cloudfront.net/images/group-classes-c/hero.webp",
-    mobileImage:
-      "/images/group-classes/hero-mobile.jpg",
+    mobileImage: "/images/group-classes/hero-mobile.jpg",
     btnPrimaryText: "Book a free trial",
   },
   banner2Section: {
@@ -225,8 +224,8 @@ export const groupClassesData: StaticPageData = {
         title: "Quick links",
         links: [
           { title: "About us", link: "/about-us" },
-          { title: "Blogs", link: "/coming-soon" },
-          { title: "Career", link: "/coming-soon" },
+          { title: "Blogs", link: "/blogs" },
+          { title: "Career", link: "/careers" },
           { title: "Partner with us", link: "/franchise" },
         ],
       },

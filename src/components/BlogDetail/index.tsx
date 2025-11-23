@@ -47,11 +47,11 @@ const footerData = {
         },
         {
           title: "Blogs",
-          link: "/coming-soon",
+          link: "/blogs",
         },
         {
           title: "Career",
-          link: "/coming-soon",
+          link: "/careers",
         },
         {
           title: "Partner With Us",
