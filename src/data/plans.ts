@@ -34,7 +34,7 @@ export const plansData: StaticPageData = {
       {
         title: "Individual Annual Plan",
         discountedPrice: "₹47,000",
-        originalPrice: "₹62,999",
+        originalPrice: "₹67,149",
         discountPercentage: "30%",
         buttonText: "Lock this Price @ ₹999",
         seatsLeft: "",
@@ -44,7 +44,7 @@ export const plansData: StaticPageData = {
         title: "Family Annual Plan",
         subtitle: "3 Members",
         discountedPrice: "₹1,20,000",
-        originalPrice: "₹1,63,999",
+        originalPrice: "₹1,71,449",
         discountPercentage: "30%",
         buttonText: "Lock this Price @ ₹999",
         seatsLeft: "",
