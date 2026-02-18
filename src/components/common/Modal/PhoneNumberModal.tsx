@@ -416,76 +416,21 @@ const PhoneNumberModal = ({
     []
   );
 
-  const sendOTPAndUpdateDBAsync = useCallback(
-    async (phone: string, purpose: OTPPurpose, otp: string) => {
-      try {
-        // Step 2: Send SMS with the generated OTP via Edge Runtime
-        const smsResponse = await fetch("/api/auth/send-otp", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            phone,
-            purpose,
-            otp,
-          }),
-        });
-
-        const smsResult = await smsResponse.json();
-
-        // Step 3: Update vendor response in database
-        await fetch("/api/auth/otp-db-operations", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            operation: "update_vendor_response",
-            phone,
-            purpose,
-            vendorResponse: {
-              success: smsResult.success,
-              response: smsResult.message || "OTP sent successfully",
-            },
-          }),
-        });
-
-        console.log("Background OTP operations completed:", {
-          success: smsResult.success,
-        });
-      } catch (error) {
-        console.error("Error in background OTP operations:", error);
-        // Don't show error to user since this runs in background
-      }
-    },
-    []
-  );
-
   const handleContinue = useCallback(async () => {
     if (phoneNumber.length === 10) {
       setIsLoading(true);
       setError("");
 
       try {
-        // Step 1: Generate OTP and store in database
-        const dbResponse = await fetch("/api/auth/otp-db-operations", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            operation: "generate_and_store",
-            phone: phoneNumber,
-            purpose: OTPPurpose.LOGIN,
-          }),
-        });
+        // Call server-side API that handles everything: OTP generation, storage, and sending
+        const response = await authAPI.sendOTP(phoneNumber, OTPPurpose.LOGIN);
 
-        const dbResult = await dbResponse.json();
-        if (!dbResult.success) {
-          setError("Failed to generate OTP");
-          return;
+        if (response.success) {
+          // Show OTP screen after successful OTP send
+          setModalState("otp");
+        } else {
+          setError(response.message || "Failed to send OTP");
         }
-
-        // Show OTP screen immediately after successful database operation
-        setModalState("otp");
-
-        // Step 2 & 3: Run SMS sending and DB update in background (don't wait)
-        sendOTPAndUpdateDBAsync(phoneNumber, OTPPurpose.LOGIN, dbResult.otp);
       } catch (error) {
         console.error("Error in OTP flow:", error);
         setError("Network error. Please try again.");
@@ -493,7 +438,7 @@ const PhoneNumberModal = ({
         setIsLoading(false);
       }
     }
-  }, [phoneNumber, sendOTPAndUpdateDBAsync]);
+  }, [phoneNumber]);
 
   const handleOTPChange = useCallback(
     (index: number, value: string) => {

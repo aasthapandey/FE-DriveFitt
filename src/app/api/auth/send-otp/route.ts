@@ -1,14 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import { smsService } from "@/lib/smsService";
+import { otpService } from "@/lib/otpService";
 import { SendOTPRequest, AuthResponse, OTPPurpose } from "@/types/auth";
 
-// Use Edge Runtime for better performance in serverless environment
-export const runtime = "edge";
+// Use Node.js runtime for database operations
+export const runtime = "nodejs";
 
 export async function POST(request: NextRequest) {
   try {
-    const body: SendOTPRequest & { otp?: string } = await request.json();
-    const { phone, purpose, otp } = body;
+    const body: SendOTPRequest = await request.json();
+    const { phone, purpose } = body;
 
     // Validate phone number
     if (!phone || !/^[6-9]\d{9}$/.test(phone)) {
@@ -33,11 +34,26 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Use provided OTP or generate new one if not provided
-    const otpToSend = otp || Math.floor(1000 + Math.random() * 9000).toString();
+    // Step 1: Generate OTP and store in database (server-side only)
+    const dbResult = await otpService.generateAndStoreOTP(phone, purpose);
+    
+    if (!dbResult.success || !dbResult.otp) {
+      return NextResponse.json<AuthResponse>(
+        {
+          success: false,
+          message: "Failed to generate OTP. Please try again.",
+        },
+        { status: 500 }
+      );
+    }
 
-    // Send OTP via SMS
-    const smsResult = await smsService.sendOTP(phone, otpToSend);
+    // Step 2: Send OTP via WhatsApp (server-side only)
+    const smsResult = await smsService.sendOTP(phone, dbResult.otp);
+
+    // Step 3: Update vendor response in database
+    if (dbResult.otpId) {
+      await otpService.updateVendorResponse(dbResult.otpId, smsResult);
+    }
 
     if (smsResult.success) {
       return NextResponse.json<AuthResponse>(
