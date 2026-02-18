@@ -28,12 +28,6 @@ class EasySocialService {
           "/api/v1/wa-templates/send/cmkxk2e2b5mzddixph7xiajy6/16318/3661/API",
         timeout: 15000, // 15 seconds
       };
-
-      if (!this.config.apiKey) {
-        console.warn(
-          "⚠️ EASYSOCIAL_API_KEY not configured. WhatsApp OTP delivery will fail.",
-        );
-      }
     }
     return this.config;
   }
