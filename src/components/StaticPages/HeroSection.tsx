@@ -1,7 +1,5 @@
 "use client";
 import { Hero, TitleWord } from "@/types/staticPages";
-import { homeData } from "@/data/home";
-import CountdownTimer from "./CountdownTimer";
 import { useState } from "react";
 import EmailModal from "@/components/common/Modal/EmailModal";
 import PhoneNumberModal from "@/components/common/Modal/PhoneNumberModal";
@@ -123,15 +121,6 @@ const HeroSection = ({ data, pageName, isMobile }: HeroSectionProps) => {
           </ScrollAnimation>
         </div>
       </div>
-      {pageName === "home" && homeData.countdownSection && (
-        <ScrollAnimation delay={0.8} direction="up">
-          <CountdownTimer
-            countdownData={homeData.countdownSection}
-            isMobile={isMobile}
-          />
-        </ScrollAnimation>
-      )}
-
       {/* Email Modal */}
       <EmailModal
         isOpen={isEmailModalOpen}
