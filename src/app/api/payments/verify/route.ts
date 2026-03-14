@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
     console.log("🚀 Payment verification API called");
     console.log(
       "📋 Request headers:",
-      Object.fromEntries(request.headers.entries())
+      Object.fromEntries(request.headers.entries()),
     );
 
     const { orderId, paymentId, signature, userDetails } = await request.json();
@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
       });
       return NextResponse.json(
         { error: "Missing required parameters" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -63,11 +63,11 @@ export async function POST(request: NextRequest) {
     if (!paymentResponse.success) {
       console.error(
         "Failed to fetch payment details from Razorpay:",
-        paymentResponse.error
+        paymentResponse.error,
       );
       return NextResponse.json(
         { error: "Payment verification failed" },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
@@ -81,7 +81,7 @@ export async function POST(request: NextRequest) {
       console.error("Payment not in valid state:", paymentDetails.status);
       return NextResponse.json(
         { error: "Payment not completed" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -159,7 +159,7 @@ export async function POST(request: NextRequest) {
         "with membership_type:",
         order.membership_type,
         "and ID:",
-        membershipRecordId
+        membershipRecordId,
       );
     } catch (dbError) {
       console.error("Failed to create membership record:", dbError);
@@ -285,7 +285,7 @@ export async function POST(request: NextRequest) {
             console.log(
               "✅ Invoice PDF generated successfully, size:",
               invoiceBuffer.length,
-              "bytes"
+              "bytes",
             );
 
             // Upload invoice to S3
@@ -294,14 +294,14 @@ export async function POST(request: NextRequest) {
               console.log("☁️ Uploading invoice to S3...");
               const s3Result = await s3Service.uploadInvoice(
                 invoiceBuffer,
-                invoiceData.invoiceNumber
+                invoiceData.invoiceNumber,
               );
 
               if (s3Result.success && s3Result.url) {
                 invoiceUrl = s3Result.url;
                 console.log(
                   "✅ Invoice uploaded to S3 successfully:",
-                  invoiceUrl
+                  invoiceUrl,
                 );
               } else {
                 console.error("❌ S3 upload failed:", s3Result.error);
@@ -329,13 +329,13 @@ export async function POST(request: NextRequest) {
                   orderId: membership.order_id,
                   paymentId: membership.payment_id,
                 },
-                invoiceBuffer
+                invoiceBuffer,
               );
               console.log("✅ Membership success email sent successfully");
             } catch (emailError) {
               console.error(
                 "❌ Failed to send membership success email:",
-                emailError
+                emailError,
               );
               // Don't fail the payment verification if email sending fails
             }
@@ -363,7 +363,7 @@ export async function POST(request: NextRequest) {
               } else {
                 console.error(
                   "❌ WhatsApp sending failed:",
-                  whatsappResult.error
+                  whatsappResult.error,
                 );
               }
             } catch (whatsappError) {
@@ -372,13 +372,13 @@ export async function POST(request: NextRequest) {
           } else {
             console.error(
               "❌ User not found for invoice generation, user_id:",
-              order.user_id
+              order.user_id,
             );
           }
         } catch (invoiceError) {
           console.error(
             "❌ Failed to generate invoice or send email:",
-            invoiceError
+            invoiceError,
           );
           console.error("Invoice error details:", {
             userId: order.user_id,
@@ -411,7 +411,7 @@ export async function POST(request: NextRequest) {
         error: "Verification failed",
         details: error instanceof Error ? error.message : "Unknown error",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

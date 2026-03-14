@@ -2,7 +2,10 @@ import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import fs from "fs";
 import path from "path";
-import { getPricingByAmount, MEMBERSHIP_PRICING } from "@/config/membershipPricing";
+import {
+  getPricingByAmount,
+  MEMBERSHIP_PRICING,
+} from "@/config/membershipPricing";
 
 // Extend jsPDF interface to include our custom property
 interface ExtendedJsPDF extends jsPDF {
@@ -15,7 +18,7 @@ export interface InvoiceData {
   customerName: string;
   customerEmail: string;
   customerPhone: string;
-  amount: number;       // total amount including GST (e.g. 49350 or 126000)
+  amount: number; // total amount including GST (e.g. 49350 or 126000)
   membershipType: string;
   paymentId: string;
   orderId: string;
@@ -49,7 +52,7 @@ export function generateInvoicePDF(data: InvoiceData): ExtendedJsPDF {
       process.cwd(),
       "public",
       "images",
-      "logo-invoice2.jpg"
+      "logo-invoice2.jpg",
     );
     const logoBuffer = fs.readFileSync(logoPath);
     const logoBase64 = logoBuffer.toString("base64");
@@ -183,7 +186,7 @@ export function generateInvoicePDF(data: InvoiceData): ExtendedJsPDF {
   doc.text(
     `  ${amountToWords(totalAmount)}.`,
     20 + amountWordsWidth,
-    amountWordsY
+    amountWordsY,
   );
 
   // Payment Terms - positioned below amount in words with minimal spacing
@@ -204,7 +207,7 @@ export function generateInvoicePDF(data: InvoiceData): ExtendedJsPDF {
     amountWordsY + 115,
     {
       align: "center",
-    }
+    },
   );
   doc.setFont("helvetica", "bold");
   doc.setFontSize(11);
@@ -214,14 +217,14 @@ export function generateInvoicePDF(data: InvoiceData): ExtendedJsPDF {
     amountWordsY + 135,
     {
       align: "center",
-    }
+    },
   );
   doc.setFont("helvetica", "normal");
   doc.text(
     "Registered Address: 5th Floor, DLF Centre, Savitri Cinema Complex, Greater Kailash-2, New Delhi - 110048",
     105,
     amountWordsY + 141,
-    { align: "center" }
+    { align: "center" },
   );
 
   return doc;

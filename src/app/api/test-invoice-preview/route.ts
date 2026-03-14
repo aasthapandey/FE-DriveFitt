@@ -22,7 +22,9 @@ export async function GET(request: NextRequest) {
     customerName: "Test Customer",
     customerEmail: "test@example.com",
     customerPhone: "9999999999",
-    amount: isFamily ? MEMBERSHIP_PRICING.FAMILY.total : MEMBERSHIP_PRICING.INDIVIDUAL.total,
+    amount: isFamily
+      ? MEMBERSHIP_PRICING.FAMILY.total
+      : MEMBERSHIP_PRICING.INDIVIDUAL.total,
     membershipType: isFamily ? "Family Annual Plan" : "Individual Annual Plan",
     paymentId: "pay_testPaymentId123",
     orderId: "order_testOrderId456",
@@ -46,7 +48,7 @@ export async function GET(request: NextRequest) {
         error: "Invoice generation failed",
         details: error instanceof Error ? error.message : String(error),
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
