@@ -1,5 +1,6 @@
 import { navbarData } from "./navbar";
 import { StaticPageData } from "@/types/staticPages";
+import { MEMBERSHIP_PRICING } from "@/config/membershipPricing";
 
 export const plansData: StaticPageData = {
   title: "Plans",
@@ -33,20 +34,20 @@ export const plansData: StaticPageData = {
     plans: [
       {
         title: "Individual Annual Plan",
-        discountedPrice: "₹47,000",
+        discountedPrice: MEMBERSHIP_PRICING.INDIVIDUAL.displayPrice,
         originalPrice: "₹67,149",
         discountPercentage: "30%",
-        buttonText: "Lock this Price @ ₹999",
+        buttonText: MEMBERSHIP_PRICING.INDIVIDUAL.buttonText,
         seatsLeft: "",
         limitedOfferCountText: "100 members",
       },
       {
         title: "Family Annual Plan",
         subtitle: "3 Members",
-        discountedPrice: "₹1,20,000",
+        discountedPrice: MEMBERSHIP_PRICING.FAMILY.displayPrice,
         originalPrice: "₹1,71,449",
         discountPercentage: "30%",
-        buttonText: "Lock this Price @ ₹999",
+        buttonText: MEMBERSHIP_PRICING.FAMILY.buttonText,
         seatsLeft: "",
         limitedOfferCountText: "100 families",
       },

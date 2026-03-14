@@ -13,6 +13,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
 import { MembershipStatus } from "@/types/auth";
+import { MEMBERSHIP_PRICING } from "@/config/membershipPricing";
 
 interface PricingPlan {
   title: string;
@@ -212,6 +213,12 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
     if (title.includes("Individual")) return 1;
     if (title.includes("Family")) return 2;
     return 1; // default to Individual
+  };
+
+  // Get the full payment amount (inc. GST) based on plan title — sourced from central config
+  const getMembershipAmount = (plan: PricingPlan): number => {
+    if (plan.title.includes("Family")) return MEMBERSHIP_PRICING.FAMILY.total;
+    return MEMBERSHIP_PRICING.INDIVIDUAL.total; // default to Individual
   };
 
   // Helper function to check if user has active membership of specific type
@@ -784,7 +791,7 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
             isOpen={showPaymentModal}
             onClose={handlePaymentClose}
             membershipType={getMembershipType(selectedPlan.title)}
-            amount={999} // Lock-in price for pre-booking advance
+            amount={getMembershipAmount(selectedPlan)}
             onSuccess={handlePaymentSuccess}
             onError={handlePaymentError}
           />
@@ -931,7 +938,7 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
           isOpen={showPaymentModal}
           onClose={handlePaymentClose}
           membershipType={getMembershipType(selectedPlan.title)}
-          amount={999} // Lock-in price for pre-booking advance
+          amount={getMembershipAmount(selectedPlan)}
           onSuccess={handlePaymentSuccess}
           onError={handlePaymentError}
         />

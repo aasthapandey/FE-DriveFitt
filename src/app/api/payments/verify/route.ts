@@ -261,7 +261,7 @@ export async function POST(request: NextRequest) {
               customerName: `${user.first_name} ${user.last_name}`.trim(),
               customerEmail: user.email,
               customerPhone: user.phone,
-              amount: 999.0,
+              amount: order.amount, // Use actual order amount from database
               membershipType:
                 membership.membership_type === 1
                   ? "Individual Annual Plan"

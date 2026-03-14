@@ -2,6 +2,7 @@ import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import fs from "fs";
 import path from "path";
+import { getPricingByAmount, MEMBERSHIP_PRICING } from "@/config/membershipPricing";
 
 // Extend jsPDF interface to include our custom property
 interface ExtendedJsPDF extends jsPDF {
@@ -14,10 +15,15 @@ export interface InvoiceData {
   customerName: string;
   customerEmail: string;
   customerPhone: string;
-  amount: number;
+  amount: number;       // total amount including GST (e.g. 49350 or 126000)
   membershipType: string;
   paymentId: string;
   orderId: string;
+}
+
+function amountToWords(amount: number): string {
+  const pricing = getPricingByAmount(amount);
+  return pricing.amountInWords;
 }
 
 export function generateInvoicePDF(data: InvoiceData): ExtendedJsPDF {
@@ -112,20 +118,21 @@ export function generateInvoicePDF(data: InvoiceData): ExtendedJsPDF {
   // Table headers
   const headers = [["Description", "Quantity", "Rate (Rs.)", "Amount (Rs.)"]];
 
-  // Calculate GST values
-  const subtotal = 951.43; // Before GST
-  const gstAmount = 47.53; // 18% GST
-  const totalAmount = 999.0;
+  // Calculate GST values dynamically based on amount
+  const pricing = getPricingByAmount(data.amount);
+  const baseAmount = pricing.base;
+  const gstAmount = pricing.gst;
+  const totalAmount = pricing.total;
 
   // Table data
   const tableData = [
     [
-      `Pre-booking advance with respect to membership at Drive FITT Club\n- ${data.membershipType}`,
+      `Membership at Drive FITT Club\n- ${data.membershipType}`,
       "1",
-      "951.43",
-      "951.43",
+      baseAmount.toFixed(2),
+      baseAmount.toFixed(2),
     ],
-    ["Subtotal (before GST)", "", "", subtotal.toFixed(2)],
+    ["Subtotal (before GST)", "", "", baseAmount.toFixed(2)],
     ["GST @5% (IGST/CGST+SGST)", "", "", gstAmount.toFixed(2)],
     ["Total Amount (Rs.)", "", "", totalAmount.toFixed(2)],
   ];
@@ -174,7 +181,7 @@ export function generateInvoicePDF(data: InvoiceData): ExtendedJsPDF {
   doc.setFont("helvetica", "normal");
   doc.setFontSize(9);
   doc.text(
-    "  Nine Hundred Ninety-Nine Rupees Only.",
+    `  ${amountToWords(totalAmount)}.`,
     20 + amountWordsWidth,
     amountWordsY
   );
