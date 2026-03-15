@@ -2,10 +2,7 @@ import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import fs from "fs";
 import path from "path";
-import {
-  getPricingByAmount,
-  MEMBERSHIP_PRICING,
-} from "@/config/membershipPricing";
+import { getPricingByAmount } from "@/config/membershipPricing";
 
 // Extend jsPDF interface to include our custom property
 interface ExtendedJsPDF extends jsPDF {

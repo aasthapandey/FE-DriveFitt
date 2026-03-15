@@ -11,19 +11,21 @@
 export const MEMBERSHIP_PRICING = {
   INDIVIDUAL: {
     base: 47000,
-    gst: 2350, // 5% of base
+    gst: 2350,   // 5% of base
     total: 49350,
     amountInWords: "Forty-Nine Thousand Three Hundred and Fifty Rupees Only",
-    displayPrice: "₹49,350",
-    buttonText: "Buy Now @ ₹49,350",
+    displayPrice: "₹47,000",       // shown on plans page (excl. tax)
+    displayPriceWithTax: "₹49,350", // charged at payment
+    buttonText: "Buy Now @ ₹47,000 + GST",
   },
   FAMILY: {
     base: 120000,
-    gst: 6000, // 5% of base
+    gst: 6000,   // 5% of base
     total: 126000,
     amountInWords: "One Lakh Twenty-Six Thousand Rupees Only",
-    displayPrice: "₹1,26,000",
-    buttonText: "Buy Now @ ₹1,26,000",
+    displayPrice: "₹1,20,000",       // shown on plans page (excl. tax)
+    displayPriceWithTax: "₹1,26,000", // charged at payment
+    buttonText: "Buy Now @ ₹1,20,000 + GST",
   },
 } as const;
 
