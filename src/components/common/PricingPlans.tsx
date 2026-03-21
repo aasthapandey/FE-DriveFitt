@@ -14,7 +14,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/store";
 import { MembershipStatus } from "@/types/auth";
 import { MEMBERSHIP_PRICING } from "@/config/membershipPricing";
-
+ 
 interface PricingPlan {
   title: string;
   subtitle?: string;
