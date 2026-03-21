@@ -687,13 +687,16 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
                             {plans[activePlanIndex].originalPrice}
                           </span>
                         </span>
-                        <Image
+                        {/* <Image
                           src={plan.discountPercentage === "40%" ? "/images/plans/discount-tag-40.svg" : "/images/plans/discount-tag.svg"}
                           alt="Discount"
                           width={104}
                           height={36}
                           className="w-16 h-6"
-                        />
+                        /> */}
+                        <span className="inline-flex items-center justify-center px-3 py-1 rounded-md text-xs font-medium text-[#0BFFB6] border border-[#0BFFB6]/40 bg-[#0BFFB6]/10">
+                          Save {plans[activePlanIndex].discountPercentage}
+                        </span>
                       </div>
                     </ScrollAnimation>
 
@@ -859,13 +862,16 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
                     <span className="text-lg md:text-xl lg:text-2xl font-normal leading-[100%] tracking-[0px] text-center text-[#6A6A6A]">
                       <span className="line-through">{plan.originalPrice}</span>
                     </span>
-                    <Image
+                    {/* <Image
                       src={plan.discountPercentage === "40%" ? "/images/plans/discount-tag-40.svg" : "/images/plans/discount-tag.svg"}
                       alt="Discount"
                       width={104}
                       height={36}
                       className="w-16 md:w-20 lg:w-[104px] h-6 md:h-7 lg:h-[36px]"
-                    />
+                    /> */}
+                    <span className="inline-flex items-center justify-center px-3 py-1 rounded-md text-xs font-medium text-[#0BFFB6] border border-[#0BFFB6]/40 bg-[#0BFFB6]/10">
+                          Save {plans[activePlanIndex].discountPercentage}
+                    </span>
                   </div>
 
                   <div className="w-full border-t border-[#333333] mb-6 md:mb-8 lg:mb-10" />
