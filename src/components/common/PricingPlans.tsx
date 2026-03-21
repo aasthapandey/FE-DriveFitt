@@ -860,7 +860,7 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
                       <span className="line-through">{plan.originalPrice}</span>
                     </span>
                     <Image
-                      src="/images/plans/discount-tag.svg"
+                      src="/images/plans/discount-tag-40.svg"
                       alt="Discount"
                       width={104}
                       height={36}
