@@ -33,7 +33,7 @@ export const plansData: StaticPageData = {
   pricingPlansSection: {
     plans: [
       {
-        title: "Individual Annual Plan",
+        title: "Founding Member - Individual Annual Plan",
         discountedPrice: MEMBERSHIP_PRICING.INDIVIDUAL.displayPrice,
         originalPrice: "₹67,149",
         discountPercentage: "30%",
@@ -42,11 +42,11 @@ export const plansData: StaticPageData = {
         limitedOfferCountText: "100 members",
       },
       {
-        title: "Family Annual Plan",
+        title: "Founding Member - Family Annual Plan",
         subtitle: "3 Members",
         discountedPrice: MEMBERSHIP_PRICING.FAMILY.displayPrice,
-        originalPrice: "₹1,71,449",
-        discountPercentage: "30%",
+        originalPrice: "₹2,01,447",
+        discountPercentage: "40%",
         buttonText: MEMBERSHIP_PRICING.FAMILY.buttonText,
         seatsLeft: "",
         limitedOfferCountText: "100 families",
