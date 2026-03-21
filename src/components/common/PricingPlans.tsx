@@ -869,8 +869,8 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
                       height={36}
                       className="w-16 md:w-20 lg:w-[104px] h-6 md:h-7 lg:h-[36px]"
                     /> */}
-                    <span className="inline-flex items-center justify-center px-3 py-1 rounded-md text-xs font-medium text-[#0BFFB6] border border-[#0BFFB6]/40 bg-[#0BFFB6]/10">
-                          Save {plans[activePlanIndex].discountPercentage}
+                    <span className="inline-flex items-center justify-center px-3 py-1 md:px-4 md:py-1.5 lg:px-5 lg:py-2 rounded-md text-xs md:text-sm lg:text-base font-medium text-[#0BFFB6] border border-[#0BFFB6]/40 bg-[#0BFFB6]/10">
+                        Save {plan.discountPercentage}
                     </span>
                   </div>
 
