@@ -57,10 +57,10 @@ class EasySocialService {
         };
       }
 
-      console.log(`📱 Sending WhatsApp OTP to ${phone}`);
+      console.log(`📱 Sending WhatsApp OTP to +91-${phone}`);
 
       // Construct API URL with parameters
-      const url = `${config.baseURL}${config.templatePath}/${phone}?body1=${otp}&button1=${otp}`;
+      const url = `${config.baseURL}${config.templatePath}/91${phone}?body1=${otp}&button1=${otp}`;
 
       // Setup request with timeout
       const controller = new AbortController();
