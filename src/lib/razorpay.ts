@@ -1,11 +1,24 @@
 import Razorpay from "razorpay";
 import crypto from "crypto";
 
-// Initialize Razorpay instance
-export const razorpayInstance = new Razorpay({
-  key_id: process.env.RAZORPAY_KEY_ID!,
-  key_secret: process.env.RAZORPAY_KEY_SECRET!,
-});
+let razorpayInstance: Razorpay | null = null;
+
+// Initialize only when needed so importing signature helpers does not require
+// Razorpay credentials during build-time route collection.
+export const getRazorpayInstance = (): Razorpay => {
+  if (!process.env.RAZORPAY_KEY_ID || !process.env.RAZORPAY_KEY_SECRET) {
+    throw new Error("Razorpay credentials are required.");
+  }
+
+  if (!razorpayInstance) {
+    razorpayInstance = new Razorpay({
+      key_id: process.env.RAZORPAY_KEY_ID,
+      key_secret: process.env.RAZORPAY_KEY_SECRET,
+    });
+  }
+
+  return razorpayInstance;
+};
 
 // Verify payment signature
 export const verifyPaymentSignature = (

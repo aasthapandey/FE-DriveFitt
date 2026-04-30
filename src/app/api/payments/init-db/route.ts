@@ -12,7 +12,12 @@ export async function POST() {
     return NextResponse.json({
       success: true,
       message: "Payment database tables initialized successfully",
-      tables: ["orders", "payments", "memberships"],
+      tables: [
+        "orders",
+        "payments",
+        "memberships",
+        "membership_terms_acceptances",
+      ],
     });
   } catch (error) {
     console.error("❌ Failed to initialize payment database:", error);

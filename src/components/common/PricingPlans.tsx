@@ -3,9 +3,6 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import ScrollAnimation from "@/components/common/ScrollAnimation";
-import PaymentModal from "./PaymentModal";
-import PaymentResultModal, { PaymentResultType } from "./PaymentResultModal";
-import PaymentLoader from "./PaymentLoader";
 // import MembershipAlertModal from "./MembershipAlertModal"; // Removed - no longer blocking purchases
 import PhoneNumberModal from "./Modal/PhoneNumberModal";
 import UserInfoModal from "./Modal/UserInfoModal";
@@ -13,18 +10,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
 import { MembershipStatus } from "@/types/auth";
-import { MEMBERSHIP_PRICING } from "@/config/membershipPricing";
- 
-interface PricingPlan {
-  title: string;
-  subtitle?: string;
-  discountedPrice: string;
-  originalPrice: string;
-  discountPercentage: string;
-  buttonText: string;
-  seatsLeft: string;
-  limitedOfferCountText?: string;
-}
+import { PricingPlan } from "@/types/staticPages";
 
 interface PricingPlansProps {
   plans: PricingPlan[];
@@ -36,25 +22,16 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
   const [activePlanIndex, setActivePlanIndex] = useState(0);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState<PricingPlan | null>(null);
-  const [showPaymentResultModal, setShowPaymentResultModal] = useState(false);
-  const [paymentResultType, setPaymentResultType] =
-    useState<PaymentResultType>("success");
-  const [paymentResultData, setPaymentResultData] = useState<{
-    transactionId: string;
-    planName?: string;
-    discountAmount?: number;
-  } | null>(null);
   const [showPhoneModal, setShowPhoneModal] = useState(false);
   const [showUserInfoModal, setShowUserInfoModal] = useState(false);
   const [tempPhoneNumber, setTempPhoneNumber] = useState<string>("");
   const [waitingForUserData, setWaitingForUserData] = useState(false);
-  const [isPaymentProcessing, setIsPaymentProcessing] = useState(false);
   const [userMembershipTypes, setUserMembershipTypes] = useState<number[]>([]);
 
   const { isAuthenticated, user } = useSelector(
     (state: RootState) => state.auth,
   );
-  const { checkUserMembership, fetchProfile, updateUserData } = useAuth();
+  const { checkUserMembership } = useAuth();
   const router = useRouter();
 
   // Check user's current membership on component mount
@@ -156,7 +133,7 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
         });
 
         if (selectedPlan && user?.memberships) {
-          const planMembershipType = getMembershipType(selectedPlan.title);
+          const planMembershipType = selectedPlan.membershipType;
           const hasExistingActivePlan = hasActiveMembershipOfType(
             planMembershipType,
             user.memberships,
@@ -187,11 +164,13 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
           }
         }
 
-        console.log(
-          "PricingPlans: Profile complete and no duplicate membership, opening payment modal",
-        );
-        setWaitingForUserData(false);
-        setShowPaymentModal(true);
+        if (selectedPlan) {
+          console.log(
+            "PricingPlans: Profile complete and no duplicate membership, opening review page",
+          );
+          setWaitingForUserData(false);
+          proceedToReview(selectedPlan);
+        }
       } else {
         console.log(
           "PricingPlans: Profile incomplete, not opening payment modal",
@@ -208,19 +187,6 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
     }
   }, [waitingForUserData, user]);
 
-  // Map plan titles to integers
-  const getMembershipType = (title: string): number => {
-    if (title.includes("Individual")) return 1;
-    if (title.includes("Family")) return 2;
-    return 1; // default to Individual
-  };
-
-  // Get the full payment amount (inc. GST) based on plan title — sourced from central config
-  const getMembershipAmount = (plan: PricingPlan): number => {
-    if (plan.title.includes("Family")) return MEMBERSHIP_PRICING.FAMILY.total;
-    return MEMBERSHIP_PRICING.INDIVIDUAL.total; // default to Individual
-  };
-
   // Helper function to check if user has active membership of specific type
   const hasActiveMembershipOfType = (
     membershipType: number,
@@ -236,7 +202,7 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
 
   // Helper function to get button text and state for a plan
   const getButtonConfig = (plan: PricingPlan) => {
-    const planMembershipType = getMembershipType(plan.title);
+    const planMembershipType = plan.membershipType;
     const isUserCurrentPlan = userMembershipTypes.includes(planMembershipType);
 
     if (isUserCurrentPlan) {
@@ -258,6 +224,10 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
 
   const handlePlanSwitch = (index: number) => {
     setActivePlanIndex(index);
+  };
+
+  const proceedToReview = (plan: PricingPlan) => {
+    router.push(`/membership/review?plan=${encodeURIComponent(plan.id)}`);
   };
 
   const handlePaymentClick = async (plan: PricingPlan) => {
@@ -306,7 +276,7 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
 
     // Step 2: Check if user already has active membership of same type
     if (isAuthenticated && user?.memberships) {
-      const planMembershipType = getMembershipType(plan.title);
+      const planMembershipType = plan.membershipType;
       const hasExistingActivePlan = hasActiveMembershipOfType(
         planMembershipType,
         user.memberships,
@@ -339,113 +309,10 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
       return;
     }
 
-    // Step 3: All checks passed, proceed to payment
-    console.log("PricingPlans: All checks passed, opening payment modal");
+    // Step 3: All checks passed, proceed to review
+    console.log("PricingPlans: All checks passed, opening review page");
     console.log("PricingPlans: Final user data:", user);
-    setShowPaymentModal(true);
-  };
-
-  const handlePaymentClose = () => {
-    setShowPaymentModal(false);
-    setSelectedPlan(null);
-  };
-
-  const handlePaymentSuccess = async (
-    paymentId: string,
-    membershipData?: {
-      id: number;
-      membershipType: number;
-      status: number; // Using integer status
-      startDate: string;
-      expiresAt: string;
-      invoiceNumber?: string;
-      orderId: number;
-      paymentId: number;
-    } | null,
-  ) => {
-    console.log(
-      "Payment successful for plan:",
-      selectedPlan?.title,
-      "Payment ID:",
-      paymentId,
-      "Membership Data:",
-      membershipData,
-    );
-
-    // Show loader while processing
-    setIsPaymentProcessing(true);
-    setShowPaymentModal(false);
-
-    try {
-      if (membershipData) {
-        // ✅ OPTIMIZATION: Update Redux state directly with membership data
-        console.log("🔄 Updating Redux state with new membership data...");
-
-        // Update user's membership status in Redux
-        updateUserData({
-          hasMembership: true,
-          membershipInfo: membershipData,
-        });
-
-        console.log("✅ Redux state updated, showing success modal...");
-      } else {
-        // Fallback: Fetch fresh user data if membership data not available
-        console.log(
-          "🔄 Fallback: Fetching fresh user data after successful payment...",
-        );
-        await fetchProfile();
-      }
-
-      // Hide loader and show success modal
-      setIsPaymentProcessing(false);
-      setPaymentResultType("success");
-      setPaymentResultData({
-        transactionId: paymentId,
-        planName: selectedPlan?.title,
-        discountAmount: selectedPlan?.originalPrice
-          ? parseInt(selectedPlan.originalPrice.replace(/[^\d]/g, ""))
-          : undefined,
-      });
-      setShowPaymentResultModal(true);
-
-      // Clear selected plan
-      setSelectedPlan(null);
-    } catch (error) {
-      console.error("❌ Error handling payment success:", error);
-
-      // Hide loader and still show success modal even if there's an error updating state
-      setIsPaymentProcessing(false);
-      setPaymentResultType("success");
-      setPaymentResultData({
-        transactionId: paymentId,
-        planName: selectedPlan?.title,
-        discountAmount: selectedPlan?.originalPrice
-          ? parseInt(selectedPlan.originalPrice.replace(/[^\d]/g, ""))
-          : undefined,
-      });
-      setShowPaymentResultModal(true);
-      setSelectedPlan(null);
-    }
-  };
-
-  const handlePaymentError = (error: string) => {
-    console.error("Payment failed:", error);
-
-    // Hide loader and close payment modal
-    setIsPaymentProcessing(false);
-    setShowPaymentModal(false);
-
-    // Show failure modal
-    setPaymentResultType("failure");
-    setPaymentResultData({
-      transactionId: error.includes("cancelled")
-        ? "Payment Cancelled"
-        : "Payment Failed",
-    });
-    setShowPaymentResultModal(true);
-
-    // Don't clear selectedPlan here - keep it for retry functionality
-    // setSelectedPlan(null);
+    proceedToReview(plan);
   };
 
   const handlePhoneModalClose = () => {
@@ -454,32 +321,6 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
 
   const handleUserInfoModalClose = () => {
     setShowUserInfoModal(false);
-  };
-
-  const handlePaymentResultModalClose = () => {
-    setShowPaymentResultModal(false);
-    setPaymentResultData(null);
-    setSelectedPlan(null); // Clear selected plan when modal is closed
-  };
-
-  const handleRetryPayment = () => {
-    console.log("Retry payment clicked, selectedPlan:", selectedPlan);
-    setShowPaymentResultModal(false);
-    setPaymentResultData(null);
-    // Reopen payment modal for retry
-    if (selectedPlan) {
-      console.log("Reopening payment modal for retry");
-      setShowPaymentModal(true);
-    } else {
-      console.error("No selected plan available for retry");
-    }
-  };
-
-  const handleGoHome = () => {
-    setShowPaymentResultModal(false);
-    setPaymentResultData(null);
-    setSelectedPlan(null); // Clear selected plan when going home
-    router.push("/");
   };
 
   const handlePhoneModalSuccess = (
@@ -501,7 +342,7 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
 
     // Step 1: Check if user already has active membership of same type
     if (selectedPlan && userToCheck?.memberships) {
-      const planMembershipType = getMembershipType(selectedPlan.title);
+      const planMembershipType = selectedPlan.membershipType;
 
       console.log("🔍 DUPLICATE VALIDATION DEBUG:", {
         selectedPlan: selectedPlan.title,
@@ -556,11 +397,13 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
       );
       setShowUserInfoModal(true);
     } else {
-      console.log(
-        "PricingPlans: User has complete profile, proceeding to payment",
-      );
-      // User is authenticated and has complete profile, proceed to payment
-      setShowPaymentModal(true);
+      if (selectedPlan) {
+        console.log(
+          "PricingPlans: User has complete profile, proceeding to review page",
+        );
+        // User is authenticated and has complete profile, proceed to review
+        proceedToReview(selectedPlan);
+      }
     }
   };
 
@@ -583,7 +426,7 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
       if (user && user.name && user.email && user.phone) {
         // Step 1: Check if user already has active membership of same type (before opening payment modal)
         if (selectedPlan && user?.memberships) {
-          const planMembershipType = getMembershipType(selectedPlan.title);
+          const planMembershipType = selectedPlan.membershipType;
           const hasExistingActivePlan = hasActiveMembershipOfType(
             planMembershipType,
             user.memberships,
@@ -602,11 +445,13 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
           }
         }
 
-        console.log(
-          "PricingPlans: User data complete and no duplicate membership, opening payment modal",
-        );
-        setWaitingForUserData(false);
-        setShowPaymentModal(true);
+        if (selectedPlan) {
+          console.log(
+            "PricingPlans: User data complete and no duplicate membership, opening review page",
+          );
+          setWaitingForUserData(false);
+          proceedToReview(selectedPlan);
+        }
       } else {
         console.log(
           "PricingPlans: User data not yet complete, waiting for Redux update",
@@ -752,13 +597,6 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
                       </button>
                     </ScrollAnimation>
 
-                    {/* Terms & conditions - mobile */}
-                    <div className="text-[12px] font-normal leading-4 tracking-[0px] text-center underline text-[#6A6A6A] mt-[8px]">
-                      <a href="/api/download/terms" rel="noopener noreferrer">
-                        *Terms & conditions apply
-                      </a>
-                    </div>
-
                     {/* Seats Left */}
                     {plans[activePlanIndex].seatsLeft && (
                       <ScrollAnimation
@@ -788,24 +626,21 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
           </ScrollAnimation>
         </div>
 
-        {/* Payment Modal */}
-        {selectedPlan && showPaymentModal && (
-          <PaymentModal
-            isOpen={showPaymentModal}
-            onClose={handlePaymentClose}
-            membershipType={getMembershipType(selectedPlan.title)}
-            amount={getMembershipAmount(selectedPlan)}
-            onSuccess={handlePaymentSuccess}
-            onError={handlePaymentError}
-          />
-        )}
-
         <PhoneNumberModal
           key={`mobile-phone-modal-${showPhoneModal}`}
           isOpen={showPhoneModal}
           onClose={handlePhoneModalClose}
           isMobile={true}
           onSuccess={handlePhoneModalSuccess}
+        />
+
+        <UserInfoModal
+          isOpen={showUserInfoModal}
+          onClose={handleUserInfoModalClose}
+          isMobile={true}
+          phoneNumber={tempPhoneNumber}
+          onParentClose={handleUserInfoModalClose}
+          onSuccess={handleUserInfoModalSuccess}
         />
       </section>
     );
@@ -910,13 +745,6 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
                     </span>
                   </button>
 
-                  {/* Terms & conditions - desktop */}
-                  <div className="text-xs md:text-sm lg:text-base font-normal leading-4 md:leading-5 lg:leading-5 tracking-[0px] text-center text-[#6A6A6A] underline mt-6 md:mt-[26px] lg:mt-[26px]">
-                    <a href="/api/download/terms" rel="noopener noreferrer">
-                      *Terms & conditions apply
-                    </a>
-                  </div>
-
                   {plan.seatsLeft && (
                     <div className="flex items-center gap-2">
                       <Image
@@ -938,18 +766,6 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
         ))}
       </div>
 
-      {/* Payment Modal */}
-      {selectedPlan && showPaymentModal && (
-        <PaymentModal
-          isOpen={showPaymentModal}
-          onClose={handlePaymentClose}
-          membershipType={getMembershipType(selectedPlan.title)}
-          amount={getMembershipAmount(selectedPlan)}
-          onSuccess={handlePaymentSuccess}
-          onError={handlePaymentError}
-        />
-      )}
-
       <PhoneNumberModal
         key={`phone-modal-${showPhoneModal}`}
         isOpen={showPhoneModal}
@@ -966,25 +782,6 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
         phoneNumber={tempPhoneNumber}
         onParentClose={handleUserInfoModalClose}
         onSuccess={handleUserInfoModalSuccess}
-      />
-
-      {/* Payment Result Modal */}
-      {paymentResultData && (
-        <PaymentResultModal
-          isOpen={showPaymentResultModal}
-          onClose={handlePaymentResultModalClose}
-          type={paymentResultType}
-          transactionId={paymentResultData.transactionId}
-          planName={paymentResultData.planName}
-          discountAmount={paymentResultData.discountAmount}
-          onRetryPayment={handleRetryPayment}
-          onGoHome={handleGoHome}
-        />
-      )}
-
-      <PaymentLoader
-        isVisible={isPaymentProcessing}
-        message="Processing your payment..."
       />
 
       {/* Membership Alert Modal - Removed: Users can now purchase multiple plans */}

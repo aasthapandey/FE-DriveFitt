@@ -60,7 +60,12 @@ class RazorpayApiClient {
     this.keySecret = process.env.RAZORPAY_KEY_SECRET || "";
 
     // Create Basic Auth header
-    this.authHeader = `Basic cnpwX2xpdmVfUkJjQ2Ziek4zNWVXeDQ6ZjBkQWY0OXdPc2Nwb1paelE1SEp6a1VF`;
+    this.authHeader =
+      this.keyId && this.keySecret
+        ? `Basic ${Buffer.from(`${this.keyId}:${this.keySecret}`).toString(
+            "base64"
+          )}`
+        : "";
   }
 
   private async makeRequest<T>(
@@ -71,6 +76,13 @@ class RazorpayApiClient {
     try {
       const url = `${this.baseUrl}${endpoint}`;
       console.log("🌐 Making HTTP request:", { method, url, hasData: !!data });
+
+      if (!this.authHeader) {
+        return {
+          success: false,
+          error: "Razorpay credentials are not configured",
+        };
+      }
 
       const options: RequestInit = {
         method,
@@ -158,7 +170,7 @@ class RazorpayApiClient {
 
     console.log("🔍 Razorpay API Request Data:", requestData);
     console.log("🔑 Using credentials:", {
-      keyId: this.keyId,
+      hasKeyId: !!this.keyId,
       hasSecret: !!this.keySecret,
       baseUrl: this.baseUrl,
     });

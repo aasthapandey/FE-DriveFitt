@@ -518,14 +518,21 @@ export interface SignatureClassesSection {
 }
 
 export interface PricingPlan {
+  id: string;
+  displayName: string;
+  membershipType: number;
   title: string;
   subtitle?: string;
   discountedPrice: string;
+  baseAmount: number;
+  gstAmount: number;
+  totalAmount: number;
   originalPrice: string;
   discountPercentage: string;
   buttonText: string;
   seatsLeft: string;
   limitedOfferCountText?: string; // e.g., "100 members" or "100 families"
+  benefits: string[];
 }
 
 export interface PricingPlansSection {

@@ -85,6 +85,41 @@ export const createMembershipsTable = async (): Promise<void> => {
   console.log("Memberships table created/verified");
 };
 
+// Create membership terms acceptance audit table
+export const createMembershipTermsAcceptancesTable = async (): Promise<void> => {
+  const query = `
+    CREATE TABLE IF NOT EXISTS membership_terms_acceptances (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      user_id INT NOT NULL,
+      plan_id VARCHAR(100) NOT NULL,
+      plan_display_name VARCHAR(255) NOT NULL,
+      membership_type INT NOT NULL,
+      base_amount DECIMAL(10, 2) NOT NULL,
+      gst_amount DECIMAL(10, 2) NOT NULL,
+      total_amount DECIMAL(10, 2) NOT NULL,
+      currency VARCHAR(3) DEFAULT 'INR',
+      accepted_at TIMESTAMP NOT NULL,
+      terms_url VARCHAR(255) NOT NULL,
+      terms_version VARCHAR(100) NOT NULL,
+      terms_snapshot LONGTEXT NOT NULL,
+      terms_hash VARCHAR(64) NOT NULL,
+      ip_address VARCHAR(45),
+      user_agent TEXT,
+      order_id INT NULL,
+      razorpay_order_id VARCHAR(255) NULL,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+      INDEX idx_terms_acceptances_user (user_id),
+      INDEX idx_terms_acceptances_plan (plan_id),
+      INDEX idx_terms_acceptances_order (order_id),
+      INDEX idx_terms_acceptances_razorpay_order (razorpay_order_id)
+    )
+  `;
+
+  await executeQuery(query);
+  console.log("Membership terms acceptances table created/verified");
+};
+
 // Insert order
 export const insertOrder = async (order: Partial<Order>): Promise<number> => {
   const query = `
@@ -301,6 +336,62 @@ export const insertMembership = async (
   return (result as { insertId?: number }).insertId || 0;
 };
 
+// Insert terms acceptance audit record
+export const insertMembershipTermsAcceptance = async (
+  acceptance: Partial<MembershipTermsAcceptance>
+): Promise<number> => {
+  const query = `
+    INSERT INTO membership_terms_acceptances (
+      user_id, plan_id, plan_display_name, membership_type, base_amount,
+      gst_amount, total_amount, currency, accepted_at, terms_url,
+      terms_version, terms_snapshot, terms_hash, ip_address, user_agent
+    )
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `;
+
+  const result = await executeQuery(query, [
+    acceptance.user_id,
+    acceptance.plan_id,
+    acceptance.plan_display_name,
+    acceptance.membership_type,
+    acceptance.base_amount,
+    acceptance.gst_amount,
+    acceptance.total_amount,
+    acceptance.currency || "INR",
+    acceptance.accepted_at,
+    acceptance.terms_url,
+    acceptance.terms_version,
+    acceptance.terms_snapshot,
+    acceptance.terms_hash,
+    acceptance.ip_address || null,
+    acceptance.user_agent || null,
+  ]);
+
+  return (result as { insertId?: number }).insertId || 0;
+};
+
+export const getMembershipTermsAcceptanceById = async (
+  id: number
+): Promise<MembershipTermsAcceptance | null> => {
+  const query = `SELECT * FROM membership_terms_acceptances WHERE id = ?`;
+  const result = await executeQuery<MembershipTermsAcceptance[]>(query, [id]);
+  return result.length > 0 ? result[0] : null;
+};
+
+export const linkMembershipTermsAcceptanceToOrder = async (
+  acceptanceId: number,
+  orderId: number,
+  razorpayOrderId: string
+): Promise<void> => {
+  const query = `
+    UPDATE membership_terms_acceptances
+    SET order_id = ?, razorpay_order_id = ?, updated_at = CURRENT_TIMESTAMP
+    WHERE id = ?
+  `;
+
+  await executeQuery(query, [orderId, razorpayOrderId, acceptanceId]);
+};
+
 // Get membership by user_id
 export const getMembershipByUserId = async (
   userId: number
@@ -316,6 +407,7 @@ export const initializePaymentDatabase = async (): Promise<void> => {
     await createOrdersTable();
     await createPaymentsTable();
     await createMembershipsTable();
+    await createMembershipTermsAcceptancesTable();
     console.log("Payment database tables initialized successfully");
   } catch (error) {
     console.error("Failed to initialize payment database:", error);
@@ -412,6 +504,29 @@ export interface Membership {
   end_date: Date;
   cancelled_at?: Date | null;
   cancellation_reason?: string | null;
+  created_at?: Date;
+  updated_at?: Date;
+}
+
+export interface MembershipTermsAcceptance {
+  id?: number;
+  user_id: number;
+  plan_id: string;
+  plan_display_name: string;
+  membership_type: number;
+  base_amount: number;
+  gst_amount: number;
+  total_amount: number;
+  currency: string;
+  accepted_at: Date;
+  terms_url: string;
+  terms_version: string;
+  terms_snapshot: string;
+  terms_hash: string;
+  ip_address?: string | null;
+  user_agent?: string | null;
+  order_id?: number | null;
+  razorpay_order_id?: string | null;
   created_at?: Date;
   updated_at?: Date;
 }

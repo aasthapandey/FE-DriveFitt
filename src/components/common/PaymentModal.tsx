@@ -7,8 +7,10 @@ import PaymentLoader from "./PaymentLoader";
 interface PaymentModalProps {
   isOpen: boolean;
   onClose: () => void;
+  planId: string;
   membershipType: number;
   amount: number;
+  termsAcceptanceId: number;
   onSuccess?: (
     paymentId: string,
     membershipData?: {
@@ -28,8 +30,10 @@ interface PaymentModalProps {
 export default function PaymentModal({
   isOpen,
   onClose,
+  planId,
   membershipType,
   amount,
+  termsAcceptanceId,
   onSuccess,
   onError,
 }: PaymentModalProps) {
@@ -97,6 +101,10 @@ export default function PaymentModal({
     userDetails.name,
     userDetails.email,
     userDetails.contact,
+    planId,
+    membershipType,
+    amount,
+    termsAcceptanceId,
   ]);
 
   const handlePayment = async () => {
@@ -109,7 +117,9 @@ export default function PaymentModal({
 
       const result = await PaymentService.processPayment({
         amount,
+        planId,
         membershipType,
+        termsAcceptanceId,
         userDetails: {
           ...userDetails,
           id: user.id,

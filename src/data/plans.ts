@@ -1,6 +1,6 @@
 import { navbarData } from "./navbar";
 import { StaticPageData } from "@/types/staticPages";
-import { MEMBERSHIP_PRICING } from "@/config/membershipPricing";
+import { MEMBERSHIP_PLAN_BENEFITS, MEMBERSHIP_PLAN_LIST } from "@/config/membershipPlans";
 
 export const plansData: StaticPageData = {
   title: "Plans",
@@ -31,41 +31,28 @@ export const plansData: StaticPageData = {
       "md:font-normal md:text-base md:leading-5 md:tracking-0 md:text-center",
   },
   pricingPlansSection: {
-    plans: [
-      {
-        title: "Founding Member - Individual Annual Plan",
-        discountedPrice: MEMBERSHIP_PRICING.INDIVIDUAL.displayPrice,
-        originalPrice: "₹67,149",
-        discountPercentage: "30%",
-        buttonText: MEMBERSHIP_PRICING.INDIVIDUAL.buttonText,
-        seatsLeft: "",
-        limitedOfferCountText: "100 members",
-      },
-      {
-        title: "Founding Member - Family Annual Plan",
-        subtitle: "3 Members",
-        discountedPrice: MEMBERSHIP_PRICING.FAMILY.displayPrice,
-        originalPrice: "₹2,01,447",
-        discountPercentage: "40%",
-        buttonText: MEMBERSHIP_PRICING.FAMILY.buttonText,
-        seatsLeft: "",
-        limitedOfferCountText: "100 families",
-      },
-    ],
+    plans: MEMBERSHIP_PLAN_LIST.map((plan) => ({
+      id: plan.id,
+      displayName: plan.displayName,
+      membershipType: plan.membershipType,
+      title: plan.cardTitle,
+      subtitle: plan.subtitle,
+      discountedPrice: plan.pricing.displayPrice,
+      baseAmount: plan.pricing.base,
+      gstAmount: plan.pricing.gst,
+      totalAmount: plan.pricing.total,
+      originalPrice: plan.originalPrice,
+      discountPercentage: plan.discountPercentage,
+      buttonText: plan.pricing.buttonText,
+      seatsLeft: plan.seatsLeft,
+      limitedOfferCountText: plan.limitedOfferCountText,
+      benefits: plan.benefits,
+    })),
   },
   includedPlansSection: {
     title: "Included in all plans",
     className: "-md:mt-[150px]",
-    items: [
-      "30 Cricket Sessions",
-      "8 Pilates Sessions",
-      "6 Run Studio Sessions",
-      "6 Recovery Classes",
-      "4 Physio Sessions",
-      "Unlimited Group Classes (Spinning, etc.)",
-      "Unlimited Small Group Training",
-      "Included: Fitness Induction + Events/Workshops/Outdoor Runs/Bootcamps",
-    ],
+    items: MEMBERSHIP_PLAN_BENEFITS,
   },
   footerSection: {
     logo: "https://da8nru77lsio9.cloudfront.net/images/logo.svg",

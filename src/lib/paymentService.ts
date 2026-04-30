@@ -4,7 +4,9 @@ import { RazorpayRedirect } from "./razorpayRedirect";
 export interface PaymentOptions {
   amount: number;
   currency?: string;
+  planId: string;
   membershipType: number;
+  termsAcceptanceId: number;
   userDetails: {
     id: number;
     name: string;
@@ -34,14 +36,20 @@ export class PaymentService {
   // Create order on server
   static async createOrder(options: PaymentOptions) {
     console.log("🔍 Creating order via API...", options);
+    const token = sessionStorage.getItem("auth_token");
     const response = await fetch("/api/payments/create-order", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      },
       body: JSON.stringify({
         amount: options.amount,
         currency: options.currency || "INR",
         receipt: `receipt_${Date.now()}`,
+        plan_id: options.planId,
         membership_type: options.membershipType,
+        terms_acceptance_id: options.termsAcceptanceId,
         user_id: options.userDetails.id,
       }),
     });
