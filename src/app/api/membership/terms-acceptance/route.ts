@@ -9,7 +9,7 @@ import {
 } from "@/lib/paymentDatabase";
 
 const TERMS_URL = "/api/download/terms";
-const TERMS_VERSION = "terms-2025";
+const TERMS_VERSION = "terms-2026-05";
 
 export async function POST(request: NextRequest) {
   try {
