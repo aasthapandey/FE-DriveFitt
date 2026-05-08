@@ -1,6 +1,6 @@
 export async function GET() {
   const cdnUrl =
-    "https://da8nru77lsio9.cloudfront.net/Term+and+Conditions+Feb-2026.pdf";
+    "https://da8nru77lsio9.cloudfront.net/Term+and+Conditions+May-2026.pdf";
 
   const res = await fetch(cdnUrl, { cache: "no-store" });
   if (!res.ok) {
