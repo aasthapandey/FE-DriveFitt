@@ -10,6 +10,7 @@ interface UserInfoModalProps {
   phoneNumber?: string;
   onParentClose?: () => void; // Callback to close parent PhoneNumberModal
   onSuccess?: () => void; // Optional callback for successful registration
+  shouldTrackSignUp?: boolean;
 }
 
 const UserInfoModal = ({
@@ -19,6 +20,7 @@ const UserInfoModal = ({
   phoneNumber,
   onParentClose,
   onSuccess,
+  shouldTrackSignUp = false,
 }: UserInfoModalProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -70,6 +72,7 @@ const UserInfoModal = ({
           phoneNumber={phoneNumber}
           onParentClose={onParentClose}
           onSuccess={onSuccess}
+          shouldTrackSignUp={shouldTrackSignUp}
         />
       </div>
     </div>

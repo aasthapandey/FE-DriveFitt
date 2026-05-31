@@ -43,3 +43,19 @@ export const event = ({
     });
   }
 };
+
+export const trackLogin = (method = "phone_otp") => {
+  if (typeof window !== "undefined" && window.gtag) {
+    window.gtag("event", "login", {
+      method,
+    });
+  }
+};
+
+export const trackSignUp = (method = "phone") => {
+  if (typeof window !== "undefined" && window.gtag) {
+    window.gtag("event", "sign_up", {
+      method,
+    });
+  }
+};

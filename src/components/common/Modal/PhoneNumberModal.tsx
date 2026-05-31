@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { authAPI } from "@/services/authAPI";
 import { OTPPurpose } from "@/types/auth";
 import { useAuth } from "@/hooks/useAuth";
+import { trackLogin } from "@/lib/gtag";
 import { UserInfoModal } from "./";
 
 type ModalState = "phone" | "otp";
@@ -328,6 +329,7 @@ const PhoneNumberModal = ({
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [isUserInfoModalOpen, setIsUserInfoModalOpen] = useState(false);
+  const [shouldTrackSignUp, setShouldTrackSignUp] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
   const handleVerifyRef = useRef<() => Promise<void>>();
   const hasAutoSubmittedRef = useRef(false);
@@ -394,6 +396,8 @@ const PhoneNumberModal = ({
       setOtpValues(["", "", "", ""]);
       setTimeLeft(59);
       setError(""); // Clear error when modal is closed
+      setIsUserInfoModalOpen(false);
+      setShouldTrackSignUp(false);
       hasAutoSubmittedRef.current = false; // Reset auto-submit flag
     }
   }, [isOpen]);
@@ -493,6 +497,8 @@ const PhoneNumberModal = ({
           console.log("PhoneNumberModal: Login result:", loginResult);
 
           if (loginResult.type === "auth/loginUser/fulfilled") {
+            trackLogin("phone_otp");
+
             // Check if user has complete profile data
             const hasCompleteProfile = user.name && user.email && user.phone;
 
@@ -510,6 +516,7 @@ const PhoneNumberModal = ({
               console.log(
                 "PhoneNumberModal: User profile incomplete, opening UserInfoModal"
               );
+              setShouldTrackSignUp(false);
               setIsUserInfoModalOpen(true);
               return;
             }
@@ -563,6 +570,7 @@ const PhoneNumberModal = ({
           }
         } else if (response.success && !response.data) {
           // User doesn't exist, open UserInfoModal for registration
+          setShouldTrackSignUp(true);
           setIsUserInfoModalOpen(true);
           // Don't close the modal yet - let UserInfoModal handle the flow
         } else {
@@ -737,10 +745,12 @@ const PhoneNumberModal = ({
         isOpen={isUserInfoModalOpen}
         onClose={() => {
           setIsUserInfoModalOpen(false);
+          setShouldTrackSignUp(false);
         }}
         isMobile={isMobile}
         phoneNumber={phoneNumber}
         onParentClose={onClose}
+        shouldTrackSignUp={shouldTrackSignUp}
       />
     </>
   );

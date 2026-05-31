@@ -2,12 +2,14 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useAuth } from "@/hooks/useAuth";
+import { trackSignUp } from "@/lib/gtag";
 
 interface UserInfoFormProps {
   isMobile?: boolean;
   phoneNumber?: string;
   onParentClose?: () => void;
   onSuccess?: () => void; // Optional callback for successful registration
+  shouldTrackSignUp?: boolean;
 }
 
 const UserInfoForm = ({
@@ -15,6 +17,7 @@ const UserInfoForm = ({
   phoneNumber,
   onParentClose,
   onSuccess,
+  shouldTrackSignUp = false,
 }: UserInfoFormProps) => {
   const [formData, setFormData] = useState({
     name: "",
@@ -172,6 +175,10 @@ const UserInfoForm = ({
       console.log("UserInfoForm: Registration result:", result);
 
       if (result.type === "auth/registerUser/fulfilled") {
+        if (shouldTrackSignUp) {
+          trackSignUp("phone");
+        }
+
         // Registration successful, redirect to membership page
         console.log(
           "UserInfoForm: Registration successful, payload:",
