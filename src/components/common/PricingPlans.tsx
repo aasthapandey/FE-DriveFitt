@@ -237,7 +237,7 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
         onClick={() => router.push("/contact-us")}
         className="h-12 md:h-14 rounded-lg bg-[#00DBDC] px-6 md:px-8 text-base md:text-lg font-medium leading-[100%] text-[#0D0D0D] transition-colors hover:bg-[#00DBDC]/90"
       >
-        Click here to Know More
+        Click Here to Know More
       </button>
     </div>
   );
