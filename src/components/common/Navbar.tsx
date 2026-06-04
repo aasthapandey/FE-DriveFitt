@@ -11,9 +11,10 @@ import { useAuth } from "@/hooks/useAuth";
 interface Props {
   data: NavbarProps;
   isMobile?: boolean;
+  overlayOnTop?: boolean;
 }
 
-export default function Navbar({ data, isMobile }: Props) {
+export default function Navbar({ data, isMobile, overlayOnTop }: Props) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -77,7 +78,9 @@ export default function Navbar({ data, isMobile }: Props) {
     return (
       <>
         <nav
-          className={`sticky top-0 z-50 flex justify-between items-center py-5 px-6 md:py-6 md:px-4 w-full transition-all duration-300 ${
+          className={`${
+            overlayOnTop ? "fixed left-0 right-0" : "sticky"
+          } top-0 z-50 flex justify-between items-center py-5 px-6 md:py-6 md:px-4 w-full transition-all duration-300 ${
             isScrolled ? "bg-[#0D0D0D]/95 backdrop-blur-sm" : "bg-transparent"
           }`}
         >
@@ -236,19 +239,32 @@ export default function Navbar({ data, isMobile }: Props) {
 
   return (
     <nav
-      className={`sticky top-0 z-50 flex justify-between items-center py-8 pr-[100px] pl-[120px] gap-4 transition-all duration-300 ${
-        isScrolled ? "bg-[#0D0D0D]/95 backdrop-blur-sm" : "bg-transparent"
+      className={`${
+        overlayOnTop ? "fixed left-0 right-0" : "sticky"
+      } top-0 z-50 flex justify-between items-center gap-4 transition-all duration-300 ${
+        overlayOnTop ? "px-8 py-6 lg:px-[72px]" : "py-8 pr-[100px] pl-[120px]"
+      } ${
+        isScrolled
+          ? "bg-[#0D0D0D]/95 backdrop-blur-sm"
+          : "bg-transparent"
       }`}
     >
       <Link href="/">
-        <Image src={logo} alt="logo" width={212} height={36} />
+        <Image
+          src={logo}
+          alt="logo"
+          width={overlayOnTop ? 180 : 212}
+          height={overlayOnTop ? 31 : 36}
+        />
       </Link>
-      <div className="flex gap-10 px-2">
+      <div className={`${overlayOnTop ? "flex gap-8 px-2" : "flex gap-10 px-2"}`}>
         {desktopNavLinks.map((link, idx) => (
           <Link
             key={idx}
             href={link.href}
-            className={`transition-colors ${
+            className={`font-medium transition-colors ${
+              overlayOnTop ? "text-sm leading-5" : ""
+            } ${
               isActiveLink(link.href)
                 ? "text-[#00DBDC]"
                 : "text-white hover:text-[#00DBDC]"
@@ -263,7 +279,11 @@ export default function Navbar({ data, isMobile }: Props) {
       ) : (
         <button
           onClick={() => setIsLoginModalOpen(true)}
-          className="bg-[#00DBDC] border border-transparent rounded-lg px-10 md:px-[48px] md:h-[50px] text-[#0D0D0D] font-medium text-base hover:bg-transparent hover:border-[#00DBDC] hover:text-[#00DBDC] transition-all duration-200"
+          className={`bg-[#00DBDC] border border-transparent rounded-lg text-[#0D0D0D] font-medium hover:bg-transparent hover:border-[#00DBDC] hover:text-[#00DBDC] transition-all duration-200 ${
+            overlayOnTop
+              ? "h-12 px-8 text-sm"
+              : "px-10 md:px-[48px] md:h-[50px] text-base"
+          }`}
         >
           Sign in
         </button>
