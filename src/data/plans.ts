@@ -1,6 +1,6 @@
 import { navbarData } from "./navbar";
 import { StaticPageData } from "@/types/staticPages";
-import { MEMBERSHIP_PLAN_BENEFITS, MEMBERSHIP_PLAN_LIST } from "@/config/membershipPlans";
+import { MEMBERSHIP_PLAN_LIST } from "@/config/membershipPlans";
 
 export const plansData: StaticPageData = {
   title: "Plans",
@@ -48,11 +48,6 @@ export const plansData: StaticPageData = {
       limitedOfferCountText: plan.limitedOfferCountText,
       benefits: plan.benefits,
     })),
-  },
-  includedPlansSection: {
-    title: "Included in all plans",
-    className: "-md:mt-[150px]",
-    items: MEMBERSHIP_PLAN_BENEFITS,
   },
   footerSection: {
     logo: "https://da8nru77lsio9.cloudfront.net/images/logo.svg",

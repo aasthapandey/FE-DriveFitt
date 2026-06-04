@@ -673,13 +673,13 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
   // Desktop/Tablet Layout (existing code)
   return (
     <section
-      className={`flex flex-col items-center gap-6 md:gap-10 lg:gap-[40px] px-4 md:px-6 lg:px-8 md:-mt-[95px] ${className}`}
+      className={`flex flex-col items-center gap-8 md:gap-10 lg:gap-12 px-4 md:px-6 lg:px-8 md:-mt-[60px] ${className}`}
     >
       <div className="flex flex-col lg:flex-row gap-6 md:gap-8 lg:gap-[40px] w-full max-w-[1200px]">
         {plans.map((plan, index) => (
           <ScrollAnimation key={index} delay={0.2 + index * 0.1} direction="up">
             <div
-              className="w-full lg:w-[580px] h-auto min-h-[400px] rounded-[20px] md:rounded-[30px] lg:rounded-[40px] p-[2px]"
+              className="w-full lg:w-[580px] h-auto min-h-[400px] lg:min-h-[430px] rounded-[20px] md:rounded-[30px] lg:rounded-[40px] p-[2px]"
               style={{
                 background:
                   "linear-gradient(180deg, #333333 29.36%, #00DBDC 120.13%)",
@@ -695,7 +695,7 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
                 <div className="flex flex-col items-center text-center w-full">
                   <h3
                     className={`text-lg md:text-xl lg:text-2xl font-light leading-[100%] tracking-[0px] text-white mb-2 md:mb-3 ${
-                      plan.subtitle ? "lg:mb-3" : "lg:mb-[65px]"
+                      plan.subtitle ? "lg:mb-3" : "lg:mb-[54px]"
                     }`}
                   >
                     {plan.title}
@@ -733,7 +733,7 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
                     </span>
                   </div>
 
-                  <div className="w-full border-t border-[#333333] mb-6 md:mb-8 lg:mb-10" />
+                  <div className="w-full border-t border-[#333333] mb-6 md:mb-7 lg:mb-8" />
 
                   <ScrollAnimation
                     key={`limited-offer-desktop-${index}`}
@@ -790,7 +790,7 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
         ))}
       </div>
 
-      <ScrollAnimation delay={0.3} direction="up">
+      <ScrollAnimation delay={0.3} direction="up" className="mt-4 md:mt-6">
         {renderComingSoonCta()}
       </ScrollAnimation>
 
