@@ -693,21 +693,19 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
                 }}
               >
                 <div className="flex flex-col items-center text-center w-full">
-                  <h3
-                    className={`text-lg md:text-xl lg:text-2xl font-light leading-[100%] tracking-[0px] text-white mb-2 md:mb-3 ${
-                      plan.subtitle ? "lg:mb-3" : "lg:mb-[54px]"
-                    }`}
-                  >
+                  <h3 className="text-lg md:text-xl lg:text-2xl font-light leading-[100%] tracking-[0px] text-white mb-2 md:mb-3">
                     {plan.title}
                   </h3>
 
-                  {plan.subtitle && (
-                    <div className="bg-[#1E1E1E] rounded px-2 md:px-3 py-1 mb-4 md:mb-6">
-                      <span className="text-xs md:text-sm font-normal leading-4 md:leading-5 tracking-[0px] text-center text-white">
-                        {plan.subtitle}
-                      </span>
-                    </div>
-                  )}
+                  <div className="h-8 mb-4 md:mb-6 flex items-start justify-center">
+                    {plan.subtitle && (
+                      <div className="bg-[#1E1E1E] rounded px-2 md:px-3 py-1">
+                        <span className="text-xs md:text-sm font-normal leading-4 md:leading-5 tracking-[0px] text-center text-white">
+                          {plan.subtitle}
+                        </span>
+                      </div>
+                    )}
+                  </div>
 
                   <div className="text-3xl md:text-4xl lg:text-[60px] font-semibold leading-[100%] tracking-[0px] text-center text-[#00DBDC] mb-1 md:mb-[2px]">
                     {plan.discountedPrice}
