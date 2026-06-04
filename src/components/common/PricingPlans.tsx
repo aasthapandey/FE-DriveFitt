@@ -204,23 +204,43 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
   const getButtonConfig = (plan: PricingPlan) => {
     const planMembershipType = plan.membershipType;
     const isUserCurrentPlan = userMembershipTypes.includes(planMembershipType);
+    const disabledClassName =
+      "w-full h-12 md:h-14 lg:h-[56px] rounded-lg bg-[#666666] px-4 md:px-[60px] lg:px-[60px] py-3 md:py-4 mb-3 md:mb-4 cursor-not-allowed";
 
     if (isUserCurrentPlan) {
       return {
         text: "Your Existing Plan",
         disabled: true,
-        className:
-          "w-full h-12 md:h-14 lg:h-[56px] rounded-lg bg-[#666666] px-4 md:px-[60px] lg:px-[60px] py-3 md:py-4 mb-3 md:mb-4 cursor-not-allowed",
+        className: disabledClassName,
       };
     }
 
     return {
-      text: plan.buttonText,
-      disabled: false,
-      className:
-        "w-full h-12 md:h-14 lg:h-[56px] rounded-lg bg-[#00DBDC] px-4 md:px-[60px] lg:px-[60px] py-3 md:py-4 mb-3 md:mb-4 hover:bg-[#00DBDC]/90 transition-colors",
+      text: "Sold Out",
+      disabled: true,
+      className: disabledClassName,
     };
   };
+
+  const renderComingSoonCta = () => (
+    <div className="flex flex-col items-center justify-center gap-4 text-center">
+      <div>
+        <p className="text-xl md:text-2xl lg:text-[28px] font-semibold leading-tight text-white">
+          New Plans Coming Soon.
+        </p>
+        <p className="mt-2 text-sm md:text-base font-light leading-5 text-[#A7A7A7]">
+          Talk to our team for the latest membership updates.
+        </p>
+      </div>
+      <button
+        type="button"
+        onClick={() => router.push("/contact-us")}
+        className="h-12 md:h-14 rounded-lg bg-[#00DBDC] px-6 md:px-8 text-base md:text-lg font-medium leading-[100%] text-[#0D0D0D] transition-colors hover:bg-[#00DBDC]/90"
+      >
+        Click here to Know More
+      </button>
+    </div>
+  );
 
   const handlePlanSwitch = (index: number) => {
     setActivePlanIndex(index);
@@ -626,6 +646,10 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
           </ScrollAnimation>
         </div>
 
+        <ScrollAnimation delay={0.3} direction="up" className="mt-6">
+          {renderComingSoonCta()}
+        </ScrollAnimation>
+
         <PhoneNumberModal
           key={`mobile-phone-modal-${showPhoneModal}`}
           isOpen={showPhoneModal}
@@ -765,6 +789,10 @@ const PricingPlans = ({ plans, className, isMobile }: PricingPlansProps) => {
           </ScrollAnimation>
         ))}
       </div>
+
+      <ScrollAnimation delay={0.3} direction="up">
+        {renderComingSoonCta()}
+      </ScrollAnimation>
 
       <PhoneNumberModal
         key={`phone-modal-${showPhoneModal}`}

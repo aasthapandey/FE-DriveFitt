@@ -1,6 +1,6 @@
 "use client";
 import { ContactUsContactFormProps } from "@/types/staticPages";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import ScrollAnimation from "@/components/common/ScrollAnimation";
 import Image from "next/image";
 
@@ -34,7 +34,6 @@ const ContactUsContactForm = ({
   const [errors, setErrors] = useState({
     name: "",
     phone: "",
-    preferredLocation: "",
   });
 
   const [messageState, setMessageState] = useState<{
@@ -46,21 +45,6 @@ const ContactUsContactForm = ({
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isLocationOpen, setIsLocationOpen] = useState(false);
-  const locationDropdownRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        locationDropdownRef.current &&
-        !locationDropdownRef.current.contains(event.target as Node)
-      ) {
-        setIsLocationOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
 
   const interestOptions = [
     { key: "cricket", label: "Cricket" },
@@ -86,13 +70,6 @@ const ContactUsContactForm = ({
   const validatePhone = (value: string) => {
     if (!/^\d{10}$/.test(value)) {
       return "Phone number must be exactly 10 digits";
-    }
-    return "";
-  };
-
-  const validatePreferredLocation = (value: string) => {
-    if (!value) {
-      return "Preferred location is required";
     }
     return "";
   };
@@ -127,11 +104,6 @@ const ContactUsContactForm = ({
           ...prev,
           name: validateName(value),
         }));
-      } else if (name === "preferredLocation") {
-        setErrors((prev) => ({
-          ...prev,
-          preferredLocation: validatePreferredLocation(value),
-        }));
       }
     }
   };
@@ -152,17 +124,13 @@ const ContactUsContactForm = ({
     // Validate all fields before submission
     const nameError = validateName(formData.name);
     const phoneError = validatePhone(formData.phone);
-    const preferredLocationError = validatePreferredLocation(
-      formData.preferredLocation
-    );
 
     setErrors({
       name: nameError,
       phone: phoneError,
-      preferredLocation: preferredLocationError,
     });
 
-    if (nameError || phoneError || preferredLocationError) {
+    if (nameError || phoneError) {
       setMessageState({
         type: "validation",
         text: "Please fill in all required fields before submitting.",
@@ -220,7 +188,6 @@ const ContactUsContactForm = ({
       setErrors({
         name: "",
         phone: "",
-        preferredLocation: "",
       });
 
       setMessageState({
@@ -253,7 +220,6 @@ const ContactUsContactForm = ({
       setErrors({
         name: "",
         phone: "",
-        preferredLocation: "",
       });
     } finally {
       setIsSubmitting(false);
@@ -382,76 +348,6 @@ const ContactUsContactForm = ({
                     </button>
                   ))}
                 </div>
-              </div>
-
-              {/* Preferred Location Dropdown (custom) */}
-              <div className="flex flex-col gap-1.5" ref={locationDropdownRef}>
-                <label className="text-xs md:text-sm text-[#8A8A8A]">
-                  {fields.preferredLocation?.label || "Preferred Location"}
-                </label>
-                <button
-                  type="button"
-                  onClick={() => setIsLocationOpen((v) => !v)}
-                  className={`w-full bg-[#FFFFFF] border rounded-lg py-2 px-4 text-left flex items-center justify-between transition-colors focus:outline-none focus:border-[2px] focus:border-[#00DBDC] ${
-                    errors.preferredLocation
-                      ? "border-red-500"
-                      : "border-[#333333]"
-                  }`}
-                >
-                  <span
-                    className={
-                      formData.preferredLocation
-                        ? "text-[#0D0D0D]"
-                        : "text-[#8A8A8A]"
-                    }
-                  >
-                    {formData.preferredLocation ||
-                      fields.preferredLocation?.placeholder ||
-                      "Select Location"}
-                  </span>
-                  <Image
-                    src={
-                      isLocationOpen
-                        ? "/images/accordian-up-arrow.svg"
-                        : "/images/accordian-down-arrow.svg"
-                    }
-                    alt="toggle"
-                    width={16}
-                    height={16}
-                    className="w-4 h-4"
-                  />
-                </button>
-                {isLocationOpen && (
-                  <div className="relative">
-                    <ul className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-lg border border-[#333333] bg-[#FFFFFF] shadow-lg">
-                      {(fields.preferredLocation?.options || []).map((opt) => (
-                        <li key={opt}>
-                          <button
-                            type="button"
-                            onClick={() => {
-                              setFormData((prev) => ({
-                                ...prev,
-                                preferredLocation: opt,
-                              }));
-                              setErrors((prev) => ({
-                                ...prev,
-                                preferredLocation: "",
-                              }));
-                              setIsLocationOpen(false);
-                            }}
-                            className={`w-full text-left px-4 py-2 text-sm ${
-                              formData.preferredLocation === opt
-                                ? "bg-[#00DBDC1A] text-[#00DBDC]"
-                                : "text-[#0D0D0D] hover:bg-[#00DBDC1A] hover:text-[#000000]"
-                            }`}
-                          >
-                            {opt}
-                          </button>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
               </div>
 
               <div className="flex flex-col gap-1.5 flex-1">
