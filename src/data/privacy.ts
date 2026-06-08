@@ -118,6 +118,8 @@ export const privacyData: StaticPageData = {
       <p>While we try to be selective in working with third parties, we are not responsible for their use of your personal information. Where payments are involved, we must release your credit/debit card information to credit/debit card authorization service providers and associated banks to process your payment for purchases, returns or refunds. We may transfer to our online service providers, personal information you provide to us so that these parties may store and process your personal information.</p>
       
       <p>We may share aggregate information with vendors, potential advertisers, business partners, or other third parties. Aggregate information does not include personal information.</p>
+
+      <p>Members and prospects who express interest in DriveFITT's offerings consent to being contacted by DriveFITT through phone calls, WhatsApp, SMS, emails, IVR, and other digital communication channels for membership-related information, service updates, promotional offers, events, renewals, and customer support purposes. Members may opt out of promotional communications where applicable.</p>
       
       <p>Except as described in this section, we will not give or sell your personal information to any other party for its use in marketing or solicitation.</p>
       
