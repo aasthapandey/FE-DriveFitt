@@ -1,7 +1,7 @@
 import { NavbarProps, LoginModalType } from "@/types/staticPages";
 
 export const navbarData: NavbarProps = {
-  logo: "https://da8nru77lsio9.cloudfront.net/images/logo.svg",
+  logo: "/images/drive-wordmark-dark.png",
   navLinks: [
     { title: "Home", href: "/" },
     { title: "Cricket", href: "/cricket" },

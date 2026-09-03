@@ -96,9 +96,9 @@ export default function Navbar({ data, isMobile }: Props) {
           <Link href="/">
             <Image
               src={logo}
-              alt="logo"
-              width={141}
-              height={24}
+              alt="Drive FITT — Sport, For Life"
+              width={190}
+              height={20}
               className="ml-[25px]"
             />
           </Link>
@@ -145,7 +145,12 @@ export default function Navbar({ data, isMobile }: Props) {
             {/* Header with Close Button */}
             <div className="flex justify-between items-center py-5 px-6 border-b border-[#333333] flex-shrink-0">
               <Link href="/" onClick={handleLinkClick}>
-                <Image src={logo} alt="logo" width={141} height={24} />
+                <Image
+                  src={logo}
+                  alt="Drive FITT — Sport, For Life"
+                  width={190}
+                  height={20}
+                />
               </Link>
               <button
                 onClick={handleMenuToggle}
@@ -241,7 +246,12 @@ export default function Navbar({ data, isMobile }: Props) {
       }`}
     >
       <Link href="/">
-        <Image src={logo} alt="logo" width={212} height={36} />
+        <Image
+          src={logo}
+          alt="Drive FITT — Sport, For Life"
+          width={285}
+          height={30}
+        />
       </Link>
       <div className="flex gap-10 px-2">
         {desktopNavLinks.map((link, idx) => (

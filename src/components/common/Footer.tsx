@@ -41,10 +41,10 @@ const Footer = ({
           <div className="w-full md:w-[290px] h-auto">
             <Image
               src={logo}
-              alt="DriveFITT"
-              width={212}
-              height={36}
-              className="md:w-[212px] md:h-9 w-[188px] h-8 mb-6 md:mb-[26px]"
+              alt="Drive FITT — Sport, For Life"
+              width={285}
+              height={30}
+              className="w-[238px] h-auto md:w-[285px] mb-6 md:mb-[26px]"
             />
             <p className="text-[#FFFFFF] md:text-[#EAECF0] max-w-md text-base tracking-[0%] font-normal md:text-base md:leading-5">
               {description}

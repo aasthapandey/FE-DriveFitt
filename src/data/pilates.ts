@@ -185,7 +185,7 @@ export const pilatesData: StaticPageData = {
     },
   },
   footerSection: {
-    logo: "https://da8nru77lsio9.cloudfront.net/images/logo.svg",
+    logo: "/images/drive-wordmark-dark.png",
     description:
       "Experience Gurugram's Premier Sports Club - Cricket, Fitness, Recovery & more.",
     sections: [

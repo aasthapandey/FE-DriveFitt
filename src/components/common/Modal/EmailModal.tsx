@@ -46,13 +46,13 @@ const EmailStep = ({
     {/* Logo */}
     <div className="mb-8 md:mb-[48px] md:px-[64px]">
       <Image
-        src="https://da8nru77lsio9.cloudfront.net/images/logo.svg"
-        alt="DRIVEFITT"
-        width={isMobile ? 165 : 212}
-        height={isMobile ? 28 : 36}
+        src="/images/drive-wordmark-dark.png"
+        alt="Drive FITT — Sport, For Life"
+        width={isMobile ? 190 : 285}
+        height={isMobile ? 20 : 30}
         style={{
-          width: isMobile ? "165px" : "212px",
-          height: isMobile ? "28px" : "36px",
+          width: isMobile ? "190px" : "285px",
+          height: isMobile ? "20px" : "30px",
         }}
         className="object-contain"
       />
