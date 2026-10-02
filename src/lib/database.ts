@@ -100,10 +100,13 @@ export const executeQuery = async <T = unknown>(
 ): Promise<T> => {
   try {
     console.log("Executing query:", query.substring(0, 100) + "...");
-    console.log("Query parameters:", params);
+    // Do not log query parameters; they may contain OTPs, contact details, or payment data.
 
     const connection = await getConnection();
-    const [rows] = await connection.execute(query, params);
+    const [rows] = await connection.execute(
+      query,
+      params as Array<string | number | boolean | Date | Buffer | null> | undefined,
+    );
     console.log("Query executed successfully");
     return rows as T;
   } catch (error) {

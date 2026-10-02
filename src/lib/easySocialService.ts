@@ -57,7 +57,7 @@ class EasySocialService {
         };
       }
 
-      console.log(`📱 Sending WhatsApp OTP to +91-${phone}`);
+      console.log("Sending WhatsApp OTP request");
 
       // Construct API URL with parameters
       const url = `${config.baseURL}${config.templatePath}/91${phone}?body1=${otp}&button1=${otp}`;
@@ -87,10 +87,9 @@ class EasySocialService {
         result = { raw: responseText };
       }
 
-      console.log("📨 EasySocial API response:", {
+      console.log("EasySocial API response:", {
         status: response.status,
         statusText: response.statusText,
-        data: result,
       });
 
       // Handle successful response
