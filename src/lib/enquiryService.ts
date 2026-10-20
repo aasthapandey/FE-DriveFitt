@@ -5,6 +5,11 @@ import { termsData } from "@/data/terms";
 import { executeQuery, getConnection } from "@/lib/database";
 import { otpService } from "@/lib/otpService";
 import { smsService } from "@/lib/smsService";
+import {
+  createYoactivEnquiry,
+  fetchYoactivMemberByPhone,
+  type YoactivEnquiryInput,
+} from "@/lib/yoactivService";
 import { OTPPurpose } from "@/types/auth";
 import {
   EnquiryGender,
@@ -110,11 +115,20 @@ const getProspectPrefill = async (phone: string): Promise<ProspectPrefill | null
      LIMIT 1`,
     [localPhone, phone],
   );
-  if (!users[0]) return null;
+  if (users[0]) {
+    return {
+      name: users[0].name || "",
+      email: users[0].email || "",
+      gender: normalizeGender(users[0].gender),
+    };
+  }
+
+  const yoactivMember = await fetchYoactivMemberByPhone(phone);
+  if (!yoactivMember) return null;
   return {
-    name: users[0].name || "",
-    email: users[0].email || "",
-    gender: normalizeGender(users[0].gender),
+    name: yoactivMember.name,
+    email: yoactivMember.email,
+    gender: normalizeGender(yoactivMember.gender || null),
   };
 };
 
@@ -296,12 +310,69 @@ const verifySubmissionToken = (token: string) => {
   }
 };
 
+const syncEnquiryToYoactiv = async (
+  enquiryId: number,
+  input: YoactivEnquiryInput,
+) => {
+  try {
+    await executeQuery(
+      `INSERT INTO enquiry_crm_sync (enquiry_id, provider, status)
+       VALUES (?, 'yoactiv', 'pending')
+       ON DUPLICATE KEY UPDATE updated_at = CURRENT_TIMESTAMP`,
+      [enquiryId],
+    );
+    await executeQuery(
+      `UPDATE enquiry_crm_sync
+       SET attempts = attempts + 1, status = 'pending', last_error = NULL
+       WHERE enquiry_id = ?`,
+      [enquiryId],
+    );
+
+    const result = await createYoactivEnquiry(input);
+    const status = result.success ? "synced" : result.ambiguous ? "review" : "failed";
+    await executeQuery(
+      `UPDATE enquiry_crm_sync
+       SET status = ?, last_error = ?, response_summary = ?, synced_at = ?
+       WHERE enquiry_id = ?`,
+      [
+        status,
+        result.success ? null : result.message.slice(0, 1000),
+        result.responseSummary,
+        result.success ? new Date() : null,
+        enquiryId,
+      ],
+    );
+
+    if (!result.success) {
+      console.error("YoActiv enquiry sync did not complete:", {
+        enquiryId: input.publicId,
+        status,
+        message: result.message,
+      });
+    }
+  } catch (error) {
+    // The local enquiry is already committed and must remain successful even if
+    // CRM tracking or delivery is unavailable.
+    console.error("Unable to process YoActiv enquiry sync:", {
+      enquiryId: input.publicId,
+      message: error instanceof Error ? error.message : "Unknown error",
+    });
+  }
+};
+
 export const submitEnquiry = async (body: EnquirySubmission) => {
   const { name, email } = validateSubmission(body);
   const verification = verifySubmissionToken(body.verificationToken);
 
   const pool = await getConnection();
   const connection = await pool.getConnection();
+  let enquiryDatabaseId = 0;
+  let syncInput: YoactivEnquiryInput | null = null;
+  let submissionResult: {
+    enquiryId: string;
+    submittedAt: string;
+    duplicate: boolean;
+  } | null = null;
 
   try {
     await connection.beginTransaction();
@@ -349,7 +420,7 @@ export const submitEnquiry = async (body: EnquirySubmission) => {
     const prospectId = (prospectResult as ResultHeader).insertId;
     const publicId = crypto.randomUUID();
     const submittedAt = new Date();
-    await connection.execute(
+    const [enquiryResult] = await connection.execute(
       `INSERT INTO enquiries
         (public_id, prospect_id, consent_id, source_id, source_label, name, email,
          gender, enquiry_type, idempotency_key, submitted_at)
@@ -368,16 +439,37 @@ export const submitEnquiry = async (body: EnquirySubmission) => {
         submittedAt,
       ],
     );
+    enquiryDatabaseId = (enquiryResult as ResultHeader).insertId;
     await connection.execute(
       `UPDATE enquiry_consent_acceptances SET used_at = ? WHERE id = ?`,
       [submittedAt, verification.consentId],
     );
     await connection.commit();
-    return { enquiryId: publicId, submittedAt: submittedAt.toISOString(), duplicate: false };
+    syncInput = {
+      publicId,
+      phone: verification.phone,
+      name,
+      email,
+      gender: body.gender,
+      enquiryType: body.enquiryType,
+      sourceLabel: source.label,
+      submittedAt,
+    };
+    submissionResult = {
+      enquiryId: publicId,
+      submittedAt: submittedAt.toISOString(),
+      duplicate: false,
+    };
   } catch (error) {
     await connection.rollback();
     throw error;
   } finally {
     connection.release();
   }
+
+  if (!submissionResult || !syncInput || !enquiryDatabaseId) {
+    throw new Error("INVALID_SUBMISSION");
+  }
+  await syncEnquiryToYoactiv(enquiryDatabaseId, syncInput);
+  return submissionResult;
 };

@@ -284,8 +284,8 @@ export default function EnquiryForm() {
 
                 <fieldset>
                   <legend className="mb-2 text-sm text-[#8A8A8A]">Gender</legend>
-                  <div className="grid grid-cols-1 gap-2 md:grid-cols-3">
-                    {([['male', 'Male'], ['female', 'Female'], ['prefer_not_to_say', 'Prefer not to say']] as const).map(([value, label]) => (
+                  <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
+                    {([['male', 'Male'], ['female', 'Female']] as const).map(([value, label]) => (
                       <label key={value} className={`cursor-pointer rounded-lg border px-4 py-2.5 text-center text-sm transition-colors ${gender === value ? 'border-[#00DBDC] bg-[#00DBDC]/10 text-[#00DBDC]' : 'border-[#333333] bg-[#1D1D1D] text-[#8A8A8A]'}`}>
                         <input type="radio" name="gender" value={value} checked={gender === value} onChange={() => setGender(value)} className="sr-only" />
                         {label}
