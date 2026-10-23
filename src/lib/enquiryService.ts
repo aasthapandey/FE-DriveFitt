@@ -23,10 +23,18 @@ const TERMS_URL = "/terms";
 const TERMS_VERSION = process.env.ENQUIRY_TERMS_VERSION || "enquiry-2026-09";
 const OTP_EXPIRY_MINUTES = 5;
 const DEV_SOURCES: EnquirySource[] = [
-  ...Array.from({ length: 10 }, (_, index) => ({
+  ...[
+    ["Social Media", "social-media"],
+    ["Walk-by", "walk-by"],
+    ["Website", "website"],
+    ["Phone", "phone"],
+    ["Referral", "referral"],
+    ["Event", "event"],
+    ["Others", "others"],
+  ].map(([label, slug], index) => ({
     id: index + 1,
-    label: `Source ${index + 1}`,
-    slug: `source-${index + 1}`,
+    label,
+    slug,
     active: true,
     sortOrder: (index + 1) * 10,
   })),

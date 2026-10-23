@@ -12,17 +12,17 @@ CREATE TABLE IF NOT EXISTS enquiry_sources (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO enquiry_sources (label, slug, active, sort_order) VALUES
-  ('Source 1', 'source-1', TRUE, 10),
-  ('Source 2', 'source-2', TRUE, 20),
-  ('Source 3', 'source-3', TRUE, 30),
-  ('Source 4', 'source-4', TRUE, 40),
-  ('Source 5', 'source-5', TRUE, 50),
-  ('Source 6', 'source-6', TRUE, 60),
-  ('Source 7', 'source-7', TRUE, 70),
-  ('Source 8', 'source-8', TRUE, 80),
-  ('Source 9', 'source-9', TRUE, 90),
-  ('Source 10', 'source-10', TRUE, 100)
-ON DUPLICATE KEY UPDATE label = VALUES(label), sort_order = VALUES(sort_order);
+  ('Social Media', 'social-media', TRUE, 10),
+  ('Walk-by', 'walk-by', TRUE, 20),
+  ('Website', 'website', TRUE, 30),
+  ('Phone', 'phone', TRUE, 40),
+  ('Referral', 'referral', TRUE, 50),
+  ('Event', 'event', TRUE, 60),
+  ('Others', 'others', TRUE, 70)
+ON DUPLICATE KEY UPDATE
+  label = VALUES(label),
+  active = VALUES(active),
+  sort_order = VALUES(sort_order);
 
 CREATE TABLE IF NOT EXISTS enquiry_prospects (
   id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
