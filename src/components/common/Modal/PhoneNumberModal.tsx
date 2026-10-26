@@ -427,7 +427,11 @@ const PhoneNumberModal = ({
 
       try {
         // Call server-side API that handles everything: OTP generation, storage, and sending
-        const response = await authAPI.sendOTP(phoneNumber, OTPPurpose.LOGIN);
+        const response = await authAPI.sendOTP(
+          phoneNumber,
+          OTPPurpose.LOGIN,
+          false
+        );
 
         if (response.success) {
           // Show OTP screen after successful OTP send
@@ -624,7 +628,11 @@ const PhoneNumberModal = ({
     setError("");
 
     try {
-      const response = await authAPI.sendOTP(phoneNumber, OTPPurpose.LOGIN);
+      const response = await authAPI.sendOTP(
+        phoneNumber,
+        OTPPurpose.LOGIN,
+        true
+      );
 
       if (response.success) {
         setTimeLeft(59);

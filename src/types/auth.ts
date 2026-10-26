@@ -70,6 +70,7 @@ export interface AuthResponse {
 export interface SendOTPRequest {
   phone: string;
   purpose: OTPPurpose;
+  resend?: boolean;
 }
 
 export interface LoginWithOTPRequest {

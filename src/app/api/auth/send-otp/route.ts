@@ -9,7 +9,7 @@ export const runtime = "nodejs";
 export async function POST(request: NextRequest) {
   try {
     const body: SendOTPRequest = await request.json();
-    const { phone, purpose } = body;
+    const { phone, purpose, resend = false } = body;
 
     // Validate phone number
     if (!phone || !/^[6-9]\d{9}$/.test(phone)) {
@@ -34,6 +34,12 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    const previousOtp = await otpService.getOTPRecord(phone, purpose);
+    const hasUnexpiredOtp =
+      previousOtp !== null &&
+      new Date(previousOtp.expires_at).getTime() > Date.now();
+    const shouldBypassCoolingPeriod = resend || hasUnexpiredOtp;
+
     // Step 1: Generate OTP and store in database (server-side only)
     const dbResult = await otpService.generateAndStoreOTP(phone, purpose);
     
@@ -48,7 +54,9 @@ export async function POST(request: NextRequest) {
     }
 
     // Step 2: Send OTP via WhatsApp (server-side only)
-    const smsResult = await smsService.sendOTP(phone, dbResult.otp);
+    const smsResult = await smsService.sendOTP(phone, dbResult.otp, {
+      resend: shouldBypassCoolingPeriod,
+    });
 
     // Step 3: Update vendor response in database
     if (dbResult.otpId) {

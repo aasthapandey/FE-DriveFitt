@@ -62,7 +62,9 @@ class EasySocialService {
         };
       }
 
-      console.log("Sending WhatsApp OTP request");
+      console.log("Sending WhatsApp OTP request", {
+        resend: options.resend === true,
+      });
 
       // Construct API URL with parameters
       const params = new URLSearchParams({ body1: otp, button1: otp });

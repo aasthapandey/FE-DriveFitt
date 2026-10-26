@@ -11,12 +11,13 @@ const API_BASE = "/api/auth";
 export const authAPI = {
   sendOTP: async (
     phone: string,
-    purpose: OTPPurpose
+    purpose: OTPPurpose,
+    resend: boolean = false,
   ): Promise<AuthResponse> => {
     const response = await fetch(`${API_BASE}/send-otp`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ phone, purpose } as SendOTPRequest),
+      body: JSON.stringify({ phone, purpose, resend } as SendOTPRequest),
     });
     return response.json();
   },

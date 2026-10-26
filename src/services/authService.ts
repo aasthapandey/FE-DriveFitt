@@ -58,11 +58,12 @@ class AuthService {
 
   async sendOTP(
     phoneNumber: string,
-    purpose: string = "login"
+    purpose: string = "login",
+    resend: boolean = false,
   ): Promise<{ success: boolean; message: string }> {
     return this.makeRequest("/api/auth/send-otp", {
       method: "POST",
-      body: JSON.stringify({ phone: phoneNumber, purpose }),
+      body: JSON.stringify({ phone: phoneNumber, purpose, resend }),
     });
   }
 
