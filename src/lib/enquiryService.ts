@@ -204,13 +204,24 @@ export const createEnquiryOtpChallenge = async ({
   });
 
   const localPhone = phone.slice(3);
+  const previousOtp = await otpService.getOTPRecord(
+    localPhone,
+    OTPPurpose.LOGIN,
+  );
+  const hasUnexpiredOtp =
+    previousOtp !== null &&
+    new Date(previousOtp.expires_at).getTime() > Date.now();
+  const shouldBypassCoolingPeriod = resend || hasUnexpiredOtp;
+
   const otpResult = await otpService.generateAndStoreOTP(
     localPhone,
     OTPPurpose.LOGIN,
   );
   if (!otpResult.success || !otpResult.otp) throw new Error("OTP_DELIVERY_FAILED");
   const otp = otpResult.otp;
-  const delivery = await smsService.sendOTP(phone.slice(3), otp, { resend });
+  const delivery = await smsService.sendOTP(phone.slice(3), otp, {
+    resend: shouldBypassCoolingPeriod,
+  });
   const otpRecord = await otpService.getOTPRecord(localPhone, OTPPurpose.LOGIN);
   if (otpRecord) await otpService.updateVendorResponse(otpRecord.id, delivery);
 
