@@ -8,10 +8,12 @@ export async function POST(request: NextRequest) {
     const body = (await request.json()) as {
       phone?: string;
       consentAccepted?: boolean;
+      resend?: boolean;
     };
     const result = await createEnquiryOtpChallenge({
       phoneInput: body.phone || "",
       consentAccepted: body.consentAccepted === true,
+      resend: body.resend === true,
     });
 
     return NextResponse.json({

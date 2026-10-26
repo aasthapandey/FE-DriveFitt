@@ -182,9 +182,11 @@ export const getActiveEnquirySources = async (): Promise<EnquirySource[]> => {
 export const createEnquiryOtpChallenge = async ({
   phoneInput,
   consentAccepted,
+  resend,
 }: {
   phoneInput: string;
   consentAccepted: boolean;
+  resend: boolean;
 }) => {
   const phone = normalizeIndianPhone(phoneInput);
   if (!phone) throw new Error("INVALID_PHONE");
@@ -208,7 +210,7 @@ export const createEnquiryOtpChallenge = async ({
   );
   if (!otpResult.success || !otpResult.otp) throw new Error("OTP_DELIVERY_FAILED");
   const otp = otpResult.otp;
-  const delivery = await smsService.sendOTP(phone.slice(3), otp);
+  const delivery = await smsService.sendOTP(phone.slice(3), otp, { resend });
   const otpRecord = await otpService.getOTPRecord(localPhone, OTPPurpose.LOGIN);
   if (otpRecord) await otpService.updateVendorResponse(otpRecord.id, delivery);
 

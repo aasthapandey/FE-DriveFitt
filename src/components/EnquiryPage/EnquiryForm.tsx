@@ -52,7 +52,7 @@ export default function EnquiryForm() {
     return () => window.clearTimeout(timer);
   }, [secondsLeft]);
 
-  const sendOtp = async () => {
+  const sendOtp = async (resend: boolean) => {
     setError("");
     if (!/^[6-9]\d{9}$/.test(phone)) {
       setError("Enter a valid 10-digit mobile number.");
@@ -68,7 +68,7 @@ export default function EnquiryForm() {
       const response = await fetch("/api/enquiries/otp/send", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone, consentAccepted }),
+        body: JSON.stringify({ phone, consentAccepted, resend }),
       });
       const result = (await response.json()) as ApiResponse<{ consentToken: string }>;
       if (!response.ok || !result.success || !result.data) {
@@ -229,7 +229,7 @@ export default function EnquiryForm() {
                   </span>
                 </label>
                 <FieldError>{error}</FieldError>
-                <button type="button" onClick={sendOtp} disabled={isLoading} className={buttonClass}>
+                <button type="button" onClick={() => sendOtp(false)} disabled={isLoading} className={buttonClass}>
                   {isLoading ? "Sending..." : "Send OTP"}
                 </button>
               </div>
@@ -256,7 +256,7 @@ export default function EnquiryForm() {
                   {secondsLeft > 0 ? (
                     <span className="text-[#8A8A8A]">Resend in {secondsLeft}s</span>
                   ) : (
-                    <button type="button" onClick={sendOtp} disabled={isLoading} className="text-[#00DBDC]">Resend OTP</button>
+                    <button type="button" onClick={() => sendOtp(true)} disabled={isLoading} className="text-[#00DBDC]">Resend OTP</button>
                   )}
                 </div>
                 <FieldError>{error}</FieldError>

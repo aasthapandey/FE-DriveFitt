@@ -36,9 +36,14 @@ class EasySocialService {
    * Send OTP via WhatsApp
    * @param phone - Mobile number (10 digits)
    * @param otp - 4-digit OTP code
+   * @param options.resend - Bypass EasySocial's duplicate-message cooldown
    * @returns Promise with success status and response details
    */
-  async sendOTP(phone: string, otp: string): Promise<SendOTPResponse> {
+  async sendOTP(
+    phone: string,
+    otp: string,
+    options: { resend?: boolean } = {},
+  ): Promise<SendOTPResponse> {
     try {
       const config = this.getConfig();
 
@@ -60,7 +65,9 @@ class EasySocialService {
       console.log("Sending WhatsApp OTP request");
 
       // Construct API URL with parameters
-      const url = `${config.baseURL}${config.templatePath}/91${phone}?body1=${otp}&button1=${otp}`;
+      const params = new URLSearchParams({ body1: otp, button1: otp });
+      if (options.resend) params.set("resend", "true");
+      const url = `${config.baseURL}${config.templatePath}/91${phone}?${params.toString()}`;
 
       // Setup request with timeout
       const controller = new AbortController();
