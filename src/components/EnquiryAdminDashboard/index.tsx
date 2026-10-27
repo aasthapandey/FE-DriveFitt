@@ -34,6 +34,24 @@ interface ApiResponse<T = unknown> {
   data?: T;
 }
 
+const readApiResponse = async <T,>(response: Response): Promise<ApiResponse<T>> => {
+  const text = await response.text();
+  if (!text) {
+    return {
+      success: false,
+      message:
+        response.status === 504
+          ? "The request timed out. Please try again."
+          : "The server did not return a response. Please try again.",
+    };
+  }
+  try {
+    return JSON.parse(text) as ApiResponse<T>;
+  } catch {
+    return { success: false, message: "Unable to complete the request. Please try again." };
+  }
+};
+
 type Screen = "checking" | "phone" | "otp" | "dashboard";
 
 const inputClass =
@@ -95,7 +113,7 @@ export default function EnquiryAdminDashboard() {
     if (appliedFilters.to) params.set("to", appliedFilters.to);
     try {
       const response = await fetch(`/api/enquiry-admin?${params}`, { cache: "no-store" });
-      const result = (await response.json()) as ApiResponse<DashboardData>;
+      const result = await readApiResponse<DashboardData>(response);
       if (response.status === 401) {
         setAdmin(null);
         setScreen("phone");
@@ -117,7 +135,7 @@ export default function EnquiryAdminDashboard() {
   useEffect(() => {
     fetch("/api/enquiry-admin?view=session", { cache: "no-store" })
       .then(async (response) => {
-        const result = (await response.json()) as ApiResponse<{ admin: Admin }>;
+        const result = await readApiResponse<{ admin: Admin }>(response);
         if (!response.ok || !result.success || !result.data) {
           setScreen("phone");
           return;
@@ -151,7 +169,7 @@ export default function EnquiryAdminDashboard() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ action: "send_otp", phone, resend }),
       });
-      const result = (await response.json()) as ApiResponse;
+      const result = await readApiResponse(response);
       if (!response.ok || !result.success) {
         throw new Error(result.message || "Unable to send OTP.");
       }
@@ -176,7 +194,7 @@ export default function EnquiryAdminDashboard() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ action: "verify_otp", phone, otp: code }),
       });
-      const result = (await response.json()) as ApiResponse<{ admin: Admin }>;
+      const result = await readApiResponse<{ admin: Admin }>(response);
       if (!response.ok || !result.success || !result.data) {
         throw new Error(result.message || "Unable to verify OTP.");
       }

@@ -57,7 +57,7 @@ const findActiveAdminById = async (id: number) => {
   return rows[0] || null;
 };
 
-export const sendEnquiryAdminOtp = async (phoneInput: string, resend: boolean) => {
+export const sendEnquiryAdminOtp = async (phoneInput: string) => {
   const phone = normalizeIndianPhone(phoneInput);
   if (!phone) throw new Error("UNAUTHORIZED");
 
@@ -65,13 +65,6 @@ export const sendEnquiryAdminOtp = async (phoneInput: string, resend: boolean) =
   if (!admin) throw new Error("UNAUTHORIZED");
 
   const localPhone = phone.slice(3);
-  const previousOtp = await otpService.getOTPRecord(
-    localPhone,
-    OTPPurpose.LOGIN,
-  );
-  const hasUnexpiredOtp =
-    previousOtp !== null && new Date(previousOtp.expires_at).getTime() > Date.now();
-
   const generated = await otpService.generateAndStoreOTP(
     localPhone,
     OTPPurpose.LOGIN,
@@ -79,14 +72,24 @@ export const sendEnquiryAdminOtp = async (phoneInput: string, resend: boolean) =
   if (!generated.success || !generated.otp) throw new Error("OTP_DELIVERY_FAILED");
 
   const delivery = await smsService.sendOTP(localPhone, generated.otp, {
-    resend: resend || hasUnexpiredOtp,
+    // Admin requests should never be blocked by the vendor's duplicate-message cooldown.
+    resend: true,
   });
-  const storedOtp = await otpService.getOTPRecord(
-    localPhone,
-    OTPPurpose.LOGIN,
-  );
-  if (storedOtp) await otpService.updateVendorResponse(storedOtp.id, delivery);
   if (!delivery.success) throw new Error("OTP_DELIVERY_FAILED");
+
+  // Recording the vendor response is useful for support, but is not required before
+  // the browser can move to the verification step.
+  return async () => {
+    try {
+      const storedOtp = await otpService.getOTPRecord(
+        localPhone,
+        OTPPurpose.LOGIN,
+      );
+      if (storedOtp) await otpService.updateVendorResponse(storedOtp.id, delivery);
+    } catch (error) {
+      console.error("Unable to record enquiry admin OTP delivery:", error);
+    }
+  };
 };
 
 export const verifyEnquiryAdminOtp = async (phoneInput: string, otp: string) => {

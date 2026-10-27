@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { waitUntil } from "@vercel/functions";
 import { executeQuery } from "@/lib/database";
 import {
   ENQUIRY_ADMIN_COOKIE,
@@ -10,7 +11,7 @@ import {
 
 export const runtime = "nodejs";
 export const preferredRegion = "bom1";
-export const maxDuration = 15;
+export const maxDuration = 30;
 export const dynamic = "force-dynamic";
 
 interface LeadRow {
@@ -226,7 +227,8 @@ export async function POST(request: NextRequest) {
   try {
     const phone = typeof body.phone === "string" ? body.phone : "";
     if (action === "send_otp") {
-      await sendEnquiryAdminOtp(phone, body.resend === true);
+      const recordDelivery = await sendEnquiryAdminOtp(phone);
+      waitUntil(recordDelivery());
       return NextResponse.json(
         { success: true, message: "OTP sent on WhatsApp." },
         { headers: noStoreHeaders },
