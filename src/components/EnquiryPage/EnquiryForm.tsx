@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { EnquiryGender, EnquirySource, EnquiryType } from "@/types/enquiry";
 
 type Step = "phone" | "otp" | "details" | "success";
@@ -36,6 +36,7 @@ export default function EnquiryForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [secondsLeft, setSecondsLeft] = useState(0);
   const [idempotencyKey, setIdempotencyKey] = useState("");
+  const verificationInFlightRef = useRef(false);
 
   useEffect(() => {
     fetch("/api/enquiries", { cache: "no-store" })
@@ -90,14 +91,15 @@ export default function EnquiryForm() {
     }
   };
 
-  const verifyOtp = async (event: FormEvent) => {
-    event.preventDefault();
+  const verifyOtpCode = async (code: string) => {
+    if (verificationInFlightRef.current) return;
     setError("");
-    if (!/^\d{4}$/.test(otp)) {
+    if (!/^\d{4}$/.test(code)) {
       setError("Enter the 4-digit OTP.");
       return;
     }
 
+    verificationInFlightRef.current = true;
     setIsLoading(true);
     try {
       const response = await fetch("/api/enquiries", {
@@ -107,7 +109,7 @@ export default function EnquiryForm() {
           action: "verify_otp",
           consentToken,
           phone,
-          otp,
+          otp: code,
         }),
       });
       const result = (await response.json()) as ApiResponse<{
@@ -132,8 +134,14 @@ export default function EnquiryForm() {
     } catch (requestError) {
       setError(requestError instanceof Error ? requestError.message : "Unable to verify OTP.");
     } finally {
+      verificationInFlightRef.current = false;
       setIsLoading(false);
     }
+  };
+
+  const verifyOtp = (event: FormEvent) => {
+    event.preventDefault();
+    void verifyOtpCode(otp);
   };
 
   const submitForm = async (event: FormEvent) => {
@@ -256,9 +264,14 @@ export default function EnquiryForm() {
                     inputMode="numeric"
                     autoComplete="one-time-code"
                     value={otp}
-                    onChange={(event) => setOtp(event.target.value.replace(/\D/g, "").slice(0, 4))}
+                    onChange={(event) => {
+                      const nextOtp = event.target.value.replace(/\D/g, "").slice(0, 4);
+                      setOtp(nextOtp);
+                      if (nextOtp.length === 4) void verifyOtpCode(nextOtp);
+                    }}
                     placeholder="Enter 4-digit OTP"
                     className={`${inputClass} text-center text-lg tracking-[0.5em]`}
+                    disabled={isLoading}
                     autoFocus
                   />
                 </div>
