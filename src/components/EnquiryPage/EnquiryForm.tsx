@@ -38,7 +38,7 @@ export default function EnquiryForm() {
   const [idempotencyKey, setIdempotencyKey] = useState("");
 
   useEffect(() => {
-    fetch("/api/enquiries/sources", { cache: "no-store" })
+    fetch("/api/enquiries", { cache: "no-store" })
       .then((response) => response.json())
       .then((result: ApiResponse<EnquirySource[]>) => {
         if (result.success && result.data) setSources(result.data);
@@ -65,10 +65,15 @@ export default function EnquiryForm() {
 
     setIsLoading(true);
     try {
-      const response = await fetch("/api/enquiries/otp/send", {
+      const response = await fetch("/api/enquiries", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone, consentAccepted, resend }),
+        body: JSON.stringify({
+          action: "send_otp",
+          phone,
+          consentAccepted,
+          resend,
+        }),
       });
       const result = (await response.json()) as ApiResponse<{ consentToken: string }>;
       if (!response.ok || !result.success || !result.data) {
@@ -95,10 +100,15 @@ export default function EnquiryForm() {
 
     setIsLoading(true);
     try {
-      const response = await fetch("/api/enquiries/otp/verify", {
+      const response = await fetch("/api/enquiries", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ consentToken, phone, otp }),
+        body: JSON.stringify({
+          action: "verify_otp",
+          consentToken,
+          phone,
+          otp,
+        }),
       });
       const result = (await response.json()) as ApiResponse<{
         verificationToken: string;
@@ -141,6 +151,7 @@ export default function EnquiryForm() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          action: "submit",
           name: name.trim(),
           email: email.trim(),
           gender,
