@@ -12,12 +12,14 @@ interface AdminRow {
   id: number;
   phone: string;
   name: string;
+  last_login_at: Date | string | null;
 }
 
 export interface EnquiryAdminTokenPayload {
   kind: "enquiry_admin";
   adminId: number;
   phone: string;
+  loginAt: string;
 }
 
 export interface EnquiryAdminSession {
@@ -37,7 +39,7 @@ const getTokenSecret = () => {
 
 const findActiveAdminByPhone = async (phone: string) => {
   const rows = await executeQuery<AdminRow[]>(
-    `SELECT id, phone, name
+    `SELECT id, phone, name, last_login_at
      FROM enquiry_admin_users
      WHERE phone = ? AND active = TRUE
      LIMIT 1`,
@@ -48,7 +50,7 @@ const findActiveAdminByPhone = async (phone: string) => {
 
 const findActiveAdminById = async (id: number) => {
   const rows = await executeQuery<AdminRow[]>(
-    `SELECT id, phone, name
+    `SELECT id, phone, name, last_login_at
      FROM enquiry_admin_users
      WHERE id = ? AND active = TRUE
      LIMIT 1`,
@@ -106,13 +108,19 @@ export const verifyEnquiryAdminOtp = async (phoneInput: string, otp: string) => 
   );
   if (!verified) throw new Error("INVALID_OTP");
 
+  const loginAt = new Date(Math.floor(Date.now() / 1000) * 1000);
   await executeQuery(
-    `UPDATE enquiry_admin_users SET last_login_at = NOW() WHERE id = ?`,
-    [admin.id],
+    `UPDATE enquiry_admin_users SET last_login_at = ? WHERE id = ?`,
+    [loginAt, admin.id],
   );
 
   const token = jwt.sign(
-    { kind: "enquiry_admin", adminId: admin.id, phone: admin.phone },
+    {
+      kind: "enquiry_admin",
+      adminId: admin.id,
+      phone: admin.phone,
+      loginAt: loginAt.toISOString(),
+    },
     getTokenSecret(),
     { expiresIn: ENQUIRY_ADMIN_SESSION_SECONDS },
   );
@@ -126,7 +134,14 @@ export const getEnquiryAdminSession = async (
   if (!payload) return null;
   try {
     const admin = await findActiveAdminById(payload.adminId);
-    if (!admin || admin.phone !== payload.phone) return null;
+    if (
+      !admin ||
+      admin.phone !== payload.phone ||
+      !admin.last_login_at ||
+      new Date(admin.last_login_at).getTime() !== new Date(payload.loginAt).getTime()
+    ) {
+      return null;
+    }
     return { id: admin.id, phone: admin.phone, name: admin.name };
   } catch {
     return null;
@@ -142,7 +157,9 @@ export const verifyEnquiryAdminToken = (
     if (
       payload.kind !== "enquiry_admin" ||
       !Number.isInteger(payload.adminId) ||
-      !payload.phone
+      !payload.phone ||
+      !payload.loginAt ||
+      Number.isNaN(new Date(payload.loginAt).getTime())
     ) {
       return null;
     }

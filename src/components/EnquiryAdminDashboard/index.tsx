@@ -379,7 +379,12 @@ export default function EnquiryAdminDashboard() {
     );
   }
 
-  const totalPages = Math.max(1, Math.ceil((data?.pagination.total || 0) / 25));
+  const totalPages = Math.max(
+    1,
+    Math.ceil(
+      (data?.pagination.total || 0) / (data?.pagination.pageSize || 1000),
+    ),
+  );
 
   return (
     <main className="min-h-screen bg-[#0D0D0D] text-white">

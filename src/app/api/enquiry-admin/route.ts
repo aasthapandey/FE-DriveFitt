@@ -16,19 +16,15 @@ export const maxDuration = 30;
 export const dynamic = "force-dynamic";
 
 interface LeadRow {
-  id: number | null;
-  name: string | null;
-  phone: string | null;
-  email: string | null;
-  gender: string | null;
-  enquiry_type: string | null;
-  source_label: string | null;
-  submitted_at: Date | string | null;
-  crm_status: string | null;
-  filtered_total: number;
-  stats_total: number;
-  stats_today: number;
-  stats_needs_sync: number;
+  id: number;
+  name: string;
+  phone: string;
+  email: string;
+  gender: string;
+  enquiry_type: string;
+  source_label: string;
+  submitted_at: Date | string;
+  crm_status: string;
 }
 
 const noStoreHeaders = { "Cache-Control": "private, no-store, max-age=0" };
@@ -70,98 +66,63 @@ const csvCell = (value: unknown) => {
   return `"${text.replace(/"/g, '""')}"`;
 };
 
+const indiaDateKey = (value: Date | string) =>
+  new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Kolkata",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(new Date(value));
+
 const listLeads = async (
   request: NextRequest,
-  admin: { adminId: number; phone: string },
+  admin: { adminId: number; phone: string; loginAt: string },
 ) => {
   const filters = parseFilters(request);
   const where = buildWhere(filters);
-  const requestedPage = Number(request.nextUrl.searchParams.get("page"));
-  const page = Number.isFinite(requestedPage)
-    ? Math.min(100000, Math.max(1, Math.floor(requestedPage)))
-    : 1;
-  const pageSize = Math.min(
-    100,
-    Math.max(10, Number(request.nextUrl.searchParams.get("pageSize")) || 25),
-  );
-  const offset = (page - 1) * pageSize;
-
+  const filterSql = where.sql ? `AND ${where.sql.slice("WHERE ".length)}` : "";
   const rows = await executeQuery<LeadRow[]>(
-    `WITH authorized AS (
-       SELECT id
-       FROM enquiry_admin_users
-       WHERE id = ? AND phone = ? AND active = TRUE
-       LIMIT 1
-     ),
-     filtered_leads AS (
-       SELECT e.id, e.name, p.phone, e.email, e.gender, e.enquiry_type,
-              e.source_label, e.submitted_at,
-              COALESCE(cs.status, 'not_started') AS crm_status
-       FROM authorized a
-       CROSS JOIN enquiries e
-       INNER JOIN enquiry_prospects p ON p.id = e.prospect_id
-       LEFT JOIN enquiry_crm_sync cs ON cs.enquiry_id = e.id
-       ${where.sql}
-     ),
-     dashboard_stats AS (
-       SELECT
-         (SELECT COUNT(*) FROM filtered_leads) AS filtered_total,
-         (SELECT COUNT(*) FROM enquiries) AS stats_total,
-         (SELECT COALESCE(SUM(DATE(e2.submitted_at) = CURDATE()), 0)
-          FROM enquiries e2) AS stats_today,
-         (SELECT COUNT(*)
-          FROM enquiries e3
-          LEFT JOIN enquiry_crm_sync cs3 ON cs3.enquiry_id = e3.id
-          WHERE COALESCE(cs3.status, 'not_started') <> 'synced') AS stats_needs_sync
-       FROM authorized
-     ),
-     paged_leads AS (
-       SELECT *
-       FROM filtered_leads
-       ORDER BY submitted_at DESC
-       LIMIT ? OFFSET ?
-     )
-     SELECT s.filtered_total, s.stats_total, s.stats_today, s.stats_needs_sync,
-            p.id, p.name, p.phone, p.email, p.gender, p.enquiry_type,
-            p.source_label, p.submitted_at, p.crm_status
-     FROM dashboard_stats s
-     LEFT JOIN paged_leads p ON TRUE
-     ORDER BY p.submitted_at DESC`,
-    [admin.adminId, admin.phone, ...where.params, pageSize, offset],
+    `SELECT e.id, e.name, p.phone, e.email, e.gender, e.enquiry_type,
+            e.source_label, e.submitted_at,
+            COALESCE(cs.status, 'not_started') AS crm_status
+     FROM enquiry_admin_users a
+     CROSS JOIN enquiries e
+     INNER JOIN enquiry_prospects p ON p.id = e.prospect_id
+     LEFT JOIN enquiry_crm_sync cs ON cs.enquiry_id = e.id
+     WHERE a.id = ? AND a.phone = ? AND a.active = TRUE
+       AND a.last_login_at = ?
+     ${filterSql}
+     ORDER BY e.submitted_at DESC
+     LIMIT 1000`,
+    [admin.adminId, admin.phone, new Date(admin.loginAt), ...where.params],
   );
 
-  if (!rows[0]) {
-    return NextResponse.json(
-      { success: false, message: "Authentication required." },
-      { status: 401, headers: noStoreHeaders },
-    );
-  }
-
-  const stats = rows[0];
-  const leads = rows.filter(
-    (row): row is LeadRow & { id: number } => row.id !== null,
-  );
+  const today = indiaDateKey(new Date());
+  const submittedToday = rows.filter(
+    (row) => indiaDateKey(row.submitted_at) === today,
+  ).length;
+  const needsSync = rows.filter((row) => row.crm_status !== "synced").length;
 
   return NextResponse.json(
     {
       success: true,
       data: {
-        leads: leads.map((row) => ({
+        leads: rows.map((row) => ({
           id: row.id,
-          name: row.name || "",
-          phone: row.phone || "",
-          email: row.email || "",
-          gender: row.gender || "",
-          enquiryType: row.enquiry_type || "",
-          source: row.source_label || "",
+          name: row.name,
+          phone: row.phone,
+          email: row.email,
+          gender: row.gender,
+          enquiryType: row.enquiry_type,
+          source: row.source_label,
           submittedAt: row.submitted_at,
-          crmStatus: row.crm_status || "not_started",
+          crmStatus: row.crm_status,
         })),
-        pagination: { page, pageSize, total: Number(stats.filtered_total || 0) },
+        pagination: { page: 1, pageSize: 1000, total: rows.length },
         summary: {
-          total: Number(stats.stats_total || 0),
-          today: Number(stats.stats_today || 0),
-          needsSync: Number(stats.stats_needs_sync || 0),
+          total: rows.length,
+          today: submittedToday,
+          needsSync,
         },
       },
     },
@@ -171,29 +132,24 @@ const listLeads = async (
 
 const exportLeads = async (
   request: NextRequest,
-  admin: { adminId: number; phone: string },
+  admin: { adminId: number; phone: string; loginAt: string },
 ) => {
   const where = buildWhere(parseFilters(request));
+  const filterSql = where.sql ? `AND ${where.sql.slice("WHERE ".length)}` : "";
   const rows = await executeQuery<LeadRow[]>(
-    `WITH authorized AS (
-       SELECT id
-       FROM enquiry_admin_users
-       WHERE id = ? AND phone = ? AND active = TRUE
-       LIMIT 1
-     )
-     SELECT e.id, e.name, p.phone, e.email, e.gender, e.enquiry_type,
+    `SELECT e.id, e.name, p.phone, e.email, e.gender, e.enquiry_type,
             e.source_label, e.submitted_at,
-            COALESCE(cs.status, 'not_started') AS crm_status,
-            0 AS filtered_total, 0 AS stats_total, 0 AS stats_today,
-            0 AS stats_needs_sync
-     FROM authorized a
+            COALESCE(cs.status, 'not_started') AS crm_status
+     FROM enquiry_admin_users a
      CROSS JOIN enquiries e
      INNER JOIN enquiry_prospects p ON p.id = e.prospect_id
      LEFT JOIN enquiry_crm_sync cs ON cs.enquiry_id = e.id
-     ${where.sql}
+     WHERE a.id = ? AND a.phone = ? AND a.active = TRUE
+       AND a.last_login_at = ?
+     ${filterSql}
      ORDER BY e.submitted_at DESC
      LIMIT 5000`,
-    [admin.adminId, admin.phone, ...where.params],
+    [admin.adminId, admin.phone, new Date(admin.loginAt), ...where.params],
   );
   const headings = [
     "Submitted at",
