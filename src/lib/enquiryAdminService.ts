@@ -1,0 +1,132 @@
+import jwt from "jsonwebtoken";
+import { executeQuery } from "@/lib/database";
+import { normalizeIndianPhone } from "@/lib/enquiryService";
+import { otpService } from "@/lib/otpService";
+import { smsService } from "@/lib/smsService";
+import { OTPPurpose } from "@/types/auth";
+
+export const ENQUIRY_ADMIN_COOKIE = "drivefitt_enquiry_admin";
+export const ENQUIRY_ADMIN_SESSION_SECONDS = 8 * 60 * 60;
+
+interface AdminRow {
+  id: number;
+  phone: string;
+  name: string;
+}
+
+interface AdminSessionPayload {
+  kind: "enquiry_admin";
+  adminId: number;
+  phone: string;
+}
+
+export interface EnquiryAdminSession {
+  id: number;
+  phone: string;
+  name: string;
+}
+
+const getTokenSecret = () => {
+  const secret = process.env.JWT_SECRET;
+  if (secret) return secret;
+  if (process.env.NODE_ENV !== "production") {
+    return "drivefitt-enquiry-admin-local-development-only-secret";
+  }
+  throw new Error("Missing JWT_SECRET");
+};
+
+const findActiveAdminByPhone = async (phone: string) => {
+  const rows = await executeQuery<AdminRow[]>(
+    `SELECT id, phone, name
+     FROM enquiry_admin_users
+     WHERE phone = ? AND active = TRUE
+     LIMIT 1`,
+    [phone],
+  );
+  return rows[0] || null;
+};
+
+const findActiveAdminById = async (id: number) => {
+  const rows = await executeQuery<AdminRow[]>(
+    `SELECT id, phone, name
+     FROM enquiry_admin_users
+     WHERE id = ? AND active = TRUE
+     LIMIT 1`,
+    [id],
+  );
+  return rows[0] || null;
+};
+
+export const sendEnquiryAdminOtp = async (phoneInput: string, resend: boolean) => {
+  const phone = normalizeIndianPhone(phoneInput);
+  if (!phone) throw new Error("UNAUTHORIZED");
+
+  const admin = await findActiveAdminByPhone(phone);
+  if (!admin) throw new Error("UNAUTHORIZED");
+
+  const localPhone = phone.slice(3);
+  const previousOtp = await otpService.getOTPRecord(
+    localPhone,
+    OTPPurpose.LOGIN,
+  );
+  const hasUnexpiredOtp =
+    previousOtp !== null && new Date(previousOtp.expires_at).getTime() > Date.now();
+
+  const generated = await otpService.generateAndStoreOTP(
+    localPhone,
+    OTPPurpose.LOGIN,
+  );
+  if (!generated.success || !generated.otp) throw new Error("OTP_DELIVERY_FAILED");
+
+  const delivery = await smsService.sendOTP(localPhone, generated.otp, {
+    resend: resend || hasUnexpiredOtp,
+  });
+  const storedOtp = await otpService.getOTPRecord(
+    localPhone,
+    OTPPurpose.LOGIN,
+  );
+  if (storedOtp) await otpService.updateVendorResponse(storedOtp.id, delivery);
+  if (!delivery.success) throw new Error("OTP_DELIVERY_FAILED");
+};
+
+export const verifyEnquiryAdminOtp = async (phoneInput: string, otp: string) => {
+  const phone = normalizeIndianPhone(phoneInput);
+  if (!phone || !/^\d{4}$/.test(otp)) throw new Error("INVALID_OTP");
+
+  const admin = await findActiveAdminByPhone(phone);
+  if (!admin) throw new Error("INVALID_OTP");
+
+  const verified = await otpService.verifyOTP(
+    phone.slice(3),
+    otp,
+    OTPPurpose.LOGIN,
+  );
+  if (!verified) throw new Error("INVALID_OTP");
+
+  await executeQuery(
+    `UPDATE enquiry_admin_users SET last_login_at = NOW() WHERE id = ?`,
+    [admin.id],
+  );
+
+  const token = jwt.sign(
+    { kind: "enquiry_admin", adminId: admin.id, phone: admin.phone },
+    getTokenSecret(),
+    { expiresIn: ENQUIRY_ADMIN_SESSION_SECONDS },
+  );
+  return { token, admin: { id: admin.id, phone: admin.phone, name: admin.name } };
+};
+
+export const getEnquiryAdminSession = async (
+  token: string | undefined,
+): Promise<EnquiryAdminSession | null> => {
+  if (!token) return null;
+  try {
+    const payload = jwt.verify(token, getTokenSecret()) as AdminSessionPayload;
+    if (payload.kind !== "enquiry_admin" || !payload.adminId) return null;
+    const admin = await findActiveAdminById(payload.adminId);
+    if (!admin || admin.phone !== payload.phone) return null;
+    return { id: admin.id, phone: admin.phone, name: admin.name };
+  } catch {
+    return null;
+  }
+};
