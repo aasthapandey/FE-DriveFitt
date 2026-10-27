@@ -28,6 +28,15 @@ interface DashboardData {
   summary: { total: number; today: number; needsSync: number };
 }
 
+interface CrmRetryResult {
+  attempted: number;
+  synced: number;
+  failed: number;
+  review: number;
+  pending: number;
+  remaining: number;
+}
+
 interface ApiResponse<T = unknown> {
   success: boolean;
   message?: string;
@@ -95,6 +104,8 @@ export default function EnquiryAdminDashboard() {
   const [otp, setOtp] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [crmRetrying, setCrmRetrying] = useState(false);
+  const [crmNotice, setCrmNotice] = useState("");
   const [secondsLeft, setSecondsLeft] = useState(0);
   const [data, setData] = useState<DashboardData | null>(null);
   const [search, setSearch] = useState("");
@@ -241,6 +252,55 @@ export default function EnquiryAdminDashboard() {
     setOtp("");
     setPhone("");
     setScreen("phone");
+  };
+
+  const retryFailedCrm = async () => {
+    setCrmRetrying(true);
+    setCrmNotice("");
+    setError("");
+    let attempted = 0;
+    let synced = 0;
+    let failed = 0;
+    let remaining = 0;
+
+    try {
+      for (let batch = 0; batch < 5; batch += 1) {
+        const response = await fetch("/api/enquiry-admin", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ action: "retry_failed_crm" }),
+        });
+        const result = await readApiResponse<CrmRetryResult>(response);
+        if (!response.ok || !result.success || !result.data) {
+          throw new Error(result.message || "Unable to retry CRM syncs.");
+        }
+
+        attempted += result.data.attempted;
+        synced += result.data.synced;
+        failed += result.data.failed;
+        remaining = result.data.remaining;
+        if (result.data.attempted === 0 || remaining === 0 || result.data.synced === 0) {
+          break;
+        }
+      }
+
+      setCrmNotice(
+        attempted === 0
+          ? "There are no failed CRM syncs to retry."
+          : `${synced} of ${attempted} retried leads synced successfully.${
+              failed || remaining ? ` ${Math.max(failed, remaining)} still require attention.` : ""
+            }`,
+      );
+      await loadLeads();
+    } catch (requestError) {
+      setError(
+        requestError instanceof Error
+          ? requestError.message
+          : "Unable to retry CRM syncs.",
+      );
+    } finally {
+      setCrmRetrying(false);
+    }
   };
 
   if (screen === "checking") {
@@ -412,7 +472,17 @@ export default function EnquiryAdminDashboard() {
             <h1 className="text-3xl font-semibold tracking-[-1.5px] md:text-[40px]">Enquiry leads</h1>
             <p className="mt-2 text-sm text-[#8A8A8A]">Read-only view of enquiries submitted through the website.</p>
           </div>
-          <a href={exportUrl()} className={`${buttonClass} text-center`}>Export CSV</a>
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <button
+              type="button"
+              onClick={() => void retryFailedCrm()}
+              disabled={crmRetrying}
+              className="rounded-lg border border-white/20 px-5 py-2.5 text-sm font-semibold transition-colors hover:border-[#00DBDC] hover:text-[#00DBDC] disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              {crmRetrying ? "Retrying CRM..." : "Retry failed CRM syncs"}
+            </button>
+            <a href={exportUrl()} className={`${buttonClass} text-center`}>Export CSV</a>
+          </div>
         </div>
 
         <section className="mb-8 grid gap-4 sm:grid-cols-3">
@@ -446,6 +516,7 @@ export default function EnquiryAdminDashboard() {
         </form>
 
         {error && <div className="mb-5 rounded-lg border border-red-400/30 bg-red-400/10 px-4 py-3 text-sm text-red-300">{error}</div>}
+        {crmNotice && <div className="mb-5 rounded-lg border border-[#00DBDC]/30 bg-[#00DBDC]/10 px-4 py-3 text-sm text-[#8FFBFC]">{crmNotice}</div>}
 
         <section className="overflow-hidden rounded-xl border border-white/10 bg-[#151515]">
           <div className="overflow-x-auto">

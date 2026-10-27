@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import { privacyData } from "@/data/privacy";
 import { termsData } from "@/data/terms";
 import { executeQuery, getConnection } from "@/lib/database";
+import { EXCLUDED_ENQUIRY_TEST_PHONE } from "@/lib/enquiryConfig";
 import { otpService } from "@/lib/otpService";
 import { smsService } from "@/lib/smsService";
 import {
@@ -22,7 +23,7 @@ import {
 const TERMS_URL = "/terms";
 const TERMS_VERSION = process.env.ENQUIRY_TERMS_VERSION || "enquiry-2026-09";
 const OTP_EXPIRY_MINUTES = 5;
-const YOACTIV_EXCLUDED_TEST_PHONES = new Set(["+919650811118"]);
+const YOACTIV_EXCLUDED_TEST_PHONES = new Set([EXCLUDED_ENQUIRY_TEST_PHONE]);
 const DEV_SOURCES: EnquirySource[] = [
   ...[
     ["Social Media", "social-media"],
@@ -396,6 +397,89 @@ const syncEnquiryToYoactiv = async (
       message: error instanceof Error ? error.message : "Unknown error",
     });
   }
+};
+
+interface FailedCrmEnquiryRow {
+  id: number;
+  public_id: string;
+  phone: string;
+  name: string;
+  email: string;
+  gender: EnquiryGender;
+  enquiry_type: EnquiryType;
+  source_label: string;
+  submitted_at: Date | string;
+}
+
+export const retryFailedYoactivEnquiries = async (limit = 4) => {
+  const batchSize = Math.min(6, Math.max(1, Math.floor(limit)));
+  const candidates = await executeQuery<FailedCrmEnquiryRow[]>(
+    `SELECT e.id, e.public_id, p.phone, e.name, e.email, e.gender,
+            e.enquiry_type, e.source_label, e.submitted_at
+     FROM enquiry_crm_sync cs
+     INNER JOIN enquiries e ON e.id = cs.enquiry_id
+     INNER JOIN enquiry_prospects p ON p.id = e.prospect_id
+     WHERE cs.status = 'failed' AND p.phone <> ?
+     ORDER BY cs.updated_at ASC
+     LIMIT ${batchSize}`,
+    [EXCLUDED_ENQUIRY_TEST_PHONE],
+  );
+
+  if (!candidates.length) {
+    return { attempted: 0, synced: 0, failed: 0, review: 0, pending: 0, remaining: 0 };
+  }
+
+  const ids = candidates.map((candidate) => candidate.id);
+  const placeholders = ids.map(() => "?").join(",");
+  await executeQuery(
+    `UPDATE enquiry_crm_sync
+     SET status = 'pending', updated_at = CURRENT_TIMESTAMP
+     WHERE enquiry_id IN (${placeholders}) AND status = 'failed'`,
+    ids,
+  );
+
+  await Promise.all(
+    candidates.map((candidate) =>
+      syncEnquiryToYoactiv(candidate.id, {
+        publicId: candidate.public_id,
+        phone: candidate.phone,
+        name: candidate.name,
+        email: candidate.email,
+        gender: candidate.gender,
+        enquiryType: candidate.enquiry_type,
+        sourceLabel: candidate.source_label,
+        submittedAt: new Date(candidate.submitted_at),
+      }),
+    ),
+  );
+
+  const statuses = await executeQuery<Array<{ status: string; count: number }>>(
+    `SELECT status, COUNT(*) AS count
+     FROM enquiry_crm_sync
+     WHERE enquiry_id IN (${placeholders})
+     GROUP BY status`,
+    ids,
+  );
+  const counts = Object.fromEntries(
+    statuses.map((row) => [row.status, Number(row.count)]),
+  );
+  const remainingRows = await executeQuery<Array<{ count: number }>>(
+    `SELECT COUNT(*) AS count
+     FROM enquiry_crm_sync cs
+     INNER JOIN enquiries e ON e.id = cs.enquiry_id
+     INNER JOIN enquiry_prospects p ON p.id = e.prospect_id
+     WHERE cs.status = 'failed' AND p.phone <> ?`,
+    [EXCLUDED_ENQUIRY_TEST_PHONE],
+  );
+
+  return {
+    attempted: candidates.length,
+    synced: counts.synced || 0,
+    failed: counts.failed || 0,
+    review: counts.review || 0,
+    pending: counts.pending || 0,
+    remaining: Number(remainingRows[0]?.count || 0),
+  };
 };
 
 export const submitEnquiry = async (body: EnquirySubmission) => {

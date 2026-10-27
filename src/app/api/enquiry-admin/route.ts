@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { waitUntil } from "@vercel/functions";
 import { executeQuery } from "@/lib/database";
+import { EXCLUDED_ENQUIRY_TEST_PHONE } from "@/lib/enquiryConfig";
+import { retryFailedYoactivEnquiries } from "@/lib/enquiryService";
 import {
   ENQUIRY_ADMIN_COOKIE,
   ENQUIRY_ADMIN_SESSION_SECONDS,
@@ -28,7 +30,6 @@ interface LeadRow {
 }
 
 const noStoreHeaders = { "Cache-Control": "private, no-store, max-age=0" };
-const HIDDEN_TEST_PHONE = "+919650811118";
 
 const parseFilters = (request: NextRequest) => {
   const search = (request.nextUrl.searchParams.get("search") || "").trim().slice(0, 100);
@@ -100,7 +101,7 @@ const listLeads = async (
       admin.adminId,
       admin.phone,
       new Date(admin.loginAt),
-      HIDDEN_TEST_PHONE,
+      EXCLUDED_ENQUIRY_TEST_PHONE,
       ...where.params,
     ],
   );
@@ -162,7 +163,7 @@ const exportLeads = async (
       admin.adminId,
       admin.phone,
       new Date(admin.loginAt),
-      HIDDEN_TEST_PHONE,
+      EXCLUDED_ENQUIRY_TEST_PHONE,
       ...where.params,
     ],
   );
@@ -257,6 +258,29 @@ export async function POST(request: NextRequest) {
     );
     response.cookies.set(ENQUIRY_ADMIN_COOKIE, "", { path: "/", maxAge: 0 });
     return response;
+  }
+
+  if (action === "retry_failed_crm") {
+    const token = request.cookies.get(ENQUIRY_ADMIN_COOKIE)?.value;
+    if (!verifyEnquiryAdminToken(token)) {
+      return NextResponse.json(
+        { success: false, message: "Authentication required." },
+        { status: 401, headers: noStoreHeaders },
+      );
+    }
+    try {
+      const result = await retryFailedYoactivEnquiries();
+      return NextResponse.json(
+        { success: true, message: "CRM retry completed.", data: result },
+        { headers: noStoreHeaders },
+      );
+    } catch (error) {
+      console.error("Unable to retry failed CRM enquiries:", error);
+      return NextResponse.json(
+        { success: false, message: "Unable to retry failed CRM enquiries." },
+        { status: 500, headers: noStoreHeaders },
+      );
+    }
   }
 
   try {
