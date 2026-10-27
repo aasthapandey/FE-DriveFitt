@@ -407,9 +407,12 @@ export const submitEnquiry = async (body: EnquirySubmission) => {
     if (existing) {
       await connection.commit();
       return {
-        enquiryId: existing.public_id,
-        submittedAt: new Date(existing.submitted_at).toISOString(),
-        duplicate: true,
+        result: {
+          enquiryId: existing.public_id,
+          submittedAt: new Date(existing.submitted_at).toISOString(),
+          duplicate: true,
+        },
+        backgroundSync: null,
       };
     }
 
@@ -491,6 +494,13 @@ export const submitEnquiry = async (body: EnquirySubmission) => {
   if (!submissionResult || !syncInput || !enquiryDatabaseId) {
     throw new Error("INVALID_SUBMISSION");
   }
-  await syncEnquiryToYoactiv(enquiryDatabaseId, syncInput);
-  return submissionResult;
+  const completedResult = submissionResult;
+  const completedSyncInput = syncInput;
+  const completedEnquiryId = enquiryDatabaseId;
+
+  return {
+    result: completedResult,
+    backgroundSync: () =>
+      syncEnquiryToYoactiv(completedEnquiryId, completedSyncInput),
+  };
 };

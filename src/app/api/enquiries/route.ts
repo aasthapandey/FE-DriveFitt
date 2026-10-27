@@ -1,13 +1,19 @@
 import { NextRequest, NextResponse } from "next/server";
+import { waitUntil } from "@vercel/functions";
 import { submitEnquiry } from "@/lib/enquiryService";
 import { EnquirySubmission } from "@/types/enquiry";
 
 export const runtime = "nodejs";
+export const maxDuration = 15;
 
 export async function POST(request: NextRequest) {
   try {
     const body = (await request.json()) as EnquirySubmission;
-    const result = await submitEnquiry(body);
+    const submission = await submitEnquiry(body);
+    if (submission.backgroundSync) {
+      waitUntil(submission.backgroundSync());
+    }
+    const result = submission.result;
 
     return NextResponse.json(
       {
