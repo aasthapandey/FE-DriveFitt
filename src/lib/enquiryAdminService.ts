@@ -14,7 +14,7 @@ interface AdminRow {
   name: string;
 }
 
-interface AdminSessionPayload {
+export interface EnquiryAdminTokenPayload {
   kind: "enquiry_admin";
   adminId: number;
   phone: string;
@@ -122,13 +122,31 @@ export const verifyEnquiryAdminOtp = async (phoneInput: string, otp: string) => 
 export const getEnquiryAdminSession = async (
   token: string | undefined,
 ): Promise<EnquiryAdminSession | null> => {
-  if (!token) return null;
+  const payload = verifyEnquiryAdminToken(token);
+  if (!payload) return null;
   try {
-    const payload = jwt.verify(token, getTokenSecret()) as AdminSessionPayload;
-    if (payload.kind !== "enquiry_admin" || !payload.adminId) return null;
     const admin = await findActiveAdminById(payload.adminId);
     if (!admin || admin.phone !== payload.phone) return null;
     return { id: admin.id, phone: admin.phone, name: admin.name };
+  } catch {
+    return null;
+  }
+};
+
+export const verifyEnquiryAdminToken = (
+  token: string | undefined,
+): EnquiryAdminTokenPayload | null => {
+  if (!token) return null;
+  try {
+    const payload = jwt.verify(token, getTokenSecret()) as EnquiryAdminTokenPayload;
+    if (
+      payload.kind !== "enquiry_admin" ||
+      !Number.isInteger(payload.adminId) ||
+      !payload.phone
+    ) {
+      return null;
+    }
+    return payload;
   } catch {
     return null;
   }

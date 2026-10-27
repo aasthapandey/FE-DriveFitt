@@ -6,6 +6,7 @@ import {
   ENQUIRY_ADMIN_SESSION_SECONDS,
   getEnquiryAdminSession,
   sendEnquiryAdminOtp,
+  verifyEnquiryAdminToken,
   verifyEnquiryAdminOtp,
 } from "@/lib/enquiryAdminService";
 
@@ -15,15 +16,19 @@ export const maxDuration = 30;
 export const dynamic = "force-dynamic";
 
 interface LeadRow {
-  id: number;
-  name: string;
-  phone: string;
-  email: string;
-  gender: string;
-  enquiry_type: string;
-  source_label: string;
-  submitted_at: Date | string;
-  crm_status: string;
+  id: number | null;
+  name: string | null;
+  phone: string | null;
+  email: string | null;
+  gender: string | null;
+  enquiry_type: string | null;
+  source_label: string | null;
+  submitted_at: Date | string | null;
+  crm_status: string | null;
+  filtered_total: number;
+  stats_total: number;
+  stats_today: number;
+  stats_needs_sync: number;
 }
 
 const noStoreHeaders = { "Cache-Control": "private, no-store, max-age=0" };
@@ -59,71 +64,104 @@ const buildWhere = (filters: ReturnType<typeof parseFilters>) => {
   return { sql: clauses.length ? `WHERE ${clauses.join(" AND ")}` : "", params };
 };
 
-const leadSelect = `
-  SELECT e.id, e.name, p.phone, e.email, e.gender, e.enquiry_type,
-         e.source_label, e.submitted_at,
-         COALESCE(cs.status, 'not_started') AS crm_status
-  FROM enquiries e
-  INNER JOIN enquiry_prospects p ON p.id = e.prospect_id
-  LEFT JOIN enquiry_crm_sync cs ON cs.enquiry_id = e.id`;
-
 const csvCell = (value: unknown) => {
   let text = value instanceof Date ? value.toISOString() : String(value ?? "");
   if (/^[=+\-@]/.test(text)) text = `'${text}`;
   return `"${text.replace(/"/g, '""')}"`;
 };
 
-const listLeads = async (request: NextRequest) => {
+const listLeads = async (
+  request: NextRequest,
+  admin: { adminId: number; phone: string },
+) => {
   const filters = parseFilters(request);
   const where = buildWhere(filters);
-  const page = Math.max(1, Number(request.nextUrl.searchParams.get("page")) || 1);
+  const requestedPage = Number(request.nextUrl.searchParams.get("page"));
+  const page = Number.isFinite(requestedPage)
+    ? Math.min(100000, Math.max(1, Math.floor(requestedPage)))
+    : 1;
   const pageSize = Math.min(
     100,
     Math.max(10, Number(request.nextUrl.searchParams.get("pageSize")) || 25),
   );
   const offset = (page - 1) * pageSize;
 
-  const [rows, counts, summary] = await Promise.all([
-    executeQuery<LeadRow[]>(
-      `${leadSelect} ${where.sql} ORDER BY e.submitted_at DESC LIMIT ? OFFSET ?`,
-      [...where.params, pageSize, offset],
-    ),
-    executeQuery<Array<{ total: number }>>(
-      `SELECT COUNT(*) AS total
-       FROM enquiries e
+  const rows = await executeQuery<LeadRow[]>(
+    `WITH authorized AS (
+       SELECT id
+       FROM enquiry_admin_users
+       WHERE id = ? AND phone = ? AND active = TRUE
+       LIMIT 1
+     ),
+     filtered_leads AS (
+       SELECT e.id, e.name, p.phone, e.email, e.gender, e.enquiry_type,
+              e.source_label, e.submitted_at,
+              COALESCE(cs.status, 'not_started') AS crm_status
+       FROM authorized a
+       CROSS JOIN enquiries e
        INNER JOIN enquiry_prospects p ON p.id = e.prospect_id
-       ${where.sql}`,
-      where.params,
-    ),
-    executeQuery<Array<{ total: number; today: number; needs_sync: number }>>(
-      `SELECT COUNT(*) AS total,
-              SUM(DATE(e.submitted_at) = CURDATE()) AS today,
-              SUM(COALESCE(cs.status, 'not_started') <> 'synced') AS needs_sync
-       FROM enquiries e
-       LEFT JOIN enquiry_crm_sync cs ON cs.enquiry_id = e.id`,
-    ),
-  ]);
+       LEFT JOIN enquiry_crm_sync cs ON cs.enquiry_id = e.id
+       ${where.sql}
+     ),
+     dashboard_stats AS (
+       SELECT
+         (SELECT COUNT(*) FROM filtered_leads) AS filtered_total,
+         (SELECT COUNT(*) FROM enquiries) AS stats_total,
+         (SELECT COALESCE(SUM(DATE(e2.submitted_at) = CURDATE()), 0)
+          FROM enquiries e2) AS stats_today,
+         (SELECT COUNT(*)
+          FROM enquiries e3
+          LEFT JOIN enquiry_crm_sync cs3 ON cs3.enquiry_id = e3.id
+          WHERE COALESCE(cs3.status, 'not_started') <> 'synced') AS stats_needs_sync
+       FROM authorized
+     ),
+     paged_leads AS (
+       SELECT *
+       FROM filtered_leads
+       ORDER BY submitted_at DESC
+       LIMIT ? OFFSET ?
+     )
+     SELECT s.filtered_total, s.stats_total, s.stats_today, s.stats_needs_sync,
+            p.id, p.name, p.phone, p.email, p.gender, p.enquiry_type,
+            p.source_label, p.submitted_at, p.crm_status
+     FROM dashboard_stats s
+     LEFT JOIN paged_leads p ON TRUE
+     ORDER BY p.submitted_at DESC`,
+    [admin.adminId, admin.phone, ...where.params, pageSize, offset],
+  );
+
+  if (!rows[0]) {
+    return NextResponse.json(
+      { success: false, message: "Authentication required." },
+      { status: 401, headers: noStoreHeaders },
+    );
+  }
+
+  const stats = rows[0];
+  const leads = rows.filter(
+    (row): row is LeadRow & { id: number } => row.id !== null,
+  );
 
   return NextResponse.json(
     {
       success: true,
       data: {
-        leads: rows.map((row) => ({
+        leads: leads.map((row) => ({
           id: row.id,
-          name: row.name,
-          phone: row.phone,
-          email: row.email,
-          gender: row.gender,
-          enquiryType: row.enquiry_type,
-          source: row.source_label,
+          name: row.name || "",
+          phone: row.phone || "",
+          email: row.email || "",
+          gender: row.gender || "",
+          enquiryType: row.enquiry_type || "",
+          source: row.source_label || "",
           submittedAt: row.submitted_at,
-          crmStatus: row.crm_status,
+          crmStatus: row.crm_status || "not_started",
         })),
-        pagination: { page, pageSize, total: Number(counts[0]?.total || 0) },
+        pagination: { page, pageSize, total: Number(stats.filtered_total || 0) },
         summary: {
-          total: Number(summary[0]?.total || 0),
-          today: Number(summary[0]?.today || 0),
-          needsSync: Number(summary[0]?.needs_sync || 0),
+          total: Number(stats.stats_total || 0),
+          today: Number(stats.stats_today || 0),
+          needsSync: Number(stats.stats_needs_sync || 0),
         },
       },
     },
@@ -131,11 +169,31 @@ const listLeads = async (request: NextRequest) => {
   );
 };
 
-const exportLeads = async (request: NextRequest) => {
+const exportLeads = async (
+  request: NextRequest,
+  admin: { adminId: number; phone: string },
+) => {
   const where = buildWhere(parseFilters(request));
   const rows = await executeQuery<LeadRow[]>(
-    `${leadSelect} ${where.sql} ORDER BY e.submitted_at DESC LIMIT 5000`,
-    where.params,
+    `WITH authorized AS (
+       SELECT id
+       FROM enquiry_admin_users
+       WHERE id = ? AND phone = ? AND active = TRUE
+       LIMIT 1
+     )
+     SELECT e.id, e.name, p.phone, e.email, e.gender, e.enquiry_type,
+            e.source_label, e.submitted_at,
+            COALESCE(cs.status, 'not_started') AS crm_status,
+            0 AS filtered_total, 0 AS stats_total, 0 AS stats_today,
+            0 AS stats_needs_sync
+     FROM authorized a
+     CROSS JOIN enquiries e
+     INNER JOIN enquiry_prospects p ON p.id = e.prospect_id
+     LEFT JOIN enquiry_crm_sync cs ON cs.enquiry_id = e.id
+     ${where.sql}
+     ORDER BY e.submitted_at DESC
+     LIMIT 5000`,
+    [admin.adminId, admin.phone, ...where.params],
   );
   const headings = [
     "Submitted at",
@@ -177,10 +235,9 @@ const exportLeads = async (request: NextRequest) => {
 
 export async function GET(request: NextRequest) {
   try {
-    const admin = await getEnquiryAdminSession(
-      request.cookies.get(ENQUIRY_ADMIN_COOKIE)?.value,
-    );
-    if (!admin) {
+    const token = request.cookies.get(ENQUIRY_ADMIN_COOKIE)?.value;
+    const tokenPayload = verifyEnquiryAdminToken(token);
+    if (!tokenPayload) {
       return NextResponse.json(
         { success: false, message: "Authentication required." },
         { status: 401, headers: noStoreHeaders },
@@ -188,8 +245,15 @@ export async function GET(request: NextRequest) {
     }
 
     const view = request.nextUrl.searchParams.get("view") || "session";
-    if (view === "list") return listLeads(request);
-    if (view === "export") return exportLeads(request);
+    if (view === "list") return listLeads(request, tokenPayload);
+    if (view === "export") return exportLeads(request, tokenPayload);
+    const admin = await getEnquiryAdminSession(token);
+    if (!admin) {
+      return NextResponse.json(
+        { success: false, message: "Authentication required." },
+        { status: 401, headers: noStoreHeaders },
+      );
+    }
     return NextResponse.json(
       { success: true, data: { admin } },
       { headers: noStoreHeaders },
