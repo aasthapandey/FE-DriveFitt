@@ -4,9 +4,11 @@ import { submitEnquiry } from "@/lib/enquiryService";
 import { EnquirySubmission } from "@/types/enquiry";
 
 export const runtime = "nodejs";
+export const preferredRegion = "bom1";
 export const maxDuration = 15;
 
 export async function POST(request: NextRequest) {
+  const startedAt = performance.now();
   try {
     const body = (await request.json()) as EnquirySubmission;
     const submission = await submitEnquiry(body);
@@ -14,6 +16,12 @@ export async function POST(request: NextRequest) {
       waitUntil(submission.backgroundSync());
     }
     const result = submission.result;
+    const durationMs = performance.now() - startedAt;
+    console.info("Enquiry submission completed", {
+      enquiryId: result.enquiryId,
+      duplicate: result.duplicate,
+      durationMs: Math.round(durationMs),
+    });
 
     return NextResponse.json(
       {
@@ -21,7 +29,10 @@ export async function POST(request: NextRequest) {
         message: "Your enquiry has been submitted.",
         data: result,
       },
-      { status: result.duplicate ? 200 : 201 },
+      {
+        status: result.duplicate ? 200 : 201,
+        headers: { "Server-Timing": `submit;dur=${durationMs.toFixed(1)}` },
+      },
     );
   } catch (error) {
     const code = error instanceof Error ? error.message : "UNKNOWN";

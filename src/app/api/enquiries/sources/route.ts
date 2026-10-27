@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { getActiveEnquirySources } from "@/lib/enquiryService";
 
 export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
+export const preferredRegion = "bom1";
 
 export async function GET() {
   try {

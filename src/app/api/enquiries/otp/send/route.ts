@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { createEnquiryOtpChallenge } from "@/lib/enquiryService";
 
 export const runtime = "nodejs";
+export const preferredRegion = "bom1";
 
 export async function POST(request: NextRequest) {
   try {

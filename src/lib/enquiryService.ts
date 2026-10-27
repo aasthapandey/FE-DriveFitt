@@ -53,6 +53,10 @@ interface ResultHeader {
   affectedRows: number;
 }
 
+interface DatabaseError extends Error {
+  code?: string;
+}
+
 interface ProspectPrefill {
   name: string;
   email: string;
@@ -336,6 +340,18 @@ const syncEnquiryToYoactiv = async (
   input: YoactivEnquiryInput,
 ) => {
   try {
+    let syncInput = input;
+    if (!syncInput.sourceLabel) {
+      const sourceRows = await executeQuery<Array<{ source_label: string }>>(
+        `SELECT source_label FROM enquiries WHERE id = ? LIMIT 1`,
+        [enquiryId],
+      );
+      syncInput = {
+        ...syncInput,
+        sourceLabel: sourceRows[0]?.source_label || "Unknown",
+      };
+    }
+
     await executeQuery(
       `INSERT INTO enquiry_crm_sync (enquiry_id, provider, status)
        VALUES (?, 'yoactiv', 'pending')
@@ -349,7 +365,7 @@ const syncEnquiryToYoactiv = async (
       [enquiryId],
     );
 
-    const result = await createYoactivEnquiry(input);
+    const result = await createYoactivEnquiry(syncInput);
     const status = result.success ? "synced" : result.ambiguous ? "review" : "failed";
     await executeQuery(
       `UPDATE enquiry_crm_sync
@@ -397,41 +413,16 @@ export const submitEnquiry = async (body: EnquirySubmission) => {
 
   try {
     await connection.beginTransaction();
-    const [existingRows] = await connection.execute(
-      `SELECT public_id, submitted_at FROM enquiries WHERE idempotency_key = ?`,
-      [body.idempotencyKey],
+    const submittedAt = new Date();
+    const [consentResult] = await connection.execute(
+      `UPDATE enquiry_consent_acceptances
+       SET used_at = ?
+       WHERE id = ? AND phone = ? AND verified_at IS NOT NULL AND used_at IS NULL`,
+      [submittedAt, verification.consentId, verification.phone],
     );
-    const existing = (
-      existingRows as Array<{ public_id: string; submitted_at: Date | string }>
-    )[0];
-    if (existing) {
-      await connection.commit();
-      return {
-        result: {
-          enquiryId: existing.public_id,
-          submittedAt: new Date(existing.submitted_at).toISOString(),
-          duplicate: true,
-        },
-        backgroundSync: null,
-      };
-    }
-
-    const [consentRows] = await connection.execute(
-      `SELECT id FROM enquiry_consent_acceptances
-       WHERE id = ? AND phone = ? AND verified_at IS NOT NULL AND used_at IS NULL
-       FOR UPDATE`,
-      [verification.consentId, verification.phone],
-    );
-    if ((consentRows as Array<{ id: number }>).length !== 1) {
+    if ((consentResult as ResultHeader).affectedRows !== 1) {
       throw new Error("VERIFICATION_REQUIRED");
     }
-
-    const [sourceRows] = await connection.execute(
-      `SELECT id, label FROM enquiry_sources WHERE id = ? AND active = TRUE`,
-      [body.sourceId],
-    );
-    const source = (sourceRows as Array<{ id: number; label: string }>)[0];
-    if (!source) throw new Error("INVALID_SOURCE");
 
     const [prospectResult] = await connection.execute(
       `INSERT INTO enquiry_prospects (phone, name, email, gender)
@@ -443,31 +434,30 @@ export const submitEnquiry = async (body: EnquirySubmission) => {
     );
     const prospectId = (prospectResult as ResultHeader).insertId;
     const publicId = crypto.randomUUID();
-    const submittedAt = new Date();
     const [enquiryResult] = await connection.execute(
       `INSERT INTO enquiries
         (public_id, prospect_id, consent_id, source_id, source_label, name, email,
          gender, enquiry_type, idempotency_key, submitted_at)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+       SELECT ?, ?, ?, source.id, source.label, ?, ?, ?, ?, ?, ?
+       FROM enquiry_sources AS source
+       WHERE source.id = ? AND source.active = TRUE`,
       [
         publicId,
         prospectId,
         verification.consentId,
-        source.id,
-        source.label,
         name,
         email,
         body.gender,
         body.enquiryType,
         body.idempotencyKey,
         submittedAt,
+        body.sourceId,
       ],
     );
+    if ((enquiryResult as ResultHeader).affectedRows !== 1) {
+      throw new Error("INVALID_SOURCE");
+    }
     enquiryDatabaseId = (enquiryResult as ResultHeader).insertId;
-    await connection.execute(
-      `UPDATE enquiry_consent_acceptances SET used_at = ? WHERE id = ?`,
-      [submittedAt, verification.consentId],
-    );
     await connection.commit();
     syncInput = {
       publicId,
@@ -476,7 +466,7 @@ export const submitEnquiry = async (body: EnquirySubmission) => {
       email,
       gender: body.gender,
       enquiryType: body.enquiryType,
-      sourceLabel: source.label,
+      sourceLabel: "",
       submittedAt,
     };
     submissionResult = {
@@ -486,6 +476,33 @@ export const submitEnquiry = async (body: EnquirySubmission) => {
     };
   } catch (error) {
     await connection.rollback();
+
+    const shouldCheckForExistingSubmission =
+      (error as DatabaseError).code === "ER_DUP_ENTRY" ||
+      (error instanceof Error && error.message === "VERIFICATION_REQUIRED");
+    if (shouldCheckForExistingSubmission) {
+      const [existingRows] = await connection.execute(
+        `SELECT public_id, submitted_at
+         FROM enquiries
+         WHERE idempotency_key = ?
+         LIMIT 1`,
+        [body.idempotencyKey],
+      );
+      const existing = (
+        existingRows as Array<{ public_id: string; submitted_at: Date | string }>
+      )[0];
+      if (existing) {
+        return {
+          result: {
+            enquiryId: existing.public_id,
+            submittedAt: new Date(existing.submitted_at).toISOString(),
+            duplicate: true,
+          },
+          backgroundSync: null,
+        };
+      }
+    }
+
     throw error;
   } finally {
     connection.release();
