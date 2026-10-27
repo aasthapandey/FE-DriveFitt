@@ -28,6 +28,7 @@ interface LeadRow {
 }
 
 const noStoreHeaders = { "Cache-Control": "private, no-store, max-age=0" };
+const HIDDEN_TEST_PHONE = "+919650811118";
 
 const parseFilters = (request: NextRequest) => {
   const search = (request.nextUrl.searchParams.get("search") || "").trim().slice(0, 100);
@@ -91,10 +92,17 @@ const listLeads = async (
      LEFT JOIN enquiry_crm_sync cs ON cs.enquiry_id = e.id
      WHERE a.id = ? AND a.phone = ? AND a.active = TRUE
        AND a.last_login_at = ?
+       AND p.phone <> ?
      ${filterSql}
      ORDER BY e.submitted_at DESC
      LIMIT 1000`,
-    [admin.adminId, admin.phone, new Date(admin.loginAt), ...where.params],
+    [
+      admin.adminId,
+      admin.phone,
+      new Date(admin.loginAt),
+      HIDDEN_TEST_PHONE,
+      ...where.params,
+    ],
   );
 
   const today = indiaDateKey(new Date());
@@ -146,10 +154,17 @@ const exportLeads = async (
      LEFT JOIN enquiry_crm_sync cs ON cs.enquiry_id = e.id
      WHERE a.id = ? AND a.phone = ? AND a.active = TRUE
        AND a.last_login_at = ?
+       AND p.phone <> ?
      ${filterSql}
      ORDER BY e.submitted_at DESC
      LIMIT 5000`,
-    [admin.adminId, admin.phone, new Date(admin.loginAt), ...where.params],
+    [
+      admin.adminId,
+      admin.phone,
+      new Date(admin.loginAt),
+      HIDDEN_TEST_PHONE,
+      ...where.params,
+    ],
   );
   const headings = [
     "Submitted at",
