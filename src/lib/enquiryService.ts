@@ -22,6 +22,7 @@ import {
 const TERMS_URL = "/terms";
 const TERMS_VERSION = process.env.ENQUIRY_TERMS_VERSION || "enquiry-2026-09";
 const OTP_EXPIRY_MINUTES = 5;
+const YOACTIV_EXCLUDED_TEST_PHONES = new Set(["+919650811118"]);
 const DEV_SOURCES: EnquirySource[] = [
   ...[
     ["Social Media", "social-media"],
@@ -517,7 +518,8 @@ export const submitEnquiry = async (body: EnquirySubmission) => {
 
   return {
     result: completedResult,
-    backgroundSync: () =>
-      syncEnquiryToYoactiv(completedEnquiryId, completedSyncInput),
+    backgroundSync: YOACTIV_EXCLUDED_TEST_PHONES.has(completedSyncInput.phone)
+      ? null
+      : () => syncEnquiryToYoactiv(completedEnquiryId, completedSyncInput),
   };
 };
