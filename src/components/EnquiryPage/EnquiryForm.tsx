@@ -7,6 +7,8 @@ import { EnquiryGender, EnquirySource, EnquiryType } from "@/types/enquiry";
 
 type Step = "phone" | "otp" | "details" | "success";
 
+const FORM_RESET_SECONDS = 4;
+
 interface ApiResponse<T> {
   success: boolean;
   message: string;
@@ -35,6 +37,7 @@ export default function EnquiryForm() {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [secondsLeft, setSecondsLeft] = useState(0);
+  const [resetSeconds, setResetSeconds] = useState(FORM_RESET_SECONDS);
   const [idempotencyKey, setIdempotencyKey] = useState("");
   const verificationInFlightRef = useRef(false);
 
@@ -52,6 +55,27 @@ export default function EnquiryForm() {
     const timer = window.setTimeout(() => setSecondsLeft((value) => value - 1), 1000);
     return () => window.clearTimeout(timer);
   }, [secondsLeft]);
+
+  useEffect(() => {
+    if (step !== "success") return;
+
+    setResetSeconds(FORM_RESET_SECONDS);
+    const countdownTimer = window.setInterval(() => {
+      setResetSeconds((value) => Math.max(0, value - 1));
+    }, 1000);
+    const resetTimer = window.setTimeout(() => {
+      window.location.replace("/dfnewclient2026fc");
+    }, FORM_RESET_SECONDS * 1000);
+
+    return () => {
+      window.clearInterval(countdownTimer);
+      window.clearTimeout(resetTimer);
+    };
+  }, [step]);
+
+  const resetEnquiryForm = () => {
+    window.location.replace("/dfnewclient2026fc");
+  };
 
   const sendOtp = async (resend: boolean) => {
     setError("");
@@ -350,6 +374,16 @@ export default function EnquiryForm() {
                 <Image src="/images/success-tick.svg" alt="" width={56} height={56} className="mx-auto mb-5" />
                 <h1 className="text-2xl font-semibold md:text-[40px] md:leading-[48px]">Enquiry submitted</h1>
                 <p className="mx-auto mt-3 max-w-md text-sm text-[#8A8A8A] md:text-base">Thank you for your interest in Drive FITT. We&apos;re excited to be part of your fitness journey and look forward to helping you get started.</p>
+                <p className="mt-5 text-sm text-white">
+                  This form will reset for the next enquiry in {resetSeconds} second{resetSeconds === 1 ? "" : "s"}.
+                </p>
+                <button
+                  type="button"
+                  onClick={resetEnquiryForm}
+                  className="mt-5 rounded-lg border border-transparent bg-[#00DBDC] px-8 py-2.5 text-sm font-medium text-black transition-all hover:border-[#00DBDC] hover:bg-transparent hover:text-[#00DBDC]"
+                >
+                  Start new enquiry
+                </button>
               </div>
             )}
           </section>

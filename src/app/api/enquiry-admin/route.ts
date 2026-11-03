@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { waitUntil } from "@vercel/functions";
 import { executeQuery } from "@/lib/database";
 import { EXCLUDED_ENQUIRY_TEST_PHONE } from "@/lib/enquiryConfig";
-import { retryFailedYoactivEnquiries } from "@/lib/enquiryService";
 import {
   ENQUIRY_ADMIN_COOKIE,
   ENQUIRY_ADMIN_SESSION_SECONDS,
@@ -26,7 +25,6 @@ interface LeadRow {
   enquiry_type: string;
   source_label: string;
   submitted_at: Date | string;
-  crm_status: string;
 }
 
 const noStoreHeaders = { "Cache-Control": "private, no-store, max-age=0" };
@@ -85,12 +83,10 @@ const listLeads = async (
   const filterSql = where.sql ? `AND ${where.sql.slice("WHERE ".length)}` : "";
   const rows = await executeQuery<LeadRow[]>(
     `SELECT e.id, e.name, p.phone, e.email, e.gender, e.enquiry_type,
-            e.source_label, e.submitted_at,
-            COALESCE(cs.status, 'not_started') AS crm_status
+            e.source_label, e.submitted_at
      FROM enquiry_admin_users a
      CROSS JOIN enquiries e
      INNER JOIN enquiry_prospects p ON p.id = e.prospect_id
-     LEFT JOIN enquiry_crm_sync cs ON cs.enquiry_id = e.id
      WHERE a.id = ? AND a.phone = ? AND a.active = TRUE
        AND a.last_login_at = ?
        AND p.phone <> ?
@@ -110,7 +106,6 @@ const listLeads = async (
   const submittedToday = rows.filter(
     (row) => indiaDateKey(row.submitted_at) === today,
   ).length;
-  const needsSync = rows.filter((row) => row.crm_status !== "synced").length;
 
   return NextResponse.json(
     {
@@ -125,13 +120,11 @@ const listLeads = async (
           enquiryType: row.enquiry_type,
           source: row.source_label,
           submittedAt: row.submitted_at,
-          crmStatus: row.crm_status,
         })),
         pagination: { page: 1, pageSize: 1000, total: rows.length },
         summary: {
           total: rows.length,
           today: submittedToday,
-          needsSync,
         },
       },
     },
@@ -147,12 +140,10 @@ const exportLeads = async (
   const filterSql = where.sql ? `AND ${where.sql.slice("WHERE ".length)}` : "";
   const rows = await executeQuery<LeadRow[]>(
     `SELECT e.id, e.name, p.phone, e.email, e.gender, e.enquiry_type,
-            e.source_label, e.submitted_at,
-            COALESCE(cs.status, 'not_started') AS crm_status
+            e.source_label, e.submitted_at
      FROM enquiry_admin_users a
      CROSS JOIN enquiries e
      INNER JOIN enquiry_prospects p ON p.id = e.prospect_id
-     LEFT JOIN enquiry_crm_sync cs ON cs.enquiry_id = e.id
      WHERE a.id = ? AND a.phone = ? AND a.active = TRUE
        AND a.last_login_at = ?
        AND p.phone <> ?
@@ -175,7 +166,6 @@ const exportLeads = async (
     "Gender",
     "Enquiry type",
     "Lead source",
-    "YoActiv status",
   ];
   const lines = [
     headings.map(csvCell).join(","),
@@ -188,7 +178,6 @@ const exportLeads = async (
         row.gender,
         row.enquiry_type,
         row.source_label,
-        row.crm_status,
       ]
         .map(csvCell)
         .join(","),
@@ -258,29 +247,6 @@ export async function POST(request: NextRequest) {
     );
     response.cookies.set(ENQUIRY_ADMIN_COOKIE, "", { path: "/", maxAge: 0 });
     return response;
-  }
-
-  if (action === "retry_failed_crm") {
-    const token = request.cookies.get(ENQUIRY_ADMIN_COOKIE)?.value;
-    if (!verifyEnquiryAdminToken(token)) {
-      return NextResponse.json(
-        { success: false, message: "Authentication required." },
-        { status: 401, headers: noStoreHeaders },
-      );
-    }
-    try {
-      const result = await retryFailedYoactivEnquiries();
-      return NextResponse.json(
-        { success: true, message: "CRM retry completed.", data: result },
-        { headers: noStoreHeaders },
-      );
-    } catch (error) {
-      console.error("Unable to retry failed CRM enquiries:", error);
-      return NextResponse.json(
-        { success: false, message: "Unable to retry failed CRM enquiries." },
-        { status: 500, headers: noStoreHeaders },
-      );
-    }
   }
 
   try {
