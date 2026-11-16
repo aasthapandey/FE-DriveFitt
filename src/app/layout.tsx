@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { GoogleTagManager } from "@next/third-parties/google";
 import "./globals.css";
 import GoogleAnalytics from "@/components/common/GoogleAnalytics";
 import GoogleAnalyticsTracker from "@/components/common/GoogleAnalyticsTracker";
@@ -36,6 +37,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} bg-black text-white`}>
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-NH52MS7D"
+            height="0"
+            width="0"
+            className="hidden invisible"
+            title="Google Tag Manager"
+          />
+        </noscript>
         <ReduxProvider>
           <GoogleAnalytics />
           <GoogleAnalyticsTracker />
@@ -47,6 +57,7 @@ export default function RootLayout({
           <div className="max-w-[1980px] mx-auto bg-[#0E1119]">{children}</div>
         </ReduxProvider>
       </body>
+      <GoogleTagManager gtmId="GTM-NH52MS7D" />
     </html>
   );
 }
