@@ -1,5 +1,8 @@
 import { NextResponse } from "next/server";
+import { waitUntil } from "@vercel/functions";
+import type { TrialPassBooking } from "@/config/trialPass";
 import { getRazorpayInstance, verifyPaymentSignature } from "@/lib/razorpay";
+import { deliverTrialPassReceipt } from "@/lib/trialPassReceiptEmail";
 import {
   createTrialBooking,
   getTrialBookingStatus,
@@ -12,6 +15,15 @@ import {
 export const runtime = "nodejs";
 export const maxDuration = 30;
 
+function respondWithBooking(booking: TrialPassBooking) {
+  if (booking.state === "paid" && booking.paymentId) {
+    waitUntil(deliverTrialPassReceipt(booking.paymentId).catch(() => {
+      console.error("Trial pass receipt delivery failed after checkout confirmation");
+    }));
+  }
+  return NextResponse.json(booking);
+}
+
 export async function POST(request: Request) {
   const body: unknown = await request.json().catch(() => null);
   if (!body || typeof body !== "object" || Array.isArray(body)) {
@@ -23,9 +35,9 @@ export async function POST(request: Request) {
     const id = readBookingId(input);
     switch (input.action) {
       case "create":
-        return NextResponse.json(await createTrialBooking(id, input));
+        return respondWithBooking(await createTrialBooking(id, input));
       case "status":
-        return NextResponse.json(await getTrialBookingStatus(id));
+        return respondWithBooking(await getTrialBookingStatus(id));
       case "verify": {
         const paymentId = inputText(input, "paymentId");
         const signature = inputText(input, "signature");
@@ -38,7 +50,7 @@ export async function POST(request: Request) {
           throw new TrialPassError("Payment could not be verified.");
         }
         const payment = await getRazorpayInstance().payments.fetch(paymentId);
-        return NextResponse.json(await getTrialBookingStatus(id, payment));
+        return respondWithBooking(await getTrialBookingStatus(id, payment));
       }
       default:
         throw new TrialPassError("Invalid request.");

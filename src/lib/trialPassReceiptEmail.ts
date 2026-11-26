@@ -37,12 +37,13 @@ async function sendReceiptEmail(receipt: TrialPassReceipt) {
   if (!response.ok) {
     const body = await response.json().catch(() => null);
     if (body?.code !== "duplicate_parameter" || !/idempotenc/i.test(String(body.message))) {
+      console.error("Brevo rejected trial pass receipt", { status: response.status });
       throw new Error(`Brevo rejected the trial receipt email (HTTP ${response.status}).`);
     }
   }
 }
 
-export async function deliverTrialPassReceipt(orderId: string, paymentId: string, amountPaise: number) {
+export async function deliverTrialPassReceipt(paymentId: string) {
   const pool = await getConnection();
   const [bookings] = await pool.execute<Array<RowDataPacket & TrialPassReceipt>>(
     `SELECT id AS bookingId, first_name AS firstName, last_name AS lastName, email, phone,
@@ -50,8 +51,8 @@ export async function deliverTrialPassReceipt(orderId: string, paymentId: string
             DATE_FORMAT(paid_at + INTERVAL 330 MINUTE, '%d/%m/%Y') AS paymentDate,
             amount_paise AS amountPaise, razorpay_order_id AS orderId, razorpay_payment_id AS paymentId
      FROM trial_pass_bookings
-     WHERE razorpay_order_id = ? AND razorpay_payment_id = ? AND amount_paise = ? AND paid_at IS NOT NULL`,
-    [orderId, paymentId, amountPaise],
+     WHERE razorpay_payment_id = ? AND paid_at IS NOT NULL`,
+    [paymentId],
   );
   const receipt = bookings[0];
   if (!receipt) return true;

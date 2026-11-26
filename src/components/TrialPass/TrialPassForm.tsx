@@ -82,37 +82,10 @@ export default function TrialPassForm({
 }) {
   const router = useRouter();
   const [booking, setBooking] = useState<TrialPassBooking | null>(null);
-  const [restoreId, setRestoreId] = useState("");
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState("");
   const requestInFlight = useRef(false);
   const bookingId = useRef("");
-
-  useEffect(() => {
-    const id = storedBooking();
-    if (!id) return;
-    let active = true;
-    requestInFlight.current = true;
-    setBusy(true);
-    setRestoreId(id);
-    bookingRequest({ action: "status", id })
-      .then((result) => {
-        if (!active) return;
-        setBooking(result);
-        setRestoreId("");
-        if (!result) storedBooking("");
-      })
-      .catch(() => {
-        if (active) setMessage("We couldn’t check your previous booking. Try checking again.");
-      })
-      .finally(() => {
-        if (active) {
-          requestInFlight.current = false;
-          setBusy(false);
-        }
-      });
-    return () => { active = false; };
-  }, []);
 
   useEffect(() => {
     if (booking?.state === "paid" && storedBooking(booking.id) === booking.id) {
@@ -120,11 +93,8 @@ export default function TrialPassForm({
     }
   }, [booking, router]);
 
-  async function openCheckout(
-    current: TrialPassBooking,
-    prefill = { name: "", email: "", contact: "" },
-  ) {
-    if (!current.checkout) return;
+  async function openCheckout(current: TrialPassBooking, prefill: { name: string; email: string; contact: string }) {
+    if (!current.checkout) throw new Error("Checkout is unavailable.");
     const Razorpay = await RazorpayHostedCheckout.loadScript();
     const { key, amount, orderId } = current.checkout;
     let returnedPayment = false;
@@ -160,7 +130,7 @@ export default function TrialPassForm({
           if (returnedPayment) return;
           requestInFlight.current = false;
           setBusy(false);
-          setMessage("Checkout closed. You can resume with the same booking.");
+          setMessage("Checkout closed. Confirm and pay when you’re ready.");
         },
       },
     });
@@ -182,10 +152,13 @@ export default function TrialPassForm({
         quotedAmountPaise: offer.amountPaise,
         ...fields,
       });
-      if (!result) throw new Error("Booking could not be saved. Please try again.");
-      setBooking(result);
-      storedBooking(result.id);
-      if (result.checkout && result.amountPaise === offer.amountPaise) {
+      if (!result) throw new Error("Checkout is unavailable.");
+      if (result.state !== "unpaid") {
+        setBooking(result);
+      } else {
+        if (result.amountPaise !== offer.amountPaise) {
+          throw new BookingRequestError("The trial pass price changed. Review the updated price before paying.", 409);
+        }
         await openCheckout(result, {
           name: `${fields.firstName} ${fields.lastName}`,
           email: String(fields.email),
@@ -204,25 +177,20 @@ export default function TrialPassForm({
     setBusy(false);
   }
 
-  async function checkStatus(resume = false) {
-    if (requestInFlight.current) return;
+  async function checkStatus() {
+    if (requestInFlight.current || !booking) return;
     requestInFlight.current = true;
     setBusy(true);
     setMessage("");
     try {
-      const result = await bookingRequest({ action: "status", id: booking?.id || restoreId });
-      setRestoreId("");
-      setBooking(result);
-      if (!result) storedBooking("");
-      if (resume && result?.checkout) {
-        await openCheckout(result);
-        return;
-      }
+      const result = await bookingRequest({ action: "status", id: booking.id });
+      if (result?.state === "paid") setBooking(result);
+      else setMessage("Payment is still unconfirmed. Please check again shortly or contact the club.");
     } catch (error) {
       setMessage(
         error instanceof BookingRequestError
           ? error.message
-          : resume ? "Could not open checkout. Please try again." : "Could not check payment status.",
+          : "Could not check payment status.",
       );
     }
     requestInFlight.current = false;
@@ -269,33 +237,21 @@ export default function TrialPassForm({
           </dl>
           {booking.state === "paid" ? (
             <p className="text-base text-white/80">{formatTrialPrice(booking.amountPaise)} paid. Keep this reference to show at reception.</p>
-          ) : booking.checkout ? (
-            <button type="button" className={buttonClass} disabled={busy} onClick={() => void checkStatus(true)}>
-              {busy ? "Opening checkout…" : `Continue to payment · ${formatTrialPrice(booking.amountPaise)}`}
-            </button>
           ) : (
             <>
-              <p role="status" className="text-base text-white/80">
-                {booking.state === "processing"
-                  ? "We’re confirming your Razorpay payment."
-                  : "Checkout is unavailable for this booking."}
-              </p>
+              <p role="status" className="text-base text-white/80">We’re confirming your Razorpay payment.</p>
               <button type="button" className={buttonClass} disabled={busy} onClick={() => void checkStatus()}>
                 {busy ? "Checking…" : "Check payment status"}
               </button>
             </>
           )}
-          {!busy && (booking.state === "paid" || (booking.state === "unpaid" && !booking.checkout)) && (
+          {!busy && booking.state === "paid" && (
             <button type="button" onClick={startNewBooking} className="block text-sm text-[#00DBDC] underline">
               Book another visit
             </button>
           )}
           <Link href="/contact-us" className="inline-block text-sm text-[#00DBDC] underline">Contact the club</Link>
         </div>
-      ) : restoreId ? (
-        <button type="button" className={`mt-5 ${buttonClass}`} disabled={busy} onClick={() => void checkStatus()}>
-          {busy ? "Checking your booking…" : "Check booking status"}
-        </button>
       ) : (
         <>
           <form onSubmit={submit} onChange={() => { bookingId.current = ""; }} className="mt-5 flex flex-col gap-4 md:mt-7 md:gap-6">

@@ -75,22 +75,27 @@ export default async function TrialBuyersPage({
       params,
     );
     total = Number(count.total);
+    if (!Number.isSafeInteger(total) || total < 0) throw new Error("Invalid trial buyer count");
     pageCount = Math.max(1, Math.ceil(total / PAGE_SIZE));
     if (Number.isSafeInteger(requestedPage) && requestedPage > 1) {
       page = Math.min(requestedPage, pageCount);
     }
+    const offset = (page - 1) * PAGE_SIZE;
+    // mysql2 binds JS numbers as DOUBLE, which some MySQL versions reject in LIMIT/OFFSET.
     buyers = await executeQuery<Buyer[]>(
       `SELECT id, first_name AS firstName, last_name AS lastName, email, phone,
               DATE_FORMAT(trial_date, '%Y-%m-%d') AS trialDate,
               DATE_FORMAT(paid_at, '%Y-%m-%dT%H:%i:%sZ') AS paidAt,
               amount_paise AS amountPaise, razorpay_payment_id AS paymentId
        FROM trial_pass_bookings WHERE ${where}
-       ORDER BY paid_at DESC, id DESC LIMIT ? OFFSET ?`,
-      [...params, PAGE_SIZE, (page - 1) * PAGE_SIZE],
+       ORDER BY paid_at DESC, id DESC LIMIT ${PAGE_SIZE} OFFSET ${offset}`,
+      params,
     );
-  } catch {
+  } catch (error) {
     failed = true;
-    console.error("Unable to load trial pass buyers");
+    console.error("Unable to load trial pass buyers", {
+      code: (error as { code?: string })?.code,
+    });
   }
 
   const pageUrl = (number: number) => {

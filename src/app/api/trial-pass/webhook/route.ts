@@ -22,7 +22,7 @@ export async function POST(request: Request) {
       }
       if (payment.status === "captured" && payment.currency === "INR") {
         await recordTrialPayment(payment);
-        const sent = await deliverTrialPassReceipt(payment.order_id, payment.id, Number(payment.amount));
+        const sent = await deliverTrialPassReceipt(payment.id);
         if (!sent) return NextResponse.json({ message: "Receipt delivery is in progress." }, { status: 503 });
       }
     }
