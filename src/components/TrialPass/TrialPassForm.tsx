@@ -125,10 +125,10 @@ export default function TrialPassForm({
     prefill = { name: "", email: "", contact: "" },
   ) {
     if (!current.checkout) return;
-    await RazorpayHostedCheckout.loadScript();
+    const Razorpay = await RazorpayHostedCheckout.loadScript();
     const { key, amount, orderId } = current.checkout;
     let returnedPayment = false;
-    const checkout = new window.Razorpay({
+    const checkout = new Razorpay({
       key,
       amount,
       currency: "INR",
@@ -198,7 +198,7 @@ export default function TrialPassForm({
         bookingId.current = "";
         router.refresh();
       }
-      setMessage(error instanceof Error ? error.message : "Could not open Razorpay. Please try again.");
+      setMessage(error instanceof BookingRequestError ? error.message : "Could not open checkout. Please try again.");
     }
     requestInFlight.current = false;
     setBusy(false);
@@ -219,7 +219,11 @@ export default function TrialPassForm({
         return;
       }
     } catch (error) {
-      setMessage(error instanceof Error ? error.message : "Could not check payment status.");
+      setMessage(
+        error instanceof BookingRequestError
+          ? error.message
+          : resume ? "Could not open checkout. Please try again." : "Could not check payment status.",
+      );
     }
     requestInFlight.current = false;
     setBusy(false);

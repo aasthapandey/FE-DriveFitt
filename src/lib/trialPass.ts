@@ -2,7 +2,7 @@ import { getConnection } from "@/lib/database";
 import { getRazorpayInstance } from "@/lib/razorpay";
 import { getTrialDateWindow, type TrialPassBooking } from "@/config/trialPass";
 import {
-  getTrialPassOffer,
+  getTrialPassCheckoutOffer,
   TRIAL_PASS_SERVICE_ID,
   TRIAL_PASS_VARIATION_ID,
 } from "@/lib/trialPassOffer";
@@ -130,7 +130,7 @@ export async function createTrialBooking(id: string, body: Input) {
   }
   if (existing?.razorpay_order_id) return getTrialBookingStatus(id);
 
-  const offer = await getTrialPassOffer();
+  const offer = await getTrialPassCheckoutOffer();
   if (!offer) {
     throw new TrialPassError("The trial pass is temporarily unavailable. Please try again later.", 503);
   }
@@ -165,7 +165,7 @@ export async function createTrialBooking(id: string, body: Input) {
       product: "trial_pass",
       service_id: String(TRIAL_PASS_SERVICE_ID),
       service_variation_id: String(booking.service_id),
-      variation_name: offer.name.slice(0, 256),
+      ...(offer.name && { variation_name: offer.name.slice(0, 256) }),
     },
   });
   // Concurrent requests can create orders, but only the stored order is ever opened.

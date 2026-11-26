@@ -21,64 +21,40 @@ export interface RazorpayCheckoutOptions {
 }
 
 export class RazorpayHostedCheckout {
-  private static scriptLoaded = false;
-  private static scriptLoading = false;
+  private static checkoutScript: Promise<Window["Razorpay"]> | undefined;
 
-  static loadScript(): Promise<void> {
-    return new Promise((resolve, reject) => {
-      if (typeof window === "undefined") {
-        reject(new Error("Window is not available"));
-        return;
-      }
+  static loadScript(): Promise<Window["Razorpay"]> {
+    if (typeof window === "undefined") {
+      return Promise.reject(new Error("Razorpay Checkout requires a browser."));
+    }
+    if (this.checkoutScript) return this.checkoutScript;
 
-      // Check if script is already loaded
-      if (window.Razorpay) {
-        resolve();
-        return;
-      }
-
-      // If script is already loading, wait for it
-      if (this.scriptLoading) {
-        const checkLoaded = () => {
-          if (window.Razorpay && this.scriptLoaded) {
-            resolve();
-          } else if (!this.scriptLoading) {
-            reject(new Error("Script loading failed"));
-          } else {
-            setTimeout(checkLoaded, 100);
-          }
-        };
-        checkLoaded();
-        return;
-      }
-
-      this.scriptLoading = true;
-
-      // Remove any existing script first
-      const existingScript = document.querySelector(
-        'script[src="https://checkout.razorpay.com/v1/checkout.js"]'
-      );
-      if (existingScript) {
-        existingScript.remove();
-      }
-
+    this.checkoutScript = new Promise<Window["Razorpay"]>((resolve, reject) => {
       const script = document.createElement("script");
       script.src = "https://checkout.razorpay.com/v1/checkout.js";
       script.async = true;
-      script.onload = () => {
-        this.scriptLoaded = true;
-        this.scriptLoading = false;
-        console.log("✅ Razorpay script loaded successfully");
-        resolve();
-      };
-      script.onerror = () => {
-        this.scriptLoading = false;
-        console.error("❌ Failed to load Razorpay script");
-        reject(new Error("Failed to load Razorpay script"));
-      };
 
+      const fail = () => {
+        window.clearTimeout(timeout);
+        script.remove();
+        reject(new Error("Razorpay Checkout could not be loaded."));
+      };
+      const timeout = window.setTimeout(fail, 10000);
+      script.onload = () => {
+        if (typeof window.Razorpay !== "function") {
+          fail();
+          return;
+        }
+        window.clearTimeout(timeout);
+        resolve(window.Razorpay);
+      };
+      script.onerror = fail;
       document.head.appendChild(script);
+    }).catch((error: unknown) => {
+      this.checkoutScript = undefined;
+      throw error;
     });
+    return this.checkoutScript;
   }
 
   static async openCheckout(options: RazorpayCheckoutOptions): Promise<void> {
@@ -87,13 +63,7 @@ export class RazorpayHostedCheckout {
 
       // Load Razorpay script if not already loaded
       console.log("📥 Loading Razorpay script...");
-      await this.loadScript();
-
-      console.log("🔍 Checking Razorpay availability...");
-      if (!window.Razorpay) {
-        console.error("❌ Razorpay not available after script load");
-        throw new Error("Razorpay not available");
-      }
+      const Razorpay = await this.loadScript();
 
       console.log("✅ Razorpay is available, creating checkout instance...");
 
@@ -149,7 +119,7 @@ export class RazorpayHostedCheckout {
         },
       };
       console.log("a:", a);
-      const rzp = new window.Razorpay(a);
+      const rzp = new Razorpay(a);
 
       console.log("🚀 Opening Razorpay checkout...");
       rzp.open();

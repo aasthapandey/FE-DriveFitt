@@ -16,3 +16,10 @@ export async function getTrialPassOffer() {
     return null;
   }
 }
+
+export async function getTrialPassCheckoutOffer(): Promise<{ amountPaise: number; name?: string } | null> {
+  if (TRIAL_PASS_TEST_AMOUNT_PAISE !== null) {
+    return { amountPaise: TRIAL_PASS_TEST_AMOUNT_PAISE };
+  }
+  return getTrialPassOffer();
+}
