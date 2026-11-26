@@ -24,6 +24,7 @@ export interface Hero {
   originalMobileImage?: string;
   btnPrimaryText?: string;
   btnSecondaryText?: string;
+  btnSecondaryLink?: string;
 }
 
 export interface CarouselBanner {

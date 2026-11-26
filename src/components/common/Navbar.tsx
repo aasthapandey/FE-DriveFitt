@@ -241,7 +241,7 @@ export default function Navbar({ data, isMobile }: Props) {
 
   return (
     <nav
-      className={`sticky top-0 z-50 flex justify-between items-center py-8 pr-[100px] pl-[120px] gap-4 transition-all duration-300 ${
+      className={`sticky top-0 z-50 flex justify-between items-center px-6 py-8 gap-4 transition-all duration-300 xl:pr-[100px] xl:pl-[120px] ${
         isScrolled ? "bg-[#0D0D0D]/95 backdrop-blur-sm" : "bg-transparent"
       }`}
     >
@@ -253,12 +253,12 @@ export default function Navbar({ data, isMobile }: Props) {
           height={30}
         />
       </Link>
-      <div className="flex gap-8 px-2 text-[0.9375rem]">
+      <div className="flex gap-4 px-2 text-[0.9375rem] lg:gap-6 2xl:gap-8">
         {desktopNavLinks.map((link, idx) => (
           <Link
             key={idx}
             href={link.href}
-            className={`transition-colors ${
+            className={`whitespace-nowrap transition-colors ${
               isActiveLink(link.href)
                 ? "text-[#00DBDC]"
                 : "text-white hover:text-[#00DBDC]"

@@ -1,6 +1,7 @@
 import { StaticPageData } from "@/types/staticPages";
 import { navbarData } from "./navbar";
 import { PROTEIN_BAR_TEXT } from "@/data/constants";
+import { TRIAL_PASS_PATH } from "@/config/trialPass";
 
 export const homeData: StaticPageData = {
   title: "Drive FITT",
@@ -41,6 +42,8 @@ export const homeData: StaticPageData = {
     originalMobileImage:
       "https://da8nru77lsio9.cloudfront.net/images/hero/home-mobile-original.svg",
     btnPrimaryText: "Join Now",
+    btnSecondaryText: "Book a Trial",
+    btnSecondaryLink: TRIAL_PASS_PATH,
   },
   carouselBanner: [
     {

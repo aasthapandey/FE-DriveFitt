@@ -2,27 +2,24 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { headers } from "next/headers";
 import Navbar from "@/components/common/Navbar";
-import Footer from "@/components/common/Footer";
 import TrialPassForm from "@/components/TrialPass/TrialPassForm";
 import { formatTrialPrice, getTrialDateWindow } from "@/config/trialPass";
 import { getTrialPassOffer } from "@/lib/trialPassOffer";
-import { homeData } from "@/data/home";
 import { navbarData } from "@/data/navbar";
 import { isMobileDevice } from "@/utils/deviceDetection";
 
 export const metadata: Metadata = {
   title: "Book a Trial Pass | Drive FITT Gurugram",
   description: "Book a one-day trial pass at the Drive FITT flagship club in Gurugram.",
-  robots: { index: false, follow: false },
 };
 
 export default async function TrialPassPage() {
   const isMobile = isMobileDevice(headers().get("user-agent") || "");
-  const { yesterday, first, last } = getTrialDateWindow();
+  const { today, yesterday, last } = getTrialDateWindow();
   const offer = await getTrialPassOffer();
 
   return (
-    <div className="bg-[#0D0D0D] text-white">
+    <div className="min-h-screen bg-[#0D0D0D] text-white">
       <Navbar data={navbarData} isMobile={isMobile} />
       <main className="mx-auto grid max-w-[1320px] gap-8 px-5 pb-16 pt-4 sm:px-8 lg:grid-cols-[2fr_3fr] lg:gap-12 lg:px-12 lg:pb-24 lg:pt-10">
         <section className="relative isolate flex min-h-[290px] flex-col justify-between gap-8 overflow-hidden rounded-3xl border border-white/10 p-6 sm:p-9 lg:min-h-[560px]">
@@ -50,12 +47,11 @@ export default async function TrialPassPage() {
         </section>
         <TrialPassForm
           latestBirthDate={yesterday}
-          firstDate={first}
+          firstDate={today}
           lastDate={last}
           offer={offer}
         />
       </main>
-      {homeData.footerSection && <Footer data={homeData.footerSection} isMobile={isMobile} />}
     </div>
   );
 }

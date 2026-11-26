@@ -2,7 +2,7 @@ import { getConnection } from "@/lib/database";
 import { getRazorpayInstance } from "@/lib/razorpay";
 import { getTrialDateWindow, type TrialPassBooking } from "@/config/trialPass";
 import {
-  getTrialPassCheckoutOffer,
+  getTrialPassOffer,
   TRIAL_PASS_SERVICE_ID,
   TRIAL_PASS_VARIATION_ID,
 } from "@/lib/trialPassOffer";
@@ -103,7 +103,7 @@ export async function createTrialBooking(id: string, body: Input) {
   const email = inputText(body, "email");
   const dateOfBirth = inputText(body, "dateOfBirth");
   const trialDate = inputText(body, "trialDate");
-  const { today, first, last } = getTrialDateWindow();
+  const { today, last } = getTrialDateWindow();
 
   if (!firstName || !lastName || firstName.length > 80 || lastName.length > 80) {
     throw new TrialPassError("Enter your first and last name.");
@@ -115,8 +115,8 @@ export async function createTrialBooking(id: string, body: Input) {
   if (!isDate(dateOfBirth) || dateOfBirth >= today) {
     throw new TrialPassError("Enter a valid date of birth.");
   }
-  if (!isDate(trialDate) || trialDate < first || trialDate > last) {
-    throw new TrialPassError("Choose a trial date within the next seven days.");
+  if (!isDate(trialDate) || trialDate < today || trialDate > last) {
+    throw new TrialPassError("Choose a trial date from today through the next seven days.");
   }
 
   const fieldsMatch = (booking: BookingRow) =>
@@ -128,15 +128,17 @@ export async function createTrialBooking(id: string, body: Input) {
   if (existing && !fieldsMatch(existing)) {
     throw new TrialPassError("The booking details changed. Please submit again.", 409);
   }
-  if (existing?.razorpay_order_id) return getTrialBookingStatus(id);
+  const existingCheckout = existing?.razorpay_order_id ? await getTrialBookingStatus(id) : null;
+  if (existingCheckout && existingCheckout.state !== "unpaid") return existingCheckout;
 
-  const offer = await getTrialPassCheckoutOffer();
+  const offer = await getTrialPassOffer();
   if (!offer) {
     throw new TrialPassError("The trial pass is temporarily unavailable. Please try again later.", 503);
   }
-  if (body.quotedAmountPaise !== offer.amountPaise) {
+  if (body.quotedAmountPaise !== offer.amountPaise || (existing && existing.amount_paise !== offer.amountPaise)) {
     throw new TrialPassError("The trial pass price changed. Review the updated price before paying.", 409);
   }
+  if (existingCheckout) return existingCheckout;
 
   const gateway = getRazorpayInstance();
   const pool = await getConnection();

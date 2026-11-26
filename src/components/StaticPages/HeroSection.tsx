@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { Hero, TitleWord } from "@/types/staticPages";
 import { useState } from "react";
 import EmailModal from "@/components/common/Modal/EmailModal";
@@ -13,7 +14,7 @@ interface HeroSectionProps {
 }
 
 const HeroSection = ({ data, pageName, isMobile }: HeroSectionProps) => {
-  const { titleWords, description, btnPrimaryText } = data;
+  const { titleWords, description, btnPrimaryText, btnSecondaryText, btnSecondaryLink } = data;
   const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
   const [isPhoneModalOpen, setIsPhoneModalOpen] = useState(false);
 
@@ -31,16 +32,6 @@ const HeroSection = ({ data, pageName, isMobile }: HeroSectionProps) => {
       setIsPhoneModalOpen(true);
     }
   };
-
-  // const handleSecondaryButtonClick = () => {
-  //   if (isAuthenticated) {
-  //     // If logged in, redirect to membership/plans page
-  //     window.location.href = "/membership";
-  //   } else {
-  //     // If not logged in, open phone modal
-  //     setIsPhoneModalOpen(true);
-  //   }
-  // };
 
   const renderTitle = (titleWords: TitleWord[]) => {
     return (
@@ -92,7 +83,7 @@ const HeroSection = ({ data, pageName, isMobile }: HeroSectionProps) => {
             </ScrollAnimation>
           ) : null}
           <ScrollAnimation delay={0.6} direction="up">
-            <div className="flex gap-4 justify-center md:justify-start">
+            <div className="flex flex-wrap gap-4 justify-center md:justify-start">
               {btnPrimaryText && (
                 <button
                   onClick={handlePrimaryButtonClick}
@@ -105,18 +96,14 @@ const HeroSection = ({ data, pageName, isMobile }: HeroSectionProps) => {
                   {isAuthenticated ? "Join Now" : btnPrimaryText}
                 </button>
               )}
-              {/* {btnSecondaryText !== "" && (
-                <button
-                  onClick={handleSecondaryButtonClick}
-                  className={`bg-transparent border border-[#00DBDC] text-[#00DBDC] px-10 py-3 md:px-14 rounded-lg font-medium leading-[100%] tracking-[-5%] text-base md:text-lg ${
-                    isMobile
-                      ? ""
-                      : "h-[56px] hover:bg-[#00DBDC] hover:text-[#0D0D0D]"
-                  } transition-all duration-200 justify-center items-center`}
+              {btnSecondaryText && btnSecondaryLink && (
+                <Link
+                  href={btnSecondaryLink}
+                  className="inline-flex items-center justify-center rounded-[4px] border border-[#00DBDC] px-6 py-3 text-base font-medium leading-[100%] text-[#00DBDC] transition-colors duration-200 hover:bg-[#00DBDC] hover:text-[#0D0D0D] md:h-[56px] md:rounded-lg md:px-14 md:text-lg"
                 >
-                  {isAuthenticated ? "Join Now" : btnSecondaryText}
-                </button>
-              )} */}
+                  {btnSecondaryText}
+                </Link>
+              )}
             </div>
           </ScrollAnimation>
         </div>

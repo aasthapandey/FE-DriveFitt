@@ -1,4 +1,5 @@
 import { NavbarProps, LoginModalType } from "@/types/staticPages";
+import { TRIAL_PASS_PATH } from "@/config/trialPass";
 
 export const navbarData: NavbarProps = {
   logo: "/images/drive-wordmark-dark.png",
@@ -9,6 +10,7 @@ export const navbarData: NavbarProps = {
     { title: "Recovery", href: "/recovery" },
     { title: "Running", href: "/running" },
     { title: "Membership", href: "/membership" },
+    { title: "Trial Pass", href: TRIAL_PASS_PATH },
     { title: "Franchise", href: "/franchise" },
   ],
   signInButton: {

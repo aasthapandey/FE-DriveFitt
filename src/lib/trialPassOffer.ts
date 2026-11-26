@@ -1,25 +1,23 @@
+import { getCache } from "@vercel/functions";
 import { fetchYoactivServiceVariation } from "@/lib/yoactivService";
 
 export const TRIAL_PASS_SERVICE_ID = 44354;
 export const TRIAL_PASS_VARIATION_ID = 168621;
 
-// Temporary ₹1 production checkout test. Set to null to use the YoActiv price.
-const TRIAL_PASS_TEST_AMOUNT_PAISE: number | null = 100;
+type TrialPassOffer = NonNullable<Awaited<ReturnType<typeof fetchYoactivServiceVariation>>>;
+const cache = getCache({ namespace: "trial-pass" });
 
 export async function getTrialPassOffer() {
+  const key = `offer:${process.env.YOACTIV_BRANCH_ID}:${TRIAL_PASS_SERVICE_ID}:${TRIAL_PASS_VARIATION_ID}`;
   try {
+    const cached = await cache.get(key).catch(() => null) as TrialPassOffer | null;
+    if (cached) return cached;
+
     const offer = await fetchYoactivServiceVariation(TRIAL_PASS_SERVICE_ID, TRIAL_PASS_VARIATION_ID);
-    if (!offer) return null;
-    return { ...offer, amountPaise: TRIAL_PASS_TEST_AMOUNT_PAISE ?? offer.amountPaise };
+    if (offer) await cache.set(key, offer, { ttl: 120, name: "trial-pass-offer" }).catch(() => {});
+    return offer;
   } catch (error) {
     console.error("Could not load the YoActiv trial pass", error);
     return null;
   }
-}
-
-export async function getTrialPassCheckoutOffer(): Promise<{ amountPaise: number; name?: string } | null> {
-  if (TRIAL_PASS_TEST_AMOUNT_PAISE !== null) {
-    return { amountPaise: TRIAL_PASS_TEST_AMOUNT_PAISE };
-  }
-  return getTrialPassOffer();
 }
