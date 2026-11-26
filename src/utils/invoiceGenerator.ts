@@ -21,18 +21,39 @@ export interface InvoiceData {
   orderId: string;
 }
 
-function amountToWords(amount: number): string {
-  const pricing = getPricingByAmount(amount);
-  return pricing.amountInWords;
+interface ReceiptVoucherData {
+  invoiceNumber: string;
+  invoiceDate: string;
+  customerName: string;
+  customerEmail: string;
+  customerPhone: string;
+  subject: string;
+  description: string;
+  totalAmount: number;
+  amountInWords: string;
+  tax?: { base: number; gst: number };
+  paymentReference?: string;
 }
 
 export function generateInvoicePDF(data: InvoiceData): ExtendedJsPDF {
+  const pricing = getPricingByAmount(data.amount);
+  return generateReceiptVoucher({
+    ...data,
+    subject: "Drive FITT Membership Invoice",
+    description: `Membership at Drive FITT Club\n- ${data.membershipType}`,
+    totalAmount: pricing.total,
+    amountInWords: pricing.amountInWords,
+    tax: pricing,
+  });
+}
+
+export function generateReceiptVoucher(data: ReceiptVoucherData): ExtendedJsPDF {
   const doc = new jsPDF() as ExtendedJsPDF;
 
   // Set document properties
   doc.setProperties({
     title: `Invoice - ${data.invoiceNumber}`,
-    subject: "Drive FITT Membership Invoice",
+    subject: data.subject,
     author: "Drive FITT",
     creator: "Drive FITT System",
   });
@@ -118,23 +139,14 @@ export function generateInvoicePDF(data: InvoiceData): ExtendedJsPDF {
   // Table headers
   const headers = [["Description", "Quantity", "Rate (Rs.)", "Amount (Rs.)"]];
 
-  // Calculate GST values dynamically based on amount
-  const pricing = getPricingByAmount(data.amount);
-  const baseAmount = pricing.base;
-  const gstAmount = pricing.gst;
-  const totalAmount = pricing.total;
-
-  // Table data
+  const itemAmount = (data.tax?.base ?? data.totalAmount).toFixed(2);
   const tableData = [
-    [
-      `Membership at Drive FITT Club\n- ${data.membershipType}`,
-      "1",
-      baseAmount.toFixed(2),
-      baseAmount.toFixed(2),
-    ],
-    ["Subtotal (before GST)", "", "", baseAmount.toFixed(2)],
-    ["GST @5% (IGST/CGST+SGST)", "", "", gstAmount.toFixed(2)],
-    ["Total Amount (Rs.)", "", "", totalAmount.toFixed(2)],
+    [data.description, "1", itemAmount, itemAmount],
+    ...(data.tax ? [
+      ["Subtotal (before GST)", "", "", itemAmount],
+      ["GST @5% (IGST/CGST+SGST)", "", "", data.tax.gst.toFixed(2)],
+    ] : []),
+    ["Total Amount (Rs.)", "", "", data.totalAmount.toFixed(2)],
   ];
 
   // Create table
@@ -181,7 +193,7 @@ export function generateInvoicePDF(data: InvoiceData): ExtendedJsPDF {
   doc.setFont("helvetica", "normal");
   doc.setFontSize(9);
   doc.text(
-    `  ${amountToWords(totalAmount)}.`,
+    `  ${data.amountInWords}.`,
     20 + amountWordsWidth,
     amountWordsY,
   );
@@ -194,6 +206,10 @@ export function generateInvoicePDF(data: InvoiceData): ExtendedJsPDF {
   const paymentTermsWidth = doc.getTextWidth(paymentTermsText);
   doc.setFont("helvetica", "normal");
   doc.text("  Immediate", 20 + paymentTermsWidth, amountWordsY + 10);
+  if (data.paymentReference) {
+    doc.setFontSize(9);
+    doc.text(data.paymentReference, 20, amountWordsY + 20);
+  }
 
   // Footer note (as requested)
   doc.setFont("helvetica", "normal");

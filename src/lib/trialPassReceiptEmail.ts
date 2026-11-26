@@ -1,4 +1,4 @@
-import { randomUUID } from "node:crypto";
+import { createHash, randomUUID } from "node:crypto";
 import type { ResultSetHeader, RowDataPacket } from "mysql2";
 import { getConnection } from "@/lib/database";
 import { generateTrialPassReceipt, type TrialPassReceipt } from "@/utils/trialPassReceipt";
@@ -7,6 +7,12 @@ const MAP_URL = "https://maps.app.goo.gl/n33LDEAkJUcv4mw56";
 
 const escapeHtml = (text: string) =>
   text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+function receiptEmailKey(bookingId: string) {
+  // The voucher template has its own stable key so a corrected receipt can be reissued.
+  const hash = createHash("sha256").update(`trial-pass-receipt-voucher:${bookingId}`).digest("hex");
+  return `${hash.slice(0, 8)}-${hash.slice(8, 12)}-4${hash.slice(13, 16)}-8${hash.slice(17, 20)}-${hash.slice(20, 32)}`;
+}
 
 async function sendReceiptEmail(receipt: TrialPassReceipt) {
   const apiKey = process.env.BREVO_API_KEY;
@@ -21,7 +27,7 @@ async function sendReceiptEmail(receipt: TrialPassReceipt) {
       sender: { name: "Drive FITT", email: process.env.SENDER_EMAIL || "info@drivefitt.club" },
       to: [{ email: receipt.email, name: `${receipt.firstName} ${receipt.lastName}` }],
       subject: "Get ready to experience DriveFITT!",
-      headers: { idempotencyKey: receipt.bookingId },
+      headers: { idempotencyKey: receiptEmailKey(receipt.bookingId) },
       htmlContent: `<html><body>
         <p>Hi ${escapeHtml(receipt.firstName)}!</p>
         <p>Get ready to experience DriveFITT! Your trial is booked for ${receipt.trialDate}, and we're excited to have you join us at the club.</p>

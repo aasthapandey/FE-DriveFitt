@@ -1,5 +1,4 @@
-import jsPDF from "jspdf";
-import autoTable from "jspdf-autotable";
+import { generateReceiptVoucher } from "@/utils/invoiceGenerator";
 
 export interface TrialPassReceipt {
   bookingId: string;
@@ -14,48 +13,43 @@ export interface TrialPassReceipt {
   paymentId: string;
 }
 
+const smallNumbers = [
+  "", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten",
+  "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen",
+];
+const tens = ["", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"];
+
+function numberInWords(value: number): string {
+  if (value < 20) return smallNumbers[value];
+  if (value < 100) return [tens[Math.floor(value / 10)], smallNumbers[value % 10]].filter(Boolean).join("-");
+  const [size, label] = value >= 10_000_000 ? [10_000_000, "Crore"] as const
+    : value >= 100_000 ? [100_000, "Lakh"] as const
+      : value >= 1_000 ? [1_000, "Thousand"] as const
+        : [100, "Hundred"] as const;
+  return [numberInWords(Math.floor(value / size)), label, numberInWords(value % size)].filter(Boolean).join(" ");
+}
+
 export function generateTrialPassReceipt(receipt: TrialPassReceipt) {
-  const document = new jsPDF();
   const number = `TP-${receipt.bookingId}`;
-  document.setProperties({
-    title: `Trial pass receipt ${number}`,
+  const rupees = Math.floor(receipt.amountPaise / 100);
+  const paise = receipt.amountPaise % 100;
+  const rupeesInWords = `${numberInWords(rupees) || "Zero"} ${rupees === 1 ? "Rupee" : "Rupees"}`;
+  const paiseInWords = paise ? ` and ${numberInWords(paise)} ${paise === 1 ? "Paisa" : "Paise"}` : "";
+  const document = generateReceiptVoucher({
+    invoiceNumber: number,
+    invoiceDate: receipt.paymentDate,
+    customerName: `${receipt.firstName} ${receipt.lastName}`,
+    customerEmail: receipt.email,
+    customerPhone: receipt.phone,
     subject: "Drive FITT one-day trial pass",
-    author: "Drive FITT",
-  });
-
-  document.setFont("helvetica", "bold");
-  document.setFontSize(20);
-  document.text("Drive FITT", 15, 21);
-  document.setFont("helvetica", "normal");
-  document.setFontSize(10);
-  document.text("M3M 65th Avenue, Sector 65, Gurugram", 15, 28);
-  document.setFont("helvetica", "bold");
-  document.setFontSize(14);
-  document.text("Trial pass payment receipt", 15, 42);
-
-  autoTable(document, {
-    startY: 47,
-    margin: { left: 15, right: 15 },
-    body: [
-      ["Receipt number", number],
-      ["Booking reference", receipt.bookingId],
-      ["Customer", `${receipt.firstName} ${receipt.lastName}`],
-      ["Email", receipt.email],
-      ["Phone", receipt.phone],
-      ["Item", "One-day trial pass"],
-      ["Preferred trial date", receipt.trialDate],
-      ["Payment date", receipt.paymentDate],
-      ["Razorpay order ID", receipt.orderId],
-      ["Razorpay payment ID", receipt.paymentId],
-      ["Total paid", `INR ${(receipt.amountPaise / 100).toFixed(2)}`],
-    ],
-    theme: "striped",
-    styles: { fontSize: 10, cellPadding: 3, overflow: "linebreak" },
-    columnStyles: { 0: { cellWidth: 50, fontStyle: "bold" } },
+    description: `One-day trial pass at Drive FITT Club\nPreferred trial date: ${receipt.trialDate}`,
+    totalAmount: receipt.amountPaise / 100,
+    amountInWords: `${rupeesInWords}${paiseInWords} Only`,
+    paymentReference: `Razorpay payment: ${receipt.paymentId} | Order: ${receipt.orderId}`,
   });
 
   return {
-    name: `${number}-receipt.pdf`,
+    name: `receipt voucher ${number}.pdf`,
     content: Buffer.from(document.output("arraybuffer")).toString("base64"),
   };
 }

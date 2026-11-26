@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import AdminTabs from "@/components/EnquiryAdminDashboard/AdminTabs";
 import { executeQuery } from "@/lib/database";
 import { ENQUIRY_ADMIN_COOKIE, getEnquiryAdminSession } from "@/lib/enquiryAdminService";
+import { normalizeIndianPhone } from "@/lib/enquiryService";
 import { formatTrialDate, formatTrialPrice } from "@/config/trialPass";
 
 export const metadata: Metadata = {
@@ -15,6 +16,7 @@ export const metadata: Metadata = {
 
 const PAGE_SIZE = 25;
 const PATH = "/admin/trial-buyers";
+const PHONE_FILTER_COOKIE = "drivefitt_trial_buyer_phone";
 const inputClass = "w-full rounded-lg border border-[#333333] bg-white px-4 py-2.5 text-sm text-[#0D0D0D] outline-none focus:border-[#00DBDC] [&::-webkit-calendar-picker-indicator]:!block";
 const dateTime = new Intl.DateTimeFormat("en-IN", {
   dateStyle: "medium",
@@ -34,25 +36,60 @@ interface Buyer {
   paymentId: string;
 }
 
-const dateFilter = (value: string | string[] | undefined) => {
+const dateFilter = (value: unknown) => {
   if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return "";
   const date = new Date(value);
   return Number.isFinite(date.getTime()) && date.toISOString().slice(0, 10) === value ? value : "";
 };
+
+async function applyFilters(formData: FormData) {
+  "use server";
+  const cookieStore = cookies();
+  const admin = await getEnquiryAdminSession(cookieStore.get(ENQUIRY_ADMIN_COOKIE)?.value);
+  if (!admin) redirect("/admin/enquiries");
+
+  const clear = formData.get("action") === "clear";
+  const query = new URLSearchParams();
+  const rawPhone = clear ? "" : String(formData.get("phone") ?? "").trim();
+  const phone = normalizeIndianPhone(rawPhone);
+  cookieStore.set(PHONE_FILTER_COOKIE, phone ?? "", {
+    path: PATH,
+    maxAge: phone ? 600 : 0,
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict",
+  });
+
+  if (!clear) {
+    const from = dateFilter(formData.get("from"));
+    const to = dateFilter(formData.get("to"));
+    if (from) query.set("from", from);
+    if (to) query.set("to", to);
+    if (rawPhone && !phone) query.set("invalidPhone", "1");
+  }
+  redirect(query.size ? `${PATH}?${query}` : PATH);
+}
 
 export default async function TrialBuyersPage({
   searchParams,
 }: {
   searchParams: Record<string, string | string[] | undefined>;
 }) {
-  const admin = await getEnquiryAdminSession(cookies().get(ENQUIRY_ADMIN_COOKIE)?.value);
+  const cookieStore = cookies();
+  const admin = await getEnquiryAdminSession(cookieStore.get(ENQUIRY_ADMIN_COOKIE)?.value);
   if (!admin) redirect("/admin/enquiries");
 
   const from = dateFilter(searchParams.from);
   const to = dateFilter(searchParams.to);
   const requestedPage = Number(searchParams.page);
+  const phone = normalizeIndianPhone(cookieStore.get(PHONE_FILTER_COOKIE)?.value ?? "");
+  const invalidPhone = searchParams.invalidPhone === "1";
   const clauses = ["paid_at IS NOT NULL", "razorpay_payment_id IS NOT NULL"];
   const params: string[] = [];
+  if (phone) {
+    clauses.push("phone = ?");
+    params.push(phone);
+  }
   if (from) {
     clauses.push("trial_date >= ?");
     params.push(from);
@@ -121,7 +158,11 @@ export default async function TrialBuyersPage({
         <h1 className="text-3xl font-semibold tracking-[-1.5px] md:text-[40px]">Trial buyers</h1>
         <p className="mt-2 text-sm text-[#8A8A8A]">Paid trial pass bookings and buyer contact details.</p>
 
-        <form action={PATH} className="my-6 grid gap-3 rounded-xl border border-white/10 bg-[#151515] p-4 sm:grid-cols-[minmax(0,170px)_minmax(0,170px)_auto_auto] sm:items-end sm:justify-start">
+        <form action={applyFilters} className="my-6 grid gap-3 rounded-xl border border-white/10 bg-[#151515] p-4 sm:grid-cols-2 lg:grid-cols-[minmax(180px,250px)_minmax(0,170px)_minmax(0,170px)_auto_auto] lg:items-end lg:justify-start">
+          <label className="grid gap-1.5 text-xs text-[#8A8A8A] sm:col-span-2 lg:col-span-1">
+            Phone number
+            <input type="tel" inputMode="tel" name="phone" defaultValue={phone ?? ""} autoComplete="off" maxLength={24} placeholder="Enter mobile number" className={inputClass} />
+          </label>
           <label className="grid gap-1.5 text-xs text-[#8A8A8A]">
             Trial date from
             <input type="date" name="from" defaultValue={from} className={inputClass} />
@@ -131,10 +172,14 @@ export default async function TrialBuyersPage({
             <input type="date" name="to" defaultValue={to} className={inputClass} />
           </label>
           <button type="submit" className="rounded-lg bg-[#00DBDC] px-5 py-2.5 text-sm font-semibold text-black">Apply</button>
-          <Link href={PATH} className="rounded-lg border border-white/20 px-5 py-2.5 text-center text-sm">Clear</Link>
+          <button type="submit" name="action" value="clear" formNoValidate className="rounded-lg border border-white/20 px-5 py-2.5 text-sm">Clear</button>
         </form>
 
-        {failed ? (
+        {invalidPhone ? (
+          <p role="alert" className="rounded-lg border border-red-400/30 bg-red-400/10 px-4 py-3 text-sm text-red-300">
+            Enter a valid 10-digit Indian mobile number.
+          </p>
+        ) : failed ? (
           <p role="alert" className="rounded-lg border border-red-400/30 bg-red-400/10 px-4 py-3 text-sm text-red-300">
             Unable to load trial buyers. Please refresh the page.
           </p>
