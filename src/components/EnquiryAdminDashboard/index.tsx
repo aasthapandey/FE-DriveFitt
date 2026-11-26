@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
+import AdminTabs from "./AdminTabs";
 
 interface Admin {
   id: number;
@@ -398,6 +399,7 @@ export default function EnquiryAdminDashboard() {
       </header>
 
       <div className="mx-auto max-w-[1440px] px-5 py-8 md:px-10 md:py-10">
+        <AdminTabs active="/admin/enquiries" />
         <div className="mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-end">
           <div>
             <p className="mb-2 text-xs font-medium uppercase tracking-[0.16em] text-[#00DBDC]">Admin</p>

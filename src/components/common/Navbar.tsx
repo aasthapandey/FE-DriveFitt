@@ -253,7 +253,7 @@ export default function Navbar({ data, isMobile }: Props) {
           height={30}
         />
       </Link>
-      <div className="flex gap-10 px-2">
+      <div className="flex gap-8 px-2 text-[0.9375rem]">
         {desktopNavLinks.map((link, idx) => (
           <Link
             key={idx}

@@ -24,7 +24,7 @@ export class RazorpayHostedCheckout {
   private static scriptLoaded = false;
   private static scriptLoading = false;
 
-  private static loadScript(): Promise<void> {
+  static loadScript(): Promise<void> {
     return new Promise((resolve, reject) => {
       if (typeof window === "undefined") {
         reject(new Error("Window is not available"));
@@ -32,7 +32,7 @@ export class RazorpayHostedCheckout {
       }
 
       // Check if script is already loaded
-      if (window.Razorpay && this.scriptLoaded) {
+      if (window.Razorpay) {
         resolve();
         return;
       }
@@ -189,7 +189,7 @@ declare global {
       modal: {
         ondismiss: () => void;
       };
-      config: {
+      config?: {
         display: {
           blocks: {
             banks: { name: string; instruments: Array<{ method: string }> };

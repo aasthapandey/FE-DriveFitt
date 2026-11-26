@@ -104,13 +104,14 @@ const responseSummary = (
 const request = async (
   path: string,
   body: JsonRecord,
+  minimumTimeoutMs = 0,
 ): Promise<
   | { type: "response"; httpStatus: number; data: JsonRecord }
   | { type: "network_error"; message: string }
 > => {
   const config = getConfig();
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), config.timeoutMs);
+  const timeout = setTimeout(() => controller.abort(), Math.max(config.timeoutMs, minimumTimeoutMs));
 
   try {
     const response = await fetch(`${YOACTIV_BASE_URL}${path}`, {
@@ -146,6 +147,33 @@ export const isYoactivConfigured = () => {
   const config = getConfig();
   return Boolean(config.apiKey && config.branchId);
 };
+
+export async function fetchYoactivServiceVariation(serviceId: number, variationId: number) {
+  if (!isYoactivConfigured()) throw new Error("YoActiv credentials are not configured.");
+
+  const response = await request("/Billing/GetServiceVariations", { ServiceId: serviceId }, 15000);
+  if (response.type === "network_error") throw new Error(response.message);
+  if (response.httpStatus !== 200) {
+    throw new Error(`YoActiv service variations returned HTTP ${response.httpStatus}.`);
+  }
+
+  const { Data: data } = response.data;
+  if (!isRecord(data) || !Array.isArray(data.ServiceVariations)) {
+    throw new Error("Unexpected YoActiv service variations response.");
+  }
+  const variation = data.ServiceVariations.find(
+    (item): item is JsonRecord => isRecord(item) && asString(item.serviceVariationid) === String(variationId),
+  );
+  if (!variation) return null;
+
+  const name = asString(variation.ServiceVariation) || asString(variation.ServiceVeriation);
+  const price = asString(variation.amount);
+  const amountPaise = Math.round(Number(price) * 100);
+  if (!name || !/^\d+(\.\d{1,2})?$/.test(price) || !Number.isSafeInteger(amountPaise) || amountPaise <= 0) {
+    throw new Error("YoActiv returned invalid variation details.");
+  }
+  return { name, amountPaise };
+}
 
 export const fetchYoactivMemberByPhone = async (
   phone: string,
